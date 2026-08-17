@@ -52,7 +52,7 @@ On an existing project, start with `/aicf:workflow-demanda`, which explains the 
 
 | Skill                    | When                    | What it does                                                                    |
 | ------------------------ | ----------------------- | -------------------------------------------------------------------------------- |
-| `/aicf:setup`            | once, on a new project  | Creates `docs/projeto/` with a PRD and checklist, the work-item folders, and the root `CLAUDE.md` — plus engineering defaults, if you want them |
+| `/aicf:setup`            | once, on a new project  | Creates `docs/projeto/` with a PRD and checklist, the work-item folders, the root `CLAUDE.md` (with `AGENTS.md` symlinked to it) and a `README.md` — plus engineering defaults, if you want them |
 | `/aicf:criar-prd`        | start of the project    | Interviews you about the product and writes `PRD.md` — run it again when a decision contradicts it |
 | `/aicf:workflow-demanda` | the map                 | The whole cycle, the paths available at each phase, and the governance conventions |
 | `/aicf:criar-spec`       | interview phase         | Interrogates until no open decision is left, then writes the spec into the repo   |

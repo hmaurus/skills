@@ -50,7 +50,7 @@ Em projeto que já existe, comece por `/aicf:workflow-demanda`, que explica o ci
 
 | Skill                    | Quando                     | O que faz                                                                        |
 | ------------------------ | -------------------------- | -------------------------------------------------------------------------------- |
-| `/aicf:setup`            | uma vez, no projeto novo   | Cria `docs/projeto/` com PRD e checklist, as pastas de demandas e o `CLAUDE.md` raiz — e, se você quiser, os padrões de engenharia |
+| `/aicf:setup`            | uma vez, no projeto novo   | Cria `docs/projeto/` com PRD e checklist, as pastas de demandas, o `CLAUDE.md` (com `AGENTS.md` apontando para ele) e um `README.md` — e, se você quiser, os padrões de engenharia |
 | `/aicf:criar-prd`        | começo do projeto          | Entrevista sobre o produto e escreve o `PRD.md` — roda de novo quando uma decisão o contraria |
 | `/aicf:workflow-demanda` | o mapa                     | O ciclo inteiro, os caminhos de cada fase e as convenções de governança          |
 | `/aicf:criar-spec`       | fase de entrevista         | Interroga até não sobrar decisão em aberto, depois escreve a spec no repositório  |

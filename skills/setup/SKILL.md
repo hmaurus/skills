@@ -62,6 +62,8 @@ do `CLAUDE.md`. **Nome da ferramenta e nome da variável de ambiente — nunca o
 
 ```
 CLAUDE.md                       # raiz, se ainda não existir
+AGENTS.md -> CLAUDE.md          # link simbólico
+README.md                       # se ainda não existir
 docs/projeto/
 ├── PRD.md
 ├── CHECKLIST.md
@@ -77,6 +79,7 @@ Os templates estão em `templates/` dentro desta skill:
 | `templates/claude-md.md` | `CLAUDE.md` (raiz)                              |
 | `templates/prd.md`       | `docs/projeto/PRD.md`                           |
 | `templates/checklist.md` | `docs/projeto/CHECKLIST.md`                     |
+| `templates/readme.md`    | `README.md` (raiz)                              |
 | `templates/preferencias.md` | conforme a resposta acima — ver abaixo       |
 
 Copiar o conteúdo trocando `<NOME>` pelo nome do projeto e preenchendo a descrição no lugar
@@ -85,6 +88,17 @@ preencher fica marcado; é o usuário que preenche, na primeira demanda ou quand
 
 Se o projeto já tem `CLAUDE.md` na raiz, não substituir: mostrar a seção "Processos de
 desenvolvimento" do template e propor acrescentá-la ao arquivo existente.
+
+## `AGENTS.md` como link simbólico
+
+`ln -s CLAUDE.md AGENTS.md` na raiz. **Um arquivo, dois nomes** — o Claude Code lê `CLAUDE.md`;
+Codex, Cursor e outros leem `AGENTS.md`. Manter os dois como arquivos separados garante que um
+envelheça sem ninguém perceber.
+
+- Se `AGENTS.md` já existe — arquivo ou link —, não tocar.
+- O git versiona o link como link (modo `120000`), então ele viaja no clone.
+- Em Windows sem Developer Mode, `ln -s` falha. Nesse caso, avisar e seguir sem o `AGENTS.md`:
+  **não criar uma cópia**, que é justamente o que o link existe para evitar.
 
 ## Os padrões de engenharia
 
