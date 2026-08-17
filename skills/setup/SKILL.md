@@ -116,6 +116,10 @@ para ser colado dentro de um `CLAUDE.md`, não para virar arquivo próprio.
 **Se o usuário escolheu o projeto:** colar as seções no `CLAUDE.md` da raiz, depois de
 "Processos de desenvolvimento".
 
+**Se escolheu nenhum dos dois:** não colar nada, e conferir que o `CLAUDE.md` gerado não
+ficou com seção equivalente vinda do outro template. Padrão que já vale pelo global não se
+repete no projeto — cópia reduzida da regra global enfraquece a regra.
+
 Em qualquer caso, avisar sobre a única regra do template que muda o comportamento do usuário,
 não só o do agente: **credencial não entra no chat** — o valor vai para o `.env` e o agente
 recebe apenas o nome da variável.

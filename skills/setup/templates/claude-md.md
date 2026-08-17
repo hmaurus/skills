@@ -16,6 +16,8 @@
 
 **Exceção:** credenciais ficam em `.env` (não commitado) ou no gerenciador de senhas. Nunca no repositório, nunca em memory.
 
+**Glossário do domínio** (`CONTEXT.md`) e **decisões difíceis de reverter** (ADR em `docs/adr/`, numerado e imutável) nascem quando houver o primeiro termo ambíguo ou a primeira decisão a registrar — o passo 4 do ritual de fechamento manda escrever nos dois.
+
 ## Processos de desenvolvimento
 
 Duas camadas: a **governança** registra o que será feito e o que foi feito, e é sempre a mesma; a **implementação** é como o código sai, e tem caminhos à escolha. Uma demanda passa por quatro fases: demanda → entrevista → implementação → fechamento.
@@ -27,10 +29,6 @@ Três regras valem antes de abrir qualquer doc:
 - **Qual caminho usar na entrevista e na implementação é pergunta ao usuário, não dedução.** O agente sugere pelo ponto forte que couber ao caso; a decisão é do usuário.
 - **Bug de causa desconhecida** → depurar de forma sistemática antes de propor correção; se `systematic-debugging` (Superpowers) ou `/diagnosing-bugs` (Matt Pocock) estiverem instalados, usar.
 - Operação que se repete vira **skill** em `.claude/skills/`, não improviso na hora.
-
-## Validação
-
-Antes de commitar: lint + format + typecheck **no projeto inteiro**, via script do `package.json` — nunca só nos arquivos tocados, nunca chamando o binário cru. Após o push, verificar o CI em vez de presumir que passou.
 
 ## Git
 
