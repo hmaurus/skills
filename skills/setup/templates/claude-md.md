@@ -16,6 +16,14 @@
 
 **Exceção:** credenciais ficam em `.env` (não commitado) ou no gerenciador de senhas. Nunca no repositório, nunca em memory.
 
+## Stack e serviços
+
+> Uma linha por ferramenta em uso, com o nome da variável de ambiente — nunca o valor. Categoria que o projeto não usa não vira linha.
+
+- **Hospedagem:**
+- **Banco:**
+- **Senhas:**
+
 ## Processos de desenvolvimento
 
 Duas camadas: a **governança** registra o que será feito e o que foi feito, e é sempre a mesma; a **implementação** é como o código sai, e tem caminhos à escolha. Uma demanda passa por quatro fases: demanda → entrevista → implementação → fechamento.

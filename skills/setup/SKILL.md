@@ -31,6 +31,25 @@ KISS/YAGNI, validação antes do commit, testes, acessibilidade, tratamento de c
   natural para trabalho em equipe, ou quando este projeto tem padrão próprio.
 - **Nenhum dos dois** — o usuário já tem os seus.
 
+## Ferramentas que o projeto usa
+
+Depois das perguntas acima, levantar **o que o usuário já usa**, para o `CLAUDE.md` registrar e
+o agente não perguntar de novo a cada sessão.
+
+O catálogo está em [`references/ferramentas.md`](references/ferramentas.md) — ler antes de
+perguntar. **Não despejar a lista.** O fluxo é:
+
+1. Perguntar categoria por categoria, começando pelas quatro que o catálogo marca como "sempre
+   perguntar": gerenciador de senhas, hospedagem e deploy, banco de dados, CI.
+2. Quem já usa alguma coisa, só diz o nome — registrar e passar para a próxima.
+3. Quem não sabe do que se trata: explicar para que a categoria serve, em duas frases, e só
+   então oferecer as opções do catálogo com a diferença entre elas.
+4. As demais categorias (autenticação, pagamento, email, observabilidade, analytics, mídia) só
+   entram se a descrição do projeto indicar que fazem falta.
+
+**Não instalar nem configurar nada**, e não insistir em quem respondeu "nenhum" — a resposta
+"ainda não uso" é registro válido e evita que o agente presuma que existe.
+
 ## O que criar
 
 ```
@@ -51,6 +70,10 @@ Os templates estão em `templates/` dentro desta skill:
 | `templates/prd.md`       | `docs/projeto/PRD.md`                           |
 | `templates/checklist.md` | `docs/projeto/CHECKLIST.md`                     |
 | `templates/preferencias.md` | conforme a resposta acima — ver abaixo       |
+
+O que o usuário respondeu sobre ferramentas vira a seção `## Stack e serviços` do `CLAUDE.md`,
+no formato que o fim do catálogo mostra: uma linha por ferramenta em uso, com o **nome da
+variável de ambiente, nunca o valor**. Categoria não usada não vira linha.
 
 Copiar o conteúdo trocando `<NOME>` pelo nome do projeto e preenchendo a descrição no lugar
 indicado. **Não reescrever o template por conta própria** — o que estiver marcado como a
