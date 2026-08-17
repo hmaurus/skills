@@ -6,9 +6,12 @@ Um kit inicial para tocar um projeto de software com Claude Code: a estrutura de
 
 ## Onde ele entra
 
-Coleções de skills como [Superpowers](https://github.com/obra/superpowers) e as [do Matt Pocock](https://github.com/mattpocock/skills) resolvem bem **a demanda individual**: interrogam a ideia, produzem uma spec, quebram em tarefas, executam com disciplina. O Matt vai além e cobre conhecimento de domínio — glossário em `CONTEXT.md`, decisões em ADRs.
+Coleções de skills como [Superpowers](https://github.com/obra/superpowers) e as [do Matt Pocock](https://github.com/mattpocock/skills) resolvem bem **a demanda individual**: interrogam a ideia, produzem uma spec, quebram em tarefas, executam com disciplina. E deixam rastro — o Superpowers grava spec e plano em arquivo; o Matt publica spec e tickets no issue tracker e ainda mantém glossário e ADRs.
 
-O que nenhuma das duas traz é a camada acima: **onde está escrito o que o produto é, o que já foi entregue, o que falta, e o histórico do que foi decidido e por quê.** Sem ela, cada demanda é bem executada e o projeto inteiro não tem memória.
+Só que esse rastro é **por demanda** e escrito **antes** da execução. Duas coisas ficam de fora:
+
+- **O nível do produto.** Nenhum dos dois tem o documento que diz o que se está construindo, para quem, e o que ficou fora por decisão — nem a lista única do que já foi entregue e do que falta. Vinte specs bem escritas não respondem "onde o projeto está".
+- **O depois.** Spec e plano dizem o que se pretendia. O que de fato saiu, onde a entrega divergiu do plano e por quê, só existe se alguém escrever ao fechar — e nenhum dos dois pipelines pede isso.
 
 O `aicf` é essa camada — e funciona de dois jeitos:
 

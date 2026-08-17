@@ -8,9 +8,12 @@ A starter kit for running a software project with Claude Code: the documents tha
 
 ## Where it fits
 
-Skill collections like [Superpowers](https://github.com/obra/superpowers) and [Matt Pocock's](https://github.com/mattpocock/skills) handle **the individual work item** well: they interrogate the idea, produce a spec, break it into tasks, and execute with discipline. Matt's go further and cover domain knowledge — a glossary in `CONTEXT.md`, decisions as ADRs.
+Skill collections like [Superpowers](https://github.com/obra/superpowers) and [Matt Pocock's](https://github.com/mattpocock/skills) handle **the individual work item** well: they interrogate the idea, produce a spec, break it into tasks, and execute with discipline. And they do leave a trail — Superpowers writes the spec and plan to files; Matt's publish spec and tickets to an issue tracker and maintain a glossary and ADRs.
 
-What neither brings is the layer above: **where it is written what the product is, what already shipped, what is missing, and the history of what was decided and why.** Without it, every work item is well executed and the project as a whole has no memory.
+That trail, though, is **per work item** and written **before** execution. Two things fall outside it:
+
+- **The product level.** Neither has the document stating what is being built, for whom, and what was ruled out by decision — nor the single list of what shipped and what is missing. Twenty well-written specs do not answer "where does the project stand".
+- **The afterwards.** A spec and a plan say what was intended. What actually shipped, where delivery diverged from the plan and why, only exists if someone writes it at closing time — and neither pipeline asks for that.
 
 `aicf` is that layer — and it works two ways:
 
