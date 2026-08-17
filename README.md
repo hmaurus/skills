@@ -27,7 +27,19 @@ O `aicf` é essa camada — e funciona de dois jeitos:
 
 Reinicie a sessão depois de instalar — skills carregam no início e não trocam a quente.
 
-Em projeto novo, comece por `/aicf:setup`, que cria a estrutura e o `CLAUDE.md` raiz. Em projeto que já existe, comece por `/aicf:workflow-demanda`, que explica o ciclo.
+Em projeto que já existe, comece por `/aicf:workflow-demanda`, que explica o ciclo.
+
+## Começando um projeto novo
+
+**1. `/aicf:setup`** — cria `docs/projeto/` com PRD e checklist, as pastas de demandas e o `CLAUDE.md` raiz. Pergunta pouco: o nome, uma ou duas frases sobre o projeto, onde ficam os padrões de engenharia e quais ferramentas você já usa.
+
+**2. Preencher o `PRD.md`.** Ele nasce com as seções e uma pergunta em cada uma. A que mais se paga é **"fora de escopo, por decisão"** — é ela que impede a mesma discussão de voltar daqui a seis meses.
+
+Não há skill dedicada a isso, aqui nem nas outras coleções: `criar-spec` e `brainstorming` entrevistam para uma demanda, não para o produto. Duas saídas que funcionam: pedir a entrevista em linguagem natural — _"me entreviste seção por seção para preencher o `docs/projeto/PRD.md`"_ — ou usar `grilling` (Matt Pocock), feita para interrogar uma ideia até o raciocínio aparecer, e depois escrever o resultado no PRD.
+
+**3. Tirar o `CHECKLIST.md` do PRD.** Cada coisa que o produto precisa ter vira uma linha. O que couber numa linha fica ali mesmo; o que precisar de contexto vira arquivo em `demandas/`.
+
+**4. Primeira demanda.** `/aicf:criar-spec` para amadurecer, `/aicf:implementar-spec` para executar e fechar. Daí em diante o ciclo se repete.
 
 ## As skills
 

@@ -29,7 +29,19 @@ That trail, though, is **per work item** and written **before** execution. Two t
 
 Restart your session afterwards — skills load at startup and do not hot-swap.
 
-On a new project, start with `/aicf:setup`, which creates the structure and the root `CLAUDE.md`. On an existing one, start with `/aicf:workflow-demanda`, which explains the cycle.
+On an existing project, start with `/aicf:workflow-demanda`, which explains the cycle.
+
+## Starting a new project
+
+**1. `/aicf:setup`** — creates `docs/projeto/` with a PRD and checklist, the work-item folders, and the root `CLAUDE.md`. It asks little: the name, a sentence or two about the project, where the engineering defaults live, and which tools you already use.
+
+**2. Fill in `PRD.md`.** It ships with the sections and a prompt under each. The one that pays off most is **"ruled out, by decision"** — it is what keeps the same argument from coming back six months later.
+
+There is no skill dedicated to this, here or in the other collections: `criar-spec` and `brainstorming` interview for a single work item, not for the product. Two things that work: ask for the interview in plain language — _"interview me section by section to fill in `docs/projeto/PRD.md`"_ — or use `grilling` (Matt Pocock), built to interrogate an idea until the reasoning surfaces, then write the result into the PRD.
+
+**3. Derive `CHECKLIST.md` from the PRD.** Every thing the product needs becomes one line. What fits in a line stays there; what needs context becomes a file under `demandas/`.
+
+**4. First work item.** `/aicf:criar-spec` to mature it, `/aicf:implementar-spec` to execute and close. From there the cycle repeats.
 
 ## The skills
 
