@@ -1,5 +1,7 @@
 # aicf — skills de workflow para Claude Code
 
+_[English version](README.en.md)_
+
 Três skills que cobrem o ciclo de uma demanda: **entrevistar** até virar spec, **implementar** a partir dela, **fechar** com registro do que foi feito.
 
 Não é framework nem metodologia nova. É o mínimo que faz um projeto tocado por agente não perder o rastro do que foi decidido e por quê.
