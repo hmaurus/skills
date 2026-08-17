@@ -35,10 +35,9 @@ Em projeto que já existe, comece por `/aicf:workflow-demanda`, que explica o ci
 
 **2. Preencher o `PRD.md`.** Ele nasce com as seções e uma pergunta em cada uma. A que mais se paga é **"fora de escopo, por decisão"** — é ela que impede a mesma discussão de voltar daqui a seis meses.
 
-Não há skill dedicada a isso, aqui nem nas outras coleções. Três caminhos funcionam:
+**`/aicf:criar-prd`** entrevista você seção por seção e escreve o arquivo. Começa pelo problema, não pela solução, e não deixa o "fora de escopo" passar em branco. Dois complementos, quando fizerem falta:
 
-- **Entrevista em linguagem natural** — _"me entreviste seção por seção para preencher o `docs/projeto/PRD.md`"_. É o padrão quando a ideia ainda está se formando: pergunta aberta abre espaço que menu de opção fecha.
-- **`grilling`** (Matt Pocock) — quando você já acha que sabe o que quer e prefere ser contestado antes de escrever. Ela não grava nada; o resultado da conversa você transcreve para o PRD.
+- **`grilling`** (Matt Pocock) — antes, se você já acha que sabe o que quer e prefere ser contestado. Ela não grava nada; o resultado da conversa entra na entrevista do PRD.
 - **`domain-modeling`** (Matt Pocock) — depois, se o produto tem vocabulário próprio que já apareceu ambíguo. Grava o glossário em `CONTEXT.md`, ao lado do PRD e não dentro dele.
 
 **O que não funciona é passar o PRD pelo ciclo da demanda.** Não por ser documento — spec serve bem para mudança de documentação. É que a spec descreve uma **mudança**, com escopo e um estado "pronto", enquanto o PRD descreve o **produto**, e é revisado toda vez que uma decisão o contraria. Envelopar um no outro rende uma spec vazia — a entrevista dela discutiria como escrever o arquivo, e as perguntas que importam, público e fora de escopo, continuariam sem resposta — mais um fechamento pedindo relatório, arquivamento e check de lint num `.md`.
@@ -52,6 +51,7 @@ Não há skill dedicada a isso, aqui nem nas outras coleções. Três caminhos f
 | Skill                    | Quando                     | O que faz                                                                        |
 | ------------------------ | -------------------------- | -------------------------------------------------------------------------------- |
 | `/aicf:setup`            | uma vez, no projeto novo   | Cria `docs/projeto/` com PRD e checklist, as pastas de demandas e o `CLAUDE.md` raiz — e, se você quiser, os padrões de engenharia |
+| `/aicf:criar-prd`        | começo do projeto          | Entrevista sobre o produto e escreve o `PRD.md` — roda de novo quando uma decisão o contraria |
 | `/aicf:workflow-demanda` | o mapa                     | O ciclo inteiro, os caminhos de cada fase e as convenções de governança          |
 | `/aicf:criar-spec`       | fase de entrevista         | Interroga até não sobrar decisão em aberto, depois escreve a spec no repositório  |
 | `/aicf:implementar-spec` | fase de implementação      | Lê a spec, implementa, verifica e conduz o fechamento até o registro              |

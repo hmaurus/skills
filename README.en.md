@@ -37,10 +37,9 @@ On an existing project, start with `/aicf:workflow-demanda`, which explains the 
 
 **2. Fill in `PRD.md`.** It ships with the sections and a prompt under each. The one that pays off most is **"ruled out, by decision"** — it is what keeps the same argument from coming back six months later.
 
-There is no skill dedicated to this, here or in the other collections. Three routes work:
+**`/aicf:criar-prd`** interviews you section by section and writes the file. It starts from the problem rather than the solution, and does not let "out of scope" go blank. Two complements, when you need them:
 
-- **A plain-language interview** — _"interview me section by section to fill in `docs/projeto/PRD.md`"_. This is the default while the idea is still forming: an open question leaves room that a menu of options closes off.
-- **`grilling`** (Matt Pocock) — when you think you already know what you want and would rather be challenged before writing. It stores nothing; you transcribe the conversation into the PRD.
+- **`grilling`** (Matt Pocock) — beforehand, if you think you already know what you want and would rather be challenged. It stores nothing; what comes out of the conversation feeds the PRD interview.
 - **`domain-modeling`** (Matt Pocock) — afterwards, if the product has vocabulary of its own that has already turned ambiguous. It writes the glossary into `CONTEXT.md`, beside the PRD rather than inside it.
 
 **What does not work is running the PRD through the work-item cycle.** Not because it is a document — a spec handles documentation changes fine. It is that a spec describes a **change**, with a scope and a "done" state, while the PRD describes the **product**, and gets revised whenever a decision contradicts it. Wrapping one in the other yields an empty spec — its interview would debate how to write the file, while the questions that matter, audience and what is ruled out, stay unanswered — plus a closing ritual asking for a report, archiving, and a lint check on a `.md`.
@@ -54,6 +53,7 @@ There is no skill dedicated to this, here or in the other collections. Three rou
 | Skill                    | When                    | What it does                                                                    |
 | ------------------------ | ----------------------- | -------------------------------------------------------------------------------- |
 | `/aicf:setup`            | once, on a new project  | Creates `docs/projeto/` with a PRD and checklist, the work-item folders, and the root `CLAUDE.md` — plus engineering defaults, if you want them |
+| `/aicf:criar-prd`        | start of the project    | Interviews you about the product and writes `PRD.md` — run it again when a decision contradicts it |
 | `/aicf:workflow-demanda` | the map                 | The whole cycle, the paths available at each phase, and the governance conventions |
 | `/aicf:criar-spec`       | interview phase         | Interrogates until no open decision is left, then writes the spec into the repo   |
 | `/aicf:implementar-spec` | implementation phase    | Reads the spec, implements, verifies, and runs the closing ritual                 |
