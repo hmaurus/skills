@@ -4,14 +4,21 @@
     "name": "AI Coding Flow",
     "url": "https://aicodingflow.com"
   },
-  "description": "Skills de workflow do AI Coding Flow para Claude Code: o ciclo de uma demanda, da entrevista ao fechamento.",
+  "description": "Governança de projeto e workflow de demandas do AI Coding Flow para Claude Code.",
   "plugins": [
     {
       "name": "aicf",
       "source": "./",
-      "description": "O ciclo de vida de uma demanda em três skills: entrevistar até a spec ficar madura, implementar a partir dela e fechar com registro do que foi feito.",
+      "description": "Governança de projeto para desenvolver com agentes: a estrutura que sustenta o projeto (PRD, checklist, demandas versionadas) e o ciclo que leva cada demanda da ideia ao registro do que foi feito.",
       "category": "engineering",
-      "keywords": ["workflow", "spec", "governanca", "demanda", "processo"]
+      "keywords": [
+        "workflow",
+        "governanca",
+        "prd",
+        "spec",
+        "starter-kit",
+        "demanda"
+      ]
     }
   ]
 }

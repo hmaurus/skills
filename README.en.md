@@ -1,12 +1,21 @@
-# aicf — workflow skills for Claude Code
+# aicf — project governance for building with agents
 
 _[Versão em português](README.md)_
 
-Three skills covering the life of a work item: **interview** it until it becomes a spec, **implement** from that spec, **close** it with a record of what was actually done.
+A starter kit for running a software project with Claude Code: the documents that hold a project together — vision, delivery checklist, versioned work items — and the cycle that takes each one from raw idea to a record of what was actually done.
 
-Not a framework, not a new methodology. It is the minimum that keeps an agent-driven project from losing track of what was decided and why.
+> **Written in Portuguese.** The skills instruct the agent in pt-BR and the file conventions use Portuguese names (`demandas/` for work items, `concluidas/` for completed, `backlog/`). They work fine in an English-speaking session — Claude reads the instructions and answers you in whatever language you write — but if you want the artifacts named in English, fork and translate.
 
-> **Written in Portuguese.** The skills instruct the agent in pt-BR and the file conventions use Portuguese names (`demandas/`, `concluidas/`, `backlog/`). They work fine in an English-speaking session — Claude reads the instructions and answers you in whatever language you write — but if you want the artifacts named in English, fork and translate.
+## Where it fits
+
+Skill collections like [Superpowers](https://github.com/obra/superpowers) and [Matt Pocock's](https://github.com/mattpocock/skills) handle **the individual work item** well: they interrogate the idea, produce a spec, break it into tasks, and execute with discipline. Matt's go further and cover domain knowledge — a glossary in `CONTEXT.md`, decisions as ADRs.
+
+What neither brings is the layer above: **where it is written what the product is, what already shipped, what is missing, and the history of what was decided and why.** Without it, every work item is well executed and the project as a whole has no memory.
+
+`aicf` is that layer — and it works two ways:
+
+- **On its own**, with a native path for interview and implementation. Nothing else to install.
+- **On top**, if you already use the others. Interview with Superpowers' `brainstorming` or Matt's `grill-with-docs`: the record still lands in the same place, and the work item notes which path was used.
 
 ## Install
 
@@ -17,15 +26,16 @@ Not a framework, not a new methodology. It is the minimum that keeps an agent-dr
 
 Restart your session afterwards — skills load at startup and do not hot-swap.
 
-## The three skills
+On a new project, start with `/aicf:setup`, which creates the structure and the root `CLAUDE.md`. On an existing one, start with `/aicf:workflow-demanda`, which explains the cycle.
 
-| Skill                    | Phase          | What it does                                                                  |
-| ------------------------ | -------------- | ----------------------------------------------------------------------------- |
-| `/aicf:workflow-demanda` | the map        | The whole cycle, the paths available at each phase, and the governance conventions |
-| `/aicf:criar-spec`       | interview      | Interrogates until no open decision is left, then writes the spec into the repo |
-| `/aicf:implementar-spec` | implementation | Reads the spec, implements, verifies, and runs the closing ritual              |
+## The skills
 
-Start with `/aicf:workflow-demanda` — the other two are its phases on the native path.
+| Skill                    | When                    | What it does                                                                    |
+| ------------------------ | ----------------------- | -------------------------------------------------------------------------------- |
+| `/aicf:setup`            | once, on a new project  | Creates `docs/projeto/` with a PRD and checklist, the work-item folders, and the root `CLAUDE.md` |
+| `/aicf:workflow-demanda` | the map                 | The whole cycle, the paths available at each phase, and the governance conventions |
+| `/aicf:criar-spec`       | interview phase         | Interrogates until no open decision is left, then writes the spec into the repo   |
+| `/aicf:implementar-spec` | implementation phase    | Reads the spec, implements, verifies, and runs the closing ritual                 |
 
 ## The problem this solves
 
@@ -38,30 +48,30 @@ The cycle has four phases:
 3. **Implementation** — consumes the spec
 4. **Closing** — a report of what was **actually** done, including where delivery diverged from plan
 
-What holds it together is the record: each work item is a file in the repository, and on completion it gets a report and moves to `concluidas/` (_completed_). The reasoning lives in the repo, not in the chat.
+What holds it together is the record: each work item is a file in the repository, and on completion it gets a report and moves to `concluidas/`. The reasoning lives in the repo, not in the chat.
 
 ## Paths, not a single track
 
-Phases 2 and 3 are not locked to these skills. Each has alternatives, and the choice belongs to the user — the agent suggests, it does not decide:
+Phases 2 and 3 are independent, and the choice belongs to the user — the agent suggests, it does not decide:
 
-- **Interview** — `/aicf:criar-spec`, or `brainstorming` ([Superpowers](https://github.com/obra/superpowers)), or `grill-with-docs` + `to-spec` ([Matt Pocock](https://github.com/mattpocock/skills))
+- **Interview** — `/aicf:criar-spec`, or `brainstorming` (Superpowers), or `grill-with-docs` + `to-spec` (Matt Pocock)
 - **Implementation** — `/aicf:implementar-spec` (with or without plan mode), or `writing-plans` + `subagent-driven-development`, or `to-tickets` + `implement`
 
 You can interview one way and implement another. The work item records which was used, on a `Processo:` line.
 
-## Conventions the skills assume
+## The structure
 
 ```
 docs/projeto/            # project
-├── PRD.md               # why the product exists
+├── PRD.md               # why the product exists: vision, audience, model
 ├── CHECKLIST.md         # what shipped and what is missing
 └── demandas/            # work items
-    ├── <demanda>.md
-    ├── concluidas/      # completed
-    └── backlog/
+    ├── <demanda>.md     # one per file
+    ├── concluidas/      # archived, with a report
+    └── backlog/         # not yet certain they will be done
 ```
 
-Your project may diverge from this — if there is a `CLAUDE.md` inside `docs/projeto/`, it wins.
+If your project needs a different structure, write the differences into a `CLAUDE.md` inside `docs/projeto/` — Claude Code loads that file when it touches the folder, and **project instructions take precedence over the skill's**. That is how a repository adopts the method without forking the skills.
 
 ## About
 
