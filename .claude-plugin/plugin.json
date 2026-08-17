@@ -1,0 +1,18 @@
+{
+  "name": "aicf",
+  "version": "0.1.0",
+  "description": "O ciclo de vida de uma demanda em três skills: entrevistar até a spec ficar madura, implementar a partir dela e fechar com registro do que foi feito.",
+  "author": {
+    "name": "AI Coding Flow",
+    "url": "https://aicodingflow.com"
+  },
+  "homepage": "https://aicodingflow.com",
+  "repository": "https://github.com/hmaurus/skills",
+  "license": "MIT",
+  "keywords": ["workflow", "spec", "governanca", "demanda", "processo"],
+  "skills": [
+    "./skills/workflow-demanda",
+    "./skills/criar-spec",
+    "./skills/implementar-spec"
+  ]
+}

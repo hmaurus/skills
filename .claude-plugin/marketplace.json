@@ -1,0 +1,17 @@
+{
+  "name": "aicodingflow",
+  "owner": {
+    "name": "AI Coding Flow",
+    "url": "https://aicodingflow.com"
+  },
+  "description": "Skills de workflow do AI Coding Flow para Claude Code: o ciclo de uma demanda, da entrevista ao fechamento.",
+  "plugins": [
+    {
+      "name": "aicf",
+      "source": "./",
+      "description": "O ciclo de vida de uma demanda em três skills: entrevistar até a spec ficar madura, implementar a partir dela e fechar com registro do que foi feito.",
+      "category": "engineering",
+      "keywords": ["workflow", "spec", "governanca", "demanda", "processo"]
+    }
+  ]
+}
