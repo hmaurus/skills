@@ -31,24 +31,32 @@ KISS/YAGNI, validação antes do commit, testes, acessibilidade, tratamento de c
   natural para trabalho em equipe, ou quando este projeto tem padrão próprio.
 - **Nenhum dos dois** — o usuário já tem os seus.
 
-## Ferramentas que o projeto usa
+## Ferramentas que o usuário já usa
 
-Depois das perguntas acima, levantar **o que o usuário já usa**, para o `CLAUDE.md` registrar e
-o agente não perguntar de novo a cada sessão.
+Três perguntas, porque as três mudam o comportamento do agente daqui para a frente. Perguntar
+uma de cada vez, em pergunta aberta, e aceitar "nenhuma" como resposta — quem está começando
+não tem nada disso, e insistir transforma o setup em venda de stack.
 
-O catálogo está em [`references/ferramentas.md`](references/ferramentas.md) — ler antes de
-perguntar. **Não despejar a lista.** O fluxo é:
+**1. Gerenciador de senhas.** Onde mora a credencial que não cabe no `.env` — senha de painel,
+chave de produção, credencial usada em mais de uma máquina. Importa porque esses cofres têm CLI:
+o agente lê um campo específico sem o valor passar pelo chat, o que não acontece quando o
+usuário cola a chave na conversa. Se não usa nenhum: o `.env` sozinho funciona numa máquina só,
+mas some com ela e não dá para compartilhar. Opções: Bitwarden (CLI `bw`, plano gratuito
+generoso), 1Password (CLI `op`, integra direto no `.env` com `op://`).
 
-1. Perguntar categoria por categoria, começando pelas quatro que o catálogo marca como "sempre
-   perguntar": gerenciador de senhas, hospedagem e deploy, banco de dados, CI.
-2. Quem já usa alguma coisa, só diz o nome — registrar e passar para a próxima.
-3. Quem não sabe do que se trata: explicar para que a categoria serve, em duas frases, e só
-   então oferecer as opções do catálogo com a diferença entre elas.
-4. As demais categorias (autenticação, pagamento, email, observabilidade, analytics, mídia) só
-   entram se a descrição do projeto indicar que fazem falta.
+**2. Fonte de documentação de biblioteca.** Conhecimento de treino envelhece; a API da lib que o
+agente "lembra" pode ser de duas versões atrás. Um MCP de documentação — Context7, por exemplo —
+faz o agente consultar a doc atual antes de escrever a chamada. Se não usa nenhum: registrar
+que a doc oficial é consultada na mão.
 
-**Não instalar nem configurar nada**, e não insistir em quem respondeu "nenhum" — a resposta
-"ainda não uso" é registro válido e evita que o agente presuma que existe.
+**3. Coleções de skills de workflow.** Se o usuário já tem Superpowers ou as skills do Matt
+Pocock instaladas, os caminhos de entrevista e implementação que `/aicf:workflow-demanda`
+oferece mudam — sem elas, só o caminho nativo existe, e propor `brainstorming` seria propor algo
+que não roda. Confirmar o que está instalado em vez de supor.
+
+Registrar as respostas onde elas já têm lugar: as duas primeiras nas seções de segurança e de
+dependências dos padrões de engenharia (abaixo); a terceira, em "Processos de desenvolvimento"
+do `CLAUDE.md`. **Nome da ferramenta e nome da variável de ambiente — nunca o valor.**
 
 ## O que criar
 
@@ -70,10 +78,6 @@ Os templates estão em `templates/` dentro desta skill:
 | `templates/prd.md`       | `docs/projeto/PRD.md`                           |
 | `templates/checklist.md` | `docs/projeto/CHECKLIST.md`                     |
 | `templates/preferencias.md` | conforme a resposta acima — ver abaixo       |
-
-O que o usuário respondeu sobre ferramentas vira a seção `## Stack e serviços` do `CLAUDE.md`,
-no formato que o fim do catálogo mostra: uma linha por ferramenta em uso, com o **nome da
-variável de ambiente, nunca o valor**. Categoria não usada não vira linha.
 
 Copiar o conteúdo trocando `<NOME>` pelo nome do projeto e preenchendo a descrição no lugar
 indicado. **Não reescrever o template por conta própria** — o que estiver marcado como a
