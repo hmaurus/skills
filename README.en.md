@@ -35,7 +35,7 @@ On a new project, start with `/aicf:setup`, which creates the structure and the 
 
 | Skill                    | When                    | What it does                                                                    |
 | ------------------------ | ----------------------- | -------------------------------------------------------------------------------- |
-| `/aicf:setup`            | once, on a new project  | Creates `docs/projeto/` with a PRD and checklist, the work-item folders, and the root `CLAUDE.md` |
+| `/aicf:setup`            | once, on a new project  | Creates `docs/projeto/` with a PRD and checklist, the work-item folders, and the root `CLAUDE.md` — plus engineering defaults, if you want them |
 | `/aicf:workflow-demanda` | the map                 | The whole cycle, the paths available at each phase, and the governance conventions |
 | `/aicf:criar-spec`       | interview phase         | Interrogates until no open decision is left, then writes the spec into the repo   |
 | `/aicf:implementar-spec` | implementation phase    | Reads the spec, implements, verifies, and runs the closing ritual                 |

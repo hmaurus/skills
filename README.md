@@ -33,7 +33,7 @@ Em projeto novo, comece por `/aicf:setup`, que cria a estrutura e o `CLAUDE.md` 
 
 | Skill                    | Quando                     | O que faz                                                                        |
 | ------------------------ | -------------------------- | -------------------------------------------------------------------------------- |
-| `/aicf:setup`            | uma vez, no projeto novo   | Cria `docs/projeto/` com PRD e checklist, as pastas de demandas e o `CLAUDE.md` raiz |
+| `/aicf:setup`            | uma vez, no projeto novo   | Cria `docs/projeto/` com PRD e checklist, as pastas de demandas e o `CLAUDE.md` raiz — e, se você quiser, os padrões de engenharia |
 | `/aicf:workflow-demanda` | o mapa                     | O ciclo inteiro, os caminhos de cada fase e as convenções de governança          |
 | `/aicf:criar-spec`       | fase de entrevista         | Interroga até não sobrar decisão em aberto, depois escreve a spec no repositório  |
 | `/aicf:implementar-spec` | fase de implementação      | Lê a spec, implementa, verifica e conduz o fechamento até o registro              |
