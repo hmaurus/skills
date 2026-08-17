@@ -35,7 +35,13 @@ Em projeto que já existe, comece por `/aicf:workflow-demanda`, que explica o ci
 
 **2. Preencher o `PRD.md`.** Ele nasce com as seções e uma pergunta em cada uma. A que mais se paga é **"fora de escopo, por decisão"** — é ela que impede a mesma discussão de voltar daqui a seis meses.
 
-Não há skill dedicada a isso, aqui nem nas outras coleções: `criar-spec` e `brainstorming` entrevistam para uma demanda, não para o produto. Duas saídas que funcionam: pedir a entrevista em linguagem natural — _"me entreviste seção por seção para preencher o `docs/projeto/PRD.md`"_ — ou usar `grilling` (Matt Pocock), feita para interrogar uma ideia até o raciocínio aparecer, e depois escrever o resultado no PRD.
+Não há skill dedicada a isso, aqui nem nas outras coleções. Três caminhos funcionam:
+
+- **Entrevista em linguagem natural** — _"me entreviste seção por seção para preencher o `docs/projeto/PRD.md`"_. É o padrão quando a ideia ainda está se formando: pergunta aberta abre espaço que menu de opção fecha.
+- **`grilling`** (Matt Pocock) — quando você já acha que sabe o que quer e prefere ser contestado antes de escrever. Ela não grava nada; o resultado da conversa você transcreve para o PRD.
+- **`domain-modeling`** (Matt Pocock) — depois, se o produto tem vocabulário próprio que já apareceu ambíguo. Grava o glossário em `CONTEXT.md`, ao lado do PRD e não dentro dele.
+
+**O que não funciona é passar o PRD pelo ciclo da demanda.** Não por ser documento — spec serve bem para mudança de documentação. É que a spec descreve uma **mudança**, com escopo e um estado "pronto", enquanto o PRD descreve o **produto**, e é revisado toda vez que uma decisão o contraria. Envelopar um no outro rende uma spec vazia — a entrevista dela discutiria como escrever o arquivo, e as perguntas que importam, público e fora de escopo, continuariam sem resposta — mais um fechamento pedindo relatório, arquivamento e check de lint num `.md`.
 
 **3. Tirar o `CHECKLIST.md` do PRD.** Cada coisa que o produto precisa ter vira uma linha. O que couber numa linha fica ali mesmo; o que precisar de contexto vira arquivo em `demandas/`.
 

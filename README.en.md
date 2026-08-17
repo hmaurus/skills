@@ -37,7 +37,13 @@ On an existing project, start with `/aicf:workflow-demanda`, which explains the 
 
 **2. Fill in `PRD.md`.** It ships with the sections and a prompt under each. The one that pays off most is **"ruled out, by decision"** — it is what keeps the same argument from coming back six months later.
 
-There is no skill dedicated to this, here or in the other collections: `criar-spec` and `brainstorming` interview for a single work item, not for the product. Two things that work: ask for the interview in plain language — _"interview me section by section to fill in `docs/projeto/PRD.md`"_ — or use `grilling` (Matt Pocock), built to interrogate an idea until the reasoning surfaces, then write the result into the PRD.
+There is no skill dedicated to this, here or in the other collections. Three routes work:
+
+- **A plain-language interview** — _"interview me section by section to fill in `docs/projeto/PRD.md`"_. This is the default while the idea is still forming: an open question leaves room that a menu of options closes off.
+- **`grilling`** (Matt Pocock) — when you think you already know what you want and would rather be challenged before writing. It stores nothing; you transcribe the conversation into the PRD.
+- **`domain-modeling`** (Matt Pocock) — afterwards, if the product has vocabulary of its own that has already turned ambiguous. It writes the glossary into `CONTEXT.md`, beside the PRD rather than inside it.
+
+**What does not work is running the PRD through the work-item cycle.** Not because it is a document — a spec handles documentation changes fine. It is that a spec describes a **change**, with a scope and a "done" state, while the PRD describes the **product**, and gets revised whenever a decision contradicts it. Wrapping one in the other yields an empty spec — its interview would debate how to write the file, while the questions that matter, audience and what is ruled out, stay unanswered — plus a closing ritual asking for a report, archiving, and a lint check on a `.md`.
 
 **3. Derive `CHECKLIST.md` from the PRD.** Every thing the product needs becomes one line. What fits in a line stays there; what needs context becomes a file under `demandas/`.
 
