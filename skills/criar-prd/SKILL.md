@@ -19,8 +19,7 @@ roda de novo, sem cerimônia de fechamento.
 
 `docs/projeto/PRD.md`. Se já existe preenchido, é **modo revisão**: ler antes de perguntar,
 mostrar o que já está respondido e entrevistar só o que mudou ou ficou aberto — não reescrever
-seção que continua válida. Se o repositório não tem `docs/projeto/`, perguntar onde gravar em vez
-de inventar pasta.
+seção que continua válida. Sem `docs/projeto/`, perguntar onde gravar em vez de inventar pasta.
 
 ## Como entrevistar
 
@@ -31,9 +30,9 @@ não tem isso?" — e seguir. Produto desenhado a partir da solução resolve o 
 Ordem que funciona: problema → quem sofre com ele → o que passa a existir → escopo → modelo →
 sucesso → riscos.
 
-Uma pergunta de cada vez. `AskUserQuestion` para o que é escolha (o que fica fora, qual modelo,
-qual sinal conta como sucesso); pergunta aberta para o que é descritivo (o problema, o público,
-a proposta) — abrir com menu ancora quem ainda não formou opinião sobre o próprio produto.
+Uma pergunta de cada vez: `AskUserQuestion` para escolha (o que fica fora, qual modelo, qual
+sinal de sucesso), aberta para o descritivo (problema, público, proposta) — menu ancora quem
+ainda não formou opinião sobre o próprio produto.
 
 ## As três armadilhas
 
