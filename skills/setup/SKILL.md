@@ -129,4 +129,4 @@ recebe apenas o nome da variável.
 1. Listar o que foi criado e onde.
 2. Dizer que o mapa do ciclo está em `/aicf:workflow-demanda`, e que a primeira demanda pode
    começar por `/aicf:criar-spec`.
-3. Sugerir preencher o `PRD.md` como primeira coisa — é dele que sai o checklist inicial.
+3. Sugerir `/aicf:criar-prd` como primeira coisa — é do PRD que sai o checklist inicial.

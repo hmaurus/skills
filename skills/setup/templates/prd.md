@@ -2,7 +2,7 @@
 
 O porquê do produto. Responde o que nenhuma linha de código responde: para quem isto existe e o que conta como sucesso.
 
-Documento vivo — revisar quando uma decisão o contrariar, em vez de deixar envelhecer.
+Documento vivo — quando uma decisão o contrariar, revisar por `/aicf:criar-prd`, em vez de deixar envelhecer.
 
 ## Problema
 
