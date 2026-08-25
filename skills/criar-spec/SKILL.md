@@ -44,5 +44,6 @@ Usar o vocabulário do domínio do projeto (`CONTEXT.md`, se existir).
 2. Perguntar por qual caminho será implementada e registrar logo abaixo do título:
    `Processo: <entrevista> → <implementação>` — a recomendação é do agente; a decisão é do
    usuário.
-3. Sugerir `/clear` ou sessão nova para implementar: o contexto da entrevista já cumpriu seu
-   papel e a partir daqui só atrapalha.
+3. Entrevista curta e demanda pequena → seguir na mesma sessão, se o usuário quiser emendar a
+   implementação. Entrevista longa → sugerir `/clear` ou sessão nova: a spec deve bastar
+   sozinha, e o resíduo da conversa ancora a implementação na memória em vez do texto.
