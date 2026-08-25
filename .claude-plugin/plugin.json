@@ -1,6 +1,6 @@
 {
   "name": "aicf",
-  "version": "0.8.1",
+  "version": "0.9.0",
   "description": "Governança de projeto para desenvolver com agentes: a estrutura que sustenta o projeto (PRD, checklist, demandas versionadas) e o ciclo que leva cada demanda da ideia ao registro do que foi feito.",
   "author": {
     "name": "AI Coding Flow",
@@ -20,6 +20,7 @@
   "skills": [
     "./skills/setup",
     "./skills/workflow-demanda",
+    "./skills/fechar-demanda",
     "./skills/criar-prd",
     "./skills/criar-spec",
     "./skills/implementar-spec"

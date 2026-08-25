@@ -22,7 +22,7 @@
 
 Duas camadas: a **governança** registra o que será feito e o que foi feito, e é sempre a mesma; a **implementação** é como o código sai, e tem caminhos à escolha. Uma demanda passa por quatro fases: demanda → entrevista → implementação → fechamento.
 
-**O workflow completo está na skill `/aicf:workflow-demanda`** — ciclo, caminhos de cada fase, nomenclatura, formato do relatório e ritual de fechamento. Invocar ao começar, rodar ou fechar uma demanda.
+**O mapa do workflow está na skill `/aicf:workflow-demanda`** — ciclo, caminhos de cada fase e nomenclatura; invocar ao começar ou registrar uma demanda. **O fechamento — relatório e ritual — está em `/aicf:fechar-demanda`**, que o agente aplica ao concluir qualquer demanda, por qualquer caminho.
 
 Três regras valem antes de abrir qualquer doc:
 
