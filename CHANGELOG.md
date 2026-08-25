@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.9.2 — 2026-08-25
+
+- O fim do `setup` e o template do PRD passam a apontar para `/aicf:criar-prd` em vez de mandar "preencher o `PRD.md`" na mão — texto anterior à skill, nunca atualizado. Como ela é manual (`disable-model-invocation`), só é descoberta se alguém apontar, e o setup é o lugar natural desse ponteiro.
+
 ## 0.9.1 — 2026-08-24
 
 - A sugestão de `/clear` ao fim do `criar-spec` vira condicional: entrevista curta e demanda pequena podem emendar a implementação na mesma sessão; entrevista longa mantém a sugestão, porque a spec deve bastar sozinha — implementar pela memória da conversa esconde spec incompleta.
