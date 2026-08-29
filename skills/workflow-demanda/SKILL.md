@@ -12,6 +12,11 @@ que a skill não cita), **dizer em uma linha o que vai fazer e por quê**, antes
 Ferramenta do agente — subagente, plan mode, worktree, code review, busca paralela — é escolha
 livre em qualquer ponto, e o agente propõe a que couber sem esperar autorização.
 
+Estas skills são deliberadamente pequenas: dizem o que o agente não teria como inferir — onde
+gravar, o que registrar, quando fechar — e param aí. Ausência de instrução é liberdade, não
+lacuna: o que a ferramenta nativa já faz bem e o que se decide melhor no caso concreto ficam
+com o agente. Quanto mais a skill descreve, mais ela precisa ser reescrita a cada evolução dele.
+
 ## O ciclo
 
 **Demanda** (item do checklist, arquivo em `demandas/`, ou ideia ainda não registrada) →
@@ -87,3 +92,6 @@ regra rígida, é cada uma rodar em **sessão própria**, com `/clear` ou `/comp
 **Cada demanda no doc é auto-contida** (Problema, Solução, DoD): a próxima sessão lê o doc,
 escolhe, executa. O _porquê_ das decisões mora no doc, não na conversa; a **Origem** da leva
 fica no cabeçalho do plano, uma vez.
+
+Demanda que não coube na sessão não vira prompt de continuação: fecha parcial, com o estado
+gravado no próprio doc — `/aicf:fechar-demanda` cobre o caso.

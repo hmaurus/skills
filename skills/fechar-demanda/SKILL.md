@@ -1,6 +1,6 @@
 ---
 name: fechar-demanda
-description: Ritual de fechamento de uma demanda — checks, revisão, relatório, arquivamento e promoção de conhecimento. Aplicar proativamente ao concluir qualquer demanda, por qualquer caminho de implementação.
+description: Ritual de fechamento de uma demanda — checks, revisão, relatório, arquivamento e promoção de conhecimento. Aplicar proativamente ao concluir qualquer demanda, por qualquer caminho de implementação, e também ao interromper uma demanda por falta de contexto, para registrar o estado parcial antes do /clear.
 ---
 
 # Fechar uma demanda
@@ -37,6 +37,19 @@ cabe num commit, e a demanda pode nascer já no fechamento: o relatório registr
 e o arquivo vai direto para `concluidas/`. Ao final, avaliar o peso do contexto e sugerir
 `/clear` se estiver pesado — não a cada demanda por reflexo.
 
+## Sessão que acaba antes da demanda
+
+Contexto no fim com a demanda aberta também é fechamento, parcial: o arquivo fica em
+`demandas/`, o checklist não é marcado, e o que a sessão descobriu vai para o próprio arquivo
+sob `## Estado em andamento` — decisão tomada, caminho descartado com o motivo, onde parou e o
+próximo passo. **Se a frase serve para qualquer demanda, ela é do `CLAUDE.md`, não do arquivo.**
+O teste é a retomada caber em `continue a demanda <arquivo>`. Commit próprio; no fechamento
+definitivo o bloco some, absorvido pelo relatório.
+
+Quando o usuário sinaliza a parada, o agente registra sem perguntar. Quando é o agente que
+percebe o aperto, ele avisa e a decisão é do usuário — encerrar o trabalho por conta própria
+para registrar, não.
+
 ## O relatório
 
 `## Relatório de implementação (YYYY-MM-DD)` no fim do arquivo. Documenta como a demanda foi
@@ -63,14 +76,3 @@ Processo: nativo-direto
 Processo: grill-with-docs → nativo-plan
 Processo: mattpocock — issues #12, #13, #14
 ```
-
-## Prompt para a próxima sessão
-
-Quando o usuário pedir o prompt para a próxima demanda (para copiar após `/clear`), entregar
-**cercado por uma linha só com `---` acima e outra abaixo**, sem rótulos nem cercas de código, e
-com **linha em branco entre cada `---` e o corpo** — senão o markdown transforma a última linha
-em título e come o delimitador.
-
-O corpo é autocontido: contexto, o que ler, escopo, fora de escopo, skills obrigatórias, checks,
-DoD, branch, ritual de fechamento. O teste: a próxima sessão, fria, executa lendo só ele e o que
-ele mandar ler — sem impedi-la de investigar mais se achar que precisa.
