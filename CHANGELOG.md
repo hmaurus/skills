@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.10.1 — 2026-08-29
+
+- O check do fechamento ganha default: o `CLAUDE.md` continua sendo a fonte de qual é o comando, mas na ausência dele o agente usa os scripts que o projeto expõe, e não havendo nenhum registra o fato no relatório. Antes a instrução era só "rodar o script de check do projeto" — sem `CLAUDE.md`, o agente adivinhava ou pulava calado. Skill precisa funcionar sozinha; o `CLAUDE.md` refina, não habilita.
+
 ## 0.10.0 — 2026-08-29
 
 - Sai do `fechar-demanda` a instrução **"prompt para a próxima sessão"**. Ela mandava montar um bloco autocontido com contexto, escopo, fora de escopo, DoD, skills, checks e branch — e todos esses campos já moram no arquivo da demanda e no `CLAUDE.md` do projeto. O prompt era uma cópia manual dos dois, criando uma terceira fonte que diverge das outras: uma skill que existe para tirar o porquê da conversa terminava mandando exportar o repositório de volta para a conversa. Com o registro em dia, a retomada é `implementa a próxima demanda do checklist` numa sessão limpa; se isso não basta, o defeito está no checklist ou na demanda, e é lá que se corrige. Some junto a regra de cercar o bloco com `---`, que só existia para proteger o formato dele.

@@ -11,7 +11,9 @@ proativamente, sem esperar pedido.
 ## Antes do relatório
 
 Rodar o script de check do projeto (lint + format + typecheck) **no projeto inteiro, nunca só
-nos arquivos tocados**, e propor revisão de código quando a mudança for além de ajuste de texto
+nos arquivos tocados**. Qual é o comando, o `CLAUDE.md` diz; quando não diz, vale o que os
+scripts do projeto expõem, e não havendo nenhum o relatório registra isso — o passo não some em
+silêncio. Propor revisão de código quando a mudança for além de ajuste de texto
 — `/code-review`, subagente fresco que não viu a implementação, ou o code review do harness.
 Reler o próprio diff na mesma sessão é a opção mais fraca: o agente defende o que acabou de
 escrever.
