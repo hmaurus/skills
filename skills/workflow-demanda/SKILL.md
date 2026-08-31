@@ -83,7 +83,9 @@ exigem `/setup-matt-pocock-skills` rodado no repositório.
 Demanda tem começo e fim. Procedimento que se repete enquanto o projeto existir (publicar
 conteúdo, subir versão, disparar email, liberar acesso) vira **skill** ou **command** em
 `.claude/`. Gatilho: o mesmo passo a passo explicado pela terceira vez — quando acontecer, propor
-a criação.
+a criação. Mas skill é conselho que o modelo pode não seguir: regra que precisa valer sem exceção
+— formatar após editar, barrar escrita em pasta protegida — é **hook**, script que roda sempre. O
+critério é a regra poder falhar sem ninguém perceber.
 
 ## Checklists e PLANOs multi-demanda
 

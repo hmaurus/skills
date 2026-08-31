@@ -41,9 +41,9 @@ Usar o vocabulário do domínio do projeto (`CONTEXT.md`, se existir).
 ## Ao terminar
 
 1. Mostrar a spec e pedir revisão antes de considerar fechada.
-2. Perguntar por qual caminho será implementada e registrar logo abaixo do título:
-   `Processo: <entrevista> → <implementação>` — a recomendação é do agente; a decisão é do
-   usuário.
+2. Registrar logo abaixo do título só o que já é fato: `Processo: <entrevista> → a definir`. A
+   escolha do caminho de implementação pertence a quem for ler a spec, e `/aicf:fechar-demanda`
+   completa a linha — perguntar agora só cabe se a implementação emendar nesta sessão (passo 3).
 3. Entrevista curta e demanda pequena → seguir na mesma sessão, se o usuário quiser emendar a
    implementação. Entrevista longa → sugerir `/clear` ou sessão nova: a spec deve bastar
    sozinha, e o resíduo da conversa ancora a implementação na memória em vez do texto.

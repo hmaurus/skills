@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.11.0 — 2026-08-30
+
+- O passo 4 do `fechar-demanda` ganha **fonte, limiar e contrapeso**. Fonte: além do relatório, o agente relê os achados da revisão de código — o material com maior chance de virar regra útil (o caso de borda que faltou, a suposição que não se sustentava) vivia na sessão ou nos comentários do PR e evaporava no `/clear`. Limiar: a rota `CLAUDE.md` deixa de aceitar qualquer regra e passa a exigir que o erro tenha aparecido duas vezes, porque uma vez é caso isolado. Contrapeso: promover para o `CLAUDE.md` obriga a olhar o que de lá saiu de validade. Sem esses dois últimos, a skill produzia exatamente o padrão de falha que a documentação da Anthropic nomeia — o `CLAUDE.md` sobre-especificado, longo o bastante para o agente ignorar metade dele. Não havia limiar de entrada, teto de tamanho, nem saída.
+- `workflow-demanda` ganha a outra metade da regra de trabalho recorrente. A seção dizia que procedimento repetido vira skill ou command e parava aí. Faltava a distinção: skill é conselho que o modelo pode não seguir, **hook** é script que roda sempre. Regra que precisa valer sem exceção — formatar após editar, barrar escrita em pasta protegida — escrita como linha de skill é regra que vai falhar em silêncio algum dia, e o critério é justamente esse, se a falha passaria despercebida.
+- O passo 2 do `criar-spec` para de gravar o que ainda não aconteceu. Ele mandava perguntar o caminho de implementação e fechar a linha `Processo:` inteira, enquanto o passo 3 logo abaixo recomendava `/clear` — e dava o argumento que derruba o 2: se a spec deve bastar sozinha, a escolha do caminho pertence a quem vai lê-la, não a quem a escreveu. Agora a linha nasce como `<entrevista> → a definir` e o fechamento a completa, que é onde ela já mora. Perguntar continua certo no outro ramo do passo 3, quando a implementação emenda na mesma sessão.
+
 ## 0.10.1 — 2026-08-29
 
 - O check do fechamento ganha default: o `CLAUDE.md` continua sendo a fonte de qual é o comando, mas na ausência dele o agente usa os scripts que o projeto expõe, e não havendo nenhum registra o fato no relatório. Antes a instrução era só "rodar o script de check do projeto" — sem `CLAUDE.md`, o agente adivinhava ou pulava calado. Skill precisa funcionar sozinha; o `CLAUDE.md` refina, não habilita.

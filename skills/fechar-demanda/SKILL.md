@@ -23,13 +23,16 @@ escrever.
 1. **Relatório** no arquivo da demanda. Se a demanda não tinha arquivo, criar agora.
 2. **Mover** para `concluidas/`.
 3. **Marcar `- [x]`** no checklist ou no PLANO.
-4. **Reler o próprio relatório procurando o que vale além desta demanda** — decisão que outra
-   sessão vai reencontrar, armadilha que vai morder de novo, ID externo — e promover, porque
-   ninguém abre demanda concluída procurando informação: conhecimento operacional → doc de
-   referência; regra que muda como o agente age → `CLAUDE.md`; decisão difícil de reverter,
+4. **Reler o próprio relatório e os achados da revisão de código procurando o que vale além
+   desta demanda** — decisão que outra sessão vai reencontrar, armadilha que vai morder de novo,
+   ID externo — e promover, porque ninguém abre demanda concluída procurando informação:
+   conhecimento operacional → doc de referência; regra que muda como o agente age e cujo erro já
+   apareceu duas vezes → `CLAUDE.md`, porque uma vez é caso isolado; decisão difícil de reverter,
    surpreendente e com trade-off real → ADR numerado e imutável em `docs/adr/` (`0001-slug.md`);
    termo ambíguo do domínio → glossário em `CONTEXT.md`. Os dois últimos saem de
    `/domain-modeling`, que o agente invoca em qualquer processo — não depende das skills do Matt.
+   Escrever no `CLAUDE.md` obriga a olhar o que de lá saiu de validade: ele é lido inteiro em toda
+   sessão, e `/doctor` propõe cortes do que o agente já deduz do próprio código.
 5. **Conferir se a execução criou item novo no checklist/PLANO ou tornou algum obsoleto**, e
    ajustar inline.
 
