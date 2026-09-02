@@ -19,16 +19,21 @@ com o agente. Quanto mais a skill descreve, mais ela precisa ser reescrita a cad
 
 ## O ciclo
 
-**Demanda** (item do checklist, arquivo em `demandas/`, ou ideia ainda não registrada) →
+**Demanda** (item do checklist, arquivo em `intents/`, ou ideia ainda não registrada) →
 **entrevista**, que produz a spec → **implementação**, que a consome → **fechamento**, que é
-`/aicf:fechar-demanda` — relatório, arquivamento e linha `Processo:` vivem lá, e o agente o
+`/aicf:fechar-demanda` — relatório, arquivamento e linha `Processo` vivem lá, e o agente o
 aplica em qualquer caminho. Demanda que já nasceu de entrevista volta à mesa: o agente diz se o
 registrado basta ou se vale outra rodada. Pular a entrevista é legítimo quando a demanda já diz
-o suficiente — a implementação a consome como está, e a linha `Processo:` fica sem seta.
+o suficiente — o arquivo vai de `intents/` para `specs/` como está, e a linha `Processo` registra
+`entrevista: nenhuma`.
+
+**Três palavras, uma unidade de trabalho.** _Demanda_ é a coisa a fazer. _Intent_ e _spec_ são
+os dois estados do arquivo que a descreve: intent é a demanda decidida e ainda não entrevistada;
+spec é a demanda pronta para implementar. A pasta diz em qual estado o arquivo está.
 
 **Entrevista e implementação são escolhas independentes, e ambas são pergunta ao usuário, não
 dedução**: o agente sugere pelo ponto forte que couber ao caso, e a resposta vira a linha
-`Processo:` na demanda.
+`Processo` na demanda.
 
 ## Governança — onde mora o quê
 
@@ -36,33 +41,39 @@ dedução**: o agente sugere pelo ponto forte que couber ao caso, e a resposta v
 docs/projeto/
 ├── PRD.md             # Visão, público, modelo de negócio — o porquê do produto
 ├── CHECKLIST.md       # O entregue e o que falta (+ Backlog); cada item é uma demanda em potencial
-└── demandas/
-    ├── <demanda>.md       # Item que precisa de mais que uma linha no checklist
-    ├── PLANO-<titulo>.md  # Plano ativo (conjunto de demandas)
-    ├── concluidas/        # Demandas e planos concluídos, com relatório
-    └── backlog/           # Ainda não está claro que será feita
+├── intents/
+│   ├── <intent>.md        # Decidida, ainda não entrevistada
+│   └── backlog/           # Ainda não está claro que será feita
+└── specs/
+    ├── <spec>.md          # Pronta para implementar
+    └── concluidas/        # Arquivadas, com relatório
 ```
 
-Se houver um `CLAUDE.md` em `docs/projeto/`, ele manda sobre essa estrutura. Se o repositório
-nem tem `docs/projeto/`, perguntar onde gravar em vez de inventar pasta.
+Se o repositório nem tem `docs/projeto/`, perguntar onde gravar em vez de inventar pasta.
 
-`demandas/` ou `backlog/` se decide por **certeza, não urgência**: `demandas/` é o que já foi
-decidido fazer, mesmo que não seja agora; `backlog/` é o que ainda não se sustenta, depende de
-decisão não tomada, ou o usuário nem sabe se quer — ideia que nunca sai de lá é uso legítimo.
+`intents/` ou `intents/backlog/` se decide por **certeza, não urgência**: `intents/` é o que já
+foi decidido fazer, mesmo que não seja agora; `backlog/` é o que ainda não se sustenta, depende
+de decisão não tomada, ou o usuário nem sabe se quer — ideia que nunca sai de lá é uso legítimo.
 Importa mais quando a ideia surge no meio de outra demanda: registrar o esboço, escolher a pasta
 e voltar imediatamente ao que estava sendo feito.
 
+Um caminho só: todo intent que vai ser feito vira spec — com entrevista ou sem —, e tudo termina
+em `specs/concluidas/`, inclusive o que a entrevista concluiu não fazer.
+
 ## Entrevista — produz a spec
 
-| Caminho         | Como                                | A spec fica em                                         |
-| --------------- | ----------------------------------- | ------------------------------------------------------ |
-| **Nativo**      | `/aicf:criar-spec`                  | `demandas/<nome>.md`                                   |
-| **Superpowers** | `brainstorming`                     | `docs/superpowers/specs/YYYY-MM-DD-<topico>-design.md` |
-| **Matt Pocock** | `grill-with-docs`, depois `to-spec` | issue no tracker                                       |
+| Caminho         | Como                                | A spec fica em                                                                                                      |
+| --------------- | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Nativo**      | `/aicf:criar-spec`                  | `specs/<nome>.md` — o intent movido                                                                                 |
+| **Superpowers** | `brainstorming`                     | `docs/superpowers/specs/YYYY-MM-DD-<topico>-design.md`, só no caminho _architectural_; ou `specs/<nome>.md`, se o projeto mandar |
+| **Matt Pocock** | `grill-with-docs`, depois `to-spec` | issue no tracker; ou `specs/<nome>.md`, se o tracker configurado no setup apontar para lá                           |
 
-No Matt, `grill-with-docs` interroga e grava glossário e ADRs pelo caminho, mas quem escreve e
-publica a spec é `to-spec`; emendando direto no `implement`, a spec não vira arquivo nem issue —
-fica só na janela de contexto.
+No Superpowers, os caminhos _bounded_ e _spike_ do `brainstorming` não gravam arquivo — o
+registro é só a spec em `specs/`. Ele honra preferência de local ("user preferences for spec
+location override this default"), então o `CLAUDE.md` do projeto pode mandá-lo gravar direto em
+`specs/<nome>.md`. No Matt, `grill-with-docs` interroga e grava glossário e ADRs pelo caminho,
+mas quem escreve e publica a spec é `to-spec`; emendando direto no `implement`, a spec não vira
+arquivo nem issue — fica só na janela de contexto.
 
 ## Implementação — consome a spec
 
@@ -87,13 +98,12 @@ a criação. Mas skill é conselho que o modelo pode não seguir: regra que prec
 — formatar após editar, barrar escrita em pasta protegida — é **hook**, script que roda sempre. O
 critério é a regra poder falhar sem ninguém perceber.
 
-## Checklists e PLANOs multi-demanda
+## Demanda grande, e demandas que andam juntas
 
-O checklist e os PLANOs (`demandas/PLANO-*.md`) consolidam várias demandas — o ideal, sem ser
-regra rígida, é cada uma rodar em **sessão própria**, com `/clear` ou `/compact` entre elas.
-**Cada demanda no doc é auto-contida** (Problema, Solução, DoD): a próxima sessão lê o doc,
-escolhe, executa. O _porquê_ das decisões mora no doc, não na conversa; a **Origem** da leva
-fica no cabeçalho do plano, uma vez.
-
-Demanda que não coube na sessão não vira prompt de continuação: fecha parcial, com o estado
-gravado no próprio doc — `/aicf:fechar-demanda` cobre o caso.
+Demanda grande demais para uma sessão é **uma spec só**, com as entregas em checkboxes no corpo:
+a sessão faz o que cabe e fecha parcial — `/aicf:fechar-demanda` cobre o caso — e a próxima
+continua pelo mesmo arquivo. Várias demandas independentes que andam juntas são **specs
+separadas**, agrupadas sob um título de seção no `CHECKLIST.md`; a relação mora na lista, não em
+campo de cada spec nem em subpasta. O ideal, sem ser regra rígida, é cada demanda rodar em
+**sessão própria**, com `/clear` ou `/compact` entre elas. O _porquê_ das decisões mora no
+arquivo, não na conversa.

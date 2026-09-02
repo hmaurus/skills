@@ -64,7 +64,7 @@ Datar a última revisão no topo: o PRD é vivo, e saber quando parou de ser rev
 
 1. Mostrar o PRD e pedir revisão antes de considerá-lo fechado.
 2. **Propor tirar dele o primeiro `CHECKLIST.md`** — cada coisa que a proposta exige vira uma
-   linha; o que precisar de contexto vira arquivo em `demandas/`.
+   linha; o que precisar de contexto vira arquivo em `intents/`.
 3. Se apareceu vocabulário já ambíguo — dois nomes para a mesma coisa, ou o mesmo nome para duas
    —, sugerir `domain-modeling` (Matt Pocock) para gravar o glossário em `CONTEXT.md`, ao lado do
    PRD e não dentro dele.

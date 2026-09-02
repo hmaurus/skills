@@ -1,6 +1,6 @@
 # Checklist — \<NOME\>
 
-O que já foi entregue e o que falta. Cada item é uma demanda em potencial: quando precisar de mais que uma linha, vira arquivo em [`demandas/`](demandas/) e o item aqui vira ponteiro.
+O que já foi entregue e o que falta. Cada item é uma demanda em potencial: quando precisar de mais que uma linha, vira arquivo em [`intents/`](intents/) e o item aqui vira ponteiro.
 
 Marcar `- [x]` faz parte do ritual de fechamento — não é registro paralelo.
 
@@ -19,8 +19,8 @@ Marcar `- [x]` faz parte do ritual de fechamento — não é registro paralelo.
 
 ## Backlog
 
-Ideia que ainda não é certeza. Se couber numa linha, fica aqui; se precisar de contexto, vira arquivo em [`demandas/backlog/`](demandas/backlog/).
+Ideia que ainda não é certeza. Se couber numa linha, fica aqui; se precisar de contexto, vira arquivo em [`intents/backlog/`](intents/backlog/).
 
-O que separa daqui para `demandas/` é **certeza, não urgência**: demanda certa e sem prioridade já sai do backlog.
+O que separa daqui para `intents/` é **certeza, não urgência**: demanda certa e sem prioridade já sai do backlog.
 
 > - ...

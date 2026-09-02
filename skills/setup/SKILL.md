@@ -1,6 +1,6 @@
 ---
 name: setup
-description: Cria a base de governança de um projeto novo — docs/projeto/ com PRD e checklist, as pastas de demandas e o CLAUDE.md raiz — e, se o usuário quiser, os padrões de engenharia. Rodar uma vez, no começo do projeto.
+description: Cria a base de governança de um projeto novo — docs/projeto/ com PRD e checklist, as pastas de intents e specs e o CLAUDE.md raiz — e, se o usuário quiser, os padrões de engenharia. Rodar uma vez, no começo do projeto.
 disable-model-invocation: true
 ---
 
@@ -67,9 +67,11 @@ README.md                       # se ainda não existir
 docs/projeto/
 ├── PRD.md
 ├── CHECKLIST.md
-└── demandas/
-    ├── concluidas/.gitkeep
-    └── backlog/.gitkeep
+├── intents/
+│   ├── .gitkeep
+│   └── backlog/.gitkeep
+└── specs/
+    └── concluidas/.gitkeep
 ```
 
 Os templates estão em `templates/` dentro desta skill:
