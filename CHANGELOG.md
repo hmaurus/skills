@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.13.2 — 2026-09-02
+
+- Corrige o exemplo da linha `Processo` no `fechar-demanda`: `entrevista: to-spec` vira `entrevista: grill-with-docs`. Na coleção do Matt Pocock quem entrevista é `grill-with-docs`; `to-spec` só sintetiza a conversa e publica ("no interview, just synthesis"), e o exemplo contradizia o de duas linhas acima.
+
 ## 0.13.1 — 2026-09-01
 
 - **Poda das quatro skills que carregam a cada demanda**, sem regra nova nem regra removida. O que saiu foi justificativa depois da instrução já dada (por que a sugestão fica na spec, por que não reler o próprio diff, por que a issue vai no fim da linha), duplicata (`/clear` estava em três lugares e fica nos dois em que se aplica) e conhecimento sobre as outras coleções que envelhece com a versão delas. Os passos 3 e 4 do `implementar-spec`, que usavam o mesmo critério duas vezes, viraram um; o passo 4 do `fechar-demanda` virou tabela — destino por gatilho — em vez de um item de vinte linhas.

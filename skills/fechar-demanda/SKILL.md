@@ -93,5 +93,5 @@ Processo — entrevista: criar-spec · implementação: a definir · sugestão: 
 Processo — entrevista: nenhuma · implementação: aicf-direto
 Processo — entrevista: grill-with-docs · implementação: aicf-plan
 Processo — entrevista: brainstorming · implementação: subagent-driven-development
-Processo — entrevista: to-spec · implementação: implement · issues #12, #13
+Processo — entrevista: grill-with-docs · implementação: implement · issues #12, #13
 ```
