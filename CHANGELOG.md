@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.13.1 — 2026-09-01
+
+- **Poda das quatro skills que carregam a cada demanda**, sem regra nova nem regra removida. O que saiu foi justificativa depois da instrução já dada (por que a sugestão fica na spec, por que não reler o próprio diff, por que a issue vai no fim da linha), duplicata (`/clear` estava em três lugares e fica nos dois em que se aplica) e conhecimento sobre as outras coleções que envelhece com a versão delas. Os passos 3 e 4 do `implementar-spec`, que usavam o mesmo critério duas vezes, viraram um; o passo 4 do `fechar-demanda` virou tabela — destino por gatilho — em vez de um item de vinte linhas.
+- A premissa de tamanho das skills ("dizem o que o agente não teria como inferir e param aí") sai do `workflow-demanda` e vai para o README: é critério para quem mantém o plugin, não instrução para o agente.
+- Sai a linha do `Shift+Tab` e `Ctrl+G` do `workflow-demanda` — detalhe de interface que o agente não executa, e que ficou pela metade desde que o `implementar-spec` entra no plan mode quando o usuário escolhe `aicf-plan`. A tabela de implementação diz isso agora.
+- As descriptions de `criar-spec` e `implementar-spec` perdem o "par do …", que era para leitor humano e custava contexto em toda sessão.
+
 ## 0.13.0 — 2026-09-01
 
 - **`criar-spec` e `implementar-spec` passam a ser invocáveis pelo agente.** Sai o `disable-model-invocation: true` das duas. Com a flag, "me entreviste sobre X" e "pode implementar a spec" não carregavam a skill: a documentação diz que o Claude Code bloqueia a chamada e o agente deveria pedir que o usuário digitasse o comando, mas na prática ele fazia o trabalho como tarefa comum, sem a skill. A flag existia pelo critério "side effect ou timing", e o pedido explícito do usuário já resolve o timing — o `fechar-demanda`, que também escreve e commita, nunca a teve. Deixar cada projeto escolher não era opção: `skillOverrides` não afeta skill de plugin. Como a description agora conta para a auto-ativação, as duas passam a dizer **quando não** invocar — pergunta pontual, implementação em curso, tarefa sem spec. `criar-prd` e `setup` mantêm a flag: rodam uma vez ou raramente, e o comando digitado basta.

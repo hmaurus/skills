@@ -96,8 +96,8 @@ Projeto que já tem código também tem a parte do `CLAUDE.md` que se deduz dele
 convenções —, e essa parte não é deste setup: sugerir `/init` numa sessão aberta com
 `CLAUDE_CODE_NEW_INIT=1` no ambiente (`CLAUDE_CODE_NEW_INIT=1 claude` — é variável do processo,
 não liga de dentro da sessão), que explora o repositório com subagente e apresenta uma proposta
-antes de escrever qualquer arquivo. O setup segue dono da governança: PRD, checklist, `intents/`, `specs/`. Num projeto sem código não
-há o que deduzir, e nada muda.
+antes de escrever qualquer arquivo. O setup segue dono da governança: PRD, checklist,
+`intents/`, `specs/`. Num projeto sem código não há o que deduzir, e nada muda.
 
 ## `AGENTS.md` como link simbólico
 

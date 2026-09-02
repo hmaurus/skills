@@ -58,6 +58,8 @@ Em projeto que já existe, comece por `/aicf:workflow-demanda`, que explica o ci
 | `/aicf:implementar-spec` | fase de implementação      | Decide o caminho pela sugestão da spec — segue no caso óbvio, pergunta nos demais —, implementa e verifica; ao final chama o fechamento |
 | `/aicf:fechar-demanda`   | fase de fechamento         | Checks, relatório, arquivamento e promoção de conhecimento — o agente a aplica ao concluir qualquer demanda, por qualquer caminho |
 
+As skills são deliberadamente pequenas: dizem o que o agente não teria como inferir — onde gravar, o que registrar, quando fechar — e param aí. O que a ferramenta já faz bem e o que se decide melhor no caso concreto ficam com o agente; quanto mais a skill descreve, mais ela precisa ser reescrita a cada evolução dele.
+
 ## O problema que isso resolve
 
 Sessão de agente é volátil. A conversa em que você decidiu **não** usar uma abordagem some no `/clear`, e três semanas depois alguém — humano ou agente — reabre a mesma discussão porque o motivo nunca foi escrito em lugar nenhum.

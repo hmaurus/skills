@@ -12,11 +12,6 @@ que a skill não cita), **dizer em uma linha o que vai fazer e por quê**, antes
 Ferramenta do agente — subagente, plan mode, worktree, code review, busca paralela — é escolha
 livre em qualquer ponto, e o agente propõe a que couber sem esperar autorização.
 
-Estas skills são deliberadamente pequenas: dizem o que o agente não teria como inferir — onde
-gravar, o que registrar, quando fechar — e param aí. Ausência de instrução é liberdade, não
-lacuna: o que a ferramenta nativa já faz bem e o que se decide melhor no caso concreto ficam
-com o agente. Quanto mais a skill descreve, mais ela precisa ser reescrita a cada evolução dele.
-
 ## O ciclo
 
 **Demanda** (item do checklist, arquivo em `intents/`, ou ideia ainda não registrada) →
@@ -70,25 +65,21 @@ em `specs/concluidas/`, inclusive o que a entrevista concluiu não fazer.
 | **Superpowers** | `brainstorming`                     | `docs/superpowers/specs/YYYY-MM-DD-<topico>-design.md`, só no caminho _architectural_; ou `specs/<nome>.md`, se o projeto mandar |
 | **Matt Pocock** | `grill-with-docs`, depois `to-spec` | issue no tracker; ou `specs/<nome>.md`, se o tracker configurado no setup apontar para lá                           |
 
-No Superpowers, os caminhos _bounded_ e _spike_ do `brainstorming` não gravam arquivo — o
-registro é só a spec em `specs/`. Ele honra preferência de local ("user preferences for spec
-location override this default"), então o `CLAUDE.md` do projeto pode mandá-lo gravar direto em
-`specs/<nome>.md`. No Matt, `grill-with-docs` interroga e grava glossário e ADRs pelo caminho,
-mas quem escreve e publica a spec é `to-spec`; emendando direto no `implement`, a spec não vira
-arquivo nem issue — fica só na janela de contexto.
+No Superpowers, só o caminho _architectural_ do `brainstorming` grava arquivo, e ele honra o
+local que o `CLAUDE.md` do projeto mandar. No Matt, quem grava a spec é `to-spec`; emendar
+direto no `implement` deixa a spec só na janela de contexto.
 
 ## Implementação — consome a spec
 
 | Caminho              | Como                                                    | Plano de implementação                          |
 | -------------------- | ------------------------------------------------------- | ----------------------------------------------- |
 | **Aicf direto**      | `/aicf:implementar-spec`                                | depende do agente                               |
-| **Aicf plan mode**   | plan mode ligado, depois `/aicf:implementar-spec`       | depende do agente                               |
+| **Aicf plan mode**   | plan mode ligado antes, ou escolhido no `implementar-spec` | depende do agente                            |
 | **Superpowers**      | `writing-plans`, depois `subagent-driven-development`   | `docs/superpowers/plans/YYYY-MM-DD-<topico>.md` |
 | **Matt Pocock**      | `to-tickets`, depois `implement`                        | tickets, com bloqueio declarado entre eles      |
 
 Descer a tabela troca velocidade por rastro: nos caminhos aicf o plano vive na sessão e morre
-com ela. Plan mode liga com `Shift+Tab` **antes** de chamar a skill (`Ctrl+G` abre o plano no
-editor). As skills do Matt (`to-spec`, `to-tickets`, `triage`, `wayfinder`, `code-review`)
+com ela. As skills do Matt (`to-spec`, `to-tickets`, `triage`, `wayfinder`, `code-review`)
 exigem `/setup-matt-pocock-skills` rodado no repositório.
 
 ## Trabalho recorrente não é demanda
@@ -106,6 +97,4 @@ Demanda grande demais para uma sessão é **uma spec só**, com as entregas em c
 a sessão faz o que cabe e fecha parcial — `/aicf:fechar-demanda` cobre o caso — e a próxima
 continua pelo mesmo arquivo. Várias demandas independentes que andam juntas são **specs
 separadas**, agrupadas sob um título de seção no `CHECKLIST.md`; a relação mora na lista, não em
-campo de cada spec nem em subpasta. O ideal, sem ser regra rígida, é cada demanda rodar em
-**sessão própria**, com `/clear` ou `/compact` entre elas. O _porquê_ das decisões mora no
-arquivo, não na conversa.
+campo de cada spec nem em subpasta. O _porquê_ das decisões mora no arquivo, não na conversa.

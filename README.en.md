@@ -60,6 +60,8 @@ On an existing project, start with `/aicf:workflow-demanda`, which explains the 
 | `/aicf:implementar-spec` | implementation phase    | Picks the path from the spec's suggestion — follows it when the case is obvious, asks otherwise —, implements and verifies; calls the closing ritual at the end |
 | `/aicf:fechar-demanda`   | closing phase           | Checks, report, archiving and knowledge promotion — the agent applies it when any work item completes, whatever the path |
 
+The skills are deliberately small: they say what the agent could not infer on its own — where to write, what to record, when to close — and stop there. What the tool already does well, and what is better decided case by case, stays with the agent; the more a skill describes, the more it has to be rewritten with every evolution of the model.
+
 ## The problem this solves
 
 Agent sessions are volatile. The conversation where you decided **not** to take some approach dies with `/clear`, and three weeks later someone — human or agent — reopens the same argument, because the reasoning was never written down anywhere.
