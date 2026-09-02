@@ -1,7 +1,6 @@
 ---
 name: criar-spec
-description: Entrevista o usuário até a demanda estar madura e escreve a spec no repositório. Caminho nativo da fase de entrevista — par do `implementar-spec`.
-disable-model-invocation: true
+description: Entrevista o usuário até a demanda estar madura e escreve a spec no repositório. Invocar quando o usuário pede entrevista, spec ou amadurecimento de uma demanda ou intent; não invocar para pergunta pontual, nem no meio de uma implementação sem o usuário pedir a volta à entrevista. Caminho aicf da fase de entrevista — par do `implementar-spec`.
 ---
 
 # Criar spec por entrevista
@@ -47,10 +46,15 @@ Usar o vocabulário do domínio do projeto (`CONTEXT.md`, se existir).
 ## Ao terminar
 
 1. Mostrar a spec e pedir revisão antes de considerar fechada.
-2. Registrar logo abaixo do título só o que já é fato:
-   `Processo — entrevista: criar-spec · implementação: a definir`. A escolha do caminho de
-   implementação pertence a quem for ler a spec, e `/aicf:fechar-demanda` completa a linha —
-   perguntar agora só cabe se a implementação emendar nesta sessão (passo 3).
+2. Registrar logo abaixo do título o que já é fato, mais a sugestão de caminho:
+   `Processo — entrevista: criar-spec · implementação: a definir · sugestão: aicf-direto (toca dois arquivos, sem decisão de abordagem)`.
+   A sugestão nomeia um dos caminhos instalados — `aicf-direto`, `aicf-plan`, ou a skill de outra
+   coleção — e o motivo cabe numa frase entre parênteses. Ela é gravada aqui porque a entrevista
+   é quando o agente mais sabe sobre a demanda, e o usuário a vê ao revisar a spec. A decisão
+   continua pertencendo a quem for implementar: `/aicf:implementar-spec` segue a sugestão no caso
+   óbvio e pergunta nos demais, e `/aicf:fechar-demanda` completa a linha com o caminho seguido.
+   Se a implementação emendar nesta sessão (passo 3), a decisão é o passo do `implementar-spec`,
+   não desta skill.
 3. Entrevista curta e demanda pequena → seguir na mesma sessão, se o usuário quiser emendar a
    implementação. Entrevista longa → sugerir `/clear` ou sessão nova: a spec deve bastar
    sozinha, e o resíduo da conversa ancora a implementação na memória em vez do texto.

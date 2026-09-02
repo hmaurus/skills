@@ -2,7 +2,7 @@
 
 _[Versão em português](README.md)_
 
-A starter kit for running a software project with Claude Code: the documents that hold a project together — vision, delivery checklist, versioned work items — and the cycle that takes each one from raw idea to a record of what was actually done. It covers **governance** and **macro planning**, which engineering skill collections leave out, and it is **agnostic** about the implementation path: governance is the same whether a work item is interviewed and implemented through the native path, through Superpowers, or through Matt Pocock's skills.
+A starter kit for running a software project with Claude Code: the documents that hold a project together — vision, delivery checklist, versioned work items — and the cycle that takes each one from raw idea to a record of what was actually done. It covers **governance** and **macro planning**, which engineering skill collections leave out, and it is **agnostic** about the implementation path: governance is the same whether a work item is interviewed and implemented through the aicf path, through Superpowers, or through Matt Pocock's skills.
 
 > **Written in Portuguese.** The skills instruct the agent in pt-BR and the file conventions mix the playbook's terms with Portuguese names (`intents/` and `specs/` for the two states of a work item, `backlog/`, `concluidas/` for completed). They work fine in an English-speaking session — Claude reads the instructions and answers you in whatever language you write — but if you want the artifacts named in English, fork and translate.
 
@@ -18,7 +18,7 @@ That trail, though, is **per work item** and written **before** execution. Three
 
 `aicf` is that layer, and the same layer applies to any implementation path. It works two ways:
 
-- **On its own**, with a native path for interview and implementation. Nothing else to install.
+- **On its own**, with an aicf path of its own for interview and implementation. Nothing else to install.
 - **On top**, if you already use the others. Interview with Superpowers' `brainstorming` or Matt's `grill-with-docs`, implement with `subagent-driven-development` or with `to-tickets` + `implement`: the record still lands in the same place, closing is the same, and the work item notes which path was used. Switching collections, or mixing both within one work item, changes nothing in governance.
 
 ## Install
@@ -47,7 +47,7 @@ On an existing project, start with `/aicf:workflow-demanda`, which explains the 
 
 **3. Derive `CHECKLIST.md` from the PRD.** Every thing the product needs becomes one line. What fits in a line stays there; what needs context becomes a file under `intents/`.
 
-**4. First work item.** `/aicf:criar-spec` to mature it, `/aicf:implementar-spec` to execute and close. From there the cycle repeats.
+**4. First work item.** `/aicf:criar-spec` to mature it, `/aicf:implementar-spec` to execute and close. Both also answer a plain-language request — "interview me about X", "implement spec Y" — because the agent loads them on its own when it recognizes the intent. From there the cycle repeats.
 
 ## The skills
 
@@ -56,8 +56,8 @@ On an existing project, start with `/aicf:workflow-demanda`, which explains the 
 | `/aicf:setup`            | once, on a new project  | Creates `docs/projeto/` with a PRD and checklist, the `intents/` and `specs/` folders, the root `CLAUDE.md` (with `AGENTS.md` symlinked to it) and a `README.md` — plus engineering defaults, if you want them |
 | `/aicf:criar-prd`        | start of the project    | Interviews you about the product and writes `PRD.md` — run it again when a decision contradicts it |
 | `/aicf:workflow-demanda` | the map                 | The cycle, the paths available at each phase, and the governance conventions      |
-| `/aicf:criar-spec`       | interview phase         | Interrogates until no open decision is left, then writes the spec into the repo   |
-| `/aicf:implementar-spec` | implementation phase    | Reads the spec, implements and verifies; calls the closing ritual at the end      |
+| `/aicf:criar-spec`       | interview phase         | Interrogates until no open decision is left, then writes the spec into the repo, with a suggested implementation path |
+| `/aicf:implementar-spec` | implementation phase    | Picks the path from the spec's suggestion — follows it when the case is obvious, asks otherwise —, implements and verifies; calls the closing ritual at the end |
 | `/aicf:fechar-demanda`   | closing phase           | Checks, report, archiving and knowledge promotion — the agent applies it when any work item completes, whatever the path |
 
 ## The problem this solves
@@ -75,7 +75,7 @@ What holds it together is the record: each work item is a file in the repository
 
 ## Paths, not a single track
 
-Phases 2 and 3 are independent, and the choice belongs to the user — the agent suggests, it does not decide:
+Phases 2 and 3 are independent. At the interview, the path is the user's call; at implementation, the agent follows the suggestion recorded in the spec when the case is obvious — the direct aicf path and a diff that fits in one sentence — and asks with options otherwise. The agent suggests, and when there is a real choice the decision is the user's:
 
 - **Interview** — `/aicf:criar-spec`, or `brainstorming` (Superpowers), or `grill-with-docs` + `to-spec` (Matt Pocock)
 - **Implementation** — `/aicf:implementar-spec` (with or without plan mode), or `writing-plans` + `subagent-driven-development`, or `to-tickets` + `implement`

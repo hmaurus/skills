@@ -31,9 +31,11 @@ o suficiente — o arquivo vai de `intents/` para `specs/` como está, e a linha
 os dois estados do arquivo que a descreve: intent é a demanda decidida e ainda não entrevistada;
 spec é a demanda pronta para implementar. A pasta diz em qual estado o arquivo está.
 
-**Entrevista e implementação são escolhas independentes, e ambas são pergunta ao usuário, não
-dedução**: o agente sugere pelo ponto forte que couber ao caso, e a resposta vira a linha
-`Processo` na demanda.
+**Entrevista e implementação são escolhas independentes. Na entrevista, o caminho é pergunta ao
+usuário; na implementação, o agente segue a sugestão gravada na spec quando o caso é óbvio —
+caminho aicf direto e diff que cabe numa frase — e pergunta com opções nos demais.** O agente
+sugere pelo ponto forte que couber ao caso; a decisão é do usuário quando há escolha real, e o
+caminho seguido vira a linha `Processo` na demanda.
 
 ## Governança — onde mora o quê
 
@@ -64,7 +66,7 @@ em `specs/concluidas/`, inclusive o que a entrevista concluiu não fazer.
 
 | Caminho         | Como                                | A spec fica em                                                                                                      |
 | --------------- | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| **Nativo**      | `/aicf:criar-spec`                  | `specs/<nome>.md` — o intent movido                                                                                 |
+| **Aicf**        | `/aicf:criar-spec`                  | `specs/<nome>.md` — o intent movido                                                                                 |
 | **Superpowers** | `brainstorming`                     | `docs/superpowers/specs/YYYY-MM-DD-<topico>-design.md`, só no caminho _architectural_; ou `specs/<nome>.md`, se o projeto mandar |
 | **Matt Pocock** | `grill-with-docs`, depois `to-spec` | issue no tracker; ou `specs/<nome>.md`, se o tracker configurado no setup apontar para lá                           |
 
@@ -79,12 +81,12 @@ arquivo nem issue — fica só na janela de contexto.
 
 | Caminho              | Como                                                    | Plano de implementação                          |
 | -------------------- | ------------------------------------------------------- | ----------------------------------------------- |
-| **Nativo direto**    | `/aicf:implementar-spec`                                | depende do agente                               |
-| **Nativo plan mode** | plan mode ligado, depois `/aicf:implementar-spec`       | depende do agente                               |
+| **Aicf direto**      | `/aicf:implementar-spec`                                | depende do agente                               |
+| **Aicf plan mode**   | plan mode ligado, depois `/aicf:implementar-spec`       | depende do agente                               |
 | **Superpowers**      | `writing-plans`, depois `subagent-driven-development`   | `docs/superpowers/plans/YYYY-MM-DD-<topico>.md` |
 | **Matt Pocock**      | `to-tickets`, depois `implement`                        | tickets, com bloqueio declarado entre eles      |
 
-Descer a tabela troca velocidade por rastro: nos caminhos nativos o plano vive na sessão e morre
+Descer a tabela troca velocidade por rastro: nos caminhos aicf o plano vive na sessão e morre
 com ela. Plan mode liga com `Shift+Tab` **antes** de chamar a skill (`Ctrl+G` abre o plano no
 editor). As skills do Matt (`to-spec`, `to-tickets`, `triage`, `wayfinder`, `code-review`)
 exigem `/setup-matt-pocock-skills` rodado no repositório.

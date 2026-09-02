@@ -51,12 +51,13 @@ que a doc oficial é consultada na mão.
 
 **3. Coleções de skills de workflow.** Se o usuário já tem Superpowers ou as skills do Matt
 Pocock instaladas, os caminhos de entrevista e implementação que `/aicf:workflow-demanda`
-oferece mudam — sem elas, só o caminho nativo existe, e propor `brainstorming` seria propor algo
+oferece mudam — sem elas, só o caminho aicf existe, e propor `brainstorming` seria propor algo
 que não roda. Confirmar o que está instalado em vez de supor.
 
 Registrar as respostas onde elas já têm lugar: as duas primeiras nas seções de segurança e de
-dependências dos padrões de engenharia (abaixo); a terceira, em "Processos de desenvolvimento"
-do `CLAUDE.md`. **Nome da ferramenta e nome da variável de ambiente — nunca o valor.**
+dependências dos padrões de engenharia (abaixo); a terceira, na linha "Coleções de skills de
+workflow instaladas" de "Processos de desenvolvimento" do `CLAUDE.md` — é dela que o
+`implementar-spec` tira os caminhos que oferece. **Nome da ferramenta e nome da variável de ambiente — nunca o valor.**
 
 ## O que criar
 
@@ -91,6 +92,13 @@ preencher fica marcado; é o usuário que preenche, na primeira demanda ou quand
 Se o projeto já tem `CLAUDE.md` na raiz, não substituir: mostrar a seção "Processos de
 desenvolvimento" do template e propor acrescentá-la ao arquivo existente.
 
+Projeto que já tem código também tem a parte do `CLAUDE.md` que se deduz dele — comandos, layout,
+convenções —, e essa parte não é deste setup: sugerir `/init` numa sessão aberta com
+`CLAUDE_CODE_NEW_INIT=1` no ambiente (`CLAUDE_CODE_NEW_INIT=1 claude` — é variável do processo,
+não liga de dentro da sessão), que explora o repositório com subagente e apresenta uma proposta
+antes de escrever qualquer arquivo. O setup segue dono da governança: PRD, checklist, `intents/`, `specs/`. Num projeto sem código não
+há o que deduzir, e nada muda.
+
 ## `AGENTS.md` como link simbólico
 
 `ln -s CLAUDE.md AGENTS.md` na raiz. **Um arquivo, dois nomes** — o Claude Code lê `CLAUDE.md`;
@@ -99,8 +107,11 @@ envelheça sem ninguém perceber.
 
 - Se `AGENTS.md` já existe — arquivo ou link —, não tocar.
 - O git versiona o link como link (modo `120000`), então ele viaja no clone.
-- Em Windows sem Developer Mode, `ln -s` falha. Nesse caso, avisar e seguir sem o `AGENTS.md`:
-  **não criar uma cópia**, que é justamente o que o link existe para evitar.
+- Em Windows sem Developer Mode, `ln -s` falha. Nesse caso, usar o que a documentação indica no
+  lugar do link: o conteúdo vai para `AGENTS.md`, e o `CLAUDE.md` fica só com a linha
+  `@AGENTS.md`, que importa o outro — continua um arquivo, dois nomes. Daí em diante, onde esta
+  skill diz `CLAUDE.md`, o arquivo a editar é `AGENTS.md`. **Não criar uma cópia**, que é
+  justamente o que o link existe para evitar.
 
 ## Os padrões de engenharia
 
@@ -129,6 +140,9 @@ recebe apenas o nome da variável.
 ## Ao terminar
 
 1. Listar o que foi criado e onde.
-2. Dizer que o mapa do ciclo está em `/aicf:workflow-demanda`, e que a primeira demanda pode
+2. Pedir que, na próxima sessão, o usuário rode `/context` e confira o `CLAUDE.md` na lista
+   **Memory files**. O arquivo carrega no início da sessão, e essa lista é a prova de que carregou
+   — em vez de supor.
+3. Dizer que o mapa do ciclo está em `/aicf:workflow-demanda`, e que a primeira demanda pode
    começar por `/aicf:criar-spec`.
-3. Sugerir `/aicf:criar-prd` como primeira coisa — é do PRD que sai o checklist inicial.
+4. Sugerir `/aicf:criar-prd` como primeira coisa — é do PRD que sai o checklist inicial.

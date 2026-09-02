@@ -11,9 +11,10 @@ proativamente, sem esperar pedido.
 ## Antes do relatório
 
 Rodar o script de check do projeto (lint + format + typecheck) e a suíte de testes, quando
-existe, **no projeto inteiro, nunca só nos arquivos tocados**. Qual é o comando, o `CLAUDE.md`
-diz; quando não diz, vale o que os scripts do projeto expõem, e não havendo nenhum o relatório
-registra isso — o passo não some em silêncio. Propor revisão de código quando a mudança for além
+existe, **no projeto inteiro, nunca só nos arquivos tocados**. Qual é o comando, a seção
+`## Verificação` do `CLAUDE.md` diz — é a que o `/aicf:setup` gera; quando não existe, vale o que
+os scripts do projeto expõem, e não havendo nenhum o relatório registra isso — o passo não some
+em silêncio. Propor revisão de código quando a mudança for além
 de ajuste de texto — `/code-review`, subagente fresco que não viu a implementação, ou o code
 review do harness. Reler o próprio diff na mesma sessão é a opção mais fraca: o agente defende
 o que acabou de escrever.
@@ -26,13 +27,20 @@ o que acabou de escrever.
 4. **Reler o próprio relatório e os achados da revisão de código procurando o que vale além
    desta demanda** — decisão que outra sessão vai reencontrar, armadilha que vai morder de novo,
    ID externo — e promover, porque ninguém abre demanda concluída procurando informação:
-   conhecimento operacional → doc de referência; regra que muda como o agente age e cujo erro já
-   apareceu duas vezes → `CLAUDE.md`, porque uma vez é caso isolado; decisão difícil de reverter,
+   conhecimento operacional → doc de referência; regra que muda como o agente age → `CLAUDE.md`,
+   por um de três gatilhos: o erro já apareceu duas vezes (uma vez é caso isolado), a revisão de
+   código apontou algo que o agente deveria saber sobre este código (achado de revisão não espera
+   a segunda vez), ou é contexto que um colega novo precisaria para ser produtivo; regra que só
+   vale para uma parte do código → `.claude/rules/<tema>.md` com `paths:` no frontmatter, que
+   carrega só quando o agente toca arquivo daquele padrão — não o `CLAUDE.md`; procedimento que
+   já se repetiu → skill (gatilho e critério skill×hook no `/aicf:workflow-demanda`); decisão
+   difícil de reverter,
    surpreendente e com trade-off real → ADR numerado e imutável em `docs/adr/` (`0001-slug.md`);
    termo ambíguo do domínio → glossário em `CONTEXT.md`. Os dois últimos saem de
    `/domain-modeling`, que o agente invoca em qualquer processo — não depende das skills do Matt.
-   Escrever no `CLAUDE.md` obriga a olhar o que de lá saiu de validade: ele é lido inteiro em toda
-   sessão, e `/doctor` propõe cortes do que o agente já deduz do próprio código.
+   Escrever no `CLAUDE.md` obriga a olhar o que de lá saiu de validade e o tamanho: ele é lido
+   inteiro em toda sessão, o alvo que a documentação do Claude Code publica é abaixo de 200
+   linhas por arquivo, e `/doctor` propõe cortes do que o agente já deduz do próprio código.
 5. **Conferir se a execução criou item novo no checklist ou tornou algum obsoleto**, e ajustar
    inline.
 
@@ -72,14 +80,19 @@ resolvida **de fato**, não como foi planejada — registrar divergências plano
 ## A linha `Processo`
 
 Logo abaixo do título da demanda: dois campos nomeados, valor sempre escrito — nada é
-sinalizado por ausência. O valor é o nome da skill usada, ou `nenhuma`; no caminho nativo,
-`criar-spec`, `nativo-direto` ou `nativo-plan`. Referências externas (issues, tickets, PRs)
-entram no fim da mesma linha, porque issue fechada não se perde, mas não aparece em `grep` nem
-em `git log -S`.
+sinalizado por ausência. O valor é o nome da skill usada, ou `nenhuma`; no caminho aicf,
+`criar-spec`, `aicf-direto` ou `aicf-plan`. Enquanto a implementação está `a definir`, a linha
+pode trazer um terceiro campo, `sugestão: <valor> (motivo)`, gravado pelo `criar-spec`; ao
+fechar, o caminho seguido substitui `a definir · sugestão: ...` inteiro, e a sugestão some. Se o
+caminho seguido divergiu da sugestão, o relatório diz por quê em "Escopo efetivo" ou "Lições";
+seguir a sugestão no caso óbvio, sem perguntar, é o comportamento certo e não recebe marca.
+Referências externas (issues, tickets, PRs) entram no fim da mesma linha, porque issue fechada
+não se perde, mas não aparece em `grep` nem em `git log -S`.
 
 ```
-Processo — entrevista: nenhuma · implementação: nativo-direto
-Processo — entrevista: grill-with-docs · implementação: nativo-plan
+Processo — entrevista: criar-spec · implementação: a definir · sugestão: aicf-direto (toca dois arquivos, sem decisão de abordagem)
+Processo — entrevista: nenhuma · implementação: aicf-direto
+Processo — entrevista: grill-with-docs · implementação: aicf-plan
 Processo — entrevista: brainstorming · implementação: subagent-driven-development
 Processo — entrevista: to-spec · implementação: implement · issues #12, #13
 ```

@@ -2,7 +2,7 @@
 
 _[English version](README.en.md)_
 
-Um kit inicial para tocar um projeto de software com Claude Code: a estrutura de documentos que sustenta o projeto — visão, checklist de entregas, demandas versionadas — e o ciclo que leva cada demanda da ideia ao registro do que foi feito. Ele cuida da **governança** e do **planejamento macro**, que as coleções de skills de engenharia deixam de fora, e é **agnóstico** quanto ao caminho de implementação: a governança é a mesma quer a demanda seja entrevistada e implementada pelo caminho nativo, pelo Superpowers ou pelas skills do Matt Pocock.
+Um kit inicial para tocar um projeto de software com Claude Code: a estrutura de documentos que sustenta o projeto — visão, checklist de entregas, demandas versionadas — e o ciclo que leva cada demanda da ideia ao registro do que foi feito. Ele cuida da **governança** e do **planejamento macro**, que as coleções de skills de engenharia deixam de fora, e é **agnóstico** quanto ao caminho de implementação: a governança é a mesma quer a demanda seja entrevistada e implementada pelo caminho aicf, pelo Superpowers ou pelas skills do Matt Pocock.
 
 ## Onde ele entra
 
@@ -16,7 +16,7 @@ Só que esse rastro é **por demanda** e escrito **antes** da execução. Três 
 
 O `aicf` é essa camada, e a mesma camada vale para qualquer caminho de implementação. Ele funciona de dois jeitos:
 
-- **Sozinho**, com um caminho nativo próprio para entrevista e implementação, sem instalar mais nada.
+- **Sozinho**, com um caminho aicf próprio para entrevista e implementação, sem instalar mais nada.
 - **Por cima**, se você já usa as outras. Entreviste pelo `brainstorming` do Superpowers ou pelo `grill-with-docs` do Matt, implemente por `subagent-driven-development` ou por `to-tickets` + `implement`: o registro continua caindo no mesmo lugar, o fechamento é o mesmo, e a demanda anota qual caminho foi usado. Trocar de coleção, ou misturar as duas numa mesma demanda, não muda nada na governança.
 
 ## Instalação
@@ -45,7 +45,7 @@ Em projeto que já existe, comece por `/aicf:workflow-demanda`, que explica o ci
 
 **3. Tirar o `CHECKLIST.md` do PRD.** Cada coisa que o produto precisa ter vira uma linha. O que couber numa linha fica ali mesmo; o que precisar de contexto vira arquivo em `intents/`.
 
-**4. Primeira demanda.** `/aicf:criar-spec` para amadurecer, `/aicf:implementar-spec` para executar e fechar. Daí em diante o ciclo se repete.
+**4. Primeira demanda.** `/aicf:criar-spec` para amadurecer, `/aicf:implementar-spec` para executar e fechar. As duas também respondem ao pedido em linguagem natural — "me entreviste sobre X", "implementa a spec Y" —, porque o agente as carrega sozinho quando reconhece a intenção. Daí em diante o ciclo se repete.
 
 ## As skills
 
@@ -54,8 +54,8 @@ Em projeto que já existe, comece por `/aicf:workflow-demanda`, que explica o ci
 | `/aicf:setup`            | uma vez, no projeto novo   | Cria `docs/projeto/` com PRD e checklist, as pastas de intents e specs, o `CLAUDE.md` (com `AGENTS.md` apontando para ele) e um `README.md` — e, se você quiser, os padrões de engenharia |
 | `/aicf:criar-prd`        | começo do projeto          | Entrevista sobre o produto e escreve o `PRD.md` — roda de novo quando uma decisão o contraria |
 | `/aicf:workflow-demanda` | o mapa                     | O ciclo, os caminhos de cada fase e as convenções de governança                   |
-| `/aicf:criar-spec`       | fase de entrevista         | Interroga até não sobrar decisão em aberto, depois escreve a spec no repositório  |
-| `/aicf:implementar-spec` | fase de implementação      | Lê a spec, implementa e verifica; ao final chama o fechamento                     |
+| `/aicf:criar-spec`       | fase de entrevista         | Interroga até não sobrar decisão em aberto, depois escreve a spec no repositório, com a sugestão de caminho de implementação |
+| `/aicf:implementar-spec` | fase de implementação      | Decide o caminho pela sugestão da spec — segue no caso óbvio, pergunta nos demais —, implementa e verifica; ao final chama o fechamento |
 | `/aicf:fechar-demanda`   | fase de fechamento         | Checks, relatório, arquivamento e promoção de conhecimento — o agente a aplica ao concluir qualquer demanda, por qualquer caminho |
 
 ## O problema que isso resolve
@@ -73,7 +73,7 @@ O que amarra tudo é o registro: cada demanda vira um arquivo no repositório, e
 
 ## Caminhos, não trilho único
 
-As fases 2 e 3 são independentes, e a escolha é do usuário — o agente sugere, não decide:
+As fases 2 e 3 são independentes. Na entrevista, o caminho é pergunta ao usuário; na implementação, o agente segue a sugestão que a spec traz quando o caso é óbvio — caminho aicf direto e diff que cabe numa frase — e pergunta com opções nos demais. O agente sugere, e quando há escolha real a decisão é do usuário:
 
 - **Entrevista** — `/aicf:criar-spec`, ou `brainstorming` (Superpowers), ou `grill-with-docs` + `to-spec` (Matt Pocock)
 - **Implementação** — `/aicf:implementar-spec` (com ou sem plan mode), ou `writing-plans` + `subagent-driven-development`, ou `to-tickets` + `implement`
