@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.13.3 — 2026-09-05
+
+- O `workflow-demanda` passa a dizer o que **não** entra em `docs/projeto/`. A árvore de pastas listava o que mora lá e parava aí, e o nome da pasta não carrega a exclusão: doc que descreve o mundo em vez de um trabalho a fazer — configuração, ID externo, decisão de marca, número de negócio, aprendizado — ia parar na pasta de governança porque era "do projeto" e porque o agente já estava com ela aberta. A regra não pede que ninguém crie pasta de domínio: a raiz de `docs/` basta até haver arquivo suficiente para uma.
+
 ## 0.13.2 — 2026-09-02
 
 - Corrige o exemplo da linha `Processo` no `fechar-demanda`: `entrevista: to-spec` vira `entrevista: grill-with-docs`. Na coleção do Matt Pocock quem entrevista é `grill-with-docs`; `to-spec` só sintetiza a conversa e publica ("no interview, just synthesis"), e o exemplo contradizia o de duas linhas acima.

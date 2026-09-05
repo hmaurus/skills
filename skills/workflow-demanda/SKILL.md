@@ -46,6 +46,10 @@ docs/projeto/
     └── concluidas/        # Arquivadas, com relatório
 ```
 
+Só governança de demanda entra aí. Doc que descreve o mundo em vez de um trabalho a fazer —
+configuração, ID externo, decisão de marca, número de negócio, aprendizado — vai para fora de
+`docs/projeto/`, e a raiz de `docs/` basta até haver arquivo suficiente para uma pasta de domínio.
+
 Se o repositório nem tem `docs/projeto/`, perguntar onde gravar em vez de inventar pasta.
 
 `intents/` ou `intents/backlog/` se decide por **certeza, não urgência**: `intents/` é o que já

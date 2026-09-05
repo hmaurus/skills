@@ -1,6 +1,6 @@
 {
   "name": "aicf",
-  "version": "0.13.2",
+  "version": "0.13.3",
   "description": "Governança de projeto para desenvolver com agentes: a estrutura que sustenta o projeto (PRD, checklist, demandas versionadas) e o ciclo que leva cada demanda da ideia ao registro do que foi feito.",
   "author": {
     "name": "AI Coding Flow",
