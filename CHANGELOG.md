@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.13.4 — 2026-09-06
+
+- O `## Idioma` do template de preferências ganha **a exceção para domínio regulado brasileiro**. A regra dizia "código em inglês" sem ressalva, o que é o padrão certo para a maioria dos projetos — mas o público do plugin é dev brasileiro, e em domínio fiscal, contábil, jurídico ou bancário os termos não têm equivalente honesto em inglês: "competência" não é _accrual basis_, "estorno" cobre o que em inglês são três coisas. Nomear em inglês ali cria uma camada de tradução entre a conversa e o código, exatamente o que o glossário em português existe para evitar; sem regra escrita, quem enfrentava isso decidia por gosto, projeto a projeto, e decidia de novo no seguinte. O parágrafo dá **o teste, não a permissão** — a maioria dos projetos continua em inglês depois de aplicá-lo —, delimita o que fica em inglês sempre (convenção de ecossistema: `feat`/`fix`, scripts, env vars, `src`/`dist`), proíbe acento e cedilha em identificador (`transacao`, nunca `transação`: acento em nome de coluna estraga `grep`) e manda a decisão para um ADR do projeto. A regra fica só no `preferencias.md`, que é onde o usuário escolhe entre global e projeto — repetir no template do `CLAUDE.md` criaria duas fontes para a mesma regra.
+
 ## 0.13.3 — 2026-09-05
 
 - O `workflow-demanda` passa a dizer o que **não** entra em `docs/projeto/`. A árvore de pastas listava o que mora lá e parava aí, e o nome da pasta não carrega a exclusão: doc que descreve o mundo em vez de um trabalho a fazer — configuração, ID externo, decisão de marca, número de negócio, aprendizado — ia parar na pasta de governança porque era "do projeto" e porque o agente já estava com ela aberta. A regra não pede que ninguém crie pasta de domínio: a raiz de `docs/` basta até haver arquivo suficiente para uma.

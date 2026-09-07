@@ -4,6 +4,8 @@ Código em inglês (variáveis, funções, classes, entidades). Comunicação co
 
 Manter a acentuação correta. Nunca trocar caractere acentuado pelo equivalente ASCII.
 
+**Exceção, quando o domínio perde na tradução.** Se o vocabulário do projeto é de um domínio regulado brasileiro — fiscal, contábil, jurídico, bancário —, nomear em inglês cria uma camada de tradução entre a conversa e o código: "competência" não é _accrual basis_, e "estorno" cobre o que em inglês são três coisas diferentes. Nesses casos o domínio é nomeado em português — entidades, tabelas, colunas, funções de regra de negócio, subcomandos de CLI —, **sem acento nem cedilha em identificador** (`transacao`, nunca `transação`: acento em nome de coluna estraga `grep` e quebra em terminal com encoding errado). Convenção de ecossistema segue em inglês sempre: `feat`/`fix`, scripts do `package.json`, variáveis de ambiente, `src`/`dist`. A decisão fica num ADR do projeto, com a fronteira entre o que é domínio e o que é ofício.
+
 ## Dependências e documentação
 
 Preferir versões estáveis mais recentes. **Antes de usar a API de uma biblioteca externa, consultar a documentação oficial** — ou um MCP de documentação, como o Context7. Conhecimento de treino envelhece; documentação, não. Em dúvida entre versões, perguntar.
