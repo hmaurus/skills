@@ -1,8 +1,7 @@
 # Exceção de idioma quando o domínio perde na tradução
 
 Processo — entrevista: conversa na sessão do `mh-fin` (2026-09-06), onde a regra nasceu e foi
-aplicada · implementação: a definir · sugestão: caminho aicf direto — o diff cabe numa frase
-(um parágrafo no template, bump de versão, entrada no changelog).
+aplicada · implementação: aicf-direto.
 
 ## Problema
 
@@ -87,3 +86,27 @@ usar acento em identificador.
 
 Vale ler o parágrafo em voz alta antes de fechar: se ele soar como permissão em vez de teste, a
 redação falhou — a maioria dos projetos deve continuar em inglês depois de aplicar a regra.
+
+## Relatório de implementação (2026-09-06)
+
+**Status:** concluído. Não há CI nem PR neste repositório; a validação foi local (abaixo).
+
+**Arquivos alterados**
+
+- `skills/setup/templates/preferencias.md` — o parágrafo da exceção entra na seção `## Idioma`, depois do parágrafo sobre acentuação, com o texto que a spec fixou.
+- `.claude-plugin/plugin.json` — `version` de `0.13.3` para `0.13.4`.
+- `CHANGELOG.md` — entrada `## 0.13.4 — 2026-09-06` no topo, na voz das anteriores: por que a regra sem ressalva não bastava, e por que o parágrafo é teste e não permissão.
+
+**Commits**
+
+- `435075b` — `feat(setup): 0.13.4 — exceção de idioma quando o domínio regulado perde na tradução`
+
+**Validação**
+
+Os quatro comandos da seção `## Verificação` da spec, todos com a saída esperada: o `grep` do parágrafo acha a linha 7 do template, `"version"` diz `0.13.4`, `head -5 CHANGELOG.md` mostra a entrada `0.13.4` no topo e o `grep -rn "0\.13\.3" --include="*.json" .` volta vazio.
+
+**O check do projeto não existe.** O repositório não tem `package.json` nem `CLAUDE.md`, então não há script de lint/format/typecheck nem suíte de testes para rodar — o passo fica registrado como ausente em vez de sumir em silêncio. Também não houve revisão de código: a mudança é texto de template mais changelog e bump, abaixo do limiar que a skill de fechamento estabelece.
+
+**Escopo efetivo.** Igual ao previsto — três arquivos, nenhum item da lista de fora de escopo tocado. O teste de leitura em voz alta que a spec pede foi feito: o parágrafo abre condicional ("Se o vocabulário do projeto é de um domínio regulado brasileiro") e fecha exigindo um ADR com a fronteira entre domínio e ofício, então lê como pergunta a responder, não como licença.
+
+**Pendente, e é o teste que fecha o ciclo:** rodar `/aicf:setup` num projeto novo e conferir que a seção `## Idioma` que chega ao `CLAUDE.md` (ou ao global) já traz a exceção e a regra de não usar acento em identificador. Só dá para fazer depois que a versão `0.13.4` chegar ao cache do plugin, o que não acontece nesta sessão.
