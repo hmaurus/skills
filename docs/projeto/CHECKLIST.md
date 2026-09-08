@@ -13,13 +13,13 @@ Marcar `- [x]` faz parte do ritual de fechamento — não é registro paralelo.
 
 > Uma linha por demanda ativa, com link para o arquivo quando houver.
 
-- [ ] [A governança orquestra o framework escolhido, não o substitui](intents/orquestrar-o-framework-escolhido.md) — decidida, aguardando entrevista
 
 ## Entregue
 
 > Vai crescendo por baixo. Não apagar item entregue — ele é o histórico do que o produto virou.
 
 - [x] Exceção de idioma quando o domínio regulado perde na tradução (`0.13.4`) — [spec](specs/concluidas/excecao-de-idioma-no-dominio.md)
+- [x] A governança orquestra o framework escolhido, não o substitui (`0.13.5`) — [spec](specs/concluidas/orquestrar-o-framework-escolhido.md) · [ADR 0001](../adr/0001-fronteira-de-fase.md)
 
 ## Backlog
 
