@@ -26,11 +26,27 @@ o suficiente — o arquivo vai de `intents/` para `specs/` como está, e a linha
 os dois estados do arquivo que a descreve: intent é a demanda decidida e ainda não entrevistada;
 spec é a demanda pronta para implementar. A pasta diz em qual estado o arquivo está.
 
+**Integração e fechamento são coisas diferentes.** _Integração_ é decidir o destino do código —
+merge na base, PR, ou a branch fica. É o último passo da **implementação**, e pertence ao método
+escolhido. _Fechamento_ é o registro da demanda — relatório, `specs/concluidas/`, checklist,
+promoção de conhecimento. É `/aicf:fechar-demanda`, e nada além. **O método fecha o código, a
+governança fecha a demanda — e a segunda só começa depois da primeira.**
+
 **Entrevista e implementação são escolhas independentes. Na entrevista, o caminho é pergunta ao
 usuário; na implementação, o agente segue a sugestão gravada na spec quando o caso é óbvio —
 caminho aicf direto e diff que cabe numa frase — e pergunta com opções nos demais.** O agente
 sugere pelo ponto forte que couber ao caso; a decisão é do usuário quando há escolha real, e o
 caminho seguido vira a linha `Processo` na demanda.
+
+**A governança escolhe o caminho de cada fase; dentro da fase, o encadeamento do framework roda
+inteiro.** Skill que o método declara como passo seguinte dentro da mesma fase não se pula nem se
+substitui — no Superpowers, `executing-plans` e `subagent-driven-development` declaram
+`finishing-a-development-branch` como `REQUIRED SUB-SKILL`: ela roda automaticamente, sem
+perguntar, e o agente conta em uma linha o que ficou decidido. Interferir ali degrada a qualidade
+de um processo que não é nosso. Na **passagem entre fases** quem decide é a governança, mesmo
+quando o framework recomenda continuar nele: o `brainstorming` declara `writing-plans` como estado
+terminal, e ainda assim parar na fronteira é legítimo — o design doc dele vale como spec, e a
+implementação é escolha nova.
 
 ## Governança — onde mora o quê
 
@@ -75,16 +91,27 @@ direto no `implement` deixa a spec só na janela de contexto.
 
 ## Implementação — consome a spec
 
-| Caminho              | Como                                                    | Plano de implementação                          |
-| -------------------- | ------------------------------------------------------- | ----------------------------------------------- |
-| **Aicf direto**      | `/aicf:implementar-spec`                                | depende do agente                               |
-| **Aicf plan mode**   | plan mode ligado antes, ou escolhido no `implementar-spec` | depende do agente                            |
-| **Superpowers**      | `writing-plans`, depois `subagent-driven-development`   | `docs/superpowers/plans/YYYY-MM-DD-<topico>.md` |
-| **Matt Pocock**      | `to-tickets`, depois `implement`                        | tickets, com bloqueio declarado entre eles      |
+| Caminho            | Como                                                       | Plano de implementação                          | Integração                                          |
+| ------------------ | ---------------------------------------------------------- | ----------------------------------------------- | --------------------------------------------------- |
+| **Aicf direto**    | `/aicf:implementar-spec`                                   | depende do agente                               | o agente, pelo critério de workspace abaixo         |
+| **Aicf plan mode** | plan mode ligado antes, ou escolhido no `implementar-spec` | depende do agente                               | o agente, pelo critério de workspace abaixo         |
+| **Superpowers**    | `writing-plans`, depois `subagent-driven-development`      | `docs/superpowers/plans/YYYY-MM-DD-<topico>.md` | `finishing-a-development-branch`, encadeada e automática |
+| **Matt Pocock**    | `to-tickets`, depois `implement`                           | tickets, com bloqueio declarado entre eles      | o próprio `implement`: `/code-review` e commit na branch atual |
 
 Descer a tabela troca velocidade por rastro: nos caminhos aicf o plano vive na sessão e morre
 com ela. As skills do Matt (`to-spec`, `to-tickets`, `triage`, `wayfinder`, `code-review`)
 exigem `/setup-matt-pocock-skills` rodado no repositório.
+
+No Superpowers, os headings de tarefa do plano ficam em inglês (`## Task 3`) mesmo com o corpo em
+português: `scripts/task-brief` procura `^#+ Task N` e responde `task N not found` para "Tarefa N".
+
+**Branch, ou worktree.** O default é commitar direto na branch de trabalho — processo prático para
+dev solo, com PR para o que a complexidade ou o risco justificarem. O agente **avalia** em vez de
+herdar o default em silêncio: branch própria ou worktree quando a demanda é grande ou se quer poder
+descartá-la em bloco; **contra worktree quando a verificação depende de estado local não
+versionado** — banco, arquivo de dados, `.env`, qualquer coisa em pasta gitignored: a worktree
+nasce sem eles. A avaliação acontece no `implementar-spec`, junto da escolha de caminho; o agente
+diz numa linha o que decidiu e por quê, e sair do default é pergunta ao usuário.
 
 ## Trabalho recorrente não é demanda
 

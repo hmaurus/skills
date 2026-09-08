@@ -21,10 +21,16 @@ Com o plan mode ligado, montar o plano e esperar aprovação antes de tocar o di
    plano ou de outra coleção, spec sem sugestão, demanda que toca vários arquivos ou código
    desconhecido —, perguntar com `AskUserQuestion`, oferecendo só os caminhos instalados (a linha
    "Coleções de skills de workflow instaladas" do `CLAUDE.md` diz quais). Conforme a resposta:
-   outra coleção, esta skill para aqui e o caminho escolhido assume, e o fechamento continua
-   sendo `/aicf:fechar-demanda`; `aicf-plan`, entrar no plan mode e seguir por esta skill;
-   `aicf-direto`, planejar em sessão antes de editar — o plano não vai para arquivo, e na linha
-   `Processo` o valor continua `aicf-direto`, porque `aicf-plan` é só com o plan mode ligado.
+   outra coleção, esta skill para aqui e o caminho escolhido assume **até o fim, inclusive a
+   integração que ele encadeia** — o aicf não interrompe nem substitui passo interno de método; ao
+   terminar, `/aicf:fechar-demanda` registra a demanda. `aicf-plan`, entrar no plan mode e seguir
+   por esta skill; `aicf-direto`, planejar em sessão antes de editar — o plano não vai para
+   arquivo, e na linha `Processo` o valor continua `aicf-direto`, porque `aicf-plan` é só com o
+   plan mode ligado.
+
+   **Junto do caminho, avaliar o workspace** — branch de trabalho, branch própria ou worktree —
+   pelo critério do `/aicf:workflow-demanda`, dizendo numa linha o que decidiu e por quê. Sair do
+   default é pergunta ao usuário.
 
 Se a spec não diz o suficiente para implementar, dizer isso e propor uma rodada de
 `/aicf:criar-spec` — não preencher a lacuna por conta própria.

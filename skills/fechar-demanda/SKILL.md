@@ -8,6 +8,12 @@ description: Ritual de fechamento de uma demanda — checks, revisão, relatóri
 Não importa por onde a demanda começou, ela termina aqui — e o agente aplica o fechamento
 proativamente, sem esperar pedido.
 
+**Antes de qualquer coisa: a implementação terminou inteira?** Caminho de outra coleção termina no
+passo que ele encadeia — no Superpowers, `finishing-a-development-branch`, que decide o destino do
+código. Fechar a demanda com essa decisão não tomada é o erro que este parágrafo existe para
+evitar: o registro diz "concluído" e o código fica parado numa branch. Se o método tem passo de
+integração e ele não rodou, rodar antes.
+
 ## Antes do relatório
 
 Rodar o script de check do projeto (lint + format + typecheck) e a suíte de testes, quando
@@ -16,7 +22,10 @@ existe, **no projeto inteiro, nunca só nos arquivos tocados**. Qual é o comand
 os scripts do projeto expõem, e não havendo nenhum o relatório registra isso — o passo não some
 em silêncio. Propor revisão de código quando a mudança for além de ajuste de texto —
 `/code-review`, subagente fresco que não viu a implementação, ou o code review do harness; não
-reler o próprio diff na mesma sessão.
+reler o próprio diff na mesma sessão. **Exigência já satisfeita por um passo do caminho escolhido
+não se repete** — o `subagent-driven-development` termina com revisão do branch inteiro, e pedir
+outra é pagar duas vezes pela mesma leitura; o relatório declara em uma linha, na Validação, qual
+passo cobriu qual exigência.
 
 ## Os cinco passos
 
@@ -36,8 +45,8 @@ reler o próprio diff na mesma sessão.
    | Decisão difícil de reverter, surpreendente e com trade-off real | ADR numerado e imutável em `docs/adr/` (`0001-slug.md`) |
    | Termo ambíguo do domínio | glossário em `CONTEXT.md` |
 
-   ADR e glossário saem de `/domain-modeling`, que o agente invoca em qualquer processo — não
-   depende das skills do Matt. Escrever no `CLAUDE.md` obriga a olhar o que de lá saiu de
+   ADR e glossário podem sair de `/domain-modeling`, quando instalado; escrever direto pela
+   tabela também serve. Escrever no `CLAUDE.md` obriga a olhar o que de lá saiu de
    validade e o tamanho: ele é lido inteiro em toda sessão, o alvo que a documentação do Claude
    Code publica é abaixo de 200 linhas por arquivo, e `/doctor` propõe cortes do que o agente já
    deduz do próprio código.
