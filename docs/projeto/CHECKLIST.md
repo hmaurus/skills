@@ -13,6 +13,8 @@ Marcar `- [x]` faz parte do ritual de fechamento — não é registro paralelo.
 
 > Uma linha por demanda ativa, com link para o arquivo quando houver.
 
+- [ ] [A governança orquestra o framework escolhido, não o substitui](intents/orquestrar-o-framework-escolhido.md) — decidida, aguardando entrevista
+
 ## Entregue
 
 > Vai crescendo por baixo. Não apagar item entregue — ele é o histórico do que o produto virou.
