@@ -132,9 +132,9 @@ passa por ele depois:
 | `docs/projeto/CHECKLIST.md` | mesma seção, e as intents deste repositório listadas nela |
 | `CHANGELOG.md` + `.claude-plugin/plugin.json` | entrada e bump de versão |
 
-O passo 5 nomeia os caminhos do layout padrão (`docs/projeto/`). Projeto que gravou a governança
-noutro lugar troca os caminhos, não os pares — uma frase na skill diz isso, para o texto não virar
-mentira em projeto fora do padrão.
+O passo 5 nomeia os caminhos do layout padrão (`docs/projeto/`), e diz que são do layout padrão.
+A frase que explicava o que fazer fora dele saiu na poda de 2026-09-09 — custava duas linhas num
+arquivo lido a cada demanda, para um caso que o `/aicf:setup` torna raro.
 
 ## Fora de escopo
 

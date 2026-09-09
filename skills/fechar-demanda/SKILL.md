@@ -57,25 +57,18 @@ passo cobriu qual exigência.
    validade e o tamanho: ele é lido inteiro em toda sessão, o alvo que a documentação do Claude
    Code publica é abaixo de 200 linhas por arquivo, e `/doctor` propõe cortes do que o agente já
    deduz do próprio código.
-5. **Conferir o índice — enumerando, não julgando se está em dia.** Três pares, e a saída deste
-   ritual:
-
-   | Seção do `CHECKLIST.md` | Espelha (sob `docs/projeto/`) |
-   | --- | --- |
-   | Decidido | `intents/` |
-   | Em andamento | `specs/` |
-   | Entregue | `specs/concluidas/` |
+5. **Conferir o índice — enumerando, não julgando se está em dia.** No layout padrão, sob
+   `docs/projeto/`, três pares seção↔pasta: `Decidido`↔`intents/`, `Em andamento`↔`specs/`,
+   `Entregue`↔`specs/concluidas/`.
 
    **A conferência corre num sentido só: todo arquivo da pasta tem linha na seção.** Arquivo sem
    linha é a falta a corrigir — inclusive o item entregue que foi apagado em vez de movido. Linha
    sem arquivo é legítima e comum: demanda que coube numa linha e nunca virou arquivo. **Nunca
-   apagar linha por não achar arquivo.** `Fundação` e `Backlog` não têm pasta e ficam fora da
-   enumeração. São os caminhos do layout padrão; projeto que gravou a governança noutro lugar
-   troca os caminhos, não os pares.
+   apagar linha por não achar arquivo.** `Fundação` e `Backlog` não têm pasta e ficam fora.
 
    **E a saída dos passos 1 a 4 deste mesmo ritual** — ADR, regra, skill ou doc de referência que
    o passo 4 acabou de criar entra como link no item de `Entregue` desta demanda; não tendo gerado
-   nada, o registro diz isso em vez de passar em silêncio.
+   nada, o registro diz isso.
 
    Por fim, **o que esta demanda escreveu fora de `docs/projeto/`** — código, doc de referência,
    `.claude/rules/` — criou item novo no checklist ou tornou algum obsoleto? Ajustar inline.
