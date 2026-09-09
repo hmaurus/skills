@@ -1,6 +1,6 @@
 # O índice envelhece sem avisar, e pedir atenção não conserta
 
-Processo — entrevista: criar-spec · implementação: a definir · sugestão: aicf-direto (cinco arquivos de texto, sem decisão de abordagem em aberto)
+Processo — entrevista: criar-spec · implementação: aicf-direto
 
 ## Problema
 
@@ -167,3 +167,80 @@ Ponta a ponta, no fechamento desta própria demanda — que é o primeiro a roda
 
 O teste real da classe B é esta spec: se ela carrega número ou afirmação de estado sem o teste que
 a refuta, a regra não pegou nem no documento que a cria.
+
+## Relatório de implementação (2026-09-09)
+
+**Status** — concluído. Não há CI neste repositório; a validação é o script de conferência dos
+pares, transcrito abaixo, e uma revisão de código por subagente.
+
+**Causa raiz** — o passo 5 do ritual pedia um julgamento (*"a execução criou item novo?"*) em vez
+de nomear o que enumerar, e a palavra "a execução" foi lida como a implementação, nunca como o
+passo 4, que roda segundos antes e existe justamente para criar ADR, regra e doc de referência.
+Somaram-se dois defeitos que o diagnóstico da intent não previa: `intents/` não era espelhado por
+seção nenhuma — o par não existia para ser conferido — e a regra proposta para a classe B mirava o
+número, quando na falta mais grave o número estava certo e quem mentiu foi o veredito.
+
+**Arquivos alterados** — 18 no total entre os commits `4eb4002` (código) e o de fechamento;
+recontar com `git show --name-only --format= <sha> | sort -u | grep -c .`:
+
+| Arquivo | O quê |
+| --- | --- |
+| `skills/fechar-demanda/SKILL.md` | passo 5 reescrito (três pares, conferência por inclusão, saída dos passos 1–4); regra da classe B no passo 4 e no relatório; passo 2 ganha o `grep` dos links; passo 3 cobre demanda que nasce no fechamento |
+| `skills/criar-spec/SKILL.md` | a linha do checklist acompanha o `git mv`; regra da classe B por referência |
+| `skills/workflow-demanda/SKILL.md` | o checklist descrito como índice; agrupamento vira subtítulo dentro de `Em andamento`, não seção nova |
+| `skills/criar-prd/SKILL.md` | diz em que seção entra a linha que nunca vira arquivo |
+| `skills/setup/templates/checklist.md` | seção `Decidido`; cabeçalho e notas de seção declarando os pares; regra da classe B na nota do `Backlog` |
+| `skills/setup/templates/readme.md` | descrição do checklist |
+| `docs/projeto/CHECKLIST.md` | mesma estrutura, e as demandas deste repositório listadas |
+| `README.md`, `README.en.md` | descrição do checklist na árvore e no passo 3 |
+| `CLAUDE.md` | a regra da classe B, promovida no passo 4 do ritual |
+| `docs/adr/0002-conferencia-do-indice-por-inclusao.md` | novo |
+| `CHANGELOG.md`, `.claude-plugin/plugin.json` | entrada e bump para `0.14.0` |
+| 3 arquivos em `intents/` | links relativos quebrados pelo `git mv`, e uma afirmação que esta demanda tornou falsa |
+
+**Commits** — `e38a68c` (spec), `4eb4002` (implementação, com `--amend` duas vezes: a primeira
+incorporou as correções da revisão, a segunda corrigiu o número de arquivos na própria mensagem),
+e o commit de fechamento.
+
+**Validação** — o script de conferência dos três pares, que é o passo de verificação da spec:
+
+```
+OK  Decidido       3 arquivo(s) -> 3 linha(s)
+OK  Em andamento   1 arquivo(s) -> 1 linha(s)
+OK  Entregue       2 arquivo(s) -> 2 linha(s)
+links quebrados: 0
+```
+
+Revisão de código por subagente fresco que não viu a implementação — 12 achados, todos aplicados.
+Não há script de lint, format ou typecheck neste repositório (sem `package.json`, `Makefile` ou
+`pyproject.toml`); o passo fica registrado como não aplicável em vez de sumir.
+
+**Escopo efetivo** — maior que o previsto, em três frentes:
+
+1. **Onze arquivos com descrição do checklist, contra os seis que a tabela da spec previa.** Um subagente mapeou toda descrição do checklist
+   no repositório e achou cinco que a spec não previa — `workflow-demanda`, os dois READMEs,
+   `templates/readme.md` e `criar-prd`. Deixá-los seria o defeito da demanda se reproduzindo na
+   própria correção.
+2. **Os links relativos quebrados pelo `git mv`.** Achado da implementação: mover o intent para
+   `specs/` quebrou cinco links de uma vez em outras demandas, e o passo 2 do ritual reproduzia
+   isso em todo fechamento. Virou instrução no passo 2.
+3. **A regra da classe B no `CLAUDE.md`**, que a spec pôs explicitamente fora de escopo. Revertido
+   com base em evidência posterior à decisão: errei o número de arquivos duas vezes na mesma
+   mensagem de commit. É o gatilho "erro que apareceu duas vezes" do passo 4. O template do
+   `CLAUDE.md` continua fora — a evidência é sobre este repositório.
+
+**Lições**
+
+- **A primeira redação do passo 5 podia causar a falta que ele existe para impedir.** "Arquivo sem
+  linha, ou linha sem arquivo, é a diferença a corrigir" dá uma instrução só para dois casos com
+  correções opostas; linha órfã em `Entregue` levaria a apagar o item entregue. Só a revisão pegou.
+  Corrigir uma instrução ambígua com outra instrução ambígua é o modo de falha desta classe de
+  demanda, e ele não aparece relendo o próprio texto.
+- **A verificação da spec não pôde ser executada como escrita.** Ela mandava rodar
+  `/aicf:fechar-demanda` para provar o passo 5 novo, mas o Claude Code carrega a skill da cópia
+  instalada do plugin — `0.13.5`, com o passo antigo. O conteúdo da regra foi provado por script; o
+  que só a reinstalação prova é que a instrução nova chega ao agente. Spec deste repositório que
+  verifica comportamento de skill precisa contar com essa defasagem.
+- **Escrever a regra não basta para segui-la.** O commit que institui "afirmação carrega o teste
+  que a refuta" trouxe dois números errados em prosa, e a spec trouxe um exemplo cujo comando
+  devolvia outro valor. Número anotado com o comando ao lado só ajuda quem roda o comando.

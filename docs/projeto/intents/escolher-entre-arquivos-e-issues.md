@@ -31,7 +31,7 @@ Arquivo e issue não são só dois lugares de guardar. Cada um ganha e perde alg
 | Depende de fornecedor | não | GitHub, Linear, … |
 
 A linha do índice gerado importa para além da conveniência: índice mantido à mão é a causa da
-deriva descrita em [o índice envelhece sem avisar](../specs/o-indice-envelhece-sem-avisar.md).
+deriva descrita em [o índice envelhece sem avisar](../specs/concluidas/o-indice-envelhece-sem-avisar.md).
 
 ## O que decidir na entrevista
 
@@ -56,6 +56,6 @@ deriva descrita em [o índice envelhece sem avisar](../specs/o-indice-envelhece-
 - **Habilita** [governança em issues neste repositório](governanca-em-issues-neste-repo.md), que
   deve consumir esta opção em vez de customizar por fora — este repositório vende o método e não
   pode divergir dele em silêncio.
-- **Resolve parcialmente** [o índice envelhece sem avisar](../specs/o-indice-envelhece-sem-avisar.md), mas
+- **Resolve parcialmente** [o índice envelhece sem avisar](../specs/concluidas/o-indice-envelhece-sem-avisar.md), mas
   só para quem escolher issues. Quem ficar em arquivo continua com o problema inteiro, então as
   duas demandas são independentes e nenhuma substitui a outra.

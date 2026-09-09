@@ -21,14 +21,13 @@ Marcar `- [x]` faz parte do ritual de fechamento — não é registro paralelo.
 
 > Uma linha por spec em [`specs/`](specs/) — entrevistada, ainda não concluída.
 
-- [ ] O índice envelhece sem avisar, e pedir atenção não conserta — [spec](specs/o-indice-envelhece-sem-avisar.md)
-
 ## Entregue
 
 > Uma linha por arquivo em [`specs/concluidas/`](specs/concluidas/), crescendo por baixo. Não apagar item entregue — ele é o histórico do que o produto virou.
 
 - [x] Exceção de idioma quando o domínio regulado perde na tradução (`0.13.4`) — [spec](specs/concluidas/excecao-de-idioma-no-dominio.md)
 - [x] A governança orquestra o framework escolhido, não o substitui (`0.13.5`) — [spec](specs/concluidas/orquestrar-o-framework-escolhido.md) · [ADR 0001](../adr/0001-fronteira-de-fase.md)
+- [x] O índice envelhece sem avisar, e pedir atenção não conserta (`0.14.0`) — [spec](specs/concluidas/o-indice-envelhece-sem-avisar.md) · [ADR 0002](../adr/0002-conferencia-do-indice-por-inclusao.md)
 
 ## Backlog
 

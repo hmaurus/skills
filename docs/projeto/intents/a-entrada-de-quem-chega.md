@@ -63,7 +63,7 @@ Dividir a documentação por **quem precisa dela**, não por assunto:
 - **A apresentação do setup fica na skill ou num arquivo à parte?** Se ficar na skill, ela é lida
   em toda invocação e engorda o contexto; se sair, é mais um arquivo para manter em dia — e o
   repositório acabou de descobrir que índice e cópia envelhecem
-  ([o índice envelhece sem avisar](../specs/o-indice-envelhece-sem-avisar.md)).
+  ([o índice envelhece sem avisar](../specs/concluidas/o-indice-envelhece-sem-avisar.md)).
 
 ## Restrição
 

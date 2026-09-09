@@ -20,6 +20,8 @@ Este repositório é a fonte editável do plugin, publicado no marketplace `aico
 
 **Glossário do domínio** (`CONTEXT.md`) e **decisões difíceis de reverter** (ADR em `docs/adr/`, numerado e imutável) nascem quando houver o primeiro termo ambíguo ou a primeira decisão a registrar — o passo 4 do ritual de fechamento manda escrever nos dois.
 
+**Afirmação verificável carrega o teste que a refuta.** Número em doc ou em mensagem de commit vem com o comando que o remede; afirmação de estado vem com a condição que a encerra. A forma está no passo 4 do `/aicf:fechar-demanda`. Escrito por causa de dois números errados na mesma mensagem de commit, em 2026-09-09.
+
 **Este arquivo é lido inteiro em toda sessão.** O alvo que a documentação do Claude Code publica é abaixo de 200 linhas; regra que só vale para uma parte do código vai para `.claude/rules/<tema>.md` com `paths:` no frontmatter, e procedimento de vários passos vira skill. `/doctor` propõe cortes do que o agente já deduz do código.
 
 ## Processos de desenvolvimento
