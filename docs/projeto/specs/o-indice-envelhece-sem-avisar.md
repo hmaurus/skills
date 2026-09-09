@@ -108,7 +108,7 @@ terceiro par para o que ainda não é certeza custa mais do que rende.
 
 Regra de escrita, não instrução de conferência. Duas formas, conforme o que a frase afirma:
 
-- **Número** vem com o comando que o remede: `78 linhas (wc -l < CLAUDE.md, 2026-09-08)`.
+- **Número** vem com o comando que o remede: `54 linhas` (`wc -l < CLAUDE.md`, 2026-09-09).
 - **Afirmação de estado** — item de backlog, "bloqueado por", "ainda não existe" — vem com a
   condição que a encerra: `— encerra quando houver workflow em .github/workflows/`.
 

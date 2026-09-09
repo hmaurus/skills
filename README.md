@@ -43,7 +43,7 @@ Em projeto que já existe, comece por `/aicf:workflow-demanda`, que explica o ci
 
 **O que não funciona é passar o PRD pelo ciclo da demanda.** Não por ser documento — spec serve bem para mudança de documentação. É que a spec descreve uma **mudança**, com escopo e um estado "pronto", enquanto o PRD descreve o **produto**, e é revisado toda vez que uma decisão o contraria. Envelopar um no outro rende uma spec vazia — a entrevista dela discutiria como escrever o arquivo, e as perguntas que importam, público e fora de escopo, continuariam sem resposta — mais um fechamento pedindo relatório, arquivamento e check de lint num `.md`.
 
-**3. Tirar o `CHECKLIST.md` do PRD.** Cada coisa que o produto precisa ter vira uma linha. O que couber numa linha fica ali mesmo; o que precisar de contexto vira arquivo em `intents/`.
+**3. Tirar o `CHECKLIST.md` do PRD.** Cada coisa que o produto precisa ter vira uma linha. O que couber numa linha fica ali mesmo; o que precisar de contexto vira arquivo em `intents/`, e a linha vira ponteiro para ele.
 
 **4. Primeira demanda.** `/aicf:criar-spec` para amadurecer, `/aicf:implementar-spec` para executar e fechar. As duas também respondem ao pedido em linguagem natural — "me entreviste sobre X", "implementa a spec Y" —, porque o agente as carrega sozinho quando reconhece a intenção. Daí em diante o ciclo se repete.
 
@@ -87,7 +87,7 @@ Dá para entrevistar por um caminho e implementar por outro. A demanda registra 
 ```
 docs/projeto/
 ├── PRD.md             # o porquê do produto: visão, público, modelo
-├── CHECKLIST.md       # o que foi entregue e o que falta
+├── CHECKLIST.md       # índice: três seções espelham as pastas abaixo
 ├── intents/
 │   ├── <intent>.md    # decidida, ainda não entrevistada
 │   └── backlog/       # ainda não está claro que será feita

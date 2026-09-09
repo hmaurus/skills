@@ -45,7 +45,7 @@ On an existing project, start with `/aicf:workflow-demanda`, which explains the 
 
 **What does not work is running the PRD through the work-item cycle.** Not because it is a document — a spec handles documentation changes fine. It is that a spec describes a **change**, with a scope and a "done" state, while the PRD describes the **product**, and gets revised whenever a decision contradicts it. Wrapping one in the other yields an empty spec — its interview would debate how to write the file, while the questions that matter, audience and what is ruled out, stay unanswered — plus a closing ritual asking for a report, archiving, and a lint check on a `.md`.
 
-**3. Derive `CHECKLIST.md` from the PRD.** Every thing the product needs becomes one line. What fits in a line stays there; what needs context becomes a file under `intents/`.
+**3. Derive `CHECKLIST.md` from the PRD.** Every thing the product needs becomes one line. What fits in a line stays there; what needs context becomes a file under `intents/`, and the line becomes a pointer to it.
 
 **4. First work item.** `/aicf:criar-spec` to mature it, `/aicf:implementar-spec` to execute and close. Both also answer a plain-language request — "interview me about X", "implement spec Y" — because the agent loads them on its own when it recognizes the intent. From there the cycle repeats.
 
@@ -89,7 +89,7 @@ You can interview one way and implement another. The work item records which was
 ```
 docs/projeto/            # project
 ├── PRD.md               # why the product exists: vision, audience, model
-├── CHECKLIST.md         # what shipped and what is missing
+├── CHECKLIST.md         # index: three sections mirror the folders below
 ├── intents/
 │   ├── <intent>.md      # decided, not yet interviewed
 │   └── backlog/         # not yet certain it will be done

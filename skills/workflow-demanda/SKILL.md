@@ -53,7 +53,7 @@ implementação é escolha nova.
 ```
 docs/projeto/
 ├── PRD.md             # Visão, público, modelo de negócio — o porquê do produto
-├── CHECKLIST.md       # O entregue e o que falta (+ Backlog); cada item é uma demanda em potencial
+├── CHECKLIST.md       # Índice: cada seção espelha uma pasta abaixo (+ Fundação e Backlog)
 ├── intents/
 │   ├── <intent>.md        # Decidida, ainda não entrevistada
 │   └── backlog/           # Ainda não está claro que será feita
@@ -127,5 +127,6 @@ critério é a regra poder falhar sem ninguém perceber.
 Demanda grande demais para uma sessão é **uma spec só**, com as entregas em checkboxes no corpo:
 a sessão faz o que cabe e fecha parcial — `/aicf:fechar-demanda` cobre o caso — e a próxima
 continua pelo mesmo arquivo. Várias demandas independentes que andam juntas são **specs
-separadas**, agrupadas sob um título de seção no `CHECKLIST.md`; a relação mora na lista, não em
+separadas**, agrupadas sob um subtítulo dentro de `Em andamento` — seção nova quebraria os pares
+que o fechamento confere; a relação mora na lista, não em
 campo de cada spec nem em subpasta. O _porquê_ das decisões mora no arquivo, não na conversa.

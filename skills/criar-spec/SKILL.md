@@ -32,8 +32,9 @@ Continuar até não sobrar decisão em aberto, e só então escrever.
 
 Vai em `docs/projeto/specs/<nome-em-kebab-case>.md`. Se a demanda já tem arquivo em
 `docs/projeto/intents/`, a spec é esse arquivo: `git mv` para `specs/` e reescrever o conteúdo
-— o nome fica, o histórico acompanha, nada sobra em `intents/`. Sem `docs/projeto/`, perguntar
-onde gravar em vez de inventar pasta.
+— o nome fica, o histórico acompanha, nada sobra em `intents/`. No `CHECKLIST.md`, a linha da
+demanda acompanha o arquivo: sai de `Decidido` e entra em `Em andamento`; spec que nasce direto em
+`specs/` ganha linha nova ali. Sem `docs/projeto/`, perguntar onde gravar em vez de inventar pasta.
 
 - **Problema** — o que está errado hoje, do ponto de vista de quem usa
 - **Solução** — o que passa a existir, na mesma linguagem
@@ -41,7 +42,9 @@ onde gravar em vez de inventar pasta.
 - **Fora de escopo** — o que foi levantado e decidido não fazer, com o motivo
 - **Verificação** — um passo ponta a ponta que prova que funcionou
 
-Usar o vocabulário do domínio do projeto (`CONTEXT.md`, se existir).
+Usar o vocabulário do domínio do projeto (`CONTEXT.md`, se existir). E **afirmação verificável
+carrega o teste que a refuta** — número traz o comando que o remede, afirmação de estado traz a
+condição que a encerra; a forma está no passo 4 do `/aicf:fechar-demanda`.
 
 ## Ao terminar
 

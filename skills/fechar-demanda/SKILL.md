@@ -30,8 +30,10 @@ passo cobriu qual exigência.
 ## Os cinco passos
 
 1. **Relatório** no arquivo da demanda. Se a demanda não tinha arquivo, criar agora.
-2. **Mover** para `specs/concluidas/`.
-3. **Marcar `- [x]`** no checklist.
+2. **Mover** para `specs/concluidas/`, e corrigir os links relativos que apontavam para o
+   arquivo — `grep -rn "<nome-do-arquivo>" --include="*.md" .` acha todos.
+3. **Marcar `- [x]`** no checklist: a linha sai de `Em andamento` e entra em `Entregue` —
+   demanda que nasceu já no fechamento entra direto em `Entregue`.
 4. **Reler o próprio relatório e os achados da revisão de código procurando o que vale além
    desta demanda** — decisão que outra sessão vai reencontrar, armadilha que vai morder de novo,
    ID externo — e promover, porque ninguém abre demanda concluída procurando informação:
@@ -45,13 +47,38 @@ passo cobriu qual exigência.
    | Decisão difícil de reverter, surpreendente e com trade-off real | ADR numerado e imutável em `docs/adr/` (`0001-slug.md`) |
    | Termo ambíguo do domínio | glossário em `CONTEXT.md` |
 
+   **Afirmação verificável carrega o teste que a refuta.** Número vem com o comando que o
+   remede — `<N> linhas` (`wc -l < <arquivo>`, `<AAAA-MM-DD>`); afirmação de estado — item de
+   backlog, "bloqueado por", "ainda não existe" — vem com a condição que a encerra. Sem isso
+   conferir vira julgar em vez de executar.
+
    ADR e glossário podem sair de `/domain-modeling`, quando instalado; escrever direto pela
    tabela também serve. Escrever no `CLAUDE.md` obriga a olhar o que de lá saiu de
    validade e o tamanho: ele é lido inteiro em toda sessão, o alvo que a documentação do Claude
    Code publica é abaixo de 200 linhas por arquivo, e `/doctor` propõe cortes do que o agente já
    deduz do próprio código.
-5. **Conferir se a execução criou item novo no checklist ou tornou algum obsoleto**, e ajustar
-   inline.
+5. **Conferir o índice — enumerando, não julgando se está em dia.** Três pares, e a saída deste
+   ritual:
+
+   | Seção do `CHECKLIST.md` | Espelha (sob `docs/projeto/`) |
+   | --- | --- |
+   | Decidido | `intents/` |
+   | Em andamento | `specs/` |
+   | Entregue | `specs/concluidas/` |
+
+   **A conferência corre num sentido só: todo arquivo da pasta tem linha na seção.** Arquivo sem
+   linha é a falta a corrigir — inclusive o item entregue que foi apagado em vez de movido. Linha
+   sem arquivo é legítima e comum: demanda que coube numa linha e nunca virou arquivo. **Nunca
+   apagar linha por não achar arquivo.** `Fundação` e `Backlog` não têm pasta e ficam fora da
+   enumeração. São os caminhos do layout padrão; projeto que gravou a governança noutro lugar
+   troca os caminhos, não os pares.
+
+   **E a saída dos passos 1 a 4 deste mesmo ritual** — ADR, regra, skill ou doc de referência que
+   o passo 4 acabou de criar entra como link no item de `Entregue` desta demanda; não tendo gerado
+   nada, o registro diz isso em vez de passar em silêncio.
+
+   Por fim, **o que esta demanda escreveu fora de `docs/projeto/`** — código, doc de referência,
+   `.claude/rules/` — criou item novo no checklist ou tornou algum obsoleto? Ajustar inline.
 
 O fechamento vai num commit próprio, separado do commit de código; quando o processo escolhido já
 commitou por conta própria, cobre só o registro. Tarefa pequena (fix trivial, copy, renomeação)
@@ -62,7 +89,8 @@ e o arquivo vai direto para `specs/concluidas/`. Ao final, avaliar o peso do con
 ## Sessão que acaba antes da demanda
 
 Contexto no fim com a demanda aberta também é fechamento, parcial: o arquivo fica em `specs/`,
-o checklist não é marcado, e o que a sessão descobriu vai para o próprio arquivo sob
+a linha segue em `Em andamento` e o checklist não é marcado, e o que a sessão descobriu vai para
+o próprio arquivo sob
 `## Estado em andamento` — decisão tomada, caminho descartado com o motivo, onde parou e o
 próximo passo. **Se a frase serve para qualquer demanda, ela é do `CLAUDE.md`, não do arquivo.**
 O teste é a retomada caber em `continue a demanda <arquivo>`. Commit próprio; no fechamento
@@ -85,6 +113,9 @@ resolvida **de fato**, não como foi planejada — registrar divergências plano
 - **Validação** — comandos executados, runs de CI, testes manuais
 - **Escopo efetivo** — se o fix afetou mais coisas que a demanda previa
 - **Lições** (opcional) — armadilhas, hipóteses erradas, diffs dev/prod
+
+Vale aqui a regra do passo 4: número e afirmação de estado entram com o teste que os refuta — é
+neste bloco que a medição congelada em prosa costuma nascer.
 
 ## A linha `Processo`
 

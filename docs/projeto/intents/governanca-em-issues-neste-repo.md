@@ -12,9 +12,9 @@ branch e PR. Abrir uma issue são dois cliques. Se aluno e usuário devem poder 
 sugerir ajuste — e devem —, o `.md` é a barreira, não o meio. Hoje a governança é escrita só pelo
 mantenedor por construção, não por escolha.
 
-**2. O índice é mantido à mão.** O `CHECKLIST.md` precisa espelhar o que existe em `intents/`,
-`specs/` e `docs/adr/`. É exatamente a deriva descrita em
-[o índice envelhece sem avisar](o-indice-envelhece-sem-avisar.md), e a lista de issues do GitHub
+**2. O índice é mantido à mão.** O `CHECKLIST.md` precisa espelhar o que existe em `intents/` e
+`specs/` — `docs/adr/` não ganhou espelho, por decisão. É exatamente a deriva descrita em
+[o índice envelhece sem avisar](../specs/o-indice-envelhece-sem-avisar.md), e a lista de issues do GitHub
 **é gerada** — não existe seção Entregue desatualizada, item apagado por engano, nem ADR faltando
 no índice. Esta demanda dissolve por construção a classe A daquela, **neste** repositório.
 
@@ -67,7 +67,7 @@ decidir a forma — edição direta, ou nota no fim, como o padrão de nota já 
 
 **Exemplo vindo de projeto privado entra anonimizado.** Vale igual em issue e em `.md`, e por isso
 não é argumento contra a migração — é regra de escrita que falta hoje. A intent
-[o índice envelhece sem avisar](o-indice-envelhece-sem-avisar.md) já nasceu sob ela, e é o
+[o índice envelhece sem avisar](../specs/o-indice-envelhece-sem-avisar.md) já nasceu sob ela, e é o
 primeiro documento do repositório a segui-la explicitamente.
 
 Assumir que a governança é pública **por decisão** torna essa regra mais necessária, não menos:
