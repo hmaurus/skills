@@ -16,6 +16,7 @@ Marcar `- [x]` faz parte do ritual de fechamento — não é registro paralelo.
 - [ ] A entrada de quem chega: o setup se apresenta, e a documentação se divide em duas — [intent](intents/a-entrada-de-quem-chega.md)
 - [ ] O usuário escolhe se a governança mora em arquivos ou em issues — [intent](intents/escolher-entre-arquivos-e-issues.md)
 - [ ] A governança deste repositório passa a viver em issues — [intent](intents/governanca-em-issues-neste-repo.md)
+- [ ] A conferência do índice vira script, e a skill encolhe — [intent](intents/a-conferencia-do-indice-vira-script.md)
 
 ## Em andamento
 
