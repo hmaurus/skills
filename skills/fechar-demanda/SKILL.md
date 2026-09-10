@@ -40,11 +40,11 @@ passo cobriu qual exigência.
 
    | O que é | Vai para |
    | --- | --- |
-   | Conhecimento operacional — manual, ID, gotcha | doc de referência |
+   | Conhecimento operacional — manual, ID, gotcha | doc em `docs/referencias/` |
    | Regra que muda como o agente age: erro que já apareceu duas vezes; achado da revisão que o agente deveria saber sobre este código (esse não espera a segunda vez); contexto que um colega novo precisaria | `CLAUDE.md` |
    | Regra que só vale para uma parte do código | `.claude/rules/<tema>.md` com `paths:` no frontmatter — carrega só ao tocar arquivo daquele padrão |
    | Procedimento que já se repetiu | skill — gatilho e critério skill×hook no `/aicf:workflow-demanda` |
-   | Decisão difícil de reverter, surpreendente e com trade-off real | ADR numerado e imutável em `docs/adr/` (`0001-slug.md`) |
+   | Decisão difícil de reverter, surpreendente e com trade-off real | ADR em `docs/adr/` |
    | Termo ambíguo do domínio | glossário em `CONTEXT.md` |
 
    **Afirmação verificável carrega o teste que a refuta.** Número vem com o comando que o
@@ -52,9 +52,9 @@ passo cobriu qual exigência.
    backlog, "bloqueado por", "ainda não existe" — vem com a condição que a encerra. Sem isso
    conferir vira julgar em vez de executar.
 
-   ADR e glossário podem sair de `/domain-modeling`, quando instalado; escrever direto pela
-   tabela também serve. Escrever no `CLAUDE.md` obriga a olhar o que de lá saiu de
-   validade e o tamanho: ele é lido inteiro em toda sessão, o alvo que a documentação do Claude
+   ADR e glossário são do `/domain-modeling` (Matt Pocock) — formato e numeração são dele; sem
+   ele, um parágrafo em `docs/adr/0001-slug.md`, imutável, basta. Escrever no `CLAUDE.md` obriga
+   a olhar o que de lá saiu de validade e o tamanho: ele é lido inteiro em toda sessão, o alvo que a documentação do Claude
    Code publica é abaixo de 200 linhas por arquivo, e `/doctor` propõe cortes do que o agente já
    deduz do próprio código.
 5. **Conferir o índice — enumerando, não julgando se está em dia.** No layout padrão, sob
