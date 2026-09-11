@@ -12,11 +12,14 @@ branch e PR. Abrir uma issue são dois cliques. Se aluno e usuário devem poder 
 sugerir ajuste — e devem —, o `.md` é a barreira, não o meio. Hoje a governança é escrita só pelo
 mantenedor por construção, não por escolha.
 
-**2. O índice é mantido à mão.** O `CHECKLIST.md` precisa espelhar o que existe em `intents/` e
-`specs/` — `docs/adr/` não ganhou espelho, por decisão. É exatamente a deriva descrita em
-[o índice envelhece sem avisar](../specs/concluidas/o-indice-envelhece-sem-avisar.md), e a lista de issues do GitHub
-**é gerada** — não existe seção Entregue desatualizada, item apagado por engano, nem ADR faltando
-no índice. Esta demanda dissolve por construção a classe A daquela, **neste** repositório.
+**2. O índice é mantido à mão.** O `CHECKLIST.md` precisa espelhar o que existe em `intents/`,
+`specs/` e `specs/concluidas/` — `docs/adr/` não ganhou espelho, por decisão da `0.15.0`, em que
+ADR passou a ser artefato do `/domain-modeling`. A deriva descrita em
+[o índice envelhece sem avisar](../specs/concluidas/o-indice-envelhece-sem-avisar.md) foi mitigada
+na `0.14.0` pelo passo 5, que enumera os três pares — mas **mitigada, não dissolvida**: o passo
+depende de o fechamento rodar, e a lista de issues do GitHub **é gerada**, sem depender de ritual
+nenhum. O ganho desta demanda deixou de ser "resolve a classe A" e passou a ser "torna o mecanismo
+desnecessário", **neste** repositório.
 
 ## Depende de outra demanda
 

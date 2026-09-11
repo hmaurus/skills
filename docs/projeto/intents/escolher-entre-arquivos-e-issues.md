@@ -30,8 +30,11 @@ Arquivo e issue não são só dois lugares de guardar. Cada um ganha e perde alg
 | Relatório de fechamento achável anos depois | arquivo versionado | comentário em issue fechada |
 | Depende de fornecedor | não | GitHub, Linear, … |
 
-A linha do índice gerado importa para além da conveniência: índice mantido à mão é a causa da
+A linha do índice gerado importa para além da conveniência: índice mantido à mão foi a causa da
 deriva descrita em [o índice envelhece sem avisar](../specs/concluidas/o-indice-envelhece-sem-avisar.md).
+Aquela demanda fechou na `0.14.0` e mitigou a classe A — o passo 5 do fechamento agora enumera três
+pares seção↔pasta —, então a vantagem do índice gerado encolheu: com arquivo, a conferência existe
+e é mecânica; o que sobra a favor da issue é ela não precisar de conferência nenhuma.
 
 ## O que decidir na entrevista
 
@@ -48,14 +51,19 @@ deriva descrita em [o índice envelhece sem avisar](../specs/concluidas/o-indice
   certa seja não.
 - **Qual tracker.** Só GitHub, ou uma camada fina que também sirva Linear? Cuidado com abstração
   antecipando o futuro: começar só com GitHub e ver se alguém pede o resto.
-- **O que acontece com o `CHECKLIST.md`.** Com issues ele perde a parte de demandas, mas a seção
-  Fundação não tem equivalente em issue.
+- **O que acontece com o `CHECKLIST.md`.** Com issues ele perde as três seções que espelham pastas
+  (`Decidido`, `Em andamento`, `Entregue`, desde a `0.14.0`); `Fundação` e `Backlog` não têm
+  equivalente em issue e são o que sobraria.
 
 ## Relação com as outras demandas
 
 - **Habilita** [governança em issues neste repositório](governanca-em-issues-neste-repo.md), que
   deve consumir esta opção em vez de customizar por fora — este repositório vende o método e não
   pode divergir dele em silêncio.
-- **Resolve parcialmente** [o índice envelhece sem avisar](../specs/concluidas/o-indice-envelhece-sem-avisar.md), mas
-  só para quem escolher issues. Quem ficar em arquivo continua com o problema inteiro, então as
-  duas demandas são independentes e nenhuma substitui a outra.
+- **Dispensaria o mecanismo** de [o índice envelhece sem avisar](../specs/concluidas/o-indice-envelhece-sem-avisar.md),
+  que já foi entregue na `0.14.0`: a lista de issues é gerada, então o passo 5 não teria o que
+  conferir para quem escolher issues. Quem ficar em arquivo continua usando o passo 5, que é a
+  razão de ele existir — a entrevista precisa decidir se as duas mídias coexistem na mesma skill.
+- **Bloqueia** [a conferência do índice vira script](a-conferencia-do-indice-vira-script.md)
+  enquanto estiver em curso: um script que compara seções com pastas não se desenha sem saber se
+  as pastas continuam existindo.

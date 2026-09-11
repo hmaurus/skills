@@ -62,8 +62,10 @@ Dividir a documentação por **quem precisa dela**, não por assunto:
   de manutenção de cada mudança futura.
 - **A apresentação do setup fica na skill ou num arquivo à parte?** Se ficar na skill, ela é lida
   em toda invocação e engorda o contexto; se sair, é mais um arquivo para manter em dia — e o
-  repositório acabou de descobrir que índice e cópia envelhecem
-  ([o índice envelhece sem avisar](../specs/concluidas/o-indice-envelhece-sem-avisar.md)).
+  repositório já pagou para aprender que índice e cópia envelhecem
+  ([o índice envelhece sem avisar](../specs/concluidas/o-indice-envelhece-sem-avisar.md), entregue
+  na `0.14.0`). O que existe hoje contra isso é o passo 5 do fechamento, que confere pares
+  seção↔pasta: um arquivo de apresentação solto não tem par nenhum e ficaria fora dele.
 
 ## Restrição
 
