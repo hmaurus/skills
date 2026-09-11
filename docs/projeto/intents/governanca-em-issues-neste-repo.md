@@ -17,9 +17,12 @@ mantenedor por construção, não por escolha.
 ADR passou a ser artefato do `/domain-modeling`. A deriva descrita em
 [o índice envelhece sem avisar](../specs/concluidas/o-indice-envelhece-sem-avisar.md) foi mitigada
 na `0.14.0` pelo passo 5, que enumera os três pares — mas **mitigada, não dissolvida**: o passo
-depende de o fechamento rodar, e a lista de issues do GitHub **é gerada**, sem depender de ritual
-nenhum. O ganho desta demanda deixou de ser "resolve a classe A" e passou a ser "torna o mecanismo
-desnecessário", **neste** repositório.
+depende de o fechamento rodar. Com issues não haveria ritual a rodar, e é aqui que o argumento
+precisa de cuidado: a lista de issues é gerada, mas **os labels que a alimentam são mantidos à
+mão**, e label errado não tem contra o que ser conferido. O ganho desta demanda não é "resolve a
+classe A" nem "torna o mecanismo desnecessário" — é trocar um erro detectável por ritual por um
+erro menos provável e invisível. Se isso compensa **neste** repositório, cujo diferencial declarado
+é a contribuição de fora, é o que a entrevista decide.
 
 ## Depende de outra demanda
 
