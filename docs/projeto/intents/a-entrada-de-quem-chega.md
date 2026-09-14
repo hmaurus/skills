@@ -64,8 +64,11 @@ Dividir a documentação por **quem precisa dela**, não por assunto:
   em toda invocação e engorda o contexto; se sair, é mais um arquivo para manter em dia — e o
   repositório já pagou para aprender que índice e cópia envelhecem
   ([o índice envelhece sem avisar](../specs/concluidas/o-indice-envelhece-sem-avisar.md), entregue
-  na `0.14.0`). O que existe hoje contra isso é o passo 5 do fechamento, que confere pares
-  seção↔pasta: um arquivo de apresentação solto não tem par nenhum e ficaria fora dele.
+  na `0.14.0`). E a rede que existia contra isso saiu do método em
+  [o `CHECKLIST.md` sai do método](../specs/concluidas/o-checklist-sai-do-metodo.md): não há mais conferência
+  de índice no fechamento, então um arquivo de apresentação solto não tem nada que o cutuque
+  quando envelhecer. Isso pesa a favor de manter a apresentação dentro da skill, e a pergunta
+  passa a ser só o custo de contexto.
 
 ## Restrição
 

@@ -65,7 +65,7 @@ docs/projeto/
 **Um item, um lugar.** Enquanto a demanda não tem arquivo, ela é uma linha no `ROADMAP.md`;
 quando vira arquivo, a pasta é o registro inteiro e **a linha sai do roadmap**. Nada aponta para
 nada, e não sobra índice para envelhecer — o que tem arquivo se lê da pasta com
-`head -qn1 docs/projeto/intents/*.md docs/projeto/specs/*.md | sed 's/^# //'`.
+`head -qn1 docs/projeto/intents/*.md docs/projeto/specs/*.md docs/projeto/specs/concluidas/*.md | sed 's/^# //'`.
 
 Só governança de demanda entra aí. Doc que descreve o mundo em vez de um trabalho a fazer —
 configuração, ID externo, decisão de marca, número de negócio, aprendizado — vai para

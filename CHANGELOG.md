@@ -12,18 +12,21 @@
   palavras: onde se lia *"a linha vira ponteiro"*, agora **a linha sai** — enquanto a demanda não
   tem arquivo ela é uma linha no roadmap; quando vira arquivo, a pasta é o registro inteiro, e
   nunca as duas coisas. O índice que se perde volta por
-  `head -qn1 docs/projeto/intents/*.md docs/projeto/specs/*.md | sed 's/^# //'`, gerado e sempre
+  `head -qn1 docs/projeto/intents/*.md docs/projeto/specs/*.md docs/projeto/specs/concluidas/*.md | sed 's/^# //'`, gerado e sempre
   correto, com os títulos de verdade em vez dos slugs.
 - **`CHECKLIST.md` → `ROADMAP.md`, com as duas seções que nunca tiveram pasta.** `Próximas` (o que
   já foi decidido e ainda não tem arquivo, onde entram as linhas que eram `Fundação`) e `Backlog`
   (o que ainda não é certeza). `Decidido`, `Em andamento` e `Entregue` não têm substituto porque não
   precisavam existir. O nome mudou de propósito: num arquivo chamado `CHECKLIST` alguém
   eventualmente recria uma seção `Entregue`, porque é o que checklists fazem. Arquivo próprio e não
-  seção do `PRD.md`, por ritmo de escrita oposto — em 44 commits o checklist mudou 6 vezes e o PRD
-  mudou 1, a de criação (`git log --oneline -- docs/projeto/PRD.md | wc -l`).
+  seção do `PRD.md`, por ritmo de escrita oposto — nos 44 commits até
+  `ddc7477`, o último antes desta demanda, o checklist mudou 6 vezes e o PRD mudou 1, a de criação.
+  Os três números reproduzem com `git log --oneline ddc7477 [-- <arquivo>] | wc -l`.
 - **O `fechar-demanda` perde um passo inteiro e encolhe 15 linhas** — de 130 para 115
   (`wc -l < skills/fechar-demanda/SKILL.md`). O passo 3 (`- [x]`, mover a linha entre seções) morre:
-  sem ponteiro não há o que marcar. O passo 5 vira 4 e cai de 16 para 4 linhas — sai a conferência
+  sem ponteiro não há o que marcar. O passo 5 vira 4 e cai de 16 para 4 linhas
+  (`awk '/^4\. \*\*Fechar o que este ritual abriu/,/^$/' skills/fechar-demanda/SKILL.md | grep -c .`)
+  — sai a conferência
   dos três pares, ficam as duas partes que nunca foram sobre o checklist: o ADR recém-criado entra
   como link no relatório da própria demanda, e a pergunta sobre item novo passa a olhar o roadmap.
   São cinco passos que viram quatro, em todo projeto que usa o plugin.

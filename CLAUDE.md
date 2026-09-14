@@ -18,9 +18,11 @@ Este repositório é a fonte editável do plugin, publicado no marketplace `aico
 
 **Exceção:** credenciais ficam em `.env` (não commitado) ou no gerenciador de senhas. Nunca no repositório, nunca em memory.
 
-**Glossário do domínio** (`CONTEXT.md`) e **decisões difíceis de reverter** (ADR em `docs/adr/`, numerado e imutável) nascem quando houver o primeiro termo ambíguo ou a primeira decisão a registrar — o passo 4 do ritual de fechamento manda escrever nos dois.
+**Glossário do domínio** (`CONTEXT.md`) e **decisões difíceis de reverter** (ADR em `docs/adr/`, numerado e imutável) nascem quando houver o primeiro termo ambíguo ou a primeira decisão a registrar — o passo 3 do ritual de fechamento manda escrever nos dois.
 
-**Afirmação verificável carrega o teste que a refuta.** Número em doc ou em mensagem de commit vem com o comando que o remede; afirmação de estado vem com a condição que a encerra. A forma está no passo 4 do `/aicf:fechar-demanda`. Escrito por causa de dois números errados na mesma mensagem de commit, em 2026-09-09.
+**Afirmação verificável carrega o teste que a refuta.** Número em doc ou em mensagem de commit vem com o comando que o remede; afirmação de estado vem com a condição que a encerra. A forma está no passo 3 do `/aicf:fechar-demanda`. Escrito por causa de dois números errados na mesma mensagem de commit, em 2026-09-09. **Número tirado do histórico do git se pina num commit, não numa data** — "em 44 commits" virou 45 no dia seguinte; `git log --oneline <sha> | wc -l` reproduz para sempre.
+
+**Passo citado por número é ponteiro, e ponteiro envelhece.** Renumerar um passo de skill quebra em silêncio quem cita o número de fora: na `0.16.0` foram quatro referências, uma delas no template que vai para o `CLAUDE.md` de todo projeto novo. Nenhum grep pelo assunto as pega — elas citam o número. Ao mexer na numeração, `grep -rn 'passo [0-9]' --include='*.md' .` antes de fechar.
 
 **Este arquivo é lido inteiro em toda sessão.** O alvo que a documentação do Claude Code publica é abaixo de 200 linhas; regra que só vale para uma parte do código vai para `.claude/rules/<tema>.md` com `paths:` no frontmatter, e procedimento de vários passos vira skill. `/doctor` propõe cortes do que o agente já deduz do código.
 

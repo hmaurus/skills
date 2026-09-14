@@ -15,7 +15,7 @@ mantenedor por construção, não por escolha.
 **2. O índice deixou de ser argumento.** Este item dizia que o `CHECKLIST.md` era mantido à mão e
 que as issues gerariam a lista sozinhas. O índice derivado saiu do método inteiro em
 [o `CHECKLIST.md` sai do método](../specs/concluidas/o-checklist-sai-do-metodo.md): hoje a pasta é
-a única fonte, e `head -qn1 docs/projeto/specs/*.md` gera a lista dos dois lados. Não há mais índice
+a única fonte, e `head -qn1 docs/projeto/intents/*.md docs/projeto/specs/*.md docs/projeto/specs/concluidas/*.md | sed 's/^# //'` gera a lista dos dois lados. Não há mais índice
 manual a trocar por índice gerado, e o que sobra a favor das issues é o item 1 — a contribuição de
 fora —, que é o diferencial declarado deste repositório e sempre foi o argumento forte.
 

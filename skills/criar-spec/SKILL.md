@@ -44,7 +44,7 @@ onde gravar em vez de inventar pasta.
 
 Usar o vocabulário do domínio do projeto (`CONTEXT.md`, se existir). E **afirmação verificável
 carrega o teste que a refuta** — número traz o comando que o remede, afirmação de estado traz a
-condição que a encerra; a forma está no passo 4 do `/aicf:fechar-demanda`.
+condição que a encerra; a forma está no passo 3 do `/aicf:fechar-demanda`.
 
 ## Ao terminar
 
