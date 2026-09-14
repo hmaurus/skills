@@ -2,11 +2,16 @@
 
 Processo — entrevista: a definir · implementação: a definir
 
+> **Depende de [o `CHECKLIST.md` sai do método](../specs/concluidas/o-checklist-sai-do-metodo.md)**,
+> entregue antes desta. Aquela demanda removeu o índice derivado, e com ele a maior parte do que
+> aqui variava entre as duas mídias — esta encolheu de "refatorar seis skills" para "trocar quatro
+> verbos". As seções abaixo já estão reescritas sob esse estado.
+
 ## Problema
 
 O aicf hoje assume **arquivo**. Toda skill grava e lê em `docs/projeto/`: `criar-spec` escreve em
-`specs/<nome>.md`, `implementar-spec` lê de lá, `fechar-demanda` move para `specs/concluidas/` e
-marca o `CHECKLIST.md`. Não há escolha — quem prefere issue tracker precisa customizar por fora, e
+`specs/<nome>.md`, `implementar-spec` lê de lá, `fechar-demanda` move para `specs/concluidas/`.
+Não há escolha — quem prefere issue tracker precisa customizar por fora, e
 a customização não é suportada nem descrita.
 
 Isso destoa do resto do próprio método. O `workflow-demanda` já oferece **três caminhos de
@@ -25,27 +30,25 @@ Arquivo e issue não são só dois lugares de guardar. Cada um ganha e perde alg
 | --- | --- | --- |
 | Sobrevive ao `git clone` sem rede | sim | não |
 | Contribuição de quem não é mantenedor | fork + PR | dois cliques |
-| Índice do que existe | mantido à mão | gerado |
-| Estado de uma demanda | pasta **e** linha no checklist | um label |
-| Erro de estado | detectável: as duas fontes divergem | silencioso: o label é fonte única |
+| Índice do que existe | gerado da pasta (`head -qn1`) | gerado da lista |
+| Estado de uma demanda | a pasta | um label |
 | Referência a outra demanda | link relativo, quebra ao mover | `#12`, estável |
 | Busca e `grep` no repositório | direto | não |
 | Relatório de fechamento achável anos depois | arquivo versionado | comentário em issue fechada |
 | Depende de fornecedor | não | GitHub, Linear, … |
 
-As três linhas do meio são a mesma moeda, e a leitura fácil delas é errada. Índice gerado **não
-quer dizer estado correto**: o que a lista de issues gera é a lista, não a correção dos labels, e
-label se aplica à mão como arquivo se move de pasta. O `triage` do Matt detecta issue sem label e
-issue com dois labels de estado em conflito; **não detecta label errado** — issue marcada
-`ready-for-agent` que já foi implementada é indistinguível de uma que não foi.
+**O argumento de detecção saiu da tabela, e essa é a novidade.** Enquanto o `CHECKLIST.md` existia,
+o lado do arquivo guardava o estado duas vezes — a pasta e a linha na seção — e dava para dizer que
+a divergência entre as duas tornava o erro achável. A demanda que removeu o índice mostrou que o
+argumento estava invertido: cópia mantida à mão não detecta erro na fonte, ela fabrica uma classe
+de erro nova e depois gasta ritual achando o erro que criou.
 
-O arquivo guarda o estado duas vezes (a pasta, e a linha na seção). Isso parece puro custo, e é o
-que torna o erro **detectável**: duas fontes divergem de forma mecânica de achar, que é o que o
-passo 5 do fechamento explora desde a `0.14.0`. A issue guarda uma vez só — menos chance de errar,
-e nenhuma chance de perceber.
+Hoje as duas mídias guardam o estado **uma vez só**: a pasta de um lado, o label do outro. Nenhuma
+das duas detecta estado errado — pasta errada e label errado são igualmente indistinguíveis de
+pasta certa e label certo. O `triage` do Matt confirma pelo lado das issues: ele acha issue sem
+label e issue com dois labels em conflito, e **não acha label errado**.
 
-Então a escolha real não é entre "erra" e "não erra": é entre **erro detectável com ritual** e
-**erro silencioso sem ritual**.
+A escolha, então, não é mais entre erro detectável e erro silencioso. É só a tabela acima.
 
 ## O que decidir na entrevista
 
@@ -54,31 +57,30 @@ Então a escolha real não é entre "erra" e "não erra": é entre **erro detect
   (`triage-labels.md`) gerado pelo setup dele — precedente que funciona.
 - **Quanto do método muda, de fato.** A hipótese a testar é que **a governança é a mesma e só o
   substrato muda**: as quatro fases, o ritual de fechamento e a linha `Processo` seguem idênticos;
-  o que troca é "mover arquivo para `concluidas/`" por "fechar a issue", e "marcar `- [x]`" por
-  "aplicar o label". Se for isso, a mudança é rasa e vale. Se a entrevista descobrir que meia dúzia
-  de comportamentos mudam junto, o custo é outro.
+  o que troca é "mover arquivo para `concluidas/`" por "fechar a issue". A hipótese ficou mais
+  forte depois que o índice saiu: o `- [x]` no checklist, que era o segundo item desta lista, não
+  existe mais em mídia nenhuma.
 - **Modo misto é permitido?** Spec em issue e relatório em arquivo, por exemplo. Tentador, e é
   exatamente o gatilho de revisão do lema — dois mecanismos coexistindo. Provável que a resposta
   certa seja não.
 - **Qual tracker.** Só GitHub, ou uma camada fina que também sirva Linear? Cuidado com abstração
   antecipando o futuro: começar só com GitHub e ver se alguém pede o resto.
-- **O que acontece com o `CHECKLIST.md`.** Com issues ele perde as três seções que espelham pastas
-  (`Decidido`, `Em andamento`, `Entregue`, desde a `0.14.0`); `Fundação` e `Backlog` não têm
-  equivalente em issue e são o que sobraria.
+- **O que acontece com o `ROADMAP.md`.** É o que sobrou do índice: a lista do que ainda não tem
+  arquivo. Com issues, `Próximas` e `Backlog` mapeiam em labels (`needs-triage` cobre o segundo),
+  e o arquivo deixaria de existir — ou sobrevive, e aí é governança em duas mídias, que é o
+  gatilho de revisão do lema.
 
 ## Relação com as outras demandas
 
 - **Habilita** [governança em issues neste repositório](governanca-em-issues-neste-repo.md), que
   deve consumir esta opção em vez de customizar por fora — este repositório vende o método e não
   pode divergir dele em silêncio.
-- **Trocaria o mecanismo** de [o índice envelhece sem avisar](../specs/concluidas/o-indice-envelhece-sem-avisar.md),
-  entregue na `0.14.0`, por nenhum: o passo 5 não teria dois conjuntos para comparar. Isso **não é
-  o problema resolvido** — é o problema ficando indetectável. Quem ficar em arquivo continua com o
-  passo 5, e a entrevista precisa decidir se as duas mídias coexistem na mesma skill.
+- **Não toca mais** [o índice envelhece sem avisar](../specs/concluidas/o-indice-envelhece-sem-avisar.md),
+  entregue na `0.14.0`. O mecanismo daquela demanda já saiu por outra via, e a decisão de mídia
+  deixou de ter relação com ele.
 - **Não toca a classe B.** Número e veredito no corpo da issue apodrecem igual, e sem `grep` no
   repositório remedir fica mais difícil. O Matt ataca isso evitando afirmação perecível
   (`AGENT-BRIEF.md`: "Don't reference file paths — they go stale"); o aicf ataca instrumentando-a.
   São estratégias diferentes para o mesmo problema, e a migração não dispensa nenhuma das duas.
-- **Bloqueia** [a conferência do índice vira script](a-conferencia-do-indice-vira-script.md)
-  enquanto estiver em curso: um script que compara seções com pastas não se desenha sem saber se
-  as pastas continuam existindo.
+- **Não bloqueia mais** [a conferência do índice vira script](../specs/concluidas/a-conferencia-do-indice-vira-script.md):
+  aquela demanda foi cancelada, porque a comparação que ela scriptaria deixou de existir.

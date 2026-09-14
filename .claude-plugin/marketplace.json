@@ -9,7 +9,7 @@
     {
       "name": "aicf",
       "source": "./",
-      "description": "Governança de projeto para desenvolver com agentes: a estrutura que sustenta o projeto (PRD, checklist, demandas versionadas) e o ciclo que leva cada demanda da ideia ao registro do que foi feito.",
+      "description": "Governança de projeto para desenvolver com agentes: a estrutura que sustenta o projeto (PRD, roadmap, demandas versionadas) e o ciclo que leva cada demanda da ideia ao registro do que foi feito.",
       "category": "engineering",
       "keywords": [
         "workflow",

@@ -1,6 +1,6 @@
 ---
 name: setup
-description: Cria a base de governança de um projeto novo — docs/projeto/ com PRD e checklist, as pastas de intents e specs e o CLAUDE.md raiz — e, se o usuário quiser, os padrões de engenharia. Rodar uma vez, no começo do projeto.
+description: Cria a base de governança de um projeto novo — docs/projeto/ com PRD e roadmap, as pastas de intents e specs e o CLAUDE.md raiz — e, se o usuário quiser, os padrões de engenharia. Rodar uma vez, no começo do projeto.
 disable-model-invocation: true
 ---
 
@@ -67,7 +67,7 @@ AGENTS.md -> CLAUDE.md          # link simbólico
 README.md                       # se ainda não existir
 docs/projeto/
 ├── PRD.md
-├── CHECKLIST.md
+├── ROADMAP.md
 ├── intents/
 │   ├── .gitkeep
 │   └── backlog/.gitkeep
@@ -81,7 +81,7 @@ Os templates estão em `templates/` dentro desta skill:
 | ------------------------ | ----------------------------------------------- |
 | `templates/claude-md.md` | `CLAUDE.md` (raiz)                              |
 | `templates/prd.md`       | `docs/projeto/PRD.md`                           |
-| `templates/checklist.md` | `docs/projeto/CHECKLIST.md`                     |
+| `templates/roadmap.md`   | `docs/projeto/ROADMAP.md`                       |
 | `templates/readme.md`    | `README.md` (raiz)                              |
 | `templates/preferencias.md` | conforme a resposta acima — ver abaixo       |
 
@@ -96,7 +96,7 @@ Projeto que já tem código também tem a parte do `CLAUDE.md` que se deduz dele
 convenções —, e essa parte não é deste setup: sugerir `/init` numa sessão aberta com
 `CLAUDE_CODE_NEW_INIT=1` no ambiente (`CLAUDE_CODE_NEW_INIT=1 claude` — é variável do processo,
 não liga de dentro da sessão), que explora o repositório com subagente e apresenta uma proposta
-antes de escrever qualquer arquivo. O setup segue dono da governança: PRD, checklist,
+antes de escrever qualquer arquivo. O setup segue dono da governança: PRD, roadmap,
 `intents/`, `specs/`. Num projeto sem código não há o que deduzir, e nada muda.
 
 ## `AGENTS.md` como link simbólico
@@ -145,4 +145,4 @@ recebe apenas o nome da variável.
    — em vez de supor.
 3. Dizer que o mapa do ciclo está em `/aicf:workflow-demanda`, e que a primeira demanda pode
    começar por `/aicf:criar-spec`.
-4. Sugerir `/aicf:criar-prd` como primeira coisa — é do PRD que sai o checklist inicial.
+4. Sugerir `/aicf:criar-prd` como primeira coisa — é do PRD que sai o roadmap inicial.

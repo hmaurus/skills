@@ -2,7 +2,7 @@
 
 ## O que é
 
-Plugin de skills para Claude Code que cuida da governança e do planejamento macro de um projeto de software: PRD, checklist de entregas e demandas versionadas, e o ciclo que leva cada demanda da ideia ao registro do que foi feito.
+Plugin de skills para Claude Code que cuida da governança e do planejamento macro de um projeto de software: PRD, roadmap e demandas versionadas, e o ciclo que leva cada demanda da ideia ao registro do que foi feito.
 
 Este repositório é a fonte editável do plugin, publicado no marketplace `aicodingflow`.
 

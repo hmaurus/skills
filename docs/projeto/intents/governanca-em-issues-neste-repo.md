@@ -12,17 +12,12 @@ branch e PR. Abrir uma issue são dois cliques. Se aluno e usuário devem poder 
 sugerir ajuste — e devem —, o `.md` é a barreira, não o meio. Hoje a governança é escrita só pelo
 mantenedor por construção, não por escolha.
 
-**2. O índice é mantido à mão.** O `CHECKLIST.md` precisa espelhar o que existe em `intents/`,
-`specs/` e `specs/concluidas/` — `docs/adr/` não ganhou espelho, por decisão da `0.15.0`, em que
-ADR passou a ser artefato do `/domain-modeling`. A deriva descrita em
-[o índice envelhece sem avisar](../specs/concluidas/o-indice-envelhece-sem-avisar.md) foi mitigada
-na `0.14.0` pelo passo 5, que enumera os três pares — mas **mitigada, não dissolvida**: o passo
-depende de o fechamento rodar. Com issues não haveria ritual a rodar, e é aqui que o argumento
-precisa de cuidado: a lista de issues é gerada, mas **os labels que a alimentam são mantidos à
-mão**, e label errado não tem contra o que ser conferido. O ganho desta demanda não é "resolve a
-classe A" nem "torna o mecanismo desnecessário" — é trocar um erro detectável por ritual por um
-erro menos provável e invisível. Se isso compensa **neste** repositório, cujo diferencial declarado
-é a contribuição de fora, é o que a entrevista decide.
+**2. O índice deixou de ser argumento.** Este item dizia que o `CHECKLIST.md` era mantido à mão e
+que as issues gerariam a lista sozinhas. O índice derivado saiu do método inteiro em
+[o `CHECKLIST.md` sai do método](../specs/concluidas/o-checklist-sai-do-metodo.md): hoje a pasta é
+a única fonte, e `head -qn1 docs/projeto/specs/*.md` gera a lista dos dois lados. Não há mais índice
+manual a trocar por índice gerado, e o que sobra a favor das issues é o item 1 — a contribuição de
+fora —, que é o diferencial declarado deste repositório e sempre foi o argumento forte.
 
 ## Depende de outra demanda
 
@@ -47,8 +42,9 @@ que a demanda diz querer evitar.
   `git clone`. É o conflito direto com o lema *"quem precisa saber é o repositório"*.
 - **O que acontece com o que já está em `specs/concluidas/`?** Migrar, deixar como arquivo morto,
   ou conviver.
-- **O `CHECKLIST.md` sobrevive?** Ele cobre mais que demandas — tem a seção Fundação. Talvez vire
-  só isso.
+- **O `ROADMAP.md` sobrevive?** É o que sobrou: a lista do que ainda não tem arquivo. Com issues,
+  `Próximas` e `Backlog` viram labels — ou o arquivo fica, e a governança passa a morar em duas
+  mídias.
 
 ## Item obrigatório: tirar as referências ao projeto privado
 

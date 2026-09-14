@@ -7,7 +7,7 @@ disable-model-invocation: true
 # Criar o PRD por entrevista
 
 O PRD responde o que nenhuma linha de código responde: para quem o produto existe, o que ele não
-vai fazer, e o que conta como sucesso. É o documento do qual sai o primeiro checklist.
+vai fazer, e o que conta como sucesso. É o documento do qual sai o primeiro roadmap.
 
 Rodar **fora do plan mode**: o passo final grava arquivo.
 
@@ -63,9 +63,9 @@ Datar a última revisão no topo: o PRD é vivo, e saber quando parou de ser rev
 ## Ao terminar
 
 1. Mostrar o PRD e pedir revisão antes de considerá-lo fechado.
-2. **Propor tirar dele o primeiro `CHECKLIST.md`** — cada coisa que a proposta exige vira uma
-   linha, em `Fundação` ou `Backlog` conforme a certeza; o que precisar de contexto vira arquivo
-   em `intents/`, e aí a linha entra em `Decidido`.
+2. **Propor tirar dele o primeiro `ROADMAP.md`** — cada coisa que a proposta exige vira uma
+   linha, em `Próximas` ou `Backlog` conforme a certeza; o que precisar de contexto vira arquivo
+   em `intents/`, e aí **a linha sai** — quem tem arquivo não tem linha.
 3. Se apareceu vocabulário já ambíguo — dois nomes para a mesma coisa, ou o mesmo nome para duas
    —, sugerir `domain-modeling` (Matt Pocock) para gravar o glossário em `CONTEXT.md`, ao lado do
    PRD e não dentro dele.

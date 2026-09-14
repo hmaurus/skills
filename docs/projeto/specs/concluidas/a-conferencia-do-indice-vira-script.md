@@ -1,6 +1,6 @@
 # A conferência do índice vira script, e a skill encolhe
 
-Processo — entrevista: a definir · implementação: a definir
+Processo — entrevista: nenhuma · implementação: nenhuma — cancelada
 
 ## Problema
 
@@ -23,14 +23,14 @@ A instrução em prosa tem dois custos que o script não tem:
 
 ## Por que agora, e por que não antes
 
-A intent original ([o índice envelhece sem avisar](../specs/concluidas/o-indice-envelhece-sem-avisar.md))
+A intent original ([o índice envelhece sem avisar](o-indice-envelhece-sem-avisar.md))
 tinha isso como **direção 4** e descartou: hook mora no projeto que consome o plugin, então o aicf
 teria que gerar e manter um script lá, e a lista fechada em prosa cobria a classe A sem código
 nenhum. O descarte foi certo para aquela decisão. Duas coisas mudaram depois:
 
 1. **O custo em linhas ficou medido.** O `fechar-demanda` cresceu 23% naquela versão — de 106 para
    130 linhas, já depois de uma poda de 7. Na hora do descarte, "mais pesada" era estimativa.
-2. **A semântica virou contrato.** O [ADR 0002](../../adr/0002-conferencia-do-indice-por-inclusao.md)
+2. **A semântica virou contrato.** O [ADR 0002](../../../adr/0002-conferencia-do-indice-por-inclusao.md)
    fixou que a conferência é de inclusão num sentido só, com `Fundação` e `Backlog` fora. Isso é
    especificação executável — antes dele, um script teria que adivinhar a regra que a prosa ainda
    estava descobrindo.
@@ -68,8 +68,26 @@ a comparação *e* mandando rodar o script, não houve poda, houve duplicação.
 
 ## Relação com as outras demandas
 
-- **Depende de** [escolher entre arquivos e issues](escolher-entre-arquivos-e-issues.md) não estar
+- **Depende de** [escolher entre arquivos e issues](../../intents/escolher-entre-arquivos-e-issues.md) não estar
   em curso ao mesmo tempo: se a governança puder morar em issues, o script conferiria pares que
   talvez não existam mais. Fazer as duas em paralelo é retrabalho garantido.
-- **Encolhe** o arquivo que [a entrada de quem chega](a-entrada-de-quem-chega.md) vai ter que
+- **Encolhe** o arquivo que [a entrada de quem chega](../../intents/a-entrada-de-quem-chega.md) vai ter que
   descrever para iniciante, o que ajuda aquela demanda — mas não a bloqueia.
+
+## Relatório de implementação (2026-09-14)
+
+- **Status** — **cancelada, não implementada.** O objeto desapareceu antes da entrevista.
+- **Causa** — esta demanda existia para transformar em script a conferência do passo 5 do
+  `/aicf:fechar-demanda`: comparar três seções do `CHECKLIST.md` com três pastas. A demanda
+  [o `CHECKLIST.md` sai do método](o-checklist-sai-do-metodo.md) removeu o índice derivado
+  inteiro. Sem duas fontes não há comparação — nem em prosa, nem em script.
+- **O que fica** — o diagnóstico continua válido e vale além desta demanda: **prosa que descreve
+  uma operação sem julgamento é código disfarçado**, e cobra contexto em toda execução mais uma
+  tradução a cada uso. O que mudou é que, aqui, a resposta certa não era escrever o código — era
+  remover a operação.
+- **Escopo efetivo** — nenhum arquivo do plugin foi alterado por esta demanda. As linhas do passo 5
+  saíram pela outra: `wc -l < skills/fechar-demanda/SKILL.md` deu 130 antes e 115 depois.
+- **Lições** — a intent registrava "**depende de** [escolher entre arquivos e issues] não estar em
+  curso ao mesmo tempo", pelo motivo certo: um script que compara seções com pastas não se desenha
+  sem saber se as pastas continuam existindo. A dependência estava certa e o prognóstico foi curto
+  — não eram as pastas que iam sumir, era o índice.

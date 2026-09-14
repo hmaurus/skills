@@ -32,9 +32,9 @@ Continuar até não sobrar decisão em aberto, e só então escrever.
 
 Vai em `docs/projeto/specs/<nome-em-kebab-case>.md`. Se a demanda já tem arquivo em
 `docs/projeto/intents/`, a spec é esse arquivo: `git mv` para `specs/` e reescrever o conteúdo
-— o nome fica, o histórico acompanha, nada sobra em `intents/`. No `CHECKLIST.md`, a linha da
-demanda acompanha o arquivo: sai de `Decidido` e entra em `Em andamento`; spec que nasce direto em
-`specs/` ganha linha nova ali. Sem `docs/projeto/`, perguntar onde gravar em vez de inventar pasta.
+— o nome fica, o histórico acompanha, nada sobra em `intents/`. Se a demanda ainda era uma linha
+do `ROADMAP.md`, **a linha sai**: quem tem arquivo não tem linha. Sem `docs/projeto/`, perguntar
+onde gravar em vez de inventar pasta.
 
 - **Problema** — o que está errado hoje, do ponto de vista de quem usa
 - **Solução** — o que passa a existir, na mesma linguagem

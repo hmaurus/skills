@@ -27,14 +27,12 @@ não se repete** — o `subagent-driven-development` termina com revisão do bra
 outra é pagar duas vezes pela mesma leitura; o relatório declara em uma linha, na Validação, qual
 passo cobriu qual exigência.
 
-## Os cinco passos
+## Os quatro passos
 
 1. **Relatório** no arquivo da demanda. Se a demanda não tinha arquivo, criar agora.
 2. **Mover** para `specs/concluidas/`, e corrigir os links relativos que apontavam para o
    arquivo — `grep -rn "<nome-do-arquivo>" --include="*.md" .` acha todos.
-3. **Marcar `- [x]`** no checklist: a linha sai de `Em andamento` e entra em `Entregue` —
-   demanda que nasceu já no fechamento entra direto em `Entregue`.
-4. **Reler o próprio relatório e os achados da revisão de código procurando o que vale além
+3. **Reler o próprio relatório e os achados da revisão de código procurando o que vale além
    desta demanda** — decisão que outra sessão vai reencontrar, armadilha que vai morder de novo,
    ID externo — e promover, porque ninguém abre demanda concluída procurando informação:
 
@@ -57,21 +55,10 @@ passo cobriu qual exigência.
    a olhar o que de lá saiu de validade e o tamanho: ele é lido inteiro em toda sessão, o alvo que a documentação do Claude
    Code publica é abaixo de 200 linhas por arquivo, e `/doctor` propõe cortes do que o agente já
    deduz do próprio código.
-5. **Conferir o índice — enumerando, não julgando se está em dia.** No layout padrão, sob
-   `docs/projeto/`, três pares seção↔pasta: `Decidido`↔`intents/`, `Em andamento`↔`specs/`,
-   `Entregue`↔`specs/concluidas/`.
-
-   **A conferência corre num sentido só: todo arquivo da pasta tem linha na seção.** Arquivo sem
-   linha é a falta a corrigir — inclusive o item entregue que foi apagado em vez de movido. Linha
-   sem arquivo é legítima e comum: demanda que coube numa linha e nunca virou arquivo. **Nunca
-   apagar linha por não achar arquivo.** `Fundação` e `Backlog` não têm pasta e ficam fora.
-
-   **E a saída dos passos 1 a 4 deste mesmo ritual** — ADR, regra, skill ou doc de referência que
-   o passo 4 acabou de criar entra como link no item de `Entregue` desta demanda; não tendo gerado
-   nada, o registro diz isso.
-
-   Por fim, **o que esta demanda escreveu fora de `docs/projeto/`** — código, doc de referência,
-   `.claude/rules/` — criou item novo no checklist ou tornou algum obsoleto? Ajustar inline.
+4. **Fechar o que este ritual abriu.** A saída dos passos 1 a 3 — ADR, regra, skill ou doc de
+   referência que o passo 3 acabou de criar — entra como link no relatório desta demanda; não
+   tendo gerado nada, o relatório diz isso. E o que esta demanda escreveu fora de `docs/projeto/`
+   criou item novo no `ROADMAP.md`, ou tornou algum obsoleto? Ajustar inline.
 
 O fechamento vai num commit próprio, separado do commit de código; quando o processo escolhido já
 commitou por conta própria, cobre só o registro. Tarefa pequena (fix trivial, copy, renomeação)
@@ -81,10 +68,8 @@ e o arquivo vai direto para `specs/concluidas/`. Ao final, avaliar o peso do con
 
 ## Sessão que acaba antes da demanda
 
-Contexto no fim com a demanda aberta também é fechamento, parcial: o arquivo fica em `specs/`,
-a linha segue em `Em andamento` e o checklist não é marcado, e o que a sessão descobriu vai para
-o próprio arquivo sob
-`## Estado em andamento` — decisão tomada, caminho descartado com o motivo, onde parou e o
+Contexto no fim com a demanda aberta também é fechamento, parcial: o arquivo fica em `specs/`
+e o que a sessão descobriu vai para ele sob `## Estado em andamento` — decisão tomada, caminho descartado com o motivo, onde parou e o
 próximo passo. **Se a frase serve para qualquer demanda, ela é do `CLAUDE.md`, não do arquivo.**
 O teste é a retomada caber em `continue a demanda <arquivo>`. Commit próprio; no fechamento
 definitivo o bloco some, absorvido pelo relatório.
@@ -107,7 +92,7 @@ resolvida **de fato**, não como foi planejada — registrar divergências plano
 - **Escopo efetivo** — se o fix afetou mais coisas que a demanda previa
 - **Lições** (opcional) — armadilhas, hipóteses erradas, diffs dev/prod
 
-Vale aqui a regra do passo 4: número e afirmação de estado entram com o teste que os refuta — é
+Vale aqui a regra do passo 3: número e afirmação de estado entram com o teste que os refuta — é
 neste bloco que a medição congelada em prosa costuma nascer.
 
 ## A linha `Processo`

@@ -1,5 +1,45 @@
 # Changelog
 
+## 0.16.0 — 2026-09-14
+
+- **O índice derivado sai do método: um item, um lugar.** O `CHECKLIST.md` tinha três seções
+  espelhando três pastas, e toda demanda existia duas vezes — arquivo na pasta, linha na seção. O
+  método defendia a duplicação como detecção de erro, e o argumento estava invertido: o
+  [ADR 0002](docs/adr/0002-conferencia-do-indice-por-inclusao.md) decidiu que a conferência corre
+  **num sentido só**, o que não é partida dobrada — é a declaração formal de que a pasta é a fonte e
+  o checklist uma cópia mantida à mão. Cópia manual não detecta erro na fonte; ela fabrica uma
+  classe de erro nova e depois gasta ritual achando o erro que criou. A regra que muda cabe em três
+  palavras: onde se lia *"a linha vira ponteiro"*, agora **a linha sai** — enquanto a demanda não
+  tem arquivo ela é uma linha no roadmap; quando vira arquivo, a pasta é o registro inteiro, e
+  nunca as duas coisas. O índice que se perde volta por
+  `head -qn1 docs/projeto/intents/*.md docs/projeto/specs/*.md | sed 's/^# //'`, gerado e sempre
+  correto, com os títulos de verdade em vez dos slugs.
+- **`CHECKLIST.md` → `ROADMAP.md`, com as duas seções que nunca tiveram pasta.** `Próximas` (o que
+  já foi decidido e ainda não tem arquivo, onde entram as linhas que eram `Fundação`) e `Backlog`
+  (o que ainda não é certeza). `Decidido`, `Em andamento` e `Entregue` não têm substituto porque não
+  precisavam existir. O nome mudou de propósito: num arquivo chamado `CHECKLIST` alguém
+  eventualmente recria uma seção `Entregue`, porque é o que checklists fazem. Arquivo próprio e não
+  seção do `PRD.md`, por ritmo de escrita oposto — em 44 commits o checklist mudou 6 vezes e o PRD
+  mudou 1, a de criação (`git log --oneline -- docs/projeto/PRD.md | wc -l`).
+- **O `fechar-demanda` perde um passo inteiro e encolhe 15 linhas** — de 130 para 115
+  (`wc -l < skills/fechar-demanda/SKILL.md`). O passo 3 (`- [x]`, mover a linha entre seções) morre:
+  sem ponteiro não há o que marcar. O passo 5 vira 4 e cai de 16 para 4 linhas — sai a conferência
+  dos três pares, ficam as duas partes que nunca foram sobre o checklist: o ADR recém-criado entra
+  como link no relatório da própria demanda, e a pergunta sobre item novo passa a olhar o roadmap.
+  São cinco passos que viram quatro, em todo projeto que usa o plugin.
+- **A demanda "a conferência do índice vira script" foi cancelada, não implementada.** Ela existia
+  para transformar aquela comparação em código; sem duas fontes não há comparação, nem em prosa nem
+  em script. O diagnóstico dela continua valendo em geral — *prosa que descreve operação sem
+  julgamento é código disfarçado* —, mas aqui a resposta certa era remover a operação. Fica
+  arquivada em `docs/projeto/specs/concluidas/` com o relatório do cancelamento.
+- **Migração de projeto que já usa o plugin**, à mão e em três passos, porque uma skill de migração
+  seria código novo para uma operação única por projeto: (1) conferir uma última vez que todo
+  arquivo de `intents/`, `specs/` e `specs/concluidas/` tem linha no `CHECKLIST.md` — o que faltar
+  não existe em lugar nenhum e precisa ser criado como arquivo; (2) copiar `Fundação` e `Backlog`
+  para um `ROADMAP.md` novo, `Fundação` virando linhas de `Próximas`; (3) apagar o `CHECKLIST.md`.
+  As seções `Decidido`, `Em andamento` e `Entregue` não migram — a pasta já as contém, e o histórico
+  de entregas vive em `specs/concluidas/` e no `CHANGELOG.md` do projeto.
+
 ## 0.15.0 — 2026-09-09
 
 - **ADR passa a ser artefato do `/domain-modeling` (Matt Pocock); a governança fica só com o gatilho.** O aicf tinha herdado o conceito de ADR por assimilação — os três critérios da tabela do passo 4 são cópia literal dos dele — e depois desenvolveu um formato próprio muito mais pesado: os dois ADRs deste repositório têm quatro seções e ~57 linhas cada (`wc -l docs/adr/*.md`), enquanto o `ADR-FORMAT.md` do Matt prescreve "an ADR can be a single paragraph" com Considered Options e Consequences como seções **opcionais**, usadas só quando a rejeição vale ser lembrada. A frase "podem sair de `/domain-modeling`, quando instalado" prometia uma delegação que nunca aconteceu na prática. Agora formato e numeração são dele, e sem ele instalado o mínimo basta — um parágrafo, imutável. O que a governança fornece é o momento de perguntar "esta demanda produziu decisão difícil de reverter?", que é barato e é o que o `domain-modeling` não cobre: ele é invocado ao modelar domínio, não a cada fechamento.

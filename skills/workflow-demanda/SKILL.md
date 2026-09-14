@@ -14,7 +14,7 @@ livre em qualquer ponto, e o agente propõe a que couber sem esperar autorizaç�
 
 ## O ciclo
 
-**Demanda** (item do checklist, arquivo em `intents/`, ou ideia ainda não registrada) →
+**Demanda** (linha do roadmap, arquivo em `intents/`, ou ideia ainda não registrada) →
 **entrevista**, que produz a spec → **implementação**, que a consome → **fechamento**, que é
 `/aicf:fechar-demanda` — relatório, arquivamento e linha `Processo` vivem lá, e o agente o
 aplica em qualquer caminho. Demanda que já nasceu de entrevista volta à mesa: o agente diz se o
@@ -28,7 +28,7 @@ spec é a demanda pronta para implementar. A pasta diz em qual estado o arquivo 
 
 **Integração e fechamento são coisas diferentes.** _Integração_ é decidir o destino do código —
 merge na base, PR, ou a branch fica. É o último passo da **implementação**, e pertence ao método
-escolhido. _Fechamento_ é o registro da demanda — relatório, `specs/concluidas/`, checklist,
+escolhido. _Fechamento_ é o registro da demanda — relatório, `specs/concluidas/`,
 promoção de conhecimento. É `/aicf:fechar-demanda`, e nada além. **O método fecha o código, a
 governança fecha a demanda — e a segunda só começa depois da primeira.**
 
@@ -53,7 +53,7 @@ implementação é escolha nova.
 ```
 docs/projeto/
 ├── PRD.md             # Visão, público, modelo de negócio — o porquê do produto
-├── CHECKLIST.md       # Índice: cada seção espelha uma pasta abaixo (+ Fundação e Backlog)
+├── ROADMAP.md         # O que ainda não tem arquivo: Próximas e Backlog
 ├── intents/
 │   ├── <intent>.md        # Decidida, ainda não entrevistada
 │   └── backlog/           # Ainda não está claro que será feita
@@ -61,6 +61,11 @@ docs/projeto/
     ├── <spec>.md          # Pronta para implementar
     └── concluidas/        # Arquivadas, com relatório
 ```
+
+**Um item, um lugar.** Enquanto a demanda não tem arquivo, ela é uma linha no `ROADMAP.md`;
+quando vira arquivo, a pasta é o registro inteiro e **a linha sai do roadmap**. Nada aponta para
+nada, e não sobra índice para envelhecer — o que tem arquivo se lê da pasta com
+`head -qn1 docs/projeto/intents/*.md docs/projeto/specs/*.md | sed 's/^# //'`.
 
 Só governança de demanda entra aí. Doc que descreve o mundo em vez de um trabalho a fazer —
 configuração, ID externo, decisão de marca, número de negócio, aprendizado — vai para
@@ -127,6 +132,5 @@ critério é a regra poder falhar sem ninguém perceber.
 Demanda grande demais para uma sessão é **uma spec só**, com as entregas em checkboxes no corpo:
 a sessão faz o que cabe e fecha parcial — `/aicf:fechar-demanda` cobre o caso — e a próxima
 continua pelo mesmo arquivo. Várias demandas independentes que andam juntas são **specs
-separadas**, agrupadas sob um subtítulo dentro de `Em andamento` — seção nova quebraria os pares
-que o fechamento confere; a relação mora na lista, não em
-campo de cada spec nem em subpasta. O _porquê_ das decisões mora no arquivo, não na conversa.
+separadas**, e a relação mora na prosa de cada uma — "bloqueia", "habilita", "depende de",
+nomeando o arquivo do outro lado. Não em subpasta, e não numa lista à parte, que envelheceria. O _porquê_ das decisões mora no arquivo, não na conversa.

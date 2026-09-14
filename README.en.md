@@ -2,7 +2,7 @@
 
 _[Versão em português](README.md)_
 
-A starter kit for running a software project with Claude Code: the documents that hold a project together — vision, delivery checklist, versioned work items — and the cycle that takes each one from raw idea to a record of what was actually done. It covers **governance** and **macro planning**, which engineering skill collections leave out, and it is **agnostic** about the implementation path: governance is the same whether a work item is interviewed and implemented through the aicf path, through Superpowers, or through Matt Pocock's skills.
+A starter kit for running a software project with Claude Code: the documents that hold a project together — vision, roadmap, versioned work items — and the cycle that takes each one from raw idea to a record of what was actually done. It covers **governance** and **macro planning**, which engineering skill collections leave out, and it is **agnostic** about the implementation path: governance is the same whether a work item is interviewed and implemented through the aicf path, through Superpowers, or through Matt Pocock's skills.
 
 > **Written in Portuguese.** The skills instruct the agent in pt-BR and the file conventions mix the playbook's terms with Portuguese names (`intents/` and `specs/` for the two states of a work item, `backlog/`, `concluidas/` for completed). They work fine in an English-speaking session — Claude reads the instructions and answers you in whatever language you write — but if you want the artifacts named in English, fork and translate.
 
@@ -12,8 +12,8 @@ Skill collections like [Superpowers](https://github.com/obra/superpowers) and [M
 
 That trail, though, is **per work item** and written **before** execution. Three things fall outside it, and neither collection declares them somebody else's problem — they simply start at an idea that is already formed and stop at the commit or the merge:
 
-- **The product level.** Neither has the document stating what is being built, for whom, and what was ruled out by decision — nor the single list of what shipped and what is missing. Twenty well-written specs do not answer "where does the project stand".
-- **Macro planning.** When a request is too big for one spec, Superpowers' `brainstorming` helps decompose it into sub-projects and works on the first one; the others stay in the conversation. Here, an idea that has not matured yet gets its own file, a set of work items that move together shows up grouped in the checklist, and what may never be done has a place to wait without getting lost.
+- **The product level.** Neither has the document stating what is being built, for whom, and what was ruled out by decision — nor the record of what shipped and what is missing. Twenty well-written specs do not answer "where does the project stand".
+- **Macro planning.** When a request is too big for one spec, Superpowers' `brainstorming` helps decompose it into sub-projects and works on the first one; the others stay in the conversation. Here, an idea that has not matured yet gets its own file, each work item declares in its own prose what it blocks and what it depends on, and what may never be done has a place to wait without getting lost.
 - **The afterwards.** A spec and a plan say what was intended. What actually shipped, where delivery diverged from the plan and why, only exists if someone writes it at closing time. Matt's `implement` ends at the commit and neither closes the ticket nor ticks the acceptance criteria; Superpowers lists the decisions it made on its own in the final message and deletes the working folder, because from there on git history is the record. `aicf` asks for a report in the work item's file, and that is where the plan×delivery divergence gets written down.
 
 `aicf` is that layer, and the same layer applies to any implementation path. It works two ways:
@@ -34,7 +34,7 @@ On an existing project, start with `/aicf:workflow-demanda`, which explains the 
 
 ## Starting a new project
 
-**1. `/aicf:setup`** — creates `docs/projeto/` with a PRD and checklist, the `intents/` and `specs/` folders, and the root `CLAUDE.md`. It asks little: the name, a sentence or two about the project, where the engineering defaults live, and which tools you already use.
+**1. `/aicf:setup`** — creates `docs/projeto/` with a PRD and roadmap, the `intents/` and `specs/` folders, and the root `CLAUDE.md`. It asks little: the name, a sentence or two about the project, where the engineering defaults live, and which tools you already use.
 
 **2. Fill in `PRD.md`.** It ships with the sections and a prompt under each. The one that pays off most is **"ruled out, by decision"** — it is what keeps the same argument from coming back six months later.
 
@@ -45,7 +45,7 @@ On an existing project, start with `/aicf:workflow-demanda`, which explains the 
 
 **What does not work is running the PRD through the work-item cycle.** Not because it is a document — a spec handles documentation changes fine. It is that a spec describes a **change**, with a scope and a "done" state, while the PRD describes the **product**, and gets revised whenever a decision contradicts it. Wrapping one in the other yields an empty spec — its interview would debate how to write the file, while the questions that matter, audience and what is ruled out, stay unanswered — plus a closing ritual asking for a report, archiving, and a lint check on a `.md`.
 
-**3. Derive `CHECKLIST.md` from the PRD.** Every thing the product needs becomes one line. What fits in a line stays there; what needs context becomes a file under `intents/`, and the line becomes a pointer to it.
+**3. Derive `ROADMAP.md` from the PRD.** Every thing the product needs becomes one line. What fits in a line stays there; what needs context becomes a file under `intents/`, and **the line goes away** — what has a file has no line, and no index is left to go stale.
 
 **4. First work item.** `/aicf:criar-spec` to mature it, `/aicf:implementar-spec` to execute and close. Both also answer a plain-language request — "interview me about X", "implement spec Y" — because the agent loads them on its own when it recognizes the intent. From there the cycle repeats.
 
@@ -53,7 +53,7 @@ On an existing project, start with `/aicf:workflow-demanda`, which explains the 
 
 | Skill                    | When                    | What it does                                                                    |
 | ------------------------ | ----------------------- | -------------------------------------------------------------------------------- |
-| `/aicf:setup`            | once, on a new project  | Creates `docs/projeto/` with a PRD and checklist, the `intents/` and `specs/` folders, the root `CLAUDE.md` (with `AGENTS.md` symlinked to it) and a `README.md` — plus engineering defaults, if you want them |
+| `/aicf:setup`            | once, on a new project  | Creates `docs/projeto/` with a PRD and roadmap, the `intents/` and `specs/` folders, the root `CLAUDE.md` (with `AGENTS.md` symlinked to it) and a `README.md` — plus engineering defaults, if you want them |
 | `/aicf:criar-prd`        | start of the project    | Interviews you about the product and writes `PRD.md` — run it again when a decision contradicts it |
 | `/aicf:workflow-demanda` | the map                 | The cycle, the paths available at each phase, and the governance conventions      |
 | `/aicf:criar-spec`       | interview phase         | Interrogates until no open decision is left, then writes the spec into the repo, with a suggested implementation path |
@@ -89,7 +89,7 @@ You can interview one way and implement another. The work item records which was
 ```
 docs/projeto/            # project
 ├── PRD.md               # why the product exists: vision, audience, model
-├── CHECKLIST.md         # index: three sections mirror the folders below
+├── ROADMAP.md           # what has no file yet: Próximas and Backlog
 ├── intents/
 │   ├── <intent>.md      # decided, not yet interviewed
 │   └── backlog/         # not yet certain it will be done
