@@ -26,7 +26,7 @@ prescrevem, ele para de comer a própria comida — e a divergência vira exceç
 vez de recurso.
 
 Por isso esta demanda **não é customização local**: ela consome a opção criada por
-[escolher entre arquivos e issues](escolher-entre-arquivos-e-issues.md), e só deve ser
+[escolher entre arquivos e issues](../specs/escolher-entre-arquivos-e-issues.md), e só deve ser
 implementada depois dela. Adotar issues aqui antes de a skill suportar issues seria justamente o
 que a demanda diz querer evitar.
 

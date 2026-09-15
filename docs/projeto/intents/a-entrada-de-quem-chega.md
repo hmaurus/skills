@@ -70,6 +70,38 @@ Dividir a documentação por **quem precisa dela**, não por assunto:
   quando envelhecer. Isso pesa a favor de manter a apresentação dentro da skill, e a pergunta
   passa a ser só o custo de contexto.
 
+## O que a entrevista de [escolher entre arquivos e issues](../specs/escolher-entre-arquivos-e-issues.md) trouxe para cá
+
+Levantado em 2026-09-15, ao entrevistar aquela demanda. Quatro achados, e o primeiro é de ordem.
+
+**Aquela demanda vem primeiro.** Ela acrescenta ao `/aicf:setup` uma pergunta conceitual — arquivo
+ou issue — que precisa ser explicada para quem não sabe o que é nenhum dos dois, e mexe no
+`README.md` (a árvore de `docs/projeto/` deixa de ser a única estrutura) e no `README.en.md` (os
+labels `aicf:*`). Ela muda **o que** o setup pergunta; esta decide **como** isso é apresentado, e
+precisa da lista final de perguntas para desenhar a abertura. Na ordem inversa, a apresentação nasce
+desatualizada — e a pergunta nova é exatamente o tipo de coisa que a Restrição abaixo proíbe virar
+muro.
+
+**O sintoma 4 fica mais difícil do que está escrito.** A divisão proposta — duas skills o usuário
+digita, quatro o agente carrega sozinho — deixa de ser limpa: `criar-spec` e `fechar-demanda` ganham
+uma forma digitável, `/aicf:criar-spec #12`, para adotar issue que já existe. Duas skills passam a
+estar dos dois lados, e a tabela precisa de um eixo que não seja "invocável × não-invocável".
+
+**"Onde ele entra" precisa de conferência de fato, não só de reposicionamento.** A seção diz *"o
+Matt publica spec e tickets no issue tracker"*. É o vocabulário dele — o arquivo se chama
+`issue-tracker.md` mesmo no modo local —, mas induz a conclusão errada de que ele força issues e o
+aicf dá arquivos: `/setup-matt-pocock-skills` oferece markdown local em `.scratch/<feature>/` como
+opção de primeira classe. Quando o aicf passar a oferecer as duas mídias, a frase fica pior, porque
+sugere uma diferença que deixou de existir. O contraste verdadeiro é melhor para nós: **o tracker
+dele é descartável por declaração dele, o registro do aicf é permanente.** A outra afirmação da mesma
+seção foi conferida e está correta — o `implement` termina em "Commit your work to the current
+branch", e `grep -niE "close|label|acceptance|criteria" SKILL.md` nele não devolve nada.
+
+**Um argumento em linguagem comum, que hoje falta.** A adoção de issue faz issue de terceiro virar
+demanda governada no lugar onde nasceu: *alguém abre uma issue no seu repositório e ela vira demanda
+governada, sem você recriar nada*. É mais concreto que "governança" e "planejamento macro", que é o
+que o primeiro parágrafo do `README.md` oferece hoje.
+
 ## Restrição
 
 **A apresentação não pode virar mais um muro.** O defeito diagnosticado é excesso de contexto
