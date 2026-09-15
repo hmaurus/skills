@@ -22,6 +22,8 @@ Este repositório é a fonte editável do plugin, publicado no marketplace `aico
 
 **Afirmação verificável carrega o teste que a refuta.** Número em doc ou em mensagem de commit vem com o comando que o remede; afirmação de estado vem com a condição que a encerra. A forma está no passo 3 do `/aicf:fechar-demanda`. Escrito por causa de dois números errados na mesma mensagem de commit, em 2026-09-09. **Número tirado do histórico do git se pina num commit, não numa data** — "em 44 commits" virou 45 no dia seguinte; `git log --oneline <sha> | wc -l` reproduz para sempre.
 
+**Exemplo vindo de projeto privado entra anonimizado.** Este repositório é público, e a lição nunca depende de qual projeto a produziu: *"num projeto privado que consome estas skills"* basta — sem nome de repositório, domínio de negócio ou caminho de arquivo de lá. Vale em qualquer mídia: doc, ADR, mensagem de commit, issue. Ao citar um caso de origem, `grep -rn '<nome-do-projeto>' --exclude-dir=.git .` antes de commitar, e o que ele achar vira a forma anônima.
+
 **Passo citado por número é ponteiro, e ponteiro envelhece.** Renumerar um passo de skill quebra em silêncio quem cita o número de fora: na `0.16.0` foram quatro referências, uma delas no template que vai para o `CLAUDE.md` de todo projeto novo. Nenhum grep pelo assunto as pega — elas citam o número. Ao mexer na numeração, `grep -rn 'passo [0-9]' --include='*.md' .` antes de fechar.
 
 **Este arquivo é lido inteiro em toda sessão.** O alvo que a documentação do Claude Code publica é abaixo de 200 linhas; regra que só vale para uma parte do código vai para `.claude/rules/<tema>.md` com `paths:` no frontmatter, e procedimento de vários passos vira skill. `/doctor` propõe cortes do que o agente já deduz do código.

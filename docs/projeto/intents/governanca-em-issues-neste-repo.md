@@ -46,31 +46,13 @@ que a demanda diz querer evitar.
   `Próximas` e `Backlog` viram labels — ou o arquivo fica, e a governança passa a morar em duas
   mídias.
 
-## Item obrigatório: tirar as referências ao projeto privado
-
-Quatro documentos já commitados citam pelo nome um repositório **privado** do mantenedor, usado
-como caso de origem. Nenhum traz dado sensível de negócio, mas todos revelam que o repositório
-existe, o nome dele e — num caso — o domínio de que trata:
-
-| Arquivo | O que expõe |
-| --- | --- |
-| `docs/projeto/specs/concluidas/orquestrar-o-framework-escolhido.md` | nome do repo (duas vezes), volume de trabalho |
-| `docs/adr/0001-fronteira-de-fase.md` | nome do repo |
-| `docs/projeto/specs/concluidas/excecao-de-idioma-no-dominio.md` | nome do repo, o domínio, e o caminho de um ADR interno |
-
-As referências são rasas — nomeiam o repositório e um caminho. Removê-las não custa nada ao
-argumento de nenhum dos documentos: em todos, a lição independe de qual projeto a produziu.
-
-**Cuidado:** `docs/adr/0001-fronteira-de-fase.md` é ADR, e a convenção do projeto diz que ADR é
-**imutável**. Anonimizar um nome próprio não reverte decisão nenhuma, mas a entrevista deve
-decidir a forma — edição direta, ou nota no fim, como o padrão de nota já usado em outros ADRs.
-
 ## Regra que nasce daqui, e vale em qualquer mídia
 
 **Exemplo vindo de projeto privado entra anonimizado.** Vale igual em issue e em `.md`, e por isso
-não é argumento contra a migração — é regra de escrita que falta hoje. A intent
-[o índice envelhece sem avisar](../specs/concluidas/o-indice-envelhece-sem-avisar.md) já nasceu sob ela, e é o
-primeiro documento do repositório a segui-la explicitamente.
+não é argumento contra a migração — é regra de escrita, não de mídia. Está na seção `## Registro`
+do `CLAUDE.md` desde
+[anonimizar as referências ao projeto privado](../specs/concluidas/anonimizar-as-referencias-ao-projeto-privado.md),
+a demanda que limpou os três documentos que ainda nomeavam o projeto de origem.
 
 Assumir que a governança é pública **por decisão** torna essa regra mais necessária, não menos:
 o que hoje é descuido isolado vira política.

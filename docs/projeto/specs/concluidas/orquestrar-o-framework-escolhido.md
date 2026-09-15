@@ -8,9 +8,9 @@ Na primeira execução de ponta a ponta com três coleções no mesmo projeto �
 Superpowers na implementação, Matt Pocock disponível —, o agente **pulou o encerramento do
 framework** por ler uma garantia do aicf como exclusão.
 
-O caso: `hmaurus/mh-fin`. Entrevista pelo `/aicf:criar-spec`, implementação pelo
-`superpowers:writing-plans` + `subagent-driven-development` (16 tarefas, 40 commits, 141 testes),
-fechamento pelo `/aicf:fechar-demanda`. O `subagent-driven-development` termina em
+O caso: um projeto privado que consome estas skills. Entrevista pelo `/aicf:criar-spec`,
+implementação pelo `superpowers:writing-plans` + `subagent-driven-development` (16 tarefas,
+40 commits, 141 testes), fechamento pelo `/aicf:fechar-demanda`. O `subagent-driven-development` termina em
 `finishing-a-development-branch` — a skill que **decide o destino do código**: merge na base, PR,
 ou a branch fica. O agente não a rodou, porque o `implementar-spec` diz:
 
@@ -129,8 +129,8 @@ E o passo 3 ganha a avaliação de workspace, na mesma linha em que já decide o
 
 **`domain-modeling`**, no passo 4. A frase atual — "ADR e glossário saem de `/domain-modeling`, que
 o agente invoca em qualquer processo — não depende das skills do Matt" — descreve um comportamento
-que não aconteceu (os dois ADRs do `mh-fin` saíram direto da tabela) e erra o fato: `domain-modeling`
-**é** da coleção do Matt Pocock. Passa a:
+que não aconteceu (os dois ADRs daquele projeto saíram direto da tabela) e erra o fato:
+`domain-modeling` **é** da coleção do Matt Pocock. Passa a:
 
 > ADR e glossário podem sair de `/domain-modeling`, quando instalado; escrever direto pela tabela
 > também serve.

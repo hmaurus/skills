@@ -8,9 +8,10 @@ O aicf é governança: registra o que será feito e o que foi feito, e convive n
 coleções de skills de terceiros (Superpowers, Matt Pocock) que fazem a implementação. Essas
 coleções encadeiam skills entre si, às vezes declarando o encadeamento como obrigatório.
 
-Numa execução real (`hmaurus/mh-fin`), o agente pulou o `finishing-a-development-branch` — passo
-que o `subagent-driven-development` declara `REQUIRED SUB-SKILL` — porque leu uma garantia do aicf
-como exclusão. A demanda foi dada por concluída com o código parado numa branch.
+Numa execução real, num projeto privado que consome estas skills, o agente pulou o
+`finishing-a-development-branch` — passo que o `subagent-driven-development` declara
+`REQUIRED SUB-SKILL` — porque leu uma garantia do aicf como exclusão. A demanda foi dada por
+concluída com o código parado numa branch.
 
 Ao corrigir, apareceu a pergunta que a correção precisava responder: **até onde a governança pode
 mandar num processo que não é dela?** Sem critério, "não interferir no framework" não tem borda —

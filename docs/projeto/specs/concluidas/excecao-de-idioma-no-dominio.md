@@ -1,7 +1,7 @@
 # Exceção de idioma quando o domínio perde na tradução
 
-Processo — entrevista: conversa na sessão do `mh-fin` (2026-09-06), onde a regra nasceu e foi
-aplicada · implementação: aicf-direto.
+Processo — entrevista: conversa na sessão de um projeto privado que consome estas skills
+(2026-09-06), onde a regra nasceu e foi aplicada · implementação: aicf-direto.
 
 ## Problema
 
@@ -18,8 +18,8 @@ português, essa camada é exatamente o que o glossário existe para evitar.
 Hoje quem enfrenta isso decide por gosto, projeto a projeto, sem critério escrito. E decide de
 novo no projeto seguinte.
 
-O caso concreto que originou a demanda está em `hmaurus/mh-fin`:
-`docs/adr/0001-identificadores-em-portugues.md`.
+O caso concreto que originou a demanda é um projeto privado de domínio regulado brasileiro, que
+registrou a escolha num ADR próprio de identificadores em português.
 
 ## Solução
 
