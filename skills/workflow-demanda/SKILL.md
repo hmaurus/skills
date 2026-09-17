@@ -1,6 +1,6 @@
 ---
 name: workflow-demanda
-description: O mapa de uma demanda — ciclo, caminhos de entrevista e implementação, convenções de governança em docs/projeto/. Consultar ao começar, triar ou registrar uma demanda. O fechamento vive em fechar-demanda.
+description: O mapa de uma demanda — ciclo, caminhos de entrevista e implementação, convenções de governança e a mídia do registro (arquivos em docs/projeto/, ou issues do GitHub). Consultar ao começar, triar ou registrar uma demanda. O fechamento vive em fechar-demanda.
 ---
 
 # Workflow de uma demanda
@@ -14,22 +14,23 @@ livre em qualquer ponto, e o agente propõe a que couber sem esperar autorizaç�
 
 ## O ciclo
 
-**Demanda** (linha do roadmap, arquivo em `intents/`, ou ideia ainda não registrada) →
+**Demanda** (registro no estado "decidido" ou "incerto", ou ideia ainda não registrada) →
 **entrevista**, que produz a spec → **implementação**, que a consome → **fechamento**, que é
 `/aicf:fechar-demanda` — relatório, arquivamento e linha `Processo` vivem lá, e o agente o
 aplica em qualquer caminho. Demanda que já nasceu de entrevista volta à mesa: o agente diz se o
 registrado basta ou se vale outra rodada. Pular a entrevista é legítimo quando a demanda já diz
-o suficiente — o arquivo vai de `intents/` para `specs/` como está, e a linha `Processo` registra
-`entrevista: nenhuma`.
+o suficiente — a demanda muda de estado para "pronta para implementar" como está, e a linha
+`Processo` registra `entrevista: nenhuma`.
 
 **Três palavras, uma unidade de trabalho.** _Demanda_ é a coisa a fazer. _Intent_ e _spec_ são
-os dois estados do arquivo que a descreve: intent é a demanda decidida e ainda não entrevistada;
-spec é a demanda pronta para implementar. A pasta diz em qual estado o arquivo está.
+os dois estados do registro que a descreve: intent é a demanda decidida e ainda não entrevistada;
+spec é a demanda pronta para implementar. No modo arquivo, a pasta diz o estado; no modo issue, o
+label.
 
 **Integração e fechamento são coisas diferentes.** _Integração_ é decidir o destino do código —
 merge na base, PR, ou a branch fica. É o último passo da **implementação**, e pertence ao método
-escolhido. _Fechamento_ é o registro da demanda — relatório, `specs/concluidas/`,
-promoção de conhecimento. É `/aicf:fechar-demanda`, e nada além. **O método fecha o código, a
+escolhido. _Fechamento_ é o registro da demanda — relatório, conclusão, promoção de
+conhecimento. É `/aicf:fechar-demanda`, e nada além. **O método fecha o código, a
 governança fecha a demanda — e a segunda só começa depois da primeira.**
 
 **Entrevista e implementação são escolhas independentes. Na entrevista, o caminho é pergunta ao
@@ -50,49 +51,65 @@ implementação é escolha nova.
 
 ## Governança — onde mora o quê
 
+**A mídia do registro é escolha do projeto**, declarada numa linha do `CLAUDE.md`, na seção
+"Processos de desenvolvimento":
+
 ```
-docs/projeto/
-├── PRD.md             # Visão, público, modelo de negócio — o porquê do produto
-├── ROADMAP.md         # O que ainda não tem arquivo: Próximas e Backlog
-├── intents/
-│   ├── <intent>.md        # Decidida, ainda não entrevistada
-│   └── backlog/           # Ainda não está claro que será feita
-└── specs/
-    ├── <spec>.md          # Pronta para implementar
-    └── concluidas/        # Arquivadas, com relatório
+**Mídia do registro:** arquivos em `docs/projeto/`
+**Mídia do registro:** issues (GitHub)
 ```
 
-**Um item, um lugar.** Enquanto a demanda não tem arquivo, ela é uma linha no `ROADMAP.md`;
-quando vira arquivo, a pasta é o registro inteiro e **a linha sai do roadmap**. Nada aponta para
-nada, e não sobra índice para envelhecer — o que tem arquivo se lê da pasta com
-`head -qn1 docs/projeto/intents/*.md docs/projeto/specs/*.md docs/projeto/specs/concluidas/*.md | sed 's/^# //'`.
+**Linha ausente significa arquivo** — compatibilidade com projeto anterior a essa escolha existir.
+As duas receitas, operação por operação, estão em [`references/midia.md`](references/midia.md): é
+de lá que sai todo comando concreto, e é lá que uma terceira mídia entraria como coluna nova.
 
-Só governança de demanda entra aí. Doc que descreve o mundo em vez de um trabalho a fazer —
-configuração, ID externo, decisão de marca, número de negócio, aprendizado — vai para
-`docs/referencias/`, criada quando houver o primeiro arquivo.
+A governança é a mesma nas duas. Quatro estados:
 
-Se o repositório nem tem `docs/projeto/`, perguntar onde gravar em vez de inventar pasta.
+| Estado | Modo arquivo | Modo issue |
+| --- | --- | --- |
+| Incerto — nem se sabe se será feito | `intents/backlog/<nome>.md`, ou linha em `ROADMAP.md` → Backlog | issue aberta, `aicf:backlog` |
+| Decidido, ainda não entrevistado | `intents/<nome>.md`, ou linha em `ROADMAP.md` → Próximas | issue aberta, `aicf:intent` |
+| Pronta para implementar | `specs/<nome>.md` | issue aberta, `aicf:spec` |
+| Concluída | `specs/concluidas/<nome>.md`, com o relatório no fim | issue fechada, com o relatório em comentário |
 
-`intents/` ou `intents/backlog/` se decide por **certeza, não urgência**: `intents/` é o que já
-foi decidido fazer, mesmo que não seja agora; `backlog/` é o que ainda não se sustenta, depende
-de decisão não tomada, ou o usuário nem sabe se quer — ideia que nunca sai de lá é uso legítimo.
-Importa mais quando a ideia surge no meio de outra demanda: registrar o esboço, escolher a pasta
-e voltar imediatamente ao que estava sendo feito.
+**Um item, um lugar.** No modo arquivo, enquanto a demanda não tem arquivo ela é uma linha no
+`ROADMAP.md`; quando vira arquivo, a pasta é o registro inteiro e **a linha sai do roadmap**. No
+modo issue a demanda é **uma issue só, do nascimento ao fechamento** — o label troca, o número não,
+e não existe `ROADMAP.md`. Nos dois casos nada aponta para nada, e não sobra índice para envelhecer.
 
-Um caminho só: todo intent que vai ser feito vira spec — com entrevista ou sem —, e tudo termina
-em `specs/concluidas/`, inclusive o que a entrevista concluiu não fazer.
+O estado se decide por **certeza, não urgência**: decidido é o que já se resolveu fazer, mesmo que
+não seja agora; incerto é o que ainda não se sustenta, depende de decisão não tomada, ou o usuário
+nem sabe se quer — ideia que nunca sai de lá é uso legítimo. Importa mais quando a ideia surge no
+meio de outra demanda: registrar o esboço, escolher o estado e voltar imediatamente ao que estava
+sendo feito.
+
+Um caminho só: toda demanda que vai ser feita vira spec — com entrevista ou sem —, e tudo termina
+concluído, inclusive o que a entrevista concluiu não fazer.
+
+Só governança de demanda entra aí, e isso não muda com a mídia. Doc que descreve o mundo em vez de
+um trabalho a fazer — configuração, ID externo, decisão de marca, número de negócio, aprendizado —
+vai para `docs/referencias/`, criada quando houver o primeiro arquivo. **PRD, ADR e `CONTEXT.md`
+ficam em arquivo nos dois modos**; no modo issue, `docs/projeto/` existe com o `PRD.md` dentro, e só
+ele.
+
+Se o repositório não tem a linha de mídia nem `docs/projeto/`, perguntar onde gravar em vez de
+inventar pasta.
 
 ## Entrevista — produz a spec
 
 | Caminho         | Como                                | A spec fica em                                                                                                      |
 | --------------- | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| **Aicf**        | `/aicf:criar-spec`                  | `specs/<nome>.md` — o intent movido                                                                                 |
+| **Aicf**        | `/aicf:criar-spec`                  | o registro da própria demanda, no estado "pronta para implementar" — `specs/<nome>.md` no modo arquivo, a issue com `aicf:spec` no modo issue |
 | **Superpowers** | `brainstorming`                     | `docs/superpowers/specs/YYYY-MM-DD-<topico>-design.md`, só no caminho _architectural_; ou `specs/<nome>.md`, se o projeto mandar |
-| **Matt Pocock** | `grill-with-docs`, depois `to-spec` | issue no tracker; ou `specs/<nome>.md`, se o tracker configurado no setup apontar para lá                           |
+| **Matt Pocock** | `grill-with-docs`, depois `to-spec` | issue no tracker, adotada por `/aicf:criar-spec #<n>` no modo issue; ou `specs/<nome>.md`, se o tracker configurado no setup apontar para lá |
 
 No Superpowers, só o caminho _architectural_ do `brainstorming` grava arquivo, e ele honra o
 local que o `CLAUDE.md` do projeto mandar. No Matt, quem grava a spec é `to-spec`; emendar
 direto no `implement` deixa a spec só na janela de contexto.
+
+**No modo issue, `to-spec` publica e `/aicf:criar-spec #<n>` adota.** O `to-spec` cria issue nova e
+não edita uma existente, então sem a adoção a mesma demanda terminaria com duas issues — a dele e a
+do aicf. Adotada, é uma issue só, com o label do aicf por cima.
 
 ## Implementação — consome a spec
 

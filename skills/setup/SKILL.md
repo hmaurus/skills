@@ -1,6 +1,6 @@
 ---
 name: setup
-description: Cria a base de governança de um projeto novo — docs/projeto/ com PRD e roadmap, as pastas de intents e specs e o CLAUDE.md raiz — e, se o usuário quiser, os padrões de engenharia. Rodar uma vez, no começo do projeto.
+description: Cria a base de governança de um projeto novo — pergunta se a demanda mora em arquivos ou em issues do GitHub, e monta o que a escolha pedir: docs/projeto/ com PRD e roadmap e as pastas de demanda, ou os labels aicf:*, mais o CLAUDE.md raiz — e, se o usuário quiser, os padrões de engenharia. Rodar uma vez, no começo do projeto.
 disable-model-invocation: true
 ---
 
@@ -21,6 +21,37 @@ Perguntar, em pergunta aberta:
 
 Não entrevistar além disso. Visão, público e modelo entram no PRD depois, com calma — o setup
 só prepara o lugar onde eles vão morar.
+
+## A mídia do registro
+
+**Antes de criar qualquer coisa** — é esta resposta que decide o que criar. `AskUserQuestion`,
+com a explicação curta de cada uma:
+
+- **Arquivos em `docs/projeto/`** (default) — a demanda é um `.md` versionado. Zero setup,
+  sobrevive ao `git clone` sem rede, entra no `grep` do repositório, não depende de fornecedor.
+- **Issues (GitHub)** — a demanda é uma issue. Conversa com comentário e notificação, contribuição
+  de fora em dois cliques, referência estável por `#12`, e `Fixes #12` fecha pelo merge.
+
+**Só oferecer issues se o repositório aguentar.** Conferir antes: `gh auth status` passa, e
+`git remote -v` aponta para GitHub. Não aguentando, oferecer só arquivo e dizer **em uma linha** o
+que falta para a outra opção existir — deixar o usuário escolher um caminho que falha no primeiro
+comando é pior que não oferecer.
+
+**Se `docs/agents/issue-tracker.md` existe**, o `/setup-matt-pocock-skills` já respondeu a mesma
+pergunta — onde o trabalho mora. Ler e propor o default a partir dele ("o tracker do Matt aponta
+para GitHub; usar issues aqui também?") em vez de perguntar do zero. As duas configs seguem
+independentes: divergir é legítimo, e a do aicf é a linha do `CLAUDE.md`.
+
+**Gravar a linha sempre, nos dois modos**, na seção "Processos de desenvolvimento" do `CLAUDE.md`:
+
+```
+**Mídia do registro:** arquivos em `docs/projeto/`
+**Mídia do registro:** issues (GitHub)
+```
+
+Linha ausente significa arquivo — é a compatibilidade com projeto anterior a esta escolha existir,
+não um valor a ser deixado implícito em projeto novo. As receitas de cada mídia estão em
+[`workflow-demanda/references/midia.md`](../workflow-demanda/references/midia.md).
 
 Depois, com `AskUserQuestion`, perguntar **onde ficam os padrões de engenharia** (idioma,
 KISS/YAGNI, validação antes do commit, testes, acessibilidade, tratamento de credencial):
@@ -61,19 +92,33 @@ workflow instaladas" de "Processos de desenvolvimento" do `CLAUDE.md` — é del
 
 ## O que criar
 
+|                                                        | Modo arquivo | Modo issue |
+| ------------------------------------------------------ | ------------ | ---------- |
+| `CLAUDE.md`, `AGENTS.md` (link), `README.md`            | sim          | sim        |
+| A linha `**Mídia do registro:**`                        | sim          | sim        |
+| `docs/projeto/PRD.md`                                   | sim          | sim        |
+| `docs/projeto/ROADMAP.md`                               | sim          | **não**    |
+| `intents/`, `intents/backlog/`, `specs/concluidas/`     | sim          | **não**    |
+| Os três labels `aicf:*`                                 | não          | **sim**    |
+
 ```
 CLAUDE.md                       # raiz, se ainda não existir
 AGENTS.md -> CLAUDE.md          # link simbólico
 README.md                       # se ainda não existir
 docs/projeto/
-├── PRD.md
-├── ROADMAP.md
-├── intents/
+├── PRD.md                      # nos dois modos
+├── ROADMAP.md                  # só modo arquivo
+├── intents/                    # só modo arquivo
 │   ├── .gitkeep
 │   └── backlog/.gitkeep
-└── specs/
+└── specs/                      # só modo arquivo
     └── concluidas/.gitkeep
 ```
+
+**No modo issue, `docs/projeto/` fica só com o `PRD.md`** — as pastas de demanda não existem, e
+`ROADMAP.md` não tem substituto: ele só fazia sentido onde criar arquivo custa mais que ter a
+ideia, e a issue não tem esse custo. O critério **certeza, não urgência** que ele explicava passa a
+viver na descrição do label `aicf:backlog`.
 
 Os templates estão em `templates/` dentro desta skill:
 
@@ -81,9 +126,20 @@ Os templates estão em `templates/` dentro desta skill:
 | ------------------------ | ----------------------------------------------- |
 | `templates/claude-md.md` | `CLAUDE.md` (raiz)                              |
 | `templates/prd.md`       | `docs/projeto/PRD.md`                           |
-| `templates/roadmap.md`   | `docs/projeto/ROADMAP.md`                       |
+| `templates/roadmap.md`   | `docs/projeto/ROADMAP.md` — **só no modo arquivo** |
 | `templates/readme.md`    | `README.md` (raiz)                              |
 | `templates/preferencias.md` | conforme a resposta acima — ver abaixo       |
+
+### Os três labels, no modo issue
+
+Criar com `gh label create`. **Criação idempotente**: label que já existe vira aviso, não erro —
+daí o `|| true`. Os comandos, com as descrições, estão em
+[`workflow-demanda/references/midia.md`](../workflow-demanda/references/midia.md), na seção "Criar
+os labels".
+
+**O setup é quem cria os labels**, e não a primeira demanda: `gh issue create --label` com label
+inexistente **falha em vez de criar**. É a armadilha mais repetida sobre setups que só gravam o
+mapeamento e deixam os labels para depois.
 
 Copiar o conteúdo trocando `<NOME>` pelo nome do projeto e preenchendo a descrição no lugar
 indicado. **Não reescrever o template por conta própria** — o que estiver marcado como a
@@ -96,8 +152,8 @@ Projeto que já tem código também tem a parte do `CLAUDE.md` que se deduz dele
 convenções —, e essa parte não é deste setup: sugerir `/init` numa sessão aberta com
 `CLAUDE_CODE_NEW_INIT=1` no ambiente (`CLAUDE_CODE_NEW_INIT=1 claude` — é variável do processo,
 não liga de dentro da sessão), que explora o repositório com subagente e apresenta uma proposta
-antes de escrever qualquer arquivo. O setup segue dono da governança: PRD, roadmap,
-`intents/`, `specs/`. Num projeto sem código não há o que deduzir, e nada muda.
+antes de escrever qualquer arquivo. O setup segue dono da governança — PRD, e o que a mídia
+escolhida pedir. Num projeto sem código não há o que deduzir, e nada muda.
 
 ## `AGENTS.md` como link simbólico
 

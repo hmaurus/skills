@@ -1,5 +1,7 @@
 # Roadmap — \<NOME\>
 
+_Modo arquivo. No modo issue este arquivo não existe: a demanda nasce como issue com o label `aicf:backlog` ou `aicf:intent`, e o critério abaixo vive na descrição do label._
+
 O que ainda não tem arquivo. Quando um item precisa de contexto, vira arquivo em [`intents/`](intents/) e **a linha sai daqui** — a pasta passa a ser o registro inteiro, e nada aponta para nada.
 
 O que já tem arquivo se lê da pasta:

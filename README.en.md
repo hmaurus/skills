@@ -4,7 +4,7 @@ _[Versão em português](README.md)_
 
 A starter kit for running a software project with Claude Code: the documents that hold a project together — vision, roadmap, versioned work items — and the cycle that takes each one from raw idea to a record of what was actually done. It covers **governance** and **macro planning**, which engineering skill collections leave out, and it is **agnostic** about the implementation path: governance is the same whether a work item is interviewed and implemented through the aicf path, through Superpowers, or through Matt Pocock's skills.
 
-> **Written in Portuguese.** The skills instruct the agent in pt-BR and the file conventions mix the playbook's terms with Portuguese names (`intents/` and `specs/` for the two states of a work item, `backlog/`, `concluidas/` for completed). They work fine in an English-speaking session — Claude reads the instructions and answers you in whatever language you write — but if you want the artifacts named in English, fork and translate.
+> **Written in Portuguese.** The skills instruct the agent in pt-BR and the file conventions mix the playbook's terms with Portuguese names (`intents/` and `specs/` for the two states of a work item, `backlog/`, `concluidas/` for completed). The GitHub labels of the issue mode are the same words: `aicf:backlog`, `aicf:intent`, `aicf:spec`. They work fine in an English-speaking session — Claude reads the instructions and answers you in whatever language you write — but if you want the artifacts named in English, fork and translate.
 
 ## Where it fits
 
@@ -34,7 +34,7 @@ On an existing project, start with `/aicf:workflow-demanda`, which explains the 
 
 ## Starting a new project
 
-**1. `/aicf:setup`** — creates `docs/projeto/` with a PRD and roadmap, the `intents/` and `specs/` folders, and the root `CLAUDE.md`. It asks little: the name, a sentence or two about the project, where the engineering defaults live, and which tools you already use.
+**1. `/aicf:setup`** — creates `docs/projeto/` with a PRD and roadmap, the `intents/` and `specs/` folders, and the root `CLAUDE.md`. It asks little: the name, a sentence or two about the project, **where work items will live** (files or issues), where the engineering defaults live, and which tools you already use.
 
 **2. Fill in `PRD.md`.** It ships with the sections and a prompt under each. The one that pays off most is **"ruled out, by decision"** — it is what keeps the same argument from coming back six months later.
 
@@ -53,7 +53,7 @@ On an existing project, start with `/aicf:workflow-demanda`, which explains the 
 
 | Skill                    | When                    | What it does                                                                    |
 | ------------------------ | ----------------------- | -------------------------------------------------------------------------------- |
-| `/aicf:setup`            | once, on a new project  | Creates `docs/projeto/` with a PRD and roadmap, the `intents/` and `specs/` folders, the root `CLAUDE.md` (with `AGENTS.md` symlinked to it) and a `README.md` — plus engineering defaults, if you want them |
+| `/aicf:setup`            | once, on a new project  | Asks whether work items live in files or in GitHub issues, then builds what the answer calls for: `docs/projeto/` with a PRD, a roadmap and the work-item folders, or the three `aicf:*` labels. Either way, the root `CLAUDE.md` (with `AGENTS.md` symlinked to it) and a `README.md` — plus engineering defaults, if you want them |
 | `/aicf:criar-prd`        | start of the project    | Interviews you about the product and writes `PRD.md` — run it again when a decision contradicts it |
 | `/aicf:workflow-demanda` | the map                 | The cycle, the paths available at each phase, and the governance conventions      |
 | `/aicf:criar-spec`       | interview phase         | Interrogates until no open decision is left, then writes the spec into the repo, with a suggested implementation path |
@@ -99,6 +99,14 @@ docs/projeto/            # project
 ```
 
 The folder tells the document's maturity. A work item is the unit of work; the file describing it is born as an **intent** (decided, not yet interviewed), becomes a **spec** when it is ready to implement — the same file, moved — and ends in `specs/concluidas/` with its report. `intents/backlog/` holds what may never be done.
+
+### Or in issues, if you prefer
+
+The recording medium is a **per-project choice**, and `/aicf:setup` asks which. Instead of files, a work item can be a **GitHub issue**: maturity lives in a label (`aicf:backlog`, `aicf:intent`, `aicf:spec`), the work item is a single issue from birth to close — the label changes, the number does not — and completed means the issue is closed, with the report as a comment. Then `docs/projeto/` holds only `PRD.md`; the PRD, ADRs and the glossary stay in files either way.
+
+You switch by editing one line of `CLAUDE.md`, and **a missing line means files** — a project created before this option keeps working untouched. The choice applies from that point on: there is no migration, what is already in files stays there, and new work items are born in the new medium.
+
+Each side wins something different. Files: zero setup, survive `git clone` with no network, show up in `grep`, depend on no vendor. Issues: conversation with comments and notifications, outside contributions in two clicks, stable `#12` references, and `Fixes #12` closing on merge. Files are the default because they work with no `gh`, no login and no remote.
 
 If your project needs a different structure, write the difference into the root `CLAUDE.md` or into `.claude/rules/`, never into a `CLAUDE.md` inside `docs/projeto/`: a subdirectory `CLAUDE.md` only enters the context when the agent reads a file in that folder, and registering a new work item does not require that.
 

@@ -8,6 +8,11 @@ description: Ritual de fechamento de uma demanda — checks, revisão, relatóri
 Não importa por onde a demanda começou, ela termina aqui — e o agente aplica o fechamento
 proativamente, sem esperar pedido.
 
+**Onde a demanda mora depende da mídia do registro** — a linha `**Mídia do registro:**` do
+`CLAUDE.md` diz qual, linha ausente significa arquivo, e as receitas estão em
+[`references/midia.md`](../workflow-demanda/references/midia.md). No modo issue,
+`/aicf:fechar-demanda #12` fecha aquela issue; sem alvo, a demanda é a que a sessão trabalhou.
+
 **Antes de qualquer coisa: a implementação terminou inteira?** Caminho de outra coleção termina no
 passo que ele encadeia — no Superpowers, `finishing-a-development-branch`, que decide o destino do
 código. Fechar a demanda com essa decisão não tomada é o erro que este parágrafo existe para
@@ -29,9 +34,13 @@ passo cobriu qual exigência.
 
 ## Os quatro passos
 
-1. **Relatório** no arquivo da demanda. Se a demanda não tinha arquivo, criar agora.
-2. **Mover** para `specs/concluidas/`, e corrigir os links relativos que apontavam para o
-   arquivo — `grep -rn "<nome-do-arquivo>" --include="*.md" .` acha todos.
+1. **Relatório** na demanda — no fim do arquivo, ou em comentário na issue. Se a demanda ainda
+   não tinha registro próprio (era linha do roadmap, ou nunca foi registrada), criar agora, pela
+   receita da mídia.
+2. **Concluir** a demanda. No modo arquivo, `git mv` para `specs/concluidas/` e corrigir os links
+   relativos que apontavam para o arquivo — `grep -rn "<nome-do-arquivo>" --include="*.md" .` acha
+   todos. **Essa correção é só do modo arquivo**: `#12` não muda de lugar e não quebra. No modo
+   issue, fechar a issue.
 3. **Reler o próprio relatório e os achados da revisão de código procurando o que vale além
    desta demanda** — decisão que outra sessão vai reencontrar, armadilha que vai morder de novo,
    ID externo — e promover, porque ninguém abre demanda concluída procurando informação:
@@ -57,22 +66,24 @@ passo cobriu qual exigência.
    deduz do próprio código.
 4. **Fechar o que este ritual abriu.** A saída dos passos 1 a 3 — ADR, regra, skill ou doc de
    referência que o passo 3 acabou de criar — entra como link no relatório desta demanda; não
-   tendo gerado nada, o relatório diz isso. E o que esta demanda escreveu fora de `docs/projeto/`
-   criou item novo no `ROADMAP.md`, ou tornou algum obsoleto? Ajustar inline.
+   tendo gerado nada, o relatório diz isso. E o que esta demanda escreveu criou demanda nova, ou
+   tornou alguma obsoleta? Ajustar inline — no modo arquivo, no `ROADMAP.md` ou no arquivo da
+   outra demanda; no modo issue, na issue dela.
 
 O fechamento vai num commit próprio, separado do commit de código; quando o processo escolhido já
 commitou por conta própria, cobre só o registro. Tarefa pequena (fix trivial, copy, renomeação)
 cabe num commit, e a demanda pode nascer já no fechamento: o relatório registra o que foi feito
-e o arquivo vai direto para `specs/concluidas/`. Ao final, avaliar o peso do contexto e sugerir
+e a demanda nasce concluída, pela receita da mídia. Ao final, avaliar o peso do contexto e sugerir
 `/clear` se estiver pesado — não a cada demanda por reflexo.
 
 ## Sessão que acaba antes da demanda
 
-Contexto no fim com a demanda aberta também é fechamento, parcial: o arquivo fica em `specs/`
-e o que a sessão descobriu vai para ele sob `## Estado em andamento` — decisão tomada, caminho descartado com o motivo, onde parou e o
-próximo passo. **Se a frase serve para qualquer demanda, ela é do `CLAUDE.md`, não do arquivo.**
-O teste é a retomada caber em `continue a demanda <arquivo>`. Commit próprio; no fechamento
-definitivo o bloco some, absorvido pelo relatório.
+Contexto no fim com a demanda aberta também é fechamento, parcial: a demanda continua no estado
+"pronta para implementar" e o que a sessão descobriu vai para o corpo dela sob
+`## Estado em andamento` — decisão tomada, caminho descartado com o motivo, onde parou e o
+próximo passo. **Se a frase serve para qualquer demanda, ela é do `CLAUDE.md`, não da demanda.**
+O teste é a retomada caber em `continue a demanda <alvo>`. Commit próprio no modo arquivo; no modo
+issue, a edição do corpo da issue. No fechamento definitivo o bloco some, absorvido pelo relatório.
 
 Quando o usuário sinaliza a parada, o agente registra sem perguntar. Quando é o agente que
 percebe o aperto, ele avisa e a decisão é do usuário — encerrar o trabalho por conta própria
@@ -80,7 +91,8 @@ para registrar, não.
 
 ## O relatório
 
-`## Relatório de implementação (YYYY-MM-DD)` no fim do arquivo. Documenta como a demanda foi
+`## Relatório de implementação (YYYY-MM-DD)` no fim do arquivo, ou como comentário na issue —
+o mesmo heading nos dois casos. Documenta como a demanda foi
 resolvida **de fato**, não como foi planejada — registrar divergências plano×entrega. É para quem
 **não viveu a implementação**: sem narrativa cronológica nem detalhes de conversa.
 
@@ -104,7 +116,9 @@ pode trazer um terceiro campo, `sugestão: <valor> (motivo)`, gravado pelo `cria
 fechar, o caminho seguido substitui `a definir · sugestão: ...` inteiro, e a sugestão some. Se o
 caminho seguido divergiu da sugestão, o relatório diz por quê em "Escopo efetivo" ou "Lições";
 seguir a sugestão no caso óbvio, sem perguntar, é o comportamento certo e não recebe marca.
-Referências externas (issues, tickets, PRs) entram no fim da mesma linha.
+Referências externas (issues, tickets, PRs) entram no fim da mesma linha. **No modo issue, o
+número da própria issue não entra** — a demanda *é* a issue, e repeti-lo dentro dela é um segundo
+lugar guardando o mesmo estado.
 
 ```
 Processo — entrevista: criar-spec · implementação: a definir · sugestão: aicf-direto (toca dois arquivos, sem decisão de abordagem)

@@ -32,7 +32,7 @@ Em projeto que já existe, comece por `/aicf:workflow-demanda`, que explica o ci
 
 ## Começando um projeto novo
 
-**1. `/aicf:setup`** — cria `docs/projeto/` com PRD e roadmap, as pastas de intents e specs e o `CLAUDE.md` raiz. Pergunta pouco: o nome, uma ou duas frases sobre o projeto, onde ficam os padrões de engenharia e quais ferramentas você já usa.
+**1. `/aicf:setup`** — cria `docs/projeto/` com PRD e roadmap, as pastas de intents e specs e o `CLAUDE.md` raiz. Pergunta pouco: o nome, uma ou duas frases sobre o projeto, **onde a demanda vai morar** (arquivos ou issues), onde ficam os padrões de engenharia e quais ferramentas você já usa.
 
 **2. Preencher o `PRD.md`.** Ele nasce com as seções e uma pergunta em cada uma. A que mais se paga é **"fora de escopo, por decisão"** — é ela que impede a mesma discussão de voltar daqui a seis meses.
 
@@ -51,7 +51,7 @@ Em projeto que já existe, comece por `/aicf:workflow-demanda`, que explica o ci
 
 | Skill                    | Quando                     | O que faz                                                                        |
 | ------------------------ | -------------------------- | -------------------------------------------------------------------------------- |
-| `/aicf:setup`            | uma vez, no projeto novo   | Cria `docs/projeto/` com PRD e roadmap, as pastas de intents e specs, o `CLAUDE.md` (com `AGENTS.md` apontando para ele) e um `README.md` — e, se você quiser, os padrões de engenharia |
+| `/aicf:setup`            | uma vez, no projeto novo   | Pergunta se a demanda mora em arquivos ou em issues do GitHub e monta o que a escolha pedir: `docs/projeto/` com PRD, roadmap e as pastas de demanda, ou os três labels `aicf:*`. Nos dois casos, o `CLAUDE.md` (com `AGENTS.md` apontando para ele) e um `README.md` — e, se você quiser, os padrões de engenharia |
 | `/aicf:criar-prd`        | começo do projeto          | Entrevista sobre o produto e escreve o `PRD.md` — roda de novo quando uma decisão o contraria |
 | `/aicf:workflow-demanda` | o mapa                     | O ciclo, os caminhos de cada fase e as convenções de governança                   |
 | `/aicf:criar-spec`       | fase de entrevista         | Interroga até não sobrar decisão em aberto, depois escreve a spec no repositório, com a sugestão de caminho de implementação |
@@ -97,6 +97,14 @@ docs/projeto/
 ```
 
 A pasta diz a maturidade do documento. Uma demanda é a unidade de trabalho; o arquivo que a descreve nasce como **intent** (decidida, ainda não entrevistada), vira **spec** quando está pronta para implementar — o mesmo arquivo, movido — e termina em `specs/concluidas/` com o relatório. `intents/backlog/` é para o que ainda não se sabe se será feito.
+
+### Ou em issues, se você preferir
+
+A mídia do registro é **escolha do projeto**, e o `/aicf:setup` pergunta qual. Em vez de arquivos, a demanda pode ser uma **issue do GitHub**: a maturidade fica num label (`aicf:backlog`, `aicf:intent`, `aicf:spec`), a demanda é uma issue só do nascimento ao fechamento — o label troca, o número não —, e concluída é a issue fechada, com o relatório em comentário. Aí `docs/projeto/` fica só com o `PRD.md`; PRD, ADR e glossário ficam em arquivo nos dois modos.
+
+Você troca editando uma linha do `CLAUDE.md`, e **a linha ausente significa arquivos** — projeto criado antes desta opção segue funcionando sem tocar em nada. A escolha vale do ponto em diante: não há migração, o que já está em arquivo fica onde está, e demanda nova nasce na mídia nova.
+
+Cada uma ganha coisas diferentes. Arquivo: zero setup, sobrevive ao `git clone` sem rede, entra no `grep` do repositório, não depende de fornecedor. Issue: conversa com comentário e notificação, contribuição de fora em dois cliques, referência estável por `#12`, e `Fixes #12` fechando pelo merge. O default é arquivo porque é o que funciona sem `gh`, sem login e sem remote.
 
 Se o seu projeto precisar de outra estrutura, escreva a diferença no `CLAUDE.md` da raiz ou em `.claude/rules/`, nunca num `CLAUDE.md` dentro de `docs/projeto/`: `CLAUDE.md` de subpasta só entra no contexto quando o agente lê um arquivo daquela pasta, e registrar uma demanda nova não exige isso.
 

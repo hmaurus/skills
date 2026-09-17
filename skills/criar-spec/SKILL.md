@@ -8,7 +8,13 @@ description: Entrevista o usuário até a demanda estar madura e escreve a spec 
 Transforma uma ideia ainda vaga na spec que a implementação vai consumir. O ciclo inteiro está
 em `/aicf:workflow-demanda`.
 
-Rodar **fora do plan mode**: o passo final grava arquivo.
+Rodar **fora do plan mode**: o passo final grava a demanda.
+
+**Alvo opcional `#<n>`, no modo issue.** `/aicf:criar-spec #12` **adota** a issue 12 em vez de
+abrir uma nova: reescreve o corpo dela e põe o label. É assim que uma issue de fora da governança
+entra nela, e é o que evita duas issues para a mesma demanda quando a entrevista veio pelo
+`to-spec` do Matt Pocock, que cria issue nova em vez de editar a existente. No modo arquivo não há
+alvo a adotar.
 
 ## Antes de perguntar
 
@@ -30,11 +36,17 @@ Continuar até não sobrar decisão em aberto, e só então escrever.
 
 ## A spec
 
-Vai em `docs/projeto/specs/<nome-em-kebab-case>.md`. Se a demanda já tem arquivo em
-`docs/projeto/intents/`, a spec é esse arquivo: `git mv` para `specs/` e reescrever o conteúdo
-— o nome fica, o histórico acompanha, nada sobra em `intents/`. Se a demanda ainda era uma linha
-do `ROADMAP.md`, **a linha sai**: quem tem arquivo não tem linha. Sem `docs/projeto/`, perguntar
-onde gravar em vez de inventar pasta.
+**Onde ela mora depende da mídia do registro** — a linha `**Mídia do registro:**` do `CLAUDE.md`
+diz qual, e linha ausente significa arquivo. As duas receitas estão em
+[`references/midia.md`](../workflow-demanda/references/midia.md) do `workflow-demanda`.
+
+A demanda **muda de estado** para "pronta para implementar", e o registro é o mesmo de antes, não
+um novo: no **modo arquivo**, o intent vai de `intents/` para `specs/` com `git mv` e o conteúdo é
+reescrito — o nome fica, o histórico acompanha, nada sobra em `intents/`; se ela ainda era uma
+linha do `ROADMAP.md`, **a linha sai**, porque quem tem arquivo não tem linha. No **modo issue**, o
+corpo da issue é reescrito e o label troca para `aicf:spec` — mesma issue, mesmo número.
+
+Sem mídia declarada e sem `docs/projeto/`, perguntar onde gravar em vez de inventar pasta.
 
 - **Problema** — o que está errado hoje, do ponto de vista de quem usa
 - **Solução** — o que passa a existir, na mesma linguagem
@@ -49,8 +61,9 @@ condição que a encerra; a forma está no passo 3 do `/aicf:fechar-demanda`.
 ## Ao terminar
 
 1. Mostrar a spec e pedir revisão antes de considerar fechada.
-2. Registrar logo abaixo do título o que já é fato, mais a sugestão de caminho — um dos
-   instalados (`aicf-direto`, `aicf-plan`, ou a skill de outra coleção), com o motivo numa frase:
+2. Registrar logo abaixo do título — no modo issue, na primeira linha do corpo — o que já é fato,
+   mais a sugestão de caminho: um dos instalados (`aicf-direto`, `aicf-plan`, ou a skill de outra
+   coleção), com o motivo numa frase:
    `Processo — entrevista: criar-spec · implementação: a definir · sugestão: aicf-direto (toca dois arquivos, sem decisão de abordagem)`.
    Quem decide é o `/aicf:implementar-spec`, inclusive quando a implementação emenda nesta
    sessão (passo 3).

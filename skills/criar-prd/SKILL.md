@@ -63,9 +63,12 @@ Datar a última revisão no topo: o PRD é vivo, e saber quando parou de ser rev
 ## Ao terminar
 
 1. Mostrar o PRD e pedir revisão antes de considerá-lo fechado.
-2. **Propor tirar dele o primeiro `ROADMAP.md`** — cada coisa que a proposta exige vira uma
-   linha, em `Próximas` ou `Backlog` conforme a certeza; o que precisar de contexto vira arquivo
-   em `intents/`, e aí **a linha sai** — quem tem arquivo não tem linha.
+2. **Propor tirar dele as primeiras demandas** — cada coisa que a proposta exige vira uma. No
+   **modo arquivo**, isso é o primeiro `ROADMAP.md`: uma linha em `Próximas` ou `Backlog` conforme
+   a certeza, e o que precisar de contexto vira arquivo em `intents/`, e aí **a linha sai** — quem
+   tem arquivo não tem linha. No **modo issue** não há roadmap: cada uma nasce como issue com
+   `aicf:intent` ou `aicf:backlog`. A mídia está na linha `**Mídia do registro:**` do `CLAUDE.md`,
+   e as receitas em [`references/midia.md`](../workflow-demanda/references/midia.md).
 3. Se apareceu vocabulário já ambíguo — dois nomes para a mesma coisa, ou o mesmo nome para duas
    —, sugerir `domain-modeling` (Matt Pocock) para gravar o glossário em `CONTEXT.md`, ao lado do
    PRD e não dentro dele.

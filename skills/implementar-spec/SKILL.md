@@ -1,6 +1,6 @@
 ---
 name: implementar-spec
-description: Implementa uma demanda a partir da spec e conduz o fechamento até o registro. Invocar quando o usuário pede para implementar uma spec pronta em docs/projeto/specs/; não invocar durante entrevista, nem para tarefa que não tem spec. Caminho aicf da fase de implementação.
+description: Implementa uma demanda a partir da spec e conduz o fechamento até o registro. Invocar quando o usuário pede para implementar uma spec pronta — arquivo em specs/, ou issue com o label aicf:spec; não invocar durante entrevista, nem para tarefa que não tem spec. Caminho aicf da fase de implementação.
 ---
 
 # Implementar a partir da spec
@@ -9,9 +9,12 @@ Com o plan mode ligado, montar o plano e esperar aprovação antes de tocar o di
 
 ## Antes de escrever código
 
-1. **Ler a spec inteira** — venha de `docs/projeto/specs/<nome>.md`, de
-   `docs/superpowers/specs/` ou de uma issue. Se o usuário não disse qual, perguntar em vez de
-   adivinhar entre as specs abertas.
+1. **Ler a spec inteira.** Onde ela mora depende da mídia do registro — a linha
+   `**Mídia do registro:**` do `CLAUDE.md` diz qual, linha ausente significa arquivo, e as
+   receitas de ler e de listar estão em
+   [`references/midia.md`](../workflow-demanda/references/midia.md). Ela também pode vir de fora
+   da governança do aicf, de `docs/superpowers/specs/`. Se o usuário não disse qual, **listar as
+   specs abertas pela receita da mídia** e perguntar, em vez de adivinhar.
 2. **Ler os arquivos que a spec nomeia**, e o que já existe de parecido no repositório. A
    segunda parte vai para subagente: procurar o que já existe é leitura ampla, e feita no
    contexto principal ela gasta o que a implementação vai precisar.
