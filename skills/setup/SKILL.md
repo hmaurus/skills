@@ -141,7 +141,7 @@ os labels".
 inexistente **falha em vez de criar**. É a armadilha mais repetida sobre setups que só gravam o
 mapeamento e deixam os labels para depois.
 
-Copiar o conteúdo trocando `<NOME>` pelo nome do projeto e preenchendo a descrição no lugar
+Copiar o conteúdo trocando `<NOME>` pelo nome do projeto, **escrevendo na linha `**Mídia do registro:**` o valor que a pergunta da mídia respondeu** — é a única fonte da verdade da escolha, e deixá-la com o texto do template faz toda skill ler a mídia errada — e preenchendo a descrição no lugar
 indicado. **Não reescrever o template por conta própria** — o que estiver marcado como a
 preencher fica marcado; é o usuário que preenche, na primeira demanda ou quando quiser.
 
@@ -201,4 +201,5 @@ recebe apenas o nome da variável.
    — em vez de supor.
 3. Dizer que o mapa do ciclo está em `/aicf:workflow-demanda`, e que a primeira demanda pode
    começar por `/aicf:criar-spec`.
-4. Sugerir `/aicf:criar-prd` como primeira coisa — é do PRD que sai o roadmap inicial.
+4. Sugerir `/aicf:criar-prd` como primeira coisa — é do PRD que saem as primeiras demandas (no
+   modo arquivo, o roadmap inicial; no modo issue, as primeiras issues).

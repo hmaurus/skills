@@ -10,7 +10,10 @@ proativamente, sem esperar pedido.
 
 **Onde a demanda mora depende da mídia do registro** — a linha `**Mídia do registro:**` do
 `CLAUDE.md` diz qual, linha ausente significa arquivo, e as receitas estão em
-[`references/midia.md`](../workflow-demanda/references/midia.md). No modo issue,
+[`references/midia.md`](../workflow-demanda/references/midia.md). Se
+`docs/agents/issue-tracker.md` existe e **discorda** dela, avisar uma vez e seguir a linha do
+`CLAUDE.md`, que é a única fonte da verdade do aicf — divergir é legítimo, mas precisa ser
+escolha, não descoberta tardia. No modo issue,
 `/aicf:fechar-demanda #12` fecha aquela issue; sem alvo, a demanda é a que a sessão trabalhou.
 
 **Antes de qualquer coisa: a implementação terminou inteira?** Caminho de outra coleção termina no

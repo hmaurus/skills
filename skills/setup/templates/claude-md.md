@@ -28,7 +28,7 @@ Duas camadas: a **governança** registra o que será feito e o que foi feito, e 
 
 **Coleções de skills de workflow instaladas:** nenhuma. _(Superpowers, Matt Pocock — são os caminhos que o `implementar-spec` pode oferecer além do aicf.)_
 
-**Mídia do registro:** arquivos em `docs/projeto/`
+**Mídia do registro:** \<arquivos em `docs/projeto/` | issues (GitHub) — o valor que o setup perguntou\>
 
 Quatro regras valem antes de abrir qualquer doc:
 

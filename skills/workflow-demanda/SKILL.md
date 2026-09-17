@@ -148,6 +148,7 @@ critério é a regra poder falhar sem ninguém perceber.
 
 Demanda grande demais para uma sessão é **uma spec só**, com as entregas em checkboxes no corpo:
 a sessão faz o que cabe e fecha parcial — `/aicf:fechar-demanda` cobre o caso — e a próxima
-continua pelo mesmo arquivo. Várias demandas independentes que andam juntas são **specs
+continua pelo mesmo registro. Várias demandas independentes que andam juntas são **specs
 separadas**, e a relação mora na prosa de cada uma — "bloqueia", "habilita", "depende de",
-nomeando o arquivo do outro lado. Não em subpasta, e não numa lista à parte, que envelheceria. O _porquê_ das decisões mora no arquivo, não na conversa.
+nomeando o outro lado: o arquivo, no modo arquivo; `#<n>`, no modo issue. Não em subpasta, e não
+numa lista à parte, que envelheceria. O _porquê_ das decisões mora na demanda, não na conversa.

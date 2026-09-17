@@ -33,7 +33,12 @@ linha, nos dois modos, para que em projeto novo a escolha seja explícita.
 | Concluída | `specs/concluidas/<nome>.md`, com o relatório no fim | issue fechada, com o relatório em comentário |
 
 **Uma demanda é uma issue só, do nascimento ao fechamento.** O label troca, o número não. Os três
-labels são exclusivos entre si, e "concluída" não tem label — é a issue fechada.
+labels são exclusivos entre si: mudar de estado é sempre **remover o atual e pôr o novo**, nunca só
+acrescentar.
+
+**"Concluída" não tem label — é a issue fechada.** Ao concluir, o label sai junto com o fechamento;
+uma issue fechada nunca carrega `aicf:*`. O estado mora num lugar só, e o fechamento é esse lugar —
+issue fechada com label seria a mesma demanda declarada em dois estados.
 
 No modo issue as duas distinções de custo desaparecem. "Próximas" é o que já foi decidido e ainda
 não tem arquivo; `intents/` é o que já foi decidido e tem arquivo — a diferença entre as duas é o
@@ -47,12 +52,13 @@ explicava passa a viver na descrição do label `aicf:backlog`.
 | --- | --- | --- |
 | Gravar demanda incerta | `docs/projeto/intents/backlog/<nome>.md`, ou linha no `ROADMAP.md` → Backlog | `gh issue create --title '<título>' --body-file <arq> --label aicf:backlog` |
 | Gravar demanda decidida | `docs/projeto/intents/<nome>.md`, ou linha no `ROADMAP.md` → Próximas | o mesmo, com `--label aicf:intent` |
+| Gravar demanda que já nasce pronta | `docs/projeto/specs/<nome>.md` | o mesmo, com `--label aicf:spec` |
 | Virar spec | `git mv docs/projeto/intents/<nome>.md docs/projeto/specs/` e reescrever | `gh issue edit <n> --body-file <arq> --remove-label aicf:intent --add-label aicf:spec` |
 | Ler a demanda | `cat docs/projeto/specs/<nome>.md` | `gh issue view <n> --comments` |
 | Listar um estado | `head -qn1 docs/projeto/specs/*.md \| sed 's/^# //'` | `gh issue list --state open --label aicf:spec` |
 | Listar os três estados abertos | o mesmo `head`, com as três pastas | `gh issue list --state open --search "label:aicf:backlog,aicf:intent,aicf:spec"` |
 | Gravar o relatório | no fim do arquivo da demanda | `gh issue comment <n> --body-file <arq>` |
-| Concluir | `git mv` para `docs/projeto/specs/concluidas/` | `gh issue close <n>` |
+| Concluir | `git mv` para `docs/projeto/specs/concluidas/` | `gh issue edit <n> --remove-label <label-atual>` e `gh issue close <n>` |
 | Referenciar outra demanda | link relativo — `[título](../intents/<nome>.md)` | `#<n>` |
 | Corrigir referências após mover | `grep -rn '<nome-do-arquivo>' --include='*.md' .` | não se aplica — `#12` não muda de lugar |
 
@@ -99,9 +105,14 @@ gh issue edit <n> --remove-label aicf:intent --add-label aicf:spec
 gh issue view <n> --json labels -q '[.labels[].name]|join(",")'   # autoritativo, imediato
 ```
 
-O `view` é leitura direta da issue e não passa pelo índice. Vale para qualquer confirmação de
-estado logo após uma escrita; para **listar** o que existe, o atraso é aceitável, porque ninguém
-lista logo depois de editar.
+O `view` é leitura direta da issue e não passa pelo índice.
+
+**Listar também morde**, e o caso é real: o `criar-spec` promove a issue a `aicf:spec` e o
+`implementar-spec` lista as specs abertas em seguida, na mesma sessão — a issue recém-promovida pode
+não aparecer, e o agente conclui que não há spec. Quando a listagem vem logo depois de uma troca de
+estado feita nesta sessão, **conferir os números que a sessão tocou com `gh issue view`** antes de
+concluir que sumiram, ou dizer ao usuário que o índice pode estar atrasado em vez de afirmar que a
+lista está completa.
 
 ## A linha `Processo`
 
@@ -142,8 +153,14 @@ falha em vez de criar; é a armadilha que esta seção existe para evitar.
 issue nova, a skill **reescreve o corpo daquela** e ajusta o label. Issue que nunca teve label
 `aicf:*` ganha um agora — é assim que uma issue de fora da governança entra nela.
 
+**Olhar o label atual antes de escrever.** O alvo `#<n>` não é só para issue crua: é também como o
+usuário aponta a skill para uma demanda que já está na governança, e aí só acrescentar label deixa
+a issue com dois, contando a mesma demanda em dois estados.
+
 ```bash
-gh issue edit 12 --body-file <arq> --add-label aicf:spec
+gh issue view 12 --json labels -q '[.labels[].name]|join(",")'   # o que já tem
+gh issue edit 12 --body-file <arq> --remove-label aicf:intent --add-label aicf:spec   # tinha label aicf:*
+gh issue edit 12 --body-file <arq> --add-label aicf:spec                              # não tinha nenhum
 ```
 
 Dois casos concretos, e os dois quebram sem adoção:

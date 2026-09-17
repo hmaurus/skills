@@ -12,7 +12,10 @@ Com o plan mode ligado, montar o plano e esperar aprovação antes de tocar o di
 1. **Ler a spec inteira.** Onde ela mora depende da mídia do registro — a linha
    `**Mídia do registro:**` do `CLAUDE.md` diz qual, linha ausente significa arquivo, e as
    receitas de ler e de listar estão em
-   [`references/midia.md`](../workflow-demanda/references/midia.md). Ela também pode vir de fora
+   [`references/midia.md`](../workflow-demanda/references/midia.md). Se
+   `docs/agents/issue-tracker.md` existe e **discorda** dela, avisar uma vez e seguir a linha do
+   `CLAUDE.md`, que é a única fonte da verdade do aicf — divergir é legítimo, mas precisa ser
+   escolha, não descoberta tardia. Ela também pode vir de fora
    da governança do aicf, de `docs/superpowers/specs/`. Se o usuário não disse qual, **listar as
    specs abertas pela receita da mídia** e perguntar, em vez de adivinhar.
 2. **Ler os arquivos que a spec nomeia**, e o que já existe de parecido no repositório. A

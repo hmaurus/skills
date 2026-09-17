@@ -11,10 +11,11 @@ em `/aicf:workflow-demanda`.
 Rodar **fora do plan mode**: o passo final grava a demanda.
 
 **Alvo opcional `#<n>`, no modo issue.** `/aicf:criar-spec #12` **adota** a issue 12 em vez de
-abrir uma nova: reescreve o corpo dela e põe o label. É assim que uma issue de fora da governança
-entra nela, e é o que evita duas issues para a mesma demanda quando a entrevista veio pelo
-`to-spec` do Matt Pocock, que cria issue nova em vez de editar a existente. No modo arquivo não há
-alvo a adotar.
+abrir uma nova: reescreve o corpo dela e ajusta o label — **olhando antes o que ela já tem**, para
+trocar em vez de acrescentar quando já houver um `aicf:*`. É assim que uma issue de fora da
+governança entra nela, e é o que evita duas issues para a mesma demanda quando a entrevista veio
+pelo `to-spec` do Matt Pocock, que cria issue nova em vez de editar a existente. No modo arquivo
+não há alvo a adotar.
 
 ## Antes de perguntar
 
@@ -38,13 +39,23 @@ Continuar até não sobrar decisão em aberto, e só então escrever.
 
 **Onde ela mora depende da mídia do registro** — a linha `**Mídia do registro:**` do `CLAUDE.md`
 diz qual, e linha ausente significa arquivo. As duas receitas estão em
-[`references/midia.md`](../workflow-demanda/references/midia.md) do `workflow-demanda`.
+[`references/midia.md`](../workflow-demanda/references/midia.md) do `workflow-demanda`. Se
+`docs/agents/issue-tracker.md` existe e **discorda** dela, avisar uma vez e seguir a linha do
+`CLAUDE.md`, que é a única fonte da verdade do aicf — divergir é legítimo, mas precisa ser
+escolha, não descoberta tardia.
 
-A demanda **muda de estado** para "pronta para implementar", e o registro é o mesmo de antes, não
-um novo: no **modo arquivo**, o intent vai de `intents/` para `specs/` com `git mv` e o conteúdo é
-reescrito — o nome fica, o histórico acompanha, nada sobra em `intents/`; se ela ainda era uma
-linha do `ROADMAP.md`, **a linha sai**, porque quem tem arquivo não tem linha. No **modo issue**, o
-corpo da issue é reescrito e o label troca para `aicf:spec` — mesma issue, mesmo número.
+A demanda **muda de estado** para "pronta para implementar". Três casos, e só o terceiro cria
+registro novo:
+
+- **Já tem registro próprio** (arquivo em `intents/`, ou issue com label `aicf:*`) — é esse mesmo
+  que vira a spec, nunca um segundo. No **modo arquivo**, `git mv` de `intents/` para `specs/` e o
+  conteúdo reescrito: o nome fica, o histórico acompanha, nada sobra em `intents/`. No **modo
+  issue**, o corpo é reescrito e o label **troca** para `aicf:spec` — mesma issue, mesmo número, e
+  o label anterior sai junto.
+- **Era uma linha do `ROADMAP.md`** (só existe no modo arquivo) — vira arquivo em `specs/`, e **a
+  linha sai**: quem tem arquivo não tem linha.
+- **Nunca foi registrada** — a demanda nasce já no estado "pronta para implementar", numa escrita
+  só: arquivo direto em `specs/`, ou `gh issue create --label aicf:spec`.
 
 Sem mídia declarada e sem `docs/projeto/`, perguntar onde gravar em vez de inventar pasta.
 

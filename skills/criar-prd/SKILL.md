@@ -7,7 +7,7 @@ disable-model-invocation: true
 # Criar o PRD por entrevista
 
 O PRD responde o que nenhuma linha de código responde: para quem o produto existe, o que ele não
-vai fazer, e o que conta como sucesso. É o documento do qual sai o primeiro roadmap.
+vai fazer, e o que conta como sucesso. É o documento do qual saem as primeiras demandas.
 
 Rodar **fora do plan mode**: o passo final grava arquivo.
 
