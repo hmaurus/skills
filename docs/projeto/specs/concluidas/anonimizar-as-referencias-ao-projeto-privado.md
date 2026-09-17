@@ -43,7 +43,7 @@ hoje: o único registro de mudança em uso é o `Supersede` na linha de cabeçal
 ## Fora de escopo
 
 - **O resto da intent de origem.** A migração para issues depende de
-  [escolher entre arquivos e issues](../escolher-entre-arquivos-e-issues.md) e continua aberta.
+  [escolher entre arquivos e issues](escolher-entre-arquivos-e-issues.md) e continua aberta.
 - **Os números de volume de trabalho** em `orquestrar-o-framework-escolhido.md` (16 tarefas,
   40 commits, 141 testes) e o detalhe de estado local não versionado. Sem o nome do repositório
   eles não identificam projeto nenhum, e são o que dá dimensão à falha que a spec relata —

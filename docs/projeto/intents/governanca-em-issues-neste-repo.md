@@ -26,9 +26,16 @@ prescrevem, ele para de comer a própria comida — e a divergência vira exceç
 vez de recurso.
 
 Por isso esta demanda **não é customização local**: ela consome a opção criada por
-[escolher entre arquivos e issues](../specs/escolher-entre-arquivos-e-issues.md), e só deve ser
-implementada depois dela. Adotar issues aqui antes de a skill suportar issues seria justamente o
-que a demanda diz querer evitar.
+[escolher entre arquivos e issues](../specs/concluidas/escolher-entre-arquivos-e-issues.md), e só
+deve ser implementada depois dela. Adotar issues aqui antes de a skill suportar issues seria
+justamente o que a demanda diz querer evitar.
+
+**Desbloqueada em 2026-09-17**, com a `0.17.0` — a opção existe (`grep -m1 'Mídia do registro'
+CLAUDE.md` traz a linha, hoje com o valor `arquivos`). Duas das perguntas abaixo já têm resposta
+gravada e viram confirmação em vez de decisão aberta: **intent e spec são a mesma issue com o label
+mudando** (sim, `aicf:backlog`/`aicf:intent`/`aicf:spec`, exclusivos entre si) e **o relatório vai em
+comentário na issue fechada**, sem modo misto. A entrevista ainda decide o que é próprio daqui:
+migrar ou não as demandas já concluídas, e o que fazer com o `ROADMAP.md` atual.
 
 ## O que decidir na entrevista
 

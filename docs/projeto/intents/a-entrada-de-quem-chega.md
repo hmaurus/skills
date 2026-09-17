@@ -70,7 +70,7 @@ Dividir a documentação por **quem precisa dela**, não por assunto:
   quando envelhecer. Isso pesa a favor de manter a apresentação dentro da skill, e a pergunta
   passa a ser só o custo de contexto.
 
-## O que a entrevista de [escolher entre arquivos e issues](../specs/escolher-entre-arquivos-e-issues.md) trouxe para cá
+## O que a entrevista de [escolher entre arquivos e issues](../specs/concluidas/escolher-entre-arquivos-e-issues.md) trouxe para cá
 
 Levantado em 2026-09-15, ao entrevistar aquela demanda. Quatro achados, e o primeiro é de ordem.
 

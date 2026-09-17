@@ -1,6 +1,6 @@
 # O usuário escolhe se a governança mora em arquivos ou em issues
 
-Processo — entrevista: criar-spec · implementação: a definir · sugestão: aicf-plan (toca cinco skills, dois templates e o README, e cria um doc de referência novo — plano na mesa antes de editar)
+Processo — entrevista: criar-spec · implementação: aicf-plan
 
 ## Problema
 
@@ -52,7 +52,7 @@ Cada mídia ganha e perde coisas diferentes:
 **O argumento de detecção não está na tabela, e isso é decisão tomada.** Enquanto o `CHECKLIST.md`
 existia, o lado do arquivo guardava o estado duas vezes — a pasta e a linha na seção — e dava para
 dizer que a divergência tornava o erro achável. [O `CHECKLIST.md` sai do
-método](concluidas/o-checklist-sai-do-metodo.md) mostrou que o argumento estava invertido: cópia
+método](o-checklist-sai-do-metodo.md) mostrou que o argumento estava invertido: cópia
 mantida à mão não detecta erro na fonte, ela fabrica uma classe de erro nova. Hoje as duas mídias
 guardam o estado uma vez só — a pasta de um lado, o label do outro — e **nenhuma das duas detecta
 estado errado**. O `triage` do Matt confirma pelo lado das issues: ele acha issue sem label e issue
@@ -233,7 +233,7 @@ mídias sem ninguém ter escolhido isso.
 | `CLAUDE.md` (deste repositório) | ganha a linha `**Mídia do registro:** arquivos em docs/projeto/` — declarar o estado atual, não adotar issues |
 | `CHANGELOG.md`, `.claude-plugin/plugin.json` | entrada e versão nova |
 
-**Precede [a entrada de quem chega](../intents/a-entrada-de-quem-chega.md)**, que vai reestruturar
+**Precede [a entrada de quem chega](../../intents/a-entrada-de-quem-chega.md)**, que vai reestruturar
 `README.md`, `README.en.md` e a abertura do `/aicf:setup` — os três tocados aqui. Nesta demanda, o
 mínimo neles: registrar que a escolha existe. A redação fica para lá.
 
@@ -267,9 +267,9 @@ mínimo neles: registrar que a escolha existe. A redação fica para lá.
 - **Unificar a declaração dos domain docs.** `CONTEXT.md` e `docs/adr/` estão declarados no
   `docs/agents/domain.md` dele e na seção "Registro" do nosso template de `CLAUDE.md`. É duplicação
   real e **anterior a esta demanda** — vive em
-  [o layout dos domain docs está declarado duas vezes](../intents/backlog/layout-dos-domain-docs-declarado-duas-vezes.md).
+  [o layout dos domain docs está declarado duas vezes](../../intents/backlog/layout-dos-domain-docs-declarado-duas-vezes.md).
 - **Adotar issues neste repositório.** É a demanda vizinha, [a governança deste repositório passa a
-  viver em issues](../intents/governanca-em-issues-neste-repo.md), que consome esta opção. Aqui só
+  viver em issues](../../intents/governanca-em-issues-neste-repo.md), que consome esta opção. Aqui só
   se cria a opção.
 - **Detectar mídia errada.** Nenhuma das duas detecta estado errado, e esta demanda não tenta
   inventar detecção — pasta errada e label errado seguem indistinguíveis de pasta certa e label
@@ -314,3 +314,108 @@ comando `gh` nenhum.
 só pode devolver ocorrência dentro de bloco que declare "modo arquivo", ou ponteiro para
 `references/midia.md`. Caminho de pasta solto no meio de uma instrução é o que esta demanda existe
 para tirar.
+
+## Relatório de implementação (2026-09-17)
+
+**Status** — concluído. Sem CI neste repositório, e sem PR: dois commits diretos na `main`.
+
+**Arquivos alterados** — 13 (`git diff --name-only acb5bb8~1 83d0ea6 | wc -l`), 449 inserções e 81
+remoções (`git diff --stat acb5bb8~1 83d0ea6 | tail -1`).
+
+- `skills/workflow-demanda/references/midia.md` — **novo**, 221 linhas
+  (`wc -l < skills/workflow-demanda/references/midia.md`). Primeira pasta `references/` do plugin.
+  As duas receitas operação por operação, mais os quatro estados, a linha `Processo`, a criação dos
+  labels, a adoção, a parada quando o `gh` falha e a deferência ao tracker do Matt.
+- `skills/workflow-demanda/SKILL.md` — a árvore de pastas vira a tabela de quatro estados; a linha
+  do Matt na tabela de entrevista ganha a saída por adoção.
+- `skills/setup/SKILL.md` — a pergunta da mídia antes de criar qualquer coisa, a checagem de
+  `gh auth status` e do remote, a leitura do `docs/agents/issue-tracker.md` e o que cada modo cria.
+- `skills/criar-spec/SKILL.md` — alvo `#<n>`, e os três casos de mudança de estado.
+- `skills/implementar-spec/SKILL.md`, `skills/fechar-demanda/SKILL.md` — neutras de mídia; o `grep`
+  de links relativos fica declarado como só do modo arquivo.
+- `skills/criar-prd/SKILL.md` — **fora do previsto pela spec**, ver Escopo efetivo.
+- `templates/claude-md.md`, `templates/roadmap.md`, `templates/readme.md`, `README.md`,
+  `README.en.md`, `CLAUDE.md`, `plugin.json` (`0.17.0`).
+
+**Commits**
+
+| Hash | O que |
+| --- | --- |
+| `acb5bb8` | `feat(governanca): a mídia do registro vira escolha do projeto` |
+| `83d0ea6` | `fix(governanca): oito achados da revisão de código da mídia do registro` |
+
+**Validação**
+
+Sem lint, testes ou build: o projeto é só markdown e a seção `## Verificação` do `CLAUDE.md` segue
+"a preencher" — o passo não foi pulado, não há o que rodar. Revisão de código por subagente fresco
+que não viu a implementação, contra a spec e o diff: **oito achados, todos procedentes**, corrigidos
+em `83d0ea6`.
+
+Ciclo rodado num repositório privado descartável com `gh` autenticado, apagado ao final:
+
+| O que se verificou | Saída |
+| --- | --- |
+| `gh label create` duas vezes | 2ª é aviso; exit 0 com `\|\| true` |
+| Linha `Processo —` no corpo da issue | primeira linha |
+| Troca de estado | mesmo número, label trocado |
+| Fechamento | `CLOSED`, relatório como último comentário |
+| Adoção de issue crua | 1 aberta antes, 1 depois — nenhuma paralela |
+| `--label` ×3 vs `--search`, uma issue de cada label | **0** contra **3** |
+| `GH_TOKEN=invalido` | erro 401, `git status --short` vazio |
+| Adoção sobre issue que já tinha label | reproduziu `aicf:intent,aicf:spec`; a receita corrigida deixa um só |
+| Conclusão removendo o label | issue fechada sem `aicf:*` |
+
+Verificações de texto, no repositório:
+`grep -rn 'docs/projeto/specs\|intents/' --include='SKILL.md' skills` só devolve ocorrência em bloco
+que declara o modo; `grep -o '^[0-9]\.' skills/<skill>/SKILL.md` confirma que a numeração dos passos
+não mudou (1234 / 123 / 123 / 1234), porque passo citado por número é ponteiro que envelhece.
+
+**O que não foi verificado:** o ciclo interativo ponta a ponta — `/aicf:setup` → `/aicf:criar-spec` →
+`/aicf:fechar-demanda` respondendo às perguntas. As três são entrevistas e dependem do usuário; o
+que se verificou foram os comandos que elas passam a prescrever.
+
+**Escopo efetivo** — dois arquivos além dos que a spec previa:
+
+- `skills/criar-prd/SKILL.md`, que a spec punha explicitamente fora de escopo. O passo 2 dele manda
+  tirar do PRD o primeiro `ROADMAP.md` — arquivo que não existe no modo issue. Deixá-lo intacto
+  entregaria caminho quebrado, então entrou um qualificador de uma linha, sem reestruturar a skill.
+  A revisão apontou que a correção tinha ficado cirúrgica demais e deixado duas irmãs (o último
+  passo do `setup` e a abertura do próprio `criar-prd`), corrigidas em `83d0ea6`.
+- `.claude/rules/templates.md`, criado pelo passo 3 — ver abaixo.
+- `skills/setup/templates/readme.md`, achado na varredura de links do fechamento: o README gerado
+  apontava para `ROADMAP.md`, `intents/` e `specs/`, que no modo issue não existem — três links
+  mortos em todo projeto novo que escolhesse issues. Mesma classe do `criar-prd`, e a revisão não
+  pegou porque olhou os `SKILL.md` e a lista de arquivos da spec. A tabela ganhou um bloco por
+  mídia.
+
+**Saída do ritual de fechamento**
+
+- [ADR 0004 — a mídia do registro é configuração própria, lida em runtime](../../../adr/0004-midia-do-registro-e-config-propria.md)
+- [`.claude/rules/templates.md`](../../../../.claude/rules/templates.md) — regra que só vale para
+  `skills/setup/templates/**`, com `paths:` no frontmatter.
+- Sem `CONTEXT.md`: "mídia do registro" é termo novo, mas está definido no `midia.md`, que toda
+  skill aponta. Criar um glossário para um termo não ambíguo seria o segundo lugar guardando a
+  mesma definição.
+
+**Lições**
+
+- **Dois comportamentos do `gh` só apareceram porque foram medidos.** A spec já mandava conferir a
+  semântica de `--label` repetido antes de escrever o comando no doc, e estava certa: é AND, não OR.
+  O segundo não estava previsto por ninguém — **o índice de label atrasa depois de um `edit`**, 4
+  defasagens em 6 rodadas. A primeira observação veio como uma linha aparentemente impossível: o
+  filtro devolveu o estado anterior enquanto a coluna exibida mostrava o atual. Prosa que descreve
+  comando sem ter rodado o comando é palpite formatado.
+- **Duas horas de revisão fresca acharam o que a implementação não podia achar.** Os dois achados
+  graves — o template com valor literal e o aviso de divergência inalcançável — não são erros de
+  escrita, são erros de alcance: instrução certa, escrita num lugar onde ninguém que precisa dela
+  passa. Quem implementou sabe o caminho que pretendia; só quem lê frio percebe que o caminho não
+  existe. O segundo era **falha declarada da Verificação da spec**, e teria passado.
+- **A varredura de links do fechamento vale a pena ser ampla.** O passo 2 do ritual manda corrigir
+  os links que apontavam **para** o arquivo movido; rodar o inverso — todo link relativo do
+  repositório, não só os da demanda — custou um comando e achou duas coisas: os seis links do
+  próprio relatório, deslocados um nível pelo `git mv`, e os três links mortos do template de
+  README, que são defeito da feature e não do movimento.
+- **Skill neutra de mídia não é skill sem caminho de pasta.** Tirar o caminho e deixar "gravar a
+  demanda" produz instrução que o agente não sabe executar. O que funciona é nomear a operação e
+  apontar para o doc — e manter o caminho onde o bloco declara o modo, porque no modo arquivo o
+  agente precisa dele inline, sem abrir outro arquivo.

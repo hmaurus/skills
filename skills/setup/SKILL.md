@@ -127,7 +127,7 @@ Os templates estão em `templates/` dentro desta skill:
 | `templates/claude-md.md` | `CLAUDE.md` (raiz)                              |
 | `templates/prd.md`       | `docs/projeto/PRD.md`                           |
 | `templates/roadmap.md`   | `docs/projeto/ROADMAP.md` — **só no modo arquivo** |
-| `templates/readme.md`    | `README.md` (raiz)                              |
+| `templates/readme.md`    | `README.md` (raiz) — a tabela "Onde ficam as coisas" tem um bloco por mídia; escolher um e apagar o outro |
 | `templates/preferencias.md` | conforme a resposta acima — ver abaixo       |
 
 ### Os três labels, no modo issue

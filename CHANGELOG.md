@@ -1,5 +1,71 @@
 # Changelog
 
+## 0.17.0 — 2026-09-17
+
+- **A mídia do registro vira escolha do projeto: arquivos ou issues do GitHub.** O aicf assumia
+  arquivo em toda skill, e quem preferia issue tracker customizava por fora, sem suporte e sem
+  documentação — o último trilho único de um método que já oferece três caminhos de entrevista e
+  quatro de implementação. Agora a demanda pode nascer e morrer como issue, e a governança não muda:
+  as quatro fases, o ritual de fechamento e a linha `Processo` são as mesmas nos dois modos. A
+  configuração é **uma linha do `CLAUDE.md`**, ao lado da que já declara as coleções instaladas —
+  nenhum mecanismo novo, porque o arquivo já carrega inteiro em toda sessão. O desenho vem do
+  conjunto do Matt Pocock, que já provou em produção que a mídia cabe numa resposta de setup lida em
+  runtime; o [ADR 0004](docs/adr/0004-midia-do-registro-e-config-propria.md) registra por que o aicf
+  lê o `docs/agents/issue-tracker.md` dele, mas não depende.
+- **Nada quebra em projeto que já usa o plugin: linha ausente significa arquivo.** Não há migração e
+  não haverá skill de migração — trocar a mídia vale do ponto em diante, o que está em arquivo fica
+  onde está, e demanda nova nasce na mídia nova. Código para um evento que acontece no máximo uma vez
+  por projeto não se paga.
+- **As cinco skills ficam neutras de mídia; o comando concreto mora num lugar só.**
+  `skills/workflow-demanda/references/midia.md` (221 linhas,
+  `wc -l < skills/workflow-demanda/references/midia.md`) traz as duas receitas lado a lado, operação
+  por operação. Uma terceira mídia no futuro acrescenta coluna em vez de espalhar condicional por
+  quatro arquivos. É a primeira pasta `references/` do plugin.
+- **Seis gavetas viram quatro estados.** No modo issue, "Próximas" e `intents/` deixam de se
+  distinguir — a diferença entre elas era o custo de criar arquivo, que a issue não tem. Sobram três
+  labels exclusivos (`aicf:backlog`, `aicf:intent`, `aicf:spec`) mais a issue fechada, e **uma
+  demanda é uma issue só, do nascimento ao fechamento**: o label troca, o número não. Por isso não
+  existe `ROADMAP.md` no modo issue, e o critério *certeza, não urgência* que ele explicava passa a
+  viver na descrição do label `aicf:backlog` — que tem limite de 100 caracteres.
+- **O `/aicf:setup` cria os labels, e não deixa isso para a primeira demanda.** `gh issue create
+  --label` com label inexistente falha em vez de criar; é a reclamação mais repetida sobre setups
+  que só gravam o mapeamento. Criação idempotente, com `|| true`. O setup também confere
+  `gh auth status` e o remote **antes** de oferecer issues: deixar o usuário escolher um caminho que
+  falha no primeiro comando é pior que não oferecer.
+- **`/aicf:criar-spec #12` e `/aicf:fechar-demanda #12` adotam uma issue que já existe**, em vez de
+  abrir outra. Sem isso, quem entrevista pelo `to-spec` do Matt — que cria issue nova e não edita a
+  existente — terminaria com duas issues para a mesma demanda, e a issue crua de um contribuidor
+  viraria duplicata em vez de virar a spec no lugar onde nasceu.
+- **Mídia issue com `gh` indisponível é parada, não fallback.** A skill mostra o erro e para. Gravar
+  em `docs/projeto/` "só desta vez" é como um repositório acaba com governança em duas mídias sem
+  ninguém ter escolhido isso.
+- **Dois comportamentos do `gh` medidos antes de entrarem no doc.** (1) `--label` repetido filtra por
+  **todos** os labels, não por qualquer um: com uma issue de cada label, os três flags juntos
+  devolvem 0 e `--search "label:aicf:backlog,aicf:intent,aicf:spec"` devolve 3. Reproduz em
+  repositório público, sem depender de nada nosso:
+  `gh issue list --repo denoland/deno --state open --label node:http --label node:sqlite --json number -q length`
+  devolve 0, e a forma `--search` equivalente devolve 6, que é 2 + 4. (2) **O índice de label atrasa
+  depois de um `edit`** — 4 defasagens em 6 rodadas alternando o label da mesma issue. A consulta
+  devolve o estado anterior à troca enquanto a coluna exibida mostra o atual, o que produz uma linha
+  aparentemente impossível. Troca de estado se confirma com `gh issue view`, que lê a issue direto.
+- **Oito achados de revisão de código, todos procedentes, corrigidos antes do release.** Os dois
+  graves não eram erro de escrita, e sim de alcance — instrução certa, num lugar por onde não passa
+  quem precisa dela. O template do `CLAUDE.md` trazia a linha de mídia com o valor do modo arquivo
+  escrito por extenso e sem marcador de preenchimento, cem linhas depois da pergunta que decide o
+  valor: setup em modo issue criaria os labels e copiaria a linha dizendo "arquivos". E o aviso de
+  divergência com o tracker do Matt vivia só no `midia.md`, que no modo arquivo nenhuma skill tem
+  motivo para abrir — era falha declarada da própria Verificação da spec. A lição virou regra em
+  [`.claude/rules/templates.md`](.claude/rules/templates.md), que carrega só ao tocar
+  `skills/setup/templates/**`.
+- **O template de `README.md` ganhou um bloco por mídia.** O README gerado listava `ROADMAP.md`,
+  `intents/` e `specs/` na tabela "Onde ficam as coisas" — três links mortos em todo projeto novo
+  que escolhesse issues. Achado pela varredura de links do fechamento, depois da revisão.
+- **`/aicf:criar-prd` ganhou um qualificador, embora a spec o pusesse fora de escopo.** O passo 2
+  dele mandava tirar do PRD o primeiro `ROADMAP.md` — arquivo que não existe no modo issue. A skill
+  não foi reestruturada; a redação fica para a demanda da entrada de quem chega.
+- **Os READMEs registram que a escolha existe, e só.** A reestruturação dos dois é da demanda
+  [a entrada de quem chega](docs/projeto/intents/a-entrada-de-quem-chega.md), que os toca inteiros.
+
 ## 0.16.0 — 2026-09-14
 
 - **O índice derivado sai do método: um item, um lugar.** O `CHECKLIST.md` tinha três seções

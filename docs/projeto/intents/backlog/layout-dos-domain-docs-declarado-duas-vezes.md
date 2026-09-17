@@ -53,6 +53,6 @@ onde o método já defere ao vizinho.
 ## Origem
 
 Levantado durante a entrevista de
-[o usuário escolhe se a governança mora em arquivos ou em issues](../../specs/escolher-entre-arquivos-e-issues.md),
+[o usuário escolhe se a governança mora em arquivos ou em issues](../../specs/concluidas/escolher-entre-arquivos-e-issues.md),
 ao mapear o que o aicf e o conjunto do Matt duplicam. Aquela demanda tratou a duplicação do
 **substrato** — onde o trabalho mora — e deixou esta, que é de outro assunto, fora do escopo.
