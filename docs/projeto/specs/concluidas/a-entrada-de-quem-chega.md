@@ -291,10 +291,12 @@ Um passo ponta a ponta, na ordem:
     A API devolve o bloco como `<pre lang="mermaid">`
     (`gh api repos/hmaurus/skills/readme -H "Accept: application/vnd.github.html" | grep -o '<pre lang="mermaid"'`),
     e a página renderiza as quatro caixas com as setas sólidas e a de retorno pontilhada.
-  - Verificação 4 (percurso de quem chega) — **parcial.** Conferido no conteúdo: a apresentação
-    está antes da primeira pergunta e a despedida no fim (`grep -n '^## ' skills/setup/SKILL.md`).
-    O comportamento encerra ao rodar `/aicf:setup` numa pasta vazia, em sessão nova, com a `0.18.0`
-    instalada — a sessão que implementou roda a skill da cópia em cache, que ainda é a `0.17.0`.
+  - Verificação 4 (percurso de quem chega) — **parcial, e o agente não pode fechá-la.** Conferido
+    no conteúdo: a apresentação está antes da primeira pergunta e a despedida no fim
+    (`grep -n '^## ' skills/setup/SKILL.md`). O comportamento só um humano verifica: o `setup` tem
+    `disable-model-invocation: true`, e o harness recusa tanto a invocação quanto a imitação do
+    roteiro por fora ("Do not replicate this skill's workflow by other means"). Encerra quando
+    alguém digitar `/aicf:setup` numa pasta vazia com a `0.18.0` carregada.
   - Verificação 5 (os dois idiomas) — `grep -c '^## '` devolve 6 nos dois, na mesma ordem.
   - Verificação 6 (ponteiros por número) — `## Ao terminar` foi de 4 para 5 passos, e
     `grep -rn 'passo [0-9]' --include='*.md' .` não acha nenhuma citação a passo do `setup`.
