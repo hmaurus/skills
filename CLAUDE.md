@@ -59,6 +59,12 @@ Quatro regras valem antes de abrir qualquer doc:
 
 Rodar tudo antes de dar qualquer tarefa por concluída, e colar a saída. Se um teste falha, corrigir o código, não o teste.
 
+## Publicação
+
+- **A versão sobe no commit de código; o `CHANGELOG.md` entra no commit de fechamento.** O bump do `.claude-plugin/plugin.json` viaja junto com a mudança que ele descreve.
+- **A release do GitHub fecha a versão:** `git tag -a vX.Y.Z <sha do HEAD>`, push da tag, e `gh release create vX.Y.Z --title "<título>" --notes-file <arquivo> --latest`. A tag aponta para o **HEAD**, não para o commit de código, para que o tarball leve o `CHANGELOG.md` e a doc da versão junto. `--target` com sha abreviado é recusado; criar a tag antes evita isso.
+- **As notas da release são para quem usa o plugin; o `CHANGELOG.md` é para quem o desenvolve.** Não reaproveitar o texto de um no outro. Nome interno de demanda não diz nada de fora — "a entrada de quem chega" não parece falar de README —, e decisão de projeto (o que foi descartado, ADR, regra nova) não interessa a quem só quer saber o que mudou no comando dele. A release diz o que mudou no uso, como atualizar, e para.
+
 ## Git
 
 - **`main`** — única branch. Não há `develop` aqui.
