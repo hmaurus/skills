@@ -12,6 +12,18 @@ ainda não tem `docs/projeto/`.
 **Nunca sobrescrever arquivo existente.** Se algum dos alvos já existe, mostrar quais e
 perguntar antes: pular, ou mostrar o diff e deixar o usuário decidir arquivo por arquivo.
 
+## A apresentação
+
+**Antes da primeira pergunta**, dizer em três a cinco linhas o que vem pela frente. Não mais que
+isso: quem roda este comando pela primeira vez está prestes a agir, e três parágrafos sobre
+governança seriam o muro que a apresentação existe para derrubar. Cobrir só:
+
+- **o que vai ser montado** — onde a visão do produto mora, onde cada demanda é registrada, e como
+  o agente sabe disso em toda sessão;
+- **quantas perguntas vêm** (cerca de seis), e que nenhuma resposta é definitiva: tudo vira arquivo
+  que o usuário edita depois;
+- **que nada é criado antes de ele confirmar.**
+
 ## Antes de criar
 
 Perguntar, em pergunta aberta:
@@ -195,11 +207,24 @@ recebe apenas o nome da variável.
 
 ## Ao terminar
 
+O setup é a primeira vez que o usuário vê o método funcionando, e ele termina sabendo o que ganhou
+e o que fazer em seguida — não só o que foi criado no disco.
+
 1. Listar o que foi criado e onde.
-2. Pedir que, na próxima sessão, o usuário rode `/context` e confira o `CLAUDE.md` na lista
+2. **Apresentar o método em linguagem comum.** Carregar `/aicf:workflow-demanda` e contar o que ele
+   diz, em vez de colar um texto guardado aqui: texto guardado seria a segunda cópia do mapa e
+   envelheceria sozinho, enquanto a skill é a fonte da verdade do ciclo. Cobrir, nesta ordem:
+   - as quatro fases, uma frase cada, sem o vocabulário de governança;
+   - **um exemplo concreto de primeira demanda**, do pedido até o registro fechado, usando o nome
+     real do projeto e a mídia que o usuário acabou de escolher — é o exemplo que faz o ciclo sair
+     do abstrato;
+   - que a governança é a mesma em qualquer caminho de implementação, inclusive os de outras
+     coleções.
+3. Pedir que, na próxima sessão, o usuário rode `/context` e confira o `CLAUDE.md` na lista
    **Memory files**. O arquivo carrega no início da sessão, e essa lista é a prova de que carregou
    — em vez de supor.
-3. Dizer que o mapa do ciclo está em `/aicf:workflow-demanda`, e que a primeira demanda pode
-   começar por `/aicf:criar-spec`.
-4. Sugerir `/aicf:criar-prd` como primeira coisa — é do PRD que saem as primeiras demandas (no
-   modo arquivo, o roadmap inicial; no modo issue, as primeiras issues).
+4. Sugerir `/aicf:criar-prd` como próximo passo — é do PRD que saem as primeiras demandas (no
+   modo arquivo, o roadmap inicial; no modo issue, as primeiras issues). Depois dele, a primeira
+   demanda começa por `/aicf:criar-spec`.
+5. Dizer que `/aicf:workflow-demanda` é o lugar de voltar quando quiser reler como o método
+   funciona.

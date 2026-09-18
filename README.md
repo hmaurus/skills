@@ -2,22 +2,11 @@
 
 _[English version](README.en.md)_
 
-Um kit inicial para tocar um projeto de software com Claude Code: a estrutura de documentos que sustenta o projeto — visão, roadmap, demandas versionadas — e o ciclo que leva cada demanda da ideia ao registro do que foi feito. Ele cuida da **governança** e do **planejamento macro**, que as coleções de skills de engenharia deixam de fora, e é **agnóstico** quanto ao caminho de implementação: a governança é a mesma quer a demanda seja entrevistada e implementada pelo caminho aicf, pelo Superpowers ou pelas skills do Matt Pocock.
+Vinte specs bem escritas não respondem onde o projeto está.
 
-## Onde ele entra
+As coleções de skills de engenharia cuidam de uma demanda por vez, e cuidam bem: interrogam a ideia, escrevem a spec, quebram em tarefas, executam com disciplina. Elas começam numa ideia já formulada e param no commit. Fica de fora o nível de cima — o documento que diz o que você está construindo e para quem, o lugar onde a ideia ainda crua espera a vez, e o registro do que foi entregue de verdade.
 
-Coleções de skills como [Superpowers](https://github.com/obra/superpowers) e as [do Matt Pocock](https://github.com/mattpocock/skills) resolvem bem **a demanda individual**: interrogam a ideia, produzem uma spec, quebram em tarefas, executam com disciplina. E deixam rastro — o Superpowers grava spec e plano em arquivo; o Matt publica spec e tickets no issue tracker e ainda mantém glossário e ADRs.
-
-Só que esse rastro é **por demanda** e escrito **antes** da execução. Três coisas ficam de fora, e nenhuma das duas coleções declara que elas são problema de outra pessoa — elas simplesmente começam na ideia já formulada e terminam no commit ou no merge:
-
-- **O nível do produto.** Nenhuma das duas tem o documento que diz o que se está construindo, para quem, e o que ficou fora por decisão — nem o registro do que já foi entregue e do que falta. Vinte specs bem escritas não respondem "onde o projeto está".
-- **O planejamento macro.** Quando o pedido é grande demais para uma spec, o `brainstorming` do Superpowers ajuda a decompor em subprojetos e trabalha o primeiro; os outros ficam na conversa. Aqui a ideia que ainda não amadureceu tem arquivo próprio, cada demanda declara na própria prosa o que bloqueia e do que depende, e o que ainda não se sabe se será feito tem lugar para esperar sem se perder.
-- **O depois.** Spec e plano dizem o que se pretendia. O que de fato saiu, onde a entrega divergiu do plano e por quê, só existe se alguém escrever ao fechar. O `implement` do Matt termina no commit e não fecha o ticket nem marca os critérios de aceite; o Superpowers lista as decisões que tomou por conta própria na mensagem final e apaga a pasta de trabalho, porque a partir dali o histórico do git é o registro. O `aicf` pede um relatório no arquivo da demanda, e é nele que a divergência plano×entrega fica escrita.
-
-O `aicf` é essa camada, e a mesma camada vale para qualquer caminho de implementação. Ele funciona de dois jeitos:
-
-- **Sozinho**, com um caminho aicf próprio para entrevista e implementação, sem instalar mais nada.
-- **Por cima**, se você já usa as outras. Entreviste pelo `brainstorming` do Superpowers ou pelo `grill-with-docs` do Matt, implemente por `subagent-driven-development` ou por `to-tickets` + `implement`: o registro continua caindo no mesmo lugar, o fechamento é o mesmo, e a demanda anota qual caminho foi usado. Trocar de coleção, ou misturar as duas numa mesma demanda, não muda nada na governança.
+O aicf é essa camada. Ele monta a estrutura de documentos do projeto e conduz cada demanda da ideia até o relatório do que foi feito. Funciona sozinho, e funciona por cima das coleções que você já usa.
 
 ## Instalação
 
@@ -28,61 +17,94 @@ O `aicf` é essa camada, e a mesma camada vale para qualquer caminho de implemen
 
 Reinicie a sessão depois de instalar — skills carregam no início e não trocam a quente.
 
-Em projeto que já existe, comece por `/aicf:workflow-demanda`, que explica o ciclo.
+Em projeto novo, comece por `/aicf:setup`. Em projeto que já existe, por `/aicf:workflow-demanda`, que explica o ciclo.
 
-## Começando um projeto novo
+## O ciclo
 
-**1. `/aicf:setup`** — cria `docs/projeto/` com PRD e roadmap, as pastas de intents e specs e o `CLAUDE.md` raiz. Pergunta pouco: o nome, uma ou duas frases sobre o projeto, **onde a demanda vai morar** (arquivos ou issues), onde ficam os padrões de engenharia e quais ferramentas você já usa.
+Toda demanda passa pelas mesmas quatro fases.
 
-**2. Preencher o `PRD.md`.** Ele nasce com as seções e uma pergunta em cada uma. A que mais se paga é **"fora de escopo, por decisão"** — é ela que impede a mesma discussão de voltar daqui a seis meses.
+```mermaid
+flowchart LR
+  D[Demanda<br/>o que se quer, ainda cru]
+  E[Entrevista<br/>produz a spec]
+  I[Implementação<br/>consome a spec]
+  F[Fechamento<br/>relatório do que saiu]
+  D --> E --> I --> F
+  F -.-> D
+```
 
-**`/aicf:criar-prd`** entrevista você seção por seção e escreve o arquivo. Começa pelo problema, não pela solução, e não deixa o "fora de escopo" passar em branco. Dois complementos, quando fizerem falta:
+- **Demanda** — a ideia registrada, mesmo antes de estar madura.
+- **Entrevista** — perguntas até não sobrar decisão em aberto. Sai uma spec.
+- **Implementação** — alguém executa a spec, por qualquer caminho.
+- **Fechamento** — o relatório do que foi feito de fato, com o que saiu diferente do planejado.
 
-- **`grilling`** (Matt Pocock) — antes, se você já acha que sabe o que quer e prefere ser contestado. Ela não grava nada; o resultado da conversa entra na entrevista do PRD.
-- **`domain-modeling`** (Matt Pocock) — depois, se o produto tem vocabulário próprio que já apareceu ambíguo. Grava o glossário em `CONTEXT.md`, ao lado do PRD e não dentro dele.
-
-**O que não funciona é passar o PRD pelo ciclo da demanda.** Não por ser documento — spec serve bem para mudança de documentação. É que a spec descreve uma **mudança**, com escopo e um estado "pronto", enquanto o PRD descreve o **produto**, e é revisado toda vez que uma decisão o contraria. Envelopar um no outro rende uma spec vazia — a entrevista dela discutiria como escrever o arquivo, e as perguntas que importam, público e fora de escopo, continuariam sem resposta — mais um fechamento pedindo relatório, arquivamento e check de lint num `.md`.
-
-**3. Tirar o `ROADMAP.md` do PRD.** Cada coisa que o produto precisa ter vira uma linha. O que couber numa linha fica ali mesmo; o que precisar de contexto vira arquivo em `intents/`, e **a linha sai** — quem tem arquivo não tem linha, e não sobra índice para envelhecer.
-
-**4. Primeira demanda.** `/aicf:criar-spec` para amadurecer, `/aicf:implementar-spec` para executar e fechar. As duas também respondem ao pedido em linguagem natural — "me entreviste sobre X", "implementa a spec Y" —, porque o agente as carrega sozinho quando reconhece a intenção. Daí em diante o ciclo se repete.
-
-## As skills
-
-| Skill                    | Quando                     | O que faz                                                                        |
-| ------------------------ | -------------------------- | -------------------------------------------------------------------------------- |
-| `/aicf:setup`            | uma vez, no projeto novo   | Pergunta se a demanda mora em arquivos ou em issues do GitHub e monta o que a escolha pedir: `docs/projeto/` com PRD, roadmap e as pastas de demanda, ou os três labels `aicf:*`. Nos dois casos, o `CLAUDE.md` (com `AGENTS.md` apontando para ele) e um `README.md` — e, se você quiser, os padrões de engenharia |
-| `/aicf:criar-prd`        | começo do projeto          | Entrevista sobre o produto e escreve o `PRD.md` — roda de novo quando uma decisão o contraria |
-| `/aicf:workflow-demanda` | o mapa                     | O ciclo, os caminhos de cada fase e as convenções de governança                   |
-| `/aicf:criar-spec`       | fase de entrevista         | Interroga até não sobrar decisão em aberto, depois escreve a spec no repositório, com a sugestão de caminho de implementação |
-| `/aicf:implementar-spec` | fase de implementação      | Decide o caminho pela sugestão da spec — segue no caso óbvio, pergunta nos demais —, implementa e verifica; ao final chama o fechamento |
-| `/aicf:fechar-demanda`   | fase de fechamento         | Checks, relatório, arquivamento e promoção de conhecimento — o agente a aplica ao concluir qualquer demanda, por qualquer caminho |
-
-As skills são deliberadamente pequenas: dizem o que o agente não teria como inferir — onde gravar, o que registrar, quando fechar — e param aí. O que a ferramenta já faz bem e o que se decide melhor no caso concreto ficam com o agente; quanto mais a skill descreve, mais ela precisa ser reescrita a cada evolução dele.
+Cada demanda é um arquivo versionado no repositório, ou uma issue do GitHub. Você escolhe qual no setup.
 
 ## O problema que isso resolve
 
-Sessão de agente é volátil. A conversa em que você decidiu **não** usar uma abordagem some no `/clear`, e três semanas depois alguém — humano ou agente — reabre a mesma discussão porque o motivo nunca foi escrito em lugar nenhum.
+### A conversa some no /clear
 
-O ciclo tem quatro fases:
+Você passou meia hora com o agente decidindo não seguir por um caminho. Deu `/clear`. Três semanas depois alguém reabre a mesma discussão, porque o motivo não ficou escrito em lugar nenhum.
 
-1. **Demanda** — o que se quer, ainda cru
-2. **Entrevista** — amadurece a demanda e produz a spec
-3. **Implementação** — consome a spec
-4. **Fechamento** — relatório do que foi feito **de fato**, com as divergências plano×entrega
+No aicf a decisão e o motivo ficam na demanda, dentro do repositório. `/aicf:criar-spec` conduz a entrevista e grava tudo, inclusive o que foi decidido **não** fazer.
 
-O que amarra tudo é o registro: cada demanda vira um arquivo no repositório, e ao concluir ganha um relatório e vai para `specs/concluidas/`. O porquê mora no repo, não na conversa.
+### Ninguém sabe onde o projeto está
 
-## Caminhos, não trilho único
+Specs contam cada mudança, uma por uma. Nenhuma delas diz o que o produto é, para quem serve, e o que ficou de fora por decisão.
 
-As fases 2 e 3 são independentes. Na entrevista, o caminho é pergunta ao usuário; na implementação, o agente segue a sugestão que a spec traz quando o caso é óbvio — caminho aicf direto e diff que cabe numa frase — e pergunta com opções nos demais. O agente sugere, e quando há escolha real a decisão é do usuário:
+`/aicf:criar-prd` entrevista você e escreve o `PRD.md`. A seção que mais se paga é "fora de escopo, por decisão": é ela que impede a mesma discussão de voltar daqui a seis meses.
 
-- **Entrevista** — `/aicf:criar-spec`, ou `brainstorming` (Superpowers), ou `grill-with-docs` + `to-spec` (Matt Pocock)
-- **Implementação** — `/aicf:implementar-spec` (com ou sem plan mode), ou `writing-plans` + `subagent-driven-development`, ou `to-tickets` + `implement`
+### O que saiu de fato não fica escrito
 
-Dá para entrevistar por um caminho e implementar por outro. A demanda registra qual foi usado, numa linha `Processo`.
+Spec e plano dizem o que se pretendia, e foram escritos antes de executar. O que mudou no caminho só existe se alguém escrever no fim.
 
-## A estrutura
+`/aicf:fechar-demanda` pede esse relatório e o guarda junto da demanda. O agente aplica o fechamento em qualquer caminho de implementação, inclusive nos que não são do aicf.
+
+## Começando um projeto novo
+
+**1. `/aicf:setup`.** Monta a base: o `PRD.md`, o lugar onde as demandas vão morar, e o `CLAUDE.md` da raiz, que é o arquivo que o agente lê no início de toda sessão. Pergunta pouco — o nome, uma ou duas frases sobre o projeto, se a demanda vive em arquivo ou em issue, onde ficam os padrões de engenharia, e quais ferramentas você já usa.
+
+**2. Preencher o `PRD.md`.** Ele nasce com as seções e uma pergunta em cada uma. `/aicf:criar-prd` entrevista seção por seção e escreve o arquivo, começando pelo problema em vez da solução.
+
+<details>
+<summary>Por que o PRD não passa pelo ciclo da demanda</summary>
+
+Não é por ser documento — spec serve bem para mudança de documentação. É que a spec descreve uma **mudança**, com escopo e um estado "pronto", enquanto o PRD descreve o **produto**, e é revisado toda vez que uma decisão o contraria. Envelopar um no outro rende uma spec vazia: a entrevista dela discutiria como escrever o arquivo, e as perguntas que importam — público, fora de escopo — continuariam sem resposta. Mais um fechamento pedindo relatório, arquivamento e check de lint num `.md`.
+
+</details>
+
+**3. Listar o que o produto precisa ter.** Cada item vira uma linha do roadmap, ou uma issue de backlog. O que precisar de contexto ganha registro próprio na hora, e a linha sai — quem tem arquivo não tem linha, e não sobra índice para envelhecer.
+
+**4. Primeira demanda.** `/aicf:criar-spec` para amadurecer, `/aicf:implementar-spec` para executar e fechar. Daí em diante o ciclo se repete.
+
+As fases de entrevista e de implementação aceitam caminhos de fora do aicf, se você já usa outras coleções de skills. A governança não muda, e a demanda anota qual caminho foi usado.
+
+## As skills
+
+São seis, e o eixo que importa é quem pode chamar cada uma.
+
+**Você digita.** Só existem quando você as chama, e conduzem uma sessão inteira.
+
+| Skill | Quando | O que faz |
+| --- | --- | --- |
+| `/aicf:setup` | uma vez, no projeto novo | Pergunta se a demanda mora em arquivo ou em issue e monta o que a escolha pedir: `docs/projeto/` com PRD, roadmap e as pastas de demanda, ou os três labels `aicf:*`. Nos dois casos, o `CLAUDE.md` (com `AGENTS.md` apontando para ele), um `README.md` e, se você quiser, os padrões de engenharia |
+| `/aicf:criar-prd` | começo do projeto | Entrevista sobre o produto e escreve o `PRD.md`. Roda de novo quando uma decisão o contraria |
+
+**Você digita, ou o agente alcança sozinho.** Respondem ao pedido em linguagem natural — "me entreviste sobre X", "implementa a spec Y" — e o agente as carrega quando reconhece a intenção.
+
+| Skill | Quando | O que faz |
+| --- | --- | --- |
+| `/aicf:workflow-demanda` | o mapa | O ciclo, os caminhos de cada fase e as convenções de governança |
+| `/aicf:criar-spec` | fase de entrevista | Interroga até não sobrar decisão em aberto, depois escreve a spec, com a sugestão de caminho de implementação. `/aicf:criar-spec #12` adota uma issue que já existe |
+| `/aicf:implementar-spec` | fase de implementação | Decide o caminho pela sugestão da spec, implementa e verifica. Ao final chama o fechamento |
+| `/aicf:fechar-demanda` | fase de fechamento | Checks, relatório, arquivamento e promoção de conhecimento, por qualquer caminho de implementação |
+
+As skills são deliberadamente pequenas: dizem o que o agente não teria como inferir — onde gravar, o que registrar, quando fechar — e param aí. O que a ferramenta já faz bem, e o que se decide melhor no caso concreto, fica com o agente.
+
+<details>
+<summary><strong>Onde as coisas ficam</strong> — a estrutura de pastas, ou os labels</summary>
+
+No modo arquivo, a pasta diz a maturidade do documento:
 
 ```
 docs/projeto/
@@ -96,17 +118,57 @@ docs/projeto/
     └── concluidas/    # arquivadas, com relatório
 ```
 
-A pasta diz a maturidade do documento. Uma demanda é a unidade de trabalho; o arquivo que a descreve nasce como **intent** (decidida, ainda não entrevistada), vira **spec** quando está pronta para implementar — o mesmo arquivo, movido — e termina em `specs/concluidas/` com o relatório. `intents/backlog/` é para o que ainda não se sabe se será feito.
+Uma demanda é a unidade de trabalho. O arquivo que a descreve nasce como **intent**, vira **spec** quando está pronta para implementar — o mesmo arquivo, movido — e termina em `specs/concluidas/` com o relatório.
 
-### Ou em issues, se você preferir
+**Em issues**, a maturidade fica num label (`aicf:backlog`, `aicf:intent`, `aicf:spec`), a demanda é uma issue só do nascimento ao fechamento — o label troca, o número não —, e concluída é a issue fechada, com o relatório em comentário. Aí `docs/projeto/` fica só com o `PRD.md`. PRD, ADR e glossário ficam em arquivo nos dois modos.
 
-A mídia do registro é **escolha do projeto**, e o `/aicf:setup` pergunta qual. Em vez de arquivos, a demanda pode ser uma **issue do GitHub**: a maturidade fica num label (`aicf:backlog`, `aicf:intent`, `aicf:spec`), a demanda é uma issue só do nascimento ao fechamento — o label troca, o número não —, e concluída é a issue fechada, com o relatório em comentário. Aí `docs/projeto/` fica só com o `PRD.md`; PRD, ADR e glossário ficam em arquivo nos dois modos.
-
-Você troca editando uma linha do `CLAUDE.md`, e **a linha ausente significa arquivos** — projeto criado antes desta opção segue funcionando sem tocar em nada. A escolha vale do ponto em diante: não há migração, o que já está em arquivo fica onde está, e demanda nova nasce na mídia nova.
+Você troca editando uma linha do `CLAUDE.md`, e a linha ausente significa arquivo, então projeto criado antes desta opção segue funcionando sem tocar em nada. A escolha vale do ponto em diante: não há migração, o que está em arquivo fica onde está, e demanda nova nasce na mídia nova.
 
 Cada uma ganha coisas diferentes. Arquivo: zero setup, sobrevive ao `git clone` sem rede, entra no `grep` do repositório, não depende de fornecedor. Issue: conversa com comentário e notificação, contribuição de fora em dois cliques, referência estável por `#12`, e `Fixes #12` fechando pelo merge. O default é arquivo porque é o que funciona sem `gh`, sem login e sem remote.
 
 Se o seu projeto precisar de outra estrutura, escreva a diferença no `CLAUDE.md` da raiz ou em `.claude/rules/`, nunca num `CLAUDE.md` dentro de `docs/projeto/`: `CLAUDE.md` de subpasta só entra no contexto quando o agente lê um arquivo daquela pasta, e registrar uma demanda nova não exige isso.
+
+</details>
+
+<details>
+<summary><strong>Comandos vizinhos que valem conhecer</strong> — e para que serve cada um</summary>
+
+Nenhum deles vem com o aicf. São das coleções [Superpowers](https://github.com/obra/superpowers) e [Matt Pocock](https://github.com/mattpocock/skills), e valem se você já as tem instaladas.
+
+**Antes de escrever a demanda**
+
+- `grill-me` e `grill-with-docs` (Matt) — contestam a ideia antes de você escrevê-la, com perguntas até cada ramo da decisão estar resolvido. Use quando você já acha que sabe o que quer. Não gravam nada; o resultado entra na entrevista.
+- `domain-modeling` (Matt) — grava o vocabulário do projeto num `CONTEXT.md`, se o produto tem termos próprios que já apareceram ambíguos.
+
+**Na fase de entrevista, no lugar de `/aicf:criar-spec`**
+
+- `brainstorming` (Superpowers) — entrevista e, no caminho _architectural_, grava um design doc que vale como spec.
+- `grill-with-docs` + `to-spec` (Matt) — a mesma coisa em dois passos, terminando com a spec publicada no tracker.
+
+**Na fase de implementação, no lugar de `/aicf:implementar-spec`**
+
+- `writing-plans` + `subagent-driven-development` (Superpowers) — o plano vai para arquivo, e subagentes executam tarefa por tarefa.
+- `to-tickets` + `implement` (Matt) — a spec vira tickets com dependência declarada entre eles, executados um a um.
+- `code-review` (Matt) — revisa o diff em dois eixos, padrões do repositório e fidelidade à spec, em subagentes paralelos.
+
+Dá para entrevistar por um caminho e implementar por outro. Descer essa lista troca velocidade por rastro: nos caminhos aicf o plano vive na sessão e morre com ela.
+
+</details>
+
+<details>
+<summary><strong>Por que este, e não o Superpowers ou as skills do Matt Pocock</strong></summary>
+
+Porque não é a mesma pergunta. As duas coleções resolvem bem **a demanda individual**: interrogam a ideia, produzem uma spec, quebram em tarefas, executam com disciplina. E deixam rastro — o Superpowers grava spec e plano em arquivo, o Matt publica spec e tickets no tracker que você escolheu no setup dele (GitHub Issues, Linear ou markdown local), e ainda mantém glossário e ADRs.
+
+Só que esse rastro é **por demanda** e escrito **antes** da execução. Três coisas ficam de fora, e nenhuma das duas declara que são problema de outra pessoa: elas simplesmente começam na ideia já formulada e terminam no commit ou no merge.
+
+- **O nível do produto.** Nenhuma das duas tem o documento que diz o que se está construindo, para quem, e o que ficou fora por decisão, nem o registro do que já foi entregue e do que falta.
+- **O planejamento macro.** Quando o pedido é grande demais para uma spec, o `brainstorming` ajuda a decompor em subprojetos e trabalha o primeiro; os outros ficam na conversa. Aqui a ideia que ainda não amadureceu tem registro próprio, cada demanda declara na própria prosa o que bloqueia e do que depende, e o que ainda não se sabe se será feito tem lugar para esperar sem se perder.
+- **O depois.** Spec e plano dizem o que se pretendia. O `implement` do Matt termina no commit e não fecha o ticket nem marca os critérios de aceite. O Superpowers grava plano e design doc no repositório, e eles ficam — mas foram escritos antes de executar, e nada pede que sejam revistos contra o que saiu. O aicf pede um relatório na própria demanda, e é nele que a divergência plano×entrega fica escrita.
+
+O aicf é essa camada, e a mesma camada vale para qualquer caminho de implementação. Trocar de coleção, ou misturar as duas numa mesma demanda, não muda nada na governança.
+
+</details>
 
 ## Sobre
 

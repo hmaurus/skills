@@ -2,24 +2,13 @@
 
 _[Versão em português](README.md)_
 
-A starter kit for running a software project with Claude Code: the documents that hold a project together — vision, roadmap, versioned work items — and the cycle that takes each one from raw idea to a record of what was actually done. It covers **governance** and **macro planning**, which engineering skill collections leave out, and it is **agnostic** about the implementation path: governance is the same whether a work item is interviewed and implemented through the aicf path, through Superpowers, or through Matt Pocock's skills.
+Twenty well-written specs do not tell you where the project stands.
+
+Engineering skill collections handle one work item at a time, and handle it well: they interrogate the idea, write the spec, break it into tasks, execute with discipline. They start at an idea that is already formed and stop at the commit. What falls outside is the level above — the document stating what you are building and for whom, the place where a raw idea waits its turn, and the record of what actually shipped.
+
+`aicf` is that layer. It sets up the project's documents and takes each work item from the idea to the report of what was done. It works on its own, and it works on top of the collections you already use.
 
 > **Written in Portuguese.** The skills instruct the agent in pt-BR and the file conventions mix the playbook's terms with Portuguese names (`intents/` and `specs/` for the two states of a work item, `backlog/`, `concluidas/` for completed). The GitHub labels of the issue mode are the same words: `aicf:backlog`, `aicf:intent`, `aicf:spec`. They work fine in an English-speaking session — Claude reads the instructions and answers you in whatever language you write — but if you want the artifacts named in English, fork and translate.
-
-## Where it fits
-
-Skill collections like [Superpowers](https://github.com/obra/superpowers) and [Matt Pocock's](https://github.com/mattpocock/skills) handle **the individual work item** well: they interrogate the idea, produce a spec, break it into tasks, and execute with discipline. And they do leave a trail — Superpowers writes the spec and plan to files; Matt's publish spec and tickets to an issue tracker and maintain a glossary and ADRs.
-
-That trail, though, is **per work item** and written **before** execution. Three things fall outside it, and neither collection declares them somebody else's problem — they simply start at an idea that is already formed and stop at the commit or the merge:
-
-- **The product level.** Neither has the document stating what is being built, for whom, and what was ruled out by decision — nor the record of what shipped and what is missing. Twenty well-written specs do not answer "where does the project stand".
-- **Macro planning.** When a request is too big for one spec, Superpowers' `brainstorming` helps decompose it into sub-projects and works on the first one; the others stay in the conversation. Here, an idea that has not matured yet gets its own file, each work item declares in its own prose what it blocks and what it depends on, and what may never be done has a place to wait without getting lost.
-- **The afterwards.** A spec and a plan say what was intended. What actually shipped, where delivery diverged from the plan and why, only exists if someone writes it at closing time. Matt's `implement` ends at the commit and neither closes the ticket nor ticks the acceptance criteria; Superpowers lists the decisions it made on its own in the final message and deletes the working folder, because from there on git history is the record. `aicf` asks for a report in the work item's file, and that is where the plan×delivery divergence gets written down.
-
-`aicf` is that layer, and the same layer applies to any implementation path. It works two ways:
-
-- **On its own**, with an aicf path of its own for interview and implementation. Nothing else to install.
-- **On top**, if you already use the others. Interview with Superpowers' `brainstorming` or Matt's `grill-with-docs`, implement with `subagent-driven-development` or with `to-tickets` + `implement`: the record still lands in the same place, closing is the same, and the work item notes which path was used. Switching collections, or mixing both within one work item, changes nothing in governance.
 
 ## Install
 
@@ -30,88 +19,161 @@ That trail, though, is **per work item** and written **before** execution. Three
 
 Restart your session afterwards — skills load at startup and do not hot-swap.
 
-On an existing project, start with `/aicf:workflow-demanda`, which explains the cycle.
+On a new project, start with `/aicf:setup`. On an existing one, start with `/aicf:workflow-demanda`, which explains the cycle.
 
-## Starting a new project
+## The cycle
 
-**1. `/aicf:setup`** — creates `docs/projeto/` with a PRD and roadmap, the `intents/` and `specs/` folders, and the root `CLAUDE.md`. It asks little: the name, a sentence or two about the project, **where work items will live** (files or issues), where the engineering defaults live, and which tools you already use.
+Every work item goes through the same four phases.
 
-**2. Fill in `PRD.md`.** It ships with the sections and a prompt under each. The one that pays off most is **"ruled out, by decision"** — it is what keeps the same argument from coming back six months later.
+```mermaid
+flowchart LR
+  D[Work item<br/>what you want, still raw]
+  E[Interview<br/>produces the spec]
+  I[Implementation<br/>consumes the spec]
+  F[Closing<br/>report of what shipped]
+  D --> E --> I --> F
+  F -.-> D
+```
 
-**`/aicf:criar-prd`** interviews you section by section and writes the file. It starts from the problem rather than the solution, and does not let "out of scope" go blank. Two complements, when you need them:
+- **Work item** — the idea recorded, even before it is mature.
+- **Interview** — questions until no decision is left open. A spec comes out.
+- **Implementation** — someone executes the spec, by any path.
+- **Closing** — the report of what was actually done, including what came out different from the plan.
 
-- **`grilling`** (Matt Pocock) — beforehand, if you think you already know what you want and would rather be challenged. It stores nothing; what comes out of the conversation feeds the PRD interview.
-- **`domain-modeling`** (Matt Pocock) — afterwards, if the product has vocabulary of its own that has already turned ambiguous. It writes the glossary into `CONTEXT.md`, beside the PRD rather than inside it.
-
-**What does not work is running the PRD through the work-item cycle.** Not because it is a document — a spec handles documentation changes fine. It is that a spec describes a **change**, with a scope and a "done" state, while the PRD describes the **product**, and gets revised whenever a decision contradicts it. Wrapping one in the other yields an empty spec — its interview would debate how to write the file, while the questions that matter, audience and what is ruled out, stay unanswered — plus a closing ritual asking for a report, archiving, and a lint check on a `.md`.
-
-**3. Derive `ROADMAP.md` from the PRD.** Every thing the product needs becomes one line. What fits in a line stays there; what needs context becomes a file under `intents/`, and **the line goes away** — what has a file has no line, and no index is left to go stale.
-
-**4. First work item.** `/aicf:criar-spec` to mature it, `/aicf:implementar-spec` to execute and close. Both also answer a plain-language request — "interview me about X", "implement spec Y" — because the agent loads them on its own when it recognizes the intent. From there the cycle repeats.
-
-## The skills
-
-| Skill                    | When                    | What it does                                                                    |
-| ------------------------ | ----------------------- | -------------------------------------------------------------------------------- |
-| `/aicf:setup`            | once, on a new project  | Asks whether work items live in files or in GitHub issues, then builds what the answer calls for: `docs/projeto/` with a PRD, a roadmap and the work-item folders, or the three `aicf:*` labels. Either way, the root `CLAUDE.md` (with `AGENTS.md` symlinked to it) and a `README.md` — plus engineering defaults, if you want them |
-| `/aicf:criar-prd`        | start of the project    | Interviews you about the product and writes `PRD.md` — run it again when a decision contradicts it |
-| `/aicf:workflow-demanda` | the map                 | The cycle, the paths available at each phase, and the governance conventions      |
-| `/aicf:criar-spec`       | interview phase         | Interrogates until no open decision is left, then writes the spec into the repo, with a suggested implementation path |
-| `/aicf:implementar-spec` | implementation phase    | Picks the path from the spec's suggestion — follows it when the case is obvious, asks otherwise —, implements and verifies; calls the closing ritual at the end |
-| `/aicf:fechar-demanda`   | closing phase           | Checks, report, archiving and knowledge promotion — the agent applies it when any work item completes, whatever the path |
-
-The skills are deliberately small: they say what the agent could not infer on its own — where to write, what to record, when to close — and stop there. What the tool already does well, and what is better decided case by case, stays with the agent; the more a skill describes, the more it has to be rewritten with every evolution of the model.
+Each work item is a versioned file in the repository, or a GitHub issue. You pick which one at setup.
 
 ## The problem this solves
 
-Agent sessions are volatile. The conversation where you decided **not** to take some approach dies with `/clear`, and three weeks later someone — human or agent — reopens the same argument, because the reasoning was never written down anywhere.
+### The conversation disappears with /clear
 
-The cycle has four phases:
+You spent half an hour with the agent deciding not to take a certain approach. You ran `/clear`. Three weeks later someone reopens the same argument, because the reason was never written down anywhere.
 
-1. **Work item** — what you want, still raw
-2. **Interview** — matures it and produces the spec
-3. **Implementation** — consumes the spec
-4. **Closing** — a report of what was **actually** done, including where delivery diverged from plan
+In `aicf` the decision and the reason live in the work item, inside the repository. `/aicf:criar-spec` runs the interview and records all of it, including what was decided **against**.
 
-What holds it together is the record: each work item is a file in the repository, and on completion it gets a report and moves to `specs/concluidas/`. The reasoning lives in the repo, not in the chat.
+### Nobody knows where the project stands
 
-## Paths, not a single track
+Specs tell each change, one by one. None of them says what the product is, who it serves, and what was ruled out by decision.
 
-Phases 2 and 3 are independent. At the interview, the path is the user's call; at implementation, the agent follows the suggestion recorded in the spec when the case is obvious — the direct aicf path and a diff that fits in one sentence — and asks with options otherwise. The agent suggests, and when there is a real choice the decision is the user's:
+`/aicf:criar-prd` interviews you and writes `PRD.md`. The section that pays off most is "ruled out, by decision": it is what keeps the same argument from coming back six months later.
 
-- **Interview** — `/aicf:criar-spec`, or `brainstorming` (Superpowers), or `grill-with-docs` + `to-spec` (Matt Pocock)
-- **Implementation** — `/aicf:implementar-spec` (with or without plan mode), or `writing-plans` + `subagent-driven-development`, or `to-tickets` + `implement`
+### What actually shipped never gets written
 
-You can interview one way and implement another. The work item records which was used, on a `Processo` line.
+A spec and a plan say what was intended, and they were written before execution. What changed along the way only exists if someone writes it at the end.
 
-## The structure
+`/aicf:fechar-demanda` asks for that report and keeps it with the work item. The agent applies closing on any implementation path, including the ones that are not `aicf`'s.
+
+## Starting a new project
+
+**1. `/aicf:setup`.** Sets up the base: `PRD.md`, the place where work items will live, and the root `CLAUDE.md`, the file the agent reads at the start of every session. It asks little — the name, a sentence or two about the project, whether a work item lives in a file or an issue, where the engineering defaults live, and which tools you already use.
+
+**2. Fill in `PRD.md`.** It ships with the sections and a prompt under each. `/aicf:criar-prd` interviews you section by section and writes the file, starting from the problem rather than the solution.
+
+<details>
+<summary>Why the PRD does not go through the work item cycle</summary>
+
+Not because it is a document — a spec works fine for a documentation change. It is that a spec describes a **change**, with a scope and a "done" state, while the PRD describes the **product**, and gets revised every time a decision contradicts it. Wrapping one in the other yields an empty spec: its interview would discuss how to write the file, and the questions that matter — audience, what is ruled out — would stay unanswered. Plus a closing asking for a report, archiving and a lint check on a `.md`.
+
+</details>
+
+**3. List what the product needs to have.** Each item becomes a roadmap line, or a backlog issue. Anything that needs context gets its own record right away, and the line goes away — what has a file has no line, and no index is left to grow stale.
+
+**4. First work item.** `/aicf:criar-spec` to mature it, `/aicf:implementar-spec` to execute and close. From there the cycle repeats.
+
+The interview and implementation phases accept paths from outside `aicf`, if you already use other skill collections. Governance does not change, and the work item notes which path was used.
+
+## The skills
+
+There are six, and the axis that matters is who can invoke each one.
+
+**You type them.** They only exist when you call them, and they drive a whole session.
+
+| Skill | When | What it does |
+| --- | --- | --- |
+| `/aicf:setup` | once, on a new project | Asks whether work items live in files or issues and sets up whatever the answer requires: `docs/projeto/` with the PRD, roadmap and work item folders, or the three `aicf:*` labels. In both cases, `CLAUDE.md` (with `AGENTS.md` pointing to it), a `README.md` and, if you want, the engineering defaults |
+| `/aicf:criar-prd` | start of the project | Interviews you about the product and writes `PRD.md`. Run it again whenever a decision contradicts it |
+
+**You type them, or the agent reaches for them.** They answer a request in plain language — "interview me about X", "implement spec Y" — and the agent loads them when it recognizes the intent.
+
+| Skill | When | What it does |
+| --- | --- | --- |
+| `/aicf:workflow-demanda` | the map | The cycle, the paths for each phase, and the governance conventions |
+| `/aicf:criar-spec` | interview phase | Interrogates until no decision is left open, then writes the spec, with a suggested implementation path. `/aicf:criar-spec #12` adopts an issue that already exists |
+| `/aicf:implementar-spec` | implementation phase | Picks the path from the spec's suggestion, implements and verifies. At the end it calls closing |
+| `/aicf:fechar-demanda` | closing phase | Checks, report, archiving and knowledge promotion, on any implementation path |
+
+The skills are deliberately small: they say what the agent could not infer — where to write, what to record, when to close — and stop there. What the tool already does well, and what is better decided case by case, stays with the agent.
+
+<details>
+<summary><strong>Where things live</strong> — the folder structure, or the labels</summary>
+
+In file mode, the folder tells the document's maturity:
 
 ```
-docs/projeto/            # project
-├── PRD.md               # why the product exists: vision, audience, model
-├── ROADMAP.md           # what has no file yet: Próximas and Backlog
+docs/projeto/
+├── PRD.md             # why the product exists: vision, audience, model
+├── ROADMAP.md         # what has no file yet: Próximas and Backlog
 ├── intents/
-│   ├── <intent>.md      # decided, not yet interviewed
-│   └── backlog/         # not yet certain it will be done
+│   ├── <intent>.md    # decided, not yet interviewed
+│   └── backlog/       # not yet clear it will be done
 └── specs/
-    ├── <spec>.md        # ready to implement
-    └── concluidas/      # archived, with a report
+    ├── <spec>.md      # ready to implement
+    └── concluidas/    # archived, with a report
 ```
 
-The folder tells the document's maturity. A work item is the unit of work; the file describing it is born as an **intent** (decided, not yet interviewed), becomes a **spec** when it is ready to implement — the same file, moved — and ends in `specs/concluidas/` with its report. `intents/backlog/` holds what may never be done.
+A work item is the unit of work. The file describing it is born as an **intent**, becomes a **spec** once it is ready to implement — the same file, moved — and ends in `specs/concluidas/` with the report.
 
-### Or in issues, if you prefer
+**In issue mode**, maturity lives in a label (`aicf:backlog`, `aicf:intent`, `aicf:spec`), a work item is a single issue from birth to closing — the label changes, the number does not — and completed means the issue is closed, with the report in a comment. Then `docs/projeto/` holds only `PRD.md`. The PRD, ADRs and the glossary stay in files in both modes.
 
-The recording medium is a **per-project choice**, and `/aicf:setup` asks which. Instead of files, a work item can be a **GitHub issue**: maturity lives in a label (`aicf:backlog`, `aicf:intent`, `aicf:spec`), the work item is a single issue from birth to close — the label changes, the number does not — and completed means the issue is closed, with the report as a comment. Then `docs/projeto/` holds only `PRD.md`; the PRD, ADRs and the glossary stay in files either way.
+You switch by editing one line of `CLAUDE.md`, and a missing line means files, so a project created before this option keeps working untouched. The choice applies from that point on: there is no migration, what is already in files stays where it is, and new work items are born in the new medium.
 
-You switch by editing one line of `CLAUDE.md`, and **a missing line means files** — a project created before this option keeps working untouched. The choice applies from that point on: there is no migration, what is already in files stays there, and new work items are born in the new medium.
+Each one buys you something different. Files: zero setup, survives `git clone` with no network, shows up in the repository's `grep`, no vendor dependency. Issues: conversation with comments and notifications, outside contribution in two clicks, a stable `#12` reference, and `Fixes #12` closing on merge. The default is files because that is what works with no `gh`, no login and no remote.
 
-Each side wins something different. Files: zero setup, survive `git clone` with no network, show up in `grep`, depend on no vendor. Issues: conversation with comments and notifications, outside contributions in two clicks, stable `#12` references, and `Fixes #12` closing on merge. Files are the default because they work with no `gh`, no login and no remote.
+If your project needs a different structure, write the difference in the root `CLAUDE.md` or in `.claude/rules/`, never in a `CLAUDE.md` inside `docs/projeto/`: a subfolder `CLAUDE.md` only enters context when the agent reads a file from that folder, and recording a new work item does not require that.
 
-If your project needs a different structure, write the difference into the root `CLAUDE.md` or into `.claude/rules/`, never into a `CLAUDE.md` inside `docs/projeto/`: a subdirectory `CLAUDE.md` only enters the context when the agent reads a file in that folder, and registering a new work item does not require that.
+</details>
+
+<details>
+<summary><strong>Neighbouring commands worth knowing</strong> — and what each one is for</summary>
+
+None of these ship with `aicf`. They belong to the [Superpowers](https://github.com/obra/superpowers) and [Matt Pocock](https://github.com/mattpocock/skills) collections, and they apply if you already have them installed.
+
+**Before writing the work item**
+
+- `grill-me` and `grill-with-docs` (Matt) — challenge the idea before you write it down, with questions until every branch of the decision is resolved. Use them when you already think you know what you want. They record nothing; the result feeds the interview.
+- `domain-modeling` (Matt) — records the project's vocabulary in a `CONTEXT.md`, if the product has terms of its own that have already turned out ambiguous.
+
+**In the interview phase, instead of `/aicf:criar-spec`**
+
+- `brainstorming` (Superpowers) — interviews you and, on the _architectural_ path, writes a design doc that counts as a spec.
+- `grill-with-docs` + `to-spec` (Matt) — the same thing in two steps, ending with the spec published to the tracker.
+
+**In the implementation phase, instead of `/aicf:implementar-spec`**
+
+- `writing-plans` + `subagent-driven-development` (Superpowers) — the plan goes to a file, and subagents execute task by task.
+- `to-tickets` + `implement` (Matt) — the spec becomes tickets with declared dependencies between them, executed one at a time.
+- `code-review` (Matt) — reviews the diff on two axes, repository standards and faithfulness to the spec, in parallel subagents.
+
+You can interview by one path and implement by another. Going down this list trades speed for a trail: on the `aicf` paths the plan lives in the session and dies with it.
+
+</details>
+
+<details>
+<summary><strong>Why this one, and not Superpowers or Matt Pocock's skills</strong></summary>
+
+Because it is not the same question. Both collections handle **the individual work item** well: they interrogate the idea, produce a spec, break it into tasks, and execute with discipline. And they do leave a trail — Superpowers writes the spec and plan to files, Matt's publish spec and tickets to the tracker you picked in his setup (GitHub Issues, Linear or local markdown), and maintain a glossary and ADRs.
+
+That trail, though, is **per work item** and written **before** execution. Three things fall outside it, and neither collection declares them somebody else's problem: they simply start at an idea that is already formed and stop at the commit or the merge.
+
+- **The product level.** Neither has the document stating what is being built, for whom, and what was ruled out by decision, nor the record of what shipped and what is missing.
+- **Macro planning.** When a request is too big for one spec, `brainstorming` helps decompose it into sub-projects and works on the first one; the others stay in the conversation. Here, an idea that has not matured yet gets its own record, each work item declares in its own prose what it blocks and what it depends on, and what may never be done has a place to wait without getting lost.
+- **The afterwards.** A spec and a plan say what was intended. Matt's `implement` ends at the commit and neither closes the ticket nor ticks the acceptance criteria. Superpowers writes the plan and design doc into the repository, and they stay — but they were written before execution, and nothing asks for them to be reviewed against what shipped. `aicf` asks for a report in the work item itself, and that is where the plan×delivery divergence gets written down.
+
+`aicf` is that layer, and the same layer applies to any implementation path. Switching collections, or mixing both within one work item, changes nothing in governance.
+
+</details>
 
 ## About
 
-Built for [Claude Code: Criador de Apps](https://aicodingflow.com/curso), a course by [AI Coding Flow](https://aicodingflow.com). Use it freely, with or without the course.
+Built for the [Claude Code: Criador de Apps](https://aicodingflow.com/curso) course, by [AI Coding Flow](https://aicodingflow.com). Use it freely, with or without the course.
 
 MIT.
