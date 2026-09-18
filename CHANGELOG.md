@@ -1,5 +1,62 @@
 # Changelog
 
+## 0.18.0 — 2026-09-18
+
+- **O `README.md` se reorganiza por quem chega, e não por assunto.** O público do aicf é aluno,
+  parceiro e indicado: entra pelo GitHub, lê o README e só entende de verdade rodando o
+  `/aicf:setup`. O arquivo estava escrito para quem já sabe o que é isso — um quarto do texto era
+  comparação com Superpowers e Matt Pocock, citando `brainstorming`, `grill-with-docs` e
+  `to-tickets` como se fossem óbvios, antes de qualquer "como eu começo". Agora a abertura é o
+  problema que o método resolve, vem um diagrama Mermaid do ciclo, e cada um dos três problemas
+  termina na skill que o corrige. O que é para quem já usa **dobra em `<details>`, não muda de
+  arquivo**. Texto visível: 105 linhas, contra 115 antes
+  (`awk '/^<details/{d=1} /^<\/details>/{d=0;next} !d' README.md | wc -l`).
+- **Não haverá `MANUAL.md`, e isso virou decisão escrita.** O manual em runtime já existe e se
+  chama `/aicf:workflow-demanda`; um terceiro arquivo com o mesmo conteúdo seria a cópia que
+  envelhece sem nada que a cutuque, que é o que este repositório já pagou para aprender duas vezes.
+  O [ADR 0005](docs/adr/0005-a-documentacao-humana-e-um-arquivo-so.md) registra o porquê, o que
+  fica de fora e o que reverter custaria. O desenho vem do repositório do Matt Pocock, que cabe num
+  README de 231 linhas organizado por modo de falha do leitor; o `spec-kit` do GitHub é o
+  contraexemplo, e separou em site inteiro porque tem dezenas de páginas. São seis skills aqui.
+- **A tabela de skills troca de eixo: quem pode chamar.** Das seis, duas só existem quando você as
+  digita (`setup`, `criar-prd`); as outras quatro você digita **ou** o agente alcança sozinho. O
+  eixo antigo — invocável × não-invocável — tinha deixado de fechar na `0.17.0`, quando
+  `/aicf:criar-spec #12` e `/aicf:fechar-demanda #12` ganharam forma digitável e passaram a estar
+  dos dois lados. O eixo novo é o do repositório do Matt e acomoda as duas sem categoria nova,
+  porque separa quem **pode** chamar, não quem costuma.
+- **Duas afirmações erradas sobre ferramenta de terceiro, as duas na mesma seção.** (1) *"o Matt
+  publica spec e tickets no issue tracker"* — o `setup-matt-pocock-skills` oferece GitHub Issues,
+  Linear ou markdown local em `.scratch/<feature>/`, este recomendado por ele para projeto solo e
+  repositório sem remote. A frase piorou na `0.17.0`: agora que o aicf também pergunta arquivo ou
+  issue, ela anunciava uma diferença que não existe em nenhum dos dois lados. (2) *"o Superpowers
+  apaga a pasta de trabalho"* — ele remove a **worktree**, e só quando foi ele quem a criou e em
+  duas das quatro opções; plano e design doc ficam commitados em `docs/superpowers/`, com o
+  `brainstorming` mandando "save ... and commit". Vale nas versões 5.0.0 e 6.1.1. O contraste real
+  é outro e mais forte: `grep -rliE "diverge|what actually shipped|retrospective|final report"
+  skills/*/SKILL.md` no Superpowers 6.1.1 não devolve arquivo nenhum — o registro deles é escrito
+  **antes** de executar e nada pede que seja revisto contra o que saiu.
+- **O substituto que o intent propunha também não passou no teste.** Ele sugeria *"o tracker dele é
+  descartável por declaração dele"*; a declaração não existe —
+  `grep -rniE "throwaway|disposable|ephemeral"` nas skills dele devolve só o `wizard` falando de si
+  mesmo e o `ask-matt` falando do contexto da sessão. O nome `.scratch/` sugere descarte, nenhuma
+  skill declara. Virou regra no `CLAUDE.md`: **afirmação sobre ferramenta de terceiro carrega o
+  comando que a confere, no texto que a propõe.** Errar sobre o próprio repositório é barato;
+  errar sobre a ferramenta do vizinho derruba o crédito da comparação inteira.
+- **O `/aicf:setup` se apresenta antes da primeira pergunta.** Ele abria em "1. Nome do projeto", e
+  quem rodava pela primeira vez respondia antes de saber o que estava sendo montado. Agora vêm três
+  a cinco linhas — o que vai ser montado, que são cerca de seis perguntas, e que nada é criado
+  antes de confirmar — e nada além disso, porque abrir com três parágrafos sobre governança seria o
+  mesmo muro em lugar novo.
+- **E se despede apresentando o método, não um ponteiro.** O fim tinha quatro passos, todos
+  apontando para outras skills. Agora são cinco, e o segundo manda **carregar o
+  `/aicf:workflow-demanda` e contar o que ele diz em linguagem comum**, com as quatro fases em uma
+  frase cada e um exemplo concreto de primeira demanda usando o nome real do projeto e a mídia que
+  o usuário acabou de escolher. O roteiro mora na skill; o texto se compõe na hora, da fonte da
+  verdade — um mecanismo, não dois.
+- **O `README.en.md` acompanha inteiro**, seção por seção (`grep -c '^## ' README.md README.en.md`
+  devolve 6 nos dois). Encolher o inglês para um stub foi considerado e recusado na entrevista: o
+  custo de manter os dois em dia é aceito.
+
 ## 0.17.0 — 2026-09-17
 
 - **A mídia do registro vira escolha do projeto: arquivos ou issues do GitHub.** O aicf assumia
@@ -64,7 +121,7 @@
   dele mandava tirar do PRD o primeiro `ROADMAP.md` — arquivo que não existe no modo issue. A skill
   não foi reestruturada; a redação fica para a demanda da entrada de quem chega.
 - **Os READMEs registram que a escolha existe, e só.** A reestruturação dos dois é da demanda
-  [a entrada de quem chega](docs/projeto/intents/a-entrada-de-quem-chega.md), que os toca inteiros.
+  [a entrada de quem chega](docs/projeto/specs/concluidas/a-entrada-de-quem-chega.md), que os toca inteiros.
 
 ## 0.16.0 — 2026-09-14
 

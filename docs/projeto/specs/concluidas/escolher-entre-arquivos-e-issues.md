@@ -233,7 +233,7 @@ mídias sem ninguém ter escolhido isso.
 | `CLAUDE.md` (deste repositório) | ganha a linha `**Mídia do registro:** arquivos em docs/projeto/` — declarar o estado atual, não adotar issues |
 | `CHANGELOG.md`, `.claude-plugin/plugin.json` | entrada e versão nova |
 
-**Precede [a entrada de quem chega](../../intents/a-entrada-de-quem-chega.md)**, que vai reestruturar
+**Precede [a entrada de quem chega](a-entrada-de-quem-chega.md)**, que vai reestruturar
 `README.md`, `README.en.md` e a abertura do `/aicf:setup` — os três tocados aqui. Nesta demanda, o
 mínimo neles: registrar que a escolha existe. A redação fica para lá.
 

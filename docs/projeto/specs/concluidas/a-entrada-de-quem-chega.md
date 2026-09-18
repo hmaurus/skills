@@ -180,7 +180,7 @@ agrupado por fase, e só o que estiver de fato instalado no ecossistema que o RE
 
 **A abertura fica dentro do `SKILL.md`**, não num arquivo à parte: arquivo solto envelhece sem nada
 que o cutuque, e a rede que existia contra isso saiu do método em
-[o `CHECKLIST.md` sai do método](concluidas/o-checklist-sai-do-metodo.md). O custo é de três a
+[o `CHECKLIST.md` sai do método](o-checklist-sai-do-metodo.md). O custo é de três a
 cinco linhas num arquivo de 205.
 
 Antes da primeira pergunta, três coisas e nada mais: o que vai ser montado, quantas perguntas vêm,
@@ -254,3 +254,75 @@ Um passo ponta a ponta, na ordem:
    número nos dois, e as seções estão na mesma ordem.
 6. **Nenhum ponteiro por número quebrou:** `grep -rn 'passo [0-9]' --include='*.md' .` — cada
    ocorrência confere com a numeração atual do arquivo citado.
+
+## Relatório de implementação (2026-09-18)
+
+- **Status** — concluído. Os seis passos da Verificação rodaram; dois deles só se **confirmam**
+  depois do release, e a condição que encerra cada um está em "Validação".
+
+- **Arquivos alterados**
+  - `README.md` — reorganizado por problema do leitor: abertura pelo nível do produto, diagrama
+    Mermaid do ciclo, três problemas terminando cada um na skill que o resolve, tabela de skills no
+    eixo "quem pode chamar", e quatro `<details>` com o que é para quem já usa.
+  - `README.en.md` — traduzido inteiro, seção por seção.
+  - `skills/setup/SKILL.md` — nova seção `## A apresentação` antes de `## Antes de criar`, e
+    `## Ao terminar` reescrito como despedida que apresenta o método (4 passos → 5).
+  - `.claude-plugin/plugin.json` — versão `0.17.0` → `0.18.0`.
+  - `docs/adr/0005-a-documentacao-humana-e-um-arquivo-so.md` — a decisão de não ter `MANUAL.md`.
+  - `CLAUDE.md` — a regra promovida no passo 3 (ver abaixo).
+
+- **Commits**
+  - `698ddab` — `docs(governanca): entrevista de "a entrada de quem chega"`
+  - `ae7fb15` — `feat(entrada): o README se reorganiza por problema, e o setup se apresenta`
+
+- **Validação**
+  - **Checks do projeto: não existem.** A seção `## Verificação` do `CLAUDE.md` segue com "a
+    preencher quando houver código", e não há lint, testes ou typecheck a rodar. Encerra quando
+    houver comando naquela seção.
+  - **Revisão de código: não pedida.** A mudança é texto de ponta a ponta, que é o caso que o
+    ritual dispensa. A conferência que importava aqui foi de **fato**, contra os repositórios
+    citados, e está registrada abaixo.
+  - Verificação 1 (frases erradas) — os quatro greps devolvem vazio, e as duas correções aparecem
+    nos dois idiomas.
+  - Verificação 2 (tamanho) — 105 linhas visíveis
+    (`awk '/^<details/{d=1} /^<\/details>/{d=0;next} !d' README.md | wc -l`), contra 115 antes
+    (`git show 698ddab:README.md | wc -l`).
+  - Verificação 3 (o diagrama renderiza) — **pendente.** Encerra ao abrir a página do repositório
+    no GitHub e ver o fluxograma das quatro fases desenhado; Mermaid quebrado aparece como bloco
+    de código cru.
+  - Verificação 4 (percurso de quem chega) — **parcial.** Conferido no conteúdo: a apresentação
+    está antes da primeira pergunta e a despedida no fim (`grep -n '^## ' skills/setup/SKILL.md`).
+    O comportamento encerra ao rodar `/aicf:setup` numa pasta vazia, em sessão nova, com a `0.18.0`
+    instalada — a sessão que implementou roda a skill da cópia em cache, que ainda é a `0.17.0`.
+  - Verificação 5 (os dois idiomas) — `grep -c '^## '` devolve 6 nos dois, na mesma ordem.
+  - Verificação 6 (ponteiros por número) — `## Ao terminar` foi de 4 para 5 passos, e
+    `grep -rn 'passo [0-9]' --include='*.md' .` não acha nenhuma citação a passo do `setup`.
+
+- **Escopo efetivo** — um `<details>` além dos três do esqueleto: *"Por que o PRD não passa pelo
+  ciclo da demanda"*, dobrado dentro do passo 2 em vez de apagado. A spec mandava tirar a digressão
+  do caminho de leitura, e dobrar no lugar faz isso sem perder o argumento. Fora isso, a entrega
+  bate com a spec.
+
+- **Saída do ritual**
+  - [`docs/adr/0005-a-documentacao-humana-e-um-arquivo-so.md`](../../../adr/0005-a-documentacao-humana-e-um-arquivo-so.md)
+    — por que não há `MANUAL.md`, com o que fica de fora por decisão e o que reverter custaria.
+  - `CLAUDE.md`, seção `## Registro` — **afirmação sobre ferramenta de terceiro carrega o comando
+    que a confere, no texto que a propõe.** Entra pelo gatilho do erro que apareceu duas vezes, e
+    as duas vezes foram nesta demanda.
+  - Nenhuma skill nova, nenhuma regra em `.claude/rules/`, nenhum termo novo em glossário.
+  - Nenhuma demanda nova, e nenhuma tornada obsoleta. O `ROADMAP.md` não muda.
+
+- **Lições**
+  - **Conteúdo dobrado é conteúdo que ninguém revisa.** As duas frases erradas iam descer para
+    dentro de um `<details>` junto com a seção; se tivessem descido antes da conferência, ficariam
+    erradas até alguém de fora reclamar. Corrigir antes de dobrar virou passo explícito da spec, e
+    a regra geral foi promovida ao `CLAUDE.md`.
+  - **O substituto proposto pelo intent também não passou.** Ele sugeria contrastar com *"o tracker
+    dele é descartável por declaração dele"*; a declaração não existe
+    (`grep -rniE "throwaway|disposable|ephemeral"` nas skills dele não devolve nada sobre o
+    tracker). Frase de posicionamento herdada de um intent tem o mesmo direito à conferência que
+    uma frase nova.
+  - **Perguntar "o manual não existe já?" mudou a demanda.** O intent pedia um `MANUAL.md`; a
+    entrevista achou que ele já existia em runtime (`/aicf:workflow-demanda`) e o arquivo deixou
+    de ser escrito. O que o intent chamava de falta de manual era falta de **renderização** e de
+    **comparação**, e as duas cabiam no `README.md`.

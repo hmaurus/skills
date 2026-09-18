@@ -71,7 +71,7 @@ a comparação *e* mandando rodar o script, não houve poda, houve duplicação.
 - **Depende de** [escolher entre arquivos e issues](escolher-entre-arquivos-e-issues.md) não estar
   em curso ao mesmo tempo: se a governança puder morar em issues, o script conferiria pares que
   talvez não existam mais. Fazer as duas em paralelo é retrabalho garantido.
-- **Encolhe** o arquivo que [a entrada de quem chega](../../intents/a-entrada-de-quem-chega.md) vai ter que
+- **Encolhe** o arquivo que [a entrada de quem chega](a-entrada-de-quem-chega.md) vai ter que
   descrever para iniciante, o que ajuda aquela demanda — mas não a bloqueia.
 
 ## Relatório de implementação (2026-09-14)
