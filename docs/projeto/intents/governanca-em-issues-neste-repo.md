@@ -53,6 +53,34 @@ migrar ou não as demandas já concluídas, e o que fazer com o `ROADMAP.md` atu
   `Próximas` e `Backlog` viram labels — ou o arquivo fica, e a governança passa a morar em duas
   mídias.
 
+## O que [o README reorganizado](../specs/concluidas/a-entrada-de-quem-chega.md) trouxe para cá
+
+Levantado em 2026-09-18, ao implementar aquela demanda. Dois fatos, e o primeiro põe número numa
+pergunta que já estava na lista. **Os dois comandos abaixo contam a si mesmos** — este arquivo é uma
+das demandas —, então remedir depois de editá-lo dá um número maior, e é o comando que vale.
+
+**A teia de links entre demandas é um custo de migração que ninguém tinha medido.** As demandas
+deste repositório se citam: *"precede X"*, *"encolhe o arquivo que Y vai ter que"*, *"entregue na
+`0.14.0`"*. São **27 links relativos entre elas**
+(`grep -rno '\](\.\./[^)]*\.md\|\]([a-z0-9-]*\.md)' docs/projeto/intents/*.md docs/projeto/intents/backlog/*.md docs/projeto/specs/concluidas/*.md | wc -l`)
+mais **14 apontando de fora para dentro** — do `CHANGELOG.md`, dos ADRs e das próprias skills
+(`grep -rn 'docs/projeto/\(intents\|specs\)' --include='*.md' CLAUDE.md README.md README.en.md CHANGELOG.md docs/adr/ skills/ | wc -l`).
+Migrar as concluídas para issue quebra os 41 de uma vez, e trocar cada um por `#<n>` é trabalho
+manual sem rede: nenhum teste acusa link de markdown morto neste repositório. O fechamento de
+2026-09-18 já reproduziu a classe do problema em pequena escala — um `git mv` quebrou três links
+e eles só foram achados porque o passo 2 do ritual manda procurá-los. Isso pesa a favor de
+**conviver** em vez de migrar, e a pergunta "o que acontece com `specs/concluidas/`" passa a ter
+um custo escrito em vez de uma intuição.
+
+**O repositório virou exemplo vivo do modo arquivo, e isso é novo.** O `README.md` reescrito
+apresenta a árvore de `docs/projeto/` como a explicação principal de onde as coisas ficam, com as
+issues logo abaixo como a outra opção. Quem clona este repositório para ver o método funcionando
+encontra exatamente o que o README descreveu primeiro. Migrando, o repositório passa a demonstrar
+o modo issue enquanto documenta os dois — não é impedimento, e pode até ser melhor (o modo issue
+tem menos gente usando, então vê-lo rodando vale mais), mas é decisão consciente e não subproduto.
+A entrevista decide qual dos dois o repositório deve demonstrar, e se o README precisa dizer qual
+modo está vendo quem chega.
+
 ## Regra que nasce daqui, e vale em qualquer mídia
 
 **Exemplo vindo de projeto privado entra anonimizado.** Vale igual em issue e em `.md`, e por isso
