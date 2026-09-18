@@ -287,9 +287,10 @@ Um passo ponta a ponta, na ordem:
   - Verificação 2 (tamanho) — 105 linhas visíveis
     (`awk '/^<details/{d=1} /^<\/details>/{d=0;next} !d' README.md | wc -l`), contra 115 antes
     (`git show 698ddab:README.md | wc -l`).
-  - Verificação 3 (o diagrama renderiza) — **pendente.** Encerra ao abrir a página do repositório
-    no GitHub e ver o fluxograma das quatro fases desenhado; Mermaid quebrado aparece como bloco
-    de código cru.
+  - Verificação 3 (o diagrama renderiza) — **fechada em 2026-09-18**, depois do push de `3064fd3`.
+    A API devolve o bloco como `<pre lang="mermaid">`
+    (`gh api repos/hmaurus/skills/readme -H "Accept: application/vnd.github.html" | grep -o '<pre lang="mermaid"'`),
+    e a página renderiza as quatro caixas com as setas sólidas e a de retorno pontilhada.
   - Verificação 4 (percurso de quem chega) — **parcial.** Conferido no conteúdo: a apresentação
     está antes da primeira pergunta e a despedida no fim (`grep -n '^## ' skills/setup/SKILL.md`).
     O comportamento encerra ao rodar `/aicf:setup` numa pasta vazia, em sessão nova, com a `0.18.0`
