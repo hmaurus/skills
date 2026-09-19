@@ -37,12 +37,22 @@ Continuar até não sobrar decisão em aberto, e só então escrever.
 
 ## A spec
 
-**Onde ela mora depende da mídia do registro** — a linha `**Mídia do registro:**` do `CLAUDE.md`
-diz qual, e linha ausente significa arquivo. As duas receitas estão em
-[`references/midia.md`](../workflow-demanda/references/midia.md) do `workflow-demanda`. Se
-`docs/agents/issue-tracker.md` existe e **discorda** dela, avisar uma vez e seguir a linha do
-`CLAUDE.md`, que é a única fonte da verdade do aicf — divergir é legítimo, mas precisa ser
-escolha, não descoberta tardia.
+- **Problema** — o que está errado hoje, do ponto de vista de quem usa
+- **Solução** — o que passa a existir, na mesma linguagem
+- **Arquivos e interfaces** envolvidos, nomeados
+- **Fora de escopo** — o que foi levantado e decidido não fazer, com o motivo
+- **Verificação** — um passo ponta a ponta que prova que funcionou
+
+Usar o vocabulário do domínio do projeto (`CONTEXT.md`, se existir). E **afirmação verificável
+carrega o teste que a refuta** — número traz o comando que o remede, afirmação de estado traz a
+condição que a encerra; a forma está no passo 3 do `/aicf:fechar-demanda`.
+
+### Onde ela mora
+
+A linha `**Mídia do registro:**` do `CLAUDE.md` diz qual arquivo de
+[`workflow-demanda/references/`](../workflow-demanda/references/) seguir — `midia-arquivo.md` ou
+`midia-issues.md`; sem linha, arquivo. Se `docs/agents/issue-tracker.md` discordar da linha, avisar
+uma vez e seguir a linha.
 
 A demanda **muda de estado** para "pronta para implementar". Três casos, e só o terceiro cria
 registro novo:
@@ -58,16 +68,6 @@ registro novo:
   só: arquivo direto em `specs/`, ou `gh issue create --label aicf:spec`.
 
 Sem mídia declarada e sem `docs/projeto/`, perguntar onde gravar em vez de inventar pasta.
-
-- **Problema** — o que está errado hoje, do ponto de vista de quem usa
-- **Solução** — o que passa a existir, na mesma linguagem
-- **Arquivos e interfaces** envolvidos, nomeados
-- **Fora de escopo** — o que foi levantado e decidido não fazer, com o motivo
-- **Verificação** — um passo ponta a ponta que prova que funcionou
-
-Usar o vocabulário do domínio do projeto (`CONTEXT.md`, se existir). E **afirmação verificável
-carrega o teste que a refuta** — número traz o comando que o remede, afirmação de estado traz a
-condição que a encerra; a forma está no passo 3 do `/aicf:fechar-demanda`.
 
 ## Ao terminar
 

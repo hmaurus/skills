@@ -1,5 +1,38 @@
 # Changelog
 
+## 0.20.0 — 2026-09-19
+
+- **A referência de mídia vira um arquivo por mídia.** `midia.md` trazia as duas receitas lado a
+  lado, e a mídia é escolhida uma vez no setup: quem abria a referência no modo arquivo carregava
+  5.666 bytes de seções que só existem para issue, num arquivo de 12.747. Agora são
+  `references/midia-arquivo.md` (1.585 bytes, `wc -c < skills/workflow-demanda/references/midia-arquivo.md`)
+  e `references/midia-issues.md`; o que é comum às duas — a linha de configuração, os quatro
+  estados, "um item, um lugar", a divergência com o tracker do Matt — fica só no
+  `/aicf:workflow-demanda`, que já tinha a configuração e os estados e agora ganha a divergência. As medições que provaram os dois comportamentos do
+  `gh` saem da referência: são evidência para quem mantém o plugin, e já estão na entrada da
+  `0.17.0` deste arquivo. O [ADR 0004](docs/adr/0004-midia-do-registro-e-config-propria.md) fica de
+  pé — config na linha do `CLAUDE.md`, skills neutras, comando concreto num lugar só por mídia —;
+  onde ele diz que uma terceira mídia entra como coluna nova, entra como arquivo novo.
+- **As skills apontam, em vez de repetir.** O parágrafo de mídia que `criar-spec`,
+  `implementar-spec` e `fechar-demanda` carregavam quase idêntico vira duas frases: qual arquivo
+  seguir, e o aviso de divergência com `docs/agents/issue-tracker.md`. O aviso continua dentro das
+  três de propósito — a revisão da `0.17.0` mostrou que no modo arquivo a referência não é aberta;
+  só a justificativa dele mudou para o `workflow-demanda`. O conjunto das skills e referências cai
+  de 60.080 bytes no `745d9a0` para 56.556
+  (`wc -c skills/*/SKILL.md skills/workflow-demanda/references/*.md | tail -1`; para o valor antigo,
+  o mesmo `wc` num checkout de `745d9a0`).
+- **Três casos ganham operador.** Pular a entrevista era legítimo no `workflow-demanda` e nenhuma
+  skill o executava: o passo 1 do `implementar-spec` passa a virar spec um intent que o usuário
+  mandou implementar sem entrevista, com `entrevista: nenhuma`. No `/aicf:setup`, as perguntas
+  sobre gerenciador de senhas e fonte de documentação só acontecem se os padrões de engenharia vão
+  para algum lugar — quem escolheu "nenhum dos dois" não tinha onde guardar as respostas. E a
+  apresentação prometia "cerca de seis" perguntas, que eram sete; agora diz "entre cinco e sete".
+- **Três trechos voltam para perto do que explicam.** Em `criar-spec`, a lista das cinco seções da
+  spec abre a seção "A spec", e o material de mídia e de estado desce para "Onde ela mora". Em
+  `setup`, o parágrafo de cópia dos templates fica logo abaixo da tabela de templates, em três
+  frases, e não mais depois da subseção dos labels. Em `implementar-spec`, a linha solta sobre plan
+  mode sai do topo e entra no ramo `aicf-plan` do passo 3, onde o plan mode se decide.
+
 ## 0.19.0 — 2026-09-19
 
 - **O repositório ganha verificação, e o GitHub a roda depois do push.** `./scripts/check.sh` é o

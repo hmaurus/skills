@@ -59,9 +59,12 @@ implementação é escolha nova.
 **Mídia do registro:** issues (GitHub)
 ```
 
-**Linha ausente significa arquivo** — compatibilidade com projeto anterior a essa escolha existir.
-As duas receitas, operação por operação, estão em [`references/midia.md`](references/midia.md): é
-de lá que sai todo comando concreto, e é lá que uma terceira mídia entraria como coluna nova.
+`grep -m1 'Mídia do registro' CLAUDE.md` lê a escolha. **Linha ausente significa arquivo** —
+compatibilidade com projeto anterior a essa escolha existir.
+Os comandos concretos estão no arquivo da mídia que a linha nomeia —
+[`references/midia-arquivo.md`](references/midia-arquivo.md) ou
+[`references/midia-issues.md`](references/midia-issues.md); uma terceira mídia seria um terceiro
+arquivo.
 
 A governança é a mesma nas duas. Quatro estados:
 
@@ -90,10 +93,20 @@ Só governança de demanda entra aí, e isso não muda com a mídia. Doc que des
 um trabalho a fazer — configuração, ID externo, decisão de marca, número de negócio, aprendizado —
 vai para `docs/referencias/`, criada quando houver o primeiro arquivo. **PRD, ADR e `CONTEXT.md`
 ficam em arquivo nos dois modos**; no modo issue, `docs/projeto/` existe com o `PRD.md` dentro, e só
-ele.
+ele. **Não existe modo misto:** a demanda inteira mora numa mídia só, relatório incluído. E o passo 3
+do fechamento — promover para o repositório o que vale além da demanda — vale nas duas mídias; é o
+que compensa o preço do modo issue, em que o relatório em comentário de issue fechada some do
+`git clone`.
 
 Se o repositório não tem a linha de mídia nem `docs/projeto/`, perguntar onde gravar em vez de
 inventar pasta.
+
+**O `docs/agents/issue-tracker.md` do Matt Pocock responde a mesma pergunta** — onde o trabalho
+mora. O aicf lê para propor o default no setup, e não depende: a linha do `CLAUDE.md` é a única
+fonte da verdade dele. Se as duas discordarem, avisar uma vez e seguir a linha — divergir é
+legítimo, mas precisa ser escolha, não descoberta tardia. Os labels `aicf:*` classificam maturidade
+do documento; os do `/triage` dele, o que fazer em seguida. Eixos diferentes: a mesma issue pode
+carregar os dois, e nenhum lado enxerga o do outro.
 
 ## Entrevista — produz a spec
 

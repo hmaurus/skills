@@ -67,8 +67,10 @@ Datar a última revisão no topo: o PRD é vivo, e saber quando parou de ser rev
    **modo arquivo**, isso é o primeiro `ROADMAP.md`: uma linha em `Próximas` ou `Backlog` conforme
    a certeza, e o que precisar de contexto vira arquivo em `intents/`, e aí **a linha sai** — quem
    tem arquivo não tem linha. No **modo issue** não há roadmap: cada uma nasce como issue com
-   `aicf:intent` ou `aicf:backlog`. A mídia está na linha `**Mídia do registro:**` do `CLAUDE.md`,
-   e as receitas em [`references/midia.md`](../workflow-demanda/references/midia.md).
+   `aicf:intent` ou `aicf:backlog`. A linha `**Mídia do registro:**` do `CLAUDE.md` diz qual
+   arquivo de [`workflow-demanda/references/`](../workflow-demanda/references/) seguir —
+   `midia-arquivo.md` ou `midia-issues.md`; sem linha, arquivo. Se `docs/agents/issue-tracker.md` discordar da
+   linha, avisar uma vez e seguir a linha.
 3. Se apareceu vocabulário já ambíguo — dois nomes para a mesma coisa, ou o mesmo nome para duas
    —, sugerir `domain-modeling` (Matt Pocock) para gravar o glossário em `CONTEXT.md`, ao lado do
    PRD e não dentro dele.

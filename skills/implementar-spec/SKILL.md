@@ -5,19 +5,16 @@ description: Implementa uma demanda a partir da spec e conduz o fechamento até 
 
 # Implementar a partir da spec
 
-Com o plan mode ligado, montar o plano e esperar aprovação antes de tocar o disco.
-
 ## Antes de escrever código
 
-1. **Ler a spec inteira.** Onde ela mora depende da mídia do registro — a linha
-   `**Mídia do registro:**` do `CLAUDE.md` diz qual, linha ausente significa arquivo, e as
-   receitas de ler e de listar estão em
-   [`references/midia.md`](../workflow-demanda/references/midia.md). Se
-   `docs/agents/issue-tracker.md` existe e **discorda** dela, avisar uma vez e seguir a linha do
-   `CLAUDE.md`, que é a única fonte da verdade do aicf — divergir é legítimo, mas precisa ser
-   escolha, não descoberta tardia. Ela também pode vir de fora
-   da governança do aicf, de `docs/superpowers/specs/`. Se o usuário não disse qual, **listar as
-   specs abertas pela receita da mídia** e perguntar, em vez de adivinhar.
+1. **Ler a spec inteira.** A linha `**Mídia do registro:**` do `CLAUDE.md` diz qual arquivo de
+   [`workflow-demanda/references/`](../workflow-demanda/references/) seguir — `midia-arquivo.md`
+   ou `midia-issues.md`; sem linha, arquivo. Se `docs/agents/issue-tracker.md` discordar da linha,
+   avisar uma vez e seguir a linha. A spec também pode vir de fora da governança do aicf, de
+   `docs/superpowers/specs/`. Se o usuário não disse qual, **listar as specs abertas pela receita
+   da mídia** e perguntar, em vez de adivinhar. Alvo que ainda é intent — arquivo em `intents/`,
+   linha do `ROADMAP.md`, ou issue `aicf:intent` — que o usuário mandou implementar sem entrevista:
+   virar spec pela receita da mídia, com `entrevista: nenhuma` na linha `Processo`, e seguir.
 2. **Ler os arquivos que a spec nomeia**, e o que já existe de parecido no repositório. A
    segunda parte vai para subagente: procurar o que já existe é leitura ampla, e feita no
    contexto principal ela gasta o que a implementação vai precisar.
@@ -29,9 +26,10 @@ Com o plan mode ligado, montar o plano e esperar aprovação antes de tocar o di
    "Coleções de skills de workflow instaladas" do `CLAUDE.md` diz quais). Conforme a resposta:
    outra coleção, esta skill para aqui e o caminho escolhido assume **até o fim, inclusive a
    integração que ele encadeia** — o aicf não interrompe nem substitui passo interno de método; ao
-   terminar, `/aicf:fechar-demanda` registra a demanda. `aicf-plan`, entrar no plan mode e seguir
-   por esta skill; `aicf-direto`, planejar em sessão antes de editar — o plano não vai para
-   arquivo, e na linha `Processo` o valor continua `aicf-direto`, porque `aicf-plan` é só com o
+   terminar, `/aicf:fechar-demanda` registra a demanda. `aicf-plan`, entrar no plan mode, montar o
+   plano, esperar aprovação antes de tocar o disco, e seguir por esta skill; `aicf-direto`,
+   planejar em sessão antes de editar — o plano não vai para arquivo, e na linha `Processo` o
+   valor continua `aicf-direto`, porque `aicf-plan` é só com o
    plan mode ligado.
 
    **Junto do caminho, avaliar o workspace** — branch de trabalho, branch própria ou worktree —

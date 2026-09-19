@@ -8,13 +8,11 @@ description: Ritual de fechamento de uma demanda — checks, revisão, relatóri
 Não importa por onde a demanda começou, ela termina aqui — e o agente aplica o fechamento
 proativamente, sem esperar pedido.
 
-**Onde a demanda mora depende da mídia do registro** — a linha `**Mídia do registro:**` do
-`CLAUDE.md` diz qual, linha ausente significa arquivo, e as receitas estão em
-[`references/midia.md`](../workflow-demanda/references/midia.md). Se
-`docs/agents/issue-tracker.md` existe e **discorda** dela, avisar uma vez e seguir a linha do
-`CLAUDE.md`, que é a única fonte da verdade do aicf — divergir é legítimo, mas precisa ser
-escolha, não descoberta tardia. No modo issue,
-`/aicf:fechar-demanda #12` fecha aquela issue; sem alvo, a demanda é a que a sessão trabalhou.
+**Onde a demanda mora, e os comandos:** a linha `**Mídia do registro:**` do `CLAUDE.md` diz qual
+arquivo de [`workflow-demanda/references/`](../workflow-demanda/references/) seguir —
+`midia-arquivo.md` ou `midia-issues.md`; sem linha, arquivo. Se `docs/agents/issue-tracker.md`
+discordar da linha, avisar uma vez e seguir a linha. No modo issue, `/aicf:fechar-demanda #12` fecha
+aquela issue; sem alvo, a demanda é a que a sessão trabalhou.
 
 **Antes de qualquer coisa: a implementação terminou inteira?** Caminho de outra coleção termina no
 passo que ele encadeia — no Superpowers, `finishing-a-development-branch`, que decide o destino do

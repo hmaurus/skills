@@ -20,9 +20,8 @@ governança seriam o muro que a apresentação existe para derrubar. Cobrir só:
 
 - **o que vai ser montado** — onde a visão do produto mora, onde cada demanda é registrada, e como
   o agente sabe disso em toda sessão;
-- **quantas perguntas vêm** (cerca de seis), e que nenhuma resposta é definitiva: tudo vira arquivo
-  que o usuário edita depois;
-- **que nada é criado antes de ele confirmar.**
+- **quantas perguntas vêm** (entre cinco e sete), e que nenhuma resposta é definitiva: tudo vira
+arquivo que o usuário edita depois; - **que nada é criado antes de ele confirmar.**
 
 ## Antes de criar
 
@@ -62,8 +61,10 @@ independentes: divergir é legítimo, e a do aicf é a linha do `CLAUDE.md`.
 ```
 
 Linha ausente significa arquivo — é a compatibilidade com projeto anterior a esta escolha existir,
-não um valor a ser deixado implícito em projeto novo. As receitas de cada mídia estão em
-[`workflow-demanda/references/midia.md`](../workflow-demanda/references/midia.md).
+não um valor a ser deixado implícito em projeto novo. As receitas estão em
+`workflow-demanda/references/`, uma por mídia:
+[`midia-arquivo.md`](../workflow-demanda/references/midia-arquivo.md) e
+[`midia-issues.md`](../workflow-demanda/references/midia-issues.md).
 
 Depois, com `AskUserQuestion`, perguntar **onde ficam os padrões de engenharia** (idioma,
 KISS/YAGNI, validação antes do commit, testes, acessibilidade, tratamento de credencial):
@@ -76,9 +77,11 @@ KISS/YAGNI, validação antes do commit, testes, acessibilidade, tratamento de c
 
 ## Ferramentas que o usuário já usa
 
-Três perguntas, porque as três mudam o comportamento do agente daqui para a frente. Perguntar
-uma de cada vez, em pergunta aberta, e aceitar "nenhuma" como resposta — quem está começando
-não tem nada disso, e insistir transforma o setup em venda de stack.
+Até três perguntas, porque as três mudam o comportamento do agente daqui para a frente. **As duas
+primeiras só acontecem se os padrões de engenharia vão para algum lugar** — global ou projeto —,
+porque é lá que as respostas moram; quem escolheu "nenhum dos dois" já tem os seus. A terceira é
+sempre. Perguntar uma de cada vez, em pergunta aberta, e aceitar "nenhuma" como resposta — quem
+está começando não tem nada disso, e insistir transforma o setup em venda de stack.
 
 **1. Gerenciador de senhas.** Onde mora a credencial que não cabe no `.env` — senha de painel,
 chave de produção, credencial usada em mais de uma máquina. Importa porque esses cofres têm CLI:
@@ -142,20 +145,11 @@ Os templates estão em `templates/` dentro desta skill:
 | `templates/readme.md`    | `README.md` (raiz) — a tabela "Onde ficam as coisas" tem um bloco por mídia; escolher um e apagar o outro |
 | `templates/preferencias.md` | conforme a resposta acima — ver abaixo       |
 
-### Os três labels, no modo issue
-
-Criar com `gh label create`. **Criação idempotente**: label que já existe vira aviso, não erro —
-daí o `|| true`. Os comandos, com as descrições, estão em
-[`workflow-demanda/references/midia.md`](../workflow-demanda/references/midia.md), na seção "Criar
-os labels".
-
-**O setup é quem cria os labels**, e não a primeira demanda: `gh issue create --label` com label
-inexistente **falha em vez de criar**. É a armadilha mais repetida sobre setups que só gravam o
-mapeamento e deixam os labels para depois.
-
-Copiar o conteúdo trocando `<NOME>` pelo nome do projeto, **escrevendo na linha `**Mídia do registro:**` o valor que a pergunta da mídia respondeu** — é a única fonte da verdade da escolha, e deixá-la com o texto do template faz toda skill ler a mídia errada — e preenchendo a descrição no lugar
-indicado. **Não reescrever o template por conta própria** — o que estiver marcado como a
-preencher fica marcado; é o usuário que preenche, na primeira demanda ou quando quiser.
+Copiar cada template trocando `<NOME>` pelo nome do projeto e preenchendo a descrição no lugar
+indicado. **A linha `**Mídia do registro:**` recebe o valor que a pergunta da mídia respondeu** — é
+a única fonte da verdade da escolha, e deixá-la com o texto do template faz toda skill ler a mídia
+errada. **Não reescrever o template por conta própria:** o que estiver marcado como a preencher
+fica marcado; é o usuário que preenche, na primeira demanda ou quando quiser.
 
 Se o projeto já tem `CLAUDE.md` na raiz, não substituir: mostrar a seção "Processos de
 desenvolvimento" do template e propor acrescentá-la ao arquivo existente.
@@ -166,6 +160,17 @@ convenções —, e essa parte não é deste setup: sugerir `/init` numa sessão
 não liga de dentro da sessão), que explora o repositório com subagente e apresenta uma proposta
 antes de escrever qualquer arquivo. O setup segue dono da governança — PRD, e o que a mídia
 escolhida pedir. Num projeto sem código não há o que deduzir, e nada muda.
+
+### Os três labels, no modo issue
+
+Criar com `gh label create`. **Criação idempotente**: label que já existe vira aviso, não erro —
+daí o `|| true`. Os comandos, com as descrições, estão em
+[`workflow-demanda/references/midia-issues.md`](../workflow-demanda/references/midia-issues.md), na
+seção "Criar os labels".
+
+**O setup é quem cria os labels**, e não a primeira demanda: `gh issue create --label` com label
+inexistente **falha em vez de criar**. É a armadilha mais repetida sobre setups que só gravam o
+mapeamento e deixam os labels para depois.
 
 ## `AGENTS.md` como link simbólico
 
