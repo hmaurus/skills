@@ -89,7 +89,7 @@ Uma demanda só, com as entregas em checkboxes; a sessão faz o que cabe e fecha
       parágrafo. O `workflow-demanda` aponta para os dois arquivos: "os comandos estão no arquivo da
       mídia que a linha nomeia".
 - [x] Uma terceira mídia passa a ser um terceiro arquivo, não uma terceira coluna. A decisão do
-      [ADR 0004](../../adr/0004-midia-do-registro-e-config-propria.md) fica de pé — config na linha do
+      [ADR 0004](../../../adr/0004-midia-do-registro-e-config-propria.md) fica de pé — config na linha do
       `CLAUDE.md`, skills neutras, comando concreto num lugar só por mídia —; só a forma da referência
       muda, e isso vai na entrada do `CHANGELOG.md`, sem ADR novo: é reversível num `cat`.
 
@@ -154,7 +154,7 @@ Uma demanda só, com as entregas em checkboxes; a sessão faz o que cabe e fecha
   e o `/setup-matt-pocock-skills`). Movê-las para um arquivo de referência de coleções custaria um
   arquivo novo para poupar ~80 tokens. Ficam.
 - **Migrar alguma coisa deste repositório.** A mídia dele segue arquivo; a demanda
-  [governança em issues neste repo](../intents/governanca-em-issues-neste-repo.md) é outra.
+  [governança em issues neste repo](../../intents/governanca-em-issues-neste-repo.md) é outra.
 
 ## Verificação
 
@@ -213,8 +213,11 @@ Uma demanda só, com as entregas em checkboxes; a sessão faz o que cabe e fecha
   `setup` aponta para os dois arquivos, não só para `midia-issues.md`; a receita de arquivo diz o
   que fazer com a linha do `ROADMAP.md` ao virar spec.
 - **Lições** — `git rm` deixa a remoção no índice, e `git add <arquivo>` seguido de commit a
-  leva junto: conferir `git diff --cached --stat` antes de um commit seletivo. E afirmação sobre o
-  que "já existe" em outro arquivo pede o `grep` na spec, não a memória da leitura.
+  leva junto: conferir `git diff --cached --stat` antes de um commit seletivo. Afirmação sobre o
+  que "já existe" em outro arquivo pede o `grep` na spec, não a memória da leitura. E o `git mv`
+  desta spec para `concluidas/` quebrou dois links **de dentro dela**, que o CI do commit de
+  fechamento acusou (run 35476882735): o `grep` do passo 2 acha quem aponta para o arquivo, não o
+  que o arquivo aponta — e ler só a última linha do check, em vez do exit code, deixou passar.
 - **Promoção (passo 3)** — a lição do `midia.md` virou regra no `CLAUDE.md`: referência que o
   agente carrega leva regra e comando; a medição vai para o CHANGELOG ou para a spec. Dois números
   do backlog mudaram com esta demanda e foram ajustados inline
