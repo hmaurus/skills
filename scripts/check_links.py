@@ -1,11 +1,20 @@
 #!/usr/bin/env python3
 """Confere se todo link relativo de markdown do repositório existe no disco.
 
-Varre o texto inteiro, não linha a linha: link de markdown pode ter o rótulo
-quebrado em duas linhas, e quatro deles existem aqui hoje.
+Duas decisões que o código sozinho não explica:
+
+- **Varre o texto inteiro, não linha a linha.** Link de markdown pode ter o
+  rótulo quebrado em duas linhas, e quatro deles existem aqui hoje.
+- **Mascara código antes de procurar link.** Este é um repositório sobre
+  escrever markdown com link relativo: link de exemplo dentro de bloco cercado
+  ou de crase é ilustração, não link. Sem isso o primeiro exemplo novo deixaria
+  o check vermelho por um não-defeito. A máscara troca o trecho por espaços,
+  para que o número da linha continue certo.
 
 Fora do escopo, por decisão da spec `nenhum-teste-acusa-link-morto`: âncoras
-(`arquivo.md#secao`) — o destino conferido é o arquivo, nunca a seção.
+(`arquivo.md#secao`) — o destino conferido é o arquivo, nunca a seção. Ponto
+cego conhecido: link de referência (`[rótulo][id]` com `[id]: destino` à
+parte), forma que o repositório não usa hoje.
 """
 
 import re
@@ -19,14 +28,11 @@ RAIZ = Path(__file__).resolve().parent.parent
 # passa batido.
 DIRETORIOS_IGNORADOS = ("skills/setup/templates",)
 
-# Placeholder de caminho (`../intents/<nome>.md`) não é link para arquivo.
-DESTINOS_IGNORADOS = ("<", ">")
-
 ESQUEMAS_EXTERNOS = ("http://", "https://", "mailto:")
 
-LINK = re.compile(
-    r"\[[^\]]*\]\(\s*([^)\s]+)(?:\s+[\"'][^\"']*[\"'])?\s*\)", re.DOTALL
-)
+CERCA = re.compile(r"^\s*(```|~~~)")
+CRASES = re.compile(r"`[^`\n]*`")
+LINK = re.compile(r"\[[^\]]*\]\(\s*([^)\s]+)(?:\s+[\"'][^\"']*[\"'])?\s*\)")
 
 
 def arquivos_markdown():
@@ -39,19 +45,30 @@ def arquivos_markdown():
         yield caminho
 
 
+def mascarar_codigo(texto):
+    """Troca bloco cercado e código inline por espaços, preservando offsets."""
+    linhas = texto.split("\n")
+    dentro = False
+    for i, linha in enumerate(linhas):
+        if CERCA.match(linha):
+            dentro = not dentro
+            linhas[i] = " " * len(linha)
+        elif dentro:
+            linhas[i] = " " * len(linha)
+    return CRASES.sub(lambda m: " " * len(m.group(0)), "\n".join(linhas))
+
+
 def main():
     conferidos = 0
     quebrados = []
 
     for caminho in arquivos_markdown():
-        texto = caminho.read_text(encoding="utf-8")
+        texto = mascarar_codigo(caminho.read_text(encoding="utf-8"))
         for achado in LINK.finditer(texto):
             destino = achado.group(1)
             if destino.startswith("#"):
                 continue
             if destino.lower().startswith(ESQUEMAS_EXTERNOS):
-                continue
-            if any(marca in destino for marca in DESTINOS_IGNORADOS):
                 continue
             alvo = destino.split("#", 1)[0]
             if not alvo:
