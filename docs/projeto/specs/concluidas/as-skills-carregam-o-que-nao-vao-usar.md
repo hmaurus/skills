@@ -1,6 +1,6 @@
 # As skills carregam o que não vão usar
 
-Processo — entrevista: criar-spec · implementação: a definir · sugestão: aicf-plan (toca sete arquivos de skill e cria dois; só texto, mas a lista de cortes vale revisar antes de editar)
+Processo — entrevista: criar-spec · implementação: aicf-plan
 
 ## Problema
 
@@ -77,55 +77,55 @@ Uma demanda só, com as entregas em checkboxes; a sessão faz o que cabe e fecha
 
 ### O `midia.md` vira um arquivo por mídia
 
-- [ ] `references/midia.md` deixa de existir. Nascem `references/midia-arquivo.md` e
+- [x] `references/midia.md` deixa de existir. Nascem `references/midia-arquivo.md` e
       `references/midia-issues.md`, cada um com a coluna da sua mídia da tabela "Operação por
       operação" e o que só vale nela: o de arquivo leva a correção de links após `git mv`; o de issue
       leva `--body-file`, os dois gotchas do `gh` (só regra e comando, sem as medições), criar labels,
       adotar issue, `gh` indisponível, e as duas particularidades da linha `Processo` (primeira linha
       do corpo; sem o número da própria issue).
-- [ ] O que é comum às duas mídias fica só em `workflow-demanda/SKILL.md`, que já o tem: a linha de
+- [x] O que é comum às duas mídias fica só em `workflow-demanda/SKILL.md`, que já o tem: a linha de
       configuração e o fallback, a tabela dos quatro estados, "um item, um lugar", o que não muda com
       a mídia. A seção "Divergência com o tracker do Matt Pocock" vai para lá também, resumida a um
       parágrafo. O `workflow-demanda` aponta para os dois arquivos: "os comandos estão no arquivo da
       mídia que a linha nomeia".
-- [ ] Uma terceira mídia passa a ser um terceiro arquivo, não uma terceira coluna. A decisão do
+- [x] Uma terceira mídia passa a ser um terceiro arquivo, não uma terceira coluna. A decisão do
       [ADR 0004](../../adr/0004-midia-do-registro-e-config-propria.md) fica de pé — config na linha do
       `CLAUDE.md`, skills neutras, comando concreto num lugar só por mídia —; só a forma da referência
       muda, e isso vai na entrada do `CHANGELOG.md`, sem ADR novo: é reversível num `cat`.
 
 ### As skills apontam, em vez de repetir
 
-- [ ] Em `criar-spec`, `implementar-spec`, `fechar-demanda` e `criar-prd`, o parágrafo de mídia vira
+- [x] Em `criar-spec`, `implementar-spec`, `fechar-demanda` e `criar-prd`, o parágrafo de mídia vira
       duas frases: uma que aponta — "a linha `Mídia do registro` do `CLAUDE.md` diz qual arquivo de
       `workflow-demanda/references/` seguir; sem linha, `midia-arquivo.md`" — e uma que mantém o
       alcance do aviso de divergência: "se `docs/agents/issue-tracker.md` discordar da linha, avisar
       uma vez e seguir a linha". A justificativa do aviso ("divergir é legítimo, mas precisa ser
       escolha") fica só no `workflow-demanda`.
-- [ ] O `setup` mantém a explicação do fallback (é ele quem grava a linha e precisa dizer por quê); os
+- [x] O `setup` mantém a explicação do fallback (é ele quem grava a linha e precisa dizer por quê); os
       links dele para o `midia.md` passam a apontar para `midia-issues.md`, que é onde estão os
       labels.
-- [ ] A linha `Processo`: `fechar-demanda` segue sendo a especificação; `criar-spec` mantém só a
+- [x] A linha `Processo`: `fechar-demanda` segue sendo a especificação; `criar-spec` mantém só a
       linha de exemplo que ele grava; o resto sai.
 
 ### Os três casos ganham dono
 
-- [ ] `implementar-spec`, passo 1, ganha o caso: alvo que ainda é intent (arquivo em `intents/`,
+- [x] `implementar-spec`, passo 1, ganha o caso: alvo que ainda é intent (arquivo em `intents/`,
       linha do `ROADMAP.md`, ou issue `aicf:intent`) e o usuário manda implementar sem entrevista →
       virar spec pela receita da mídia, com `entrevista: nenhuma` na linha `Processo`, e seguir. O
       texto do `workflow-demanda` que declara o caso legítimo não muda.
-- [ ] `setup`: as perguntas 1 e 2 de "Ferramentas que o usuário já usa" só acontecem quando os
+- [x] `setup`: as perguntas 1 e 2 de "Ferramentas que o usuário já usa" só acontecem quando os
       padrões de engenharia vão para algum lugar (global ou projeto). Quem escolheu "nenhum dos dois"
       declarou que já tem os seus, e é lá que essas respostas morariam. A pergunta 3 fica sempre:
       ela vai para "Processos de desenvolvimento".
-- [ ] A apresentação diz "entre cinco e sete perguntas", que é o que a ramificação acima produz.
+- [x] A apresentação diz "entre cinco e sete perguntas", que é o que a ramificação acima produz.
 
 ### Os três trechos voltam para perto do que explicam
 
-- [ ] `criar-spec`: a seção "A spec" abre com a lista das cinco seções, sob o heading; o material de
+- [x] `criar-spec`: a seção "A spec" abre com a lista das cinco seções, sob o heading; o material de
       mídia e de mudança de estado desce para um subheading "Onde ela mora".
-- [ ] `setup`: o parágrafo de cópia dos templates fica logo abaixo da tabela de templates, em duas ou
+- [x] `setup`: o parágrafo de cópia dos templates fica logo abaixo da tabela de templates, em duas ou
       três frases; a subseção dos labels vem depois dele.
-- [ ] `implementar-spec`: a linha solta sobre plan mode sai do topo e entra no ramo `aicf-plan` do
+- [x] `implementar-spec`: a linha solta sobre plan mode sai do topo e entra no ramo `aicf-plan` do
       passo 3, que é onde o plan mode é ligado.
 
 ## Arquivos e interfaces
@@ -175,3 +175,49 @@ Uma demanda só, com as entregas em checkboxes; a sessão faz o que cabe e fecha
    perguntas e a contagem só se confirmam com o usuário rodando `/aicf:setup` num diretório
    descartável, escolhendo "nenhum dos dois" e conferindo que as perguntas de senha e documentação
    não vêm. O relatório registra se isso aconteceu ou fica em aberto.
+
+## Relatório de implementação (2026-09-19)
+
+- **Status** — concluído. Valida o run 35476857251 do CI (`gh run list --workflow=ci.yml --limit 1`).
+- **Arquivos alterados** — `skills/workflow-demanda/references/midia.md` apagado; `midia-arquivo.md`
+  e `midia-issues.md` criados na mesma pasta; `workflow-demanda/SKILL.md` (ponteiro para os dois,
+  divergência com o Matt, o comum que só existia no `midia.md`); `criar-spec`, `implementar-spec`,
+  `fechar-demanda` e `criar-prd` (parágrafo de mídia em duas frases; operador do "sem entrevista";
+  colocação); `setup/SKILL.md` (perguntas condicionais, contagem, links, colocação);
+  `.claude-plugin/plugin.json` e `CHANGELOG.md` (0.20.0).
+- **Commits** — `23c924e` a spec; `06f09a7` o código. Os dois foram reescritos antes do push: o
+  primeiro par tinha a remoção do `midia.md` no commit da spec, e o commit intermediário ficava com
+  sete links quebrados.
+- **Validação** — `./scripts/check.sh` verde nos dois commits, cada um extraído com `git archive` e
+  conferido isolado. Os pontos da Verificação da spec:
+  1. Total das skills e referências: **56.556 bytes**, contra o alvo de 56.500 — não bateu, por 56.
+     A spec afirmava que o comum do `midia.md` "já estava no `workflow-demanda`", e a revisão
+     mostrou três trechos que não estavam (o comando que lê a configuração, "não existe modo misto",
+     o passo 3 valendo nas duas mídias); devolvê-los, mais as duas frases que faltavam no
+     `criar-prd`, custou 527 bytes sobre os 56.029 medidos antes da revisão. Referência do modo
+     arquivo: 1.585 bytes, abaixo dos 3.000.
+  2. `discorda` no máximo uma vez por skill; a tabela dos quatro estados num arquivo só;
+     `denoland` em nenhum; `references/` com os dois arquivos e nada mais.
+  3. `entrevista: nenhuma` no `implementar-spec`; `cerca de seis` em lugar nenhum.
+  4. Check verde. O ponta a ponta do "sem entrevista" **não rodou** nesta sessão; encerra na primeira
+     demanda deste repositório que partir de um intent com "implementa sem entrevista".
+  5. A ramificação das perguntas do `setup` **fica em aberto**: `disable-model-invocation` impede o
+     agente de rodar; encerra quando o usuário rodar `/aicf:setup` num diretório descartável,
+     responder "nenhum dos dois" e as perguntas de senha e documentação não vierem.
+  - Revisão de código por subagente que não viu a implementação, sobre o commit de código: quatro
+    achados, todos procedentes, corrigidos antes do push — a remoção no commit errado; os três
+    trechos sem destino; o `criar-prd` fora das duas frases que a spec pedia; e, no CHANGELOG, a
+    base do "60.080" sem sha e um "que já o tinha" falso.
+- **Escopo efetivo** — além do previsto: os parágrafos do `setup` sobre `CLAUDE.md` existente e
+  `/init` subiram junto com o de cópia, senão ficariam sob a subseção dos labels; o link geral do
+  `setup` aponta para os dois arquivos, não só para `midia-issues.md`; a receita de arquivo diz o
+  que fazer com a linha do `ROADMAP.md` ao virar spec.
+- **Lições** — `git rm` deixa a remoção no índice, e `git add <arquivo>` seguido de commit a
+  leva junto: conferir `git diff --cached --stat` antes de um commit seletivo. E afirmação sobre o
+  que "já existe" em outro arquivo pede o `grep` na spec, não a memória da leitura.
+- **Promoção (passo 3)** — a lição do `midia.md` virou regra no `CLAUDE.md`: referência que o
+  agente carrega leva regra e comando; a medição vai para o CHANGELOG ou para a spec. Dois números
+  do backlog mudaram com esta demanda e foram ajustados inline
+  ([o setup não avisa que o Matt pergunta o mesmo](../../intents/backlog/o-setup-nao-avisa-que-o-matt-pergunta-o-mesmo.md),
+  [o ciclo nunca rodou em outro agente](../../intents/backlog/o-ciclo-nunca-rodou-em-outro-agente.md)).
+  Nenhum ADR, skill ou termo de glossário.

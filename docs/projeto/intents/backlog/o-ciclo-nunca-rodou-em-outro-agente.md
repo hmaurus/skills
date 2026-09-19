@@ -22,7 +22,7 @@ Levantado em 2026-09-19, na entrevista do PRD.
   há `/plugin install`.
 - **`disable-model-invocation: true`** (`setup`, `criar-prd`) está fora do mínimo do padrão. Outro
   agente pode invocar as duas sozinho.
-- **A prosa cita ferramentas do Claude Code** em 21 pontos
+- **A prosa cita ferramentas do Claude Code** em 20 pontos
   (`grep -rnoE 'AskUserQuestion|plan mode|/clear|\.claude/rules|hooks?' skills/ --include='*.md' | wc -l`),
   e toda referência cruzada usa a sintaxe `/aicf:nome`, que cada agente escreve de outro jeito.
 - **`CLAUDE.md` já está coberto:** o setup gera `AGENTS.md` como link simbólico, e o caso em que o

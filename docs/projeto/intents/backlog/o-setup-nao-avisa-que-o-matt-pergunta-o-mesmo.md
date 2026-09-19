@@ -18,7 +18,7 @@ Elas podem discordar, e discordar é legítimo — o que cada uma guarda não é
 
 O aicf já faz o que dá sem tocar em nada alheio: no setup, lê o arquivo do Matt **se ele existir** e
 propõe o default a partir dele; nas demais skills, avisa uma vez quando as duas discordam e segue a
-linha do `CLAUDE.md` (`grep -rn "issue-tracker.md" skills/` mostra os quatro pontos).
+linha do `CLAUDE.md` (`grep -rn "issue-tracker.md" skills/` mostra os cinco pontos).
 
 **O que falta é a informação chegar a quem decide.** Três buracos:
 
