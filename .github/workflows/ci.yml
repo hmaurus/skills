@@ -1,0 +1,28 @@
+# Rede para quando a execução local do ./scripts/check.sh for esquecida. Aqui se
+# commita direto na main, sem PR: este workflow não bloqueia nada, ele avisa
+# depois do fato. Toda a lógica dos checks vive no script — este YAML não repete
+# comando nenhum.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+
+      # Versão pinada de propósito: localmente roda a mais nova, que descobre
+      # cedo uma exigência nova do formato de plugin; aqui o pin impede que o CI
+      # fique vermelho por uma mudança que não foi nossa. Sobe quando o check
+      # local reprovar com uma versão mais nova que esta.
+      - run: npm i -g @anthropic-ai/claude-code@2.1.278
+
+      - run: ./scripts/check.sh

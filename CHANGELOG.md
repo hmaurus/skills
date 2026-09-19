@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.19.0 — 2026-09-19
+
+- **O repositório ganha verificação, e o GitHub a roda depois do push.** `./scripts/check.sh` é o
+  comando único que a regra *"antes de commitar, rodar no projeto inteiro"* passa a ter aqui, e o
+  `.github/workflows/ci.yml` executa **esse mesmo script** — o YAML não repete comando nenhum. São
+  três checks: link relativo de markdown que aponta para arquivo inexistente (hoje 49 conferidos, 0
+  quebrados — `python3 scripts/check_links.py`), `claude plugin validate --strict` no marketplace e
+  nas skills, e a versão do `plugin.json` achando a própria linha no changelog. A falta tem dano
+  medido: oito links quebrados em duas demandas (2026-09-14 e 2026-09-18), achados só porque alguém
+  lembrou de rodar o `grep` do passo 2 do ritual.
+- **O check de links ignora `skills/setup/templates/**`, e o preço está escrito.** Lá o link
+  relativo fala do projeto que vai receber a cópia, não deste repositório; sem a exclusão o check
+  nasceria com 7 falsos positivos, e check que nasce vermelho não é lido. O ponto cego —
+  link quebrado dentro de um template passa batido — encerra quando um chegar ao projeto de um
+  usuário.
+- **A entrada do `CHANGELOG.md` passa a subir junto com o bump da versão**, e não mais no commit de
+  fechamento. O check as confere em par: separá-las deixaria o CI vermelho em todo commit de
+  release, que é exatamente a hora em que o check é rodado. O commit de fechamento ainda ajusta o
+  texto da entrada com o que descobriu.
+- **A linha `Repositório, branch de trabalho e CI mínimo` sai do `ROADMAP.md`** — quem tem arquivo
+  não tem linha. Ela nunca foi decidida: era o item de exemplo do template, copiado junto quando o
+  roadmap nasceu (`git show a6276e7 -- docs/projeto/ROADMAP.md skills/setup/templates/roadmap.md`).
+
 ## 0.18.0 — 2026-09-18
 
 - **O `README.md` se reorganiza por quem chega, e não por assunto.** O público do aicf é aluno,

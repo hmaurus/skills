@@ -51,17 +51,13 @@ Quatro regras valem antes de abrir qualquer doc:
 
 ## Verificação
 
-> A preencher quando houver código. Comando por comando, e o que conta como saída saudável.
+Um comando só, antes de commitar: **`./scripts/check.sh`**. Saída saudável termina em `Tudo verde.` e sai com 0, depois de imprimir a versão do Claude Code usada, `N links conferidos, 0 quebrados` e os dois `✔ Validation passed`. Ele confere três coisas: link relativo de markdown que aponta para arquivo inexistente, o formato do plugin (`claude plugin validate --strict` no marketplace e nas skills) e se a versão do `plugin.json` tem entrada no `CHANGELOG.md`. O check de links ignora `skills/setup/templates/**`, onde o link fala do projeto que vai receber a cópia — **link quebrado dentro de um template passa batido**, e isso encerra quando chegar ao projeto de um usuário.
 
-- Build: `<comando>` (termina com "...")
-- Testes: `<comando>` (tudo verde; nunca pular nem apagar teste que falha)
-- Lint, formatação e tipos: `<comando>` (zero avisos)
-
-Rodar tudo antes de dar qualquer tarefa por concluída, e colar a saída. Se um teste falha, corrigir o código, não o teste.
+Depois do push, conferir o run: `gh run list --workflow=ci.yml --limit 1` → `completed success`. O workflow chama o mesmo script, com uma versão pinada do Claude Code; quando o check local reprovar com uma versão mais nova que a do `.github/workflows/ci.yml`, subir o pin. Se um check falha, corrigir o repositório, não o script.
 
 ## Publicação
 
-- **A versão sobe no commit de código; o `CHANGELOG.md` entra no commit de fechamento.** O bump do `.claude-plugin/plugin.json` viaja junto com a mudança que ele descreve.
+- **A versão e a entrada do `CHANGELOG.md` sobem juntas, no commit de código.** O bump do `.claude-plugin/plugin.json` viaja junto com a mudança que ele descreve, e o `./scripts/check.sh` confere os dois em par — separá-los deixaria o check vermelho em todo commit de release, que é a hora em que ele é rodado. O commit de fechamento ainda pode ajustar o texto da entrada, com o que o fechamento descobriu.
 - **A release do GitHub fecha a versão:** `git tag -a vX.Y.Z <sha do HEAD>`, push da tag, e `gh release create vX.Y.Z --title "<título>" --notes-file <arquivo> --latest`. A tag aponta para o **HEAD**, não para o commit de código, para que o tarball leve o `CHANGELOG.md` e a doc da versão junto. `--target` com sha abreviado é recusado; criar a tag antes evita isso.
 - **As notas da release são para quem usa o plugin; o `CHANGELOG.md` é para quem o desenvolve.** Não reaproveitar o texto de um no outro. Nome interno de demanda não diz nada de fora — "a entrada de quem chega" não parece falar de README —, e decisão de projeto (o que foi descartado, ADR, regra nova) não interessa a quem só quer saber o que mudou no comando dele. A release diz o que mudou no uso, como atualizar, e para.
 
