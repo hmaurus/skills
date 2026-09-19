@@ -12,8 +12,6 @@ head -qn1 docs/projeto/intents/*.md docs/projeto/specs/*.md docs/projeto/specs/c
 
 > Decidido, ainda sem arquivo.
 
-- [ ] `PRD.md` preenchido
-
 ## Backlog
 
 > Ainda não é certeza. O que separa daqui de `Próximas` é **certeza, não urgência**: demanda certa e sem prioridade já é `Próximas`.
