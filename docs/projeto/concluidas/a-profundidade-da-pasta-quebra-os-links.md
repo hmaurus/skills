@@ -339,3 +339,11 @@ declarar.
   `docs/projeto/*`. Cosmético; se a ordem importa, a instrução diria onde inserir.
 
 Nada a mudar na 0.22.0 quanto ao objeto desta verificação.
+
+**O que este encerramento promoveu.** O achado da versão em cache virou regra no `CLAUDE.md`, ao
+lado da que já tratava de skill com `disable-model-invocation: true`: *"A skill que roda é a do
+início da sessão, não a do cache"*, com a mitigação (reiniciar a sessão antes de verificar) e o
+teste (conferir a versão no cabeçalho do comando). Os dois achados menores nos templates ficam
+aqui como registro, sem virar trabalho. O ramo issue do setup continua sem passada — encerra
+quando alguém rodar o `/aicf:setup` num diretório com `git init` e remote no GitHub, e o
+`gh label list` devolver os três `aicf:*`.
