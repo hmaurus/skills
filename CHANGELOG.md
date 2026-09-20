@@ -1,5 +1,35 @@
 # Changelog
 
+## 0.23.0 — 2026-09-20
+
+- **O `/aicf:setup` passa a inicializar o repositório git.** Antes ele montava a governança inteira
+  num diretório sem `.git` sem dizer uma palavra — `git init` não aparecia na skill, e `git ` só
+  conferia estado alheio. O método assume versionamento em toda parte (a demanda muda de estado por
+  `git mv`, o relatório vive no histórico), então a estrutura nascia num lugar onde ela não
+  funciona, e o usuário só descobria no primeiro fechamento. Aconteceu nos dois diretórios de teste
+  de 2026-09-20. Agora, antes da pergunta da mídia, o setup confere o `.git`, explica em uma linha
+  por que o método depende dele, e roda `git init` com o sim do usuário.
+- **O setup deixa tudo no primeiro commit**, nos dois modos — sem ele o `.gitkeep` não segura pasta
+  nenhuma. **Por caminhos nomeados, nunca `git add -A`:** num diretório que já tem código não
+  commitado, o `-A` varreria um `.env` que ainda não tem `.gitignore` para segurá-lo.
+- **O modo issue deixa de ser escondido e passa a ser habilitado.** A regra antiga conferia
+  `gh auth status` e `git remote -v` e, faltando qualquer coisa, oferecia só arquivo — inclusive no
+  caso em que o que faltava era o repositório no GitHub, que o setup sabe criar. No lugar dela, uma
+  tabela de cinco estados: `gh` ausente e `gh` deslogado deixam de ser indistinguíveis, "autenticado
+  sem repositório" vira o caso que o setup resolve com `gh repo create --source=. --push`, e a opção
+  só some nos dois estados que ele de fato não resolve. `gh auth login` é **conduzido**, não
+  executado: é interativo, e o agente não completa esse fluxo sozinho.
+- **A criação do remoto vem depois do commit, e a skill fixa essa ordem.** O `--push` empurra
+  commits locais; sem commit nenhum ele falha com `error: src refspec HEAD does not match any`
+  (`git init && git remote add origin <bare> && git push -u origin HEAD` reproduz), deixando um
+  repositório vazio no GitHub e um erro no meio do onboarding. Fora dessa ordem — organização, SSH,
+  Enterprise, escopo de token, nome em uso — a skill autoriza o agente a pesquisar, e não copia a
+  documentação do `gh` para dentro de si, que envelheceria ali enquanto
+  `gh repo create --help` está sempre atual.
+- **A apresentação para de prometer "entre cinco e sete perguntas".** Os ramos têm tamanhos
+  diferentes e o modo issue com repositório a criar passa de qualquer faixa; a promessa vira
+  qualitativa.
+
 ## 0.22.0 — 2026-09-20
 
 - **As quatro pastas de demanda passam a ser irmãs.** `backlog/`, `intents/`, `specs/` e

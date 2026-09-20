@@ -1,6 +1,6 @@
 ---
 name: setup
-description: Cria a base de governança de um projeto novo — pergunta se a demanda mora em arquivos ou em issues do GitHub, e monta o que a escolha pedir: docs/projeto/ com PRD e roadmap e as pastas de demanda, ou os labels aicf:*, mais o CLAUDE.md raiz — e, se o usuário quiser, os padrões de engenharia. Rodar uma vez, no começo do projeto.
+description: Cria a base de governança de um projeto novo — inicializa o repositório git se faltar, pergunta se a demanda mora em arquivos ou em issues do GitHub, e monta o que a escolha pedir: docs/projeto/ com PRD e roadmap e as pastas de demanda, ou o repositório no GitHub e os labels aicf:*, mais o CLAUDE.md raiz — e, se o usuário quiser, os padrões de engenharia. Deixa tudo no primeiro commit. Rodar uma vez, no começo do projeto.
 disable-model-invocation: true
 ---
 
@@ -20,8 +20,13 @@ governança seriam o muro que a apresentação existe para derrubar. Cobrir só:
 
 - **o que vai ser montado** — onde a visão do produto mora, onde cada demanda é registrada, e como
   o agente sabe disso em toda sessão;
-- **quantas perguntas vêm** (entre cinco e sete), e que nenhuma resposta é definitiva: tudo vira
-arquivo que o usuário edita depois; - **que nada é criado antes de ele confirmar.**
+- **que são poucas perguntas**, e que nenhuma resposta é definitiva: tudo vira arquivo que o
+  usuário edita depois;
+- **que nada é criado antes de ele confirmar.**
+
+**Sem prometer um número.** Os ramos do roteiro têm tamanhos diferentes — o modo issue com
+repositório a criar passa de qualquer faixa que coubesse aqui —, e número que o próprio roteiro
+desmente é pior que número nenhum.
 
 ## Antes de criar
 
@@ -33,9 +38,23 @@ Perguntar, em pergunta aberta:
 Não entrevistar além disso. Visão, público e modelo entram no PRD depois, com calma — o setup
 só prepara o lugar onde eles vão morar.
 
+## O repositório local
+
+**Antes da pergunta da mídia**, conferir se o diretório é repositório git. Não sendo, explicar **em
+uma linha** por que o método depende de versionamento — a demanda muda de estado por `git mv`, o
+relatório vive no histórico, e `.gitkeep` num diretório sem git não segura pasta nenhuma — e
+perguntar. Sim, `git init`: é local, barato e desfeito com `rm -rf .git`.
+
+Montar a governança num diretório sem repositório entrega um método que não funciona, e o usuário
+só descobre no primeiro fechamento de demanda.
+
+Na mesma passada, **ler o ambiente em silêncio**: `command -v gh`, `gh auth status` e
+`git remote -v`. Nada é executado a partir daí; a leitura só decide o que a pergunta seguinte
+oferece.
+
 ## A mídia do registro
 
-**Antes de criar qualquer coisa** — é esta resposta que decide o que criar. `AskUserQuestion`,
+**Antes de criar a estrutura** — é esta resposta que decide o que criar. `AskUserQuestion`,
 com a explicação curta de cada uma:
 
 - **Arquivos em `docs/projeto/`** (default) — a demanda é um `.md` versionado. Zero setup,
@@ -43,10 +62,25 @@ com a explicação curta de cada uma:
 - **Issues (GitHub)** — a demanda é uma issue. Conversa com comentário e notificação, contribuição
   de fora em dois cliques, referência estável por `#12`, e `Fixes #12` fecha pelo merge.
 
-**Só oferecer issues se o repositório aguentar.** Conferir antes: `gh auth status` passa, e
-`git remote -v` aponta para GitHub. Não aguentando, oferecer só arquivo e dizer **em uma linha** o
-que falta para a outra opção existir — deixar o usuário escolher um caminho que falha no primeiro
-comando é pior que não oferecer.
+**O ambiente decide o que a pergunta oferece, e o setup remove o que falta em vez de esconder a
+opção.** Os estados que a leitura da seção anterior distingue:
+
+| Estado | Detectado por | A pergunta da mídia |
+| --- | --- | --- |
+| Tudo pronto | `gh` presente e autenticado, `git remote -v` aponta para GitHub | as duas opções |
+| Autenticado, sem repositório no GitHub | `git remote -v` vazio | as duas; escolhida a issue, o setup **cria o repositório** |
+| `gh` presente, deslogado | `gh auth status` falha | as duas; escolhida a issue, o setup **conduz o login** |
+| `gh` ausente | `command -v gh` falha | só arquivo, e **uma linha**: o modo issue precisa do GitHub CLI (<https://cli.github.com>); instalado, o `/aicf:setup` de uma sessão nova passa a oferecê-lo |
+| `remote` que não é GitHub | `git remote -v` aponta para outro provedor | só arquivo, e **uma linha**: o modo issue existe só para GitHub, porque a receita inteira é `gh` |
+
+Nos dois últimos a opção some, e some porque o setup não resolve o que falta — deixar o usuário
+escolher um caminho que falha no primeiro comando é pior que não oferecer. Nos dois do meio ele
+resolve, e é isso que separa esta tabela de um aviso.
+
+**O login é conduzido, não executado.** `gh auth login` é interativo — abre navegador ou pede código
+de dispositivo —, então mostrar o comando, pedir que o usuário rode (pelo `!` da própria sessão) e
+reconferir com `gh auth status` antes de seguir. Não é escrúpulo: o agente não tem como completar
+esse fluxo sozinho.
 
 **Se `docs/agents/issue-tracker.md` existe**, o `/setup-matt-pocock-skills` já respondeu a mesma
 pergunta — onde o trabalho mora. Ler e propor o default a partir dele ("o tracker do Matt aponta
@@ -116,6 +150,10 @@ workflow instaladas" de "Processos de desenvolvimento" do `CLAUDE.md` — é del
 | `backlog/`, `intents/`, `specs/`, `concluidas/`         | sim          | **não**    |
 | Os três labels `aicf:*`                                 | não          | **sim**    |
 
+O `CLAUDE.md`, o `README.md` e o que `docs/projeto/` pedir são desta seção. Os três labels — e o
+repositório no GitHub, quando ele ainda não existe — nascem depois do primeiro commit, e têm seção
+própria mais abaixo.
+
 ```
 CLAUDE.md                       # raiz, se ainda não existir
 AGENTS.md -> CLAUDE.md          # link simbólico
@@ -160,17 +198,6 @@ não liga de dentro da sessão), que explora o repositório com subagente e apre
 antes de escrever qualquer arquivo. O setup segue dono da governança — PRD, e o que a mídia
 escolhida pedir. Num projeto sem código não há o que deduzir, e nada muda.
 
-### Os três labels, no modo issue
-
-Criar com `gh label create`. **Criação idempotente**: label que já existe vira aviso, não erro —
-daí o `|| true`. Os comandos, com as descrições, estão em
-[`workflow-demanda/references/midia-issues.md`](../workflow-demanda/references/midia-issues.md), na
-seção "Criar os labels".
-
-**O setup é quem cria os labels**, e não a primeira demanda: `gh issue create --label` com label
-inexistente **falha em vez de criar**. É a armadilha mais repetida sobre setups que só gravam o
-mapeamento e deixam os labels para depois.
-
 ## `AGENTS.md` como link simbólico
 
 `ln -s CLAUDE.md AGENTS.md` na raiz. **Um arquivo, dois nomes** — o Claude Code lê `CLAUDE.md`;
@@ -209,12 +236,61 @@ Em qualquer caso, avisar sobre a única regra do template que muda o comportamen
 não só o do agente: **credencial não entra no chat** — o valor vai para o `.env` e o agente
 recebe apenas o nome da variável.
 
+## O primeiro commit
+
+Depois de criar os arquivos e colar os padrões de engenharia, **nos dois modos**. Sem ele o
+`.gitkeep` não segura pasta nenhuma, e no modo issue o push do passo seguinte não tem o que empurrar.
+
+**Só os caminhos que o setup escreveu, nomeados** — `CLAUDE.md`, `AGENTS.md`, `README.md`,
+`docs/projeto/` e o que a mídia pedir. **Nunca `git add -A`:** num diretório que já tem código não
+commitado, o `-A` varre tudo, inclusive um `.env` que ainda não tem `.gitignore` para segurá-lo. O
+setup não decide o que vai para o histórico de arquivo que ele não criou.
+
+A mensagem segue o idioma do projeto que está nascendo: `chore: estrutura de governança do projeto`.
+
+## O repositório no GitHub, e os labels
+
+Só no modo issue, e **depois do commit**.
+
+### Criar o repositório, se faltar
+
+`gh repo create` é a primeira ação do setup que cria algo fora do disco local, então vai com
+**confirmação explícita — nome e visibilidade**, e `--private` como sugestão.
+
+```bash
+gh repo create <nome> --private --source=. --remote=origin --push
+```
+
+**A ordem é o que esta skill fixa.** O `--push` empurra commits locais; num diretório onde o
+`git init` acabou de rodar e não há commit nenhum, ele falha com
+`error: src refspec HEAD does not match any` e deixa o usuário com um repositório vazio no GitHub e
+um erro no meio do onboarding. Criar o remoto antes de os arquivos existirem é exatamente como se
+chega nesse erro.
+
+**Fora dessa ordem, pesquisar em vez de improvisar.** O comando acima cobre o caso comum;
+organização em vez de conta pessoal, SSH em vez de HTTPS, GitHub Enterprise, escopo de token
+faltando, nome já em uso — cada um tem resposta na documentação do `gh`, e consultá-la na hora é o
+certo. O que não se faz é copiá-la para cá: ela envelheceria sozinha dentro desta skill, enquanto
+`gh repo create --help` está sempre atual.
+
+### Os três labels
+
+Criar com `gh label create`. **Criação idempotente**: label que já existe vira aviso, não erro —
+daí o `|| true`. Os comandos, com as descrições, estão em
+[`workflow-demanda/references/midia-issues.md`](../workflow-demanda/references/midia-issues.md), na
+seção "Criar os labels".
+
+**O setup é quem cria os labels**, e não a primeira demanda: `gh issue create --label` com label
+inexistente **falha em vez de criar**. É a armadilha mais repetida sobre setups que só gravam o
+mapeamento e deixam os labels para depois.
+
 ## Ao terminar
 
 O setup é a primeira vez que o usuário vê o método funcionando, e ele termina sabendo o que ganhou
 e o que fazer em seguida — não só o que foi criado no disco.
 
-1. Listar o que foi criado e onde.
+1. Listar o que foi criado e onde — os arquivos, o commit, e, no modo issue, o repositório e os
+   labels.
 2. **Apresentar o método em linguagem comum.** Carregar `/aicf:workflow-demanda` e contar o que ele
    diz, em vez de colar um texto guardado aqui: texto guardado seria a segunda cópia do mapa e
    envelheceria sozinho, enquanto a skill é a fonte da verdade do ciclo. Cobrir, nesta ordem:
