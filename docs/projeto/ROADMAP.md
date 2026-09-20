@@ -12,7 +12,6 @@ head -qn1 docs/projeto/intents/*.md docs/projeto/specs/*.md docs/projeto/specs/c
 
 > Decidido, ainda sem arquivo.
 
-- [ ] O `git mv` de uma demanda quebra os links que saem dela, e o passo 2 do fechamento só procura os que entram — encerra quando `midia-arquivo.md` e o passo 2 mandarem conferir os dois sentidos, ou rodar o check de links
 
 ## Backlog
 
