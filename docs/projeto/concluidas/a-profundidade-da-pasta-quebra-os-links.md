@@ -149,3 +149,90 @@ juiz de cada passo da migração.
    nessa lista na implementação**: a spec as tinha esquecido, e elas caem no mesmo princípio que o
    `CHANGELOG.md` — ponteiro se reaponta, relato do que uma versão fez fica como foi escrito.
 5. Depois do push, `gh run list --workflow=ci.yml --limit 1` → `completed success`.
+
+## Relatório de implementação (2026-09-20)
+
+**Status** — concluído. CI run `35493339756` → `completed success`
+(`gh run list --workflow=ci.yml --limit 1`).
+
+**Causa raiz** — confirmada como a spec descrevia, e medida antes de tocar o disco: copiar
+`as-skills-carregam-o-que-nao-vao-usar.md` de `specs/concluidas/` para `specs/` — a mesma mudança
+de nível que o `git mv` do fechamento faz no sentido inverso — fez o `check_links.py` acusar **4
+links quebrados**, todos de saída (`../../../adr/`, `../../intents/`). A cópia existia no
+`git status --porcelain` antes de a saída ser lida.
+
+**Arquivos alterados** — 38 no commit de código (`git show --stat 9be56e3`):
+
+- `docs/projeto/specs/concluidas/` → `docs/projeto/concluidas/` e
+  `docs/projeto/intents/backlog/` → `docs/projeto/backlog/` — 16 arquivos, `git mv`
+- `docs/projeto/specs/.gitkeep` — novo: quem segurava `specs/` era o `.gitkeep` de `concluidas/`,
+  que saiu de dentro dela
+- `skills/workflow-demanda/references/midia-arquivo.md` — a tabela, o parágrafo das pastas irmãs e
+  o "Mover quebra link" encolhido para um sentido só
+- `skills/workflow-demanda/SKILL.md`, `skills/fechar-demanda/SKILL.md`,
+  `skills/criar-spec/SKILL.md`, `skills/setup/SKILL.md`, `skills/setup/templates/roadmap.md`
+- `README.md`, `README.en.md`, `docs/projeto/PRD.md`, `docs/projeto/ROADMAP.md`,
+  `docs/projeto/intents/governanca-em-issues-neste-repo.md`, os 4 itens de `backlog/`
+- [`docs/adr/0006-o-layout-das-demandas-e-achatado.md`](../../adr/0006-o-layout-das-demandas-e-achatado.md) — novo
+- `.claude-plugin/plugin.json` → `0.22.0` e a entrada do `CHANGELOG.md`
+
+**Commits** — `9be56e3` (código) e o commit deste fechamento.
+
+**Validação**
+
+1. Defeito provado antes: 4 links quebrados na cópia, com `git status --porcelain` conferido antes
+   da saída.
+2. Layout novo provado depois: `git mv docs/projeto/specs/a-profundidade-...md docs/projeto/concluidas/`
+   → `check_links.py` devolveu `0 quebrados` **sem editar um link sequer**. Desfeito com `git mv`.
+3. `./scripts/check.sh` → `Tudo verde.`, `97 links conferidos, 0 quebrados`, dois `✔ Validation passed`.
+4. `grep -rn 'specs/concluidas\|intents/backlog' --include='*.md' .` devolve só texto histórico
+   deliberado — ver "Escopo efetivo".
+5. `grep -rn 'passo [0-9]' --include='*.md' .` — a numeração não mudou; quem cita o passo 2 do
+   fechamento de fora continua falando da mesma coisa.
+6. Revisão de código **dispensada** por decisão do titular: o risco real (link morto) tem juiz
+   automatizado no `check_links.py`, e a conferência de "destino existe mas é o alvo errado" foi do
+   próprio autor, lendo a listagem antes/depois dos 46 links.
+7. **O fechamento desta demanda é a prova final.** O `git mv` de `specs/` para `concluidas/` moveu
+   este arquivo com dois links de saída para `../../adr/` e devolveu `0 quebrados` sem nenhuma
+   edição — os dois caminhos são iguais nas duas pastas, porque elas estão no mesmo nível. Antes do
+   achatamento, este mesmo movimento os teria quebrado.
+
+**Escopo efetivo**
+
+- **A verificação 4 da spec estava mal calibrada, e foi corrigida no próprio arquivo.** Ela exigia
+  que o `grep` sobrasse apenas o comando do ADR 0003 e as entradas antigas do `CHANGELOG.md`, mas
+  as demandas em `concluidas/` citam as pastas em prosa dezenas de vezes. Elas caem no mesmo
+  princípio que a spec já enunciava — *"ponteiro se reaponta; o texto não se toca"* —, então os
+  links dentro delas foram reapontados e a prosa ficou. Decisão do titular na abertura.
+- **Dois arquivos que a spec não nomeava entraram, por serem instrução viva e não relato:** os 4
+  itens de `backlog/`, cujo bloco de citação manda *"arquivar este arquivo em `specs/concluidas/`"*,
+  e o intent aberto `governanca-em-issues-neste-repo.md`.
+- **O caminho divergiu da sugestão da spec** (`aicf-direto` → `aicf-plan`). Motivo: o diff não cabia
+  numa frase — 16 renames, 46 links recomputados, 13 arquivos editados à mão, ADR novo e bump.
+- `docs/projeto/specs/.gitkeep` não estava previsto e foi necessário.
+
+**Lições**
+
+- **Achatar resolveu o sentido de saída, e só ele — e o teste da spec confundia os dois.** A
+  Verificação 2 pedia `0 quebrados` depois de um `git mv` qualquer; rodada com um arquivo que
+  tinha ponteiros de entrada, deu 2 quebrados, todos de **entrada**. Não era regressão: é o sentido
+  que o `grep` do passo 2 sempre cobriu e continua cobrindo. O teste que prova esta demanda isola a
+  origem — nenhum link **quebrado tem o arquivo movido como origem**.
+- **A conta dos links não é uniforme, e `sed` teria errado.** De `concluidas/X.md`, `../../../adr/`
+  vira `../../adr/`, mas `../a-primeira-tela-...md` vira `../specs/a-primeira-tela-...md`: o
+  primeiro perde um nível, o segundo ganha um segmento. O script resolveu cada destino contra o
+  caminho antigo e recomputou contra o novo, reaproveitando `mascarar_codigo()` do
+  `check_links.py` para não tocar em link de exemplo dentro de crase.
+- **Importar `scripts/check_links.py` de um script auxiliar cria `scripts/__pycache__/`**, que
+  entrou no `git add -A` e precisou de `git rm --cached`. Rodar o check direto não gera o diretório
+  — só o import gera. Não há `.gitignore` no repositório
+  (`test -e .gitignore || echo ausente`).
+
+**O que este ritual abriu**
+
+- [ADR 0006 — o layout das demandas é achatado](../../adr/0006-o-layout-das-demandas-e-achatado.md)
+- Regra nova no `CLAUDE.md`, na seção `## Registro`: *"Comando que um doc escreve se roda antes de
+  o doc fechar"* — promovida pela Verificação 4 desta spec, que previa a saída de um `grep` sem o
+  ter executado. Segunda ocorrência do mesmo erro em dois dias.
+- Nenhuma demanda nova nem obsoleta. A linha de `Próximas` do `ROADMAP.md` já tinha saído quando a
+  spec foi gravada.
