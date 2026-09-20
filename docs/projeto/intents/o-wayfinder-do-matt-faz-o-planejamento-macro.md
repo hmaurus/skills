@@ -20,9 +20,27 @@ O `wayfinder` do Matt Pocock existe exatamente para esse caso, e tem os dois mec
   the effort is headed" (`grep -n 'Not yet specified' $R/skills/skills/engineering/wayfinder/SKILL.md`).
 
 O mesmo bullet, e o parágrafo acima dele ("elas simplesmente começam na ideia já formulada"),
-afirmam o contrário. É por esforço e não por produto — o mapa morre com o esforço, e não há nada
-que atravesse esforços —, mas a frase como está é absoluta e um leitor que usa o `wayfinder`
-derruba a comparação inteira.
+afirmam o contrário. A frase como está é absoluta, e um leitor que usa o `wayfinder` derruba a
+comparação inteira.
+
+**O recorte que torna a frase verdadeira é esforço × projeto**, não "tem" × "não tem". Os comandos
+abaixo usam `W=$R/skills/skills/engineering/wayfinder/SKILL.md`, no sha `c55ee46`:
+
+- O `wayfinder` planeja **um esforço**, e o destino é o que o define: "The destination varies per
+  effort, and naming it is the first act of charting" (`sed -n 9p $W`).
+- O mapa acaba quando aquele destino fica alcançável: "the map is done when the way is clear, with
+  nothing left to decide before someone goes and does the thing" (`sed -n 13p $W`).
+- O que ficou fora não fica esperando o próximo: "it returns only if the destination is redrawn,
+  and then as a fresh effort, not a resumption" (`sed -n 99p $W`).
+- Nada no arquivo liga um mapa ao seguinte:
+  `grep -nic 'across efforts\|between efforts\|multiple maps\|previous map' $W` devolve `0`. É
+  esse comando que encerra a afirmação se a skill ganhar o mecanismo.
+
+O aicf registra **o projeto**: `intents/` e `backlog/` existem fora de qualquer demanda, e o PRD
+diz o que ficou fora do produto, não de um esforço. É por isso que o Matt marca PARCIAL no critério
+2 da pesquisa, e é o `wayfinder` que sustenta esse parcial — o mecanismo existe, o alcance é outro.
+Uma redação que troque "o aicf tem, o Matt não" por "o alcance é outro" fica verdadeira sem perder
+o argumento.
 
 A pesquisa [governança macro nos frameworks vizinhos](../../referencias/governanca-nos-frameworks-vizinhos.md)
 já registrou isto no item 6 da seção de achados. A demanda
@@ -34,11 +52,14 @@ fechamento dela, em 2026-09-20 — fora do escopo daquela, registrada aqui.
 
 - Se o bullet ganha a ressalva do `wayfinder` (como o bullet do nível do produto ganhou a do
   `triage`), ou se o parágrafo de abertura é que precisa parar de dizer "começam na ideia já
-  formulada".
+  formulada". O recorte a aplicar já está decidido acima; o que falta é onde ele entra e em quantas
+  palavras.
 - Se o `wayfinder` também entra na seção "Comandos vizinhos que valem conhecer", que hoje não o
   cita — ele é o comando do Matt para a fase que o aicf chama de planejamento macro.
 - O `README.en.md` acompanha seção por seção.
 
-**Encerra quando** o `README.md` e o `README.en.md` não afirmarem mais que o registro de ideia
-ainda não madura é exclusivo do aicf, ou quando a afirmação vier com o recorte que a torna
-verdadeira.
+**Encerra quando** o `README.md` e o `README.en.md` pararem de afirmar que o registro de ideia
+ainda não madura é exclusivo do aicf — seja porque a frase saiu, seja porque passou a dizer que o
+que muda é o alcance, esforço contra projeto. Enquanto
+`grep -n 'ainda não amadureceu\|has not matured' README.md README.en.md` devolver a frase antiga
+nos dois, a demanda está aberta.
