@@ -245,9 +245,10 @@ verificado é só o texto dos arquivos.
 - **Como:** `find docs/projeto -maxdepth 1 -type d | sort` deve devolver as quatro pastas irmãs —
   `backlog`, `concluidas`, `intents`, `specs` — e nenhuma aninhada. A tabela do `README.md` gerado
   deve trazer as quatro linhas, uma por pasta.
-- **Por que ainda não aconteceu:** o `setup` roda uma vez por projeto, e não havia projeto novo
-  nesta sessão. Sem isso, o risco vivo é o mesmo que o `templates/readme.md` materializou — texto
-  de template que descreve o layout antigo e que o `./scripts/check.sh` não enxerga, porque
+- **Encerrada em 2026-09-20, e passou** — a seção de encerramento no fim deste arquivo traz a saída
+  dos comandos, o que a passada não cobriu e o achado que ela produziu.
+- **O risco que ela existia para pegar** era o mesmo que o `templates/readme.md` materializou:
+  texto de template que descreve o layout antigo e que o `./scripts/check.sh` não enxerga, porque
   `skills/setup/templates/**` está na lista de ignorados do `check_links.py`.
 
 **O que este ritual abriu**
@@ -258,3 +259,83 @@ verificado é só o texto dos arquivos.
   ter executado. Segunda ocorrência do mesmo erro em dois dias.
 - Nenhuma demanda nova nem obsoleta. A linha de `Próximas` do `ROADMAP.md` já tinha saído quando a
   spec foi gravada.
+
+## Encerramento da verificação em aberto — o `/aicf:setup` num projeto novo (2026-09-20)
+
+**Encerrada: passa.** O titular rodou `/aicf:setup` em modo arquivo num diretório vazio,
+`~/dev/tmp/teste-aicf`, criado para isto. O modo arquivo não foi escolha: o diretório não é
+repositório git e não tem remote no GitHub, então o setup ofereceu uma mídia só — o que também
+exercitou o caminho "não aguentando, oferecer só arquivo e dizer em uma linha o que falta".
+
+O critério, literal:
+
+```
+$ find docs/projeto -maxdepth 1 -type d | sort
+docs/projeto
+docs/projeto/backlog
+docs/projeto/concluidas
+docs/projeto/intents
+docs/projeto/specs
+
+$ find docs/projeto -mindepth 2 -type d
+(vazio)
+```
+
+As quatro pastas irmãs, nenhuma aninhada. A tabela do `README.md` gerado traz as quatro linhas,
+uma por pasta (linhas 18–21 do arquivo), e o `head -qn1` do `ROADMAP.md` gerado aponta para
+`docs/projeto/concluidas/*.md`, não para a pasta funda.
+
+**O que esta passada prova, e o que não prova.** A sessão começou com o plugin em **0.20.0** —
+o cabeçalho do comando trouxe `cache/aicodingflow/aicf/0.20.0/skills/setup`, e a primeira árvore
+que o agente imprimiu ao usuário foi a antiga, com `intents/backlog/` e `specs/concluidas/`. O
+titular reconheceu o layout velho, atualizou o plugin no meio da conversa e perguntou se a causa
+era a desatualização ou falta de ajuste. Era a desatualização: a **0.22.0** entrou no cache às
+17:03, `diff -rq` entre `0.22.0/skills/setup` e `skills/setup` deste repositório deu vazio, e
+`grep -rn 'specs/concluidas\|intents/backlog' 0.22.0/skills/` não devolveu nada — as únicas
+ocorrências na versão estão no `CHANGELOG.md`, descrevendo a migração, e em relatórios antigos de
+`docs/projeto/concluidas/`, que é onde devem estar. O agente releu o `SKILL.md` e os templates da
+0.22.0 pelo disco e criou a estrutura por eles.
+
+Então o que está provado é: **os arquivos da 0.22.0, seguidos à risca num diretório vazio,
+produzem o layout achatado**. O que não está é uma invocação de ponta a ponta com a 0.22.0 já
+carregada no início da sessão — na prática o mesmo texto, lido de um lugar diferente, mas a
+distinção fica registrada por honestidade.
+
+**O achado vale mais que a verificação: a versão que roda é a do início da sessão.** Skill é lida
+quando a sessão abre; `/plugin update` no meio troca o cache e não recarrega o que já está em
+contexto. Quem for encerrar uma verificação destas depois de atualizar o plugin **verifica a
+versão anterior sem perceber** — foi exatamente o que quase aconteceu aqui, e só não aconteceu
+porque o titular reconheceu a árvore velha de memória. É a mesma classe de risco que a spec
+nomeou em "Verificação em aberto" — texto que descreve o layout antigo e que o
+`./scripts/check.sh` não enxerga —, com origem diferente: não o arquivo do template, mas a versão
+em cache. Mitigação, uma linha: **depois de `/plugin update`, reiniciar a sessão antes de
+verificar**.
+
+**O que esta passada não cobriu: o modo issue.** A pergunta da mídia não chegou a ser feita, e
+por regra da própria skill — *"Só oferecer issues se o repositório aguentar. Conferir antes:
+`gh auth status` passa, e `git remote -v` aponta para GitHub"*. Aqui o `gh` passou (conta
+autenticada, token ativo) e o `git remote -v` devolveu `fatal: not a git repository`, então o
+roteiro manda oferecer só arquivo e dizer em uma linha o que falta para a outra opção existir.
+Foi o que aconteceu, e está correto para a sessão — mas deixa registrado o buraco: **o ramo issue
+do setup continua sem nenhuma passada**, incluindo o `gh label create` dos três `aicf:*`, que o
+`SKILL.md` destaca como a armadilha mais repetida do método (`gh issue create --label` com label
+inexistente falha em vez de criar). Encerrar esse ramo pede um segundo diretório, com `git init` e
+um repositório no GitHub antes de rodar o setup.
+
+**Nota de conduta, na mesma passagem:** o agente anunciou a mídia como fato consumado — *"seguimos
+com arquivos em `docs/projeto/`"* — em vez de apresentá-la como a decisão que ainda era do titular.
+Com uma opção viável o efeito prático é o mesmo, mas a resposta *"espera, deixa eu criar o repo no
+GitHub primeiro"* estava disponível e não foi oferecida. O roteiro diz **oferecer** só arquivo, não
+declarar.
+
+**Dois achados menores nos templates**, fora do escopo desta verificação e sem impacto no layout:
+
+- `templates/claude-md.md` — o parêntese da linha das coleções (`_(Superpowers, Matt Pocock — são
+  os caminhos que o implementar-spec pode oferecer além do aicf.)_`) existe para exemplificar
+  quando o valor é "nenhuma". Quando o projeto tem as duas instaladas, a linha preenchida repete
+  os mesmos dois nomes em seguida. O parêntese sem os nomes serve aos dois casos.
+- `templates/readme.md` — as quatro linhas a acrescentar entram "na tabela acima", que termina na
+  linha do `CLAUDE.md`. Inseridas ao fim, elas deixam o `CLAUDE.md` no meio do bloco
+  `docs/projeto/*`. Cosmético; se a ordem importa, a instrução diria onde inserir.
+
+Nada a mudar na 0.22.0 quanto ao objeto desta verificação.
