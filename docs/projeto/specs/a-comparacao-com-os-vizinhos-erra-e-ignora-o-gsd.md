@@ -53,19 +53,17 @@ O aicf é a camada de governança do GSD sem o loop de execução, e plugável a
 
 - [ ] **A frase sobre o tracker do Matt fica certa nos três arquivos.** `README.md` e `README.en.md`
       passam a dizer "GitHub, GitLab ou markdown local, e outro tracker descrito em prosa". No
-      `CLAUDE.md`, a regra "Afirmação sobre ferramenta de terceiro carrega o comando que a confere"
-      ganha, além da correção, o registro de que a própria frase errou uma segunda vez: é a prova de
-      que a regra vale, e o texto novo carrega o comando do Matt.
+      `CLAUDE.md`, só o parêntese da regra muda; nada se acrescenta.
 - [ ] **As três frases da seção "Por que este" ganham a nuance.** "O código é revisto contra o plano
       durante a execução, mas o plano e a spec ficam como foram escritos: nada os atualiza com o que
       saiu"; "no caminho _architectural_"; e "o Matt guarda o que foi recusado por pedido, não o que
-      o produto é". Cada frase nova vem com o comando de conferência entre parênteses ou em nota, no
-      formato que o `README.md` já usa.
+      o produto é". Troca de frase por frase, sem comando na prosa: os comandos ficam nesta spec e
+      no relatório em `docs/referencias/`, como o README já faz na seção inteira.
 - [ ] **A seção "Por que este" ganha um parágrafo sobre GSD e BMAD.** Diz que eles têm a mesma
       camada, que a diferença é serem donos da implementação, e que é isso que o aicf deixa de fora
       por decisão ([ADR 0001](../../adr/0001-fronteira-de-fase.md)). O título da seção passa a
       cobrir os quatro, ou ganha um segundo `<details>`; a implementação escolhe o que fica mais
-      curto. Nenhuma afirmação sobre GSD ou BMAD entra sem o comando que a confere.
+      curto. É o único acréscimo da demanda; o resto é substituição.
 - [ ] **O `README.en.md` acompanha, seção por seção**, como a demanda
       [a entrada de quem chega](concluidas/a-entrada-de-quem-chega.md) estabeleceu
       (`grep -c '^## ' README.md README.en.md` devolve o mesmo número).
@@ -105,8 +103,8 @@ O aicf é a camada de governança do GSD sem o loop de execução, e plugável a
    Linear como opção do setup do Matt.
 2. `sed -n 44,47p $R/skills/skills/engineering/setup-matt-pocock-skills/SKILL.md` no sha
    `c55ee46` lista as quatro opções que o README passa a citar.
-3. `grep -c 'GSD' README.md README.en.md` devolve pelo menos 1 em cada, e cada frase sobre GSD ou
-   BMAD tem um comando de conferência ao lado.
+3. `grep -c 'GSD' README.md README.en.md` devolve pelo menos 1 em cada, e cada afirmação sobre GSD
+   ou BMAD no README tem correspondente com comando no relatório em `docs/referencias/`.
 4. `grep -c '^## ' README.md README.en.md` devolve o mesmo número nos dois.
 5. `./scripts/check.sh` termina em `Tudo verde.`, e a versão do `plugin.json` é a entrada do topo do
    `CHANGELOG.md`.
