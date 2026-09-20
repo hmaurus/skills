@@ -21,9 +21,9 @@ O `MANUAL.md` que o intent desta demanda propunha teria o conteúdo do `/aicf:wo
 (154 linhas, `wc -l < skills/workflow-demanda/SKILL.md`) escrito outra vez para humano. Dois
 mecanismos guardando o mesmo estado é o gatilho de revisão do lema deste projeto, e cópia que
 ninguém é obrigado a reler envelhece — foi o que custou [o índice envelhece sem
-avisar](../projeto/specs/concluidas/o-indice-envelhece-sem-avisar.md), e a rede que existia contra
+avisar](../projeto/concluidas/o-indice-envelhece-sem-avisar.md), e a rede que existia contra
 isso saiu do método em [o `CHECKLIST.md` sai do
-método](../projeto/specs/concluidas/o-checklist-sai-do-metodo.md).
+método](../projeto/concluidas/o-checklist-sai-do-metodo.md).
 
 As duas coleções que este repositório cita resolvem a mesma pergunta do mesmo jeito. O repositório
 do Matt Pocock cabe num `README.md` de 231 linhas, organizado por modo de falha do leitor, com o

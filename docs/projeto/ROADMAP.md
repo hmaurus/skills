@@ -5,7 +5,7 @@ O que ainda não tem arquivo. Quando um item precisa de contexto, vira arquivo e
 O que já tem arquivo se lê da pasta:
 
 ```
-head -qn1 docs/projeto/intents/*.md docs/projeto/specs/*.md docs/projeto/specs/concluidas/*.md | sed 's/^# //'
+head -qn1 docs/projeto/intents/*.md docs/projeto/specs/*.md docs/projeto/concluidas/*.md | sed 's/^# //'
 ```
 
 ## Próximas

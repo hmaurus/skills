@@ -70,10 +70,10 @@ A governança é a mesma nas duas. Quatro estados:
 
 | Estado | Modo arquivo | Modo issue |
 | --- | --- | --- |
-| Incerto — nem se sabe se será feito | `intents/backlog/<nome>.md`, ou linha em `ROADMAP.md` → Backlog | issue aberta, `aicf:backlog` |
+| Incerto — nem se sabe se será feito | `backlog/<nome>.md`, ou linha em `ROADMAP.md` → Backlog | issue aberta, `aicf:backlog` |
 | Decidido, ainda não entrevistado | `intents/<nome>.md`, ou linha em `ROADMAP.md` → Próximas | issue aberta, `aicf:intent` |
 | Pronta para implementar | `specs/<nome>.md` | issue aberta, `aicf:spec` |
-| Concluída | `specs/concluidas/<nome>.md`, com o relatório no fim | issue fechada, com o relatório em comentário |
+| Concluída | `concluidas/<nome>.md`, com o relatório no fim | issue fechada, com o relatório em comentário |
 
 **Um item, um lugar.** No modo arquivo, enquanto a demanda não tem arquivo ela é uma linha no
 `ROADMAP.md`; quando vira arquivo, a pasta é o registro inteiro e **a linha sai do roadmap**. No

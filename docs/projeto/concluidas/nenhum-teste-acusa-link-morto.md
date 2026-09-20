@@ -17,7 +17,7 @@ ritual quebra.**
   quebrou **cinco links de uma vez** em outras demandas. O achado virou a instrução de `grep` que
   hoje está no passo 2 do `/aicf:fechar-demanda`.
 - **2026-09-18**, fechando *a entrada de quem chega*: **três links**, e o intent
-  [governança em issues neste repo](../../intents/governanca-em-issues-neste-repo.md) registra que
+  [governança em issues neste repo](../intents/governanca-em-issues-neste-repo.md) registra que
   *"eles só foram achados porque o passo 2 do ritual manda procurá-los"*.
 
 O mesmo intent escreve a frase que é a justificativa desta demanda — **"nenhum teste acusa link de
@@ -277,7 +277,7 @@ Ponta a ponta, na ordem:
   - **Regra alterada no `CLAUDE.md`**, seção `## Publicação` — a entrada do `CHANGELOG.md` sobe
     junto com o bump.
   - **Intent novo no backlog** —
-    [o template do roadmap entrega item de exemplo](../../intents/backlog/o-template-do-roadmap-oferece-item-de-exemplo.md),
+    [o template do roadmap entrega item de exemplo](../backlog/o-template-do-roadmap-oferece-item-de-exemplo.md),
     que é o achado que esta spec registrou e deixou fora de escopo. A linha
     `- [ ] PRD.md preenchido` do `ROADMAP.md` **fica**: veio do mesmo template, mas é pendência
     real (`diff <(sed 's/aicf/<NOME>/g' docs/projeto/PRD.md) skills/setup/templates/prd.md` mostra

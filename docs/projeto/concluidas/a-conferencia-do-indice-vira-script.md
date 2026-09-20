@@ -30,7 +30,7 @@ nenhum. O descarte foi certo para aquela decisão. Duas coisas mudaram depois:
 
 1. **O custo em linhas ficou medido.** O `fechar-demanda` cresceu 23% naquela versão — de 106 para
    130 linhas, já depois de uma poda de 7. Na hora do descarte, "mais pesada" era estimativa.
-2. **A semântica virou contrato.** O [ADR 0002](../../../adr/0002-conferencia-do-indice-por-inclusao.md)
+2. **A semântica virou contrato.** O [ADR 0002](../../adr/0002-conferencia-do-indice-por-inclusao.md)
    fixou que a conferência é de inclusão num sentido só, com `Fundação` e `Backlog` fora. Isso é
    especificação executável — antes dele, um script teria que adivinhar a regra que a prosa ainda
    estava descobrindo.

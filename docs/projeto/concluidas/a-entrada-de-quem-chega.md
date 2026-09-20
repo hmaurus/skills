@@ -307,7 +307,7 @@ Um passo ponta a ponta, na ordem:
   bate com a spec.
 
 - **Saída do ritual**
-  - [`docs/adr/0005-a-documentacao-humana-e-um-arquivo-so.md`](../../../adr/0005-a-documentacao-humana-e-um-arquivo-so.md)
+  - [`docs/adr/0005-a-documentacao-humana-e-um-arquivo-so.md`](../../adr/0005-a-documentacao-humana-e-um-arquivo-so.md)
     — por que não há `MANUAL.md`, com o que fica de fora por decisão e o que reverter custaria.
   - `CLAUDE.md`, seção `## Registro` — **afirmação sobre ferramenta de terceiro carrega o comando
     que a confere, no texto que a propõe.** Entra pelo gatilho do erro que apareceu duas vezes, e

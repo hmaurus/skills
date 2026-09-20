@@ -8,7 +8,7 @@ Três das cinco seções do `CHECKLIST.md` — `Decidido`, `Em andamento`, `Entr
 pastas. Toda demanda existe duas vezes: como arquivo na pasta, e como linha na seção.
 
 O método defende essa duplicação como detecção de erro. O argumento está invertido, e o
-[ADR 0002](../../../adr/0002-conferencia-do-indice-por-inclusao.md) prova: ele decidiu que a
+[ADR 0002](../../adr/0002-conferencia-do-indice-por-inclusao.md) prova: ele decidiu que a
 conferência corre **num sentido só** — todo arquivo tem linha, e o inverso não é exigido. Isso não
 é partida dobrada, em que duas fontes independentes se conferem. É a declaração formal de que a
 pasta é a fonte e o checklist é uma cópia derivada dela **à mão**.
@@ -186,7 +186,7 @@ test ! -f docs/projeto/intents/a-conferencia-do-indice-vira-script.md
     `head -qn1 ...` nasceu com três conjuntos de caminhos diferentes em cinco arquivos. Unificado.
   - **Número em prosa se pina num commit, não numa data.** "Em 44 commits" virou 45 no dia
     seguinte; `git log --oneline ddc7477 | wc -l` reproduz para sempre.
-- **Promoção** — [ADR 0003 — um item, um lugar](../../../adr/0003-um-item-um-lugar.md), que
+- **Promoção** — [ADR 0003 — um item, um lugar](../../adr/0003-um-item-um-lugar.md), que
   supersede o 0002; e duas regras no `CLAUDE.md`, ambas vindas da revisão: passo citado por número
   é ponteiro (com o `grep` que o confere), e número tirado do histórico do git se pina num commit.
   Nenhum doc de referência, skill ou regra de `paths:` saiu desta demanda. No `ROADMAP.md`, nada a

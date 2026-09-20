@@ -110,15 +110,13 @@ No modo arquivo, a pasta diz a maturidade do documento:
 docs/projeto/
 ├── PRD.md             # o porquê do produto: visão, público, modelo
 ├── ROADMAP.md         # o que ainda não tem arquivo: Próximas e Backlog
-├── intents/
-│   ├── <intent>.md    # decidida, ainda não entrevistada
-│   └── backlog/       # ainda não está claro que será feita
-└── specs/
-    ├── <spec>.md      # pronta para implementar
-    └── concluidas/    # arquivadas, com relatório
+├── backlog/           # ainda não está claro que será feita
+├── intents/           # decidida, ainda não entrevistada
+├── specs/             # pronta para implementar
+└── concluidas/        # arquivadas, com relatório
 ```
 
-Uma demanda é a unidade de trabalho. O arquivo que a descreve nasce como **intent**, vira **spec** quando está pronta para implementar — o mesmo arquivo, movido — e termina em `specs/concluidas/` com o relatório.
+Uma demanda é a unidade de trabalho. O arquivo que a descreve nasce como **intent**, vira **spec** quando está pronta para implementar — o mesmo arquivo, movido — e termina em `concluidas/` com o relatório. As quatro pastas ficam no mesmo nível, para que mover o arquivo não quebre os links relativos que saem dele.
 
 **Em issues**, a maturidade fica num label (`aicf:backlog`, `aicf:intent`, `aicf:spec`), a demanda é uma issue só do nascimento ao fechamento — o label troca, o número não —, e concluída é a issue fechada, com o relatório em comentário. Aí `docs/projeto/` fica só com o `PRD.md`. PRD, ADR e glossário ficam em arquivo nos dois modos.
 

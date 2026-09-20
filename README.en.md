@@ -112,15 +112,13 @@ In file mode, the folder tells the document's maturity:
 docs/projeto/
 ├── PRD.md             # why the product exists: vision, audience, model
 ├── ROADMAP.md         # what has no file yet: Próximas and Backlog
-├── intents/
-│   ├── <intent>.md    # decided, not yet interviewed
-│   └── backlog/       # not yet clear it will be done
-└── specs/
-    ├── <spec>.md      # ready to implement
-    └── concluidas/    # archived, with a report
+├── backlog/           # not yet clear it will be done
+├── intents/           # decided, not yet interviewed
+├── specs/             # ready to implement
+└── concluidas/        # archived, with a report
 ```
 
-A work item is the unit of work. The file describing it is born as an **intent**, becomes a **spec** once it is ready to implement — the same file, moved — and ends in `specs/concluidas/` with the report.
+A work item is the unit of work. The file describing it is born as an **intent**, becomes a **spec** once it is ready to implement — the same file, moved — and ends in `concluidas/` with the report. The four folders sit at the same level, so moving the file does not break the relative links that point out of it.
 
 **In issue mode**, maturity lives in a label (`aicf:backlog`, `aicf:intent`, `aicf:spec`), a work item is a single issue from birth to closing — the label changes, the number does not — and completed means the issue is closed, with the report in a comment. Then `docs/projeto/` holds only `PRD.md`. The PRD, ADRs and the glossary stay in files in both modes.
 

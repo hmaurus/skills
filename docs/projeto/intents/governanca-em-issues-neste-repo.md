@@ -14,8 +14,8 @@ mantenedor por construção, não por escolha.
 
 **2. O índice deixou de ser argumento.** Este item dizia que o `CHECKLIST.md` era mantido à mão e
 que as issues gerariam a lista sozinhas. O índice derivado saiu do método inteiro em
-[o `CHECKLIST.md` sai do método](../specs/concluidas/o-checklist-sai-do-metodo.md): hoje a pasta é
-a única fonte, e `head -qn1 docs/projeto/intents/*.md docs/projeto/specs/*.md docs/projeto/specs/concluidas/*.md | sed 's/^# //'` gera a lista dos dois lados. Não há mais índice
+[o `CHECKLIST.md` sai do método](../concluidas/o-checklist-sai-do-metodo.md): hoje a pasta é
+a única fonte, e `head -qn1 docs/projeto/intents/*.md docs/projeto/specs/*.md docs/projeto/concluidas/*.md | sed 's/^# //'` gera a lista dos dois lados. Não há mais índice
 manual a trocar por índice gerado, e o que sobra a favor das issues é o item 1 — a contribuição de
 fora —, que é o diferencial declarado deste repositório e sempre foi o argumento forte.
 
@@ -26,7 +26,7 @@ prescrevem, ele para de comer a própria comida — e a divergência vira exceç
 vez de recurso.
 
 Por isso esta demanda **não é customização local**: ela consome a opção criada por
-[escolher entre arquivos e issues](../specs/concluidas/escolher-entre-arquivos-e-issues.md), e só
+[escolher entre arquivos e issues](../concluidas/escolher-entre-arquivos-e-issues.md), e só
 deve ser implementada depois dela. Adotar issues aqui antes de a skill suportar issues seria
 justamente o que a demanda diz querer evitar.
 
@@ -41,19 +41,19 @@ migrar ou não as demandas já concluídas, e o que fazer com o `ROADMAP.md` atu
 
 - **Intent e spec são a mesma issue, com o label mudando?** É o modelo do Matt Pocock
   (`triage-labels.md`: `needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`,
-  `wontfix`), e mapeia quase 1:1 nas pastas de hoje: `intents/backlog/` → `needs-triage`;
+  `wontfix`), e mapeia quase 1:1 nas pastas de hoje: `backlog/` → `needs-triage`;
   `intents/` → triada e decidida, sem entrevista; `specs/` → `ready-for-agent`;
-  `specs/concluidas/` → issue fechada. Alternativa: dois tipos de issue, o que duplica o artefato.
+  `concluidas/` → issue fechada. Alternativa: dois tipos de issue, o que duplica o artefato.
 - **Onde fica o relatório de fechamento?** Hoje ele mora no arquivo da demanda, que fica no
   repositório para sempre. Como comentário de issue fechada ele é menos achável, e some do
   `git clone`. É o conflito direto com o lema *"quem precisa saber é o repositório"*.
-- **O que acontece com o que já está em `specs/concluidas/`?** Migrar, deixar como arquivo morto,
+- **O que acontece com o que já está em `concluidas/`?** Migrar, deixar como arquivo morto,
   ou conviver.
 - **O `ROADMAP.md` sobrevive?** É o que sobrou: a lista do que ainda não tem arquivo. Com issues,
   `Próximas` e `Backlog` viram labels — ou o arquivo fica, e a governança passa a morar em duas
   mídias.
 
-## O que [o README reorganizado](../specs/concluidas/a-entrada-de-quem-chega.md) trouxe para cá
+## O que [o README reorganizado](../concluidas/a-entrada-de-quem-chega.md) trouxe para cá
 
 Levantado em 2026-09-18, ao implementar aquela demanda. Dois fatos, e o primeiro põe número numa
 pergunta que já estava na lista. **Os dois comandos abaixo contam a si mesmos** — este arquivo é uma
@@ -62,14 +62,14 @@ das demandas —, então remedir depois de editá-lo dá um número maior, e é 
 **A teia de links entre demandas é um custo de migração que ninguém tinha medido.** As demandas
 deste repositório se citam: *"precede X"*, *"encolhe o arquivo que Y vai ter que"*, *"entregue na
 `0.14.0`"*. São **27 links relativos entre elas**
-(`grep -rno '\](\.\./[^)]*\.md\|\]([a-z0-9-]*\.md)' docs/projeto/intents/*.md docs/projeto/intents/backlog/*.md docs/projeto/specs/concluidas/*.md | wc -l`)
+(`grep -rno '\](\.\./[^)]*\.md\|\]([a-z0-9-]*\.md)' docs/projeto/intents/*.md docs/projeto/backlog/*.md docs/projeto/concluidas/*.md | wc -l`)
 mais **14 apontando de fora para dentro** — do `CHANGELOG.md`, dos ADRs e das próprias skills
 (`grep -rn 'docs/projeto/\(intents\|specs\)' --include='*.md' CLAUDE.md README.md README.en.md CHANGELOG.md docs/adr/ skills/ | wc -l`).
 Migrar as concluídas para issue quebra os 41 de uma vez, e trocar cada um por `#<n>` é trabalho
 manual sem rede: nenhum teste acusa link de markdown morto neste repositório. O fechamento de
 2026-09-18 já reproduziu a classe do problema em pequena escala — um `git mv` quebrou três links
 e eles só foram achados porque o passo 2 do ritual manda procurá-los. Isso pesa a favor de
-**conviver** em vez de migrar, e a pergunta "o que acontece com `specs/concluidas/`" passa a ter
+**conviver** em vez de migrar, e a pergunta "o que acontece com `concluidas/`" passa a ter
 um custo escrito em vez de uma intuição.
 
 **O repositório virou exemplo vivo do modo arquivo, e isso é novo.** O `README.md` reescrito
@@ -86,7 +86,7 @@ modo está vendo quem chega.
 **Exemplo vindo de projeto privado entra anonimizado.** Vale igual em issue e em `.md`, e por isso
 não é argumento contra a migração — é regra de escrita, não de mídia. Está na seção `## Registro`
 do `CLAUDE.md` desde
-[anonimizar as referências ao projeto privado](../specs/concluidas/anonimizar-as-referencias-ao-projeto-privado.md),
+[anonimizar as referências ao projeto privado](../concluidas/anonimizar-as-referencias-ao-projeto-privado.md),
 a demanda que limpou os três documentos que ainda nomeavam o projeto de origem.
 
 Assumir que a governança é pública **por decisão** torna essa regra mais necessária, não menos:

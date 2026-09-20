@@ -113,7 +113,7 @@ workflow instaladas" de "Processos de desenvolvimento" do `CLAUDE.md` — é del
 | A linha `**Mídia do registro:**`                        | sim          | sim        |
 | `docs/projeto/PRD.md`                                   | sim          | sim        |
 | `docs/projeto/ROADMAP.md`                               | sim          | **não**    |
-| `intents/`, `intents/backlog/`, `specs/concluidas/`     | sim          | **não**    |
+| `backlog/`, `intents/`, `specs/`, `concluidas/`         | sim          | **não**    |
 | Os três labels `aicf:*`                                 | não          | **sim**    |
 
 ```
@@ -123,11 +123,10 @@ README.md                       # se ainda não existir
 docs/projeto/
 ├── PRD.md                      # nos dois modos
 ├── ROADMAP.md                  # só modo arquivo
-├── intents/                    # só modo arquivo
-│   ├── .gitkeep
-│   └── backlog/.gitkeep
-└── specs/                      # só modo arquivo
-    └── concluidas/.gitkeep
+├── backlog/.gitkeep            # as quatro pastas de demanda ficam no
+├── intents/.gitkeep            # mesmo nível, e só existem no modo arquivo
+├── specs/.gitkeep
+└── concluidas/.gitkeep
 ```
 
 **No modo issue, `docs/projeto/` fica só com o `PRD.md`** — as pastas de demanda não existem, e

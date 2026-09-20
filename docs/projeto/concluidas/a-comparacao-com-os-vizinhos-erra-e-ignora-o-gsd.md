@@ -6,7 +6,7 @@ Processo — entrevista: criar-spec · implementação: aicf-direto
 
 Em 2026-09-19 uma pesquisa em fonte primária leu sete frameworks de desenvolvimento com agente
 contra os quatro critérios da governança do aicf. O resultado inteiro, com sha e comando por
-afirmação, está em [governança macro nos frameworks vizinhos](../../../referencias/governanca-nos-frameworks-vizinhos.md).
+afirmação, está em [governança macro nos frameworks vizinhos](../../referencias/governanca-nos-frameworks-vizinhos.md).
 Ela achou três problemas na prosa deste repositório.
 
 **Uma afirmação errada sobre o Matt Pocock, em três lugares.** O `README.md`, o `README.en.md` e o
@@ -61,7 +61,7 @@ O aicf é a camada de governança do GSD sem o loop de execução, e plugável a
       no relatório em `docs/referencias/`, como o README já faz na seção inteira.
 - [x] **A seção "Por que este" ganha um parágrafo sobre GSD e BMAD.** Diz que eles têm a mesma
       camada, que a diferença é serem donos da implementação, e que é isso que o aicf deixa de fora
-      por decisão ([ADR 0001](../../../adr/0001-fronteira-de-fase.md)). O título da seção passa a
+      por decisão ([ADR 0001](../../adr/0001-fronteira-de-fase.md)). O título da seção passa a
       cobrir os quatro, ou ganha um segundo `<details>`; a implementação escolhe o que fica mais
       curto. É o único acréscimo da demanda; o resto é substituição.
 - [x] **O `README.en.md` acompanha, seção por seção**, como a demanda
@@ -119,7 +119,7 @@ commit de fechamento.
 **Arquivos alterados**
 
 - `README.md` — título da seção passa a cobrir os quatro frameworks; três frases substituídas; um
-  parágrafo novo sobre GSD e BMAD, com link para o [ADR 0001](../../../adr/0001-fronteira-de-fase.md).
+  parágrafo novo sobre GSD e BMAD, com link para o [ADR 0001](../../adr/0001-fronteira-de-fase.md).
 - `README.en.md` — as mesmas cinco mudanças, seção por seção.
 - `CLAUDE.md` — o parêntese da regra sobre ferramenta de terceiro, e (no fechamento) a oração que
   diz que o comando se roda, não só se cita.
@@ -135,7 +135,7 @@ relatório. `git log --oneline e106962~1..HEAD` lista os dois.
 
 Cada afirmação sobre terceiro foi conferida **rodando** o comando contra o clone no sha pinado, não
 só citando-o. Os quatro clones, reproduzíveis pelo bloco do
-[relatório de pesquisa](../../../referencias/governanca-nos-frameworks-vizinhos.md):
+[relatório de pesquisa](../../referencias/governanca-nos-frameworks-vizinhos.md):
 `mattpocock/skills` `c55ee46`, `obra/superpowers` `5bf4e78` (era o `HEAD` do dia),
 `open-gsd/gsd-core` `6dcc042`, `bmad-code-org/bmad-method` `f033e70`. O menu do setup do Matt
 (`sed -n 44,47p`) lista GitHub, GitLab, Local markdown e Other; `ls $R/gsd-core/commands/gsd | wc -l`
@@ -181,7 +181,7 @@ cita quatro, e "as duas coleções" ficava ambíguo), e duas frases perderam a m
   deste fechamento.
 - **O `git mv` da demanda quebrou os links nos dois sentidos, de novo.** Saem daqui três links
   relativos (`../../` → `../../../`, e `concluidas/x.md` → `x.md`) e entram dois. O item de
-  `Próximas` no [ROADMAP.md](../../ROADMAP.md) que prevê isso continua de pé; o
+  `Próximas` no [ROADMAP.md](../ROADMAP.md) que prevê isso continua de pé; o
   `./scripts/check.sh` pega, mas só depois de quebrado.
 - **Corrigir três frases de uma seção deixa a quarta de pé.** A spec nomeou três, e a revisão de
   código achou uma quarta no mesmo bloco, sobre o mesmo terceiro, pelo mesmo motivo — o `wayfinder`
@@ -194,10 +194,10 @@ cita quatro, e "as duas coleções" ficava ambíguo), e duas frases perderam a m
 
 **Promoção de conhecimento** — uma oração no `CLAUDE.md`, no parágrafo "Afirmação sobre ferramenta
 de terceiro", e uma intent nova ([o `wayfinder`](o-wayfinder-do-matt-faz-o-planejamento-macro.md)).
-Nenhum ADR, skill, regra ou doc de referência novo: o [ADR 0001](../../../adr/0001-fronteira-de-fase.md)
+Nenhum ADR, skill, regra ou doc de referência novo: o [ADR 0001](../../adr/0001-fronteira-de-fase.md)
 já sustentava o argumento do parágrafo sobre GSD e BMAD, e a pesquisa em `docs/referencias/` já
 existia.
 
-**Demanda desbloqueada** — [a primeira tela do README esconde o argumento](../a-primeira-tela-do-readme-esconde-o-argumento.md),
+**Demanda desbloqueada** — [a primeira tela do README esconde o argumento](../specs/a-primeira-tela-do-readme-esconde-o-argumento.md),
 que declarava rodar depois desta. Ela cita `grep -n '^## O problema' README.md` → linha 43, e a
 linha continua 43 depois desta demanda; as linhas 5 a 9 que ela reescreve não foram tocadas aqui.

@@ -4,7 +4,7 @@ Processo — entrevista: a definir · implementação: a definir
 
 > **Encerra quando** `grep -n 'CONTEXT.md\|docs/adr' skills/setup/templates/claude-md.md` devolver
 > ponteiro em vez de layout — ou quando a entrevista concluir que a duplicação se sustenta e
-> arquivar este arquivo em `specs/concluidas/` com o motivo.
+> arquivar este arquivo em `concluidas/` com o motivo.
 >
 > **Reabrir quando** existir o primeiro monorepo com as duas coleções instaladas — é o único caso em
 > que as duas declarações divergem. Até lá elas concordam, e este arquivo é registro de achado, não
@@ -53,6 +53,6 @@ onde o método já defere ao vizinho.
 ## Origem
 
 Levantado durante a entrevista de
-[o usuário escolhe se a governança mora em arquivos ou em issues](../../specs/concluidas/escolher-entre-arquivos-e-issues.md),
+[o usuário escolhe se a governança mora em arquivos ou em issues](../concluidas/escolher-entre-arquivos-e-issues.md),
 ao mapear o que o aicf e o conjunto do Matt duplicam. Aquela demanda tratou a duplicação do
 **substrato** — onde o trabalho mora — e deixou esta, que é de outro assunto, fora do escopo.

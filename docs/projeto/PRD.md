@@ -62,7 +62,7 @@ Seis skills, deliberadamente pequenas: dizem o que o agente não teria como infe
 
 ## Sucesso
 
-**O sinal que serve de prova hoje:** os projetos do autor rodam o ciclo inteiro, demanda → entrevista → implementação → fechamento, sem o processo ser burlado. Quando o autor contorna uma fase, o plugin falhou no que motivou sua criação. Verificação: em cada projeto que consome o plugin, toda demanda em `specs/concluidas/` (ou issue fechada) tem relatório de fechamento.
+**O sinal que serve de prova hoje:** os projetos do autor rodam o ciclo inteiro, demanda → entrevista → implementação → fechamento, sem o processo ser burlado. Quando o autor contorna uma fase, o plugin falhou no que motivou sua criação. Verificação: em cada projeto que consome o plugin, toda demanda em `concluidas/` (ou issue fechada) tem relatório de fechamento.
 
 **A definir.** Uso por aluno sem ajuda, contribuição de fora e sobrevivência à troca de coleção são sinais plausíveis, mas ainda é cedo: o plugin foi exercitado com duas coleções e poucos projetos. Revisar esta seção quando houver alunos usando.
 

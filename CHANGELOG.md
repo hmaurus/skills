@@ -1,5 +1,41 @@
 # Changelog
 
+## 0.22.0 — 2026-09-20
+
+- **As quatro pastas de demanda passam a ser irmãs.** `backlog/`, `intents/`, `specs/` e
+  `concluidas/` ficam no mesmo nível sob `docs/projeto/` — antes, `intents/backlog/` e
+  `specs/concluidas/` moravam um nível abaixo. O `git mv` do fechamento descia um nível, e todo
+  link relativo que **saía** do arquivo movido passava a resolver errado, enquanto o ritual só
+  ensinava o sentido contrário. O dano já tinha sido pago no commit `07cb4a9`; aqui quem pegou foi
+  o `scripts/check_links.py`, e num projeto sem check de links o mesmo `git mv` quebra em silêncio.
+  Achatado, o arquivo muda de pasta sem mudar de profundidade. A decisão e o descarte da
+  alternativa do Matt Pocock (estado como campo no corpo) estão no
+  [ADR 0006](docs/adr/0006-o-layout-das-demandas-e-achatado.md).
+  **Migração de quem já instalou:**
+  ```
+  git mv docs/projeto/specs/concluidas docs/projeto/concluidas
+  git mv docs/projeto/intents/backlog  docs/projeto/backlog
+  grep -rn 'specs/concluidas\|intents/backlog' --include='*.md' .
+  ```
+  O `grep` lista o que falta ajustar. Os links **de dentro** das pastas movidas também mudam de
+  base, e o `grep` não os enxerga: são 33 aqui
+  (`grep -rno '](\.\./[^)]*)' docs/projeto/backlog/*.md docs/projeto/concluidas/*.md | wc -l`), e a
+  conta deles não é uniforme — de `concluidas/X.md`, `../../../adr/` vira `../../adr/`, mas
+  `../<irmã-de-specs>.md` vira `../specs/<irmã>.md`. Projeto que não migrar continua funcionando —
+  o plugin é instrução, não código, e as skills falarão de uma pasta que lá tem outro nome.
+- **A referência entre demandas passa a ser sempre `[título](../<pasta>/<nome>.md)`**, inclusive
+  para arquivo da mesma pasta. É essa forma que sobrevive ao `git mv`: link para irmão escrito como
+  `[título](<nome>.md)` quebra, porque a pasta de origem deixa de conter o alvo. A regra está na
+  tabela do `midia-arquivo.md`.
+- **O parágrafo "Mover quebra link" encolheu em vez de crescer.** Passa a falar de um sentido só —
+  quem aponta para o arquivo movido —, e diz por que o outro não precisa de comando. O passo 2 do
+  `fechar-demanda` deixa de repetir o `grep` inline e aponta para a receita da mídia.
+- **O `criar-spec` ganha a correção que nunca teve.** O `git mv` de `intents/` para `specs/` não
+  quebra link de saída, mas quebra quem apontava para `intents/<nome>.md`, e a skill não mandava
+  corrigir nada. Agora manda, pela mesma receita.
+- **O `/aicf:setup` cria as quatro pastas no mesmo nível**, cada uma com seu `.gitkeep`. A tabela
+  "O que criar" e a árvore acompanham.
+
 ## 0.21.0 — 2026-09-20
 
 - **A comparação do README para de errar sobre o tracker do Matt Pocock.** Os três lugares que
@@ -227,7 +263,7 @@
   dele mandava tirar do PRD o primeiro `ROADMAP.md` — arquivo que não existe no modo issue. A skill
   não foi reestruturada; a redação fica para a demanda da entrada de quem chega.
 - **Os READMEs registram que a escolha existe, e só.** A reestruturação dos dois é da demanda
-  [a entrada de quem chega](docs/projeto/specs/concluidas/a-entrada-de-quem-chega.md), que os toca inteiros.
+  [a entrada de quem chega](docs/projeto/concluidas/a-entrada-de-quem-chega.md), que os toca inteiros.
 
 ## 0.16.0 — 2026-09-14
 

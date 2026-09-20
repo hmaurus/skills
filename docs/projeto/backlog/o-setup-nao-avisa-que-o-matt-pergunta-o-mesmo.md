@@ -5,7 +5,7 @@ Processo — entrevista: a definir · implementação: a definir
 > **Encerra quando** o `/aicf:setup`, no momento da escolha de mídia, disser ao usuário que o
 > `/setup-matt-pocock-skills` responde a mesma pergunta e que os dois podem apontar para o mesmo
 > lugar — ou quando a entrevista concluir que o aviso não se paga, e este arquivo for para
-> `specs/concluidas/` com o motivo.
+> `concluidas/` com o motivo.
 >
 > **Não reabrir por divergência observada:** divergir é comportamento declarado, não defeito. O que
 > falta é o usuário saber que está escolhendo.
@@ -36,7 +36,7 @@ linha do `CLAUDE.md` (`grep -rn "issue-tracker.md" skills/` mostra os cinco pont
 ## Restrição
 
 **O aicf não escreve em configuração de coleção alheia.** Decidido em 2026-09-18, e é a mesma
-posição do [ADR 0004](../../../adr/0004-midia-do-registro-e-config-propria.md): ler para propor,
+posição do [ADR 0004](../../adr/0004-midia-do-registro-e-config-propria.md): ler para propor,
 nunca gravar. A saída desta demanda é **instruir**, não configurar — e uma pergunta do tipo "quer
 que eu escreva o `issue-tracker.md` apontando para cá?" está fora de escopo por essa decisão, não
 por custo.
@@ -45,7 +45,7 @@ por custo.
 
 - **Onde o aviso entra, se entrar.** O candidato óbvio é junto da pergunta da mídia, que é onde a
   decisão acontece. Mas o setup acabou de ganhar uma apresentação curta em
-  [a entrada de quem chega](../../specs/concluidas/a-entrada-de-quem-chega.md), cuja Restrição era
+  [a entrada de quem chega](../concluidas/a-entrada-de-quem-chega.md), cuja Restrição era
   não virar muro — e mais um parágrafo sobre coleção alheia, antes da primeira ação útil, é
   exatamente o defeito que aquela demanda consertou. A despedida é a alternativa: a decisão já foi
   tomada, mas ali o aviso chega tarde para mudá-la.

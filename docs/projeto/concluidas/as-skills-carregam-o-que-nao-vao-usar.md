@@ -89,7 +89,7 @@ Uma demanda só, com as entregas em checkboxes; a sessão faz o que cabe e fecha
       parágrafo. O `workflow-demanda` aponta para os dois arquivos: "os comandos estão no arquivo da
       mídia que a linha nomeia".
 - [x] Uma terceira mídia passa a ser um terceiro arquivo, não uma terceira coluna. A decisão do
-      [ADR 0004](../../../adr/0004-midia-do-registro-e-config-propria.md) fica de pé — config na linha do
+      [ADR 0004](../../adr/0004-midia-do-registro-e-config-propria.md) fica de pé — config na linha do
       `CLAUDE.md`, skills neutras, comando concreto num lugar só por mídia —; só a forma da referência
       muda, e isso vai na entrada do `CHANGELOG.md`, sem ADR novo: é reversível num `cat`.
 
@@ -154,7 +154,7 @@ Uma demanda só, com as entregas em checkboxes; a sessão faz o que cabe e fecha
   e o `/setup-matt-pocock-skills`). Movê-las para um arquivo de referência de coleções custaria um
   arquivo novo para poupar ~80 tokens. Ficam.
 - **Migrar alguma coisa deste repositório.** A mídia dele segue arquivo; a demanda
-  [governança em issues neste repo](../../intents/governanca-em-issues-neste-repo.md) é outra.
+  [governança em issues neste repo](../intents/governanca-em-issues-neste-repo.md) é outra.
 
 ## Verificação
 
@@ -221,6 +221,6 @@ Uma demanda só, com as entregas em checkboxes; a sessão faz o que cabe e fecha
 - **Promoção (passo 3)** — a lição do `midia.md` virou regra no `CLAUDE.md`: referência que o
   agente carrega leva regra e comando; a medição vai para o CHANGELOG ou para a spec. Dois números
   do backlog mudaram com esta demanda e foram ajustados inline
-  ([o setup não avisa que o Matt pergunta o mesmo](../../intents/backlog/o-setup-nao-avisa-que-o-matt-pergunta-o-mesmo.md),
-  [o ciclo nunca rodou em outro agente](../../intents/backlog/o-ciclo-nunca-rodou-em-outro-agente.md)).
+  ([o setup não avisa que o Matt pergunta o mesmo](../backlog/o-setup-nao-avisa-que-o-matt-pergunta-o-mesmo.md),
+  [o ciclo nunca rodou em outro agente](../backlog/o-ciclo-nunca-rodou-em-outro-agente.md)).
   Nenhum ADR, skill ou termo de glossário.

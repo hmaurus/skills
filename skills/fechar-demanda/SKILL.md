@@ -38,10 +38,9 @@ passo cobriu qual exigência.
 1. **Relatório** na demanda — no fim do arquivo, ou em comentário na issue. Se a demanda ainda
    não tinha registro próprio (era linha do roadmap, ou nunca foi registrada), criar agora, pela
    receita da mídia.
-2. **Concluir** a demanda. No modo arquivo, `git mv` para `specs/concluidas/` e corrigir os links
-   relativos que apontavam para o arquivo — `grep -rn "<nome-do-arquivo>" --include="*.md" .` acha
-   todos. **Essa correção é só do modo arquivo**: `#12` não muda de lugar e não quebra. No modo
-   issue, fechar a issue.
+2. **Concluir** a demanda. No modo arquivo, `git mv` para `concluidas/` e corrigir os links
+   relativos que apontavam para o arquivo, pela receita da mídia. **Essa correção é só do modo
+   arquivo**: `#12` não muda de lugar e não quebra. No modo issue, fechar a issue.
 3. **Reler o próprio relatório e os achados da revisão de código procurando o que vale além
    desta demanda** — decisão que outra sessão vai reencontrar, armadilha que vai morder de novo,
    ID externo — e promover, porque ninguém abre demanda concluída procurando informação:

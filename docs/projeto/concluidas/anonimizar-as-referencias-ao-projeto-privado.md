@@ -17,7 +17,7 @@ nomeavam o repositório e um caminho —, então anonimizar não custa nada ao a
 deles.
 
 Esta demanda saiu de um item da intent
-[a governança deste repositório passa a viver em issues](../../intents/governanca-em-issues-neste-repo.md),
+[a governança deste repositório passa a viver em issues](../intents/governanca-em-issues-neste-repo.md),
 onde era pré-requisito de uma migração maior. É independente dela: vale com arquivos ou com
 issues, e não espera a decisão sobre a mídia.
 
@@ -25,7 +25,7 @@ issues, e não espera a decisão sobre a mídia.
 
 Substituir cada citação nominal pela forma anônima já usada em
 [o índice envelhece sem avisar](o-indice-envelhece-sem-avisar.md) e no
-[ADR 0002](../../../adr/0002-conferencia-do-indice-por-inclusao.md) — *"num projeto privado que
+[ADR 0002](../../adr/0002-conferencia-do-indice-por-inclusao.md) — *"num projeto privado que
 consome estas skills"* —, preservando o que sustenta o argumento de cada documento.
 
 | Arquivo | O que sai |
@@ -38,7 +38,7 @@ consome estas skills"* —, preservando o que sustenta o argumento de cada docum
 contexto, decisão, alternativas nem consequências — nada que um leitor futuro precise reconstruir
 muda. Nota de revisão no fim seria a alternativa, mas nenhum ADR deste repositório tem esse padrão
 hoje: o único registro de mudança em uso é o `Supersede` na linha de cabeçalho do
-[0003](../../../adr/0003-um-item-um-lugar.md), que não se aplica a uma troca de nome.
+[0003](../../adr/0003-um-item-um-lugar.md), que não se aplica a uma troca de nome.
 
 ## Fora de escopo
 
@@ -134,5 +134,5 @@ Corrigir depois é mais caro, porque a citação já está no histórico do git 
 arquivos, não do `git log`.
 
 **O que este ritual gerou:** a regra da seção `## Registro` do
-[`CLAUDE.md`](../../../../CLAUDE.md), *"Exemplo vindo de projeto privado entra anonimizado"*.
+[`CLAUDE.md`](../../../CLAUDE.md), *"Exemplo vindo de projeto privado entra anonimizado"*.
 Nenhum ADR, skill ou doc de referência novo; nenhum item do `ROADMAP.md` nasceu ou ficou obsoleto.

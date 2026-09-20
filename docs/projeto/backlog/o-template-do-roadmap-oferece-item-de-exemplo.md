@@ -5,7 +5,7 @@ Processo — entrevista: a definir · implementação: a definir
 > **Encerra quando** o `skills/setup/templates/roadmap.md` não tiver mais linha de exemplo dentro
 > de `## Próximas` (`sed -n '/^## Próximas/,/^## /p' skills/setup/templates/roadmap.md | grep -c '^- \[ \]'`
 > → `0`) — ou quando a entrevista concluir que o exemplo se paga, e este arquivo for para
-> `specs/concluidas/` com o motivo.
+> `concluidas/` com o motivo.
 
 ## Problema
 
@@ -26,7 +26,7 @@ marcam o exemplo com reticências (`> - ...` no Backlog), que é o contraste que
 → `a6276e7`), e os dois itens daqui eram, palavra por palavra, os dois de lá. A linha
 `Repositório, branch de trabalho e CI mínimo` sobreviveu quatro versões como item decidido sem
 nunca ter sido decidida — repositório e branch já existiam desde agosto —, e só caiu quando a
-entrevista de [nenhum teste acusa link morto](../../specs/concluidas/nenhum-teste-acusa-link-morto.md)
+entrevista de [nenhum teste acusa link morto](../concluidas/nenhum-teste-acusa-link-morto.md)
 foi atrás da origem dela. A outra linha (`PRD.md preenchido`) coincide com uma pendência real
 daqui, o que torna o defeito ainda menos visível: metade do exemplo virou verdade por acaso.
 

@@ -38,7 +38,7 @@ derruba a comparação inteira.
 
 O aicf registra **o projeto**: `intents/` e `backlog/` existem fora de qualquer demanda, e o PRD diz
 o que ficou fora do produto, não de um esforço. É por isso que o Matt marca PARCIAL no critério 2 da
-pesquisa [governança macro nos frameworks vizinhos](../../../referencias/governanca-nos-frameworks-vizinhos.md),
+pesquisa [governança macro nos frameworks vizinhos](../../referencias/governanca-nos-frameworks-vizinhos.md),
 e é o `wayfinder` que sustenta esse parcial — o mecanismo existe, o alcance é outro.
 
 A pesquisa já registrou isto no item 6 da seção de achados. A demanda
@@ -115,7 +115,7 @@ fechamento daquela, em 2026-09-20.
 3. `grep -c '^## ' README.md README.en.md` devolve o mesmo número nos dois.
 4. Cada afirmação nova sobre o `wayfinder` tem o comando que a confere nesta spec, e o comando foi
    **rodado** no clone de `mattpocock/skills` no sha `c55ee46` — não só citado. O bloco de clone
-   está na [pesquisa](../../../referencias/governanca-nos-frameworks-vizinhos.md).
+   está na [pesquisa](../../referencias/governanca-nos-frameworks-vizinhos.md).
 5. `./scripts/check.sh` termina em `Tudo verde.`, e `0.21.0` continua sendo a versão do
    `plugin.json` e a entrada do topo do `CHANGELOG.md`.
 
@@ -143,7 +143,7 @@ passo 1 da Verificação achou um **terceiro**, no parágrafo do topo dos dois R
 "Por que este" e por isso fora do alcance da revisão de código que originou esta demanda. Corrigido
 aqui ("Elas começam numa ideia já formulada" → "num pedido já recortado", e o equivalente em
 inglês): é a mesma frase e o mesmo defeito, custa uma linha, e é o lugar de maior visibilidade do
-repositório. A demanda [a primeira tela do README esconde o argumento](../a-primeira-tela-do-readme-esconde-o-argumento.md)
+repositório. A demanda [a primeira tela do README esconde o argumento](../specs/a-primeira-tela-do-readme-esconde-o-argumento.md)
 vai reescrever esse bloco inteiro; o texto que ela propõe não repete a frase, então nada aqui será
 desfeito por ela.
 

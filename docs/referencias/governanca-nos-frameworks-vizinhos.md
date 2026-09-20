@@ -20,7 +20,7 @@ Sha diferente da tabela abaixo significa que o repositório andou: `git -C $R/<n
 recupera o estado pesquisado, e o que mudou desde então é assunto de pesquisa nova, não desta.
 
 A seção "Afirmações do README/CLAUDE.md do aicf" descreve o estado do repositório em `07cb4a9`; a
-demanda [a comparação com os vizinhos erra e ignora o GSD](../projeto/specs/concluidas/a-comparacao-com-os-vizinhos-erra-e-ignora-o-gsd.md)
+demanda [a comparação com os vizinhos erra e ignora o GSD](../projeto/concluidas/a-comparacao-com-os-vizinhos-erra-e-ignora-o-gsd.md)
 corrige o que ela aponta.
 
 | Repositório | Clone | sha |

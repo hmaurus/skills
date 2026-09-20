@@ -267,9 +267,9 @@ mínimo neles: registrar que a escolha existe. A redação fica para lá.
 - **Unificar a declaração dos domain docs.** `CONTEXT.md` e `docs/adr/` estão declarados no
   `docs/agents/domain.md` dele e na seção "Registro" do nosso template de `CLAUDE.md`. É duplicação
   real e **anterior a esta demanda** — vive em
-  [o layout dos domain docs está declarado duas vezes](../../intents/backlog/layout-dos-domain-docs-declarado-duas-vezes.md).
+  [o layout dos domain docs está declarado duas vezes](../backlog/layout-dos-domain-docs-declarado-duas-vezes.md).
 - **Adotar issues neste repositório.** É a demanda vizinha, [a governança deste repositório passa a
-  viver em issues](../../intents/governanca-em-issues-neste-repo.md), que consome esta opção. Aqui só
+  viver em issues](../intents/governanca-em-issues-neste-repo.md), que consome esta opção. Aqui só
   se cria a opção.
 - **Detectar mídia errada.** Nenhuma das duas detecta estado errado, e esta demanda não tenta
   inventar detecção — pasta errada e label errado seguem indistinguíveis de pasta certa e label
@@ -390,8 +390,8 @@ que se verificou foram os comandos que elas passam a prescrever.
 
 **Saída do ritual de fechamento**
 
-- [ADR 0004 — a mídia do registro é configuração própria, lida em runtime](../../../adr/0004-midia-do-registro-e-config-propria.md)
-- [`.claude/rules/templates.md`](../../../../.claude/rules/templates.md) — regra que só vale para
+- [ADR 0004 — a mídia do registro é configuração própria, lida em runtime](../../adr/0004-midia-do-registro-e-config-propria.md)
+- [`.claude/rules/templates.md`](../../../.claude/rules/templates.md) — regra que só vale para
   `skills/setup/templates/**`, com `paths:` no frontmatter.
 - Sem `CONTEXT.md`: "mídia do registro" é termo novo, mas está definido no `midia.md`, que toda
   skill aponta. Criar um glossário para um termo não ambíguo seria o segundo lugar guardando a

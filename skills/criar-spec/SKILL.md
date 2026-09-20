@@ -59,9 +59,10 @@ registro novo:
 
 - **Já tem registro próprio** (arquivo em `intents/`, ou issue com label `aicf:*`) — é esse mesmo
   que vira a spec, nunca um segundo. No **modo arquivo**, `git mv` de `intents/` para `specs/` e o
-  conteúdo reescrito: o nome fica, o histórico acompanha, nada sobra em `intents/`. No **modo
-  issue**, o corpo é reescrito e o label **troca** para `aicf:spec` — mesma issue, mesmo número, e
-  o label anterior sai junto.
+  conteúdo reescrito: o nome fica, o histórico acompanha, nada sobra em `intents/`. O caminho muda,
+  então **corrigir quem apontava para o arquivo**, pela receita da mídia. No **modo issue**, o corpo
+  é reescrito e o label **troca** para `aicf:spec` — mesma issue, mesmo número, e o label anterior
+  sai junto.
 - **Era uma linha do `ROADMAP.md`** (só existe no modo arquivo) — vira arquivo em `specs/`, e **a
   linha sai**: quem tem arquivo não tem linha.
 - **Nunca foi registrada** — a demanda nasce já no estado "pronta para implementar", numa escrita

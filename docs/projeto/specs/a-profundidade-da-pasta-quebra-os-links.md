@@ -1,6 +1,6 @@
 # A profundidade da pasta quebra os links da demanda
 
-Processo — entrevista: criar-spec · implementação: a definir · sugestão: aicf-direto (edição mecânica de caminho em arquivos já nomeados, com o `check_links.py` como juiz de cada passo)
+Processo — entrevista: criar-spec · implementação: aicf-plan
 
 ## Problema
 
@@ -128,7 +128,7 @@ juiz de cada passo da migração.
 - **Reescrever prosa histórica** no `CHANGELOG.md` e no comando do ADR 0003. Ponteiro se reaponta;
   relato do que uma versão fez fica como foi escrito.
 - **Gerar check de links nos projetos que usam o aicf** — já fora de escopo por decisão de
-  [nenhum teste acusa link morto](../specs/concluidas/nenhum-teste-acusa-link-morto.md), e nada
+  [nenhum teste acusa link morto](../concluidas/nenhum-teste-acusa-link-morto.md), e nada
   aqui muda isso.
 
 ## Verificação
@@ -144,6 +144,8 @@ juiz de cada passo da migração.
 3. `./scripts/check.sh` termina em `Tudo verde.`, com `N links conferidos, 0 quebrados` e os dois
    `✔ Validation passed`.
 4. `grep -rn 'specs/concluidas\|intents/backlog' --include='*.md' .` devolve **apenas** o texto
-   histórico deliberado: o comando do ADR 0003 e as entradas antigas do `CHANGELOG.md`. Qualquer
-   outra linha é caminho esquecido.
+   histórico deliberado: o comando do ADR 0003, as entradas antigas do `CHANGELOG.md` e a prosa das
+   demandas em `concluidas/`. Qualquer outra linha é caminho esquecido. **As concluídas entraram
+   nessa lista na implementação**: a spec as tinha esquecido, e elas caem no mesmo princípio que o
+   `CHANGELOG.md` — ponteiro se reaponta, relato do que uma versão fez fica como foi escrito.
 5. Depois do push, `gh run list --workflow=ci.yml --limit 1` → `completed success`.

@@ -5,9 +5,9 @@ Processo — entrevista: a definir · implementação: a definir
 > **Encerra quando** alguém rodar o ciclo inteiro — setup, entrevista, implementação, fechamento —
 > num agente que lê o padrão Agent Skills (Codex, OpenCode, Cursor) e registrar aqui o que quebrou
 > e o que passou; ou quando a revisão do PRD concluir que a porta se fecha, e este arquivo for
-> para `specs/concluidas/` com o motivo.
+> para `concluidas/` com o motivo.
 >
-> **Não é pendência.** O [PRD](../../PRD.md) deixa outros agentes fora do escopo, com a porta
+> **Não é pendência.** O [PRD](../PRD.md) deixa outros agentes fora do escopo, com a porta
 > aberta. Este arquivo registra que a porta nunca foi testada, para que ninguém afirme que o plugin
 > funciona lá, nem que não funciona.
 

@@ -2,8 +2,8 @@
 
 Processo — entrevista: criar-spec · implementação: a definir · sugestão: aicf-direto (prosa em dois READMEs e um SVG novo; texto e desenho já estão decididos aqui)
 
-Roda **depois de** [a comparação com os vizinhos erra e ignora o GSD](concluidas/a-comparacao-com-os-vizinhos-erra-e-ignora-o-gsd.md): as duas mexem no `README.md`, e aquela corrige fatos que esta cita. Ambas concluídas em 2026-09-20, junto com
-[o bullet do planejamento macro](concluidas/o-wayfinder-do-matt-faz-o-planejamento-macro.md).
+Roda **depois de** [a comparação com os vizinhos erra e ignora o GSD](../concluidas/a-comparacao-com-os-vizinhos-erra-e-ignora-o-gsd.md): as duas mexem no `README.md`, e aquela corrige fatos que esta cita. Ambas concluídas em 2026-09-20, junto com
+[o bullet do planejamento macro](../concluidas/o-wayfinder-do-matt-faz-o-planejamento-macro.md).
 
 **A linha 7 mudou depois de `cc28b60`.** Aquela última demanda trocou "Elas começam numa ideia já
 formulada" por "num pedido já recortado", porque o `wayfinder` do Matt começa antes da ideia estar
