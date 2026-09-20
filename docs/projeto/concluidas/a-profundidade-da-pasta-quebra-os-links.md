@@ -225,8 +225,8 @@ links quebrados**, todos de saída (`../../../adr/`, `../../intents/`). A cópia
   `check_links.py` para não tocar em link de exemplo dentro de crase.
 - **Importar `scripts/check_links.py` de um script auxiliar cria `scripts/__pycache__/`**, que
   entrou no `git add -A` e precisou de `git rm --cached`. Rodar o check direto não gera o diretório
-  — só o import gera. Não há `.gitignore` no repositório
-  (`test -e .gitignore || echo ausente`).
+  — só o import gera. O repositório não tinha `.gitignore`; ganhou um com `__pycache__/` logo
+  depois do fechamento, a pedido do titular (`cat .gitignore`).
 
 **O que este ritual abriu**
 

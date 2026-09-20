@@ -57,7 +57,8 @@ passo cobriu qual exigência.
    **Afirmação verificável carrega o teste que a refuta.** Número vem com o comando que o
    remede — `<N> linhas` (`wc -l < <arquivo>`, `<AAAA-MM-DD>`); afirmação de estado — item de
    backlog, "bloqueado por", "ainda não existe" — vem com a condição que a encerra. Sem isso
-   conferir vira julgar em vez de executar.
+   conferir vira julgar em vez de executar. **E o comando se roda antes de a frase ir para o
+   arquivo:** condição de aceite que ninguém executou é palpite com aparência de teste.
 
    ADR e glossário são do `/domain-modeling` (Matt Pocock) — formato e numeração são dele; sem
    ele, um parágrafo em `docs/adr/0001-slug.md`, imutável, basta. Escrever no `CLAUDE.md` obriga
