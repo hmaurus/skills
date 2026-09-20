@@ -156,7 +156,7 @@ o Matt e as duas já registradas na pesquisa:
 2. O bullet do **planejamento macro** afirma que registro de ideia ainda não madura é do aicf, e o
    `wayfinder` tem `## Not yet specified` para isso. Linha que esta demanda não tocou e quarta
    frase, fora das três que a spec nomeou: virou intent,
-   [o bullet do planejamento macro ignora o `wayfinder` do Matt](../../intents/o-wayfinder-do-matt-faz-o-planejamento-macro.md).
+   [o bullet do planejamento macro ignora o `wayfinder` do Matt](../o-wayfinder-do-matt-faz-o-planejamento-macro.md).
 
 O revisor também notou que o `README.md` do próprio Matt ainda diz "GitHub, Linear, or local files"
 (linha 78 em `c55ee46`), divergindo da skill de setup dele. A skill é a fonte de verdade, e é o que
@@ -193,7 +193,7 @@ cita quatro, e "as duas coleções" ficava ambíguo), e duas frases perderam a m
   erro de 2026-09-18 nasceu.
 
 **Promoção de conhecimento** — uma oração no `CLAUDE.md`, no parágrafo "Afirmação sobre ferramenta
-de terceiro", e uma intent nova ([o `wayfinder`](../../intents/o-wayfinder-do-matt-faz-o-planejamento-macro.md)).
+de terceiro", e uma intent nova ([o `wayfinder`](../o-wayfinder-do-matt-faz-o-planejamento-macro.md)).
 Nenhum ADR, skill, regra ou doc de referência novo: o [ADR 0001](../../../adr/0001-fronteira-de-fase.md)
 já sustentava o argumento do parágrafo sobre GSD e BMAD, e a pesquisa em `docs/referencias/` já
 existia.
