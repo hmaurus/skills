@@ -2,7 +2,7 @@
 
 Processo — entrevista: criar-spec · implementação: a definir · sugestão: aicf-direto (prosa em dois READMEs e um SVG novo; texto e desenho já estão decididos aqui)
 
-Roda **depois de** [a comparação com os vizinhos erra e ignora o GSD](a-comparacao-com-os-vizinhos-erra-e-ignora-o-gsd.md): as duas mexem no `README.md`, e aquela corrige fatos que esta cita.
+Roda **depois de** [a comparação com os vizinhos erra e ignora o GSD](concluidas/a-comparacao-com-os-vizinhos-erra-e-ignora-o-gsd.md): as duas mexem no `README.md`, e aquela corrige fatos que esta cita.
 
 ## Problema
 
