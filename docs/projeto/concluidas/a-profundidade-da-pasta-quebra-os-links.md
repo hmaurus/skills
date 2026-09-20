@@ -152,8 +152,8 @@ juiz de cada passo da migração.
 
 ## Relatório de implementação (2026-09-20)
 
-**Status** — concluído. CI run `35493339756` → `completed success`
-(`gh run list --workflow=ci.yml --limit 1`).
+**Status** — concluído, com **uma verificação de comportamento em aberto** (ver abaixo). CI run
+`35493339756` → `completed success` (`gh run list --workflow=ci.yml --limit 1`).
 
 **Causa raiz** — confirmada como a spec descrevia, e medida antes de tocar o disco: copiar
 `as-skills-carregam-o-que-nao-vao-usar.md` de `specs/concluidas/` para `specs/` — a mesma mudança
@@ -176,7 +176,12 @@ links quebrados**, todos de saída (`../../../adr/`, `../../intents/`). A cópia
 - [`docs/adr/0006-o-layout-das-demandas-e-achatado.md`](../../adr/0006-o-layout-das-demandas-e-achatado.md) — novo
 - `.claude-plugin/plugin.json` → `0.22.0` e a entrada do `CHANGELOG.md`
 
-**Commits** — `9be56e3` (código) e o commit deste fechamento.
+**Commits** — `9be56e3` (código) e `cdf4a3e` (fechamento). Dois vieram depois, ao conferir o que o
+`grep` do fechamento tinha deixado passar: `d30cfe9`, que corrige o `templates/readme.md` — ele
+descrevia `concluidas/` dentro de `specs/`, e o check não o enxerga —, e `a191205`, que leva a
+regra do comando executado para o passo 3 do `fechar-demanda` (onde alcança quem instala o plugin,
+já que o `CLAUDE.md` fica neste repositório) e cria o `.gitignore`. Release `v0.22.0` publicada no
+HEAD.
 
 **Validação**
 
@@ -227,6 +232,23 @@ links quebrados**, todos de saída (`../../../adr/`, `../../intents/`). A cópia
   entrou no `git add -A` e precisou de `git rm --cached`. Rodar o check direto não gera o diretório
   — só o import gera. O repositório não tinha `.gitignore`; ganhou um com `__pycache__/` logo
   depois do fechamento, a pedido do titular (`cat .gitignore`).
+
+**Verificação em aberto: o `/aicf:setup` num projeto novo**
+
+Esta demanda tocou três arquivos do `setup` — `SKILL.md` (a tabela "O que criar" e a árvore),
+`templates/roadmap.md` (o `head -qn1`) e `templates/readme.md` (a tabela das pastas). A skill tem
+`disable-model-invocation: true`: nenhum agente consegue invocá-la nem imitar o roteiro por fora,
+então **nada aqui provou que um projeto novo nasce com as quatro pastas no nível certo**. O que foi
+verificado é só o texto dos arquivos.
+
+- **Quem encerra:** o titular, rodando `/aicf:setup` em modo arquivo num diretório vazio.
+- **Como:** `find docs/projeto -maxdepth 1 -type d | sort` deve devolver as quatro pastas irmãs —
+  `backlog`, `concluidas`, `intents`, `specs` — e nenhuma aninhada. A tabela do `README.md` gerado
+  deve trazer as quatro linhas, uma por pasta.
+- **Por que ainda não aconteceu:** o `setup` roda uma vez por projeto, e não havia projeto novo
+  nesta sessão. Sem isso, o risco vivo é o mesmo que o `templates/readme.md` materializou — texto
+  de template que descreve o layout antigo e que o `./scripts/check.sh` não enxerga, porque
+  `skills/setup/templates/**` está na lista de ignorados do `check_links.py`.
 
 **O que este ritual abriu**
 
