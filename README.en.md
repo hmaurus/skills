@@ -4,7 +4,7 @@ _[Versão em português](README.md)_
 
 Twenty well-written specs do not tell you where the project stands.
 
-Engineering skill collections handle one work item at a time, and handle it well: they interrogate the idea, write the spec, break it into tasks, execute with discipline. They start at an idea that is already formed and stop at the commit. What falls outside is the level above — the document stating what you are building and for whom, the place where a raw idea waits its turn, and the record of what actually shipped.
+Engineering skill collections handle one work item at a time, and handle it well: they interrogate the idea, write the spec, break it into tasks, execute with discipline. They start from a request that is already bounded and stop at the commit. What falls outside is the level above — the document stating what you are building and for whom, the place where a raw idea waits its turn, and the record of what actually shipped.
 
 `aicf` is that layer. It sets up the project's documents and takes each work item from the idea to the report of what was done. It works on its own, and it works on top of the collections you already use.
 
@@ -140,6 +140,7 @@ None of these ship with `aicf`. They belong to the [Superpowers](https://github.
 **Before writing the work item**
 
 - `grill-me` and `grill-with-docs` (Matt) — challenge the idea before you write it down, with questions until every branch of the decision is resolved. Use them when you already think you know what you want. They record nothing; the result feeds the interview.
+- `wayfinder` (Matt) — maps a request too big for one session as decision tickets on your tracker, and resolves them one at a time. Use it when the way to the result is not visible yet. The map belongs to that effort.
 - `domain-modeling` (Matt) — records the project's vocabulary in a `CONTEXT.md`, if the product has terms of its own that have already turned out ambiguous.
 
 **In the interview phase, instead of `/aicf:criar-spec`**
@@ -162,11 +163,11 @@ You can interview by one path and implement by another. Going down this list tra
 
 Because it is not the same question. Superpowers and Matt's skills handle **the individual work item** well: they interrogate the idea, produce a spec, break it into tasks, and execute with discipline. And they do leave a trail — Superpowers writes the spec and plan to files on its _architectural_ path, Matt's publish spec and tickets to the tracker you picked in his setup (GitHub, GitLab or local markdown, plus any other tracker you describe in prose), and maintain a glossary and ADRs.
 
-That trail, though, is **per work item** and written **before** execution. Three things fall outside it, and neither collection declares them somebody else's problem: they simply start at an idea that is already formed and stop at the commit or the merge.
+That trail, though, is **per work item** and written **before** execution. Three things fall outside it, and neither collection declares them somebody else's problem — they stop at the effort: they start from a request that is already bounded, however large, and end at the commit or the merge.
 
-- **The product level.** Neither has the document stating what is being built, for whom, and what was ruled out by decision, nor the record of what shipped and what is missing. Matt's come close to one piece of it: they keep the request they turned down and the work they ruled out of the effort in hand, each with its reasoning — by effort, not by product.
-- **Macro planning.** When a request is too big for one spec, `brainstorming` helps decompose it into sub-projects and works on the first one; the others stay in the conversation. Here, an idea that has not matured yet gets its own record, each work item declares in its own prose what it blocks and what it depends on, and what may never be done has a place to wait without getting lost.
-- **The afterwards.** A spec and a plan say what was intended. Matt's `implement` ends at the commit and neither closes the ticket nor ticks the acceptance criteria. Superpowers writes the plan and design doc into the repository, and they stay: the code is reviewed against the plan during execution, but the plan and the spec stay as they were written, and nothing updates them with what shipped. `aicf` asks for a report in the work item itself, and that is where the plan×delivery divergence gets written down.
+- **The product level.** Neither has the document stating what is being built, for whom, and what was ruled out by decision, nor the record of what shipped and what is missing. Matt's come close: they keep the request they turned down and what they ruled out of the effort in hand, with the reasoning — by effort, not by product.
+- **Macro planning.** When a request is too big for one spec, `brainstorming` helps decompose it into sub-projects and works on the first one; the others stay in the conversation. Here, an idea that has not matured yet gets its own record, each work item declares in its own prose what it blocks and what it depends on, and what may never be done has a place to wait without getting lost. Matt's `wayfinder` comes close: it maps a request too big for one session and has `Not yet specified` for the idea that cannot be ticketed yet. The map belongs to one effort and ends with it; what is left over returns as a fresh effort, not as a queue that outlives it.
+- **The afterwards.** A spec and a plan say what was intended. Matt's `implement` ends at the commit and neither closes the ticket nor ticks the acceptance criteria. Superpowers writes the plan and design doc into the repository, and they stay: the code is reviewed against the plan after each task, but plan and spec do not move — nothing updates them with what shipped. `aicf` asks for a report in the work item itself, and that is where the plan×delivery divergence gets written down.
 
 `aicf` is that layer, and the same layer applies to any implementation path. Switching collections, or mixing both within one work item, changes nothing in governance.
 

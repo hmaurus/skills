@@ -30,6 +30,18 @@
   e que é esse loop que o aicf deixa de fora por decisão
   ([ADR 0001](docs/adr/0001-fronteira-de-fase.md)). O título dos dois READMEs passa a cobrir os
   quatro.
+- **O bullet do planejamento macro para de ignorar o `wayfinder` do Matt.** Ele dizia que só o
+  `brainstorming` trata pedido grande demais para uma spec, e que registro de ideia ainda não
+  madura é do aicf; o `wayfinder` mapeia "a huge chunk of work (more than one agent session can
+  hold)" e tem `## Not yet specified` para a ideia que ainda não dá para ticketar
+  (`sed -n 1,8p $R/skills/skills/engineering/wayfinder/SKILL.md`). O recorte que torna a frase
+  verdadeira é **esforço × projeto**: o mapa é de um esforço, acaba com ele
+  (`sed -n 13p`), e o que ficou fora volta "as a fresh effort, not a resumption" (`sed -n 99p`) —
+  nada liga um mapa ao seguinte
+  (`grep -nic 'across efforts\|between efforts\|multiple maps\|previous map'` devolve `0`). O
+  parágrafo de abertura da seção também parou de dizer que as duas coleções "começam na ideia já
+  formulada", e o `wayfinder` entrou na lista de comandos vizinhos. Achado na revisão de código do
+  fechamento da demanda acima, não na spec dela.
 - **A fonte de tudo isto é a pesquisa** [governança macro nos frameworks vizinhos](docs/referencias/governanca-nos-frameworks-vizinhos.md),
   de 2026-09-19, que lê sete frameworks em fonte primária com sha e comando por afirmação. Os shas
   reconferidos nesta demanda: `obra/superpowers` `5bf4e78`, `mattpocock/skills` `c55ee46`,

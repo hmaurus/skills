@@ -4,7 +4,7 @@ _[English version](README.en.md)_
 
 Vinte specs bem escritas não respondem onde o projeto está.
 
-As coleções de skills de engenharia cuidam de uma demanda por vez, e cuidam bem: interrogam a ideia, escrevem a spec, quebram em tarefas, executam com disciplina. Elas começam numa ideia já formulada e param no commit. Fica de fora o nível de cima — o documento que diz o que você está construindo e para quem, o lugar onde a ideia ainda crua espera a vez, e o registro do que foi entregue de verdade.
+As coleções de skills de engenharia cuidam de uma demanda por vez, e cuidam bem: interrogam a ideia, escrevem a spec, quebram em tarefas, executam com disciplina. Elas começam num pedido já recortado e param no commit. Fica de fora o nível de cima — o documento que diz o que você está construindo e para quem, o lugar onde a ideia ainda crua espera a vez, e o registro do que foi entregue de verdade.
 
 O aicf é essa camada. Ele monta a estrutura de documentos do projeto e conduz cada demanda da ideia até o relatório do que foi feito. Funciona sozinho, e funciona por cima das coleções que você já usa.
 
@@ -138,6 +138,7 @@ Nenhum deles vem com o aicf. São das coleções [Superpowers](https://github.co
 **Antes de escrever a demanda**
 
 - `grill-me` e `grill-with-docs` (Matt) — contestam a ideia antes de você escrevê-la, com perguntas até cada ramo da decisão estar resolvido. Use quando você já acha que sabe o que quer. Não gravam nada; o resultado entra na entrevista.
+- `wayfinder` (Matt) — mapeia um pedido grande demais para uma sessão como tickets de decisão no seu tracker, e resolve um por vez. Use quando o caminho até o resultado ainda não está visível. O mapa é daquele esforço.
 - `domain-modeling` (Matt) — grava o vocabulário do projeto num `CONTEXT.md`, se o produto tem termos próprios que já apareceram ambíguos.
 
 **Na fase de entrevista, no lugar de `/aicf:criar-spec`**
@@ -160,11 +161,11 @@ Dá para entrevistar por um caminho e implementar por outro. Descer essa lista t
 
 Porque não é a mesma pergunta. O Superpowers e as skills do Matt resolvem bem **a demanda individual**: interrogam a ideia, produzem uma spec, quebram em tarefas, executam com disciplina. E deixam rastro — o Superpowers grava spec e plano em arquivo no caminho _architectural_, o Matt publica spec e tickets no tracker que você escolheu no setup dele (GitHub, GitLab ou markdown local, e outro tracker descrito em prosa), e ainda mantém glossário e ADRs.
 
-Só que esse rastro é **por demanda** e escrito **antes** da execução. Três coisas ficam de fora, e nenhuma das duas declara que são problema de outra pessoa: elas simplesmente começam na ideia já formulada e terminam no commit ou no merge.
+Só que esse rastro é **por demanda** e escrito **antes** da execução. Três coisas ficam de fora, e nenhuma das duas declara que são problema de outra pessoa — elas param no esforço: começam num pedido já recortado, por maior que ele seja, e terminam no commit ou no merge.
 
-- **O nível do produto.** Nenhuma das duas tem o documento que diz o que se está construindo, para quem, e o que ficou fora por decisão, nem o registro do que já foi entregue e do que falta. O Matt chega perto de um pedaço disso: guarda o pedido que recusou e o trabalho que tirou do esforço em andamento, cada um com o motivo — por esforço, não por produto.
-- **O planejamento macro.** Quando o pedido é grande demais para uma spec, o `brainstorming` ajuda a decompor em subprojetos e trabalha o primeiro; os outros ficam na conversa. Aqui a ideia que ainda não amadureceu tem registro próprio, cada demanda declara na própria prosa o que bloqueia e do que depende, e o que ainda não se sabe se será feito tem lugar para esperar sem se perder.
-- **O depois.** Spec e plano dizem o que se pretendia. O `implement` do Matt termina no commit e não fecha o ticket nem marca os critérios de aceite. O Superpowers grava plano e design doc no repositório, e eles ficam: o código é revisto contra o plano durante a execução, mas o plano e a spec ficam como foram escritos, e nada os atualiza com o que saiu. O aicf pede um relatório na própria demanda, e é nele que a divergência plano×entrega fica escrita.
+- **O nível do produto.** Nenhuma das duas tem o documento que diz o que se está construindo, para quem, e o que ficou fora por decisão, nem o registro do que já foi entregue e do que falta. O Matt chega perto: guarda o pedido que recusou e o que tirou do esforço em andamento, com o motivo — por esforço, não por produto.
+- **O planejamento macro.** Quando o pedido é grande demais para uma spec, o `brainstorming` ajuda a decompor em subprojetos e trabalha o primeiro; os outros ficam na conversa. Aqui a ideia que ainda não amadureceu tem registro próprio, cada demanda declara na própria prosa o que bloqueia e do que depende, e o que ainda não se sabe se será feito tem lugar para esperar sem se perder. O `wayfinder` do Matt chega perto: mapeia um pedido grande demais para uma sessão e tem `Not yet specified` para a ideia que ainda não dá para ticketar. O mapa é de um esforço e acaba com ele; o que sobra volta como esforço novo, não como fila que atravessa o projeto.
+- **O depois.** Spec e plano dizem o que se pretendia. O `implement` do Matt termina no commit e não fecha o ticket nem marca os critérios de aceite. O Superpowers grava plano e design doc no repositório, e eles ficam: o código é revisto contra o plano a cada tarefa, mas plano e spec não mudam — nada os atualiza com o que saiu. O aicf pede um relatório na própria demanda, e é nele que a divergência plano×entrega fica escrita.
 
 O aicf é essa camada, e a mesma camada vale para qualquer caminho de implementação. Trocar de coleção, ou misturar as duas numa mesma demanda, não muda nada na governança.
 
