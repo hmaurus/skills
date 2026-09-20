@@ -50,16 +50,17 @@ versionado. A ordem dos passos é o que resolve, e ela é fixa.
 12. **Fechamento**, como hoje.
 
 **A criação do remoto vem depois do commit, e é por isso que ela está no passo 10.** O `--push` do
-`gh repo create` empurra commits locais; num diretório recém-`git init`ado, sem commit nenhum, ele
-falha:
+`gh repo create` empurra commits locais, e o `gh` confere isso antes de chamar a API:
 
 ```
-git init && echo oi > CLAUDE.md && git remote add origin <bare> && git push -u origin HEAD
-→ error: src refspec HEAD does not match any    (exit 1)
+git init && GH_TOKEN=invalido gh repo create <nome> --private --source=. --remote=origin --push
+→ `--push` enabled but no commits found in <dir>    (exit 1)
 ```
 
-Criar o repositório antes dos arquivos existirem deixaria o usuário com um remoto vazio e um erro
-no meio do onboarding. Inverter os dois passos é o conserto, e a ordem é a parte que a skill fixa.
+O token inválido nunca chega a ser usado — a checagem é local, e **nada é criado no GitHub**. Fora
+de um repositório git, a recusa é `current directory is not a git repository`. Não há estado meio
+criado a limpar; o que há é o onboarding parando com um erro. Inverter os dois passos é o conserto,
+e a ordem é a parte que a skill fixa.
 
 ### Os quatro estados de ambiente
 
@@ -166,8 +167,13 @@ resultado — a skill que roda é a do início da sessão.
    ```bash
    gh label list | grep -c '^aicf:'             # 3
    git log origin/main --oneline | wc -l        # 1 — o --push funcionou
+   gh issue create --title t --label nao-existe # falha: é o que obriga o setup a criar os labels
    gh repo delete <nome> --yes                  # descartável: some depois de provar
    ```
+
+   A terceira linha é a única forma segura de conferir a afirmação de que `gh issue create` com
+   label inexistente falha em vez de criar — num repositório descartável, uma issue criada por
+   engano não custa nada.
 
 3. **O grep que refutava o problema passa a devolver hit:**
 

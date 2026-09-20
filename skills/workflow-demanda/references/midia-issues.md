@@ -65,8 +65,9 @@ guardando o mesmo estado.
 ## Criar os labels
 
 **Criar o label é passo do `/aicf:setup`, não da demanda:** `gh issue create --label` com label
-inexistente falha em vez de criar. Criação **idempotente** — label que já existe vira aviso, não
-erro; daí o `|| true`.
+inexistente falha em vez de criar. **Label que já existe faz o `gh label create` sair com 1**
+(`label with name "X" already exists; use --force to update its color and description`); o
+`|| true` é o que deixa a sequência seguir, e a idempotência é dela, não do comando.
 
 ```bash
 gh label create aicf:backlog --color FBCA04 \

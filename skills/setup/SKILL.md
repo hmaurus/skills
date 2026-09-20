@@ -48,9 +48,33 @@ perguntar. Sim, `git init`: é local, barato e desfeito com `rm -rf .git`.
 Montar a governança num diretório sem repositório entrega um método que não funciona, e o usuário
 só descobre no primeiro fechamento de demanda.
 
-Na mesma passada, **ler o ambiente em silêncio**: `command -v gh`, `gh auth status` e
-`git remote -v`. Nada é executado a partir daí; a leitura só decide o que a pergunta seguinte
-oferece.
+**Dito não, o setup segue em modo arquivo**, sem primeiro commit e sem oferecer o modo issue — e
+diz isso em uma linha, porque as duas coisas passam a existir assim que o usuário rodar `git init`
+por conta própria. Não insistir: a estrutura criada continua válida, só não versionada.
+
+## O que o ambiente permite
+
+Com o repositório local de pé, ler o ambiente **na ordem abaixo**, anotando o que falta. Nada é
+executado aqui: a leitura só decide o que a pergunta seguinte oferece, e o que o setup terá de
+resolver se a resposta for issue.
+
+1. **`command -v gh`** — sem o GitHub CLI o modo issue não existe nesta máquina, e a opção **não é
+   oferecida**. Uma linha: o modo issue precisa do GitHub CLI (<https://cli.github.com>); quem o
+   quiser para aqui, instala e roda o `/aicf:setup` de novo — este comando roda uma vez, e trocar
+   de mídia num projeto que já tem governança montada não é dele.
+2. **`gh auth status`** — falhando, falta login, que o setup **conduz**.
+3. **`git remote -v`** — vazio, falta o repositório no GitHub, que o setup **cria**. Apontando para
+   outro provedor, a opção **não é oferecida**: a receita inteira do modo issue é `gh`. Este
+   comando só vale depois da seção anterior — em diretório sem `.git` ele sai com 128 e
+   `fatal: not a git repository`, que não é a mesma coisa que vazio.
+
+**As pendências se acumulam, e no projeto novo as duas aparecem juntas** — quem acabou de rodar
+`git init` tem o remote vazio, e quem nunca usou o `gh` também não tem login. Resolver na ordem da
+lista: criar o repositório exige estar autenticado.
+
+A opção issue só some nos dois casos que o setup **não** resolve. Deixar o usuário escolher um
+caminho que falha no primeiro comando é pior que não oferecer — e esconder o que bastava um comando
+para habilitar é pior ainda.
 
 ## A mídia do registro
 
@@ -62,32 +86,19 @@ com a explicação curta de cada uma:
 - **Issues (GitHub)** — a demanda é uma issue. Conversa com comentário e notificação, contribuição
   de fora em dois cliques, referência estável por `#12`, e `Fixes #12` fecha pelo merge.
 
-**O ambiente decide o que a pergunta oferece, e o setup remove o que falta em vez de esconder a
-opção.** Os estados que a leitura da seção anterior distingue:
-
-| Estado | Detectado por | A pergunta da mídia |
-| --- | --- | --- |
-| Tudo pronto | `gh` presente e autenticado, `git remote -v` aponta para GitHub | as duas opções |
-| Autenticado, sem repositório no GitHub | `git remote -v` vazio | as duas; escolhida a issue, o setup **cria o repositório** |
-| `gh` presente, deslogado | `gh auth status` falha | as duas; escolhida a issue, o setup **conduz o login** |
-| `gh` ausente | `command -v gh` falha | só arquivo, e **uma linha**: o modo issue precisa do GitHub CLI (<https://cli.github.com>); instalado, o `/aicf:setup` de uma sessão nova passa a oferecê-lo |
-| `remote` que não é GitHub | `git remote -v` aponta para outro provedor | só arquivo, e **uma linha**: o modo issue existe só para GitHub, porque a receita inteira é `gh` |
-
-Nos dois últimos a opção some, e some porque o setup não resolve o que falta — deixar o usuário
-escolher um caminho que falha no primeiro comando é pior que não oferecer. Nos dois do meio ele
-resolve, e é isso que separa esta tabela de um aviso.
-
-**O login é conduzido, não executado.** `gh auth login` é interativo — abre navegador ou pede código
-de dispositivo —, então mostrar o comando, pedir que o usuário rode (pelo `!` da própria sessão) e
-reconferir com `gh auth status` antes de seguir. Não é escrúpulo: o agente não tem como completar
-esse fluxo sozinho.
-
 **Se `docs/agents/issue-tracker.md` existe**, o `/setup-matt-pocock-skills` já respondeu a mesma
 pergunta — onde o trabalho mora. Ler e propor o default a partir dele ("o tracker do Matt aponta
 para GitHub; usar issues aqui também?") em vez de perguntar do zero. As duas configs seguem
 independentes: divergir é legítimo, e a do aicf é a linha do `CLAUDE.md`.
 
-**Gravar a linha sempre, nos dois modos**, na seção "Processos de desenvolvimento" do `CLAUDE.md`:
+**Respondida a pergunta, resolver o login, se ele faltava.** `gh auth login` é **conduzido, não
+executado**: mostrar o comando, pedir que o usuário rode (pelo `!` da própria sessão) e reconferir
+com `gh auth status` antes de seguir. Existe caminho não interativo — `gh auth login --with-token`
+lê de stdin —, e é justamente por isso que ele não serve aqui: o token teria que passar pelo chat,
+e credencial não entra no chat.
+
+**A escolha fica guardada e vira uma linha no `CLAUDE.md` quando ele for criado** (em "O que
+criar"), na seção "Processos de desenvolvimento" — sempre, nos dois modos:
 
 ```
 **Mídia do registro:** arquivos em `docs/projeto/`
@@ -150,9 +161,9 @@ workflow instaladas" de "Processos de desenvolvimento" do `CLAUDE.md` — é del
 | `backlog/`, `intents/`, `specs/`, `concluidas/`         | sim          | **não**    |
 | Os três labels `aicf:*`                                 | não          | **sim**    |
 
-O `CLAUDE.md`, o `README.md` e o que `docs/projeto/` pedir são desta seção. Os três labels — e o
-repositório no GitHub, quando ele ainda não existe — nascem depois do primeiro commit, e têm seção
-própria mais abaixo.
+O `CLAUDE.md`, o `AGENTS.md`, o `README.md` e o que `docs/projeto/` pedir são desta seção. Os três
+labels — e o repositório no GitHub, quando ele ainda não existe — nascem depois do primeiro commit,
+e têm seção própria mais abaixo.
 
 ```
 CLAUDE.md                       # raiz, se ainda não existir
@@ -241,12 +252,19 @@ recebe apenas o nome da variável.
 Depois de criar os arquivos e colar os padrões de engenharia, **nos dois modos**. Sem ele o
 `.gitkeep` não segura pasta nenhuma, e no modo issue o push do passo seguinte não tem o que empurrar.
 
-**Só os caminhos que o setup escreveu, nomeados** — `CLAUDE.md`, `AGENTS.md`, `README.md`,
-`docs/projeto/` e o que a mídia pedir. **Nunca `git add -A`:** num diretório que já tem código não
-commitado, o `-A` varre tudo, inclusive um `.env` que ainda não tem `.gitignore` para segurá-lo. O
-setup não decide o que vai para o histórico de arquivo que ele não criou.
+**Só os caminhos que o setup escreveu, um a um** — `CLAUDE.md`, `AGENTS.md`, `README.md`,
+`docs/projeto/PRD.md`, e o `ROADMAP.md` e os quatro `.gitkeep` quando a mídia é arquivo. **Nunca
+`git add -A`, e nem `git add docs/projeto/`:** num diretório que já tem código não commitado, o
+`-A` varre tudo, inclusive um `.env` que ainda não tem `.gitignore` para segurá-lo, e o diretório
+inteiro leva junto o que estiver lá dentro. O setup não decide o que vai para o histórico de
+arquivo que ele não criou.
 
 A mensagem segue o idioma do projeto que está nascendo: `chore: estrutura de governança do projeto`.
+
+**Máquina sem identidade de git configurada** faz o `git commit` falhar com
+`Author identity unknown`. Acontece justamente onde o `git init` acabou de rodar. Nesse caso,
+mostrar `git config --global user.name` e `user.email` para o usuário rodar, e commitar depois —
+não configurar a identidade dele por conta própria.
 
 ## O repositório no GitHub, e os labels
 
@@ -261,11 +279,12 @@ Só no modo issue, e **depois do commit**.
 gh repo create <nome> --private --source=. --remote=origin --push
 ```
 
-**A ordem é o que esta skill fixa.** O `--push` empurra commits locais; num diretório onde o
-`git init` acabou de rodar e não há commit nenhum, ele falha com
-`error: src refspec HEAD does not match any` e deixa o usuário com um repositório vazio no GitHub e
-um erro no meio do onboarding. Criar o remoto antes de os arquivos existirem é exatamente como se
-chega nesse erro.
+**A ordem é o que esta skill fixa.** O `--push` empurra commits locais, e o `gh` confere isso
+**antes** de chamar a API: sem commit nenhum ele sai com 1 e
+``--push` enabled but no commits found``, sem criar repositório nenhum. Fora de um repositório
+git, recusa com `current directory is not a git repository`. Nada quebra pela metade, mas o
+onboarding para com um erro — e criar o remoto antes de os arquivos existirem é exatamente como se
+chega lá.
 
 **Fora dessa ordem, pesquisar em vez de improvisar.** O comando acima cobre o caso comum;
 organização em vez de conta pessoal, SSH em vez de HTTPS, GitHub Enterprise, escopo de token
@@ -275,8 +294,11 @@ certo. O que não se faz é copiá-la para cá: ela envelheceria sozinha dentro 
 
 ### Os três labels
 
-Criar com `gh label create`. **Criação idempotente**: label que já existe vira aviso, não erro —
-daí o `|| true`. Os comandos, com as descrições, estão em
+Criar com `gh label create`. **Label que já existe faz o comando sair com 1** —
+`label with name "X" already exists; use --force to update its color and description` —, e é o
+`|| true` que deixa a sequência seguir. A idempotência é da sequência, não do comando: quem
+conferir o exit code, ou rodar sob `set -e`, precisa saber disso. Os comandos, com as descrições,
+estão em
 [`workflow-demanda/references/midia-issues.md`](../workflow-demanda/references/midia-issues.md), na
 seção "Criar os labels".
 

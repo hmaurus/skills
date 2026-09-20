@@ -20,15 +20,21 @@
   só some nos dois estados que ele de fato não resolve. `gh auth login` é **conduzido**, não
   executado: é interativo, e o agente não completa esse fluxo sozinho.
 - **A criação do remoto vem depois do commit, e a skill fixa essa ordem.** O `--push` empurra
-  commits locais; sem commit nenhum ele falha com `error: src refspec HEAD does not match any`
-  (`git init && git remote add origin <bare> && git push -u origin HEAD` reproduz), deixando um
-  repositório vazio no GitHub e um erro no meio do onboarding. Fora dessa ordem — organização, SSH,
-  Enterprise, escopo de token, nome em uso — a skill autoriza o agente a pesquisar, e não copia a
-  documentação do `gh` para dentro de si, que envelheceria ali enquanto
-  `gh repo create --help` está sempre atual.
+  commits locais, e o `gh` confere isso antes de chamar a API: sem commit nenhum ele sai com 1 e
+  ``--push` enabled but no commits found`` — sem criar repositório nenhum
+  (`git init && GH_TOKEN=invalido gh repo create <nome> --private --source=. --push` reproduz: o
+  token inválido nunca chega a ser usado). Nada quebra pela metade, mas o onboarding para com um
+  erro. Fora dessa ordem — organização, SSH, Enterprise, escopo de token, nome em uso — a skill
+  autoriza o agente a pesquisar, e não copia a documentação do `gh` para dentro de si, que
+  envelheceria ali enquanto `gh repo create --help` está sempre atual.
 - **A apresentação para de prometer "entre cinco e sete perguntas".** Os ramos têm tamanhos
   diferentes e o modo issue com repositório a criar passa de qualquer faixa; a promessa vira
   qualitativa.
+- **A descrição do `/aicf:setup` nos dois READMEs acompanha** — ela listava o que o comando monta
+  sem `git init`, sem commit e sem criação de repositório.
+- **`gh label create` com label existente sai com 1, e não com aviso.** O `midia-issues.md` dizia o
+  contrário desde que a receita nasceu; quem conferisse o exit code, ou rodasse sob `set -e`, agiria
+  errado. A idempotência é do `|| true`, que é da sequência, não do comando.
 
 ## 0.22.0 — 2026-09-20
 

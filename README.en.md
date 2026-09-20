@@ -64,7 +64,7 @@ A spec and a plan say what was intended, and they were written before execution.
 
 ## Starting a new project
 
-**1. `/aicf:setup`.** Sets up the base: `PRD.md`, the place where work items will live, and the root `CLAUDE.md`, the file the agent reads at the start of every session. It asks little — the name, a sentence or two about the project, whether a work item lives in a file or an issue, where the engineering defaults live, and which tools you already use.
+**1. `/aicf:setup`.** Sets up the base: `PRD.md`, the place where work items will live, and the root `CLAUDE.md`, the file the agent reads at the start of every session. It asks little — the name, a sentence or two about the project, whether a work item lives in a file or an issue, where the engineering defaults live, and which tools you already use. If the directory is not a git repository yet, it offers `git init` before asking where work items live, and leaves what it created in the first commit.
 
 **2. Fill in `PRD.md`.** It ships with the sections and a prompt under each. `/aicf:criar-prd` interviews you section by section and writes the file, starting from the problem rather than the solution.
 
@@ -89,7 +89,7 @@ There are six, and the axis that matters is who can invoke each one.
 
 | Skill | When | What it does |
 | --- | --- | --- |
-| `/aicf:setup` | once, on a new project | Asks whether work items live in files or issues and sets up whatever the answer requires: `docs/projeto/` with the PRD, roadmap and work item folders, or the three `aicf:*` labels. In both cases, `CLAUDE.md` (with `AGENTS.md` pointing to it), a `README.md` and, if you want, the engineering defaults |
+| `/aicf:setup` | once, on a new project | Initializes the git repository if missing, asks whether work items live in files or issues and sets up whatever the answer requires: `docs/projeto/` with the PRD, roadmap and work item folders, or the GitHub repository and the three `aicf:*` labels. In both cases, `CLAUDE.md` (with `AGENTS.md` pointing to it), a `README.md`, the engineering defaults if you want them, and the first commit |
 | `/aicf:criar-prd` | start of the project | Interviews you about the product and writes `PRD.md`. Run it again whenever a decision contradicts it |
 
 **You type them, or the agent reaches for them.** They answer a request in plain language — "interview me about X", "implement spec Y" — and the agent loads them when it recognizes the intent.
