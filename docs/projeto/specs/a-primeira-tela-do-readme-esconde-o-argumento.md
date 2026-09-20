@@ -2,7 +2,15 @@
 
 Processo — entrevista: criar-spec · implementação: a definir · sugestão: aicf-direto (prosa em dois READMEs e um SVG novo; texto e desenho já estão decididos aqui)
 
-Roda **depois de** [a comparação com os vizinhos erra e ignora o GSD](concluidas/a-comparacao-com-os-vizinhos-erra-e-ignora-o-gsd.md): as duas mexem no `README.md`, e aquela corrige fatos que esta cita.
+Roda **depois de** [a comparação com os vizinhos erra e ignora o GSD](concluidas/a-comparacao-com-os-vizinhos-erra-e-ignora-o-gsd.md): as duas mexem no `README.md`, e aquela corrige fatos que esta cita. Ambas concluídas em 2026-09-20, junto com
+[o bullet do planejamento macro](concluidas/o-wayfinder-do-matt-faz-o-planejamento-macro.md).
+
+**A linha 7 mudou depois de `cc28b60`.** Aquela última demanda trocou "Elas começam numa ideia já
+formulada" por "num pedido já recortado", porque o `wayfinder` do Matt começa antes da ideia estar
+formulada (`git diff cc28b60..v0.21.0 -- README.md | grep 'pedido já recortado'`). O texto novo
+proposto abaixo **substitui o bloco inteiro** e não repete a afirmação, então o ajuste é descartado
+junto sem perda — não é preciso preservá-lo. As âncoras desta spec seguem válidas: o bloco continua
+nas linhas 5 a 9, e `grep -n '^## O problema' README.md` continua devolvendo 43.
 
 ## Problema
 
