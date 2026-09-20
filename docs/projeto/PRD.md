@@ -44,7 +44,7 @@ Seis skills, deliberadamente pequenas: dizem o que o agente não teria como infe
 - Roadmap e demandas versionadas, com a maturidade na pasta ou no label.
 - Entrevista que produz spec, com sugestão de caminho de implementação.
 - Caminho aicf mínimo de implementação, que encadeia o fechamento.
-- Fechamento por qualquer caminho: checks, relatório, arquivamento e promoção de conhecimento para `CLAUDE.md`, ADR, `CONTEXT.md` ou skill.
+- Fechamento por qualquer caminho: checks, relatório, arquivamento e promoção de conhecimento para `CLAUDE.md`, ADR, `CONTEXT.md`, `docs/referencias/` ou skill.
 - Superpowers e Matt Pocock como caminhos alternativos de entrevista e de implementação.
 
 **Fora, por decisão:**
@@ -53,7 +53,7 @@ Seis skills, deliberadamente pequenas: dizem o que o agente não teria como infe
 - **Migração entre arquivo e issue.** A escolha de mídia vale do ponto em diante; o que está em arquivo fica onde está. Motivo: migrar é uma demanda de conversão a manter, e ninguém pediu. [ADR 0004](../adr/0004-midia-do-registro-e-config-propria.md).
 - **Manual ou tutorial separado do README.** Motivo: dois documentos humanos divergem; o que é para quem já usa fica dobrado no README. [ADR 0005](../adr/0005-a-documentacao-humana-e-um-arquivo-so.md).
 - **Outros agentes (Codex, OpenCode, Cursor) como alvo.** O alvo é Claude Code. A porta fica aberta: o formato `SKILL.md` é o padrão aberto Agent Skills, que esses agentes leem (`curl -s https://agentskills.io/llms.txt` lista os clientes), e o setup já gera `AGENTS.md`. Mas o empacotamento é plugin de Claude Code, e a prosa cita ferramentas dele (`AskUserQuestion`, plan mode, `/clear`, `disable-model-invocation`) em cerca de vinte pontos (`grep -rnoE 'AskUserQuestion|plan mode|/clear|\.claude/rules|hooks?' skills/ --include='*.md' | wc -l`). Ninguém testou, e o plugin não promete. Motivo: o público é quem usa Claude Code, e cada agente a mais é uma superfície a manter sem quem a exercite.
-- **Pasta de registro livre de aprendizados** (`docs/referencias/` ou equivalente). Motivo: o que tem padrão já tem lugar — decisão vai para ADR, vocabulário para `CONTEXT.md`, regra para `CLAUDE.md`, procedimento para skill. O resto (referência de serviço de terceiro, estudo, material pessoal) é organização particular de cada projeto, e o plugin não impõe uma.
+- **A organização interna de `docs/referencias/`.** A pasta existe: o `/aicf:workflow-demanda` a nomeia para doc que descreve o mundo em vez de um trabalho a fazer, e o passo 3 do `/aicf:fechar-demanda` manda conhecimento operacional para lá (`grep -n 'docs/referencias' skills/workflow-demanda/SKILL.md skills/fechar-demanda/SKILL.md`). O que fica fora é o resto: o setup não a cria (nasce no primeiro arquivo, como `docs/adr/` e `CONTEXT.md`), e o plugin não impõe índice, nome de arquivo nem subpasta dentro dela. Motivo: o que tem padrão já tem lugar — decisão em ADR, vocabulário em `CONTEXT.md`, regra em `CLAUDE.md`, procedimento em skill —, e o que sobra (referência de serviço de terceiro, estudo, pesquisa) varia demais entre projetos para ter forma imposta. Esta entrada dizia que a pasta inteira era fora de escopo, contradizendo as duas skills; corrigido em 2026-09-19.
 - **Trackers além do GitHub Issues** (Linear, Jira). Motivo: o plugin só carrega o que o autor usa e consegue testar, e até hoje foram só arquivo markdown e GitHub Issues. A mídia é uma linha de configuração, então acrescentar uma depois é possível, mas só quando houver quem a exercite.
 
 ## Modelo
