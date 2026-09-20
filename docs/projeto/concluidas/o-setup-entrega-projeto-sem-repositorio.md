@@ -1,6 +1,6 @@
 # O setup entrega projeto sem repositório, e esconde o modo issue em vez de habilitá-lo
 
-Processo — entrevista: criar-spec · implementação: a definir · sugestão: aicf-direto (toca um arquivo, e as decisões de abordagem estão todas fechadas aqui)
+Processo — entrevista: criar-spec · implementação: aicf-direto
 
 ## Problema
 
@@ -182,3 +182,81 @@ resultado — a skill que roda é a do início da sessão.
    ```
 
 4. `./scripts/check.sh` termina em `Tudo verde.` e sai com 0.
+
+
+## Relatório de implementação (2026-09-20)
+
+**Status** — concluído, com **a verificação de comportamento em aberto e nomeada**. A skill tem
+`disable-model-invocation: true`: nenhum agente a invoca nem imita o roteiro por fora, então as
+Verificações 1 e 2 (as duas passadas do `/aicf:setup` em diretório novo) são do titular. Quem as
+encerra é ele, numa sessão reiniciada depois do `/plugin update` — a skill que roda é a do início da
+sessão, e conferir a versão no cabeçalho do comando (`cache/aicodingflow/aicf/0.23.0/skills/setup`)
+vem antes de acreditar no resultado. As Verificações 3 e 4 rodaram e passaram.
+
+**Causa raiz** — não é bug de código, é lacuna de roteiro, e as duas metades têm a mesma origem: a
+skill sabia **conferir** estado de git e de `gh`, e não sabia **criar** nenhum dos dois. As três
+menções a `git ` no arquivo eram todas de leitura. Disso saíam os dois sintomas: a estrutura nascia
+sem repositório, e o modo issue era escondido justamente no caso — falta o repositório no GitHub —
+em que um comando o habilitaria.
+
+**Arquivos alterados**
+
+| Arquivo | O quê |
+| --- | --- |
+| `skills/setup/SKILL.md` | o alvo: nasce "O repositório local" (com a rota do "não"), "O que o ambiente permite" (sequência que acumula, no lugar da regra de esconder), "O primeiro commit" e "O repositório no GitHub, e os labels"; a apresentação perde o número de perguntas; os labels mudam de seção |
+| `skills/workflow-demanda/references/midia-issues.md` | `gh label create` com label existente sai com 1, não vira aviso — a frase estava errada desde que a receita nasceu |
+| `README.md`, `README.en.md` | a descrição do comando listava o que ele monta sem `git init`, sem commit e sem criação de repositório |
+| `.claude-plugin/plugin.json`, `CHANGELOG.md` | `0.23.0`, em par |
+| `CLAUDE.md` | a regra sobre ferramenta de terceiro ganha a emenda do passo 3 |
+| `docs/adr/0007-o-setup-age-fora-do-disco-local.md` | novo, saída do passo 3 |
+
+**Commits**
+
+| Sha | O quê |
+| --- | --- |
+| `13a3c4b` | a entrevista promove o intent a spec |
+| `4c1c143` | o código: skill, versão e CHANGELOG |
+| `ba84832` | as correções da revisão, incluindo o erro factual que o próprio `4c1c143` carregava |
+
+**Validação**
+
+- `./scripts/check.sh` — `Tudo verde.`, com `104 links conferidos, 0 quebrados` e os dois
+  `✔ Validation passed`.
+- `grep -c 'git init' skills/setup/SKILL.md` — `0` antes de `4c1c143`, `2` depois. É a Verificação 3.
+- Revisão de código por subagente fresco, que não viu a implementação, com os comandos do `gh`
+  rodados por ele e reconferidos aqui: 14 achados, todos aceitos e aplicados em `ba84832`.
+- `git init && GH_TOKEN=invalido gh repo create <nome> --private --source=. --push` →
+  ``--push` enabled but no commits found``, exit 1, nada criado.
+- `gh label create <label-existente>` → `already exists; use --force`, exit 1.
+- `git remote -v` em diretório sem `.git` → `fatal: not a git repository`, exit 128.
+
+**Escopo efetivo** — passou da spec em dois pontos, os dois por consequência direta. Os **dois
+READMEs** descreviam o comando e ficariam mentindo sobre ele. E o **`midia-issues.md`** carregava a
+mesma frase errada sobre `gh label create` que a revisão achou no setup — corrigir num lugar só
+deixaria a contradição dentro do repositório.
+
+**Lições**
+
+- **O comando que se roda é o que a frase cita, não um parente dele.** A afirmação de que
+  `gh repo create --push` falha com `error: src refspec HEAD does not match any` foi para quatro
+  arquivos — skill, CHANGELOG, spec e ADR — com um teste ao lado que de fato rodava, e provava, o
+  `git push` cru. O `gh` valida a ausência de commit **antes** de chamar a API e devolve outra
+  mensagem, o que só aparece rodando o `gh`. A regra de ordem estava certa; a consequência descrita
+  estava errada (não sobra repositório órfão, sobra um onboarding parado). Promovido para o
+  `CLAUDE.md`, emendando a regra sobre ferramenta de terceiro.
+- **Skill é texto que o check não lê.** `./scripts/check.sh` ficou verde o tempo todo: ele confere
+  link, formato de plugin e par versão/CHANGELOG, e não tem como ver que os estados de um roteiro
+  não são exclusivos, que o "não" de uma pergunta não tem rota, ou que um parágrafo de ação está
+  antes do parágrafo que alimenta a pergunta. Dos 14 achados, 13 eram invisíveis para o check. Num
+  repositório cujo produto **é** a instrução, a revisão fresca não é opcional — é o único teste que
+  existe.
+- **A ordem dos passos foi a parte difícil, e ela não estava no intent.** O intent tratava
+  `gh repo create` como decisão de política (executar ou conduzir), e a decisão de política levou
+  dez minutos. O que custou foi descobrir que o comando só funciona depois do primeiro commit — e
+  isso só apareceu porque a entrevista rodou o comando em vez de descrevê-lo.
+
+**Saída do passo 3** — [ADR 0007 — O setup age fora do disco local, com confirmação](../../adr/0007-o-setup-age-fora-do-disco-local.md),
+mais a emenda no `CLAUDE.md`. Nenhuma demanda nova nasceu, e nenhuma ficou obsoleta: a
+[governança em issues neste repositório](../intents/governanca-em-issues-neste-repo.md) continua
+aberta e independente — o que esta demanda lhe dá é a primeira passada real do modo issue, quando a
+Verificação 2 rodar.
