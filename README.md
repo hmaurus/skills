@@ -156,17 +156,19 @@ Dá para entrevistar por um caminho e implementar por outro. Descer essa lista t
 </details>
 
 <details>
-<summary><strong>Por que este, e não o Superpowers ou as skills do Matt Pocock</strong></summary>
+<summary><strong>Por que este, e não o Superpowers, o Matt Pocock, o GSD ou o BMAD</strong></summary>
 
-Porque não é a mesma pergunta. As duas coleções resolvem bem **a demanda individual**: interrogam a ideia, produzem uma spec, quebram em tarefas, executam com disciplina. E deixam rastro — o Superpowers grava spec e plano em arquivo, o Matt publica spec e tickets no tracker que você escolheu no setup dele (GitHub Issues, Linear ou markdown local), e ainda mantém glossário e ADRs.
+Porque não é a mesma pergunta. O Superpowers e as skills do Matt resolvem bem **a demanda individual**: interrogam a ideia, produzem uma spec, quebram em tarefas, executam com disciplina. E deixam rastro — o Superpowers grava spec e plano em arquivo no caminho _architectural_, o Matt publica spec e tickets no tracker que você escolheu no setup dele (GitHub, GitLab ou markdown local, e outro tracker descrito em prosa), e ainda mantém glossário e ADRs.
 
 Só que esse rastro é **por demanda** e escrito **antes** da execução. Três coisas ficam de fora, e nenhuma das duas declara que são problema de outra pessoa: elas simplesmente começam na ideia já formulada e terminam no commit ou no merge.
 
-- **O nível do produto.** Nenhuma das duas tem o documento que diz o que se está construindo, para quem, e o que ficou fora por decisão, nem o registro do que já foi entregue e do que falta.
+- **O nível do produto.** Nenhuma das duas tem o documento que diz o que se está construindo, para quem, e o que ficou fora por decisão, nem o registro do que já foi entregue e do que falta. O Matt chega perto de um pedaço disso: guarda o pedido que foi recusado e o motivo — o que ficou fora por pedido, não o que o produto é.
 - **O planejamento macro.** Quando o pedido é grande demais para uma spec, o `brainstorming` ajuda a decompor em subprojetos e trabalha o primeiro; os outros ficam na conversa. Aqui a ideia que ainda não amadureceu tem registro próprio, cada demanda declara na própria prosa o que bloqueia e do que depende, e o que ainda não se sabe se será feito tem lugar para esperar sem se perder.
-- **O depois.** Spec e plano dizem o que se pretendia. O `implement` do Matt termina no commit e não fecha o ticket nem marca os critérios de aceite. O Superpowers grava plano e design doc no repositório, e eles ficam — mas foram escritos antes de executar, e nada pede que sejam revistos contra o que saiu. O aicf pede um relatório na própria demanda, e é nele que a divergência plano×entrega fica escrita.
+- **O depois.** Spec e plano dizem o que se pretendia. O `implement` do Matt termina no commit e não fecha o ticket nem marca os critérios de aceite. O Superpowers grava plano e design doc no repositório, e eles ficam: o código é revisto contra o plano durante a execução, mas o plano e a spec ficam como foram escritos, e nada os atualiza com o que saiu. O aicf pede um relatório na própria demanda, e é nele que a divergência plano×entrega fica escrita.
 
 O aicf é essa camada, e a mesma camada vale para qualquer caminho de implementação. Trocar de coleção, ou misturar as duas numa mesma demanda, não muda nada na governança.
+
+**GSD e BMAD são o caso oposto: já têm essa camada.** O `PROJECT.md` do GSD Core tem "What This Is", "Core Value", "Out of Scope" com o motivo e "Key Decisions", e `complete-milestone` e `extract-learnings` fazem o que o `fechar-demanda` faz aqui. A diferença é que nos dois a camada vem grudada num loop de execução próprio — 72 comandos `/gsd-*` no GSD Core, 30 skills e `uv` obrigatório no BMAD —, e é esse loop que o aicf deixa de fora por decisão ([ADR 0001](docs/adr/0001-fronteira-de-fase.md)): aqui quem manda dentro da fase de implementação é o método que você escolheu para ela. Se você quer o pacote inteiro, o GSD faz mais do que o aicf; se quer só a camada, e implementar pelo caminho que preferir, é este.
 
 </details>
 

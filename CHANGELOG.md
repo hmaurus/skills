@@ -1,5 +1,40 @@
 # Changelog
 
+## 0.21.0 — 2026-09-20
+
+- **A comparação do README para de errar sobre o tracker do Matt Pocock.** Os três lugares que
+  diziam "GitHub, Linear ou markdown local" — `README.md`, `README.en.md` e a própria regra do
+  `CLAUDE.md` que manda conferir afirmação sobre ferramenta de terceiro — passam a dizer GitHub,
+  GitLab ou markdown local, e outro tracker descrito em prosa. Linear não é opção do setup dele:
+  entra como exemplo dentro de "Other (Jira, Linear, etc.)", que o usuário preenche em texto livre
+  (`sed -n 44,47p $R/skills/skills/engineering/setup-matt-pocock-skills/SKILL.md`). A frase errada
+  tinha sido escrita justamente para corrigir outro erro na mesma seção, em 2026-09-18.
+- **Três frases da seção "Por que este" ganham a nuance que faltava.** "Nada pede que sejam
+  revistos contra o que saiu" virou "o código é revisto contra o plano durante a execução, mas o
+  plano e a spec ficam como foram escritos": o `subagent-driven-development` faz "task review (spec
+  compliance + code quality) after each"
+  (`sed -n 8p $R/superpowers/skills/subagent-driven-development/SKILL.md`); o que não acontece é o
+  documento ser atualizado, e a issue [obra/superpowers#1075](https://github.com/obra/superpowers/issues/1075)
+  segue aberta (`gh issue view 1075 -R obra/superpowers --json state`). "O Superpowers grava spec e
+  plano em arquivo" ganhou "no caminho _architectural_" — nos caminhos _bounded_ e _spike_ é "No
+  spec file, no implementation plan document"
+  (`grep -n 'No spec file' $R/superpowers/skills/brainstorming/SKILL.md`). E o absoluto "nenhuma das
+  duas tem o documento ... com o que ficou fora por decisão" ganhou a ressalva do Matt, que guarda o
+  pedido recusado em `.out-of-scope/<conceito>.md`
+  (`sed -n 1,10p $R/skills/skills/engineering/triage/OUT-OF-SCOPE.md`).
+- **A seção passa a responder "por que não o GSD?".** GSD Core e BMAD têm os quatro critérios da
+  governança do aicf, em forma quase idêntica, e o README só comparava com Superpowers e Matt. O
+  parágrafo novo — único acréscimo da demanda; o resto é substituição — diz que a camada deles vem
+  grudada num loop de execução próprio (72 comandos, `ls $R/gsd-core/commands/gsd | wc -l`; 30
+  skills e `uv` obrigatório, `ls $R/bmad-method/skills | wc -l` e `sed -n 18,19p $R/bmad-method/README.md`),
+  e que é esse loop que o aicf deixa de fora por decisão
+  ([ADR 0001](docs/adr/0001-fronteira-de-fase.md)). O título dos dois READMEs passa a cobrir os
+  quatro.
+- **A fonte de tudo isto é a pesquisa** [governança macro nos frameworks vizinhos](docs/referencias/governanca-nos-frameworks-vizinhos.md),
+  de 2026-09-19, que lê sete frameworks em fonte primária com sha e comando por afirmação. Os shas
+  reconferidos nesta demanda: `obra/superpowers` `5bf4e78`, `mattpocock/skills` `c55ee46`,
+  `open-gsd/gsd-core` `6dcc042`, `bmad-code-org/bmad-method` `f033e70`.
+
 ## 0.20.0 — 2026-09-19
 
 - **A referência de mídia vira um arquivo por mídia.** `midia.md` trazia as duas receitas lado a

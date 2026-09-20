@@ -158,17 +158,19 @@ You can interview by one path and implement by another. Going down this list tra
 </details>
 
 <details>
-<summary><strong>Why this one, and not Superpowers or Matt Pocock's skills</strong></summary>
+<summary><strong>Why this one, and not Superpowers, Matt Pocock, GSD or BMAD</strong></summary>
 
-Because it is not the same question. Both collections handle **the individual work item** well: they interrogate the idea, produce a spec, break it into tasks, and execute with discipline. And they do leave a trail — Superpowers writes the spec and plan to files, Matt's publish spec and tickets to the tracker you picked in his setup (GitHub Issues, Linear or local markdown), and maintain a glossary and ADRs.
+Because it is not the same question. Superpowers and Matt's skills handle **the individual work item** well: they interrogate the idea, produce a spec, break it into tasks, and execute with discipline. And they do leave a trail — Superpowers writes the spec and plan to files on its _architectural_ path, Matt's publish spec and tickets to the tracker you picked in his setup (GitHub, GitLab or local markdown, plus any other tracker you describe in prose), and maintain a glossary and ADRs.
 
 That trail, though, is **per work item** and written **before** execution. Three things fall outside it, and neither collection declares them somebody else's problem: they simply start at an idea that is already formed and stop at the commit or the merge.
 
-- **The product level.** Neither has the document stating what is being built, for whom, and what was ruled out by decision, nor the record of what shipped and what is missing.
+- **The product level.** Neither has the document stating what is being built, for whom, and what was ruled out by decision, nor the record of what shipped and what is missing. Matt's come close to one piece of it: they keep the request that was turned down and the reason — what was ruled out by request, not what the product is.
 - **Macro planning.** When a request is too big for one spec, `brainstorming` helps decompose it into sub-projects and works on the first one; the others stay in the conversation. Here, an idea that has not matured yet gets its own record, each work item declares in its own prose what it blocks and what it depends on, and what may never be done has a place to wait without getting lost.
-- **The afterwards.** A spec and a plan say what was intended. Matt's `implement` ends at the commit and neither closes the ticket nor ticks the acceptance criteria. Superpowers writes the plan and design doc into the repository, and they stay — but they were written before execution, and nothing asks for them to be reviewed against what shipped. `aicf` asks for a report in the work item itself, and that is where the plan×delivery divergence gets written down.
+- **The afterwards.** A spec and a plan say what was intended. Matt's `implement` ends at the commit and neither closes the ticket nor ticks the acceptance criteria. Superpowers writes the plan and design doc into the repository, and they stay: the code is reviewed against the plan during execution, but the plan and the spec stay as they were written, and nothing updates them with what shipped. `aicf` asks for a report in the work item itself, and that is where the plan×delivery divergence gets written down.
 
 `aicf` is that layer, and the same layer applies to any implementation path. Switching collections, or mixing both within one work item, changes nothing in governance.
+
+**GSD and BMAD are the opposite case: they already have this layer.** GSD Core's `PROJECT.md` has "What This Is", "Core Value", "Out of Scope" with the reasoning, and "Key Decisions"; `complete-milestone` and `extract-learnings` do what `fechar-demanda` does here. The difference is that in both the layer comes welded to an execution loop of their own — 72 `/gsd-*` commands in GSD Core, 30 skills and a hard `uv` requirement in BMAD — and that loop is exactly what `aicf` leaves out by decision ([ADR 0001](docs/adr/0001-fronteira-de-fase.md)): here, whatever runs inside the implementation phase is the method you picked for it. If you want the whole package, GSD does more than `aicf`; if you want just the layer, and to implement by whatever path you prefer, this is it.
 
 </details>
 
