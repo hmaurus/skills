@@ -20,8 +20,10 @@ _A preencher quando houver código._
 No **modo arquivo**, acrescentar à tabela acima:
 
 | [`docs/projeto/ROADMAP.md`](docs/projeto/ROADMAP.md)     | O que ainda não tem arquivo              |
+| [`docs/projeto/backlog/`](docs/projeto/backlog/)         | Ainda não está claro que será feita      |
 | [`docs/projeto/intents/`](docs/projeto/intents/)         | Demanda decidida, ainda não entrevistada |
-| [`docs/projeto/specs/`](docs/projeto/specs/)             | Spec pronta; `concluidas/` com relatório |
+| [`docs/projeto/specs/`](docs/projeto/specs/)             | Spec pronta para implementar             |
+| [`docs/projeto/concluidas/`](docs/projeto/concluidas/)   | Arquivada, com o relatório no fim        |
 
 No **modo issue**, uma linha só, porque as pastas não existem:
 
