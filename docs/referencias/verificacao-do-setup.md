@@ -32,7 +32,20 @@ ls docs/projeto/                             # PRD.md, ROADMAP.md e as quatro pa
 grep '^\*\*Coleções' CLAUDE.md               # "Superpowers" uma vez só na linha
 grep -n 'develop' CLAUDE.md                  # a seção Git descreve o que existe
 grep -n 'Repositório' docs/projeto/ROADMAP.md  # "Repositório no GitHub e CI mínimo"
+
+T=~/.claude/plugins/cache/aicodingflow/aicf/<versão>/skills/setup/templates
+for p in "CLAUDE.md claude-md.md" "README.md readme.md" \
+         "docs/projeto/PRD.md prd.md" "docs/projeto/ROADMAP.md roadmap.md"; do
+  set -- $p; diff "$T/$2" "$1"
+done   # só nome, descrição, as duas linhas do CLAUDE.md, e o bloco de escolha do README apagado
 ```
+
+**O `diff` é o comando que pega defeito de template**, e é o único do bloco cuja resposta esperada
+não é um valor fixo — quem roda lê as diferenças e julga se são só as quatro do comentário. Ele está
+aqui porque os três defeitos que esta verificação já achou de verdade (2026-09-20, viraram a
+`0.23.1`) eram todos de conteúdo de template: com eles no lugar, os oito comandos acima passariam
+verdes. O `diff` também pega o inverso, que nenhum `grep` pega — uma substituição que o setup fez e
+não devia.
 
 ### Modo issue
 

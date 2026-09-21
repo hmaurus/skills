@@ -191,7 +191,8 @@ resultado — a skill que roda é a do início da sessão.
 Verificações 1 e 2 (as duas passadas do `/aicf:setup` em diretório novo) são do titular. Quem as
 encerra é ele, numa sessão reiniciada depois do `/plugin update` — a skill que roda é a do início da
 sessão, e conferir a versão no cabeçalho do comando (`cache/aicodingflow/aicf/0.23.0/skills/setup`)
-vem antes de acreditar no resultado. As Verificações 3 e 4 rodaram e passaram.
+vem antes de acreditar no resultado. As Verificações 3 e 4 rodaram e passaram. O estado das Verificações 1 e 2 vive em
+[verificacao-do-setup.md](../../referencias/verificacao-do-setup.md).
 
 **Causa raiz** — não é bug de código, é lacuna de roteiro, e as duas metades têm a mesma origem: a
 skill sabia **conferir** estado de git e de `gh`, e não sabia **criar** nenhum dos dois. As três

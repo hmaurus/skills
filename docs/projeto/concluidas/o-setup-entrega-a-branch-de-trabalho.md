@@ -82,7 +82,8 @@ O template do `CLAUDE.md` volta a trazer `develop`/`main`, agora dizendo que o s
 ## Relatório de implementação (2026-09-21)
 
 **Status** — concluído. As Verificações 1 a 4 rodaram e passaram. A 5 é a passada do ramo issue,
-do titular pelo `disable-model-invocation: true`, e agora prova três demandas de uma vez.
+do titular pelo `disable-model-invocation: true`, e agora prova três demandas de uma vez. O
+estado dela vive em [verificacao-do-setup.md](../../referencias/verificacao-do-setup.md).
 
 **Causa raiz** — não é bug: é uma decisão de projeto que a `0.23.1` tomou na direção errada por
 falta de um dado que só o titular tinha. Ela viu a contradição certa — `CLAUDE.md` descrevendo
