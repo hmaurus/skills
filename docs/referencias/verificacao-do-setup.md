@@ -55,8 +55,18 @@ git log origin/main --oneline | wc -l                           # 1 — o --push
 gh repo view --json defaultBranchRef -q .defaultBranchRef.name  # main
 git branch --show-current                                       # develop
 ls docs/projeto/                                                # só PRD.md
+
+T=~/.claude/plugins/cache/aicodingflow/aicf/<versão>/skills/setup/templates
+for p in "CLAUDE.md claude-md.md" "README.md readme.md" "docs/projeto/PRD.md prd.md"; do
+  set -- $p; diff "$T/$2" "$1"
+done   # só nome, descrição, as duas linhas do CLAUDE.md, e o bloco de escolha do README apagado
+
 gh repo delete <nome> --yes                                     # o repositório de teste é descartável
 ```
+
+São três pares, e não os quatro do modo arquivo: neste ramo o `roadmap.md` não é copiado, como a
+tabela "O que criar" do roteiro marca. O `diff` do `README.md` mostra um bloco maior que no modo
+arquivo — aqui sobra a linha única das issues no lugar das cinco das pastas.
 
 O repositório sai da máquina, então é privado e some no fim. `gh label list` num repositório criado
 pelo próprio setup é a condição que encerra o ramo issue.
