@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.24.0 — 2026-09-21
+
+- **O `/aicf:setup` entrega as duas branches.** O primeiro commit cai em `main`, e o último passo
+  antes do fechamento cria a `develop` e deixa você nela — que é onde a primeira demanda vai
+  commitar. É a correção do que a `0.23.1` tinha resolvido pelo outro lado: lá o template deixou de
+  descrever `develop`/`main` porque o repositório tinha uma branch só; aqui o repositório passa a
+  ter as duas, e o template volta a descrevê-las. **Quem montou a governança na `0.23.x` cria a
+  branch na mão:**
+  ```
+  git branch develop && git switch develop
+  git push -u origin develop   # se o projeto tem remoto
+  ```
+- **A ordem dos passos importa de novo, e pelo mesmo tipo de motivo da `0.23.0`.** A `develop` nasce
+  **depois** do `gh repo create --push`: o comando roda com `main` ativa, então é `main` que sobe
+  primeiro e fica sendo o default do repositório no GitHub — produção como default, que é o que o
+  fluxo pede. Criada antes, a `develop` subiria primeiro e viraria o default remoto, e desfazer isso
+  é mexer na configuração do repositório em vez de rodar um comando. A sequência foi conferida
+  contra um remoto local: depois de a `develop` subir, `git symbolic-ref HEAD` no remoto continua em
+  `refs/heads/main`.
+- Os dois READMEs e a descrição do comando dizem o que ele entrega.
+
 ## 0.23.1 — 2026-09-20
 
 Três correções nos templates que o `/aicf:setup` copia, achadas na primeira passada da `0.23.0` num

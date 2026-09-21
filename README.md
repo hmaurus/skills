@@ -62,7 +62,7 @@ Spec e plano dizem o que se pretendia, e foram escritos antes de executar. O que
 
 ## Começando um projeto novo
 
-**1. `/aicf:setup`.** Monta a base: o `PRD.md`, o lugar onde as demandas vão morar, e o `CLAUDE.md` da raiz, que é o arquivo que o agente lê no início de toda sessão. Pergunta pouco — o nome, uma ou duas frases sobre o projeto, se a demanda vive em arquivo ou em issue, onde ficam os padrões de engenharia, e quais ferramentas você já usa. Se o diretório ainda não é repositório git, ele oferece o `git init` antes da pergunta sobre onde as demandas moram, e deixa o que criou no primeiro commit.
+**1. `/aicf:setup`.** Monta a base: o `PRD.md`, o lugar onde as demandas vão morar, e o `CLAUDE.md` da raiz, que é o arquivo que o agente lê no início de toda sessão. Pergunta pouco — o nome, uma ou duas frases sobre o projeto, se a demanda vive em arquivo ou em issue, onde ficam os padrões de engenharia, e quais ferramentas você já usa. Se o diretório ainda não é repositório git, ele oferece o `git init` antes da pergunta sobre onde as demandas moram, deixa o que criou no primeiro commit em `main`, e te entrega em `develop`, a branch de trabalho.
 
 **2. Preencher o `PRD.md`.** Ele nasce com as seções e uma pergunta em cada uma. `/aicf:criar-prd` entrevista seção por seção e escreve o arquivo, começando pelo problema em vez da solução.
 
@@ -87,7 +87,7 @@ São seis, e o eixo que importa é quem pode chamar cada uma.
 
 | Skill | Quando | O que faz |
 | --- | --- | --- |
-| `/aicf:setup` | uma vez, no projeto novo | Inicializa o repositório git se faltar, pergunta se a demanda mora em arquivo ou em issue e monta o que a escolha pedir: `docs/projeto/` com PRD, roadmap e as pastas de demanda, ou o repositório no GitHub e os três labels `aicf:*`. Nos dois casos, o `CLAUDE.md` (com `AGENTS.md` apontando para ele), um `README.md`, se você quiser os padrões de engenharia, e o primeiro commit |
+| `/aicf:setup` | uma vez, no projeto novo | Inicializa o repositório git se faltar, pergunta se a demanda mora em arquivo ou em issue e monta o que a escolha pedir: `docs/projeto/` com PRD, roadmap e as pastas de demanda, ou o repositório no GitHub e os três labels `aicf:*`. Nos dois casos, o `CLAUDE.md` (com `AGENTS.md` apontando para ele), um `README.md`, se você quiser os padrões de engenharia, o primeiro commit em `main` e a branch `develop` para trabalhar |
 | `/aicf:criar-prd` | começo do projeto | Entrevista sobre o produto e escreve o `PRD.md`. Roda de novo quando uma decisão o contraria |
 
 **Você digita, ou o agente alcança sozinho.** Respondem ao pedido em linguagem natural — "me entreviste sobre X", "implementa a spec Y" — e o agente as carrega quando reconhece a intenção.

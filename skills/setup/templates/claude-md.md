@@ -49,6 +49,6 @@ Rodar tudo antes de dar qualquer tarefa por concluída, e colar a saída. Se um 
 
 ## Git
 
-- **`main`** — única branch, que é o que o `git init` cria. Quem trabalha com branch de produção separada ajusta esta linha.
+- **`develop`** — branch de trabalho. **`main`** — produção. O setup criou as duas, e deixou você em `develop`. Quem prefere uma branch só apaga a outra (`git branch -d develop`) e ajusta esta linha.
 - Commitar direto na branch de trabalho por padrão; branch + PR só para mudança grande ou a pedido.
 - O fechamento de uma demanda vai em commit próprio, separado do commit de código.

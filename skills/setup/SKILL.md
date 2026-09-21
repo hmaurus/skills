@@ -1,6 +1,6 @@
 ---
 name: setup
-description: Cria a base de governança de um projeto novo — inicializa o repositório git se faltar, pergunta se a demanda mora em arquivos ou em issues do GitHub, e monta o que a escolha pedir: docs/projeto/ com PRD e roadmap e as pastas de demanda, ou o repositório no GitHub e os labels aicf:*, mais o CLAUDE.md raiz — e, se o usuário quiser, os padrões de engenharia. Deixa tudo no primeiro commit. Rodar uma vez, no começo do projeto.
+description: Cria a base de governança de um projeto novo — inicializa o repositório git se faltar, pergunta se a demanda mora em arquivos ou em issues do GitHub, e monta o que a escolha pedir: docs/projeto/ com PRD e roadmap e as pastas de demanda, ou o repositório no GitHub e os labels aicf:*, mais o CLAUDE.md raiz — e, se o usuário quiser, os padrões de engenharia. Deixa tudo no primeiro commit, em main, e entrega develop como branch de trabalho. Rodar uma vez, no começo do projeto.
 disable-model-invocation: true
 ---
 
@@ -266,6 +266,9 @@ A mensagem segue o idioma do projeto que está nascendo: `chore: estrutura de go
 mostrar `git config --global user.name` e `user.email` para o usuário rodar, e commitar depois —
 não configurar a identidade dele por conta própria.
 
+**O commit cai em `main`**, que é a branch que o `git init` cria. A branch de trabalho nasce depois
+de tudo — ver "A branch de trabalho", no fim.
+
 ## O repositório no GitHub, e os labels
 
 Só no modo issue, e **depois do commit**.
@@ -306,13 +309,33 @@ seção "Criar os labels".
 inexistente **falha em vez de criar**. É a armadilha mais repetida sobre setups que só gravam o
 mapeamento e deixam os labels para depois.
 
+## A branch de trabalho
+
+**O último passo antes do fechamento**, nos dois modos. O `CLAUDE.md` que o setup acabou de escrever
+descreve `develop` como branch de trabalho e `main` como produção; este passo é o que faz o
+repositório corresponder a isso, em vez de o arquivo descrever algo que não existe.
+
+```bash
+git branch develop
+git switch develop
+git push -u origin develop   # só no modo issue
+```
+
+**A posição na ordem é o que importa, e ela não é arbitrária.** O `gh repo create --push` roda com
+`main` ativa, então é `main` que sobe primeiro e fica sendo o default do repositório no GitHub —
+produção como default, que é o que o fluxo pede. Criar a `develop` antes disso inverte o resultado:
+ela sobe primeiro e vira o default remoto, e desfazer isso depois é mexer em configuração do
+repositório em vez de rodar um comando.
+
+Ao fim, `develop` é a branch ativa: é onde a primeira demanda vai commitar.
+
 ## Ao terminar
 
 O setup é a primeira vez que o usuário vê o método funcionando, e ele termina sabendo o que ganhou
 e o que fazer em seguida — não só o que foi criado no disco.
 
-1. Listar o que foi criado e onde — os arquivos, o commit, e, no modo issue, o repositório e os
-   labels.
+1. Listar o que foi criado e onde — os arquivos, o commit, as duas branches, e, no modo issue, o
+   repositório e os labels.
 2. **Apresentar o método em linguagem comum.** Carregar `/aicf:workflow-demanda` e contar o que ele
    diz, em vez de colar um texto guardado aqui: texto guardado seria a segunda cópia do mapa e
    envelheceria sozinho, enquanto a skill é a fonte da verdade do ciclo. Cobrir, nesta ordem:
