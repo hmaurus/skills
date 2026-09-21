@@ -69,7 +69,7 @@ ninguém ter olhado o cabeçalho na hora.
 | Quando | Ramo | Versão | Resultado |
 | --- | --- | --- | --- |
 | 2026-09-20 | arquivo | `0.23.0` | **passou** — um commit, só os caminhos criados, `git init` oferecido antes da pergunta da mídia, e a pergunta da mídia feita com a opção issue dizendo o que faltava |
-| — | issue | — | **nunca rodou** |
+| 2026-09-21 | issue | `0.24.0` | **passou** — os cinco comandos do bloco acima, num repositório que o próprio setup criou; `git ls-tree -r HEAD` traz só os quatro caminhos do setup, com `AGENTS.md` em modo `120000` |
 
 **A passada de 2026-09-20 achou três defeitos que nenhuma revisão tinha achado** — todos nos
 templates, nenhum no roteiro. Viraram a `0.23.1`
@@ -77,15 +77,33 @@ templates, nenhum no roteiro. Viraram a `0.23.1`
 É o argumento para rodar a passada de verdade em vez de confiar em leitura: o `check.sh` estava
 verde, e um subagente tinha revisado o diff inteiro.
 
+**A passada de 2026-09-21 não achou defeito nos arquivos gerados** — `CLAUDE.md`, `README.md` e
+`PRD.md` batem com os templates, com a linha da mídia, a das coleções e a seção Git corretas. Achou
+três desvios do roteiro, nenhum com consequência no resultado, todos no transcript
+(`~/.claude/projects/-home-mh-dev-tmp-teste-aicf-issues/*.jsonl`):
+
+1. A pergunta da mídia saiu com **issue como primeira opção**, e o roteiro marca arquivo como
+   default. O diretório se chamava `teste-aicf-issues`, o que provavelmente enviesou.
+2. Mídia e padrões de engenharia saíram numa **única chamada de `AskUserQuestion`**; o roteiro
+   descreve duas.
+3. As três perguntas de ferramentas saíram **juntas e já pré-respondidas** a partir do
+   `~/.claude/CLAUDE.md` global, contra o "perguntar uma de cada vez, em pergunta aberta" do
+   roteiro. Funcionou melhor que o roteiro: o global já respondia às três.
+
+E um achado fora da lista de condições: o passo "Carregar `/aicf:workflow-demanda`" foi feito com
+`cat` do `SKILL.md`, então 167 linhas do mapa caíram na tela no meio da apresentação do método. A
+skill não tem `disable-model-invocation`; invocá-la pela ferramenta Skill não imprime nada.
+
 ## O que está em aberto
 
-**O ramo issue nunca rodou.** Encerra com o bloco de comandos acima; a condição nasceu em
-[a profundidade da pasta quebra os links](../projeto/concluidas/a-profundidade-da-pasta-quebra-os-links.md)
-e foi herdada por
-[o setup entrega projeto sem repositório](../projeto/concluidas/o-setup-entrega-projeto-sem-repositorio.md).
+**Falta o `ROADMAP.md`, e o lado da `develop` que só o modo arquivo tem.** A passada de 2026-09-21
+exercitou os templates da `0.23.1` — todos menos o `roadmap.md`, que no modo issue não é copiado — e
+a criação da `develop` da `0.24.0`. Mas o passo da branch de trabalho roda com um comando a menos no
+modo arquivo (`git push -u origin develop` é só no issue), e a lição deste doc é que ler o roteiro
+não substitui rodá-lo. As duas encerram na próxima passada em modo arquivo, com
+`grep -n 'Repositório' docs/projeto/ROADMAP.md` e `git branch --format='%(refname:short)'`.
 
-**O ramo arquivo passou na `0.23.0`, e o setup mudou duas vezes desde então.** A passada não
-exercitou nem os templates corrigidos (`0.23.1`) nem a criação da `develop` (`0.24.0`). As duas
-mudanças valem nos dois modos, então uma passada do ramo issue cobre quase tudo — **menos o
-`ROADMAP.md`**, que no modo issue não existe. Essa linha está provada por `grep` e pelo diff, e
-encerra de vez na próxima passada em modo arquivo.
+O resto do bloco do modo arquivo — as quatro pastas, o `README.md` com as cinco linhas das demandas
+— está coberto: os templates que o geram não mudam desde a `0.22.0`
+(`git log --oneline v0.22.0..HEAD -- skills/setup/templates/readme.md`, vazio), e a passada de
+2026-09-20 rodou na `0.23.0`.
