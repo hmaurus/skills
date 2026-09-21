@@ -48,6 +48,22 @@ gh repo delete <nome> --yes                                     # o repositório
 O repositório sai da máquina, então é privado e some no fim. `gh label list` num repositório criado
 pelo próprio setup é a condição que encerra o ramo issue.
 
+**O `gh repo delete` é o último passo, e só depois de a passada ter sido avaliada.** Metade das
+condições — os labels e o default branch — só existe enquanto o repositório existe; apagá-lo junto
+com o resto do bloco destrói a evidência antes de alguém a ler.
+
+**O agente consegue avaliar a passada sozinho, com o caminho do diretório.** O transcript da sessão
+fica em `~/.claude/projects/<caminho-com-barras-virando-hífen>/*.jsonl` — extrair com `jq`, nunca ler
+inteiro, que passa de meio megabyte:
+
+```bash
+jq -r 'select(.type=="user") | (.message.content | if type=="string" then . else (map(select(.type=="text").text)|join(" ")) end) | select(length>0)' <arquivo>.jsonl
+```
+
+A primeira linha do bloco da skill traz a versão que de fato rodou
+(`cache/aicodingflow/aicf/<versão>/skills/setup`), que é a conferência do passo 2 sem depender de
+ninguém ter olhado o cabeçalho na hora.
+
 ## O que já passou
 
 | Quando | Ramo | Versão | Resultado |
