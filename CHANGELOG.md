@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.23.1 — 2026-09-20
+
+Três correções nos templates que o `/aicf:setup` copia, achadas na primeira passada da `0.23.0` num
+diretório novo. O roteiro rodou certo; quem errava era o que ele copiava.
+
+- **A linha das coleções de skills parava de duplicar.** O template trazia
+  `nenhuma. _(Superpowers, Matt Pocock — …)_`, e o parêntese usava como exemplo exatamente os nomes
+  que substituiriam o `nenhuma` ao lado: detectadas as duas coleções, o `CLAUDE.md` nascia com
+  `Superpowers, Matt Pocock. _(Superpowers, Matt Pocock — …)_`. O valor virou placeholder e o
+  parêntese deixou de citar nomes.
+- **O template deixa de mandar `develop` num repositório que nasceu com `main`.** O `git init` que a
+  `0.23.0` introduziu cria uma branch só, e o `CLAUDE.md` gerado descrevia um fluxo de duas. Passa a
+  descrever `main` como única branch, com a linha que diz o que ajustar para ter outra coisa. O
+  sintoma só existe desde a `0.23.0` — antes não havia repositório para contradizer.
+- **O roadmap deixa de nascer com um item já feito.** `Repositório, branch de trabalho e CI mínimo`
+  virou `Repositório no GitHub e CI mínimo`: o repositório local o setup acabou de criar, e o remoto
+  é justamente o que ele não cria no modo arquivo.
+
 ## 0.23.0 — 2026-09-20
 
 - **O `/aicf:setup` passa a inicializar o repositório git.** Antes ele montava a governança inteira

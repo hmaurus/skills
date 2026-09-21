@@ -26,7 +26,7 @@ Duas camadas: a **governança** registra o que será feito e o que foi feito, e 
 
 **O mapa do workflow está na skill `/aicf:workflow-demanda`** — ciclo, caminhos de cada fase e nomenclatura; invocar ao começar ou registrar uma demanda. **O fechamento — relatório e ritual — está em `/aicf:fechar-demanda`**, que o agente aplica ao concluir qualquer demanda, por qualquer caminho.
 
-**Coleções de skills de workflow instaladas:** nenhuma. _(Superpowers, Matt Pocock — são os caminhos que o `implementar-spec` pode oferecer além do aicf.)_
+**Coleções de skills de workflow instaladas:** \<nenhuma | os nomes que o setup detectou\>. _(São os caminhos de entrevista e implementação que o `implementar-spec` pode oferecer além do aicf.)_
 
 **Mídia do registro:** \<arquivos em `docs/projeto/` | issues (GitHub) — o valor que o setup perguntou\>
 
@@ -49,6 +49,6 @@ Rodar tudo antes de dar qualquer tarefa por concluída, e colar a saída. Se um 
 
 ## Git
 
-- **`develop`** — branch de trabalho. **`main`** — produção.
+- **`main`** — única branch, que é o que o `git init` cria. Quem trabalha com branch de produção separada ajusta esta linha.
 - Commitar direto na branch de trabalho por padrão; branch + PR só para mudança grande ou a pedido.
 - O fechamento de uma demanda vai em commit próprio, separado do commit de código.

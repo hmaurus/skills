@@ -14,7 +14,7 @@ head -qn1 docs/projeto/intents/*.md docs/projeto/specs/*.md docs/projeto/conclui
 
 > Decidido, ainda sem arquivo.
 
-- [ ] Repositório, branch de trabalho e CI mínimo
+- [ ] Repositório no GitHub e CI mínimo
 - [ ] `PRD.md` preenchido
 
 ## Backlog
