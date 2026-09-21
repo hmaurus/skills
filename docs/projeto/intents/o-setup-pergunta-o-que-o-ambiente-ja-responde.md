@@ -44,12 +44,34 @@ o nome também enviesa. O roteiro não diz que a ordem das opções é parte da 
 (*"Depois, com `AskUserQuestion`, perguntar onde ficam os padrões"*), e o agente juntou as duas
 perguntas numa chamada. As duas são independentes, então juntar funcionou e economizou uma rodada.
 
+## A segunda passada confirma três dos quatro
+
+O ramo arquivo rodou no mesmo dia, na mesma `0.24.0`, num diretório chamado `app1`
+(`~/.claude/projects/-home-mh-dev-tmp-app1/*.jsonl`). Passou nas oito condições, sem defeito nos
+arquivos gerados — e repetiu os pontos **1**, **2** e **4** com outro agente e outro ramo, o que tira
+os três do território do acaso.
+
+O ponto **3** não se repetiu: a pergunta da mídia saiu com arquivo em primeiro, como o roteiro quer.
+É evidência a favor do viés do nome do diretório, e o argumento para prescrever a ordem fica mais
+fraco — não desaparece, porque projeto real também tem nome.
+
+O ponto **1** mudou de forma, e a forma nova decide a pergunta. O usuário escolheu "nenhum dos dois"
+para os padrões de engenharia, o que dispensa as duas primeiras perguntas de ferramentas pelo próprio
+roteiro. A terceira, que o roteiro manda fazer **sempre** e pede *"confirmar o que está instalado em
+vez de supor"*, não foi feita: o agente rodou `ls ~/.claude/plugins/cache/`, viu Superpowers e Matt
+Pocock, e gravou a linha certa no `CLAUDE.md`. Dois agentes, duas passadas, nenhuma das duas
+perguntou — e a detecção pelo diretório de cache é mais confiável do que a memória de quem responde.
+
 ## O que decidir na entrevista
 
 - **O setup lê o `~/.claude/CLAUDE.md` antes de perguntar?** Se sim, as três perguntas de
   ferramentas viram confirmação do que já está lá — e o roteiro precisa dizer o que fazer quando o
   global responde só uma das três. Se não, o roteiro precisa dizer por que não, porque o agente vai
   ler de novo.
+- **A pergunta das coleções vira detecção?** É o que os dois agentes fizeram, e `ls
+  ~/.claude/plugins/cache/` responde melhor que o usuário. Se ela continuar sendo pergunta, o roteiro
+  precisa dizer por que a resposta do usuário vale mais que o diretório — e, se virar detecção,
+  precisa dizer o que fazer no harness que não tem esse diretório.
 - **O passo 2 de "Ao terminar" passa a nomear a ferramenta Skill?** Ou a instrução muda de forma —
   *"invocar, não imprimir"* — para valer também em harness que só tem shell, onde `cat` é o único
   caminho e o despejo na tela é inevitável.

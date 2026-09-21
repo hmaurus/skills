@@ -70,6 +70,7 @@ ninguém ter olhado o cabeçalho na hora.
 | --- | --- | --- | --- |
 | 2026-09-20 | arquivo | `0.23.0` | **passou** — um commit, só os caminhos criados, `git init` oferecido antes da pergunta da mídia, e a pergunta da mídia feita com a opção issue dizendo o que faltava |
 | 2026-09-21 | issue | `0.24.0` | **passou** — os cinco comandos do bloco acima, num repositório que o próprio setup criou; `git ls-tree -r HEAD` traz só os quatro caminhos do setup, com `AGENTS.md` em modo `120000` |
+| 2026-09-21 | arquivo | `0.24.0` | **passou** — os oito comandos do bloco acima, num diretório vazio onde o próprio setup rodou o `git init`; `ROADMAP.md` e o par `develop`/`main`, que eram o que faltava, conferidos |
 
 **A passada de 2026-09-20 achou três defeitos que nenhuma revisão tinha achado** — todos nos
 templates, nenhum no roteiro. Viraram a `0.23.1`
@@ -77,9 +78,9 @@ templates, nenhum no roteiro. Viraram a `0.23.1`
 É o argumento para rodar a passada de verdade em vez de confiar em leitura: o `check.sh` estava
 verde, e um subagente tinha revisado o diff inteiro.
 
-**A passada de 2026-09-21 não achou defeito nos arquivos gerados** — `CLAUDE.md`, `README.md` e
-`PRD.md` batem com os templates, com a linha da mídia, a das coleções e a seção Git corretas. Achou
-três desvios do roteiro, nenhum com consequência no resultado, todos no transcript
+**A passada de 2026-09-21 no ramo issue não achou defeito nos arquivos gerados** — `CLAUDE.md`,
+`README.md` e `PRD.md` batem com os templates, com a linha da mídia, a das coleções e a seção Git
+corretas. Achou quatro desvios do roteiro, nenhum com consequência no resultado, todos no transcript
 (`~/.claude/projects/-home-mh-dev-tmp-teste-aicf-issues/*.jsonl`):
 
 1. A pergunta da mídia saiu com **issue como primeira opção**, e o roteiro marca arquivo como
@@ -89,21 +90,41 @@ três desvios do roteiro, nenhum com consequência no resultado, todos no transc
 3. As três perguntas de ferramentas saíram **juntas e já pré-respondidas** a partir do
    `~/.claude/CLAUDE.md` global, contra o "perguntar uma de cada vez, em pergunta aberta" do
    roteiro. Funcionou melhor que o roteiro: o global já respondia às três.
+4. O passo "Carregar `/aicf:workflow-demanda`" foi feito com **`cat` do `SKILL.md`**, então 167
+   linhas do mapa caíram na tela no meio da apresentação do método. A skill não tem
+   `disable-model-invocation`; invocá-la pela ferramenta Skill não imprime nada.
 
-E um achado fora da lista de condições: o passo "Carregar `/aicf:workflow-demanda`" foi feito com
-`cat` do `SKILL.md`, então 167 linhas do mapa caíram na tela no meio da apresentação do método. A
-skill não tem `disable-model-invocation`; invocá-la pela ferramenta Skill não imprime nada.
+**A passada de 2026-09-21 no ramo arquivo fechou o que faltava, e também não achou defeito nos
+arquivos gerados.** As substituições de nome e descrição estão nos quatro templates, o bloco de
+instrução do `readme.md` foi apagado, e as linhas da mídia e das coleções saíram preenchidas
+(`diff` de cada arquivo gerado contra o template do cache da `0.24.0`). A sessão inteira teve duas
+falas do usuário: a resposta em prosa a nome, descrição e `git init`, e uma chamada de
+`AskUserQuestion`. Dos quatro desvios de roteiro que o ramo issue achou, três voltaram
+(`~/.claude/projects/-home-mh-dev-tmp-app1/*.jsonl`):
+
+1. **Mídia e padrões numa chamada só de `AskUserQuestion`** — igual à passada anterior.
+2. **`cat` do `SKILL.md` do `workflow-demanda`** — as mesmas 167 linhas na tela
+   (`wc -l < skills/workflow-demanda/SKILL.md`), de novo no meio da apresentação do método.
+3. **As perguntas de ferramentas, com uma variação.** As duas primeiras o roteiro dispensa quando os
+   padrões de engenharia não vão para lugar nenhum, que foi a escolha do usuário. A terceira — a das
+   coleções, que o roteiro diz ser sempre e pede *"confirmar o que está instalado em vez de supor"* —
+   não foi feita: o agente detectou as duas coleções com `ls ~/.claude/plugins/cache/` e gravou a
+   linha certa. Ler o diretório de cache é mais confiável que perguntar, e é o argumento mais forte
+   contra essa pergunta continuar no roteiro.
+
+**O quarto não voltou:** a pergunta da mídia saiu com arquivo como primeira opção, como o roteiro
+quer. É evidência a favor da hipótese registrada na intent — o diretório da passada anterior se
+chamava `teste-aicf-issues`, e o desta se chama `app1`.
+
+Os quatro pontos estão em
+[o setup pergunta o que o ambiente já responde](../projeto/intents/o-setup-pergunta-o-que-o-ambiente-ja-responde.md).
 
 ## O que está em aberto
 
-**Falta o `ROADMAP.md`, e o lado da `develop` que só o modo arquivo tem.** A passada de 2026-09-21
-exercitou os templates da `0.23.1` — todos menos o `roadmap.md`, que no modo issue não é copiado — e
-a criação da `develop` da `0.24.0`. Mas o passo da branch de trabalho roda com um comando a menos no
-modo arquivo (`git push -u origin develop` é só no issue), e a lição deste doc é que ler o roteiro
-não substitui rodá-lo. As duas encerram na próxima passada em modo arquivo, com
-`grep -n 'Repositório' docs/projeto/ROADMAP.md` e `git branch --format='%(refname:short)'`.
+**Nenhuma condição dos dois ramos.** O bloco do modo issue rodou em 2026-09-21 e o do modo arquivo
+no mesmo dia, ambos na `0.24.0`; o `ROADMAP.md` e o par `develop`/`main`, que a passada do issue não
+alcançava, foram os últimos.
 
-O resto do bloco do modo arquivo — as quatro pastas, o `README.md` com as cinco linhas das demandas
-— está coberto: os templates que o geram não mudam desde a `0.22.0`
-(`git log --oneline v0.22.0..HEAD -- skills/setup/templates/readme.md`, vazio), e a passada de
-2026-09-20 rodou na `0.23.0`.
+O que segue aberto é o roteiro, não o resultado: a intent dos quatro pontos acima. Ela encerra com
+uma passada nova, depois de implementada — e essa passada volta a ser em modo arquivo, que é o ramo
+onde os três desvios reincidentes apareceram por último.
