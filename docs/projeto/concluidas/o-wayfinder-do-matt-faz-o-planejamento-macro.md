@@ -143,7 +143,7 @@ passo 1 da Verificação achou um **terceiro**, no parágrafo do topo dos dois R
 "Por que este" e por isso fora do alcance da revisão de código que originou esta demanda. Corrigido
 aqui ("Elas começam numa ideia já formulada" → "num pedido já recortado", e o equivalente em
 inglês): é a mesma frase e o mesmo defeito, custa uma linha, e é o lugar de maior visibilidade do
-repositório. A demanda [a primeira tela do README esconde o argumento](../specs/a-primeira-tela-do-readme-esconde-o-argumento.md)
+repositório. A demanda [a primeira tela do README esconde o argumento](../concluidas/a-primeira-tela-do-readme-esconde-o-argumento.md)
 vai reescrever esse bloco inteiro; o texto que ela propõe não repete a frase, então nada aqui será
 desfeito por ela.
 

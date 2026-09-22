@@ -61,13 +61,19 @@ das demandas —, então remedir depois de editá-lo dá um número maior, e é 
 
 **A teia de links entre demandas é um custo de migração que ninguém tinha medido.** As demandas
 deste repositório se citam: *"precede X"*, *"encolhe o arquivo que Y vai ter que"*, *"entregue na
-`0.14.0`"*. São **27 links relativos entre elas**
+`0.14.0`"*. Em `7fcb5dc` são **69 links relativos entre elas**
 (`grep -rno '\](\.\./[^)]*\.md\|\]([a-z0-9-]*\.md)' docs/projeto/intents/*.md docs/projeto/backlog/*.md docs/projeto/concluidas/*.md | wc -l`)
-mais **14 apontando de fora para dentro** — do `CHANGELOG.md`, dos ADRs e das próprias skills
+mais **13 apontando de fora para dentro** — do `CHANGELOG.md`, dos ADRs e das próprias skills
 (`grep -rn 'docs/projeto/\(intents\|specs\)' --include='*.md' CLAUDE.md README.md README.en.md CHANGELOG.md docs/adr/ skills/ | wc -l`).
-Migrar as concluídas para issue quebra os 41 de uma vez, e trocar cada um por `#<n>` é trabalho
-manual sem rede: nenhum teste acusa link de markdown morto neste repositório. O fechamento de
-2026-09-18 já reproduziu a classe do problema em pequena escala — um `git mv` quebrou três links
+Os números de 2026-09-18, 27 e 14, ficaram para trás porque a teia cresce a cada demanda: é o
+comando que vale, não o número.
+Migrar as concluídas para issue quebra os 82 de uma vez, e trocar cada um por `#<n>` é trabalho
+manual. A rede existe desde a
+[nenhum-teste-acusa-link-morto](../concluidas/nenhum-teste-acusa-link-morto.md): o
+`./scripts/check.sh` confere link relativo de markdown que aponta para arquivo inexistente, e
+imprime `N links conferidos, 0 quebrados`. Ela acusa o que quebrou, não reescreve o que sobrou.
+
+O fechamento de 2026-09-18 já reproduziu a classe do problema em pequena escala — um `git mv` quebrou três links
 e eles só foram achados porque o passo 2 do ritual manda procurá-los. Isso pesa a favor de
 **conviver** em vez de migrar, e a pergunta "o que acontece com `concluidas/`" passa a ter
 um custo escrito em vez de uma intuição.

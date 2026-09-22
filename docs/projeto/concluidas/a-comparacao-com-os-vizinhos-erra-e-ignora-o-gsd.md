@@ -124,7 +124,7 @@ commit de fechamento.
 - `CLAUDE.md` — o parêntese da regra sobre ferramenta de terceiro, e (no fechamento) a oração que
   diz que o comando se roda, não só se cita.
 - `CHANGELOG.md` e `.claude-plugin/plugin.json` — entrada `0.21.0` e bump, no commit de código.
-- `docs/projeto/specs/a-primeira-tela-do-readme-esconde-o-argumento.md` e
+- `docs/projeto/concluidas/a-primeira-tela-do-readme-esconde-o-argumento.md` e
   `docs/referencias/governanca-nos-frameworks-vizinhos.md` — o link para esta demanda passa a
   apontar para `concluidas/`.
 
@@ -198,6 +198,6 @@ Nenhum ADR, skill, regra ou doc de referência novo: o [ADR 0001](../../adr/0001
 já sustentava o argumento do parágrafo sobre GSD e BMAD, e a pesquisa em `docs/referencias/` já
 existia.
 
-**Demanda desbloqueada** — [a primeira tela do README esconde o argumento](../specs/a-primeira-tela-do-readme-esconde-o-argumento.md),
+**Demanda desbloqueada** — [a primeira tela do README esconde o argumento](../concluidas/a-primeira-tela-do-readme-esconde-o-argumento.md),
 que declarava rodar depois desta. Ela cita `grep -n '^## O problema' README.md` → linha 43, e a
 linha continua 43 depois desta demanda; as linhas 5 a 9 que ela reescreve não foram tocadas aqui.

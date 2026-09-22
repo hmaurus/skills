@@ -1,3 +1,16 @@
+<!--
+  Hero do README.md e do README.en.md. Renderiza no GitHub, que sanitiza SVG:
+  sem elemento de script, sem HTML embutido, sem folha de estilo ou fonte
+  importada — só system-ui.
+  O fundo próprio (o retângulo de 1200x400) existe para o desenho ler igual no
+  tema claro e no escuro; sem ele o texto some num dos dois.
+  A única URL do arquivo é o namespace do W3C no atributo xmlns, que o navegador
+  exige para desenhar um SVG; tirá-lo não deixa o arquivo "sem recurso externo",
+  deixa a imagem em branco.
+  Conferir depois de editar, com os dois comandos do CHANGELOG da 0.25.0: o
+  primeiro devolve 0, o segundo só o xmlns. Este comentário não pode soletrar os
+  tokens que o primeiro procura, ou ele acusa a si mesmo.
+-->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" width="1200" height="400" role="img" aria-labelledby="titulo descricao">
   <title id="titulo">A camada de governança do aicf sobre os caminhos de implementação</title>
   <desc id="descricao">Uma faixa larga chamada Governança — PRD, roadmap, demanda, fechamento — apoiada em três caixas lado a lado: aicf, Superpowers e Matt Pocock. Cada caixa liga-se à faixa por uma linha. Abaixo delas, a legenda: entrevista e implementação, por qualquer caminho.</desc>
