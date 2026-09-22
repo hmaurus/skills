@@ -2,11 +2,15 @@
 
 _[Versão em português](README.md)_
 
-Twenty well-written specs do not tell you where the project stands.
+![The aicf governance layer sitting above the implementation paths](docs/assets/hero.svg)
 
-Engineering skill collections handle one work item at a time, and handle it well: they interrogate the idea, write the spec, break it into tasks, execute with discipline. They start from a request that is already bounded and stop at the commit. What falls outside is the level above — the document stating what you are building and for whom, the place where a raw idea waits its turn, and the record of what actually shipped.
+Superpowers, Matt Pocock, spec-kit: they handle **one work item at a time**, and handle it well. Three questions none of them answers:
 
-`aicf` is that layer. It sets up the project's documents and takes each work item from the idea to the report of what was done. It works on its own, and it works on top of the collections you already use.
+- **Where does the project stand?** Specs describe each change, one by one. None of them says what the product is, who it serves, and what was ruled out by decision.
+- **Why did we decide against that?** The reason for turning down an approach stayed in the conversation with the agent, and the conversation is not saved. Where a record does survive, it belongs to the effort that was open, not to the product — weeks later the same argument comes back.
+- **What actually shipped?** The spec and the plan were written before execution, and neither of them is updated with what changed along the way.
+
+`aicf` is the layer above: PRD, roadmap, versioned work item, and the report of what was done. Six skills, on top of the implementation path you already use, with nothing to swap out.
 
 > **Written in Portuguese.** The skills instruct the agent in pt-BR and the file conventions mix the playbook's terms with Portuguese names (`intents/` and `specs/` for the two states of a work item, `backlog/`, `concluidas/` for completed). The GitHub labels of the issue mode are the same words: `aicf:backlog`, `aicf:intent`, `aicf:spec`. They work fine in an English-speaking session — Claude reads the instructions and answers you in whatever language you write — but if you want the artifacts named in English, fork and translate.
 
@@ -44,23 +48,17 @@ Each work item is a versioned file in the repository, or a GitHub issue. You pic
 
 ## The problem this solves
 
-### The conversation disappears with /clear
-
-You spent half an hour with the agent deciding not to take a certain approach. You ran `/clear`. Three weeks later someone reopens the same argument, because the reason was never written down anywhere.
-
-In `aicf` the decision and the reason live in the work item, inside the repository. `/aicf:criar-spec` runs the interview and records all of it, including what was decided **against**.
-
-### Nobody knows where the project stands
-
-Specs tell each change, one by one. None of them says what the product is, who it serves, and what was ruled out by decision.
+### Where does the project stand?
 
 `/aicf:criar-prd` interviews you and writes `PRD.md`. The section that pays off most is "ruled out, by decision": it is what keeps the same argument from coming back six months later.
 
-### What actually shipped never gets written
+### Why did we decide against that?
 
-A spec and a plan say what was intended, and they were written before execution. What changed along the way only exists if someone writes it at the end.
+In `aicf` the decision and the reason live in the work item, inside the repository. `/aicf:criar-spec` runs the interview and records all of it, including what was decided **against**.
 
-`/aicf:fechar-demanda` asks for that report and keeps it with the work item. The agent applies closing on any implementation path, including the ones that are not `aicf`'s.
+### What actually shipped?
+
+`/aicf:fechar-demanda` asks for the report of what shipped and keeps it with the work item. The agent applies closing on any implementation path, including the ones that are not `aicf`'s.
 
 ## Starting a new project
 

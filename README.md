@@ -2,11 +2,15 @@
 
 _[English version](README.en.md)_
 
-Vinte specs bem escritas não respondem onde o projeto está.
+![A camada de governança do aicf sobre os caminhos de implementação](docs/assets/hero.svg)
 
-As coleções de skills de engenharia cuidam de uma demanda por vez, e cuidam bem: interrogam a ideia, escrevem a spec, quebram em tarefas, executam com disciplina. Elas começam num pedido já recortado e param no commit. Fica de fora o nível de cima — o documento que diz o que você está construindo e para quem, o lugar onde a ideia ainda crua espera a vez, e o registro do que foi entregue de verdade.
+Superpowers, Matt Pocock, spec-kit: cuidam de **uma demanda por vez**, e cuidam bem. Três perguntas nenhum deles responde:
 
-O aicf é essa camada. Ele monta a estrutura de documentos do projeto e conduz cada demanda da ideia até o relatório do que foi feito. Funciona sozinho, e funciona por cima das coleções que você já usa.
+- **Onde o projeto está?** Specs descrevem cada mudança, uma por uma. Nenhuma diz o que o produto é, para quem serve e o que ficou de fora por decisão.
+- **Por que decidimos não fazer aquilo?** O motivo de recusar um caminho ficou na conversa com o agente, e a conversa não é salva. Onde sobra registro, ele é do esforço que estava aberto, não do produto — semanas depois a mesma discussão volta.
+- **O que saiu de fato?** Spec e plano foram escritos antes de executar, e nenhum dos dois é atualizado com o que mudou no caminho.
+
+O aicf é a camada de cima: PRD, roadmap, demanda versionada e o relatório do que foi feito. Seis skills, por cima do caminho de implementação que você já usa, sem trocar nada.
 
 ## Instalação
 
@@ -42,23 +46,17 @@ Cada demanda é um arquivo versionado no repositório, ou uma issue do GitHub. V
 
 ## O problema que isso resolve
 
-### A conversa some no /clear
-
-Você passou meia hora com o agente decidindo não seguir por um caminho. Deu `/clear`. Três semanas depois alguém reabre a mesma discussão, porque o motivo não ficou escrito em lugar nenhum.
-
-No aicf a decisão e o motivo ficam na demanda, dentro do repositório. `/aicf:criar-spec` conduz a entrevista e grava tudo, inclusive o que foi decidido **não** fazer.
-
-### Ninguém sabe onde o projeto está
-
-Specs contam cada mudança, uma por uma. Nenhuma delas diz o que o produto é, para quem serve, e o que ficou de fora por decisão.
+### Onde o projeto está?
 
 `/aicf:criar-prd` entrevista você e escreve o `PRD.md`. A seção que mais se paga é "fora de escopo, por decisão": é ela que impede a mesma discussão de voltar daqui a seis meses.
 
-### O que saiu de fato não fica escrito
+### Por que decidimos não fazer aquilo?
 
-Spec e plano dizem o que se pretendia, e foram escritos antes de executar. O que mudou no caminho só existe se alguém escrever no fim.
+No aicf a decisão e o motivo ficam na demanda, dentro do repositório. `/aicf:criar-spec` conduz a entrevista e grava tudo, inclusive o que foi decidido **não** fazer.
 
-`/aicf:fechar-demanda` pede esse relatório e o guarda junto da demanda. O agente aplica o fechamento em qualquer caminho de implementação, inclusive nos que não são do aicf.
+### O que saiu de fato?
+
+`/aicf:fechar-demanda` pede o relatório do que saiu e o guarda junto da demanda. O agente aplica o fechamento em qualquer caminho de implementação, inclusive nos que não são do aicf.
 
 ## Começando um projeto novo
 

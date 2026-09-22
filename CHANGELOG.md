@@ -1,5 +1,38 @@
 # Changelog
 
+## 0.25.0 — 2026-09-22
+
+- **A primeira tela dos dois READMEs passa a carregar o argumento.** Onde havia a frase "Vinte
+  specs bem escritas não respondem onde o projeto está" e dois parágrafos de 124 palavras
+  (`git show cc28b60:README.md | sed -n 5,9p | wc -w`), entram um diagrama, uma frase com os três
+  nomes que o leitor provavelmente já usa e as três perguntas que nenhum deles responde. O
+  argumento saiu da linha 43 (`git show cc28b60:README.md | grep -n '^## O problema'`) para a
+  linha 9 (`grep -n 'Onde o projeto está?\*\*' README.md`), antes da instalação.
+- **`docs/assets/hero.svg` é desenhado à mão, não gerado.** Uma faixa "Governança" em cima, três
+  caixas — aicf, Superpowers, Matt Pocock — embaixo, e uma linha de cada uma subindo até a faixa.
+  Tem fundo próprio, para ler igual no tema claro e no escuro do GitHub, e nenhum recurso externo:
+  `grep -c '<script\|<foreignObject\|@import' docs/assets/hero.svg` devolve 0 e
+  `grep -o 'https\?://[^"]*' docs/assets/hero.svg | sort -u` devolve só
+  `http://www.w3.org/2000/svg`, o namespace que o navegador exige para desenhar o arquivo.
+- **A seção "O problema que isso resolve" caiu de 198 para 113 palavras**
+  (`awk '/^## O problema/,/^## Começando/' README.md | head -n -1 | wc -w`, contra o mesmo
+  comando em `git show cc28b60:README.md`). Cada subseção ficou só com o
+  parágrafo que diz qual skill resolve e como; o parágrafo da dor saiu, porque agora está no topo.
+  Os títulos viraram as três perguntas, na mesma ordem dos bullets
+  (`grep -n '^### ' README.md | sed -n 1,3p`).
+- **Dois bullets do topo saíram mais apertados do que a spec os escrevera, e pelo motivo de
+  sempre.** O rascunho dizia que o motivo de uma recusa "não fica escrito em lugar nenhum" e que o
+  que mudou no caminho "só fica registrado se alguém escrever no fim" — as duas frases erram sobre
+  ferramenta de terceiro. O `triage` do Matt grava `.out-of-scope/<conceito>.md`, "Institutional
+  memory: why a feature was rejected" (`sed -n 1,6p $R/skills/skills/engineering/triage/OUT-OF-SCOPE.md`),
+  e o `converge` do spec-kit acrescenta as lacunas em `tasks.md` sozinho. O que os três de fato não
+  têm é registro **por produto**, e spec e plano não são atualizados por ninguém — o `converge` tem
+  escrito que não pode tocar neles: "MUST NOT: modify `spec.md` or `plan.md` in any way"
+  (`grep -n 'modify .spec.md. or .plan.md.' $R/spec-kit/templates/commands/converge.md`). Os três
+  repositórios foram clonados nos shas de
+  [governanca-nos-frameworks-vizinhos.md](docs/referencias/governanca-nos-frameworks-vizinhos.md)
+  e os comandos rodados antes de as frases entrarem no arquivo.
+
 ## 0.24.0 — 2026-09-21
 
 - **O `/aicf:setup` entrega as duas branches.** O primeiro commit cai em `main`, e o último passo
