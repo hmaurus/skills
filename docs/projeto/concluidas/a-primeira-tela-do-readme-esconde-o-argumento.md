@@ -102,14 +102,17 @@ que o aicf faz, e que ele não precisa trocar nada para usar.
 
 ## Relatório de implementação (2026-09-22)
 
-**Status** — concluído no código, com duas condições em aberto, ambas com o usuário:
+**Status** — concluído. Em 2026-09-23 as duas condições que dependiam do usuário fecharam:
 
-- **Verificação 5** (abrir o repositório no GitHub nos dois temas) só roda depois do push. O
-  equivalente local rodou: o `hero.svg` foi renderizado por Chrome headless sobre `#ffffff` e sobre
-  `#0d1117`, e lê igual nos dois — o fundo próprio faz o trabalho. Encerra quando o usuário abrir a
-  página no GitHub e disser que a imagem e o texto dela se leem.
-- **Fora de escopo, "Imagem gerada por IA como banner"** — encerra quando o usuário disser se o SVG
-  basta. Não bastando, vira demanda nova.
+- **Verificação 5** (abrir o repositório no GitHub nos dois temas): o usuário confirmou que a
+  imagem e o texto dela se leem nos dois. Antes do push, o equivalente local já tinha rodado: o
+  `hero.svg` renderizado por Chrome headless sobre `#ffffff` e sobre `#0d1117`, lendo igual nos
+  dois por causa do fundo próprio.
+- **Fora de escopo, "Imagem gerada por IA como banner"**: o SVG não bastou, e virou demanda nova,
+  como esta previa. A demanda foi
+  [a abertura do README não tem marca](a-abertura-do-readme-nao-tem-marca.md), entregue na `0.27.0`.
+  Nela o banner gerado por IA entrou **acima** do título e o `hero.svg` desceu para a seção "O
+  problema que isso resolve" — os dois ficaram, em lugares diferentes.
 
 **Arquivos alterados**
 

@@ -119,9 +119,9 @@ travessão, que nenhum dos três usa, e mistura o nome do comando com a descriç
 
 ## Relatório de implementação (2026-09-23)
 
-**Status** — concluído no código, com a Verificação 10 (abrir o GitHub nos dois temas) pendente do
-push. O equivalente local rodou: o banner foi renderizado por Chrome headless sobre `#ffffff` e
-sobre `#0d1117`, e lê igual nos dois. O usuário viu o preview e autorizou a publicação.
+**Status** — concluído. A Verificação 10 (abrir o GitHub nos dois temas) fechou em 2026-09-23: o
+usuário abriu a página publicada e confirmou. Antes do push, o equivalente local já tinha rodado,
+com o banner renderizado por Chrome headless sobre `#ffffff` e sobre `#0d1117`.
 
 **Arquivos alterados**
 
