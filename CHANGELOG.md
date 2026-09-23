@@ -1,5 +1,34 @@
 # Changelog
 
+## 0.27.0 — 2026-09-23
+
+- **Os dois READMEs abrem com um banner da marca.** `docs/assets/banner.png` e `banner.en.png`, de
+  1200×190, com o logo do AI Coding Flow, o nome e uma linha de descrição. O fundo escuro é próprio,
+  então a faixa lê igual no tema claro e no escuro do GitHub, sem precisar de duas versões por tema.
+  É o mesmo caminho do [openspec](https://github.com/Fission-AI/OpenSpec) (1128×191) e do
+  [task-master](https://github.com/eyaltoledano/claude-task-master) (800×201); o
+  [Matt Pocock](https://github.com/mattpocock/skills) usa duas versões por `prefers-color-scheme`,
+  que aqui não foi preciso.
+- **O fundo foi gerado por IA e o logo e o texto entraram por cima.** Gerador de imagem não
+  reproduz logo fiel nem tipografia legível, então a IA fez só a textura e a onda laranja; o PNG
+  oficial do logo e as duas linhas de texto foram compostos com ImageMagick. A cor `#F95C28` saiu do
+  próprio logo
+  (`convert logo.png -resize 50x50! -colors 5 -format %c histogram:info: | sort -rn | head -2`).
+- **O título perdeu o travessão e passou a ser `# AI Coding Flow Skills`** nos dois arquivos
+  (`grep -c '^# .*—' README.md README.en.md` devolve 0). Nenhum dos três repositórios de referência
+  usa travessão no título. A string `aicf` continua visível na seção de instalação e em todos os
+  nomes de comando.
+- **O diagrama das camadas desceu para a seção "O problema que isso resolve"**, onde ilustra as três
+  perguntas que abrem a seção. A primeira tela ficou com uma imagem só, e o argumento continua
+  começando acima da dobra
+  (`sed -n '1,/^## Instalação/p' README.md | grep -c hero` devolve 0).
+- **O `hero.svg` ganhou versão em inglês**, `docs/assets/hero.en.svg`, usada pelo `README.en.md`:
+  `grep -c 'Governança' docs/assets/hero.en.svg` devolve 0 e `grep -c 'Governance'` devolve 2.
+- **Os PNG ficaram em 109 KB e 111 KB** (`wc -c < docs/assets/banner.png`), depois do `pngquant`. A
+  quantização do ImageMagick com 192 cores chegava a 56 KB mas fazia banding visível no gradiente
+  escuro.
+- `.tmp/` entrou no `.gitignore`, porque é onde a skill de geração de imagem trabalha.
+
 ## 0.26.0 — 2026-09-23
 
 Reescrita da prosa dos dois READMEs. Nada mudou nas skills, nos comandos ou na estrutura de seções

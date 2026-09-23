@@ -1,8 +1,8 @@
-# aicf — governança de projeto para desenvolver com agentes
+![AI Coding Flow — Skills em português para engenharia de software com IA](docs/assets/banner.png)
+
+# AI Coding Flow Skills
 
 _[English version](README.en.md)_
-
-![A camada de governança do aicf sobre os caminhos de implementação](docs/assets/hero.svg)
 
 O aicf é um plugin de skills para Claude Code que cuida da governança do projeto: o PRD, o roadmap, o registro de cada demanda e o relatório do que foi entregue. São seis skills, e elas funcionam por cima do caminho de implementação que você já usa.
 
@@ -45,6 +45,8 @@ flowchart LR
 Cada demanda é um arquivo versionado no repositório, ou uma issue do GitHub. Você escolhe qual no setup.
 
 ## O problema que isso resolve
+
+![A camada de governança do aicf sobre os caminhos de implementação](docs/assets/hero.svg)
 
 ### Onde o projeto está?
 
