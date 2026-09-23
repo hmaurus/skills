@@ -2,7 +2,7 @@
 
 Processo — entrevista: criar-spec · implementação: aicf-direto
 
-**Roda antes de** [a abertura do README não tem marca](../specs/a-abertura-do-readme-nao-tem-marca.md), que
+**Roda antes de** [a abertura do README não tem marca](../concluidas/a-abertura-do-readme-nao-tem-marca.md), que
 acrescenta banner e move o `hero.svg`. As duas mexem nos mesmos dois arquivos, e fazer o banner
 primeiro obrigaria a refazer o ajuste de texto depois.
 
@@ -67,7 +67,7 @@ implementação aparece pelo menos quatro vezes, com formulações diferentes
 - **O `CLAUDE.md` e o texto das skills.** Têm o mesmo estilo, mas o leitor é um agente, e densidade
   ali pode ser proposital. Fica para uma demanda própria, se o usuário quiser.
 - **Mudar o título, acrescentar banner ou mover o `hero.svg`.** É a demanda
-  [a abertura do README não tem marca](../specs/a-abertura-do-readme-nao-tem-marca.md), que roda depois.
+  [a abertura do README não tem marca](../concluidas/a-abertura-do-readme-nao-tem-marca.md), que roda depois.
 - **Traduzir o `hero.svg`.** Também da demanda seguinte.
 - **Mudar a estrutura de seções.** A ordem das seções `## ` está boa, segundo o usuário. Só o que
   está dentro delas muda.
@@ -139,7 +139,7 @@ do usuário, que é o leitor do arquivo.
 
 - **A entrevista começou por outra demanda.** A sessão estava entrevistando o banner do README
   quando o usuário mandou a crítica de estilo. O banner virou a spec
-  [a abertura do README não tem marca](../specs/a-abertura-do-readme-nao-tem-marca.md), que roda depois
+  [a abertura do README não tem marca](../concluidas/a-abertura-do-readme-nao-tem-marca.md), que roda depois
   desta, e esta demanda nasceu da crítica.
 - **A calibragem de tom virou passo da entrevista.** Em vez de reescrever 176 linhas e descobrir no
   fim que o tom estava errado, a seção "Por que este, e não o Superpowers..." foi reescrita primeiro
