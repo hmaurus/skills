@@ -1,5 +1,32 @@
 # Changelog
 
+## 0.26.0 — 2026-09-23
+
+Reescrita da prosa dos dois READMEs. Nada mudou nas skills, nos comandos ou na estrutura de seções
+(`diff <(grep '^## ' README.md) <(git show v0.25.0:README.md | grep '^## ')` não mostra diferença).
+
+- **O estilo elaborado saiu.** O usuário apontou que o texto tentava soar inteligente e por isso
+  parecia gerado por IA. Saíram as frases de efeito ("Porque não é a mesma pergunta"), as metáforas
+  ("o plano vive na sessão e morre com ela"), as palavras abstratas no lugar da descrição ("elas
+  param no esforço"), o "não é X, é Y" e as conclusões dramáticas de fim de parágrafo ("não sobra
+  índice para envelhecer"). Conferir:
+  `grep -cF 'param no esforço' README.md` e os outros trechos, todos em 0.
+- **O travessão de aparte zerou nos dois arquivos**, de 18 no `README.md` e 20 no `README.en.md`
+  (`grep -v '^- \|^<summary\|^# \|^|' README.md | grep -o '—' | wc -l`, contra o mesmo comando em
+  `git show v0.25.0:README.md`). Os travessões que sobram separam termo e definição em item de
+  lista, que é convenção de markdown.
+- **A tese deixou de ser repetida.** "O aicf é a camada de governança acima dos métodos de
+  implementação" aparecia quatro vezes com formulações diferentes, e agora aparece uma:
+  `grep -c 'camada' README.md` devolve 1, e `grep -c 'layer' README.en.md` também.
+- **Parágrafo com quatro ideias virou três parágrafos.** O passo 1 de "Começando um projeto novo"
+  é o caso maior. O texto encolheu 8% em palavras, de 2336 para 2152 no `README.md` e de 2468 para
+  2224 no `README.en.md` (`wc -w`), e cresceu em linhas, porque as frases se separaram.
+- **Duas listas em prosa viraram tabela.** A comparação entre modo arquivo e modo issue estava
+  escrita como "Arquivo: a, b, c. Issue: d, e, f", e agora é uma tabela de seis linhas.
+- **Nenhum fato técnico saiu.** Continuam no arquivo o `.out-of-scope/` do Matt Pocock, o
+  `wayfinder`, os 72 comandos `/gsd-*` do GSD Core, o `uv` obrigatório do BMAD, as quatro opções de
+  tracker do setup do Matt e o link do [ADR 0001](docs/adr/0001-fronteira-de-fase.md).
+
 ## 0.25.0 — 2026-09-22
 
 - **A primeira tela dos dois READMEs passa a carregar o argumento.** Onde havia a frase "Vinte
