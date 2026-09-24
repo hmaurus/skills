@@ -181,9 +181,10 @@ perguntar o que o ambiente responde é rodada gasta. Três fontes, uma por pergu
 
 **O que a detecção achou, declarar numa linha e seguir, sem perguntar** — *"Achei Bitwarden e
 Context7 no seu global, e Superpowers e Matt Pocock habilitados; vou registrar assim."* **A linha
-vai no texto que acompanha a pergunta da mídia**, antes de qualquer arquivo existir: a detecção roda
-antes dela, e é essa posição que deixa o usuário corrigir. Aparecer só no resumo final, depois do
-commit, é o mesmo que não declarar.
+abre o enunciado (`question`) da pergunta da mídia no `AskUserQuestion`**, antes da pergunta em si —
+não num texto solto antes da chamada, que o agente pula. A detecção roda antes dela, e é essa
+posição que deixa o usuário corrigir antes de qualquer arquivo existir. Aparecer só no resumo
+final, depois do commit, é o mesmo que não declarar.
 
 **O que não achou, explicar em uma frase e sugerir, numa pergunta só com os itens que faltaram** —
 Bitwarden (CLI `bw`, plano gratuito generoso) para senhas, Context7 para docs, Superpowers e Matt

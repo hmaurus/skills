@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.29.1 — 2026-09-24
+
+- **O que a detecção achou abre o enunciado da pergunta da mídia**, dentro do `AskUserQuestion`, em
+  vez de ir num texto antes dela. Duas passadas seguidas (`0.28.0` em `app2`, `0.29.0` em `app3`)
+  detectaram certo e chamaram a pergunta sem escrever nada antes, e a linha só apareceu no resumo
+  final, depois do commit — a segunda com o roteiro já dizendo onde ela ia. Na mesma passada da
+  `0.29.0` o agente pôs sozinho no enunciado da pergunta dos padrões o que tinha lido do global: o
+  enunciado é campo obrigatório da ferramenta, e o agente o preenche.
+
 ## 0.29.0 — 2026-09-24
 
 - **A pergunta dos padrões de engenharia passa a falar do que já existe.** "Nenhum dos dois" parecia
