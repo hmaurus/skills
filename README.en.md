@@ -66,7 +66,7 @@ Each work item is a versioned file in the repository, or a GitHub issue. You pic
 
 **1. `/aicf:setup`.** Sets up the base: `PRD.md`, the place where work items will live, and the root `CLAUDE.md`, the file the agent reads at the start of every session.
 
-It asks for the project name, a sentence or two about it, whether a work item lives in a file or an issue, where the engineering defaults live, and which tools you already use. If the directory is not a git repository yet, it offers `git init` before asking where work items live. At the end it leaves what it created in a first commit on `main` and hands you `develop`, the working branch.
+It asks for the project name, a sentence or two about it, whether a work item lives in a file or an issue, and what to do with the engineering defaults. The tools you already use (password manager, library docs, skill collections) it looks up on your machine, and only asks about what it cannot find. If the directory is not a git repository yet, it offers `git init` before asking where work items live. At the end it leaves what it created in a first commit on `main` and hands you `develop`, the working branch.
 
 **2. Fill in `PRD.md`.** It ships with the sections and a prompt under each. `/aicf:criar-prd` interviews you section by section and writes the file, starting from the problem rather than the solution.
 

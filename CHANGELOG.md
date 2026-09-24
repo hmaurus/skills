@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.29.0 — 2026-09-24
+
+- **A pergunta dos padrões de engenharia passa a falar do que já existe.** "Nenhum dos dois" parecia
+  remover o padrão do projeto para quem já tinha o global pronto. Agora o setup lê o
+  `~/.claude/CLAUDE.md` antes e oferece duas formas da pergunta. Com global que já tem padrões:
+  **Manter o global como está** (default), **Completar o global** e **Acrescentar no projeto** — este
+  último cola só as seções que o global não tem. Sem global: **No global**, **No projeto** e **Não
+  usar**. Decidido que "Acrescentar no projeto" soma ao global em vez de copiar tudo: serve a quem
+  trabalha sozinho, e o roteiro avisa em uma linha que equipe copia o resto à mão, porque o global
+  não viaja no `git clone`.
+- **O que a detecção achou é anunciado junto da pergunta da mídia**, antes de qualquer arquivo
+  existir. Na passada da `0.28.0` (`~/.claude/projects/-home-mh-dev-tmp-app2/*.jsonl`) o agente
+  detectou certo e não perguntou, mas as coleções só apareceram no resumo final, depois do commit —
+  tarde para o usuário corrigir.
+- Os dois READMEs dizem que o setup procura as ferramentas na máquina em vez de perguntar.
+
 ## 0.28.0 — 2026-09-23
 
 - **O `/aicf:setup` detecta as ferramentas antes de perguntar.** Cofre de senhas e fonte de docs saem

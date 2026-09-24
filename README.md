@@ -64,7 +64,7 @@ Cada demanda é um arquivo versionado no repositório, ou uma issue do GitHub. V
 
 **1. `/aicf:setup`.** Monta a base: o `PRD.md`, o lugar onde as demandas vão morar e o `CLAUDE.md` da raiz, que é o arquivo que o agente lê no início de toda sessão.
 
-Ele pergunta o nome do projeto, uma ou duas frases sobre ele, se a demanda vive em arquivo ou em issue, onde ficam os padrões de engenharia e quais ferramentas você já usa. Se o diretório ainda não for um repositório git, ele oferece o `git init` antes da pergunta sobre onde as demandas moram. No fim, deixa o que criou no primeiro commit em `main` e te entrega em `develop`, a branch de trabalho.
+Ele pergunta o nome do projeto, uma ou duas frases sobre ele, se a demanda vive em arquivo ou em issue e o que fazer com os padrões de engenharia. As ferramentas que você já usa (gerenciador de senhas, documentação de bibliotecas, coleções de skills) ele procura na máquina e só pergunta pelo que não encontrar. Se o diretório ainda não for um repositório git, ele oferece o `git init` antes da pergunta sobre onde as demandas moram. No fim, deixa o que criou no primeiro commit em `main` e te entrega em `develop`, a branch de trabalho.
 
 **2. Preencher o `PRD.md`.** Ele nasce com as seções e uma pergunta em cada uma. `/aicf:criar-prd` entrevista seção por seção e escreve o arquivo, começando pelo problema em vez da solução.
 
