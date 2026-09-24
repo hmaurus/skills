@@ -3,8 +3,9 @@
 ## 0.28.0 — 2026-09-23
 
 - **O `/aicf:setup` detecta as ferramentas antes de perguntar.** Cofre de senhas e fonte de docs saem
-  do `~/.claude/CLAUDE.md`; coleções e Context7, de `claude plugin list --json` filtrado pelo que está
-  habilitado no diretório. O que achou, o agente declara numa linha e segue; o que não achou, explica
+  do `~/.claude/CLAUDE.md`; o Context7 também de `claude mcp list`, que o mostra como plugin ou como
+  servidor MCP direto; as coleções, de `claude plugin list --json` filtrado pelo que está habilitado
+  no diretório. Ter o binário `bw` na máquina não conta como cofre declarado. O que achou, o agente declara numa linha e segue; o que não achou, explica
   e sugere (Bitwarden, Context7, Superpowers, Matt Pocock), aceitando "nenhum". Sem o CLI `claude`,
   volta a perguntar. Nas duas passadas de verificação da `0.24.0` os agentes já faziam isso por conta
   própria, contrariando o roteiro — mas liam `~/.claude/plugins/cache/`, que guarda plugin

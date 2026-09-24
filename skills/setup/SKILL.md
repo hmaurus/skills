@@ -148,11 +148,14 @@ caminhos de entrevista e implementação que `/aicf:workflow-demanda` oferece mu
 caminho aicf existe, e propor `brainstorming` seria propor algo que não roda.
 
 **Detectar antes de perguntar.** Quem já usa o método costuma ter as três respostas na máquina, e
-perguntar o que o ambiente responde é rodada gasta. Duas fontes:
+perguntar o que o ambiente responde é rodada gasta. Três fontes, uma por pergunta:
 
-- o `~/.claude/CLAUDE.md`, onde cofre e fonte de docs aparecem declarados em prosa;
-- os plugins habilitados **neste diretório** — Superpowers (`superpowers@…`), Matt Pocock
-  (`mattpocock-skills@…`) e Context7 (`context7@…`) aparecem pelo id:
+- **cofre** — o `~/.claude/CLAUDE.md`, onde ele aparece declarado em prosa. Ter o binário `bw` ou
+  `op` na máquina não conta: não diz que é o cofre que o usuário usa;
+- **fonte de docs** — o global, ou `claude mcp list`, que mostra o Context7 tanto instalado como
+  plugin (`plugin:context7:context7`) quanto configurado direto como servidor MCP;
+- **coleções** — os plugins habilitados **neste diretório**; Superpowers e Matt Pocock aparecem
+  pelo id (`superpowers@…`, `mattpocock-skills@…`):
 
   ```bash
   claude plugin list --json | jq -r --arg d "$PWD" \
@@ -167,14 +170,14 @@ perguntar o que o ambiente responde é rodada gasta. Duas fontes:
 Context7 no seu global, e Superpowers e Matt Pocock habilitados; vou registrar assim."* A
 declaração é o que deixa o usuário corrigir antes do commit; pular a pergunta em silêncio não vale.
 
-**O que não achou, explicar em uma frase e sugerir** — Bitwarden (CLI `bw`, plano gratuito
-generoso) para senhas, Context7 para docs, Superpowers e Matt Pocock para coleções — e aceitar
-"nenhum" como resposta: quem está começando não tem nada disso, e insistir transforma o setup em
+**O que não achou, explicar em uma frase e sugerir, numa pergunta só com os itens que faltaram** —
+Bitwarden (CLI `bw`, plano gratuito generoso) para senhas, Context7 para docs, Superpowers e Matt
+Pocock para coleções — e aceitar "nenhum" como resposta: quem está começando não tem nada disso, e insistir transforma o setup em
 venda de stack. **Coleção se sugere, não se instala:** plugin instalado no meio da sessão só carrega
 na próxima, e a linha do `CLAUDE.md` registra o que estava habilitado agora.
 
-**Sem o CLI `claude`** — outro harness, lendo pelo `AGENTS.md` —, a detecção de plugin não existe:
-perguntar o que o global não respondeu, uma pergunta aberta por ferramenta.
+**Sem o CLI `claude`** — outro harness, lendo pelo `AGENTS.md` —, a detecção pelo CLI não existe:
+perguntar o que o global não respondeu, do mesmo jeito.
 
 Registrar as respostas onde elas já têm lugar: as duas primeiras nas seções de segurança e de
 dependências dos padrões de engenharia (abaixo); a terceira, na linha "Coleções de skills de
