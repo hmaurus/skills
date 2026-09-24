@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.28.0 — 2026-09-23
+
+- **O `/aicf:setup` detecta as ferramentas antes de perguntar.** Cofre de senhas e fonte de docs saem
+  do `~/.claude/CLAUDE.md`; coleções e Context7, de `claude plugin list --json` filtrado pelo que está
+  habilitado no diretório. O que achou, o agente declara numa linha e segue; o que não achou, explica
+  e sugere (Bitwarden, Context7, Superpowers, Matt Pocock), aceitando "nenhum". Sem o CLI `claude`,
+  volta a perguntar. Nas duas passadas de verificação da `0.24.0` os agentes já faziam isso por conta
+  própria, contrariando o roteiro — mas liam `~/.claude/plugins/cache/`, que guarda plugin
+  desabilitado; o filtro de escopo existe porque, sem ele, o Superpowers aparecia cinco vezes na
+  máquina onde isto foi escrito, quatro de escopo `project` em outros diretórios
+  (`claude plugin list --json | jq -r '.[] | select(.enabled) | .id' | grep -c '^superpowers@'`).
+- **O mapa do método não cai mais na tela no fim do setup.** O passo 2 de "Ao terminar" manda invocar
+  `/aicf:workflow-demanda` pela ferramenta Skill e proíbe `cat`/`Read` do `SKILL.md`, que nas duas
+  passadas despejou 167 linhas (`git show 7fcb5dc:skills/workflow-demanda/SKILL.md | wc -l`).
+- **O default da mídia vai primeiro na lista do `AskUserQuestion`** — arquivo, salvo tracker do Matt
+  apontando para o GitHub. Numa das passadas, num diretório `teste-aicf-issues`, issues saiu primeiro.
+- **Mídia e padrões de engenharia podem ir na mesma chamada de `AskUserQuestion`**, a critério do
+  agente; o roteiro descrevia duas.
+
 ## 0.27.0 — 2026-09-23
 
 - **Os dois READMEs abrem com um banner da marca.** `docs/assets/banner.png` e `banner.en.png`, de

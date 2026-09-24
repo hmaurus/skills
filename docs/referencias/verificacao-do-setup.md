@@ -148,6 +148,23 @@ Os quatro pontos estão em
 no mesmo dia, ambos na `0.24.0`; o `ROADMAP.md` e o par `develop`/`main`, que a passada do issue não
 alcançava, foram os últimos.
 
-O que segue aberto é o roteiro, não o resultado: a intent dos quatro pontos acima. Ela encerra com
-uma passada nova, depois de implementada — e essa passada volta a ser em modo arquivo, que é o ramo
-onde os três desvios reincidentes apareceram por último.
+**A passada da `0.28.0`, no ramo arquivo.** A [spec dos quatro pontos](../projeto/specs/o-setup-pergunta-o-que-o-ambiente-ja-responde.md)
+foi implementada, e o comportamento novo ainda não rodou. Numa máquina com cofre e fonte de docs
+declarados no global e Superpowers e Matt Pocock habilitados, escolhendo "No global" para os
+padrões, além das condições do modo arquivo acima:
+
+```bash
+jq -r 'select(.type=="assistant") | .message.content[]? | select(.type=="tool_use")
+  | "\(.name) \(.input | tostring | .[0:160])"' <arquivo>.jsonl \
+  | grep -E 'workflow-demanda|plugin|AskUserQuestion'
+```
+
+1. **Nenhuma pergunta de ferramenta** — o agente declara numa linha o que achou e segue (ler as falas
+   com o `jq` da seção anterior).
+2. **Coleções por `claude plugin list`**, sem `ls ~/.claude/plugins/cache/`.
+3. **`Skill` com `aicf:workflow-demanda`**, e nenhum `cat` ou `Read` do `SKILL.md` dele.
+4. **A pergunta da mídia com *arquivos* como primeira opção** — é a primeira `label` do
+   `AskUserQuestion`.
+
+Na passada da `0.24.0` o mesmo comando mostra o `ls` do cache e o `cat` do `SKILL.md` — é o que ele
+flagra.

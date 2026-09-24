@@ -91,6 +91,11 @@ pergunta — onde o trabalho mora. Ler e propor o default a partir dele ("o trac
 para GitHub; usar issues aqui também?") em vez de perguntar do zero. As duas configs seguem
 independentes: divergir é legítimo, e a do aicf é a linha do `CLAUDE.md`.
 
+**O default vai primeiro na lista**, porque o `AskUserQuestion` apresenta a primeira opção como a
+sugerida. É arquivo, sempre — o nome do diretório não muda isso, nem um `-issues` no fim dele. A
+única exceção é o tracker do Matt apontar para o GitHub: aí o default proposto é issues, e issues
+vai primeiro.
+
 **Respondida a pergunta, resolver o login, se ele faltava.** `gh auth login` é **conduzido, não
 executado**: mostrar o comando, pedir que o usuário rode (pelo `!` da própria sessão) e reconferir
 com `gh auth status` antes de seguir. Existe caminho não interativo — `gh auth login --with-token`
@@ -111,8 +116,10 @@ não um valor a ser deixado implícito em projeto novo. As receitas estão em
 [`midia-arquivo.md`](../workflow-demanda/references/midia-arquivo.md) e
 [`midia-issues.md`](../workflow-demanda/references/midia-issues.md).
 
-Depois, com `AskUserQuestion`, perguntar **onde ficam os padrões de engenharia** (idioma,
-KISS/YAGNI, validação antes do commit, testes, acessibilidade, tratamento de credencial):
+Perguntar também **onde ficam os padrões de engenharia** (idioma, KISS/YAGNI, validação antes do
+commit, testes, acessibilidade, tratamento de credencial). Pode ir na mesma chamada de
+`AskUserQuestion` que a mídia, a critério do agente — nenhuma das duas respostas muda a outra, e o
+login do `gh` funciona igual depois das duas:
 
 - **No global** (`~/.claude/CLAUDE.md`) — valem para todos os projetos da máquina. Escolha
   natural para quem trabalha sozinho em vários repositórios com o mesmo padrão.
@@ -122,28 +129,52 @@ KISS/YAGNI, validação antes do commit, testes, acessibilidade, tratamento de c
 
 ## Ferramentas que o usuário já usa
 
-Até três perguntas, porque as três mudam o comportamento do agente daqui para a frente. **As duas
-primeiras só acontecem se os padrões de engenharia vão para algum lugar** — global ou projeto —,
-porque é lá que as respostas moram; quem escolheu "nenhum dos dois" já tem os seus. A terceira é
-sempre. Perguntar uma de cada vez, em pergunta aberta, e aceitar "nenhuma" como resposta — quem
-está começando não tem nada disso, e insistir transforma o setup em venda de stack.
+Três ferramentas mudam o comportamento do agente daqui para a frente. **As duas primeiras só
+importam se os padrões de engenharia vão para algum lugar** — global ou projeto —, porque é lá que
+as respostas moram; quem escolheu "nenhum dos dois" já tem os seus. A terceira é sempre.
 
 **1. Gerenciador de senhas.** Onde mora a credencial que não cabe no `.env` — senha de painel,
 chave de produção, credencial usada em mais de uma máquina. Importa porque esses cofres têm CLI:
 o agente lê um campo específico sem o valor passar pelo chat, o que não acontece quando o
-usuário cola a chave na conversa. Se não usa nenhum: o `.env` sozinho funciona numa máquina só,
-mas some com ela e não dá para compartilhar. Opções: Bitwarden (CLI `bw`, plano gratuito
-generoso), 1Password (CLI `op`, integra direto no `.env` com `op://`).
+usuário cola a chave na conversa. Sem nenhum, o `.env` sozinho funciona numa máquina só, mas some
+com ela e não dá para compartilhar.
 
 **2. Fonte de documentação de biblioteca.** Conhecimento de treino envelhece; a API da lib que o
-agente "lembra" pode ser de duas versões atrás. Um MCP de documentação — Context7, por exemplo —
-faz o agente consultar a doc atual antes de escrever a chamada. Se não usa nenhum: registrar
-que a doc oficial é consultada na mão.
+agente "lembra" pode ser de duas versões atrás. Um MCP de documentação faz o agente consultar a doc
+atual antes de escrever a chamada. Sem nenhum, registrar que a doc oficial é consultada na mão.
 
-**3. Coleções de skills de workflow.** Se o usuário já tem Superpowers ou as skills do Matt
-Pocock instaladas, os caminhos de entrevista e implementação que `/aicf:workflow-demanda`
-oferece mudam — sem elas, só o caminho aicf existe, e propor `brainstorming` seria propor algo
-que não roda. Confirmar o que está instalado em vez de supor.
+**3. Coleções de skills de workflow.** Com Superpowers ou as skills do Matt Pocock instaladas, os
+caminhos de entrevista e implementação que `/aicf:workflow-demanda` oferece mudam — sem elas, só o
+caminho aicf existe, e propor `brainstorming` seria propor algo que não roda.
+
+**Detectar antes de perguntar.** Quem já usa o método costuma ter as três respostas na máquina, e
+perguntar o que o ambiente responde é rodada gasta. Duas fontes:
+
+- o `~/.claude/CLAUDE.md`, onde cofre e fonte de docs aparecem declarados em prosa;
+- os plugins habilitados **neste diretório** — Superpowers (`superpowers@…`), Matt Pocock
+  (`mattpocock-skills@…`) e Context7 (`context7@…`) aparecem pelo id:
+
+  ```bash
+  claude plugin list --json | jq -r --arg d "$PWD" \
+    '.[] | select(.enabled and (.scope=="user" or .projectPath==$d)) | .id'
+  ```
+
+  **Não ler `~/.claude/plugins/cache/`**: o cache guarda também plugin desabilitado. E **não
+  tirar o filtro de escopo**: sem ele, plugin habilitado só em outro projeto conta como instalado
+  aqui.
+
+**O que a detecção achou, declarar numa linha e seguir, sem perguntar** — *"Achei Bitwarden e
+Context7 no seu global, e Superpowers e Matt Pocock habilitados; vou registrar assim."* A
+declaração é o que deixa o usuário corrigir antes do commit; pular a pergunta em silêncio não vale.
+
+**O que não achou, explicar em uma frase e sugerir** — Bitwarden (CLI `bw`, plano gratuito
+generoso) para senhas, Context7 para docs, Superpowers e Matt Pocock para coleções — e aceitar
+"nenhum" como resposta: quem está começando não tem nada disso, e insistir transforma o setup em
+venda de stack. **Coleção se sugere, não se instala:** plugin instalado no meio da sessão só carrega
+na próxima, e a linha do `CLAUDE.md` registra o que estava habilitado agora.
+
+**Sem o CLI `claude`** — outro harness, lendo pelo `AGENTS.md` —, a detecção de plugin não existe:
+perguntar o que o global não respondeu, uma pergunta aberta por ferramenta.
 
 Registrar as respostas onde elas já têm lugar: as duas primeiras nas seções de segurança e de
 dependências dos padrões de engenharia (abaixo); a terceira, na linha "Coleções de skills de
@@ -336,9 +367,11 @@ e o que fazer em seguida — não só o que foi criado no disco.
 
 1. Listar o que foi criado e onde — os arquivos, o commit, as duas branches, e, no modo issue, o
    repositório e os labels.
-2. **Apresentar o método em linguagem comum.** Carregar `/aicf:workflow-demanda` e contar o que ele
-   diz, em vez de colar um texto guardado aqui: texto guardado seria a segunda cópia do mapa e
-   envelheceria sozinho, enquanto a skill é a fonte da verdade do ciclo. Cobrir, nesta ordem:
+2. **Apresentar o método em linguagem comum.** Invocar `/aicf:workflow-demanda` pela ferramenta
+   Skill (*Skill tool*) — **não ler o `SKILL.md` dele com `cat` nem `Read`**: o arquivo inteiro
+   cairia na tela de quem está conhecendo o método, que é o muro de texto que esta apresentação
+   evita. Contar o que ele diz, em vez de colar um texto guardado aqui: texto guardado seria a
+   segunda cópia do mapa e envelheceria sozinho, enquanto a skill é a fonte da verdade do ciclo. Cobrir, nesta ordem:
    - as quatro fases, uma frase cada, sem o vocabulário de governança;
    - **um exemplo concreto de primeira demanda**, do pedido até o registro fechado, usando o nome
      real do projeto e a mídia que o usuário acabou de escolher — é o exemplo que faz o ciclo sair
