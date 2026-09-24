@@ -140,7 +140,7 @@ quer. É evidência a favor da hipótese registrada na intent — o diretório d
 chamava `teste-aicf-issues`, e o desta se chama `app1`.
 
 Os quatro pontos estão em
-[o setup pergunta o que o ambiente já responde](../projeto/intents/o-setup-pergunta-o-que-o-ambiente-ja-responde.md).
+[o setup pergunta o que o ambiente já responde](../projeto/specs/o-setup-pergunta-o-que-o-ambiente-ja-responde.md).
 
 ## O que está em aberto
 
