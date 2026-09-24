@@ -1,6 +1,6 @@
 # O setup pergunta o que o ambiente já responde, e despeja o mapa na tela
 
-Processo — entrevista: criar-spec · implementação: a definir · sugestão: aicf-direto (prosa num arquivo só, `skills/setup/SKILL.md`, com as quatro decisões fechadas na entrevista)
+Processo — entrevista: criar-spec · implementação: aicf-direto
 
 ## Problema
 
@@ -136,3 +136,66 @@ habilitados, e escolhendo "No global" para os padrões:
 A regressão do filtro de escopo se confere fora do setup, em qualquer diretório sem plugin de
 escopo `project`: o comando da seção 1 lista cada coleção habilitada no escopo `user` uma vez só
 (`… | sort | uniq -d` vazio).
+
+## Relatório de implementação (2026-09-23)
+
+**Status:** concluído no roteiro; a **verificação de comportamento segue aberta**, porque o `setup` tem
+`disable-model-invocation` e nenhum agente o roda. Quem a encerra é o titular, numa passada no ramo
+arquivo da `0.28.0`, pelas quatro condições que ficaram em
+[verificacao-do-setup.md](../../referencias/verificacao-do-setup.md), seção "O que está em aberto" —
+encerra quando aquela seção registrar a passada. A demanda vai para `concluidas/` agora, como as
+anteriores do `setup`: a condição de aceite mora no doc de verificação, não aqui.
+
+**Arquivos alterados**
+
+- `skills/setup/SKILL.md` — "A mídia do registro" ganha a regra do default em primeiro e libera
+  mídia e padrões numa chamada; "Ferramentas que o usuário já usa" vira detecção por três fontes,
+  declaração do que achou e uma pergunta só com o que faltou; "Ao terminar" passo 2 invoca pela
+  ferramenta Skill e proíbe `cat`/`Read`.
+- `docs/referencias/verificacao-do-setup.md` — condições da passada da `0.28.0`, com o `jq` que
+  lista as chamadas de ferramenta do transcript.
+- `.claude-plugin/plugin.json` e `CHANGELOG.md` — `0.28.0`.
+
+**Commits**
+
+- `aea3752` docs(governanca): entrevista do setup que pergunta o que o ambiente já responde vira spec
+- `42a385a` feat(setup): detecta as ferramentas antes de perguntar e não despeja o mapa na tela
+- `2107920` fix(setup): uma fonte de detecção por pergunta, e o que faltou numa pergunta só
+
+**Validação**
+
+- `./scripts/check.sh` → `Tudo verde.` depois de cada commit.
+- O comando de detecção de coleções, rodado em `/home/mh/dev/skills`, lista `superpowers@…` e
+  `mattpocock-skills@…` uma vez cada (`… | sort | uniq -d` vazio); sem o filtro de escopo,
+  `claude plugin list --json | jq -r '.[] | select(.enabled) | .id' | grep -c '^superpowers@'`
+  devolve 5.
+- O `jq` das condições novas, rodado no transcript da passada da `0.24.0`
+  (`~/.claude/projects/-home-mh-dev-tmp-app1/*.jsonl`), mostra o `ls` do cache e o `cat` do
+  `SKILL.md` do `workflow-demanda` — é o que ele flagra numa regressão.
+- Revisão por subagente fresco sobre o `42a385a`, contra a spec: nenhum defeito bloqueante; quatro
+  ambiguidades corrigidas no `2107920`.
+
+**Escopo efetivo** — duas divergências da spec, as duas vindas da revisão:
+
+- **A fonte de docs é o global ou `claude mcp list`, não `claude plugin list`.** A spec detectava o
+  Context7 pelo id do plugin; quem o tem como servidor MCP configurado direto receberia a sugestão
+  de instalar o que já tem. `claude mcp list` mostra os dois casos (o plugin aparece como
+  `plugin:context7:context7`).
+- **O que a detecção não achou vai numa pergunta só**, e o fallback sem CLI deixou de dizer "uma
+  pergunta aberta por ferramenta" — era a regra que as passadas tinham derrubado, e o primeiro
+  rascunho a reintroduziu.
+- A sugestão de cofre ficou só com Bitwarden, como decidido na entrevista; o 1Password saiu da
+  lista de opções, mas um global que o declare continua sendo detectado.
+
+**Lições**
+
+- **As versões `0.23.0`, `0.23.1` e `0.24.0` não têm tag** (`git tag | sort -V` pula de `v0.22.0`
+  para `v0.25.0`), então `git show v0.24.0:…` falha. O número das 167 linhas se pinou no sha que
+  subiu a versão (`git log --format=%h -1 -S'0.24.0' -- .claude-plugin/plugin.json` → `7fcb5dc`).
+- **O cache de plugins não é a lista do que está instalado.** Os dois agentes das passadas leram
+  `~/.claude/plugins/cache/` e acertaram por sorte: lá também fica plugin desabilitado, e o
+  `claude plugin list` sem filtro de escopo conta plugin de outro projeto. A regra ficou no próprio
+  roteiro do `setup`, que é o único lugar que detecta coleção.
+
+**Promoção (passo 3):** nada novo além do doc de verificação, que já recebeu as condições. A lição
+do cache vive no `SKILL.md` que a usa; a das tags ausentes está aqui e na mensagem ao titular.

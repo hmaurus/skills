@@ -140,7 +140,7 @@ quer. É evidência a favor da hipótese registrada na intent — o diretório d
 chamava `teste-aicf-issues`, e o desta se chama `app1`.
 
 Os quatro pontos estão em
-[o setup pergunta o que o ambiente já responde](../projeto/specs/o-setup-pergunta-o-que-o-ambiente-ja-responde.md).
+[o setup pergunta o que o ambiente já responde](../projeto/concluidas/o-setup-pergunta-o-que-o-ambiente-ja-responde.md).
 
 ## O que está em aberto
 
@@ -148,7 +148,7 @@ Os quatro pontos estão em
 no mesmo dia, ambos na `0.24.0`; o `ROADMAP.md` e o par `develop`/`main`, que a passada do issue não
 alcançava, foram os últimos.
 
-**A passada da `0.28.0`, no ramo arquivo.** A [spec dos quatro pontos](../projeto/specs/o-setup-pergunta-o-que-o-ambiente-ja-responde.md)
+**A passada da `0.28.0`, no ramo arquivo.** A [spec dos quatro pontos](../projeto/concluidas/o-setup-pergunta-o-que-o-ambiente-ja-responde.md)
 foi implementada, e o comportamento novo ainda não rodou. Numa máquina com cofre e fonte de docs
 declarados no global e Superpowers e Matt Pocock habilitados, escolhendo "No global" para os
 padrões, além das condições do modo arquivo acima:
