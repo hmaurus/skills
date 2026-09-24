@@ -19,7 +19,7 @@ transcripts `~/.claude/projects/-home-mh-dev-tmp-teste-aicf-issues/*.jsonl` e
    uma confirmação só, ou nenhuma. O roteiro não prevê isso.
 2. **O mapa do workflow cai na tela.** O passo 2 de "Ao terminar" manda *"carregar
    `/aicf:workflow-demanda`"*, e os dois agentes fizeram `cat` do `SKILL.md` — 167 linhas na
-   `0.24.0` (`git show 7fcb5dc:skills/workflow-demanda/SKILL.md | wc -l`, no commit que subiu a `0.24.0`) no meio da apresentação
+   `0.24.0` (`git show 3b51450:skills/workflow-demanda/SKILL.md | wc -l`, no commit que subiu a `0.24.0`) no meio da apresentação
    do método, para quem está vendo o aicf pela primeira vez. Contraria
    [a entrada de quem chega](../concluidas/a-entrada-de-quem-chega.md), cuja restrição era o setup
    não virar muro de texto.
@@ -189,9 +189,15 @@ anteriores do `setup`: a condição de aceite mora no doc de verificação, não
 
 **Lições**
 
-- **As versões `0.23.0`, `0.23.1` e `0.24.0` não têm tag** (`git tag | sort -V` pula de `v0.22.0`
-  para `v0.25.0`), então `git show v0.24.0:…` falha. O número das 167 linhas se pinou no sha que
-  subiu a versão (`git log --format=%h -1 -S'0.24.0' -- .claude-plugin/plugin.json` → `7fcb5dc`).
+- **As versões `0.23.0`, `0.23.1` e `0.24.0` saíram sem tag nem release**, e `git show v0.24.0:…`
+  falhava. As três ganharam tag e release retroativas no fechamento desta demanda, cada uma no
+  último commit antes do bump seguinte (`git tag | sort -V` sem buraco entre `v0.18.0` e `v0.28.0`).
+- **`git log -S'<versão>' -1` não acha o commit que subiu a versão**: `-S` casa tanto o commit que
+  acrescenta a string quanto o que a remove, e `-1` devolve o mais recente — o que *trocou* a versão
+  pela seguinte. A primeira versão deste relatório pinou o `7fcb5dc`, que é o bump para `0.25.0`. O
+  que acha é ler a versão em cada commit:
+  `for c in $(git log --format=%h -- .claude-plugin/plugin.json); do echo "$c $(git show $c:.claude-plugin/plugin.json | jq -r .version)"; done`
+  → `3b51450 0.24.0`. As 167 linhas não mudam: o arquivo tinha o mesmo tamanho nas duas.
 - **O cache de plugins não é a lista do que está instalado.** Os dois agentes das passadas leram
   `~/.claude/plugins/cache/` e acertaram por sorte: lá também fica plugin desabilitado, e o
   `claude plugin list` sem filtro de escopo conta plugin de outro projeto. A regra ficou no próprio

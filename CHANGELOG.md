@@ -14,7 +14,7 @@
   (`claude plugin list --json | jq -r '.[] | select(.enabled) | .id' | grep -c '^superpowers@'`).
 - **O mapa do método não cai mais na tela no fim do setup.** O passo 2 de "Ao terminar" manda invocar
   `/aicf:workflow-demanda` pela ferramenta Skill e proíbe `cat`/`Read` do `SKILL.md`, que nas duas
-  passadas despejou 167 linhas (`git show 7fcb5dc:skills/workflow-demanda/SKILL.md | wc -l`).
+  passadas despejou 167 linhas (`git show 3b51450:skills/workflow-demanda/SKILL.md | wc -l`).
 - **O default da mídia vai primeiro na lista do `AskUserQuestion`** — arquivo, salvo tracker do Matt
   apontando para o GitHub. Numa das passadas, num diretório `teste-aicf-issues`, issues saiu primeiro.
 - **Mídia e padrões de engenharia podem ir na mesma chamada de `AskUserQuestion`**, a critério do
