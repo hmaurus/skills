@@ -201,3 +201,16 @@ e das coleções preenchidas. Das quatro:
 
 Um detalhe sem efeito: a linha das coleções saiu `Superpowers, Matt Pocock (mattpocock-skills)` —
 o id entre parênteses é ruído, não erro.
+
+**O que segue aberto é a condição 1, na `0.29.1`**, que move a linha para dentro do enunciado da
+pergunta da mídia. Encerra quando uma passada mostrar o que foi detectado no campo `question` do
+primeiro `AskUserQuestion`:
+
+```bash
+jq -r 'select(.type=="assistant") | .message.content[]? | select(.type=="tool_use" and .name=="AskUserQuestion")
+  | .input.questions[0].question' <arquivo>.jsonl | head -1
+```
+
+**A detecção de cofre e de docs gravada nos padrões não é verificável nesta máquina:** o global
+cobre o template inteiro, e nenhuma opção escreve padrões. Encerra numa máquina — ou com um
+`HOME` — cujo global não tenha as seções de segurança e de dependências.
