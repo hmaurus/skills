@@ -202,15 +202,20 @@ e das coleções preenchidas. Das quatro:
 Um detalhe sem efeito: a linha das coleções saiu `Superpowers, Matt Pocock (mattpocock-skills)` —
 o id entre parênteses é ruído, não erro.
 
-**O que segue aberto é a condição 1, na `0.29.1`**, que move a linha para dentro do enunciado da
-pergunta da mídia. Encerra quando uma passada mostrar o que foi detectado no campo `question` do
-primeiro `AskUserQuestion`:
+**A condição 1 passou na `0.29.1`**, em 2026-09-24 (`~/.claude/projects/-home-mh-dev-tmp-app4/*.jsonl`,
+as duas skills de `aicf/0.29.1/`). O enunciado da primeira pergunta abriu com *"Achei no seu global
+Bitwarden como cofre de senhas e Context7 como fonte de docs, e neste diretório estão habilitados
+Superpowers e Matt Pocock. Vou registrar assim."* — antes de qualquer arquivo, e o commit veio
+depois. As condições do modo arquivo seguem passando. O `jq` que confere:
 
 ```bash
 jq -r 'select(.type=="assistant") | .message.content[]? | select(.type=="tool_use" and .name=="AskUserQuestion")
   | .input.questions[0].question' <arquivo>.jsonl | head -1
 ```
 
-**A detecção de cofre e de docs gravada nos padrões não é verificável nesta máquina:** o global
+A linha das coleções saiu de novo com o id entre parênteses — `Superpowers, Matt Pocock
+(mattpocock-skills)` — em `app3` e `app4`. Sem efeito no `implementar-spec`, que lê os nomes.
+
+**O que segue aberto: a detecção de cofre e de docs gravada nos padrões, que não é verificável nesta máquina:** o global
 cobre o template inteiro, e nenhuma opção escreve padrões. Encerra numa máquina — ou com um
 `HOME` — cujo global não tenha as seções de segurança e de dependências.
