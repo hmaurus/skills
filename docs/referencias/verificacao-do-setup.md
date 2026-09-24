@@ -168,7 +168,7 @@ jq -r 'select(.type=="assistant") | .message.content[]? | select(.type=="tool_us
 3. **Passou.** `Skill {"skill":"aicf:workflow-demanda"}`, e nenhum `cat` ou `Read` do `SKILL.md`.
 4. **Passou.** A primeira `label` da mídia é `Arquivos em docs/projeto/`.
 
-**O que segue aberto é a passada da `0.29.0`**, que corrigiu os dois pontos acima e mudou a
+**A passada da `0.29.0`**, que corrigiu os dois pontos acima e mudou a
 pergunta dos padrões ([a pergunta dos padrões parece apagar o global](../projeto/concluidas/a-pergunta-dos-padroes-parece-apagar-o-global.md)).
 Numa máquina com padrões no global, escolhendo **Completar o global** ou **Acrescentar no projeto**:
 
@@ -179,3 +179,25 @@ Numa máquina com padrões no global, escolhendo **Completar o global** ou **Acr
 3. Com *Acrescentar no projeto*, o `CLAUDE.md` gerado não repete seção que o global já tem; com
    *Completar o global*, o agente mostra as seções que faltam antes de tocar o `~/.claude/CLAUDE.md`.
 4. As condições 2 a 4 da `0.28.0` e as do modo arquivo seguem passando.
+
+**Ela rodou em 2026-09-24, no ramo arquivo, escolhendo *Acrescentar no projeto***
+(`~/.claude/projects/-home-mh-dev-tmp-app3/*.jsonl`, as duas skills de `aicf/0.29.0/`). As
+condições do modo arquivo passaram — 1 commit, `develop` ativa, `develop` e `main`, as linhas da mídia
+e das coleções preenchidas. Das quatro:
+
+1. **Falhou de novo.** A detecção rodou (`claude plugin list --json` e `claude mcp list` num `Bash`
+   antes da pergunta), mas nenhum texto do agente saiu entre esse comando e o `AskUserQuestion`: o
+   que foi detectado só aparece no resumo final, depois do commit. É a segunda passada com o mesmo
+   desvio, agora com o roteiro dizendo onde a linha vai — o agente não escreve texto antes de
+   chamar a ferramenta.
+2. **Passou.** A pergunta abre com *"Seu ~/.claude/CLAUDE.md já tem os padrões"*, e as opções são
+   *Manter o global como está (Recomendado)*, *Completar o global*, *Acrescentar no projeto*.
+3. **Passou, pelo lado vazio.** O global já cobre todas as seções do template, então *Acrescentar no
+   projeto* não colou nada — o `CLAUDE.md` gerado tem só as seções do `claude-md.md`
+   (`grep '^## ' CLAUDE.md`), e o agente disse isso. **Consequência:** nesta máquina, nenhuma opção
+   escreve padrões, e a detecção de cofre e de docs não tem onde ser gravada — ela só se exercita
+   com um global que não cubra o template.
+4. **Passou.** Nenhum `cat` do `workflow-demanda`, a primeira opção da mídia é arquivo.
+
+Um detalhe sem efeito: a linha das coleções saiu `Superpowers, Matt Pocock (mattpocock-skills)` —
+o id entre parênteses é ruído, não erro.
