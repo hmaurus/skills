@@ -168,6 +168,14 @@ jq -r 'select(.type=="assistant") | .message.content[]? | select(.type=="tool_us
 3. **Passou.** `Skill {"skill":"aicf:workflow-demanda"}`, e nenhum `cat` ou `Read` do `SKILL.md`.
 4. **Passou.** A primeira `label` da mídia é `Arquivos em docs/projeto/`.
 
-**O que segue aberto:** a declaração antes do commit, e o ramo "No global" ou "No projeto", que é o
-único que exercita a detecção de cofre e de docs. Encerra com uma passada nesse ramo em que a linha
-do que foi detectado aparece antes da criação dos arquivos.
+**O que segue aberto é a passada da `0.29.0`**, que corrigiu os dois pontos acima e mudou a
+pergunta dos padrões ([a pergunta dos padrões parece apagar o global](../projeto/concluidas/a-pergunta-dos-padroes-parece-apagar-o-global.md)).
+Numa máquina com padrões no global, escolhendo **Completar o global** ou **Acrescentar no projeto**:
+
+1. A linha do que foi detectado — cofre, docs e coleções — aparece **no texto da pergunta da
+   mídia**, antes de qualquer `Write` ou `git add` no transcript.
+2. A pergunta dos padrões oferece *Manter o global como está* em primeiro, *Completar o global* e
+   *Acrescentar no projeto*, e nenhum "Nenhum dos dois".
+3. Com *Acrescentar no projeto*, o `CLAUDE.md` gerado não repete seção que o global já tem; com
+   *Completar o global*, o agente mostra as seções que faltam antes de tocar o `~/.claude/CLAUDE.md`.
+4. As condições 2 a 4 da `0.28.0` e as do modo arquivo seguem passando.
