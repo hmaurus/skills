@@ -11,8 +11,8 @@ configuração, os quatro estados, "um item, um lugar", o que não muda com a m�
 | Gravar demanda incerta | `docs/projeto/backlog/<nome>.md`, ou linha no `ROADMAP.md` → Backlog |
 | Gravar demanda decidida | `docs/projeto/intents/<nome>.md`, ou linha no `ROADMAP.md` → Próximas |
 | Gravar demanda que já nasce pronta | `docs/projeto/specs/<nome>.md` |
-| Triar issue aberta por alguém de fora, aceita | vira arquivo em `backlog/` ou `intents/`, com `Origem: #<n>` na linha abaixo da `Processo`; depois `gh issue close <n> --comment "<permalink>"`, com o permalink no sha do commit que criou o arquivo (`/blob/<sha>/...`), que não quebra quando o arquivo muda de pasta |
-| Triar issue aberta por alguém de fora, recusada | `gh issue close <n> --reason "not planned" --comment "<motivo>"` |
+| Triar issue aberta por alguém de fora, aceita pelo usuário | vira arquivo em `backlog/` ou `intents/`, com `Origem: #<n>` num parágrafo próprio abaixo da linha `Processo`; commit e `git push` do arquivo, e só então `gh issue close <n> --comment "$(gh browse <caminho-do-arquivo> --commit=$(git rev-parse HEAD) -n)"` — o link no sha não quebra quando o arquivo muda de pasta |
+| Triar issue aberta por alguém de fora, recusada pelo usuário | `gh issue close <n> --reason "not planned" --comment "<motivo>"` |
 | Virar spec | `git mv docs/projeto/intents/<nome>.md docs/projeto/specs/` e reescrever; se era linha do `ROADMAP.md`, a linha sai |
 | Ler a demanda | `cat docs/projeto/specs/<nome>.md` |
 | Listar um estado | `head -qn1 docs/projeto/specs/*.md \| sed 's/^# //'` |

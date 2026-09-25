@@ -3,14 +3,15 @@
 ## 0.29.4 — 2026-09-24
 
 - **No modo arquivo, a issue aberta por alguém de fora tem receita de triagem.** Duas linhas novas
-  na tabela de `midia-arquivo.md`. Aceita, vira arquivo em `backlog/` ou `intents/` com
-  `Origem: #<n>`, e a issue fecha com um permalink no sha do commit que criou o arquivo. Link para
-  `main` quebraria no primeiro `git mv`. Recusada, fecha com `--reason "not planned"` e o motivo.
-  A issue não guarda estado da demanda, que continua só em `docs/projeto/`.
+  na tabela de `midia-arquivo.md`, e quem aceita ou recusa é o usuário. Aceita, vira arquivo em
+  `backlog/` ou `intents/` com `Origem: #<n>`; depois do commit e do push, a issue fecha com o link
+  do arquivo naquele sha, gerado por `gh browse <caminho> --commit=<sha> -n`. Link para `main`
+  quebraria no primeiro `git mv`. Recusada, fecha com `--reason "not planned"` e o motivo. A issue
+  não guarda estado da demanda, que continua só em `docs/projeto/`.
 - A tabela Arquivo × Issue dos dois READMEs deixa de dizer que a contribuição de fora no modo
   arquivo é por pull request (`grep -c 'Contribuição de fora | pull request' README.md` devolve 0).
 - Este repositório ganha o formulário de issue `.github/ISSUE_TEMPLATE/sugestao.yml`, bilíngue,
-  com o problema como único campo obrigatório, e a seção `## Sobre` dos READMEs aponta para ele.
+  com o problema como único campo obrigatório, e a seção `## Sobre` / `## About` dos READMEs aponta para ele.
   A migração da governança daqui para issues, que era a intent original, saiu na entrevista
   (`docs/projeto/specs/governanca-em-issues-neste-repo.md`).
 

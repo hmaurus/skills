@@ -13,6 +13,6 @@ body:
     attributes:
       label: Contexto / Context
       description: Versão do plugin, comando usado, o que você esperava e o que aconteceu. / Plugin version, the command you ran, what you expected and what happened.
-      placeholder: "aicf 0.29.4 · /aicf:setup · ..."
+      placeholder: "aicf X.Y.Z · /aicf:setup · ..."
     validations:
       required: false
