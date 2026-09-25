@@ -31,7 +31,7 @@ git branch --format='%(refname:short)'       # develop, main
 ls docs/projeto/                             # PRD.md, ROADMAP.md e as quatro pastas
 grep '^\*\*Coleções' CLAUDE.md               # "Superpowers" uma vez só na linha
 grep -n 'develop' CLAUDE.md                  # a seção Git descreve o que existe
-grep -n 'Repositório' docs/projeto/ROADMAP.md  # "Repositório no GitHub e CI mínimo"
+sed -n '/^## Próximas/,/^## /p' docs/projeto/ROADMAP.md | grep -c '^- \[ \]'  # 0
 
 T=~/.claude/plugins/cache/aicodingflow/aicf/<versão>/skills/setup/templates
 for p in "CLAUDE.md claude-md.md" "README.md readme.md" \

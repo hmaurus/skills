@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.29.2 — 2026-09-24
+
+- **O roadmap do projeto novo nasce com `## Próximas` vazio.** As duas linhas do template
+  (`Repositório no GitHub e CI mínimo` e `PRD.md preenchido`) estavam sob um cabeçalho que diz
+  "Decidido", no mesmo formato de um item real, e o projeto não tinha como separar exemplo de
+  decisão. Neste repositório uma delas durou quatro versões como item decidido. A `0.23.1` tinha
+  mantido a linha de CI, com o argumento de que o setup não cria o remoto no modo arquivo; isso
+  mostra que o item é plausível, não que o projeto o decidiu. A primeira linha real sai do
+  `/aicf:criar-prd`, que o setup já sugere como próximo passo.
+- A regra de templates (`.claude/rules/templates.md`) generaliza para "template não afirma o que o
+  projeto não decidiu", e a verificação do setup confere a seção vazia no projeto gerado
+  (`docs/referencias/verificacao-do-setup.md`).
+
 ## 0.29.1 — 2026-09-24
 
 - **O que a detecção achou abre o enunciado da pergunta da mídia**, dentro do `AskUserQuestion`, em

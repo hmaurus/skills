@@ -14,9 +14,6 @@ head -qn1 docs/projeto/intents/*.md docs/projeto/specs/*.md docs/projeto/conclui
 
 > Decidido, ainda sem arquivo.
 
-- [ ] Repositório no GitHub e CI mínimo
-- [ ] `PRD.md` preenchido
-
 ## Backlog
 
 > Ainda não é certeza. O que separa daqui de `Próximas` é **certeza, não urgência**: demanda certa e sem prioridade já é `Próximas`.
