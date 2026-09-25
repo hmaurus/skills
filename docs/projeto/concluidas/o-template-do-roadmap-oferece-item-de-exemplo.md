@@ -105,10 +105,10 @@ fechamento abriu esta intent. Entrevistada em 2026-09-24.
 
 ## Relatório de implementação (2026-09-24)
 
-**Status:** concluído na `0.29.2`, com a verificação de comportamento do setup em aberto — a skill
-tem `disable-model-invocation: true`. A condição que a encerra está em
-[verificacao-do-setup.md](../../referencias/verificacao-do-setup.md), no fim de "O que está em
-aberto".
+**Status:** concluído na `0.29.2`. A verificação de comportamento do setup passou em 2026-09-24,
+numa passada do titular em modo arquivo com as skills de `aicf/0.29.2/`: `## Próximas` saiu vazio
+no projeto gerado — registrado em [verificacao-do-setup.md](../../referencias/verificacao-do-setup.md),
+no fim de "O que está em aberto".
 
 **Arquivos alterados**
 
