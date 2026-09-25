@@ -219,3 +219,10 @@ A linha das coleções saiu de novo com o id entre parênteses — `Superpowers,
 **O que segue aberto: a detecção de cofre e de docs gravada nos padrões, que não é verificável nesta máquina:** o global
 cobre o template inteiro, e nenhuma opção escreve padrões. Encerra numa máquina — ou com um
 `HOME` — cujo global não tenha as seções de segurança e de dependências.
+
+**A passada da `0.29.2` confere o `## Próximas` vazio**, no ramo arquivo: o template deixou de
+trazer as duas linhas de exemplo ([o template do roadmap entrega item de exemplo](../projeto/concluidas/o-template-do-roadmap-oferece-item-de-exemplo.md)).
+A linha nova do bloco do modo arquivo é a condição —
+`sed -n '/^## Próximas/,/^## /p' docs/projeto/ROADMAP.md | grep -c '^- \[ \]'` → `0` no projeto
+gerado. Encerra na primeira passada do setup em modo arquivo com as skills carregadas de
+`aicf/0.29.2/` ou posterior.

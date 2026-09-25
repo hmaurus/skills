@@ -277,7 +277,7 @@ Ponta a ponta, na ordem:
   - **Regra alterada no `CLAUDE.md`**, seção `## Publicação` — a entrada do `CHANGELOG.md` sobe
     junto com o bump.
   - **Intent novo no backlog** —
-    [o template do roadmap entrega item de exemplo](../specs/o-template-do-roadmap-oferece-item-de-exemplo.md),
+    [o template do roadmap entrega item de exemplo](o-template-do-roadmap-oferece-item-de-exemplo.md),
     que é o achado que esta spec registrou e deixou fora de escopo. A linha
     `- [ ] PRD.md preenchido` do `ROADMAP.md` **fica**: veio do mesmo template, mas é pendência
     real (`diff <(sed 's/aicf/<NOME>/g' docs/projeto/PRD.md) skills/setup/templates/prd.md` mostra

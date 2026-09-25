@@ -1,6 +1,6 @@
 # O template do roadmap entrega item de exemplo sob um cabeçalho que diz "decidido"
 
-Processo — entrevista: criar-spec · implementação: a definir · sugestão: aicf-direto (texto em quatro arquivos, sem decisão de abordagem em aberto)
+Processo — entrevista: criar-spec · implementação: aicf-direto
 
 ## Problema
 
@@ -102,3 +102,44 @@ mora.
 Achado da entrevista de *nenhum teste acusa link morto*, em 2026-09-19, ao procurar de onde vinha
 a linha de CI do roadmap. A spec dela deixou a correção do template **fora do escopo**, e o
 fechamento abriu esta intent. Entrevistada em 2026-09-24.
+
+## Relatório de implementação (2026-09-24)
+
+**Status:** concluído na `0.29.2`, com a verificação de comportamento do setup em aberto — a skill
+tem `disable-model-invocation: true`. A condição que a encerra está em
+[verificacao-do-setup.md](../../referencias/verificacao-do-setup.md), no fim de "O que está em
+aberto".
+
+**Arquivos alterados**
+
+- `skills/setup/templates/roadmap.md` — as duas linhas de `## Próximas` saíram.
+- `.claude/rules/templates.md` — o princípio passou a "template não afirma o que o projeto não
+  decidiu", com o caso da `0.17.0` e este como as duas formas, e a conferência cobre item em seção
+  declarada decidida.
+- `docs/referencias/verificacao-do-setup.md` — o `grep 'Repositório'` do bloco do modo arquivo
+  virou a contagem da seção vazia, e a pendência da passada da `0.29.2` entrou em "O que está em
+  aberto".
+- `.claude-plugin/plugin.json`, `CHANGELOG.md` — `0.29.2`.
+
+**Commits**
+
+- `c07d7cb` docs(governanca): entrevista do item de exemplo no template do roadmap vira spec
+- `0aa8cd0` fix(setup): o roadmap do projeto novo nasce com Próximas vazio
+
+**Validação** — os quatro passos da Verificação, rodados depois da edição:
+
+1. `sed -n '/^## Próximas/,/^## /p' skills/setup/templates/roadmap.md | grep -c '^- \[ \]'` → `0`
+   (`2` no `c07d7cb`: `git show c07d7cb:skills/setup/templates/roadmap.md | sed -n '/^## Próximas/,/^## /p' | grep -c '^- \[ \]'`).
+2. `grep -c 'Repositório no GitHub' skills/setup/templates/roadmap.md docs/referencias/verificacao-do-setup.md`
+   → `0` nos dois.
+3. `grep -c 'não decidiu' .claude/rules/templates.md` → `1`.
+4. `./scripts/check.sh` → `Tudo verde.`, `0.29.2` no topo do changelog.
+
+Sem revisão de código: a mudança é só texto — template, regra, doc e changelog.
+
+**Escopo efetivo** — o previsto. Os outros quatro templates foram lidos na entrevista e ficaram
+como estavam.
+
+**Promoção** — a lição já saiu promovida pela própria spec, na regra
+[`.claude/rules/templates.md`](../../../.claude/rules/templates.md). O fechamento não gerou ADR,
+doc nem entrada no `CLAUDE.md`, e não abriu nem tornou obsoleta outra demanda.
