@@ -91,6 +91,18 @@ pergunta — onde o trabalho mora. Ler e propor o default a partir dele ("o trac
 para GitHub; usar issues aqui também?") em vez de perguntar do zero. As duas configs seguem
 independentes: divergir é legítimo, e a do aicf é a linha do `CLAUDE.md`.
 
+**Se o arquivo não existe e a detecção achou o Matt Pocock habilitado**, o setup dele ainda vai
+fazer a mesma pergunta, do zero. A descrição de cada opção ganha uma frase, que fica ao lado da
+escolha e não no enunciado:
+
+- **arquivos**: o `/setup-matt-pocock-skills` vai perguntar o mesmo, e em arquivo o Matt guarda o
+  trabalho dele em `.scratch/`, separado de `docs/projeto/`;
+- **issues**: no setup do Matt, escolher GitHub, e os dois ficam nas mesmas issues.
+
+Só informar no modo arquivo, sem ensinar a alinhar: o tracker local do Matt recebe também tickets e
+mapas, e apontá-lo para `docs/projeto/` misturaria tudo isso nas pastas de estado do aicf. O aicf
+não escreve a config do Matt.
+
 **O default vai primeiro na lista**, porque o `AskUserQuestion` apresenta a primeira opção como a
 sugerida. É arquivo, sempre — o nome do diretório não muda isso, nem um `-issues` no fim dele. A
 única exceção é o tracker do Matt apontar para o GitHub: aí o default proposto é issues, e issues

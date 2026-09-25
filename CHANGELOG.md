@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.29.3 — 2026-09-24
+
+- **Com o Matt Pocock habilitado e sem `docs/agents/issue-tracker.md`, a pergunta da mídia avisa que
+  o setup dele vai perguntar o mesmo.** O aviso vai na descrição de cada opção. Na de arquivos,
+  informa que o Matt guarda o trabalho em `.scratch/`, separado de `docs/projeto/`. Na de issues,
+  diz para escolher GitHub no setup do Matt, e os dois ficam nas mesmas issues. O enunciado não
+  cresce, e sem o Matt nada muda.
+- A linha do Matt na tabela de entrevista do `workflow-demanda` deixa de prometer
+  `specs/<nome>.md` no modo arquivo: a spec do `to-spec` fica em `.scratch/`, e o aicf não a
+  adota. O tracker local do Matt também recebe tickets e mapas, e apontá-lo para a pasta de estados
+  do aicf é um alinhamento que o aicf não suporta.
+
 ## 0.29.2 — 2026-09-24
 
 - **O roadmap do projeto novo nasce com `## Próximas` vazio.** As duas linhas do template

@@ -114,7 +114,7 @@ carregar os dois, e nenhum lado enxerga o do outro.
 | --------------- | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
 | **Aicf**        | `/aicf:criar-spec`                  | o registro da própria demanda, no estado "pronta para implementar" — `specs/<nome>.md` no modo arquivo, a issue com `aicf:spec` no modo issue |
 | **Superpowers** | `brainstorming`                     | `docs/superpowers/specs/YYYY-MM-DD-<topico>-design.md`, só no caminho _architectural_; ou `specs/<nome>.md`, se o projeto mandar |
-| **Matt Pocock** | `grill-with-docs`, depois `to-spec` | issue no tracker, adotada por `/aicf:criar-spec #<n>` no modo issue; ou `specs/<nome>.md`, se o tracker configurado no setup apontar para lá |
+| **Matt Pocock** | `grill-with-docs`, depois `to-spec` | issue no tracker, adotada por `/aicf:criar-spec #<n>` no modo issue; no modo arquivo, `.scratch/` do Matt, que o aicf não adota |
 
 No Superpowers, só o caminho _architectural_ do `brainstorming` grava arquivo, e ele honra o
 local que o `CLAUDE.md` do projeto mandar. No Matt, quem grava a spec é `to-spec`; emendar
