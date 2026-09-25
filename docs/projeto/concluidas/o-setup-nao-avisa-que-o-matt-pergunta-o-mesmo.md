@@ -1,7 +1,6 @@
 # O `/aicf:setup` não avisa que o Matt Pocock faz a mesma pergunta
 
-Processo — entrevista: criar-spec · implementação: a definir · sugestão: aicf-direto (duas frases
-em dois `SKILL.md`, sem decisão de abordagem em aberto)
+Processo — entrevista: criar-spec · implementação: aicf-direto
 
 ## Problema
 
@@ -113,3 +112,31 @@ Levantado em 2026-09-18, numa pergunta sobre o funcionamento atual: *"se no setu
 issue, isso já padroniza também para o Matt Pocock?"* A resposta é não, e a decisão de manter assim
 foi confirmada na mesma conversa. A entrevista, em 2026-09-24, descobriu que o alinhamento só é suportado
 no modo issue, e que a tabela do `workflow-demanda` prometia o outro.
+
+## Relatório de implementação (2026-09-24)
+
+- **Status** — concluído no texto. A verificação de comportamento do setup fica em aberto, com o
+  titular, em [verificacao-do-setup.md](../../referencias/verificacao-do-setup.md) (última entrada de
+  "O que está em aberto"). CI do push: ver o run do commit de fechamento.
+- **Arquivos alterados**
+  - `skills/setup/SKILL.md` — em "A mídia do registro", o parágrafo condicional (Matt habilitado e
+    sem `issue-tracker.md`) com a frase de cada opção e o motivo de só informar no modo arquivo.
+  - `skills/workflow-demanda/SKILL.md` — a linha do Matt na tabela da entrevista troca
+    `specs/<nome>.md` por `.scratch/` do Matt, que o aicf não adota.
+  - `.claude-plugin/plugin.json` e `CHANGELOG.md` — `0.29.3`.
+- **Commits**
+  - `d59afc8` docs(governanca): entrevista do aviso sobre o Matt no setup vira spec
+  - `8cd75a7` feat(setup): a pergunta da mídia avisa que o Matt pergunta o mesmo
+- **Validação**
+  - `grep -n 'scratch' skills/setup/SKILL.md` → linha 99, dentro de "A mídia do registro" (antes: 0 linhas).
+  - `grep -c 'se o tracker configurado no setup apontar para lá' skills/workflow-demanda/SKILL.md` → `0` (antes: `1`).
+  - `./scripts/check.sh` → `Tudo verde.`
+  - Sem revisão de código: a mudança é prosa de skill, duas frases e uma célula de tabela.
+- **Escopo efetivo** — o previsto. A entrevista tirou do intent duas perguntas que já estavam
+  resolvidas (a ordem das perguntas, desde a `0.29.1`; o `issue-tracker.md` existente, que o setup
+  já lia) e acrescentou a correção do `workflow-demanda`.
+- **Lições** — o intent afirmava que o setup do Matt "dá para apontar para a mesma pasta do aicf",
+  e a tabela do `workflow-demanda` prometia o mesmo. Ler o `issue-tracker-local.md` do
+  `setup-matt-pocock-skills` 1.2.3 mostrou que o tracker recebe também tickets e mapas, com
+  estrutura própria. É mais um caso da regra do `CLAUDE.md` sobre afirmação a respeito de
+  ferramenta de terceiro, que já cobre isso; nada novo a promover.

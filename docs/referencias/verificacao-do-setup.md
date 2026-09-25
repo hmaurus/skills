@@ -227,3 +227,17 @@ e `sed -n '/^## Próximas/,/^## /p' docs/projeto/ROADMAP.md | grep -c '^- \[ \]'
 projeto gerado. O resto do bloco do modo arquivo seguiu passando, e o `diff` mostrou só as quatro
 diferenças esperadas. A linha das coleções saiu `Superpowers, Matt Pocock`, desta vez sem o id entre
 parênteses.
+
+**O aviso sobre o Matt na pergunta da mídia, a partir da `0.29.3`, ainda não rodou**
+([o setup não avisa que o Matt pergunta o mesmo](../projeto/concluidas/o-setup-nao-avisa-que-o-matt-pergunta-o-mesmo.md)).
+Encerra com duas passadas num diretório novo, sem `docs/agents/`:
+
+1. **Matt habilitado.** A descrição da opção de arquivos cita `.scratch/`, e a de issues (quando
+   oferecida) diz para escolher GitHub no setup do Matt. O enunciado fica só com a linha da detecção
+   e a pergunta.
+2. **Matt desabilitado.** Nenhuma descrição cita `.scratch/`.
+
+```bash
+jq -r 'select(.type=="assistant") | .message.content[]? | select(.type=="tool_use" and .name=="AskUserQuestion")
+  | .input.questions[] | .question, (.options[] | .label + " — " + .description)' <arquivo>.jsonl
+```
