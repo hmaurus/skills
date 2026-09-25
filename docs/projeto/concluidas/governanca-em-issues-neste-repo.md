@@ -1,6 +1,6 @@
 # Sugestão de fora entra por issue, e a governança fica em arquivo
 
-Processo — entrevista: criar-spec · implementação: a definir · sugestão: aicf-direto (template, uma linha de receita e dois READMEs, sem decisão de abordagem)
+Processo — entrevista: criar-spec · implementação: aicf-direto
 
 ## De onde veio
 
@@ -39,7 +39,7 @@ ela.
 casos é fechada. O estado da demanda continua morando só em `docs/projeto/`, e a regra de revisão
 "dois mecanismos coexistindo" não se aplica, porque a issue não guarda estado.
 
-1. **Receita do modo arquivo:** uma linha nova na tabela de operações:
+1. **Receita do modo arquivo:** duas linhas novas na tabela de operações:
    - **Aceita:** vira arquivo em `backlog/` ou `intents/`, com a linha `Origem: #<n>` logo abaixo
      da linha `Processo`. Depois `gh issue close <n> --comment "<permalink>"`, e o permalink
      aponta para o arquivo **no sha do commit que o criou** (`/blob/<sha>/...`). É um link fixo,
@@ -60,7 +60,7 @@ casos é fechada. O estado da demanda continua morando só em `docs/projeto/`, e
 
 ## Arquivos e interfaces
 
-- `skills/workflow-demanda/references/midia-arquivo.md`: a linha nova na tabela de operações
+- `skills/workflow-demanda/references/midia-arquivo.md`: as duas linhas novas na tabela de operações
 - `.github/ISSUE_TEMPLATE/sugestao.yml`: arquivo novo. Antes de escrever, conferir a sintaxe de
   issue forms na doc do GitHub (`name`, `description`, `body` com `type: textarea` e
   `validations.required`)
@@ -96,3 +96,55 @@ casos é fechada. O estado da demanda continua morando só em `docs/projeto/`, e
    receita. Não vale abrir issue de teste num repositório público só para isso. O relatório de
    fechamento registra esta condição, e ela se encerra quando existir em `docs/projeto/` um arquivo
    com `Origem: #<n>` (`grep -rln '^Origem: #' docs/projeto/` não vazio).
+
+## Relatório de implementação (2026-09-24)
+
+- **Status:** concluído. O CI ficou verde no commit de código (`gh run list --workflow=ci.yml --limit 1`
+  depois do push). A triagem de ponta a ponta continua em aberto de propósito (ver Validação).
+- **Arquivos alterados:**
+  - `skills/workflow-demanda/references/midia-arquivo.md`: duas linhas na tabela de operações,
+    uma para a issue aceita e outra para a recusada.
+  - `.github/ISSUE_TEMPLATE/sugestao.yml`: arquivo novo, o formulário bilíngue.
+  - `README.md` e `README.en.md`: a célula "Contribuição de fora" e a frase em `## Sobre` /
+    `## About`.
+  - `.claude-plugin/plugin.json` passou para `0.29.4`, com a entrada correspondente no
+    `CHANGELOG.md`.
+- **Commits:**
+  - `9fb609e`: a spec.
+  - `262fb8f`: o código.
+  - `5862337`: as correções que saíram da revisão.
+- **Validação:**
+  - `./scripts/check.sh` termina em `Tudo verde.`.
+  - Os três `grep` da Verificação 2 devolvem 2, 0 e 0.
+  - Verificação 3, conferida no navegador com login: `/issues/new/choose` lista *Sugestão /
+    Suggestion* ao lado de *Blank issue*, e `?template=sugestao.yml` mostra o campo Problema
+    como obrigatório e o Contexto como opcional.
+  - A revisão de código foi feita por um subagente que não acompanhou a implementação. Ele
+    apontou 7 achados, 5 viraram correção no `5862337` e o 4 era a spec se contradizendo
+    ("uma linha" contra `grep -c` = 2). O texto acima já foi corrigido.
+  - **A Verificação 4 fica aberta** até a primeira issue real de fora ser triada. Ela se
+    encerra quando `grep -rln '^Origem: #' docs/projeto/` deixar de sair vazio.
+- **Escopo efetivo:** a receita saiu mais completa do que a spec descrevia, por causa da
+  revisão:
+  - aceitar ou recusar é decisão do usuário;
+  - a ordem dos passos é commit, depois `git push`, e só então `gh issue close`;
+  - o link é gerado com `gh browse <caminho> --commit=<sha> -n` em vez de ser montado à mão;
+  - a `Origem` fica num parágrafo próprio.
+
+  A URL que o `gh browse` gera usa `/tree/<sha>/` e o GitHub responde 200 para ela, conferido
+  com `curl -sL -o /dev/null -w '%{http_code}'`. Ficou fora, sugerido pela revisão, uma operação
+  para listar as issues de fora que estão abertas. A triagem já é gatilho do
+  `/aicf:workflow-demanda`, e `gh issue list` não precisa de receita.
+- **Lições:**
+  - **A API GraphQL não lista issue forms.** `repository.issueTemplates` devolve só os templates
+    `.md`: em `facebook/react`, que tem dois `.yml`, ela devolve apenas o `bug_report.md`. A
+    página `/issues/new/choose` pede login quando acessada por `curl`. Para conferir um form, só
+    o navegador logado serve.
+  - **Um `sed` que corrige referências depois do `git mv` também reescreve histórico.** Nas
+    concluídas, comandos e listas de arquivos de demandas passadas citam o caminho antigo e têm
+    que continuar citando. Só os links de markdown precisam mudar. Nesta demanda a substituição
+    automática pegou quatro menções históricas, que foram revertidas antes do commit.
+- **Promoção (passo 3):** nada foi promovido. A lição do GraphQL só volta a importar se alguém
+  mexer no formulário. A do `sed` apareceu pela primeira vez, e o `grep` da receita já mostra
+  cada ocorrência para quem olhar antes de substituir. Se ela se repetir, vira regra no
+  `CLAUDE.md`.

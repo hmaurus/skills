@@ -17,7 +17,7 @@ nomeavam o repositório e um caminho —, então anonimizar não custa nada ao a
 deles.
 
 Esta demanda saiu de um item da intent
-[a governança deste repositório passa a viver em issues](../specs/governanca-em-issues-neste-repo.md),
+[a governança deste repositório passa a viver em issues](../concluidas/governanca-em-issues-neste-repo.md),
 onde era pré-requisito de uma migração maior. É independente dela: vale com arquivos ou com
 issues, e não espera a decisão sobre a mídia.
 

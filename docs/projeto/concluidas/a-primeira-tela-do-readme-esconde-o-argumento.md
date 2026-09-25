@@ -173,7 +173,7 @@ que o aicf faz, e que ele não precisa trocar nada para usar.
   doc escreve se roda antes de o doc fechar", cujo texto já cita a Verificação de uma spec pelo
   nome. Acrescentar a ocorrência alongaria um arquivo lido inteiro em toda sessão sem mudar o que o
   agente faz.
-- **Um ajuste inline na intent [governanca-em-issues-neste-repo](../specs/governanca-em-issues-neste-repo.md).**
+- **Um ajuste inline na intent [governanca-em-issues-neste-repo](../concluidas/governanca-em-issues-neste-repo.md).**
   O `git mv` desta demanda mexeu num número que ela afirma, e medir mostrou que os dois já estavam
   defasados desde 2026-09-18: 27 e 14 são hoje 69 e 13, pinados em `7fcb5dc` em vez de numa data.
   No mesmo parágrafo, *"nenhum teste acusa link de markdown morto neste repositório"* deixou de ser

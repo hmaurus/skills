@@ -13,7 +13,7 @@
 - Este repositório ganha o formulário de issue `.github/ISSUE_TEMPLATE/sugestao.yml`, bilíngue,
   com o problema como único campo obrigatório, e a seção `## Sobre` / `## About` dos READMEs aponta para ele.
   A migração da governança daqui para issues, que era a intent original, saiu na entrevista
-  (`docs/projeto/specs/governanca-em-issues-neste-repo.md`).
+  (`docs/projeto/concluidas/governanca-em-issues-neste-repo.md`).
 
 ## 0.29.3 — 2026-09-24
 

@@ -269,7 +269,7 @@ mínimo neles: registrar que a escolha existe. A redação fica para lá.
   real e **anterior a esta demanda** — vive em
   [o layout dos domain docs está declarado duas vezes](../backlog/layout-dos-domain-docs-declarado-duas-vezes.md).
 - **Adotar issues neste repositório.** É a demanda vizinha, [a governança deste repositório passa a
-  viver em issues](../specs/governanca-em-issues-neste-repo.md), que consome esta opção. Aqui só
+  viver em issues](../concluidas/governanca-em-issues-neste-repo.md), que consome esta opção. Aqui só
   se cria a opção.
 - **Detectar mídia errada.** Nenhuma das duas detecta estado errado, e esta demanda não tenta
   inventar detecção — pasta errada e label errado seguem indistinguíveis de pasta certa e label
