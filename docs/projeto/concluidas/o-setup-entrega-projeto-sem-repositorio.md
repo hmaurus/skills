@@ -258,6 +258,6 @@ deixaria a contradição dentro do repositório.
 
 **Saída do passo 3** — [ADR 0007 — O setup age fora do disco local, com confirmação](../../adr/0007-o-setup-age-fora-do-disco-local.md),
 mais a emenda no `CLAUDE.md`. Nenhuma demanda nova nasceu, e nenhuma ficou obsoleta: a
-[governança em issues neste repositório](../intents/governanca-em-issues-neste-repo.md) continua
+[governança em issues neste repositório](../specs/governanca-em-issues-neste-repo.md) continua
 aberta e independente — o que esta demanda lhe dá é a primeira passada real do modo issue, quando a
 Verificação 2 rodar.

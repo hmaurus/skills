@@ -17,7 +17,7 @@ ritual quebra.**
   quebrou **cinco links de uma vez** em outras demandas. O achado virou a instrução de `grep` que
   hoje está no passo 2 do `/aicf:fechar-demanda`.
 - **2026-09-18**, fechando *a entrada de quem chega*: **três links**, e o intent
-  [governança em issues neste repo](../intents/governanca-em-issues-neste-repo.md) registra que
+  [governança em issues neste repo](../specs/governanca-em-issues-neste-repo.md) registra que
   *"eles só foram achados porque o passo 2 do ritual manda procurá-los"*.
 
 O mesmo intent escreve a frase que é a justificativa desta demanda — **"nenhum teste acusa link de

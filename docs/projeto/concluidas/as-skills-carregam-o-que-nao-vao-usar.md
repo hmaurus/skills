@@ -154,7 +154,7 @@ Uma demanda só, com as entregas em checkboxes; a sessão faz o que cabe e fecha
   e o `/setup-matt-pocock-skills`). Movê-las para um arquivo de referência de coleções custaria um
   arquivo novo para poupar ~80 tokens. Ficam.
 - **Migrar alguma coisa deste repositório.** A mídia dele segue arquivo; a demanda
-  [governança em issues neste repo](../intents/governanca-em-issues-neste-repo.md) é outra.
+  [governança em issues neste repo](../specs/governanca-em-issues-neste-repo.md) é outra.
 
 ## Verificação
 
