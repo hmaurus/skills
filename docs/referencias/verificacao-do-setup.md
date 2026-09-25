@@ -228,14 +228,19 @@ projeto gerado. O resto do bloco do modo arquivo seguiu passando, e o `diff` mos
 diferenças esperadas. A linha das coleções saiu `Superpowers, Matt Pocock`, desta vez sem o id entre
 parênteses.
 
-**O aviso sobre o Matt na pergunta da mídia, a partir da `0.29.3`, ainda não rodou**
+**O aviso sobre o Matt na pergunta da mídia, na `0.29.3`**
 ([o setup não avisa que o Matt pergunta o mesmo](../projeto/concluidas/o-setup-nao-avisa-que-o-matt-pergunta-o-mesmo.md)).
-Encerra com duas passadas num diretório novo, sem `docs/agents/`:
+Duas passadas num diretório novo, sem `docs/agents/`:
 
-1. **Matt habilitado.** A descrição da opção de arquivos cita `.scratch/`, e a de issues (quando
-   oferecida) diz para escolher GitHub no setup do Matt. O enunciado fica só com a linha da detecção
-   e a pergunta.
-2. **Matt desabilitado.** Nenhuma descrição cita `.scratch/`.
+1. **Matt habilitado — passou** em 2026-09-24 (`~/.claude/projects/-home-mh-dev-tmp-app6/*.jsonl`, as
+   duas skills de `aicf/0.29.3/`). A opção de arquivos terminou em *"O /setup-matt-pocock-skills vai
+   fazer a mesma pergunta, e em modo arquivo o Matt guarda o trabalho dele em .scratch/, separado de
+   docs/projeto/."*, e a de issues em *"No setup do Matt, escolha GitHub para os dois usarem as mesmas
+   issues."* O enunciado ficou só com a linha da detecção e a pergunta.
+2. **Matt desabilitado — não rodou; risco aceito pelo titular.** A falha possível é o agente pôr as
+   frases do Matt nas opções mesmo sem ele: ruído na tela, sem arquivo errado, e visível para o
+   primeiro usuário que não tem o Matt. Encerra na primeira passada sem o Matt habilitado: nenhuma
+   descrição cita `.scratch/`.
 
 ```bash
 jq -r 'select(.type=="assistant") | .message.content[]? | select(.type=="tool_use" and .name=="AskUserQuestion")
