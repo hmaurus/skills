@@ -130,7 +130,7 @@ Você troca de modo editando uma linha do `CLAUDE.md`. A linha ausente significa
 | Offline | sobrevive ao `git clone` sem rede | não |
 | Busca | entra no `grep` do repositório | busca do GitHub |
 | Conversa | não tem | comentário e notificação |
-| Contribuição de fora | pull request | dois cliques |
+| Contribuição de fora | issue como entrada, triada para arquivo | dois cliques |
 | Referência | caminho do arquivo | `#12`, e `Fixes #12` fecha pelo merge |
 
 O default é arquivo, porque funciona sem `gh`, sem login e sem remote.
@@ -185,5 +185,7 @@ Se você já usa uma dessas coleções, pode continuar usando. O aicf cuida só 
 ## Sobre
 
 Feito para o curso [Claude Code: Criador de Apps](https://aicodingflow.com/curso), do [AI Coding Flow](https://aicodingflow.com). Use à vontade, com ou sem o curso.
+
+Sugestões e problemas entram por [issue](https://github.com/hmaurus/skills/issues/new/choose). Cada uma é triada para `docs/projeto/`, e a issue fecha com o link do arquivo que ela gerou, ou com o motivo da recusa.
 
 MIT.

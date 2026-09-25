@@ -1,0 +1,18 @@
+name: Sugestão / Suggestion
+description: Um problema ou uma ideia de ajuste no plugin. / A problem or an idea for a change in the plugin.
+body:
+  - type: textarea
+    id: problema
+    attributes:
+      label: Problema / Problem
+      description: O que está errado ou falta hoje, do ponto de vista de quem usa. A solução pode ficar para a triagem. / What is wrong or missing today, from the user's point of view. The solution can wait for triage.
+    validations:
+      required: true
+  - type: textarea
+    id: contexto
+    attributes:
+      label: Contexto / Context
+      description: Versão do plugin, comando usado, o que você esperava e o que aconteceu. / Plugin version, the command you ran, what you expected and what happened.
+      placeholder: "aicf 0.29.4 · /aicf:setup · ..."
+    validations:
+      required: false
