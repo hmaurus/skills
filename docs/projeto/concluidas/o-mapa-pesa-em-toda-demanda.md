@@ -164,6 +164,6 @@ Os valores de "hoje" foram medidos em `0b3ce9a`.
 - **Lições** — ao tirar uma skill do alcance do agente, sai também o que só ela dizia. A spec
   mapeou o que o fluxo usava, e a revisão achou três notas sobre entrevista por outra coleção que
   ficaram sem leitor. Viraram
-  [o agente não vê o que só o mapa diz da entrevista](../backlog/o-agente-nao-ve-o-que-so-o-mapa-diz-da-entrevista.md).
+  [o brainstorming atravessa a fronteira da entrevista](../specs/o-agente-nao-ve-o-que-so-o-mapa-diz-da-entrevista.md).
   Promoção: nada para o `CLAUDE.md` além do que a própria demanda escreveu. A regra "Critério mora
   na skill que o aplica" já cobre a lição.
