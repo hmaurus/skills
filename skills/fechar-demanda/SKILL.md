@@ -75,8 +75,11 @@ passo cobriu qual exigência.
 O fechamento vai num commit próprio, separado do commit de código; quando o processo escolhido já
 commitou por conta própria, cobre só o registro. Tarefa pequena (fix trivial, copy, renomeação)
 cabe num commit, e a demanda pode nascer já no fechamento: o relatório registra o que foi feito
-e a demanda nasce concluída, pela receita da mídia. Ao final, avaliar o peso do contexto e sugerir
-`/clear` se estiver pesado — não a cada demanda por reflexo.
+e a demanda nasce concluída, pela receita da mídia.
+
+**A última mensagem diz se a sessão pode acabar.** Nada pendente — trabalho commitado, enviado e
+com o CI conferido, quando o projeto tem —: dizer que já dá para fechar a sessão ou dar `/clear`.
+Algo pendente: listar o que falta e quem faz.
 
 ## Sessão que acaba antes da demanda
 

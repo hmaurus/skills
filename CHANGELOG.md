@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.30.1 — 2026-09-25
+
+- **O fechamento termina dizendo se a sessão pode acabar.** Com nada pendente — trabalho
+  commitado, enviado e com o CI conferido, quando o projeto tem —, a última mensagem do
+  `fechar-demanda` diz que já dá para fechar a sessão ou dar `/clear`; com algo pendente, lista o
+  que falta e quem faz. Substitui "sugerir `/clear` se o contexto estiver pesado — não a cada
+  demanda por reflexo", que deixava o usuário sem sinal e perguntando.
+
 ## 0.30.0 — 2026-09-25
 
 - **O critério de workspace mora no `implementar-spec`, que é quem o aplica.** O default vem da
