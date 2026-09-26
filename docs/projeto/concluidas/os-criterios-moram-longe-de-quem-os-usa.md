@@ -1,6 +1,6 @@
 # Os critérios moram longe de quem os usa
 
-Processo — entrevista: criar-spec · implementação: a definir · sugestão: aicf-direto (três arquivos de texto, decisões fechadas na entrevista)
+Processo — entrevista: criar-spec · implementação: aicf-direto
 
 ## Problema
 
@@ -98,7 +98,7 @@ citado por número).
   compartilhado seria abstração antecipada.
 - **Mandar as skills carregarem o `workflow-demanda`.** Custaria o `SKILL.md` inteiro (12.225 bytes,
   `wc -c < skills/workflow-demanda/SKILL.md`) para usar um parágrafo, desfazendo
-  [as skills carregam o que não vão usar](../concluidas/as-skills-carregam-o-que-nao-vao-usar.md).
+  [as skills carregam o que não vão usar](as-skills-carregam-o-que-nao-vao-usar.md).
 - **Palavra de fechamento de issue no PR (`Closes #<n>`).** No modo issue, ela fecharia a issue no
   merge, antes do relatório. Só acontece com PR para a branch default, e o aicf entrega `develop`
   como branch de trabalho; se aparecer, vira demanda própria.
@@ -135,3 +135,44 @@ Os valores de "hoje" foram medidos em `ac94ff1`.
    comando (`cache/aicodingflow/aicf/0.30.0/skills/implementar-spec`), `/aicf:implementar-spec`
    numa spec deste repositório diz numa linha o workspace citando o `## Git` do `CLAUDE.md`, sem
    abrir o `workflow-demanda`.
+
+## Relatório de implementação (2026-09-25)
+
+- **Status** — concluído no código; a Verificação 5 (comportamento em sessão nova) segue em
+  aberto até a release `0.30.0`, e encerra quando `/aicf:implementar-spec`, com a `0.30.0` no
+  cabeçalho do comando, disser o workspace citando o `## Git`.
+- **Arquivos alterados**
+  - `skills/implementar-spec/SKILL.md` — passo 3 com o critério de workspace; "Verificar e fechar"
+    com a integração em branch própria ou worktree.
+  - `skills/fechar-demanda/SKILL.md` — tabela de promoção com skill e hook em linhas separadas;
+    portão de entrada com a ordem dos caminhos aicf (checks e revisão antes de integrar).
+  - `skills/workflow-demanda/SKILL.md` — sai "Branch, ou worktree"; coluna Integração aponta para
+    o `implementar-spec`; "Trabalho recorrente" só com a triagem; worktree sai da lista de
+    ferramentas de escolha livre.
+  - `CHANGELOG.md`, `.claude-plugin/plugin.json` — `0.30.0`.
+  - `CLAUDE.md` — regra "Critério mora na skill que o aplica".
+- **Commits**
+  - `780a386` docs(governanca): entrevista dos critérios longe de quem os usa vira spec
+  - `b656bf9` feat(implementar-spec): os critérios de workspace e skill×hook moram em quem os aplica
+  - `de813b3` fix(implementar-spec): worktree também integra, e checks e revisão vêm antes
+- **Validação**
+  - Verificações 1 e 2 da spec: os seis `grep -cF` devolvem 0, 0, 0, 0, 1, 1 em `de813b3`.
+  - Verificação 3: 25.365 bytes em `780a386`, 25.352 em `de813b3`
+    (`for f in workflow-demanda implementar-spec fechar-demanda; do git show <sha>:skills/$f/SKILL.md; done | wc -c`).
+  - Verificação 4: `./scripts/check.sh` → `Tudo verde.`
+  - Onde o hook de projeto mora:
+    `curl -sL https://code.claude.com/docs/en/hooks.md | grep -n '\.claude/settings\.json'` →
+    `.claude/settings.json | Single project | Yes, can be committed to the repo`.
+  - Revisão de código por subagente fresco sobre `780a386..b656bf9`; os achados viraram `de813b3`.
+- **Escopo efetivo** — três saídas da spec, todas vindas da revisão ou de contradição achada no
+  caminho:
+  - worktree saiu da lista de "escolha livre" do `workflow-demanda`, que contradizia "sair do
+    default é pergunta ao usuário";
+  - a integração vale para worktree também, e diz "branch de origem" em vez de "branch de
+    trabalho", que sem `## Git` não tem definição;
+  - checks e revisão do fechamento rodam na branch antes da integração, e o commit de fechamento
+    vai onde o código ficou — a spec punha a integração antes do fechamento inteiro, o que deixava
+    a revisão para depois do merge. O portão do `fechar-demanda` ganhou a mesma ordem.
+- **Lições** — a correção da revisão acrescentou texto e quase estourou a meta de bytes da
+  Verificação 3 (25.369 contra 25.365, antes de enxugar): meta de tamanho numa spec pesa também
+  sobre os consertos que a revisão pede.

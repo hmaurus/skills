@@ -38,6 +38,8 @@ Este repositório é a fonte editável do plugin, publicado no marketplace `aico
 
 **Passo citado por número é ponteiro, e ponteiro envelhece.** Renumerar um passo de skill quebra em silêncio quem cita o número de fora: na `0.16.0` foram quatro referências, uma delas no template que vai para o `CLAUDE.md` de todo projeto novo. Nenhum grep pelo assunto as pega — elas citam o número. Ao mexer na numeração, `grep -rn 'passo [0-9]' --include='*.md' .` antes de fechar.
 
+**Critério mora na skill que o aplica.** Skill só entra no contexto quando invocada: a que diz "pelo critério do `/aicf:<outra>`" sem mandar carregá-la faz o agente aplicar o que não tem na frente. Ponteiro entre skills serve para o que o agente pode ir buscar, nunca para a regra do passo que ele está executando. Escrito em 2026-09-25, na demanda [os critérios moram longe de quem os usa](docs/projeto/concluidas/os-criterios-moram-longe-de-quem-os-usa.md), com duas ocorrências — workspace no `implementar-spec`, skill×hook no `fechar-demanda`. ``grep -rnE 'crit[ée]rio[^.]*`/aicf:' skills/*/SKILL.md`` acusa as duas em `780a386` e nenhuma depois; o padrão não enxerga a frase quebrada entre linhas.
+
 **Este arquivo é lido inteiro em toda sessão.** O alvo que a documentação do Claude Code publica é abaixo de 200 linhas; regra que só vale para uma parte do código vai para `.claude/rules/<tema>.md` com `paths:` no frontmatter, e procedimento de vários passos vira skill. `/doctor` propõe cortes do que o agente já deduz do código.
 
 ## Processos de desenvolvimento

@@ -19,7 +19,7 @@
 - O `workflow-demanda` perde o parágrafo "Branch, ou worktree", reduz "Trabalho recorrente não é
   demanda" à triagem e tira worktree da lista de ferramentas de escolha livre, que contradizia o
   critério. Os três `SKILL.md` somam menos bytes que antes: 25.365 em `780a386`, 25.352 em
-  `SHA_DEPOIS`
+  `de813b3`
   (`for f in workflow-demanda implementar-spec fechar-demanda; do git show <sha>:skills/$f/SKILL.md; done | wc -c`).
 
 ## 0.29.4 — 2026-09-24
