@@ -35,7 +35,7 @@ description: Implementa uma demanda a partir da spec e conduz o fechamento até 
    | --- | --- | --- | --- |
    | **Aicf direto** | esta skill | depende do agente | esta skill, que pergunta |
    | **Aicf plan mode** | plan mode ligado antes, ou escolhido aqui | depende do agente | esta skill, que pergunta |
-   | **Superpowers** | `writing-plans`, depois `subagent-driven-development` | `docs/superpowers/plans/YYYY-MM-DD-<topico>.md` | `finishing-a-development-branch`, encadeada e automática |
+   | **Superpowers** | `writing-plans`, depois `subagent-driven-development` ou `executing-plans` | `docs/superpowers/plans/YYYY-MM-DD-<topico>.md` | `finishing-a-development-branch`, encadeada e automática |
    | **Matt Pocock** | `to-tickets`, depois `implement` | tickets, com bloqueio declarado entre eles | o próprio `implement`: `/code-review` e commit na branch atual |
 
    Descer a tabela troca velocidade por rastro: nos caminhos aicf o plano vive na sessão e morre

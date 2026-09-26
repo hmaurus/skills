@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.32.0 — 2026-09-26
+
+- **A passagem entre fases é da governança, e o `CLAUDE.md` diz isso.** Pelo `brainstorming` do
+  Superpowers, o design aprovado — o arquivo do caminho _architectural_ ou o design curto do
+  _bounded_ — vira a spec da demanda pela receita da mídia, com `entrevista: brainstorming` na
+  linha `Processo`, e não em `docs/superpowers/specs/`; então o agente para e pergunta o caminho da
+  implementação. O `brainstorming` manda chamar o `writing-plans`, e a regra "rodar o processo de
+  implementação inteiro" fazia isso parecer encadeamento; a frase que separava as fases só estava
+  no `/aicf:ajuda`, que desde a `0.31.0` o agente não carrega. Regra nova no repositório e no
+  template, e a lista passa de cinco para seis regras.
+- O `/aicf:ajuda` descreve a regra em vez de uma permissão, e a tabela do `implementar-spec` cita
+  as duas execuções que o `writing-plans` oferece, `subagent-driven-development` ou
+  `executing-plans`.
+- O Matt Pocock fica de fora: `grill-with-docs`, `to-spec`, `to-tickets` e `implement` só o usuário
+  invoca, e a passagem de fase é ele digitando o próximo comando.
+
 ## 0.31.0 — 2026-09-26
 
 - **O mapa vira `/aicf:ajuda`, que só o usuário invoca.** A skill `workflow-demanda` passa a se

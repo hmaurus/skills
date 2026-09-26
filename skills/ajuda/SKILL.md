@@ -47,8 +47,8 @@ substitui — no Superpowers, `executing-plans` e `subagent-driven-development` 
 perguntar, e o agente conta em uma linha o que ficou decidido. Interferir ali degrada a qualidade
 de um processo que não é nosso. Na **passagem entre fases** quem decide é a governança, mesmo
 quando o framework recomenda continuar nele: o `brainstorming` declara `writing-plans` como estado
-terminal, e ainda assim parar na fronteira é legítimo — o design doc dele vale como spec, e a
-implementação é escolha nova.
+terminal, e ainda assim o agente para na fronteira, grava o design como spec e pergunta o caminho
+da implementação.
 
 ## Governança — onde mora o quê
 

@@ -30,11 +30,12 @@ Duas camadas: a **governança** registra o que será feito e o que foi feito, e 
 
 **Mídia do registro:** \<arquivos em `docs/projeto/` | issues (GitHub) — o valor que o setup perguntou\>
 
-Cinco regras valem antes de abrir qualquer doc:
+Seis regras valem antes de abrir qualquer doc:
 
 - **Na entrevista, o caminho é pergunta ao usuário; na implementação, o agente segue a sugestão gravada na spec quando o caso é óbvio — caminho aicf direto e diff que cabe numa frase — e pergunta com opções nos demais.** O agente sugere pelo ponto forte que couber ao caso; a decisão é do usuário quando há escolha real. A entrevista entra por `/aicf:criar-spec`, ou, se instalados, por `brainstorming` (Superpowers) ou `grill-with-docs` → `to-spec` (Matt Pocock).
 - **Ideia que surge no meio de outra demanda** → registrar pela receita da mídia (`skills/midia/` do plugin aicf, a mesma que o `/aicf:criar-spec` segue), com o estado decidido por **certeza, não urgência** (decidido é o que já se resolveu fazer, mesmo que não agora; incerto é o que ainda não se sustenta), e voltar ao que estava sendo feito.
 - **O método escolhido fecha o código; a governança fecha a demanda.** Rodar o processo de implementação inteiro — inclusive o passo de integração que ele encadeia — e só então `/aicf:fechar-demanda`.
+- **A passagem entre fases é da governança.** Pelo `brainstorming` (Superpowers), o design aprovado — o arquivo do caminho _architectural_ ou o design curto do _bounded_ — vira a spec da demanda pela receita da mídia, com `entrevista: brainstorming` na linha `Processo`, e não em `docs/superpowers/specs/`; então o agente para e pergunta o caminho da implementação. O `writing-plans` que o `brainstorming` chama é passagem de fase, não encadeamento.
 - **Bug de causa desconhecida** → depurar de forma sistemática antes de propor correção; se `systematic-debugging` (Superpowers) ou `/diagnosing-bugs` (Matt Pocock) estiverem instalados, usar.
 - Operação que se repete vira **skill** em `.claude/skills/`, não improviso na hora.
 
