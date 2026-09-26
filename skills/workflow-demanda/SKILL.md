@@ -9,7 +9,7 @@ O trabalho tem duas camadas. A **governança** — registro, ritual de fechament
 obrigatória e sempre a mesma. A **implementação** é roteiro, não trilho: se o caso pedir outra
 coisa, o caso ganha. Ao sair do roteiro (pular etapa, trocar de caminho no meio, usar ferramenta
 que a skill não cita), **dizer em uma linha o que vai fazer e por quê**, antes de fazer.
-Ferramenta do agente — subagente, plan mode, worktree, code review, busca paralela — é escolha
+Ferramenta do agente — subagente, plan mode, code review, busca paralela — é escolha
 livre em qualquer ponto, e o agente propõe a que couber sem esperar autorização.
 
 ## O ciclo
@@ -128,8 +128,8 @@ do aicf. Adotada, é uma issue só, com o label do aicf por cima.
 
 | Caminho            | Como                                                       | Plano de implementação                          | Integração                                          |
 | ------------------ | ---------------------------------------------------------- | ----------------------------------------------- | --------------------------------------------------- |
-| **Aicf direto**    | `/aicf:implementar-spec`                                   | depende do agente                               | o agente, pelo critério de workspace abaixo         |
-| **Aicf plan mode** | plan mode ligado antes, ou escolhido no `implementar-spec` | depende do agente                               | o agente, pelo critério de workspace abaixo         |
+| **Aicf direto**    | `/aicf:implementar-spec`                                   | depende do agente                               | o `/aicf:implementar-spec`, que pergunta             |
+| **Aicf plan mode** | plan mode ligado antes, ou escolhido no `implementar-spec` | depende do agente                               | o `/aicf:implementar-spec`, que pergunta             |
 | **Superpowers**    | `writing-plans`, depois `subagent-driven-development`      | `docs/superpowers/plans/YYYY-MM-DD-<topico>.md` | `finishing-a-development-branch`, encadeada e automática |
 | **Matt Pocock**    | `to-tickets`, depois `implement`                           | tickets, com bloqueio declarado entre eles      | o próprio `implement`: `/code-review` e commit na branch atual |
 
@@ -140,22 +140,11 @@ exigem `/setup-matt-pocock-skills` rodado no repositório.
 No Superpowers, os headings de tarefa do plano ficam em inglês (`## Task 3`) mesmo com o corpo em
 português: `scripts/task-brief` procura `^#+ Task N` e responde `task N not found` para "Tarefa N".
 
-**Branch, ou worktree.** O default é commitar direto na branch de trabalho — processo prático para
-dev solo, com PR para o que a complexidade ou o risco justificarem. O agente **avalia** em vez de
-herdar o default em silêncio: branch própria ou worktree quando a demanda é grande ou se quer poder
-descartá-la em bloco; **contra worktree quando a verificação depende de estado local não
-versionado** — banco, arquivo de dados, `.env`, qualquer coisa em pasta gitignored: a worktree
-nasce sem eles. A avaliação acontece no `implementar-spec`, junto da escolha de caminho; o agente
-diz numa linha o que decidiu e por quê, e sair do default é pergunta ao usuário.
-
 ## Trabalho recorrente não é demanda
 
-Demanda tem começo e fim. Procedimento que se repete enquanto o projeto existir (publicar
-conteúdo, subir versão, disparar email, liberar acesso) vira **skill** ou **command** em
-`.claude/`. Gatilho: o mesmo passo a passo explicado pela terceira vez — quando acontecer, propor
-a criação. Mas skill é conselho que o modelo pode não seguir: regra que precisa valer sem exceção
-— formatar após editar, barrar escrita em pasta protegida — é **hook**, script que roda sempre. O
-critério é a regra poder falhar sem ninguém perceber.
+Demanda tem começo e fim. Procedimento que se repete enquanto o projeto existir — publicar
+conteúdo, subir versão, liberar acesso — não é demanda: vira skill ou hook, pelo critério da
+tabela de promoção do `/aicf:fechar-demanda`.
 
 ## Demanda grande, e demandas que andam juntas
 

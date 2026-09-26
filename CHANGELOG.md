@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.30.0 — 2026-09-25
+
+- **O critério de workspace mora no `implementar-spec`, que é quem o aplica.** O default vem da
+  seção `## Git` do `CLAUDE.md`; sem ela, a branch atual. Sair dele continua sendo pergunta ao
+  usuário. Branch própria se propõe quando vale descartar em bloco ou revisar antes de entrar: mais
+  de um commit de código, ou área onde erro custa dinheiro ou dado. Worktree só se propõe quando o
+  checkout atual precisa continuar em uso, e nunca com estado não versionado.
+- **Nos caminhos aicf, trabalho em branch própria se integra antes do fechamento:** o
+  `implementar-spec` pergunta entre merge na branch de trabalho, PR, ou deixar a branch. Antes, a
+  coluna Integração do mapa remetia a um critério que só falava de onde trabalhar.
+- **A tabela de promoção do `fechar-demanda` ganha o hook como destino.** Procedimento que apareceu
+  pela terceira vez vai para skill em `.claude/skills/`; regra que pode falhar sem ninguém perceber
+  vai para hook em `.claude/settings.json`. O gatilho discordava entre as duas skills ("já se
+  repetiu" contra "terceira vez").
+- O `workflow-demanda` perde o parágrafo "Branch, ou worktree", reduz "Trabalho recorrente não é
+  demanda" à triagem e tira worktree da lista de ferramentas de escolha livre, que contradizia o
+  critério. Os três `SKILL.md` somam menos bytes que antes
+  (`cat skills/{workflow-demanda,implementar-spec,fechar-demanda}/SKILL.md | wc -c`: 25.365 em
+  `780a386`, 25.191 depois).
+
 ## 0.29.4 — 2026-09-24
 
 - **No modo arquivo, a issue aberta por alguém de fora tem receita de triagem.** Duas linhas novas

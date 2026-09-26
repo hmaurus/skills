@@ -50,7 +50,8 @@ passo cobriu qual exigência.
    | Conhecimento operacional — manual, ID, gotcha | doc em `docs/referencias/` |
    | Regra que muda como o agente age: erro que já apareceu duas vezes; achado da revisão que o agente deveria saber sobre este código (esse não espera a segunda vez); contexto que um colega novo precisaria | `CLAUDE.md` |
    | Regra que só vale para uma parte do código | `.claude/rules/<tema>.md` com `paths:` no frontmatter — carrega só ao tocar arquivo daquele padrão |
-   | Procedimento que já se repetiu | skill — gatilho e critério skill×hook no `/aicf:workflow-demanda` |
+   | Procedimento que apareceu pela terceira vez | skill em `.claude/skills/` |
+   | Regra que precisa valer sem exceção — a que pode falhar sem ninguém perceber | hook em `.claude/settings.json`: roda sempre, enquanto skill é conselho que o modelo pode não seguir |
    | Decisão difícil de reverter, surpreendente e com trade-off real | ADR em `docs/adr/` |
    | Termo ambíguo do domínio | glossário em `CONTEXT.md` |
 

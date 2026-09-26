@@ -32,9 +32,14 @@ description: Implementa uma demanda a partir da spec e conduz o fechamento até 
    valor continua `aicf-direto`, porque `aicf-plan` é só com o
    plan mode ligado.
 
-   **Junto do caminho, avaliar o workspace** — branch de trabalho, branch própria ou worktree —
-   pelo critério do `/aicf:workflow-demanda`, dizendo numa linha o que decidiu e por quê. Sair do
-   default é pergunta ao usuário.
+   **Junto do caminho, decidir o workspace.** O default é o da seção `## Git` do `CLAUDE.md`; sem
+   ela, a branch atual. Sair dele é pergunta ao usuário, e o agente propõe quando couber:
+   **branch própria** quando vale poder descartar em bloco ou revisar antes de entrar — mais de um
+   commit de código, ou área onde erro custa dinheiro ou dado (migration, auth, pagamento);
+   **worktree** — outra pasta, com a própria branch — só quando o checkout atual precisa continuar
+   em uso (outra sessão, servidor rodando), e nunca quando a verificação depende de estado não
+   versionado (`.env`, banco, pasta gitignored): a worktree nasce sem ele. Dizer numa linha o que
+   decidiu e por quê — em qualquer caminho, inclusive o de outra coleção, antes de passar a vez.
 
 Se a spec não diz o suficiente para implementar, dizer isso e propor uma rodada de
 `/aicf:criar-spec` — não preencher a lacuna por conta própria.
@@ -56,5 +61,6 @@ agora.
 ## Verificar e fechar
 
 Rodar o passo de verificação ponta a ponta que a spec descreve — **só afirmar que funciona
-depois de ver a saída do comando** — e daí invocar `/aicf:fechar-demanda`, que conduz o ritual
-até o registro. **Não presumir o ritual pela memória desta skill.**
+depois de ver a saída do comando**. Em branch própria, integrar: `AskUserQuestion` com merge na
+branch de trabalho, PR, ou deixar a branch. Daí invocar `/aicf:fechar-demanda`, que conduz o
+ritual até o registro. **Não presumir o ritual pela memória desta skill.**
