@@ -21,7 +21,7 @@ Superpowers, Matt Pocock e spec-kit cobrem bem uma demanda por vez. Três pergun
 
 Reinicie a sessão depois de instalar. As skills carregam no início da sessão e não trocam a quente.
 
-Em projeto novo, comece por `/aicf:setup`. Em projeto que já existe, por `/aicf:workflow-demanda`, que explica o ciclo.
+Em projeto novo, comece por `/aicf:setup`. Em projeto que já existe, por `/aicf:ajuda`, que explica o ciclo.
 
 ## O ciclo
 
@@ -85,18 +85,18 @@ As fases de entrevista e de implementação aceitam caminhos de fora do aicf, se
 
 São seis. A diferença entre elas é quem pode chamar cada uma.
 
-**Você digita.** Só existem quando você as chama, e conduzem uma sessão inteira.
+**Você digita.** Só existem quando você as chama; as duas primeiras conduzem uma sessão inteira.
 
 | Skill | Quando | O que faz |
 | --- | --- | --- |
 | `/aicf:setup` | uma vez, no projeto novo | Inicializa o repositório git se faltar, pergunta se a demanda mora em arquivo ou em issue e monta o que a escolha pedir: `docs/projeto/` com PRD, roadmap e as pastas de demanda, ou o repositório no GitHub e os três labels `aicf:*`. Nos dois casos cria o `CLAUDE.md` (com `AGENTS.md` apontando para ele), um `README.md`, os padrões de engenharia se você quiser, o primeiro commit em `main` e a branch `develop` |
 | `/aicf:criar-prd` | começo do projeto | Entrevista sobre o produto e escreve o `PRD.md`. Roda de novo quando uma decisão o contraria |
+| `/aicf:ajuda` | quando quiser reler o método | O mapa: o ciclo, o que cada fase produz e as convenções de governança |
 
 **Você digita, ou o agente alcança sozinho.** Respondem a pedidos em linguagem natural, como "me entreviste sobre X" ou "implementa a spec Y", e o agente as carrega quando reconhece a intenção.
 
 | Skill | Quando | O que faz |
 | --- | --- | --- |
-| `/aicf:workflow-demanda` | o mapa | O ciclo, os caminhos de cada fase e as convenções de governança |
 | `/aicf:criar-spec` | fase de entrevista | Interroga até não sobrar decisão em aberto, depois escreve a spec, com a sugestão de caminho de implementação. `/aicf:criar-spec #12` adota uma issue que já existe |
 | `/aicf:implementar-spec` | fase de implementação | Decide o caminho pela sugestão da spec, implementa e verifica. Ao final chama o fechamento |
 | `/aicf:fechar-demanda` | fase de fechamento | Checks, relatório, arquivamento e promoção de conhecimento, por qualquer caminho de implementação |

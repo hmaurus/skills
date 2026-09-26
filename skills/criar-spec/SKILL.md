@@ -5,8 +5,7 @@ description: Entrevista o usuário até a demanda estar madura e escreve a spec 
 
 # Criar spec por entrevista
 
-Transforma uma ideia ainda vaga na spec que a implementação vai consumir. O ciclo inteiro está
-em `/aicf:workflow-demanda`.
+Transforma uma ideia ainda vaga na spec que a implementação vai consumir.
 
 Rodar **fora do plan mode**: o passo final grava a demanda.
 
@@ -50,8 +49,7 @@ condição que a encerra; a forma está no passo 3 do `/aicf:fechar-demanda`.
 ### Onde ela mora
 
 A linha `**Mídia do registro:**` do `CLAUDE.md` diz qual arquivo de
-[`workflow-demanda/references/`](../workflow-demanda/references/) seguir — `midia-arquivo.md` ou
-`midia-issues.md`; sem linha, arquivo. Se `docs/agents/issue-tracker.md` discordar da linha, avisar
+[`midia/`](../midia/) seguir — `arquivo.md` ou `issues.md`; sem linha, arquivo. Se `docs/agents/issue-tracker.md` discordar da linha, avisar
 uma vez e seguir a linha.
 
 A demanda **muda de estado** para "pronta para implementar". Três casos, e só o terceiro cria

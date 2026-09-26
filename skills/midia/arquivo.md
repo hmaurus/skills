@@ -1,8 +1,21 @@
 # Mídia do registro: arquivos em `docs/projeto/`
 
-A receita do modo arquivo, operação por operação. O que é comum às mídias — a linha de
-configuração, os quatro estados, "um item, um lugar", o que não muda com a mídia — está no
-`/aicf:workflow-demanda`.
+A receita do modo arquivo, operação por operação.
+
+## Os quatro estados
+
+| Estado | Onde |
+| --- | --- |
+| Incerto — nem se sabe se será feito | `backlog/<nome>.md`, ou linha em `ROADMAP.md` → Backlog |
+| Decidido, ainda não entrevistado | `intents/<nome>.md`, ou linha em `ROADMAP.md` → Próximas |
+| Pronta para implementar | `specs/<nome>.md` |
+| Concluída | `concluidas/<nome>.md`, com o relatório no fim |
+
+O estado se decide por **certeza, não urgência**: decidido é o que já se resolveu fazer, mesmo que
+não seja agora; incerto é o que ainda não se sustenta.
+
+**Um item, um lugar.** Enquanto a demanda não tem arquivo ela é uma linha no `ROADMAP.md`; quando
+vira arquivo, a pasta é o registro inteiro e **a linha sai do roadmap**.
 
 ## Operação por operação
 

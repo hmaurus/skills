@@ -124,9 +124,7 @@ criar"), na seção "Processos de desenvolvimento" — sempre, nos dois modos:
 
 Linha ausente significa arquivo — é a compatibilidade com projeto anterior a esta escolha existir,
 não um valor a ser deixado implícito em projeto novo. As receitas estão em
-`workflow-demanda/references/`, uma por mídia:
-[`midia-arquivo.md`](../workflow-demanda/references/midia-arquivo.md) e
-[`midia-issues.md`](../workflow-demanda/references/midia-issues.md).
+`midia/`, uma por mídia: [`arquivo.md`](../midia/arquivo.md) e [`issues.md`](../midia/issues.md).
 
 Perguntar também **o que fazer com os padrões de engenharia** (idioma, KISS/YAGNI, validação antes
 do commit, testes, acessibilidade, tratamento de credencial). Pode ir na mesma chamada de
@@ -169,7 +167,7 @@ agente "lembra" pode ser de duas versões atrás. Um MCP de documentação faz o
 atual antes de escrever a chamada. Sem nenhum, registrar que a doc oficial é consultada na mão.
 
 **3. Coleções de skills de workflow.** Com Superpowers ou as skills do Matt Pocock instaladas, os
-caminhos de entrevista e implementação que `/aicf:workflow-demanda` oferece mudam — sem elas, só o
+caminhos de entrevista e implementação que o aicf oferece mudam — sem elas, só o
 caminho aicf existe, e propor `brainstorming` seria propor algo que não roda.
 
 **Detectar antes de perguntar.** Quem já usa o método costuma ter as três respostas na máquina, e
@@ -366,7 +364,7 @@ Criar com `gh label create`. **Label que já existe faz o comando sair com 1** �
 `|| true` que deixa a sequência seguir. A idempotência é da sequência, não do comando: quem
 conferir o exit code, ou rodar sob `set -e`, precisa saber disso. Os comandos, com as descrições,
 estão em
-[`workflow-demanda/references/midia-issues.md`](../workflow-demanda/references/midia-issues.md), na
+[`midia/issues.md`](../midia/issues.md), na
 seção "Criar os labels".
 
 **O setup é quem cria os labels**, e não a primeira demanda: `gh issue create --label` com label
@@ -400,10 +398,11 @@ e o que fazer em seguida — não só o que foi criado no disco.
 
 1. Listar o que foi criado e onde — os arquivos, o commit, as duas branches, e, no modo issue, o
    repositório e os labels.
-2. **Apresentar o método em linguagem comum.** Invocar `/aicf:workflow-demanda` pela ferramenta
-   Skill (*Skill tool*) — **não ler o `SKILL.md` dele com `cat` nem `Read`**: o arquivo inteiro
-   cairia na tela de quem está conhecendo o método, que é o muro de texto que esta apresentação
-   evita. Contar o que ele diz, em vez de colar um texto guardado aqui: texto guardado seria a
+2. **Apresentar o método em linguagem comum.** Ler o mapa com a ferramenta `Read`, em
+   [`../ajuda/SKILL.md`](../ajuda/SKILL.md) — a skill `/aicf:ajuda` só o usuário invoca, e o
+   harness recusaria a ferramenta Skill. **Não com `cat`**: a saída do `cat` cai inteira na tela de
+   quem está conhecendo o método, que é o muro de texto que esta apresentação evita; a do `Read`
+   fica recolhida. Contar o que ele diz, em vez de colar um texto guardado aqui: texto guardado seria a
    segunda cópia do mapa e envelheceria sozinho, enquanto a skill é a fonte da verdade do ciclo. Cobrir, nesta ordem:
    - as quatro fases, uma frase cada, sem o vocabulário de governança;
    - **um exemplo concreto de primeira demanda**, do pedido até o registro fechado, usando o nome
@@ -417,5 +416,5 @@ e o que fazer em seguida — não só o que foi criado no disco.
 4. Sugerir `/aicf:criar-prd` como próximo passo — é do PRD que saem as primeiras demandas (no
    modo arquivo, o roadmap inicial; no modo issue, as primeiras issues). Depois dele, a primeira
    demanda começa por `/aicf:criar-spec`.
-5. Dizer que `/aicf:workflow-demanda` é o lugar de voltar quando quiser reler como o método
+5. Dizer que `/aicf:ajuda` é o lugar de voltar quando quiser reler como o método
    funciona.

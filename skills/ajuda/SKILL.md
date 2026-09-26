@@ -1,6 +1,7 @@
 ---
-name: workflow-demanda
-description: O mapa de uma demanda — ciclo, caminhos de entrevista e implementação, convenções de governança e a mídia do registro (arquivos em docs/projeto/, ou issues do GitHub). Consultar ao começar, triar ou registrar uma demanda. O fechamento vive em fechar-demanda.
+name: ajuda
+description: O mapa do método — o ciclo de uma demanda, o que cada fase produz e as convenções de governança comuns às duas mídias do registro. Para reler como o método funciona; só o usuário invoca.
+disable-model-invocation: true
 ---
 
 # Workflow de uma demanda
@@ -61,24 +62,19 @@ implementação é escolha nova.
 
 `grep -m1 'Mídia do registro' CLAUDE.md` lê a escolha. **Linha ausente significa arquivo** —
 compatibilidade com projeto anterior a essa escolha existir.
-Os comandos concretos estão no arquivo da mídia que a linha nomeia —
-[`references/midia-arquivo.md`](references/midia-arquivo.md) ou
-[`references/midia-issues.md`](references/midia-issues.md); uma terceira mídia seria um terceiro
-arquivo.
+Os comandos concretos, e como cada mídia representa os estados, estão no arquivo da mídia que a
+linha nomeia — [`midia/arquivo.md`](../midia/arquivo.md) ou [`midia/issues.md`](../midia/issues.md);
+uma terceira mídia seria um terceiro arquivo.
 
 A governança é a mesma nas duas. Quatro estados:
 
-| Estado | Modo arquivo | Modo issue |
-| --- | --- | --- |
-| Incerto — nem se sabe se será feito | `backlog/<nome>.md`, ou linha em `ROADMAP.md` → Backlog | issue aberta, `aicf:backlog` |
-| Decidido, ainda não entrevistado | `intents/<nome>.md`, ou linha em `ROADMAP.md` → Próximas | issue aberta, `aicf:intent` |
-| Pronta para implementar | `specs/<nome>.md` | issue aberta, `aicf:spec` |
-| Concluída | `concluidas/<nome>.md`, com o relatório no fim | issue fechada, com o relatório em comentário |
+- **Incerto** — nem se sabe se será feito.
+- **Decidido**, ainda não entrevistado.
+- **Pronta para implementar.**
+- **Concluída**, com o relatório.
 
-**Um item, um lugar.** No modo arquivo, enquanto a demanda não tem arquivo ela é uma linha no
-`ROADMAP.md`; quando vira arquivo, a pasta é o registro inteiro e **a linha sai do roadmap**. No
-modo issue a demanda é **uma issue só, do nascimento ao fechamento** — o label troca, o número não,
-e não existe `ROADMAP.md`. Nos dois casos nada aponta para nada, e não sobra índice para envelhecer.
+**Um item, um lugar.** A demanda mora num registro só, do nascimento ao fechamento, e mudar de
+estado é mover esse registro, não copiá-lo. Nada aponta para nada, e não sobra índice para envelhecer.
 
 O estado se decide por **certeza, não urgência**: decidido é o que já se resolveu fazer, mesmo que
 não seja agora; incerto é o que ainda não se sustenta, depende de decisão não tomada, ou o usuário
@@ -108,37 +104,13 @@ legítimo, mas precisa ser escolha, não descoberta tardia. Os labels `aicf:*` c
 do documento; os do `/triage` dele, o que fazer em seguida. Eixos diferentes: a mesma issue pode
 carregar os dois, e nenhum lado enxerga o do outro.
 
-## Entrevista — produz a spec
+## Os caminhos de cada fase
 
-| Caminho         | Como                                | A spec fica em                                                                                                      |
-| --------------- | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| **Aicf**        | `/aicf:criar-spec`                  | o registro da própria demanda, no estado "pronta para implementar" — `specs/<nome>.md` no modo arquivo, a issue com `aicf:spec` no modo issue |
-| **Superpowers** | `brainstorming`                     | `docs/superpowers/specs/YYYY-MM-DD-<topico>-design.md`, só no caminho _architectural_; ou `specs/<nome>.md`, se o projeto mandar |
-| **Matt Pocock** | `grill-with-docs`, depois `to-spec` | issue no tracker, adotada por `/aicf:criar-spec #<n>` no modo issue; no modo arquivo, `.scratch/` do Matt, que o aicf não adota |
+Entrevista e implementação têm caminhos à escolha — o do aicf e, se instaladas, os do Superpowers e
+do Matt Pocock. Quem oferece cada um é quem o aplica: os de entrevista, a regra da entrevista no
+`CLAUDE.md` do projeto; os de implementação, o `/aicf:implementar-spec`.
 
-No Superpowers, só o caminho _architectural_ do `brainstorming` grava arquivo, e ele honra o
-local que o `CLAUDE.md` do projeto mandar. No Matt, quem grava a spec é `to-spec`; emendar
-direto no `implement` deixa a spec só na janela de contexto.
-
-**No modo issue, `to-spec` publica e `/aicf:criar-spec #<n>` adota.** O `to-spec` cria issue nova e
-não edita uma existente, então sem a adoção a mesma demanda terminaria com duas issues — a dele e a
-do aicf. Adotada, é uma issue só, com o label do aicf por cima.
-
-## Implementação — consome a spec
-
-| Caminho            | Como                                                       | Plano de implementação                          | Integração                                          |
-| ------------------ | ---------------------------------------------------------- | ----------------------------------------------- | --------------------------------------------------- |
-| **Aicf direto**    | `/aicf:implementar-spec`                                   | depende do agente                               | o `/aicf:implementar-spec`, que pergunta            |
-| **Aicf plan mode** | plan mode ligado antes, ou escolhido no `implementar-spec` | depende do agente                               | o `/aicf:implementar-spec`, que pergunta            |
-| **Superpowers**    | `writing-plans`, depois `subagent-driven-development`      | `docs/superpowers/plans/YYYY-MM-DD-<topico>.md` | `finishing-a-development-branch`, encadeada e automática |
-| **Matt Pocock**    | `to-tickets`, depois `implement`                           | tickets, com bloqueio declarado entre eles      | o próprio `implement`: `/code-review` e commit na branch atual |
-
-Descer a tabela troca velocidade por rastro: nos caminhos aicf o plano vive na sessão e morre
-com ela. As skills do Matt (`to-spec`, `to-tickets`, `triage`, `wayfinder`, `code-review`)
-exigem `/setup-matt-pocock-skills` rodado no repositório.
-
-No Superpowers, os headings de tarefa do plano ficam em inglês (`## Task 3`) mesmo com o corpo em
-português: `scripts/task-brief` procura `^#+ Task N` e responde `task N not found` para "Tarefa N".
+No modo arquivo, a spec do `to-spec` do Matt fica no `.scratch/` dele, que o aicf não adota.
 
 ## Trabalho recorrente não é demanda
 

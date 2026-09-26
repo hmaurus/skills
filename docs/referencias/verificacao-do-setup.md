@@ -246,3 +246,18 @@ Duas passadas num diretório novo, sem `docs/agents/`:
 jq -r 'select(.type=="assistant") | .message.content[]? | select(.type=="tool_use" and .name=="AskUserQuestion")
   | .input.questions[] | .question, (.options[] | .label + " — " + .description)' <arquivo>.jsonl
 ```
+
+**A apresentação do método na `0.31.0`**
+([o mapa pesa em toda demanda](../projeto/specs/o-mapa-pesa-em-toda-demanda.md)). O mapa virou
+`/aicf:ajuda`, com `disable-model-invocation: true`, e o harness recusa a ferramenta Skill para ele.
+A condição 3 da `0.28.0` — *Skill, e nenhum `cat` ou `Read`* — passa a ser: **`Read` de
+`ajuda/SKILL.md`, nenhum `cat`, e nenhuma chamada `Skill` para `aicf:ajuda`**; o passo 5 da
+despedida cita `/aicf:ajuda`. Não rodou. Encerra na próxima passada do setup, em qualquer ramo:
+
+```bash
+jq -r 'select(.type=="assistant") | .message.content[]? | select(.type=="tool_use")
+  | "\(.name) \(.input | tostring | .[0:160])"' <arquivo>.jsonl \
+  | grep -E 'ajuda|workflow-demanda'
+```
+
+A saída esperada é uma linha `Read` com `ajuda/SKILL.md`, e nenhuma `Skill` nem `Bash` com `cat`.

@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.31.0 — 2026-09-26
+
+- **O mapa vira `/aicf:ajuda`, que só o usuário invoca.** A skill `workflow-demanda` passa a se
+  chamar `ajuda` e ganha `disable-model-invocation: true`: a description sai do contexto do agente e
+  a skill só carrega quando o usuário digita o comando. Antes, o `CLAUDE.md` mandava invocá-la no
+  começo de toda demanda, e o fluxo usava um ponto dos 11.229 bytes dela
+  (`git show 0b3ce9a:skills/workflow-demanda/SKILL.md | wc -c`). O mapa enxuto tem 7.900
+  (`wc -c < skills/ajuda/SKILL.md`), com o ciclo, o vocabulário e a governança comum às duas mídias.
+- **O que o fluxo usava vai para quem o aplica.** A tabela de caminhos de implementação, com o
+  `/setup-matt-pocock-skills` e o gotcha do `## Task N` do Superpowers, entra no passo 3 do
+  `implementar-spec`. As portas de entrada da entrevista (`/aicf:criar-spec`, `brainstorming`,
+  `grill-with-docs` → `to-spec`) entram na regra da entrevista do `CLAUDE.md`, e a ideia que surge
+  no meio de outra demanda ganha regra própria, com o critério **certeza, não urgência**: "Quatro
+  regras" viram cinco, no repositório e no template.
+- **Os anexos de mídia saem do mapa e bastam sozinhos:** `skills/midia/arquivo.md` e
+  `skills/midia/issues.md`, numa pasta sem `SKILL.md`. Cada um traz os quatro estados e o "um
+  item, um lugar" da própria mídia; o cabeçalho que remetia ao mapa sai.
+- **O `/aicf:setup` apresenta o método lendo `ajuda/SKILL.md` com `Read`**, porque a ferramenta
+  Skill passa a ser recusada para o mapa. A proibição de `cat` continua.
+
 ## 0.30.1 — 2026-09-25
 
 - **O fechamento termina dizendo se a sessão pode acabar.** Com nada pendente — trabalho

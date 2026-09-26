@@ -30,7 +30,7 @@ Este repositório é a fonte editável do plugin, publicado no marketplace `aico
 
 **Referência que o agente carrega leva a regra e o comando; a medição que os provou vai para o `CHANGELOG.md` ou para a spec.** Evidência é para quem mantém o plugin, e ninguém a relê em runtime: o `midia.md` carregou desde a `0.17.0` o exemplo em `denoland/deno` e o "4 de 6 rodadas" que já estavam na entrada da `0.17.0`. Escrito em 2026-09-19, na demanda [as skills carregam o que não vão usar](docs/projeto/concluidas/as-skills-carregam-o-que-nao-vao-usar.md).
 
-**Skill com `disable-model-invocation: true` o agente não verifica — planejar isso desde a spec.** São `setup` e `criar-prd`; o harness recusa a invocação e também imitar o roteiro por fora. Mexer nelas entrega com a verificação de comportamento em aberto, e o relatório registra quem a encerra e como, em vez de prometer um teste que não vai acontecer. O que cada passada do `setup` prova, o que já passou e o que segue em aberto vivem em [verificacao-do-setup.md](docs/referencias/verificacao-do-setup.md) — a condição de aceite fica lá, não espalhada pelos relatórios.
+**Skill com `disable-model-invocation: true` o agente não verifica — planejar isso desde a spec.** São `setup`, `criar-prd` e `ajuda`; o harness recusa a invocação e também imitar o roteiro por fora. Mexer nelas entrega com a verificação de comportamento em aberto, e o relatório registra quem a encerra e como, em vez de prometer um teste que não vai acontecer. O que cada passada do `setup` prova, o que já passou e o que segue em aberto vivem em [verificacao-do-setup.md](docs/referencias/verificacao-do-setup.md) — a condição de aceite fica lá, não espalhada pelos relatórios.
 
 **A skill que roda é a do início da sessão, não a do cache.** `/plugin update` no meio da conversa troca o disco e não recarrega o que já está em contexto: quem verifica comportamento de skill logo depois de atualizar testa a versão anterior sem perceber. **Reiniciar a sessão antes de verificar**, e conferir a versão no cabeçalho do comando (`cache/aicodingflow/aicf/<versão>/skills/<nome>`) antes de acreditar no resultado. **Em mudança pequena de skill, o teste de comportamento só é obrigatório se o agente o roda sozinho.** O que depende do titular — atualizar o plugin, reiniciar a sessão, invocar o comando — não se pede: fica para o uso real, e o relatório diz qual uso o encerra. Decidido pelo titular em 2026-09-25. Escrito em 2026-09-20: a passada que encerrou a verificação do `setup` começou na `0.20.0` e imprimiu o layout antigo; quem pegou foi o titular, reconhecendo a árvore velha.
 
@@ -46,15 +46,16 @@ Este repositório é a fonte editável do plugin, publicado no marketplace `aico
 
 Duas camadas: a **governança** registra o que será feito e o que foi feito, e é sempre a mesma; a **implementação** é como o código sai, e tem caminhos à escolha. Uma demanda passa por quatro fases: demanda → entrevista → implementação → fechamento.
 
-**O mapa do workflow está na skill `/aicf:workflow-demanda`** — ciclo, caminhos de cada fase e nomenclatura; invocar ao começar ou registrar uma demanda. **O fechamento — relatório e ritual — está em `/aicf:fechar-demanda`**, que o agente aplica ao concluir qualquer demanda, por qualquer caminho.
+**O mapa do método está em `/aicf:ajuda`, que só o usuário invoca** — ciclo, o que cada fase produz e as convenções de governança. **O fechamento — relatório e ritual — está em `/aicf:fechar-demanda`**, que o agente aplica ao concluir qualquer demanda, por qualquer caminho.
 
-**Coleções de skills de workflow instaladas:** Superpowers, Matt Pocock. _(São os caminhos que o `implementar-spec` pode oferecer além do aicf.)_
+**Coleções de skills de workflow instaladas:** Superpowers, Matt Pocock. _(São os caminhos de entrevista e implementação que o aicf pode oferecer além do dele.)_
 
 **Mídia do registro:** arquivos em `docs/projeto/`
 
-Quatro regras valem antes de abrir qualquer doc:
+Cinco regras valem antes de abrir qualquer doc:
 
-- **Na entrevista, o caminho é pergunta ao usuário; na implementação, o agente segue a sugestão gravada na spec quando o caso é óbvio — caminho aicf direto e diff que cabe numa frase — e pergunta com opções nos demais.** O agente sugere pelo ponto forte que couber ao caso; a decisão é do usuário quando há escolha real.
+- **Na entrevista, o caminho é pergunta ao usuário; na implementação, o agente segue a sugestão gravada na spec quando o caso é óbvio — caminho aicf direto e diff que cabe numa frase — e pergunta com opções nos demais.** O agente sugere pelo ponto forte que couber ao caso; a decisão é do usuário quando há escolha real. A entrevista entra por `/aicf:criar-spec`, ou, se instalados, por `brainstorming` (Superpowers) ou `grill-with-docs` → `to-spec` (Matt Pocock).
+- **Ideia que surge no meio de outra demanda** → registrar pela receita da mídia (`skills/midia/` do plugin aicf, a mesma que o `/aicf:criar-spec` segue), com o estado decidido por **certeza, não urgência** (decidido é o que já se resolveu fazer, mesmo que não agora; incerto é o que ainda não se sustenta), e voltar ao que estava sendo feito.
 - **O método escolhido fecha o código; a governança fecha a demanda.** Rodar o processo de implementação inteiro — inclusive o passo de integração que ele encadeia — e só então `/aicf:fechar-demanda`.
 - **Bug de causa desconhecida** → depurar de forma sistemática antes de propor correção; se `systematic-debugging` (Superpowers) ou `/diagnosing-bugs` (Matt Pocock) estiverem instalados, usar.
 - Operação que se repete vira **skill** em `.claude/skills/`, não improviso na hora.

@@ -1,8 +1,21 @@
 # Mídia do registro: issues (GitHub)
 
-A receita do modo issue, operação por operação. O que é comum às mídias — a linha de
-configuração, os quatro estados, "um item, um lugar", o que não muda com a mídia — está no
-`/aicf:workflow-demanda`.
+A receita do modo issue, operação por operação.
+
+## Os quatro estados
+
+| Estado | Onde |
+| --- | --- |
+| Incerto — nem se sabe se será feito | issue aberta, `aicf:backlog` |
+| Decidido, ainda não entrevistado | issue aberta, `aicf:intent` |
+| Pronta para implementar | issue aberta, `aicf:spec` |
+| Concluída | issue fechada, com o relatório em comentário |
+
+O estado se decide por **certeza, não urgência**: decidido é o que já se resolveu fazer, mesmo que
+não seja agora; incerto é o que ainda não se sustenta.
+
+**Um item, um lugar.** A demanda é **uma issue só, do nascimento ao fechamento** — o label troca, o
+número não, e não existe `ROADMAP.md`.
 
 ## Operação por operação
 
@@ -79,8 +92,9 @@ gh label create aicf:spec    --color 1D76DB \
 ```
 
 A descrição de `aicf:backlog` carrega o critério **certeza, não urgência**, que no modo arquivo
-vive no `ROADMAP.md` e aqui não teria outro lugar. Descrição de label tem **limite de 100
-caracteres**; o que não couber fica de fora, e o critério inteiro está no `/aicf:workflow-demanda`.
+vive no `ROADMAP.md` e aqui não teria outro lugar visível para quem lista as issues. Descrição de
+label tem **limite de 100 caracteres**; o que não couber fica de fora — o critério resumido está em
+"Os quatro estados", acima.
 
 ## Adotar uma issue que já existe
 

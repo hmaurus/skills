@@ -23,7 +23,7 @@ Superpowers, Matt Pocock and spec-kit cover one work item at a time, and cover i
 
 Restart your session afterwards. Skills load at the start of a session and do not hot-swap.
 
-On a new project, start with `/aicf:setup`. On an existing one, start with `/aicf:workflow-demanda`, which explains the cycle.
+On a new project, start with `/aicf:setup`. On an existing one, start with `/aicf:ajuda`, which explains the cycle.
 
 ## The cycle
 
@@ -87,18 +87,18 @@ The interview and implementation phases accept paths from outside `aicf`, if you
 
 There are six. What separates them is who can invoke each one.
 
-**You type them.** They only exist when you call them, and they drive a whole session.
+**You type them.** They only exist when you call them; the first two drive a whole session.
 
 | Skill | When | What it does |
 | --- | --- | --- |
 | `/aicf:setup` | once, on a new project | Initializes the git repository if missing, asks whether work items live in files or issues and sets up whatever the answer requires: `docs/projeto/` with the PRD, roadmap and work item folders, or the GitHub repository and the three `aicf:*` labels. In both cases it creates `CLAUDE.md` (with `AGENTS.md` pointing to it), a `README.md`, the engineering defaults if you want them, the first commit on `main` and a `develop` branch |
 | `/aicf:criar-prd` | start of the project | Interviews you about the product and writes `PRD.md`. Run it again whenever a decision contradicts it |
+| `/aicf:ajuda` | whenever you want to reread the method | The map: the cycle, what each phase produces, and the governance conventions |
 
 **You type them, or the agent reaches for them.** They answer requests in plain language, such as "interview me about X" or "implement spec Y", and the agent loads them when it recognizes the intent.
 
 | Skill | When | What it does |
 | --- | --- | --- |
-| `/aicf:workflow-demanda` | the map | The cycle, the paths for each phase, and the governance conventions |
 | `/aicf:criar-spec` | interview phase | Interrogates until no decision is left open, then writes the spec, with a suggested implementation path. `/aicf:criar-spec #12` adopts an issue that already exists |
 | `/aicf:implementar-spec` | implementation phase | Picks the path from the spec's suggestion, implements and verifies. At the end it calls closing |
 | `/aicf:fechar-demanda` | closing phase | Checks, report, archiving and knowledge promotion, on any implementation path |

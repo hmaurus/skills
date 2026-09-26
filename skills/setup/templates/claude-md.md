@@ -24,15 +24,16 @@
 
 Duas camadas: a **governança** registra o que será feito e o que foi feito, e é sempre a mesma; a **implementação** é como o código sai, e tem caminhos à escolha. Uma demanda passa por quatro fases: demanda → entrevista → implementação → fechamento.
 
-**O mapa do workflow está na skill `/aicf:workflow-demanda`** — ciclo, caminhos de cada fase e nomenclatura; invocar ao começar ou registrar uma demanda. **O fechamento — relatório e ritual — está em `/aicf:fechar-demanda`**, que o agente aplica ao concluir qualquer demanda, por qualquer caminho.
+**O mapa do método está em `/aicf:ajuda`, que só o usuário invoca** — ciclo, o que cada fase produz e as convenções de governança. **O fechamento — relatório e ritual — está em `/aicf:fechar-demanda`**, que o agente aplica ao concluir qualquer demanda, por qualquer caminho.
 
-**Coleções de skills de workflow instaladas:** \<nenhuma | os nomes que o setup detectou\>. _(São os caminhos de entrevista e implementação que o `implementar-spec` pode oferecer além do aicf.)_
+**Coleções de skills de workflow instaladas:** \<nenhuma | os nomes que o setup detectou\>. _(São os caminhos de entrevista e implementação que o aicf pode oferecer além do dele.)_
 
 **Mídia do registro:** \<arquivos em `docs/projeto/` | issues (GitHub) — o valor que o setup perguntou\>
 
-Quatro regras valem antes de abrir qualquer doc:
+Cinco regras valem antes de abrir qualquer doc:
 
-- **Na entrevista, o caminho é pergunta ao usuário; na implementação, o agente segue a sugestão gravada na spec quando o caso é óbvio — caminho aicf direto e diff que cabe numa frase — e pergunta com opções nos demais.** O agente sugere pelo ponto forte que couber ao caso; a decisão é do usuário quando há escolha real.
+- **Na entrevista, o caminho é pergunta ao usuário; na implementação, o agente segue a sugestão gravada na spec quando o caso é óbvio — caminho aicf direto e diff que cabe numa frase — e pergunta com opções nos demais.** O agente sugere pelo ponto forte que couber ao caso; a decisão é do usuário quando há escolha real. A entrevista entra por `/aicf:criar-spec`, ou, se instalados, por `brainstorming` (Superpowers) ou `grill-with-docs` → `to-spec` (Matt Pocock).
+- **Ideia que surge no meio de outra demanda** → registrar pela receita da mídia (`skills/midia/` do plugin aicf, a mesma que o `/aicf:criar-spec` segue), com o estado decidido por **certeza, não urgência** (decidido é o que já se resolveu fazer, mesmo que não agora; incerto é o que ainda não se sustenta), e voltar ao que estava sendo feito.
 - **O método escolhido fecha o código; a governança fecha a demanda.** Rodar o processo de implementação inteiro — inclusive o passo de integração que ele encadeia — e só então `/aicf:fechar-demanda`.
 - **Bug de causa desconhecida** → depurar de forma sistemática antes de propor correção; se `systematic-debugging` (Superpowers) ou `/diagnosing-bugs` (Matt Pocock) estiverem instalados, usar.
 - Operação que se repete vira **skill** em `.claude/skills/`, não improviso na hora.

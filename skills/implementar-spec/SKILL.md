@@ -8,8 +8,7 @@ description: Implementa uma demanda a partir da spec e conduz o fechamento até 
 ## Antes de escrever código
 
 1. **Ler a spec inteira.** A linha `**Mídia do registro:**` do `CLAUDE.md` diz qual arquivo de
-   [`workflow-demanda/references/`](../workflow-demanda/references/) seguir — `midia-arquivo.md`
-   ou `midia-issues.md`; sem linha, arquivo. Se `docs/agents/issue-tracker.md` discordar da linha,
+   [`midia/`](../midia/) seguir — `arquivo.md` ou `issues.md`; sem linha, arquivo. Se `docs/agents/issue-tracker.md` discordar da linha,
    avisar uma vez e seguir a linha. A spec também pode vir de fora da governança do aicf, de
    `docs/superpowers/specs/`. Se o usuário não disse qual, **listar as specs abertas pela receita
    da mídia** e perguntar, em vez de adivinhar. Alvo que ainda é intent — arquivo em `intents/`,
@@ -31,6 +30,19 @@ description: Implementa uma demanda a partir da spec e conduz o fechamento até 
    planejar em sessão antes de editar — o plano não vai para arquivo, e na linha `Processo` o
    valor continua `aicf-direto`, porque `aicf-plan` é só com o
    plan mode ligado.
+
+   | Caminho | Como | Plano de implementação | Integração |
+   | --- | --- | --- | --- |
+   | **Aicf direto** | esta skill | depende do agente | esta skill, que pergunta |
+   | **Aicf plan mode** | plan mode ligado antes, ou escolhido aqui | depende do agente | esta skill, que pergunta |
+   | **Superpowers** | `writing-plans`, depois `subagent-driven-development` | `docs/superpowers/plans/YYYY-MM-DD-<topico>.md` | `finishing-a-development-branch`, encadeada e automática |
+   | **Matt Pocock** | `to-tickets`, depois `implement` | tickets, com bloqueio declarado entre eles | o próprio `implement`: `/code-review` e commit na branch atual |
+
+   Descer a tabela troca velocidade por rastro: nos caminhos aicf o plano vive na sessão e morre
+   com ela. As skills do Matt (`to-spec`, `to-tickets`, `triage`, `wayfinder`, `code-review`)
+   exigem `/setup-matt-pocock-skills` rodado no repositório. No Superpowers, os headings de tarefa
+   do plano ficam em inglês (`## Task 3`) mesmo com o corpo em português: `scripts/task-brief`
+   procura `^#+ Task N` e responde `task N not found` para "Tarefa N".
 
    **Junto do caminho, decidir o workspace.** O default é o da seção `## Git` do `CLAUDE.md`; sem
    ela, a branch atual. Sair dele é pergunta ao usuário, e o agente propõe quando couber:
