@@ -16,9 +16,9 @@ aquela issue; sem alvo, a demanda é a que a sessão trabalhou.
 
 **Antes de qualquer coisa: a implementação terminou inteira?** Caminho de outra coleção termina no
 passo que ele encadeia — no Superpowers, `finishing-a-development-branch`, que decide o destino do
-código. Fechar a demanda com essa decisão não tomada é o erro que este parágrafo existe para
-evitar: o registro diz "concluído" e o código fica parado numa branch. Se o método tem passo de
-integração e ele não rodou, rodar antes.
+código. Sem essa decisão, o registro diz "concluído" e o código fica parado numa branch. Se o
+método tem passo de integração e ele não rodou, rodar antes — nos caminhos aicf, depois dos checks
+e da revisão abaixo, como manda o `implementar-spec`.
 
 ## Antes do relatório
 

@@ -61,6 +61,9 @@ agora.
 ## Verificar e fechar
 
 Rodar o passo de verificação ponta a ponta que a spec descreve — **só afirmar que funciona
-depois de ver a saída do comando**. Em branch própria, integrar: `AskUserQuestion` com merge na
-branch de trabalho, PR, ou deixar a branch. Daí invocar `/aicf:fechar-demanda`, que conduz o
-ritual até o registro. **Não presumir o ritual pela memória desta skill.**
+depois de ver a saída do comando** — e daí invocar `/aicf:fechar-demanda`, que conduz o ritual
+até o registro. **Não presumir o ritual pela memória desta skill.**
+
+**Em branch própria ou worktree, integrar antes do relatório:** checks e revisão do fechamento
+rodam na branch; depois, `AskUserQuestion` — merge na branch de origem, PR, ou deixar a branch. O
+commit de fechamento vai onde o código ficou.

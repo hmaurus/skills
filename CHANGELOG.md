@@ -7,18 +7,20 @@
   usuário. Branch própria se propõe quando vale descartar em bloco ou revisar antes de entrar: mais
   de um commit de código, ou área onde erro custa dinheiro ou dado. Worktree só se propõe quando o
   checkout atual precisa continuar em uso, e nunca com estado não versionado.
-- **Nos caminhos aicf, trabalho em branch própria se integra antes do fechamento:** o
-  `implementar-spec` pergunta entre merge na branch de trabalho, PR, ou deixar a branch. Antes, a
-  coluna Integração do mapa remetia a um critério que só falava de onde trabalhar.
+- **Nos caminhos aicf, trabalho em branch própria ou worktree se integra antes do relatório:**
+  checks e revisão do fechamento rodam na branch, e o `implementar-spec` pergunta entre merge na
+  branch de origem, PR, ou deixar a branch; o commit de fechamento vai onde o código ficou. O
+  portão do `fechar-demanda` diz a mesma ordem. Antes, a coluna Integração do mapa remetia a um
+  critério que só falava de onde trabalhar.
 - **A tabela de promoção do `fechar-demanda` ganha o hook como destino.** Procedimento que apareceu
   pela terceira vez vai para skill em `.claude/skills/`; regra que pode falhar sem ninguém perceber
   vai para hook em `.claude/settings.json`. O gatilho discordava entre as duas skills ("já se
   repetiu" contra "terceira vez").
 - O `workflow-demanda` perde o parágrafo "Branch, ou worktree", reduz "Trabalho recorrente não é
   demanda" à triagem e tira worktree da lista de ferramentas de escolha livre, que contradizia o
-  critério. Os três `SKILL.md` somam menos bytes que antes
-  (`cat skills/{workflow-demanda,implementar-spec,fechar-demanda}/SKILL.md | wc -c`: 25.365 em
-  `780a386`, 25.191 depois).
+  critério. Os três `SKILL.md` somam menos bytes que antes: 25.365 em `780a386`, 25.352 em
+  `SHA_DEPOIS`
+  (`for f in workflow-demanda implementar-spec fechar-demanda; do git show <sha>:skills/$f/SKILL.md; done | wc -c`).
 
 ## 0.29.4 — 2026-09-24
 

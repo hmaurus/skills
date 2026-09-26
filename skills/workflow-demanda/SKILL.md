@@ -128,8 +128,8 @@ do aicf. Adotada, é uma issue só, com o label do aicf por cima.
 
 | Caminho            | Como                                                       | Plano de implementação                          | Integração                                          |
 | ------------------ | ---------------------------------------------------------- | ----------------------------------------------- | --------------------------------------------------- |
-| **Aicf direto**    | `/aicf:implementar-spec`                                   | depende do agente                               | o `/aicf:implementar-spec`, que pergunta             |
-| **Aicf plan mode** | plan mode ligado antes, ou escolhido no `implementar-spec` | depende do agente                               | o `/aicf:implementar-spec`, que pergunta             |
+| **Aicf direto**    | `/aicf:implementar-spec`                                   | depende do agente                               | o `/aicf:implementar-spec`, que pergunta            |
+| **Aicf plan mode** | plan mode ligado antes, ou escolhido no `implementar-spec` | depende do agente                               | o `/aicf:implementar-spec`, que pergunta            |
 | **Superpowers**    | `writing-plans`, depois `subagent-driven-development`      | `docs/superpowers/plans/YYYY-MM-DD-<topico>.md` | `finishing-a-development-branch`, encadeada e automática |
 | **Matt Pocock**    | `to-tickets`, depois `implement`                           | tickets, com bloqueio declarado entre eles      | o próprio `implement`: `/code-review` e commit na branch atual |
 
