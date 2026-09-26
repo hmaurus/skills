@@ -138,9 +138,10 @@ Os valores de "hoje" foram medidos em `ac94ff1`.
 
 ## Relatório de implementação (2026-09-25)
 
-- **Status** — concluído no código; a Verificação 5 (comportamento em sessão nova) segue em
-  aberto até a release `0.30.0`, e encerra quando `/aicf:implementar-spec`, com a `0.30.0` no
-  cabeçalho do comando, disser o workspace citando o `## Git`.
+- **Status** — concluído; release `v0.30.0`, CI `36209309413` verde. A Verificação 5
+  (comportamento em sessão nova) não roda como teste dedicado: por decisão do titular, mudança
+  pequena de skill se verifica no uso real. Encerra no primeiro `/aicf:implementar-spec` com a
+  `0.30.0` no cabeçalho que disser o workspace citando o `## Git` — ou reabre, se não disser.
 - **Arquivos alterados**
   - `skills/implementar-spec/SKILL.md` — passo 3 com o critério de workspace; "Verificar e fechar"
     com a integração em branch própria ou worktree.
