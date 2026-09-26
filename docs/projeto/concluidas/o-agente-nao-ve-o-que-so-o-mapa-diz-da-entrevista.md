@@ -1,6 +1,6 @@
 # O brainstorming atravessa a fronteira da entrevista
 
-Processo — entrevista: criar-spec · implementação: a definir · sugestão: aicf-direto (texto em quatro arquivos, com as frases decididas na entrevista)
+Processo — entrevista: criar-spec · implementação: aicf-direto
 
 ## Problema
 
@@ -94,3 +94,29 @@ Valores de hoje medidos em `d3b4fd1`.
    `brainstorming` num projeto com a regra no `CLAUDE.md`: a spec aparece em `docs/projeto/specs/`
    (ou no corpo da issue), nada novo em `docs/superpowers/specs/`, e o agente pergunta o caminho
    da implementação em vez de invocar o `writing-plans`.
+
+## Relatório de implementação (2026-09-26)
+
+- **Status** — concluído. O CI é conferido depois do push, se você pedir o envio. A verificação 6
+  (comportamento) fica para o uso real, como a spec previa.
+- **Arquivos alterados**
+  - `CLAUDE.md` e `skills/setup/templates/claude-md.md`: a regra "A passagem entre fases é da
+    governança", depois de "O método escolhido fecha o código", e "Seis regras".
+  - `skills/ajuda/SKILL.md`: a fronteira do `brainstorming` descrita como regra, não como permissão.
+  - `skills/implementar-spec/SKILL.md`: a linha do Superpowers com `executing-plans`.
+  - `.claude-plugin/plugin.json` (`0.32.0`) e `CHANGELOG.md`.
+- **Commits** — `4eded3f feat(governanca): a passagem entre fases é da governança`; o fechamento vai no
+  commit seguinte.
+- **Validação** — as verificações 1 a 5 da spec, depois das edições: 1 → `1` e `1` nos dois
+  comandos; 2 → `Seis regras` `1` e `1`, e `Cinco regras` só em `docs/projeto/concluidas/` e nesta
+  demanda; 3 → `0`; 4 → `1`; 5 → `Tudo verde.`. Não houve revisão de código: a mudança é só texto,
+  com as frases decididas na entrevista. A verificação 6 encerra na primeira demanda entrevistada
+  pelo `brainstorming` num projeto com a regra: a spec aparece em `docs/projeto/specs/` (ou no
+  corpo da issue), nada novo em `docs/superpowers/specs/`, e o agente pergunta o caminho em vez de
+  invocar o `writing-plans`.
+- **Escopo efetivo** — o previsto. A entrada do `CHANGELOG.md` foi reescrita para não repetir
+  "Cinco regras", que a verificação 2 acusou na primeira passada.
+- **Lições** — nenhuma promoção. Esta demanda nasceu como backlog "esperar tropeçar" e foi
+  promovida quando a leitura dos dois frameworks mostrou que a regra "processo inteiro" empurrava o
+  agente a não parar. É a regra "Critério mora na skill que o aplica" do `CLAUDE.md`, agora com o
+  `CLAUDE.md` como o texto que o agente tem na frente dentro de outra coleção.
