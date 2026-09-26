@@ -248,7 +248,7 @@ jq -r 'select(.type=="assistant") | .message.content[]? | select(.type=="tool_us
 ```
 
 **A apresentação do método na `0.31.0`**
-([o mapa pesa em toda demanda](../projeto/specs/o-mapa-pesa-em-toda-demanda.md)). O mapa virou
+([o mapa pesa em toda demanda](../projeto/concluidas/o-mapa-pesa-em-toda-demanda.md)). O mapa virou
 `/aicf:ajuda`, com `disable-model-invocation: true`, e o harness recusa a ferramenta Skill para ele.
 A condição 3 da `0.28.0` — *Skill, e nenhum `cat` ou `Read`* — passa a ser: **`Read` de
 `ajuda/SKILL.md`, nenhum `cat`, e nenhuma chamada `Skill` para `aicf:ajuda`**; o passo 5 da

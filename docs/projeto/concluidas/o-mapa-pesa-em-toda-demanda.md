@@ -1,6 +1,6 @@
 # O mapa pesa em toda demanda
 
-Processo — entrevista: criar-spec · implementação: a definir · sugestão: aicf-plan (renomeia uma skill e mexe em doze arquivos; um plano aprovado evita esquecer ponteiro)
+Processo — entrevista: criar-spec · implementação: aicf-plan
 
 ## Problema
 
@@ -127,3 +127,43 @@ Os valores de "hoje" foram medidos em `0b3ce9a`.
    (regra do `CLAUDE.md`), então não tem passada dedicada. Encerra: na primeira demanda com a
    `0.31.0`, o agente não carrega `/aicf:ajuda`; `/aicf:ajuda` digitado mostra o mapa; e o próximo
    `/aicf:setup` apresenta o método sem invocar skill.
+
+## Relatório de implementação (2026-09-26)
+
+- **Status** — concluído. Sem push nem CI conferido até este commit; a verificação 8
+  (comportamento) fica para o uso real, como a spec previa.
+- **Arquivos alterados**
+  - `skills/workflow-demanda/SKILL.md` → `skills/ajuda/SKILL.md`: `name: ajuda`, a flag, e a
+    description falando com o usuário. Saíram as tabelas de entrevista e de implementação, e a
+    tabela de estados perdeu as colunas de mídia. Uma seção curta, "Os caminhos de cada fase", diz
+    quem oferece cada caminho e guarda a ressalva do `.scratch/` do Matt.
+  - `skills/workflow-demanda/references/midia-*.md` → `skills/midia/{arquivo,issues}.md`, com os
+    quatro estados, "certeza, não urgência" resumido e o "um item, um lugar" da própria mídia.
+  - `skills/implementar-spec/SKILL.md`: a tabela de implementação e as notas do Matt e do
+    Superpowers no passo 3.
+  - `criar-spec`, `fechar-demanda`, `criar-prd` e `setup`: caminho novo do anexo. O setup lê o mapa
+    com `Read` e aponta `/aicf:ajuda`.
+  - `CLAUDE.md` e o template: a linha do mapa, a linha das coleções, as portas de entrada na regra
+    da entrevista e a regra nova da ideia fora de hora ("Cinco regras").
+  - `plugin.json` (`0.31.0`), os READMEs, `CHANGELOG.md`, `docs/referencias/verificacao-do-setup.md`
+    (a passada nova em aberto) e `docs/projeto/PRD.md:56`.
+- **Commits** — `1150be5 feat(ajuda): o mapa vira /aicf:ajuda, que só o usuário invoca`; o
+  fechamento vai no commit seguinte.
+- **Validação** — as sete verificações da spec, rodadas depois do commit de código:
+  1 → `0`; 2 → `1`; 3 → `0` e `0`; 4 → `7900`; 5 → `2`; 6 → `3`; 7 → `Tudo verde.`
+  A 8 fica aberta: ela encerra na primeira demanda com a `0.31.0`, se o agente não carregar
+  `/aicf:ajuda`; também quando `/aicf:ajuda` digitado mostrar o mapa; e na próxima passada do setup,
+  pela condição registrada em `verificacao-do-setup.md`. Revisão por um subagente que não viu a
+  implementação, sem bloqueio. Três achados foram corrigidos antes do commit: `PRD.md:56` apontava
+  para o arquivo antigo; a regra nova não dizia onde fica a receita da mídia; e o
+  `midia/issues.md` se contradizia sobre onde está o critério inteiro.
+- **Escopo efetivo** — além da tabela da spec, mudaram o `docs/projeto/PRD.md`, que citava o
+  arquivo antigo num comando de conferência, e a frase dos READMEs sobre as skills que você
+  digita "conduzirem uma sessão inteira", que não vale para `/aicf:ajuda`. O título interno do
+  mapa continua "Workflow de uma demanda".
+- **Lições** — ao tirar uma skill do alcance do agente, sai também o que só ela dizia. A spec
+  mapeou o que o fluxo usava, e a revisão achou três notas sobre entrevista por outra coleção que
+  ficaram sem leitor. Viraram
+  [o agente não vê o que só o mapa diz da entrevista](../backlog/o-agente-nao-ve-o-que-so-o-mapa-diz-da-entrevista.md).
+  Promoção: nada para o `CLAUDE.md` além do que a própria demanda escreveu. A regra "Critério mora
+  na skill que o aplica" já cobre a lição.
