@@ -300,14 +300,22 @@ resumo traz a linha de enviar a `main` primeiro. Os repositórios de teste saem 
 **A passada da `0.34.2`**, num repositório com histórico
 ([o setup num repositório que já tem histórico](../projeto/specs/o-setup-num-repositorio-que-ja-tem-historico.md)).
 Ainda não rodou. Preparo: `main` e `develop` com commits, as duas no `origin`, uma `feature` ativa e
-um arquivo qualquer em stage; anotar `git rev-parse main develop origin/main`. Rodar o setup no modo arquivo e conferir:
+um arquivo qualquer em stage. Antes do setup, guardar o estado das refs:
 
 ```bash
-git branch --show-current                                # feature
-git show --name-only --format= HEAD                      # só os caminhos do setup
-git status --short                                       # o arquivo do preparo, ainda em stage
-git rev-parse main develop origin/main                   # os mesmos três shas de antes do setup
-grep -c '^## Git' CLAUDE.md                              # 0
+{ git branch; git ls-remote --heads origin; } > /tmp/antes.txt
 ```
 
-E o resumo nomeia a `feature` como a branch do commit. Encerra nessa passada.
+Rodar o setup no modo arquivo e conferir:
+
+```bash
+git branch --show-current                                     # feature
+git show --name-only --format= HEAD                           # só os caminhos do setup
+git status --short                                            # o arquivo do preparo, ainda em stage
+{ git branch; git ls-remote --heads origin; } | diff /tmp/antes.txt -   # vazio — nenhuma branch criada nem enviada
+grep -c '^## Git' CLAUDE.md                                   # 0
+```
+
+E o resumo nomeia a `feature` como a branch do commit. **O ramo do modo issue**, com o mesmo preparo
+mas sem `origin`: o transcript traz `gh repo create` sem `--push`, `git ls-remote --heads origin`
+sai vazio, e o resumo diz para enviar a produção primeiro. Encerra nessas duas passadas.

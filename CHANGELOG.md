@@ -10,7 +10,9 @@
   `## Git`. No modo issue, `gh repo create` roda sem `--push`, para uma `feature` ativa não virar a
   default no GitHub. Antes, o texto dizia que o commit caía na produção e ele caía na branch ativa.
 - **O commit do setup nomeia os caminhos** (`git commit -m … -- <caminhos>`), em qualquer caso:
-  sem eles, o que o usuário tinha em stage ia junto.
+  sem eles, o que o usuário tinha em stage ia junto. Com histórico, merge em andamento, HEAD
+  destacado ou branch ativa sem commit param o setup antes do commit — o primeiro faz o commit com
+  caminhos sair com 128, e os outros dois deixariam o commit fora do histórico do projeto.
 
 ## 0.34.1 — 2026-09-29
 

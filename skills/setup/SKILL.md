@@ -276,7 +276,7 @@ errada. **Não reescrever o template por conta própria:** o que estiver marcado
 fica marcado; é o usuário que preenche, na primeira demanda ou quando quiser. A exceção é a seção
 `## Git` do `CLAUDE.md`, que **sai inteira em repositório com histórico**: ela descreve o par
 `main`/`develop` que o setup entrega, e ali ele não entrega — o fluxo de git do projeto quem escreve
-é o usuário.
+é o usuário. A linha dela sobre o commit de fechamento não se perde: é regra do `/aicf:fechar-demanda`.
 
 Se o projeto já tem `CLAUDE.md` na raiz, não substituir: mostrar a seção "Processos de
 desenvolvimento" do template e propor acrescentá-la ao arquivo existente.
@@ -331,7 +331,8 @@ recebe apenas o nome da variável.
 ## O primeiro commit
 
 Depois de criar os arquivos e colar os padrões de engenharia, **nos dois modos**. Sem ele o
-`.gitkeep` não segura pasta nenhuma, e no modo issue o push do passo seguinte não tem o que empurrar.
+`.gitkeep` não segura pasta nenhuma, e, em repositório novo no modo issue, o push do passo seguinte
+não tem o que empurrar.
 
 **Só os caminhos que o setup escreveu, um a um** — `CLAUDE.md`, `AGENTS.md`, `README.md`,
 `docs/projeto/PRD.md`, e o `ROADMAP.md` e os quatro `.gitkeep` quando a mídia é arquivo. **Nunca
@@ -347,7 +348,19 @@ git commit -m 'chore: estrutura de governança do projeto' -- <caminhos>
 ```
 
 `git commit` sem caminhos commita o índice inteiro — inclusive o que o usuário deixou em stage antes
-de rodar o setup. Com os caminhos, isso continua em stage e fora do commit.
+de rodar o setup. Com os caminhos, isso continua em stage e fora do commit — salvo o que o usuário
+tinha em stage num arquivo que o setup também edita, como um `CLAUDE.md` existente, que vai junto.
+
+**Em repositório com histórico, três estados param o setup antes do commit**, e o usuário resolve:
+
+| Estado | Como se lê | Por que parar |
+| --- | --- | --- |
+| merge em andamento | `git rev-parse -q --verify MERGE_HEAD` sai com 0 | o commit com caminhos sai com 128 (`cannot do a partial commit during a merge`) |
+| HEAD destacado | `git symbolic-ref -q HEAD` sai com 1 | o commit não fica em branch nenhuma |
+| branch ativa sem commit, com histórico em outra ref | `git rev-parse -q --verify HEAD` sai com 1 | o commit vira raiz de uma branch sem ligação com o histórico do projeto |
+
+Dizer o estado em uma linha e pedir que o usuário termine o merge ou faça checkout de uma branch
+com histórico; o setup continua do commit, com os arquivos já criados.
 
 A mensagem segue o idioma do projeto que está nascendo.
 
@@ -381,16 +394,16 @@ git, recusa com `current directory is not a git repository`. Nada quebra pela me
 onboarding para com um erro — e criar o remoto antes de os arquivos existirem é exatamente como se
 chega lá.
 
-**Em repositório com histórico, sem `--push`:** `gh repo create <nome> --private --source=. --remote=origin`
-cria o repositório e o `origin` sem enviar nada. O `--push` enviaria a branch ativa, e a primeira
-branch enviada vira a default no GitHub — uma `feature` ativa viraria a default do repositório. As
-issues e os labels não dependem de código no remoto; o resumo diz para enviar primeiro a produção.
-
 **Fora dessa ordem, pesquisar em vez de improvisar.** O comando acima cobre o caso comum;
 organização em vez de conta pessoal, SSH em vez de HTTPS, GitHub Enterprise, escopo de token
 faltando, nome já em uso — cada um tem resposta na documentação do `gh`, e consultá-la na hora é o
 certo. O que não se faz é copiá-la para cá: ela envelheceria sozinha dentro desta skill, enquanto
 `gh repo create --help` está sempre atual.
+
+**Em repositório com histórico, sem `--push`:** `gh repo create <nome> --private --source=. --remote=origin`
+cria o repositório e o `origin` sem enviar nada. O `--push` enviaria a branch ativa, e a primeira
+branch enviada vira a default no GitHub — uma `feature` ativa viraria a default do repositório. As
+issues e os labels não dependem de código no remoto; o resumo diz para enviar primeiro a produção.
 
 ### Os três labels
 
@@ -479,8 +492,8 @@ e o que fazer em seguida — não só o que foi criado no disco.
    setup o criou, e, no modo issue, os labels. **E o estado do remoto:** o que foi enviado, ou a linha de "A `main` no
    remoto" do caso que ficou sem envio. **Em repositório com histórico**, no lugar das branches e
    do remoto: em que branch o commit ficou, que a seção `## Git` do `CLAUDE.md` ficou de fora para
-   o usuário escrever com o fluxo dele, e, se o repositório no GitHub nasceu agora, que a produção
-   é a primeira branch a enviar.
+   o usuário escrever com o fluxo dele, e, se o remoto não tem branch nenhuma — criado agora ou
+   vazio —, que a produção é a primeira branch a enviar.
 2. **Apresentar o método em linguagem comum.** Ler o mapa com a ferramenta `Read`, em
    [`../ajuda/SKILL.md`](../ajuda/SKILL.md) — a skill `/aicf:ajuda` só o usuário invoca, e o
    harness recusaria a ferramenta Skill. **Não com `cat`**: a saída do `cat` cai inteira na tela de
