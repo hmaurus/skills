@@ -18,6 +18,11 @@ concluídas. Aqui ela fica junta.
 2. Conferir o cabeçalho do comando: `cache/aicodingflow/aicf/<versão>/skills/setup`. Sem isso, a
    passada pode estar exercitando a versão anterior.
 3. **Diretório novo.** O setup roda uma vez por projeto, e não migra projeto que já tem governança.
+4. **A configuração global do git entra na passada.** Com `init.defaultBranch = main` no global
+   (`git config --global init.defaultBranch`), o `git init` do setup cria `main`, e a passada não
+   exercita a máquina nova, onde ele cria `master`. Enquanto
+   [o setup supõe que o git init cria main](../projeto/intents/o-setup-supoe-que-o-git-init-cria-main.md)
+   estiver aberta, esse caso não se cobre por passada nenhuma nesta máquina.
 
 ## O que cada ramo prova
 
@@ -263,7 +268,7 @@ jq -r 'select(.type=="assistant") | .message.content[]? | select(.type=="tool_us
 A saída esperada é uma linha `Read` com `ajuda/SKILL.md`, e nenhuma `Skill` nem `Bash` com `cat`.
 
 **A passada da `0.33.0`**, que envia a `main` antes da `develop` quando o `origin` já existe
-([o setup não envia a main a um remoto que já existe](../projeto/specs/o-setup-nao-envia-a-main-a-um-remoto-que-ja-existe.md)).
+([o setup não envia a main a um remoto que já existe](../projeto/concluidas/o-setup-nao-envia-a-main-a-um-remoto-que-ja-existe.md)).
 Ainda não rodou. Três ramos que enviam, cada um terminando com:
 
 ```bash

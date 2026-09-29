@@ -1,6 +1,6 @@
 # O setup não envia a `main` a um remoto que já existe
 
-Processo — entrevista: criar-spec · implementação: a definir · sugestão: aicf-direto (um roteiro de skill e o doc de verificação dele, com as decisões de comportamento já tomadas)
+Processo — entrevista: criar-spec · implementação: aicf-direto
 
 Registrada em 2026-09-28, ao preparar um projeto novo cujo repositório no GitHub foi criado vazio
 antes do setup (`git init` + `git remote add origin` na mão).
@@ -126,3 +126,54 @@ nenhuma oferta, e o resumo traz a linha de enviar a `main` primeiro.
 
 Os repositórios de teste são privados e saem com `gh repo delete <nome> --yes` depois de a passada
 ser avaliada. A demanda fecha com essa verificação em aberto, registrada em "O que está em aberto".
+
+## Relatório de implementação (2026-09-29)
+
+**Status** — concluído no roteiro; verificação de comportamento em aberto. O `setup` tem
+`disable-model-invocation: true`, então a passada é do titular. As quatro condições estão em
+[verificacao-do-setup.md](../../referencias/verificacao-do-setup.md), em "O que está em aberto", e
+se encerram quando a passada da `0.33.0` for registrada em "O que já passou".
+
+**Arquivos alterados**
+
+- `skills/setup/SKILL.md` — seção nova "A `main` no remoto", entre os labels e a branch de trabalho;
+  o push da `develop` passa a depender de a `main` ter subido; o resumo final traz o estado do remoto.
+- `docs/referencias/verificacao-do-setup.md` — as condições da passada da `0.33.0`.
+- `CHANGELOG.md` e `.claude-plugin/plugin.json` — `0.33.0`.
+
+**Commits**
+
+- `789072d` docs(projeto): entrevista do setup que não envia a main vira spec
+- `73688f0` feat(setup): envia a main antes da develop quando o origin já existe
+- `6daa1b8` fix(setup): a main no remoto cobre recusa, diretório sem commit e o caso 0
+
+**Validação**
+
+- `./scripts/check.sh` → `Tudo verde.` depois de cada commit de código.
+- Os códigos de saída do `git ls-remote --exit-code --heads origin main` (`2`, `0`, `128`), pelo
+  bloco da Solução, rodado num repositório bare local.
+- Revisão de código por subagente que não viu a implementação, sobre o `73688f0`. Os achados
+  viraram o `6daa1b8`, menos um, que virou demanda própria (abaixo).
+
+**Escopo efetivo** — a revisão achou quatro casos que a spec não previa, e o `6daa1b8` os cobre:
+
+- **Recusa sem linha no resumo.** A spec só previa a linha de "enviar a `main` primeiro" para quem
+  não tem `gh`. Quem recusa uma das duas confirmações e cria o repositório depois reproduzia o
+  defeito original. Agora a linha sai toda vez que a `main` não sobe.
+- **Diretório sem `.git` ou sem commit.** O usuário recusou o `git init`, ou a identidade do git
+  faltou. A seção agora pula esses casos, em vez de oferecer um `gh repo create --push` que recusaria.
+- **A linha do código `0`**, que tinha conteúdo na spec e não no roteiro.
+- **Os pontos que diziam "só no modo issue"** ("O que o ambiente permite" e a seção do repositório
+  no GitHub) agora dizem que servem também à oferta do modo arquivo.
+
+**Lições** — a revisão confirmou em
+`pkg/cmd/repo/create/create.go:683` do `gh` v2.101.0 que o `gh repo create --push` envia `HEAD`,
+isto é, a branch ativa. Esse é o mecanismo do terceiro caso. Achou também que o `git init` sem
+`init.defaultBranch` cria `master`, o que quebra todo passo do setup que cita `main`: virou
+[o setup supõe que o git init cria main](../intents/o-setup-supoe-que-o-git-init-cria-main.md).
+
+**O que o fechamento gerou** — a demanda
+[o setup supõe que o git init cria main](../intents/o-setup-supoe-que-o-git-init-cria-main.md), e o
+passo 4 de "Antes de qualquer passada" em
+[verificacao-do-setup.md](../../referencias/verificacao-do-setup.md), que avisa que a configuração
+global do git desta máquina esconde o caso `master`.

@@ -9,7 +9,8 @@
   `git ls-remote --exit-code --heads origin main`: `2` envia a `main` com confirmação, `0` (já tem
   `main`) e `128` (não responde) seguem sem push, com uma linha no resumo.
 - No modo arquivo sem remoto, com `gh` instalado e logado, o setup oferece criar o repositório ainda
-  com a `main` ativa. Sem `gh` ou sem login, o resumo diz para enviar a `main` primeiro.
+  com a `main` ativa. Toda vez que a `main` não sobe — recusa, sem `gh`, sem login, remoto que não
+  responde —, o resumo diz para enviá-la antes da `develop`.
 - A `develop` só é enviada se a `main` subiu no mesmo setup, nos dois modos.
 - Verificação de comportamento em aberto: o `setup` só o titular roda, e as condições estão em
   `docs/referencias/verificacao-do-setup.md`.
