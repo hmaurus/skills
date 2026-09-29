@@ -55,8 +55,9 @@ por conta própria. Não insistir: a estrutura criada continua válida, só não
 ## O que o ambiente permite
 
 Com o repositório local de pé, ler o ambiente **na ordem abaixo**, anotando o que falta. Nada é
-executado aqui: a leitura só decide o que a pergunta seguinte oferece, e o que o setup terá de
-resolver se a resposta for issue.
+executado aqui: a leitura só decide o que a pergunta seguinte oferece, o que o setup terá de
+resolver se a resposta for issue, e — no modo arquivo — se "A `main` no remoto" pode oferecer criar
+o repositório.
 
 1. **`command -v gh`** — sem o GitHub CLI o modo issue não existe nesta máquina, e a opção **não é
    oferecida**. Uma linha: o modo issue precisa do GitHub CLI (<https://cli.github.com>); quem o
@@ -333,11 +334,12 @@ de tudo — ver "A branch de trabalho", no fim.
 
 ## O repositório no GitHub, e os labels
 
-Só no modo issue, e **depois do commit**.
+Só no modo issue, e **depois do commit**. O comando de criar o repositório serve também à oferta do
+modo arquivo, em "A `main` no remoto".
 
 ### Criar o repositório, se faltar
 
-`gh repo create` é a primeira ação do setup que cria algo fora do disco local, então vai com
+`gh repo create` cria algo fora do disco local, então vai com
 **confirmação explícita — nome e visibilidade**, e `--private` como sugestão.
 
 ```bash
@@ -373,7 +375,10 @@ mapeamento e deixam os labels para depois.
 
 ## A `main` no remoto
 
-**Nos dois modos, antes de a `develop` existir.** No GitHub, a primeira branch enviada a um
+**Nos dois modos, antes de a `develop` existir — e só com o primeiro commit feito.** Sem `.git`
+(o usuário recusou o `git init`) ou sem commit (a identidade do git faltou e o commit ficou para
+depois), não há `main` para enviar: pular a seção, e o resumo diz para enviar a `main` antes da
+`develop` quando o remoto existir. No GitHub, a primeira branch enviada a um
 repositório vazio vira a default dele; se for a `develop`, produção deixa de ser a default, e
 desfazer isso é mexer em configuração do repositório. Se o `gh repo create --push` acabou de rodar,
 a `main` já subiu e esta seção não tem o que fazer.
@@ -387,18 +392,20 @@ git ls-remote --exit-code --heads origin main
 | Saída | Significado | O setup |
 | --- | --- | --- |
 | `2` | o remoto responde e não tem `main` — vazio, ou só com outras branches | `git push -u origin main`, com **confirmação explícita**: no modo arquivo é a primeira ação que sai do disco local |
-| `0` | o remoto já tem `main` | não envia. Reconciliar histórico que o setup não criou não é dele — e o push seria recusado como non-fast-forward. Uma linha no resumo |
+| `0` | o remoto já tem `main` | não envia — o push seria recusado, e reconciliar histórico que o setup não criou não é dele. Uma linha no resumo: a `main` remota tem histórico próprio, e juntar as duas fica com o usuário |
 | outro (`128`) | o remoto não responde — URL errada, sem rede, sem credencial | mostrar a saída do git e seguir sem push. Uma linha no resumo: enviar a `main` antes da `develop` quando o remoto responder |
 
 No modo arquivo a tabela vale para qualquer provedor: é `git push`, não `gh`.
 
 **Modo arquivo, sem `origin`.** Com `gh` instalado **e** `gh auth status` passando, oferecer criar o
 repositório agora, ainda com a `main` ativa — opcional, com o mesmo comando e a mesma confirmação
-de "Criar o repositório, se faltar". Sem `gh` ou sem login, não
-conduzir login para uma etapa opcional: uma linha no resumo diz que, ao criar o remoto, a `main`
-sobe primeiro — `git push -u origin main` antes de qualquer push da `develop`. Quem cria o
-repositório depois com `gh repo create --push` envia a branch ativa, que ao fim do setup é a
-`develop`.
+de "Criar o repositório, se faltar". Sem `gh` ou sem login, não conduzir login para uma etapa
+opcional.
+
+**Toda vez que a `main` não sobe** — recusa de qualquer das duas confirmações, sem `gh`, sem login —,
+uma linha no resumo diz que, ao criar ou alcançar o remoto, a `main` sobe primeiro:
+`git push -u origin main` antes de qualquer push da `develop`. Quem cria o repositório depois com
+`gh repo create --push` envia a branch ativa, que ao fim do setup é a `develop`.
 
 ## A branch de trabalho
 
@@ -429,8 +436,8 @@ Ao fim, `develop` é a branch ativa: é onde a primeira demanda vai commitar.
 O setup é a primeira vez que o usuário vê o método funcionando, e ele termina sabendo o que ganhou
 e o que fazer em seguida — não só o que foi criado no disco.
 
-1. Listar o que foi criado e onde — os arquivos, o commit, as duas branches, e, no modo issue, o
-   repositório e os labels. **E o estado do remoto:** o que foi enviado, ou a linha de "A `main` no
+1. Listar o que foi criado e onde — os arquivos, o commit, as duas branches, o repositório se o
+   setup o criou, e, no modo issue, os labels. **E o estado do remoto:** o que foi enviado, ou a linha de "A `main` no
    remoto" do caso que ficou sem envio.
 2. **Apresentar o método em linguagem comum.** Ler o mapa com a ferramenta `Read`, em
    [`../ajuda/SKILL.md`](../ajuda/SKILL.md) — a skill `/aicf:ajuda` só o usuário invoca, e o
