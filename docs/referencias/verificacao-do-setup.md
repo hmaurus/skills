@@ -21,7 +21,7 @@ concluídas. Aqui ela fica junta.
 4. **A configuração global do git entra na passada.** Com `init.defaultBranch = main` no global
    (`git config --global init.defaultBranch`), o `git init` do setup cria `main`, e a passada não
    exercita a máquina nova, onde ele cria `master`. Enquanto
-   [o setup supõe que o git init cria main](../projeto/intents/o-setup-supoe-que-o-git-init-cria-main.md)
+   [o setup supõe que o git init cria main](../projeto/specs/o-setup-supoe-que-o-git-init-cria-main.md)
    estiver aberta, esse caso não se cobre por passada nenhuma nesta máquina.
 
 ## O que cada ramo prova

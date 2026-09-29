@@ -170,10 +170,10 @@ se encerram quando a passada da `0.33.0` for registrada em "O que já passou".
 `pkg/cmd/repo/create/create.go:683` do `gh` v2.101.0 que o `gh repo create --push` envia `HEAD`,
 isto é, a branch ativa. Esse é o mecanismo do terceiro caso. Achou também que o `git init` sem
 `init.defaultBranch` cria `master`, o que quebra todo passo do setup que cita `main`: virou
-[o setup supõe que o git init cria main](../intents/o-setup-supoe-que-o-git-init-cria-main.md).
+[o setup supõe que o git init cria main](../specs/o-setup-supoe-que-o-git-init-cria-main.md).
 
 **O que o fechamento gerou** — a demanda
-[o setup supõe que o git init cria main](../intents/o-setup-supoe-que-o-git-init-cria-main.md), e o
+[o setup supõe que o git init cria main](../specs/o-setup-supoe-que-o-git-init-cria-main.md), e o
 passo 4 de "Antes de qualquer passada" em
 [verificacao-do-setup.md](../../referencias/verificacao-do-setup.md), que avisa que a configuração
 global do git desta máquina esconde o caso `master`.
