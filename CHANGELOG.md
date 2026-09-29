@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.34.3 — 2026-09-29
+
+- **A despedida do `/aicf:setup` não pede mais para conferir o `CLAUDE.md` no `/context`.** Nem
+  `/context` nem `/context all` listam os arquivos de memória por caminho — mostram só o total de
+  **Memory files** —, então o usuário não tinha como fazer a conferência. E o `CLAUDE.md` da raiz
+  carrega sempre, o que tirava o motivo do passo. Os passos seguintes subiram um número.
+
 ## 0.34.2 — 2026-09-29
 
 - **O `/aicf:setup` num repositório com histórico não mexe em branch.** Com commit em qualquer

@@ -266,7 +266,7 @@ jq -r 'select(.type=="assistant") | .message.content[]? | select(.type=="tool_us
 ([o mapa pesa em toda demanda](../projeto/concluidas/o-mapa-pesa-em-toda-demanda.md)). O mapa virou
 `/aicf:ajuda`, com `disable-model-invocation: true`, e o harness recusa a ferramenta Skill para ele.
 A condição 3 da `0.28.0` — *Skill, e nenhum `cat` ou `Read`* — passa a ser: **`Read` de
-`ajuda/SKILL.md`, nenhum `cat`, e nenhuma chamada `Skill` para `aicf:ajuda`**; o passo 5 da
+`ajuda/SKILL.md`, nenhum `cat`, e nenhuma chamada `Skill` para `aicf:ajuda`**; o último passo da
 despedida cita `/aicf:ajuda`. O comando que confere:
 
 ```bash
@@ -314,6 +314,11 @@ commit, e o resumo disse isso. O repositório não foi apagado, porque é o do p
 O que essa passada **não** exercitou: o `git init` sem `init.defaultBranch` no global (o global da
 máquina tem `main`), e o Matt desabilitado (a pergunta da mídia trouxe as duas frases do Matt, com ele
 habilitado — correto). **Seguem abertos os ramos 1 e 2 e o ramo sem `gh`.**
+
+A mesma passada derrubou um passo da despedida: pedir que o usuário rodasse `/context` na sessão
+seguinte e conferisse o `CLAUDE.md` em **Memory files**. Nem `/context` nem `/context all` listam os
+arquivos de memória por caminho — só o total da categoria —, e o `CLAUDE.md` da raiz carrega sempre.
+Saiu na `0.34.3`; a conferência é `grep -c '/context' skills/setup/SKILL.md` em `0`.
 
 **A passada da `0.34.2`**, num repositório com histórico
 ([o setup num repositório que já tem histórico](../projeto/concluidas/o-setup-num-repositorio-que-ja-tem-historico.md)).
