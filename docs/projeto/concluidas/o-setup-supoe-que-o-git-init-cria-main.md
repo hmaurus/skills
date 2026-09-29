@@ -1,6 +1,6 @@
 # O setup supõe que o `git init` cria `main`
 
-Processo — entrevista: criar-spec · implementação: a definir · sugestão: aicf-direto (toca dois arquivos da skill `setup` e um doc de referência, sem decisão de abordagem)
+Processo — entrevista: criar-spec · implementação: aicf-direto
 
 Registrada em 2026-09-29, pela revisão de código de
 [o setup não envia a main a um remoto que já existe](../concluidas/o-setup-nao-envia-a-main-a-um-remoto-que-ja-existe.md).
@@ -96,3 +96,48 @@ deixou as duas, e você em `develop`".
 4. **Comportamento do setup** — a skill tem `disable-model-invocation: true`, então o agente não a
    roda. Fica em aberto até uma passada do titular com `init.defaultBranch` desligado, pelo item 4
    de [verificacao-do-setup.md](../../referencias/verificacao-do-setup.md).
+
+## Relatório de implementação (2026-09-29)
+
+- **Status** — concluído no texto; a verificação de comportamento do setup segue em aberto (ver
+  Validação). CI: o run do push deste fechamento (`gh run list --workflow=ci.yml --limit 1`).
+- **Causa raiz** — a skill atribuía o nome da branch ao `git init`, que segue `init.defaultBranch`;
+  sem ele, `master`. A máquina do titular tem `main` no global, e as passadas nunca viram o outro
+  caso.
+- **Arquivos alterados**
+  - `skills/setup/SKILL.md` — `git init -b main`; tabela da branch de produção em "O repositório
+    local"; "O commit cai na branch de produção"; exceção da linha Git na cópia dos templates; nome
+    da produção no resumo; `description` do frontmatter
+  - `skills/setup/templates/claude-md.md` — "O setup deixou as duas"
+  - `docs/referencias/verificacao-do-setup.md` — item 4 diz como exercitar a máquina sem
+    `init.defaultBranch`, guardando e restaurando o valor global
+  - `CHANGELOG.md`, `.claude-plugin/plugin.json` — `0.34.1`
+- **Commits**
+  - `d3df172` docs(projeto): entrevista do git init que não cria main vira spec
+  - `ee09f91` fix(setup): git init -b main, e a produção decidida antes do primeiro commit
+  - `b4ab626` fix(setup): produção sem commit em branch nenhuma, e a verificação restaura o global
+- **Validação**
+  - Verificação 1, rodada com `HOME` vazio: `git init -b main` → `refs/heads/main`;
+    `rev-parse --verify -q HEAD` num repositório novo → 1; `git branch -m main` + commit → `main`.
+  - Verificação 2: ``grep -c 'que o `git init` cria' skills/setup/SKILL.md`` → 0 (era 1);
+    `grep -c 'git init -b main' skills/setup/SKILL.md` → 2.
+  - Verificação 3: `./scripts/check.sh` → `Tudo verde.` depois do `git mv` deste fechamento.
+  - Verificação 4, **em aberto**: o `setup` tem `disable-model-invocation: true`. Encerra na
+    primeira passada do titular pelo item 4 de
+    [verificacao-do-setup.md](../../referencias/verificacao-do-setup.md), com
+    `git branch --format='%(refname:short)'` devolvendo `develop` e `main`, sem `master`.
+  - Revisão de código por subagente fresco sobre `ee09f91`: cinco achados. Três corrigidos em
+    `b4ab626` (o `description` ainda dizia "em main"; o teste de "sem commit" olhava só o `HEAD`,
+    e uma branch órfã ativa ao lado de uma `main` levava ao `git branch -m main` com 128; o passo
+    de religar gravava `main` no global sem condição). Dois foram para intent (ver Escopo efetivo).
+- **Escopo efetivo** — "Sem commit" passou a ser `git rev-list -n 1 --all` vazio, e não mais
+  `git rev-parse --verify -q HEAD` como a Solução e a Verificação 1 desta spec dizem: o segundo
+  confunde branch órfã com repositório vazio. O caso "já existia, com commit" tem defeitos que
+  esta demanda nomeou sem resolver — commit na branch ativa em vez da produção, código `0` do
+  `ls-remote` tratado como histórico divergente quando o push seria fast-forward, e a `develop`
+  que já existe. Nenhum piorou com esta mudança; ficaram em
+  [o setup num repositório que já tem histórico](../intents/o-setup-num-repositorio-que-ja-tem-historico.md),
+  com a reprodução dos três.
+- **Promoção** — nada novo para o `CLAUDE.md` ou para ADR. O conhecimento operacional (como
+  exercitar a máquina sem `init.defaultBranch`) foi direto para `docs/referencias/verificacao-do-setup.md`
+  no código da demanda.
