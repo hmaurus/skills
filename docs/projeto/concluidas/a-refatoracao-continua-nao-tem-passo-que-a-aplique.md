@@ -1,6 +1,6 @@
 # A refatoração contínua não tem passo que a aplique
 
-Processo — entrevista: criar-spec · implementação: a definir · sugestão: aicf-direto (três arquivos de texto e o par versão/CHANGELOG, sem decisão de abordagem)
+Processo — entrevista: criar-spec · implementação: aicf-direto
 
 Registrada em 2026-09-29, a partir da pergunta do titular sobre onde o método manda o agente
 procurar o que simplificar durante uma implementação. Entrevistada no mesmo dia.
@@ -76,3 +76,29 @@ Ninguém aponta para este arquivo pelo caminho de `intents/`
    e reiniciar a sessão, o que é do titular; pela regra de 2026-09-25, não se pede. Encerra na
    primeira demanda implementada pelo `implementar-spec` cujo trecho tocado pedia simplificação: o
    agente a propõe no passo 2 e ela sai num commit próprio, antes do da mudança.
+
+## Relatório de implementação (2026-09-29)
+
+- **Status** — concluído; CI do push de `de6f871` conferido no fechamento.
+- **Arquivos alterados**
+  - `skills/implementar-spec/SKILL.md` — o passo 2 pergunta se o trecho a mudar ficou complexo
+    demais e manda a simplificação para um commit próprio, antes do da mudança; a frase do escopo
+    separa trecho tocado de trecho vizinho
+  - `skills/setup/templates/claude-md.md` e `CLAUDE.md` — sai a frase "Refatoração contínua"
+  - `.claude-plugin/plugin.json` e `CHANGELOG.md` — `0.34.0`
+- **Commits** — `44c2992` docs(projeto): entrevista da refatoração contínua vira spec ·
+  `de6f871` feat(implementar-spec): a refatoração contínua vira pergunta ao ler os arquivos
+- **Validação**
+  - `grep -c 'Refatoração contínua' skills/setup/templates/claude-md.md CLAUDE.md` → `0` nos dois
+  - `grep -rli 'refator' skills/*/SKILL.md` → só `skills/implementar-spec/SKILL.md`
+  - Passo 2 e frase do escopo lidos lado a lado: a mesma linha "trecho tocado × trecho vizinho"
+  - `./scripts/check.sh` → `Tudo verde.`, `0.34.0` no topo do `CHANGELOG.md`
+  - Sem revisão de código: a mudança é texto de skill, `+8 −3` no `implementar-spec`
+    (`git diff --stat 44c2992 de6f871 -- skills/implementar-spec/SKILL.md`)
+  - **Comportamento em aberto**, pela Verificação 5: encerra na primeira demanda implementada pelo
+    `implementar-spec` cujo trecho tocado pedia simplificação — o agente a propõe ao ler os
+    arquivos e ela sai num commit próprio, antes do da mudança.
+- **Escopo efetivo** — o previsto. O passo 2 é descrito sem número na frase do escopo, para não
+  criar ponteiro que envelhece.
+- **Promoção** — nada a promover; o fechamento não gerou ADR, regra nem doc. Nenhuma outra demanda
+  muda.
