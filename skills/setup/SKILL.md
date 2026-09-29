@@ -1,6 +1,6 @@
 ---
 name: setup
-description: Cria a base de governança de um projeto novo — inicializa o repositório git se faltar, pergunta se a demanda mora em arquivos ou em issues do GitHub, e monta o que a escolha pedir: docs/projeto/ com PRD e roadmap e as pastas de demanda, ou o repositório no GitHub e os labels aicf:*, mais o CLAUDE.md raiz — e, se o usuário quiser, os padrões de engenharia. Deixa tudo no primeiro commit, em main (ou na produção que o repositório já tinha), e entrega develop como branch de trabalho. Rodar uma vez, no começo do projeto.
+description: Cria a base de governança de um projeto novo — inicializa o repositório git se faltar, pergunta se a demanda mora em arquivos ou em issues do GitHub, e monta o que a escolha pedir: docs/projeto/ com PRD e roadmap e as pastas de demanda, ou o repositório no GitHub e os labels aicf:*, mais o CLAUDE.md raiz — e, se o usuário quiser, os padrões de engenharia. Em repositório novo, deixa tudo no primeiro commit, em main, e entrega develop como branch de trabalho; em repositório com histórico, um commit na branch ativa, sem mexer em branch nem no remoto. Rodar uma vez, no começo do projeto.
 disable-model-invocation: true
 ---
 
@@ -53,16 +53,19 @@ só descobre no primeiro fechamento de demanda.
 diz isso em uma linha, porque as duas coisas passam a existir assim que o usuário rodar `git init`
 por conta própria. Não insistir: a estrutura criada continua válida, só não versionada.
 
-**A branch de produção se decide aqui, antes de qualquer commit:**
+**Onde o commit cai se decide aqui, antes de qualquer commit:**
 
-| Estado do repositório | O setup | Produção |
+| Estado do repositório | O setup | O commit cai em |
 | --- | --- | --- |
 | o setup acabou de rodar o `git init -b main` | nada | `main` |
 | já existia, sem commit em branch nenhuma (`git rev-list -n 1 --all` sai vazio) | `git branch -m main`, se a branch ativa não for `main` — não há histórico para perder | `main` |
-| já existia, com commit em qualquer branch | nada — renomear branch que o setup não criou não é dele, e ela pode já estar num remoto | `main`, se existe localmente; senão, a branch ativa |
+| já existia, com commit em qualquer branch | nada — as branches e o remoto são do projeto, e ele já tem um fluxo para levar mudança à produção | a branch ativa |
 
-No último caso, quando a produção não se chama `main`, **todo `main` desta skill daqui em diante —
-em comando, tabela, template e resumo — é a branch de produção**, e se troca pelo nome real dela.
+**Com histórico, o setup não mexe em branch.** A governança é uma mudança como outra qualquer: vai
+para a branch ativa e chega à produção pelo fluxo que o projeto já tem (PR, merge). Daí em diante,
+neste caso: o `CLAUDE.md` nasce sem a seção `## Git`, o `gh repo create` roda sem `--push`, e "A
+`main` no remoto" e "A branch de trabalho" não rodam — trocar de branch, criar `develop` ou enviar
+ao remoto seria decidir o fluxo de um projeto que o setup não criou.
 
 ## O que o ambiente permite
 
@@ -270,8 +273,10 @@ Copiar cada template trocando `<NOME>` pelo nome do projeto e preenchendo a desc
 indicado. **A linha `**Mídia do registro:**` recebe o valor que a pergunta da mídia respondeu** — é
 a única fonte da verdade da escolha, e deixá-la com o texto do template faz toda skill ler a mídia
 errada. **Não reescrever o template por conta própria:** o que estiver marcado como a preencher
-fica marcado; é o usuário que preenche, na primeira demanda ou quando quiser. A exceção é a linha
-da seção Git do `CLAUDE.md`: se a produção não se chama `main`, o `main` dela recebe o nome real.
+fica marcado; é o usuário que preenche, na primeira demanda ou quando quiser. A exceção é a seção
+`## Git` do `CLAUDE.md`, que **sai inteira em repositório com histórico**: ela descreve o par
+`main`/`develop` que o setup entrega, e ali ele não entrega — o fluxo de git do projeto quem escreve
+é o usuário.
 
 Se o projeto já tem `CLAUDE.md` na raiz, não substituir: mostrar a seção "Processos de
 desenvolvimento" do template e propor acrescentá-la ao arquivo existente.
@@ -335,15 +340,25 @@ Depois de criar os arquivos e colar os padrões de engenharia, **nos dois modos*
 inteiro leva junto o que estiver lá dentro. O setup não decide o que vai para o histórico de
 arquivo que ele não criou.
 
-A mensagem segue o idioma do projeto que está nascendo: `chore: estrutura de governança do projeto`.
+**E o commit também nomeia os caminhos**, depois do `git add` deles:
+
+```bash
+git commit -m 'chore: estrutura de governança do projeto' -- <caminhos>
+```
+
+`git commit` sem caminhos commita o índice inteiro — inclusive o que o usuário deixou em stage antes
+de rodar o setup. Com os caminhos, isso continua em stage e fora do commit.
+
+A mensagem segue o idioma do projeto que está nascendo.
 
 **Máquina sem identidade de git configurada** faz o `git commit` falhar com
 `Author identity unknown`. Acontece justamente onde o `git init` acabou de rodar. Nesse caso,
 mostrar `git config --global user.name` e `user.email` para o usuário rodar, e commitar depois —
 não configurar a identidade dele por conta própria.
 
-**O commit cai na branch de produção** decidida em "O repositório local". A branch de trabalho nasce depois
-de tudo — ver "A branch de trabalho", no fim.
+**O commit cai onde "O repositório local" decidiu:** na `main`, em repositório novo; na branch
+ativa, em repositório com histórico. A branch de trabalho, quando o setup a cria, nasce depois de
+tudo — ver "A branch de trabalho", no fim.
 
 ## O repositório no GitHub, e os labels
 
@@ -366,6 +381,11 @@ git, recusa com `current directory is not a git repository`. Nada quebra pela me
 onboarding para com um erro — e criar o remoto antes de os arquivos existirem é exatamente como se
 chega lá.
 
+**Em repositório com histórico, sem `--push`:** `gh repo create <nome> --private --source=. --remote=origin`
+cria o repositório e o `origin` sem enviar nada. O `--push` enviaria a branch ativa, e a primeira
+branch enviada vira a default no GitHub — uma `feature` ativa viraria a default do repositório. As
+issues e os labels não dependem de código no remoto; o resumo diz para enviar primeiro a produção.
+
 **Fora dessa ordem, pesquisar em vez de improvisar.** O comando acima cobre o caso comum;
 organização em vez de conta pessoal, SSH em vez de HTTPS, GitHub Enterprise, escopo de token
 faltando, nome já em uso — cada um tem resposta na documentação do `gh`, e consultá-la na hora é o
@@ -387,6 +407,9 @@ inexistente **falha em vez de criar**. É a armadilha mais repetida sobre setups
 mapeamento e deixam os labels para depois.
 
 ## A `main` no remoto
+
+**Não roda em repositório com histórico** — ver "O repositório local"; a oferta de criar o
+repositório no modo arquivo também não.
 
 **Nos dois modos, antes de a `develop` existir — e só com o primeiro commit feito.** Sem `.git`
 (o usuário recusou o `git init`) ou sem commit (a identidade do git faltou e o commit ficou para
@@ -422,6 +445,9 @@ uma linha no resumo diz que, ao criar ou alcançar o remoto, a `main` sobe prime
 
 ## A branch de trabalho
 
+**Não roda em repositório com histórico:** a `develop` pode já existir (`git branch develop` sairia
+com 128), e criar a branch de trabalho de um projeto em andamento não é do setup.
+
 **O último passo antes do fechamento**, nos dois modos. O `CLAUDE.md` que o setup acabou de escrever
 descreve `develop` como branch de trabalho e `main` como produção; este passo é o que faz o
 repositório corresponder a isso, em vez de o arquivo descrever algo que não existe.
@@ -449,10 +475,12 @@ Ao fim, `develop` é a branch ativa: é onde a primeira demanda vai commitar.
 O setup é a primeira vez que o usuário vê o método funcionando, e ele termina sabendo o que ganhou
 e o que fazer em seguida — não só o que foi criado no disco.
 
-1. Listar o que foi criado e onde — os arquivos, o commit, as duas branches (com o nome da produção,
-   se não for `main`), o repositório se o
+1. Listar o que foi criado e onde — os arquivos, o commit, as duas branches, o repositório se o
    setup o criou, e, no modo issue, os labels. **E o estado do remoto:** o que foi enviado, ou a linha de "A `main` no
-   remoto" do caso que ficou sem envio.
+   remoto" do caso que ficou sem envio. **Em repositório com histórico**, no lugar das branches e
+   do remoto: em que branch o commit ficou, que a seção `## Git` do `CLAUDE.md` ficou de fora para
+   o usuário escrever com o fluxo dele, e, se o repositório no GitHub nasceu agora, que a produção
+   é a primeira branch a enviar.
 2. **Apresentar o método em linguagem comum.** Ler o mapa com a ferramenta `Read`, em
    [`../ajuda/SKILL.md`](../ajuda/SKILL.md) — a skill `/aicf:ajuda` só o usuário invoca, e o
    harness recusaria a ferramenta Skill. **Não com `cat`**: a saída do `cat` cai inteira na tela de

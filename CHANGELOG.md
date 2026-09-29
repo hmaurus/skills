@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.34.2 — 2026-09-29
+
+- **O `/aicf:setup` num repositório com histórico não mexe em branch.** Com commit em qualquer
+  branch, a governança vai num commit na branch ativa, e chega à produção pelo fluxo do projeto. O
+  setup não troca de branch, não cria `develop` (o `git branch develop` saía com 128 quando ela já
+  existia), não envia ao remoto (o código `0` de `git ls-remote --exit-code` fazia o resumo afirmar
+  "histórico próprio" de uma `main` que era só a local já enviada), e o `CLAUDE.md` nasce sem a seção
+  `## Git`. No modo issue, `gh repo create` roda sem `--push`, para uma `feature` ativa não virar a
+  default no GitHub. Antes, o texto dizia que o commit caía na produção e ele caía na branch ativa.
+- **O commit do setup nomeia os caminhos** (`git commit -m … -- <caminhos>`), em qualquer caso:
+  sem eles, o que o usuário tinha em stage ia junto.
+
 ## 0.34.1 — 2026-09-29
 
 - **O `/aicf:setup` deixa de supor que o `git init` cria `main`.** Sem `init.defaultBranch`
