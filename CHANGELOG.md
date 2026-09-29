@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.35.0 — 2026-09-29
+
+- **O `/aicf:criar-prd` aceita material de partida.** `/aicf:criar-prd ideia-inicial.md` ou
+  `/aicf:criar-prd <texto>`: a skill lê o arquivo, ou usa o texto, antes da primeira pergunta,
+  mostra o que ele já responde de cada seção e entrevista o resto. O que o material afirma se
+  confirma com o usuário antes de entrar no PRD. Antes, o argumento chegava ao agente só como
+  `ARGUMENTS: …` acrescentado no fim da skill, sem instrução do que fazer com ele. Usa argumento
+  nomeado (`arguments: contexto`), que a doc do Claude Code garante virar string vazia quando
+  não há argumento (code.claude.com/docs/en/skills, seção *Available string substitutions*).
+- O `/aicf:criar-spec` fica como está: o contexto extra de uma demanda vai para o intent, que a
+  skill já lê antes de perguntar.
+- Verificação de comportamento em aberto: a `criar-prd` só o titular invoca; encerra na primeira
+  rodada real com material de partida.
+
 ## 0.34.3 — 2026-09-29
 
 - **A despedida do `/aicf:setup` não pede mais para conferir o `CLAUDE.md` no `/context`.** Nem

@@ -2,6 +2,8 @@
 name: criar-prd
 description: Entrevista o usuário sobre o produto — problema, público, escopo, sucesso — e escreve o PRD do projeto. Rodar no começo, e de novo quando uma decisão contrariar o que está escrito.
 disable-model-invocation: true
+argument-hint: "[arquivo ou texto de contexto]"
+arguments: contexto
 ---
 
 # Criar o PRD por entrevista
@@ -20,6 +22,16 @@ roda de novo, sem cerimônia de fechamento.
 `docs/projeto/PRD.md`. Se já existe preenchido, é **modo revisão**: ler antes de perguntar,
 mostrar o que já está respondido e entrevistar só o que mudou ou ficou aberto — não reescrever
 seção que continua válida. Sem `docs/projeto/`, perguntar onde gravar em vez de inventar pasta.
+
+## Material de partida
+
+Material passado na invocação: $contexto
+
+Vazio, a entrevista começa do zero. Se for caminho de arquivo, ler o arquivo; se for texto, o
+texto é o material. Ler antes da primeira pergunta, mostrar seção por seção do PRD o que ele já
+responde, e entrevistar o resto — como no modo revisão, com uma diferença: o PRD existente foi
+decidido, o material não. O que ele afirma **se confirma com o usuário** antes de entrar no PRD,
+e o que ele não diz continua lacuna, não vira inferência.
 
 ## Como entrevistar
 
