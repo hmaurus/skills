@@ -136,7 +136,7 @@ deixou as duas, e você em `develop`".
   esta demanda nomeou sem resolver — commit na branch ativa em vez da produção, código `0` do
   `ls-remote` tratado como histórico divergente quando o push seria fast-forward, e a `develop`
   que já existe. Nenhum piorou com esta mudança; ficaram em
-  [o setup num repositório que já tem histórico](../specs/o-setup-num-repositorio-que-ja-tem-historico.md),
+  [o setup num repositório que já tem histórico](../concluidas/o-setup-num-repositorio-que-ja-tem-historico.md),
   com a reprodução dos três.
 - **Promoção** — nada novo para o `CLAUDE.md` ou para ADR. O conhecimento operacional (como
   exercitar a máquina sem `init.defaultBranch`) foi direto para `docs/referencias/verificacao-do-setup.md`

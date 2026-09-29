@@ -1,6 +1,6 @@
 # O setup num repositório que já tem histórico
 
-Processo — entrevista: criar-spec · implementação: a definir · sugestão: aicf-direto (um arquivo de skill e um template, sem decisão de abordagem em aberto)
+Processo — entrevista: criar-spec · implementação: aicf-direto
 
 Registrada em 2026-09-29, pela revisão de código de
 [o setup supõe que o git init cria main](../concluidas/o-setup-supoe-que-o-git-init-cria-main.md),
@@ -92,8 +92,11 @@ O que muda, por seção do `skills/setup/SKILL.md`:
   fluxo do projeto; quem sabe é o usuário.
 - **Perguntar qual branch enviar depois do `gh repo create`.** Descartado: o setup não envia nada
   em repositório com histórico, e a linha do resumo basta.
-- **Nenhuma outra skill lê a seção Git.** `grep -rn 'branch de trabalho' skills --include=SKILL.md | grep -v '^skills/setup'`
-  sai vazio em `6fe0d32`; se passar a achar algo, a omissão precisa ser revista.
+- **Quem mais lê a seção Git:** o `implementar-spec` tira dela o workspace default e, sem ela, usa
+  a branch atual — o que, com histórico, é o certo.
+  ``grep -rn '## Git' skills --include=SKILL.md | grep -v '^skills/setup'`` acha só essa linha em
+  `1a9443c`; um leitor novo pede rever a omissão. _(A primeira versão desta linha usava
+  `grep 'branch de trabalho'`, que não enxergava esse leitor; corrigida no fechamento.)_
 
 ## Verificação
 
@@ -125,3 +128,53 @@ O que muda, por seção do `skills/setup/SKILL.md`:
    [verificacao-do-setup.md](../../referencias/verificacao-do-setup.md): um commit na branch ativa
    só com os caminhos do setup, nenhuma branch criada ou enviada, `CLAUDE.md` sem `## Git`, e o
    resumo nomeando a branch.
+
+## Relatório de implementação (2026-09-29)
+
+**Status:** concluído. Sem CI conferido ainda — o push fica com o titular.
+
+**Arquivos alterados**
+
+- `skills/setup/SKILL.md` — a tabela de "O repositório local" passa a dizer onde o commit cai, e o
+  caso com histórico não mexe em branch; o `CLAUDE.md` nasce sem `## Git`; o commit nomeia os
+  caminhos; três estados param o setup antes do commit; `gh repo create` sem `--push`; "A `main` no
+  remoto" e "A branch de trabalho" não rodam; o resumo nomeia a branch do commit.
+- `docs/referencias/verificacao-do-setup.md` — a passada da `0.34.2`, nos ramos arquivo e issue.
+- `.claude-plugin/plugin.json` e `CHANGELOG.md` — `0.34.2`.
+
+**Commits**
+
+- `d8fad48` docs(projeto): entrevista do setup em repositório com histórico vira spec
+- `8150915` fix(setup): repositório com histórico recebe o commit na branch ativa, sem mexer em branch
+- `1a9443c` fix(setup): merge, HEAD destacado e branch sem commit param o setup antes do commit
+
+**Validação**
+
+- Verificação 1 rodada na entrevista e de novo no fechamento, com a saída prevista.
+- Verificação 2: em `skills/setup/SKILL.md`, `grep -c 'senão, a branch ativa'` → 0,
+  ``grep -c 'sem `--push`'`` → 2, `grep -c ' -- <'` → 1 (em `8150915`).
+- `./scripts/check.sh` → `Tudo verde.` nos dois commits de código.
+- Revisão por subagente sem contexto da implementação, sobre `8150915`: nove achados, nenhum
+  bloqueante; os seis que mudavam texto entraram em `1a9443c`.
+- Os três estados que param o setup, reproduzidos com git 2.43 e `HOME` vazio: `git commit -- <caminhos>`
+  no meio de um merge sai com 128 (`cannot do a partial commit during a merge`) e
+  `git rev-parse -q --verify MERGE_HEAD` sai com 0; depois de `git checkout --detach`,
+  `git symbolic-ref -q HEAD` sai com 1; com `git init` + `git fetch`, o commit do setup não tem
+  `git merge-base` com `origin/main` (sai com 1).
+- **Verificação 4 em aberto:** a skill tem `disable-model-invocation: true`. Encerra na passada da
+  `0.34.2` de [verificacao-do-setup.md](../../referencias/verificacao-do-setup.md), que o titular
+  roda no uso real.
+
+**Escopo efetivo** — além da spec: o quarto defeito (o índice do usuário), achado na entrevista; e,
+da revisão, a parada nos três estados, o aviso de "enviar a produção primeiro" também para remoto
+vazio que já existia, e a ressalva de que stage num arquivo que o setup também edita vai junto.
+
+**Lições**
+
+- A salvaguarda "nenhuma outra skill lê a seção Git" foi escrita com um grep pela frase do conteúdo,
+  não pelo heading; o leitor real (`implementar-spec`) cita `## Git`. É a mesma regra que o
+  `CLAUDE.md` já tem — o comando mira o trecho, não o assunto —, aplicada a quem lê em vez de a
+  quem muda.
+
+O ritual não gerou ADR, regra nova ou skill; o doc de referência tocado é o `verificacao-do-setup.md`,
+acima. Nenhuma demanda nova nem obsoleta.

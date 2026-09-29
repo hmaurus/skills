@@ -298,7 +298,7 @@ resumo traz a linha de enviar a `main` primeiro. Os repositórios de teste saem 
 `gh repo delete <nome> --yes` depois de a passada ser avaliada.
 
 **A passada da `0.34.2`**, num repositório com histórico
-([o setup num repositório que já tem histórico](../projeto/specs/o-setup-num-repositorio-que-ja-tem-historico.md)).
+([o setup num repositório que já tem histórico](../projeto/concluidas/o-setup-num-repositorio-que-ja-tem-historico.md)).
 Ainda não rodou. Preparo: `main` e `develop` com commits, as duas no `origin`, uma `feature` ativa e
 um arquivo qualquer em stage. Antes do setup, guardar o estado das refs:
 
