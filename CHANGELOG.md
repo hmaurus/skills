@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.34.1 — 2026-09-29
+
+- **O `/aicf:setup` deixa de supor que o `git init` cria `main`.** Sem `init.defaultBranch`
+  configurado, o git cria `master`, e numa máquina nova o `git push -u origin main` saía com
+  `error: src refspec main does not match any`. O setup agora roda `git init -b main`; num
+  repositório que o usuário iniciou antes, ainda sem commit, renomeia a branch para `main`
+  (`git branch -m main`). Com histórico, não renomeia: a produção é a `main`, se existe, ou a branch
+  ativa, e o nome real substitui `main` nos comandos, na linha Git do `CLAUDE.md` e no resumo.
+- O template do `CLAUDE.md` diz "O setup deixou as duas", porque a produção pode já existir.
+- Verificação de comportamento em aberto: o `setup` só o titular roda; o item 4 de
+  `docs/referencias/verificacao-do-setup.md` diz como exercitar a máquina sem
+  `init.defaultBranch`.
+
 ## 0.34.0 — 2026-09-29
 
 - **A refatoração contínua passa a ter passo que a aplique.** O `/aicf:implementar-spec`, ao ler

@@ -19,10 +19,19 @@ concluídas. Aqui ela fica junta.
    passada pode estar exercitando a versão anterior.
 3. **Diretório novo.** O setup roda uma vez por projeto, e não migra projeto que já tem governança.
 4. **A configuração global do git entra na passada.** Com `init.defaultBranch = main` no global
-   (`git config --global init.defaultBranch`), o `git init` do setup cria `main`, e a passada não
-   exercita a máquina nova, onde ele cria `master`. Enquanto
-   [o setup supõe que o git init cria main](../projeto/specs/o-setup-supoe-que-o-git-init-cria-main.md)
-   estiver aberta, esse caso não se cobre por passada nenhuma nesta máquina.
+   (`git config --global init.defaultBranch`), qualquer `git init` cria `main`, e a passada não
+   exercita a máquina nova, onde ele cria `master`. Para exercitá-la, desligar antes e religar
+   depois:
+
+   ```bash
+   git config --global --unset init.defaultBranch   # antes da passada
+   git config --global init.defaultBranch main      # depois
+   ```
+
+   O setup cobre dois casos em que o `master` apareceria: o `git init` que ele mesmo roda
+   (`git init -b main`) e o repositório que o usuário iniciou antes, sem commit (`git branch -m
+   main`). O segundo se exercita rodando `git init` no diretório antes do `/aicf:setup`. Nos dois,
+   `git branch --format='%(refname:short)'` ao fim devolve `develop` e `main`, sem `master`.
 
 ## O que cada ramo prova
 

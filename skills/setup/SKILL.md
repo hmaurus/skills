@@ -43,7 +43,8 @@ só prepara o lugar onde eles vão morar.
 **Antes da pergunta da mídia**, conferir se o diretório é repositório git. Não sendo, explicar **em
 uma linha** por que o método depende de versionamento — a demanda muda de estado por `git mv`, o
 relatório vive no histórico, e `.gitkeep` num diretório sem git não segura pasta nenhuma — e
-perguntar. Sim, `git init`: é local, barato e desfeito com `rm -rf .git`.
+perguntar. Sim, `git init -b main`: é local, barato e desfeito com `rm -rf .git`. O `-b` é o que
+garante o nome — sem `init.defaultBranch` configurado, o `git init` puro cria `master`.
 
 Montar a governança num diretório sem repositório entrega um método que não funciona, e o usuário
 só descobre no primeiro fechamento de demanda.
@@ -51,6 +52,17 @@ só descobre no primeiro fechamento de demanda.
 **Dito não, o setup segue em modo arquivo**, sem primeiro commit e sem oferecer o modo issue — e
 diz isso em uma linha, porque as duas coisas passam a existir assim que o usuário rodar `git init`
 por conta própria. Não insistir: a estrutura criada continua válida, só não versionada.
+
+**A branch de produção se decide aqui, antes de qualquer commit:**
+
+| Estado do repositório | O setup | Produção |
+| --- | --- | --- |
+| o setup acabou de rodar o `git init -b main` | nada | `main` |
+| já existia, sem commit (`git rev-parse --verify -q HEAD` sai com 1) | `git branch -m main`, se a branch ativa não for `main` — não há histórico para perder | `main` |
+| já existia, com commit | nada — renomear branch que o setup não criou não é dele, e ela pode já estar num remoto | `main`, se existe localmente; senão, a branch ativa |
+
+No último caso, quando a produção não se chama `main`, **todo `main` desta skill daqui em diante —
+em comando, tabela, template e resumo — é a branch de produção**, e se troca pelo nome real dela.
 
 ## O que o ambiente permite
 
@@ -258,7 +270,8 @@ Copiar cada template trocando `<NOME>` pelo nome do projeto e preenchendo a desc
 indicado. **A linha `**Mídia do registro:**` recebe o valor que a pergunta da mídia respondeu** — é
 a única fonte da verdade da escolha, e deixá-la com o texto do template faz toda skill ler a mídia
 errada. **Não reescrever o template por conta própria:** o que estiver marcado como a preencher
-fica marcado; é o usuário que preenche, na primeira demanda ou quando quiser.
+fica marcado; é o usuário que preenche, na primeira demanda ou quando quiser. A exceção é a linha
+da seção Git do `CLAUDE.md`: se a produção não se chama `main`, o `main` dela recebe o nome real.
 
 Se o projeto já tem `CLAUDE.md` na raiz, não substituir: mostrar a seção "Processos de
 desenvolvimento" do template e propor acrescentá-la ao arquivo existente.
@@ -329,7 +342,7 @@ A mensagem segue o idioma do projeto que está nascendo: `chore: estrutura de go
 mostrar `git config --global user.name` e `user.email` para o usuário rodar, e commitar depois —
 não configurar a identidade dele por conta própria.
 
-**O commit cai em `main`**, que é a branch que o `git init` cria. A branch de trabalho nasce depois
+**O commit cai na branch de produção** decidida em "O repositório local". A branch de trabalho nasce depois
 de tudo — ver "A branch de trabalho", no fim.
 
 ## O repositório no GitHub, e os labels
@@ -436,7 +449,8 @@ Ao fim, `develop` é a branch ativa: é onde a primeira demanda vai commitar.
 O setup é a primeira vez que o usuário vê o método funcionando, e ele termina sabendo o que ganhou
 e o que fazer em seguida — não só o que foi criado no disco.
 
-1. Listar o que foi criado e onde — os arquivos, o commit, as duas branches, o repositório se o
+1. Listar o que foi criado e onde — os arquivos, o commit, as duas branches (com o nome da produção,
+   se não for `main`), o repositório se o
    setup o criou, e, no modo issue, os labels. **E o estado do remoto:** o que foi enviado, ou a linha de "A `main` no
    remoto" do caso que ficou sem envio.
 2. **Apresentar o método em linguagem comum.** Ler o mapa com a ferramenta `Read`, em
