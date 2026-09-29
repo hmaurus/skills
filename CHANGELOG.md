@@ -8,6 +8,8 @@
   repositório que o usuário iniciou antes, ainda sem commit, renomeia a branch para `main`
   (`git branch -m main`). Com histórico, não renomeia: a produção é a `main`, se existe, ou a branch
   ativa, e o nome real substitui `main` nos comandos, na linha Git do `CLAUDE.md` e no resumo.
+  "Sem commit" quer dizer em branch nenhuma (`git rev-list -n 1 --all` vazio): uma branch órfã
+  ativa ao lado de uma `main` com histórico cai no caso com histórico.
 - O template do `CLAUDE.md` diz "O setup deixou as duas", porque a produção pode já existir.
 - Verificação de comportamento em aberto: o `setup` só o titular roda; o item 4 de
   `docs/referencias/verificacao-do-setup.md` diz como exercitar a máquina sem

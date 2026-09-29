@@ -24,8 +24,9 @@ concluídas. Aqui ela fica junta.
    depois:
 
    ```bash
-   git config --global --unset init.defaultBranch   # antes da passada
-   git config --global init.defaultBranch main      # depois
+   antes=$(git config --global init.defaultBranch)   # antes da passada: guarda o valor
+   git config --global --unset init.defaultBranch
+   [ -n "$antes" ] && git config --global init.defaultBranch "$antes"   # depois: restaura
    ```
 
    O setup cobre dois casos em que o `master` apareceria: o `git init` que ele mesmo roda

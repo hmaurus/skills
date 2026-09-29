@@ -1,6 +1,6 @@
 ---
 name: setup
-description: Cria a base de governança de um projeto novo — inicializa o repositório git se faltar, pergunta se a demanda mora em arquivos ou em issues do GitHub, e monta o que a escolha pedir: docs/projeto/ com PRD e roadmap e as pastas de demanda, ou o repositório no GitHub e os labels aicf:*, mais o CLAUDE.md raiz — e, se o usuário quiser, os padrões de engenharia. Deixa tudo no primeiro commit, em main, e entrega develop como branch de trabalho. Rodar uma vez, no começo do projeto.
+description: Cria a base de governança de um projeto novo — inicializa o repositório git se faltar, pergunta se a demanda mora em arquivos ou em issues do GitHub, e monta o que a escolha pedir: docs/projeto/ com PRD e roadmap e as pastas de demanda, ou o repositório no GitHub e os labels aicf:*, mais o CLAUDE.md raiz — e, se o usuário quiser, os padrões de engenharia. Deixa tudo no primeiro commit, em main (ou na produção que o repositório já tinha), e entrega develop como branch de trabalho. Rodar uma vez, no começo do projeto.
 disable-model-invocation: true
 ---
 
@@ -58,8 +58,8 @@ por conta própria. Não insistir: a estrutura criada continua válida, só não
 | Estado do repositório | O setup | Produção |
 | --- | --- | --- |
 | o setup acabou de rodar o `git init -b main` | nada | `main` |
-| já existia, sem commit (`git rev-parse --verify -q HEAD` sai com 1) | `git branch -m main`, se a branch ativa não for `main` — não há histórico para perder | `main` |
-| já existia, com commit | nada — renomear branch que o setup não criou não é dele, e ela pode já estar num remoto | `main`, se existe localmente; senão, a branch ativa |
+| já existia, sem commit em branch nenhuma (`git rev-list -n 1 --all` sai vazio) | `git branch -m main`, se a branch ativa não for `main` — não há histórico para perder | `main` |
+| já existia, com commit em qualquer branch | nada — renomear branch que o setup não criou não é dele, e ela pode já estar num remoto | `main`, se existe localmente; senão, a branch ativa |
 
 No último caso, quando a produção não se chama `main`, **todo `main` desta skill daqui em diante —
 em comando, tabela, template e resumo — é a branch de produção**, e se troca pelo nome real dela.

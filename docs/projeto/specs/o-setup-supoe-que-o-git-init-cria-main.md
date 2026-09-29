@@ -32,7 +32,7 @@ três casos:
 | Estado do repositório | O setup | Produção |
 | --- | --- | --- |
 | não existe, e o usuário aceita o `git init` | `git init -b main` | `main` |
-| existe, sem commit (`git rev-parse --verify -q HEAD` sai com 1) | `git branch -m main` se a branch ativa não for `main` — não há histórico para perder | `main` |
+| existe, sem commit em branch nenhuma (`git rev-list -n 1 --all` sai vazio) | `git branch -m main` se a branch ativa não for `main` — não há histórico para perder | `main` |
 | existe, com commit | nada — não renomeia o que não criou | `main` se ela existe localmente; senão, a branch ativa |
 
 Os dois comandos foram conferidos no git 2.43 com `HOME` vazio: `git init -b main` deixa
