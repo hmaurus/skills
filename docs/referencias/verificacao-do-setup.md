@@ -261,3 +261,23 @@ jq -r 'select(.type=="assistant") | .message.content[]? | select(.type=="tool_us
 ```
 
 A saída esperada é uma linha `Read` com `ajuda/SKILL.md`, e nenhuma `Skill` nem `Bash` com `cat`.
+
+**A passada da `0.33.0`**, que envia a `main` antes da `develop` quando o `origin` já existe
+([o setup não envia a main a um remoto que já existe](../projeto/specs/o-setup-nao-envia-a-main-a-um-remoto-que-ja-existe.md)).
+Ainda não rodou. Três ramos que enviam, cada um terminando com:
+
+```bash
+git ls-remote --heads origin | awk '{print $2}'                 # refs/heads/develop e refs/heads/main
+gh repo view --json defaultBranchRef -q .defaultBranchRef.name  # main
+git branch --show-current                                       # develop
+```
+
+1. **Modo arquivo, `origin` vazio** — repositório criado vazio no GitHub e `git remote add origin`
+   antes do setup. O setup pergunta antes do `git push -u origin main`.
+2. **Modo issue, `origin` vazio** — o mesmo preparo, escolhendo issues. Nenhum `gh repo create` no
+   transcript.
+3. **Modo arquivo, sem remoto, `gh` logado** — aceitar a oferta de criar o repositório.
+
+E um ramo que não envia: **modo arquivo, sem remoto, sem `gh` no `PATH`** — nenhuma oferta, e o
+resumo traz a linha de enviar a `main` primeiro. Os repositórios de teste saem com
+`gh repo delete <nome> --yes` depois de a passada ser avaliada.

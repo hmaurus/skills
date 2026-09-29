@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.33.0 — 2026-09-29
+
+- **O `/aicf:setup` envia a `main` antes da `develop` quando o `origin` já existe.** Antes, só o
+  `gh repo create --push` do modo issue enviava a `main`; com um remoto configurado na mão, o modo
+  issue enviava só a `develop`, e o modo arquivo não enviava nada — e a primeira branch que chega a
+  um repositório vazio do GitHub vira a default. A seção nova "A `main` no remoto" lê
+  `git ls-remote --exit-code --heads origin main`: `2` envia a `main` com confirmação, `0` (já tem
+  `main`) e `128` (não responde) seguem sem push, com uma linha no resumo.
+- No modo arquivo sem remoto, com `gh` instalado e logado, o setup oferece criar o repositório ainda
+  com a `main` ativa. Sem `gh` ou sem login, o resumo diz para enviar a `main` primeiro.
+- A `develop` só é enviada se a `main` subiu no mesmo setup, nos dois modos.
+- Verificação de comportamento em aberto: o `setup` só o titular roda, e as condições estão em
+  `docs/referencias/verificacao-do-setup.md`.
+
 ## 0.32.0 — 2026-09-26
 
 - **A passagem entre fases é da governança, e o `CLAUDE.md` diz isso.** Pelo `brainstorming` do

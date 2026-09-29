@@ -371,6 +371,35 @@ seção "Criar os labels".
 inexistente **falha em vez de criar**. É a armadilha mais repetida sobre setups que só gravam o
 mapeamento e deixam os labels para depois.
 
+## A `main` no remoto
+
+**Nos dois modos, antes de a `develop` existir.** No GitHub, a primeira branch enviada a um
+repositório vazio vira a default dele; se for a `develop`, produção deixa de ser a default, e
+desfazer isso é mexer em configuração do repositório. Se o `gh repo create --push` acabou de rodar,
+a `main` já subiu e esta seção não tem o que fazer.
+
+**Com `origin` configurado**, ler o remoto pelo código de saída, não pela mensagem:
+
+```bash
+git ls-remote --exit-code --heads origin main
+```
+
+| Saída | Significado | O setup |
+| --- | --- | --- |
+| `2` | o remoto responde e não tem `main` — vazio, ou só com outras branches | `git push -u origin main`, com **confirmação explícita**: no modo arquivo é a primeira ação que sai do disco local |
+| `0` | o remoto já tem `main` | não envia. Reconciliar histórico que o setup não criou não é dele — e o push seria recusado como non-fast-forward. Uma linha no resumo |
+| outro (`128`) | o remoto não responde — URL errada, sem rede, sem credencial | mostrar a saída do git e seguir sem push. Uma linha no resumo: enviar a `main` antes da `develop` quando o remoto responder |
+
+No modo arquivo a tabela vale para qualquer provedor: é `git push`, não `gh`.
+
+**Modo arquivo, sem `origin`.** Com `gh` instalado **e** `gh auth status` passando, oferecer criar o
+repositório agora, ainda com a `main` ativa — opcional, com o mesmo comando e a mesma confirmação
+de "Criar o repositório, se faltar". Sem `gh` ou sem login, não
+conduzir login para uma etapa opcional: uma linha no resumo diz que, ao criar o remoto, a `main`
+sobe primeiro — `git push -u origin main` antes de qualquer push da `develop`. Quem cria o
+repositório depois com `gh repo create --push` envia a branch ativa, que ao fim do setup é a
+`develop`.
+
 ## A branch de trabalho
 
 **O último passo antes do fechamento**, nos dois modos. O `CLAUDE.md` que o setup acabou de escrever
@@ -380,14 +409,18 @@ repositório corresponder a isso, em vez de o arquivo descrever algo que não ex
 ```bash
 git branch develop
 git switch develop
-git push -u origin develop   # só no modo issue
+git push -u origin develop   # só se a main subiu neste setup
 ```
 
-**A posição na ordem é o que importa, e ela não é arbitrária.** O `gh repo create --push` roda com
-`main` ativa, então é `main` que sobe primeiro e fica sendo o default do repositório no GitHub —
-produção como default, que é o que o fluxo pede. Criar a `develop` antes disso inverte o resultado:
-ela sobe primeiro e vira o default remoto, e desfazer isso depois é mexer em configuração do
-repositório em vez de rodar um comando.
+**A posição na ordem é o que importa, e ela não é arbitrária.** O `gh repo create --push` e o push
+de "A `main` no remoto" rodam com `main` ativa, então é `main` que sobe primeiro
+e fica sendo o default do repositório no GitHub — produção como default, que é o que o fluxo pede.
+Criar a `develop` antes disso inverte o resultado: ela sobe primeiro e vira o default remoto, e
+desfazer isso depois é mexer em configuração do repositório em vez de rodar um comando.
+
+**A `develop` só sobe se a `main` subiu neste setup**, por qualquer dos dois caminhos. Remoto que
+já tinha `main`, que não respondeu, ou push que o usuário recusou: a `develop` fica local, e o
+remoto como o usuário o deixou.
 
 Ao fim, `develop` é a branch ativa: é onde a primeira demanda vai commitar.
 
@@ -397,7 +430,8 @@ O setup é a primeira vez que o usuário vê o método funcionando, e ele termin
 e o que fazer em seguida — não só o que foi criado no disco.
 
 1. Listar o que foi criado e onde — os arquivos, o commit, as duas branches, e, no modo issue, o
-   repositório e os labels.
+   repositório e os labels. **E o estado do remoto:** o que foi enviado, ou a linha de "A `main` no
+   remoto" do caso que ficou sem envio.
 2. **Apresentar o método em linguagem comum.** Ler o mapa com a ferramenta `Read`, em
    [`../ajuda/SKILL.md`](../ajuda/SKILL.md) — a skill `/aicf:ajuda` só o usuário invoca, e o
    harness recusaria a ferramenta Skill. **Não com `cat`**: a saída do `cat` cai inteira na tela de
