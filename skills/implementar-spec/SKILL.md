@@ -16,7 +16,11 @@ description: Implementa uma demanda a partir da spec e conduz o fechamento até 
    virar spec pela receita da mídia, com `entrevista: nenhuma` na linha `Processo`, e seguir.
 2. **Ler os arquivos que a spec nomeia**, e o que já existe de parecido no repositório. A
    segunda parte vai para subagente: procurar o que já existe é leitura ampla, e feita no
-   contexto principal ela gasta o que a implementação vai precisar.
+   contexto principal ela gasta o que a implementação vai precisar. **Ao ler, perguntar se o
+   trecho que a demanda vai mudar ficou complexo demais para recebê-la** — a mudança copiaria uma
+   duplicação que já existe, ou poria mais um ramo numa condicional que já não se lê. Se ficou,
+   simplificá-lo é parte da demanda: refatorar sem mudar comportamento, num commit próprio antes
+   do commit da mudança, para a revisão separar o que só reorganiza do que muda o que o código faz.
 3. **Decidir o caminho, com a spec e o código à vista.** A linha `Processo` da spec pode trazer
    `sugestão: <caminho> (motivo)`. Se a sugestão é `aicf-direto` e o diff cabe numa frase, dizer
    a frase e ir — o caso é óbvio e a decisão é do agente. Em qualquer outro caso — sugestão de
@@ -67,8 +71,9 @@ corrigir o código sem tocar no teste. Mudança de texto ou de configuração n�
 dois. No meio, a régua do vizinho: onde o projeto já testa, a mudança entra testada.
 
 Código novo se parece com o código vizinho. Não ampliar o escopo: o que a spec pôs fora de
-escopo fica fora, e ideia nova que aparecer no caminho vira registro para depois, não código
-agora.
+escopo fica fora. Simplificar o trecho que a demanda toca é parte dela; refatorar um trecho vizinho
+que ela não toca é ideia nova, e ideia nova que aparecer no caminho vira registro para depois, não
+código agora.
 
 ## Verificar e fechar
 

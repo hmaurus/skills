@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.34.0 — 2026-09-29
+
+- **A refatoração contínua passa a ter passo que a aplique.** O `/aicf:implementar-spec`, ao ler
+  os arquivos que a spec nomeia, pergunta se o trecho que a demanda vai mudar ficou complexo demais
+  para recebê-la; se ficou, simplificá-lo é parte da demanda, sem mudar comportamento e num commit
+  próprio antes do commit da mudança. A frase do escopo traça a mesma linha: trecho tocado é parte
+  da demanda, trecho vizinho vira registro.
+- A frase "Refatoração contínua" sai do Lema do template do `CLAUDE.md` e do `CLAUDE.md` deste
+  repositório: ela estava em contexto em toda sessão, mas nenhum passo a disparava, e a regra de
+  escopo do `implementar-spec` a vencia. Os caminhos Superpowers e Matt Pocock ficam sem ela.
+
 ## 0.33.0 — 2026-09-29
 
 - **O `/aicf:setup` envia a `main` antes da `develop` quando o `origin` já existe.** Antes, só o
