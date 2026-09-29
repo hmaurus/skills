@@ -267,7 +267,7 @@ jq -r 'select(.type=="assistant") | .message.content[]? | select(.type=="tool_us
 `/aicf:ajuda`, com `disable-model-invocation: true`, e o harness recusa a ferramenta Skill para ele.
 A condição 3 da `0.28.0` — *Skill, e nenhum `cat` ou `Read`* — passa a ser: **`Read` de
 `ajuda/SKILL.md`, nenhum `cat`, e nenhuma chamada `Skill` para `aicf:ajuda`**; o passo 5 da
-despedida cita `/aicf:ajuda`. Não rodou. Encerra na próxima passada do setup, em qualquer ramo:
+despedida cita `/aicf:ajuda`. O comando que confere:
 
 ```bash
 jq -r 'select(.type=="assistant") | .message.content[]? | select(.type=="tool_use")
@@ -277,9 +277,13 @@ jq -r 'select(.type=="assistant") | .message.content[]? | select(.type=="tool_us
 
 A saída esperada é uma linha `Read` com `ajuda/SKILL.md`, e nenhuma `Skill` nem `Bash` com `cat`.
 
+**Passou na `0.34.2`**, em 2026-09-29, na passada do ramo 3 da `0.33.0` abaixo: uma linha `Read` de
+`aicf/0.34.2/skills/ajuda/SKILL.md`, nenhuma `Skill` e nenhum `cat`, e os próximos passos da despedida citam
+`/aicf:ajuda`.
+
 **A passada da `0.33.0`**, que envia a `main` antes da `develop` quando o `origin` já existe
 ([o setup não envia a main a um remoto que já existe](../projeto/concluidas/o-setup-nao-envia-a-main-a-um-remoto-que-ja-existe.md)).
-Ainda não rodou. Três ramos que enviam, cada um terminando com:
+Três ramos que enviam, cada um terminando com:
 
 ```bash
 git ls-remote --heads origin | awk '{print $2}'                 # refs/heads/develop e refs/heads/main
@@ -296,6 +300,20 @@ git branch --show-current                                       # develop
 E um ramo que não envia: **modo arquivo, sem remoto, sem `gh` no `PATH`** — nenhuma oferta, e o
 resumo traz a linha de enviar a `main` primeiro. Os repositórios de teste saem com
 `gh repo delete <nome> --yes` depois de a passada ser avaliada.
+
+**O ramo 3 passou na `0.34.2`**, em 2026-09-29, no setup de um projeto privado real — diretório sem
+git, com um arquivo de ideia já lá dentro, e as duas skills carregadas de `aicf/0.34.2/`. Os três
+comandos acima devolveram `develop` e `main` no remoto, `main` como default, `develop` ativa. No
+transcript, a oferta veio depois do commit e antes de qualquer envio, com o comando
+`gh repo create <nome> --private --source=. --remote=origin --push` no enunciado, e só então
+`git branch develop` e `git push -u origin develop`. O bloco do modo arquivo também passou: 1 commit
+só com os nove caminhos do setup, `ROADMAP.md` sem item em `## Próximas`, e o `diff` contra os
+templates com só as quatro diferenças esperadas. O arquivo que já estava no diretório ficou fora do
+commit, e o resumo disse isso. O repositório não foi apagado, porque é o do projeto.
+
+O que essa passada **não** exercitou: o `git init` sem `init.defaultBranch` no global (o global da
+máquina tem `main`), e o Matt desabilitado (a pergunta da mídia trouxe as duas frases do Matt, com ele
+habilitado — correto). **Seguem abertos os ramos 1 e 2 e o ramo sem `gh`.**
 
 **A passada da `0.34.2`**, num repositório com histórico
 ([o setup num repositório que já tem histórico](../projeto/concluidas/o-setup-num-repositorio-que-ja-tem-historico.md)).
