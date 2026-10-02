@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.35.1 — 2026-10-02
+
+- **O `/aicf:criar-prd` aceita pasta como material de partida.** `/aicf:criar-prd docs/insumos/`
+  lê os arquivos de texto da pasta antes da primeira pergunta. O `argument-hint` passa a citar
+  `[arquivo, pasta ou texto de contexto]`. Antes, pasta funcionava pedindo a leitura em texto, mas
+  nem o hint nem a skill a mencionavam.
+- Verificação de comportamento em aberto: a `criar-prd` só o titular invoca; encerra na primeira
+  rodada real com uma pasta como argumento.
+
 ## 0.35.0 — 2026-09-29
 
 - **O `/aicf:criar-prd` aceita material de partida.** `/aicf:criar-prd ideia-inicial.md` ou

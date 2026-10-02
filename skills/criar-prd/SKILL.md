@@ -2,7 +2,7 @@
 name: criar-prd
 description: Entrevista o usuário sobre o produto — problema, público, escopo, sucesso — e escreve o PRD do projeto. Rodar no começo, e de novo quando uma decisão contrariar o que está escrito.
 disable-model-invocation: true
-argument-hint: "[arquivo ou texto de contexto]"
+argument-hint: "[arquivo, pasta ou texto de contexto]"
 arguments: contexto
 ---
 
@@ -27,8 +27,8 @@ seção que continua válida. Sem `docs/projeto/`, perguntar onde gravar em vez 
 
 Material passado na invocação: $contexto
 
-Vazio, a entrevista começa do zero. Se for caminho de arquivo, ler o arquivo; se for texto, o
-texto é o material. Ler antes da primeira pergunta, mostrar seção por seção do PRD o que ele já
+Vazio, a entrevista começa do zero. Se for caminho de arquivo, ler o arquivo; se for pasta, ler
+os arquivos de texto dentro dela; se for texto, o texto é o material. Ler antes da primeira pergunta, mostrar seção por seção do PRD o que ele já
 responde, e entrevistar o resto — como no modo revisão, com uma diferença: o PRD existente foi
 decidido, o material não. O que ele afirma **se confirma com o usuário** antes de entrar no PRD,
 e o que ele não diz continua lacuna, não vira inferência.
