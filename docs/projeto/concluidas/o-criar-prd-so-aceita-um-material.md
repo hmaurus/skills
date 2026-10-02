@@ -1,6 +1,6 @@
 # O criar-prd não cita pasta como material de partida
 
-Processo — entrevista: criar-spec · implementação: a definir · sugestão: aicf-direto (duas linhas de uma skill e a entrada do changelog, sem decisão de abordagem)
+Processo — entrevista: criar-spec · implementação: aicf-direto
 
 ## Problema
 
@@ -52,3 +52,27 @@ seção, e o que ele afirma se confirma com o usuário.
 3. **Comportamento em aberto:** a `criar-prd` tem `disable-model-invocation: true`, e o agente não
    a invoca. Encerra na primeira rodada real em que o titular passar uma pasta como argumento e o
    agente ler os arquivos dela antes da primeira pergunta.
+
+## Relatório de implementação (2026-10-02)
+
+- **Status** — concluído; CI run `37072913693` em `f49b236`, `completed success`
+  (`gh run view 37072913693`).
+- **Arquivos alterados**
+  - `skills/criar-prd/SKILL.md` — `argument-hint` e o caso de pasta na seção *Material de partida*
+  - `.claude-plugin/plugin.json` — `0.35.1`
+  - `CHANGELOG.md` — entrada `0.35.1`
+- **Commits**
+  - `2858e9c` docs(projeto): spec do criar-prd com pasta como material de partida
+  - `f49b236` feat(criar-prd): aceita pasta como material de partida
+- **Validação** — `grep -c 'arquivo, pasta ou texto' skills/criar-prd/SKILL.md` → 1 e
+  `grep -ci 'se for pasta' skills/criar-prd/SKILL.md` → 1 (os dois davam 0 em `2858e9c`);
+  `./scripts/check.sh` → `Tudo verde.`. Sem revisão de código: a mudança é só texto.
+  **Comportamento em aberto:** a `criar-prd` tem `disable-model-invocation: true`; encerra na
+  primeira rodada real em que o titular passar uma pasta como argumento e o agente ler os arquivos
+  dela antes da primeira pergunta.
+- **Escopo efetivo** — o da spec. A intent pedia vários materiais misturados; a entrevista
+  reduziu a nomear pasta, porque o contorno por texto nunca falhou e o incômodo era só a skill não
+  citar o caso.
+- **Lições** — a primeira versão da Verificação previa `grep -c 'pasta'` em 2, e a palavra já
+  aparecia uma vez na skill ("inventar pasta"); trocada por `grep` do trecho que muda, como o
+  `CLAUDE.md` já manda. Nada novo a promover.
