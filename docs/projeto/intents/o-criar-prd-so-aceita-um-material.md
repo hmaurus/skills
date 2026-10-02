@@ -12,8 +12,8 @@ hipóteses — não tem forma prevista de passá-los juntos.
 O contorno que funciona hoje é mandar ler por texto, como em
 `/aicf:criar-prd Leia todos os arquivos de docs/insumos/ antes da primeira pergunta.`. O agente
 obedece, mas isso está fora do contrato da skill: pela letra, a frase é o material, não uma
-instrução de leitura. Caso real: o VillaTT, em 2026-09-30, com quatro insumos vindos de um projeto
-de pesquisa arquivado.
+instrução de leitura. Caso real: num projeto privado que consome estas skills, em 2026-09-30, com
+quatro insumos vindos de um projeto de pesquisa arquivado.
 
 ## O que se quer
 
