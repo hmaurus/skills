@@ -154,3 +154,87 @@ Nenhum push faz parte desta revisão; o envio do parecer e a conferência do CI
 ficam com o titular ou o agente líder, junto do registro da spec que ainda está
 não rastreada. O whitespace do parecer é conferido com `git diff --cached --check`
 antes do commit.
+
+## Segunda revisão — 2026-10-07
+
+Esta seção substitui o resultado anterior para a versão atual da spec, sem apagar
+o histórico do parecer. Base: `8002e06`. Identificação da cópia revisada:
+`sha256sum docs/projeto/specs/o-agente-nao-oferece-o-caminho-do-matt.md` →
+`2cd8c7246f0b2738bf763bc69732354c5781ee5856a41225061ce98fcb196f0b`.
+
+**Resultado: um achado P2.** Os três achados anteriores foram tratados: a spec
+inclui as instruções ativas daqui; delimita a passagem obrigatória pelo
+`criar-spec` às entrevistas e explica os atalhos; entrega a spec junto do ticket
+e estende a verificação à retomada. Não é necessário reabrir esses achados.
+
+### P2 — Escolher a referência do ticket pelo tracker do Matt
+
+**Local:** [spec](../../projeto/specs/o-agente-nao-oferece-o-caminho-do-matt.md),
+linhas 69–72, comandos entregues ao usuário; a regra também é levada ao passo 3
+do `implementar-spec` pelo inventário de arquivos.
+
+Os comandos propostos associam a mídia arquivo do aicf a tickets em `.scratch/`
+e a mídia issue a tickets identificados por `#<ticket>`. Entretanto, a mídia do
+aicf e o tracker do Matt são configurações independentes. Isso é permitido pela
+[demanda anterior](../../projeto/concluidas/o-setup-nao-avisa-que-o-matt-pergunta-o-mesmo.md)
+e pelo próprio `implementar-spec`, que avisa da divergência e segue a linha do
+`CLAUDE.md` para a governança. Já o `to-tickets` publica no tracker configurado
+em `docs/agents/issue-tracker.md`.
+
+**Cenário e consequência:** aicf em arquivos e Matt em GitHub. O `to-tickets`
+recebe corretamente `docs/projeto/specs/<nome>.md`, mas publica tickets remotos.
+O comando de implementação prescrito aponta então para um ticket em
+`.scratch/` que não existe. No caso inverso, aicf em issues e Matt em arquivos,
+`#<ticket>` não identifica o ticket local criado. Com trackers remotos diferentes,
+dois números sem origem também podem identificar itens errados.
+
+**Ajuste sugerido:** determinar cada alvo pela sua configuração: a referência
+da spec vem da mídia do aicf; a referência do ticket vem do tracker do Matt e dos
+itens efetivamente publicados. Entregar primeiro o `to-tickets` com a spec; após
+a publicação, entregar `implement` com a spec e o ticket escolhido, usando caminho
+para ticket local e URL ou identificador inequívoco para remoto. Exemplos mistos:
+
+```text
+/implement docs/projeto/specs/<nome>.md <URL-do-ticket>
+/implement <URL-da-spec> .scratch/<feature>/issues/<NN>-<slug>.md
+```
+
+Isso mantém a configuração alheia intacta e dispensa uma tabela de todas as
+combinações. Acrescentar à verificação de uso real um caso com configurações
+diferentes, conferindo que os dois alvos entregues existem e são lidos na retomada.
+O achado encerra quando a regra separar a origem de cada referência e a condição
+de verificação cobrir o caso misto.
+
+**Evidência executada:** clone de `v1.3.1` em `/tmp/matt-review-8002e06`, com
+`git -C /tmp/matt-review-8002e06 rev-parse HEAD` →
+`24fe0ef7737efae15c87225755e9f6f5965e4888`. Nesse clone:
+
+```bash
+sed -n '38,49p' skills/engineering/setup-matt-pocock-skills/SKILL.md
+sed -n '51,62p' skills/engineering/to-tickets/SKILL.md
+```
+
+O primeiro comando mostra a escolha independente de GitHub, GitLab, arquivos ou
+outro tracker; o segundo, a publicação segundo essa escolha. Os arquivos
+`SKILL.md` de `setup-matt-pocock-skills`, `to-tickets`, `implement`,
+`grill-with-docs`, `tdd` e `domain-modeling` foram comparados byte a byte com o
+cache `1.3.1` indicado na spec: todos iguais.
+
+### Validação e fechamento desta revisão
+
+Os treze `grep -c` da Verificação 1 foram executados com os padrões e os arquivos
+escritos na spec. Resultados, na ordem: `0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 2, 1, 2`.
+Todos conferem com os valores de antes. As contagens verificam presença de texto;
+a retomada com os dois alvos é a condição que comprova o comportamento proposto.
+
+Revisão estática: nenhuma skill de entrevista ou implementação foi invocada.
+O uso real permanece com o titular, após a implementação. O fechamento
+`aicf:fechar-demanda` foi aplicado somente ao parecer; a spec permanece aberta e
+intacta. Não houve promoção de conhecimento fora do diretório permitido ao Codex.
+O commit desta revisão contém somente a atualização do parecer. Nenhum push faz
+parte desta revisão; envio e conferência do CI ficam com o titular ou agente líder.
+
+`./scripts/check.sh` terminou em `Tudo verde.`, saída 0, Claude Code `2.1.293`,
+170 links conferidos e nenhum quebrado, os dois `Validation passed` e versão
+`0.36.0` no topo do changelog. Antes do commit, `git diff --cached --check`
+confere o whitespace do parecer.
