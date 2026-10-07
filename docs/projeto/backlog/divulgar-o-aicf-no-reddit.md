@@ -28,7 +28,13 @@ GSD ou o BMAD"), e uma resposta nesse tipo de discussão seria divulgação a cu
 - **"Único que une os dois" é afirmação sobre ferramenta de terceiro**, e a regra do `CLAUDE.md`
   deste repositório vale aqui também: a frase sai com o comando que a confere, rodado antes de ir ao
   ar. Errar em público, num lugar onde quem conhece os vizinhos responde em minutos, custa mais que
-  errar no README.
+  errar no README. Duas saídas:
+  - **verificar antes** — procurar no GitHub, no Reddit e nos marketplaces de plugins do Claude
+    Code se outra ferramenta já une os dois, e registrar aqui a busca feita e o resultado;
+  - **trocar a frase por uma que descreve o aicf sem falar dos outros**, como "uma camada de
+    governança que roda por cima dos dois: você escolhe o Superpowers ou o Matt para cada demanda, e
+    o registro do que foi decidido e feito fica sempre no mesmo lugar". Essa não depende de busca
+    nenhuma para ser verdade.
 
 ## Perguntas
 
