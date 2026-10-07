@@ -23,6 +23,6 @@ jobs:
       # cedo uma exigência nova do formato de plugin; aqui o pin impede que o CI
       # fique vermelho por uma mudança que não foi nossa. Sobe quando o check
       # local reprovar com uma versão mais nova que esta.
-      - run: npm i -g @anthropic-ai/claude-code@2.1.278
+      - run: npm i -g @anthropic-ai/claude-code@2.1.292
 
       - run: ./scripts/check.sh

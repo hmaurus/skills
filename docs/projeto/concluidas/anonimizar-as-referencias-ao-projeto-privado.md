@@ -134,5 +134,5 @@ Corrigir depois é mais caro, porque a citação já está no histórico do git 
 arquivos, não do `git log`.
 
 **O que este ritual gerou:** a regra da seção `## Registro` do
-[`CLAUDE.md`](../../../CLAUDE.md), *"Exemplo vindo de projeto privado entra anonimizado"*.
+[`CLAUDE.md`](../../../.claude/CLAUDE.md), *"Exemplo vindo de projeto privado entra anonimizado"*.
 Nenhum ADR, skill ou doc de referência novo; nenhum item do `ROADMAP.md` nasceu ou ficou obsoleto.
