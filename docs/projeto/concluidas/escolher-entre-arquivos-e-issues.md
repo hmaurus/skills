@@ -267,7 +267,7 @@ mínimo neles: registrar que a escolha existe. A redação fica para lá.
 - **Unificar a declaração dos domain docs.** `CONTEXT.md` e `docs/adr/` estão declarados no
   `docs/agents/domain.md` dele e na seção "Registro" do nosso template de `CLAUDE.md`. É duplicação
   real e **anterior a esta demanda** — vive em
-  [o layout dos domain docs está declarado duas vezes](../specs/o-matt-renomeou-o-glossario.md), hoje intent com outro título.
+  [o layout dos domain docs está declarado duas vezes](o-matt-renomeou-o-glossario.md), concluída com outro título.
 - **Adotar issues neste repositório.** É a demanda vizinha, [a governança deste repositório passa a
   viver em issues](../concluidas/governanca-em-issues-neste-repo.md), que consome esta opção. Aqui só
   se cria a opção.

@@ -1,6 +1,6 @@
 # O Matt renomeou o glossário para `GLOSSARY.md`, e o aicf ainda declara `CONTEXT.md`
 
-Processo — entrevista: criar-spec · implementação: a definir · sugestão: aicf-direto (troca de nome em lugares já enumerados, sem decisão de abordagem)
+Processo — entrevista: criar-spec · implementação: aicf-direto
 
 ## Problema
 
@@ -109,3 +109,42 @@ Levantado durante a entrevista de
 [o usuário escolhe se a governança mora em arquivos ou em issues](../concluidas/escolher-entre-arquivos-e-issues.md),
 como duplicação de layout ("o layout dos domain docs está declarado duas vezes"), e reaberto em
 2026-10-06 pela troca de nome do Matt.
+
+## Relatório de implementação (2026-10-06)
+
+- **Status** — concluído. CI verde no run `37557297418`
+  (`gh run view 37557297418 --json conclusion -q .conclusion` → `success`).
+- **Arquivos alterados**
+  - `skills/setup/templates/claude-md.md`, `skills/fechar-demanda/SKILL.md`,
+    `skills/ajuda/SKILL.md`, `skills/criar-prd/SKILL.md`, `skills/criar-spec/SKILL.md` — `CONTEXT.md`
+    vira `GLOSSARY.md`
+  - `.claude/CLAUDE.md`, `README.md`, `README.en.md`, `docs/projeto/PRD.md` — idem; os READMEs
+    deixam de afirmar que o `domain-modeling` grava em `CONTEXT.md`, o que já era falso para o Matt
+    `1.3.1`
+  - `CONTEXT.md` → `GLOSSARY.md` — `git mv`, conteúdo intacto
+  - `.claude-plugin/plugin.json`, `CHANGELOG.md` — `0.36.0`
+- **Commits**
+  - `639e9cc` docs(projeto): spec do glossário que o Matt renomeou para GLOSSARY.md
+  - `fcff2da` feat: o glossário do domínio passa a se chamar GLOSSARY.md
+- **Validação** — os passos da Verificação, rodados depois de `fcff2da`:
+  1. `grep -rn 'CONTEXT.md' --include='*.md' skills/ .claude/CLAUDE.md README.md README.en.md docs/projeto/PRD.md | wc -l` → 0 (10 em `064ee85`)
+  2. `grep -rln 'GLOSSARY.md' --include='*.md' skills/ .claude/CLAUDE.md README.md README.en.md docs/projeto/PRD.md | wc -l` → 9
+  3. `git diff -M --stat 064ee85 HEAD -- CONTEXT.md GLOSSARY.md` → `CONTEXT.md => GLOSSARY.md | 0`
+  4. `domain-modeling/SKILL.md` do Matt `1.3.1` instalado: 10 ocorrências de `GLOSSARY.md`, 0 de
+     `CONTEXT.md`
+  5. `./scripts/check.sh` → `Tudo verde.`
+  6. As notas da release `v0.36.0` saem com a receita de migração, depois do commit de
+     fechamento: `gh release view v0.36.0 --json body -q .body | grep -c 'git mv CONTEXT.md GLOSSARY.md'` → 1
+
+  Sem revisão de código: a mudança é troca de nome em texto, sem lógica.
+- **Escopo efetivo** — o previsto. O inventário do intent contava 9 linhas e o `AGENTS.md` entre
+  elas; desde `de58acf` o `AGENTS.md` é um ponteiro para `.claude/CLAUDE.md` e não cita o nome. A
+  spec remediu o inventário, somou o `PRD.md`, que o grep do intent não cobria, e chegou a 10.
+- **Verificação de comportamento em aberto** — o template só chega a um projeto pelo
+  `/aicf:setup`, que só o titular invoca. Encerra no primeiro setup real com a `0.36.0`, com o
+  `CLAUDE.md` gerado dizendo `GLOSSARY.md`, ou no projeto privado de origem, migrado pela nota da
+  release, quando o `grill-with-docs` gravar um termo no `GLOSSARY.md` existente sem criar outro
+  arquivo.
+- **Promoção** — nada a promover. A única lição, o inventário que envelheceu entre o intent e a
+  spec, já é a regra "comando que um doc escreve se roda antes de o doc fechar" do `CLAUDE.md`, e a
+  entrevista a cumpriu.

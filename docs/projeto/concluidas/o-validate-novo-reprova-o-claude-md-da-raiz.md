@@ -6,7 +6,7 @@ Processo — entrevista: criar-spec · implementação: aicf-direto
 
 O `./scripts/check.sh` sai com 1 na máquina de quem desenvolve, com o repositório intacto, e o CI
 continua verde. Enquanto isso durar, o check local fica sempre vermelho, e uma falha de verdade
-passa despercebida no meio. Vem antes de [o Matt renomeou o glossário](../specs/o-matt-renomeou-o-glossario.md),
+passa despercebida no meio. Vem antes de [o Matt renomeou o glossário](o-matt-renomeou-o-glossario.md),
 por escolha do usuário: aquela demanda vai precisar do check confiável.
 
 A causa é um aviso novo do validador. Com o Claude Code 2.1.292, `claude plugin validate . --strict`
