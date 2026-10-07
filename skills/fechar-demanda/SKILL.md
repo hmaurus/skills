@@ -52,7 +52,7 @@ passo cobriu qual exigência.
    | Procedimento que apareceu pela terceira vez | skill em `.claude/skills/` |
    | Regra que precisa valer sem exceção — a que pode falhar sem ninguém perceber | hook em `.claude/settings.json`: roda sempre, enquanto skill é conselho que o modelo pode não seguir |
    | Decisão difícil de reverter, surpreendente e com trade-off real | ADR em `docs/adr/` |
-   | Termo ambíguo do domínio | glossário em `CONTEXT.md` |
+   | Termo ambíguo do domínio | glossário em `GLOSSARY.md` |
 
    **Afirmação verificável carrega o teste que a refuta.** Número vem com o comando que o
    remede — `<N> linhas` (`wc -l < <arquivo>`, `<AAAA-MM-DD>`); afirmação de estado — item de

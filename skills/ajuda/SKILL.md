@@ -87,7 +87,7 @@ concluído, inclusive o que a entrevista concluiu não fazer.
 
 Só governança de demanda entra aí, e isso não muda com a mídia. Doc que descreve o mundo em vez de
 um trabalho a fazer — configuração, ID externo, decisão de marca, número de negócio, aprendizado —
-vai para `docs/referencias/`, criada quando houver o primeiro arquivo. **PRD, ADR e `CONTEXT.md`
+vai para `docs/referencias/`, criada quando houver o primeiro arquivo. **PRD, ADR e `GLOSSARY.md`
 ficam em arquivo nos dois modos**; no modo issue, `docs/projeto/` existe com o `PRD.md` dentro, e só
 ele. **Não existe modo misto:** a demanda inteira mora numa mídia só, relatório incluído. E o passo 3
 do fechamento — promover para o repositório o que vale além da demanda — vale nas duas mídias; é o

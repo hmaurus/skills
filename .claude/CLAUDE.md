@@ -18,7 +18,7 @@ Este repositório é a fonte editável do plugin, publicado no marketplace `aico
 
 **Exceção:** credenciais ficam em `.env` (não commitado) ou no gerenciador de senhas. Nunca no repositório, nunca em memory.
 
-**Glossário do domínio** (`CONTEXT.md`) e **decisões difíceis de reverter** (ADR em `docs/adr/`, numerado e imutável) nascem quando houver o primeiro termo ambíguo ou a primeira decisão a registrar — o passo 3 do ritual de fechamento manda escrever nos dois.
+**Glossário do domínio** (`GLOSSARY.md`) e **decisões difíceis de reverter** (ADR em `docs/adr/`, numerado e imutável) nascem quando houver o primeiro termo ambíguo ou a primeira decisão a registrar — o passo 3 do ritual de fechamento manda escrever nos dois.
 
 **Afirmação verificável carrega o teste que a refuta.** Número em doc ou em mensagem de commit vem com o comando que o remede; afirmação de estado vem com a condição que a encerra. A forma está no passo 3 do `/aicf:fechar-demanda`. Escrito por causa de dois números errados na mesma mensagem de commit, em 2026-09-09. **Número tirado do histórico do git se pina num commit, não numa data** — "em 44 commits" virou 45 no dia seguinte; `git log --oneline <sha> | wc -l` reproduz para sempre.
 

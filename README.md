@@ -148,7 +148,7 @@ Nenhum deles vem com o aicf. São das coleções [Superpowers](https://github.co
 
 - `grill-me` e `grill-with-docs` (Matt) — contestam a ideia com perguntas, até cada ramo da decisão estar resolvido. Não gravam nada; o resultado entra na entrevista.
 - `wayfinder` (Matt) — mapeia um pedido grande demais para uma sessão como tickets de decisão no seu tracker, e resolve um por vez. O mapa vale para aquele pedido.
-- `domain-modeling` (Matt) — grava o vocabulário do projeto num `CONTEXT.md`.
+- `domain-modeling` (Matt) — grava o vocabulário do projeto num `GLOSSARY.md`.
 
 **Na fase de entrevista, no lugar de `/aicf:criar-spec`**
 

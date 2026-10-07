@@ -42,7 +42,7 @@ Continuar até não sobrar decisão em aberto, e só então escrever.
 - **Fora de escopo** — o que foi levantado e decidido não fazer, com o motivo
 - **Verificação** — um passo ponta a ponta que prova que funcionou
 
-Usar o vocabulário do domínio do projeto (`CONTEXT.md`, se existir). E **afirmação verificável
+Usar o vocabulário do domínio do projeto (`GLOSSARY.md`, se existir). E **afirmação verificável
 carrega o teste que a refuta** — número traz o comando que o remede, afirmação de estado traz a
 condição que a encerra; a forma está no passo 3 do `/aicf:fechar-demanda`.
 

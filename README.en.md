@@ -150,7 +150,7 @@ None of these ship with `aicf`. They belong to the [Superpowers](https://github.
 
 - `grill-me` and `grill-with-docs` (Matt) — challenge the idea with questions, until every branch of the decision is resolved. They record nothing; the result feeds the interview.
 - `wayfinder` (Matt) — maps a request too big for one session as decision tickets on your tracker, and resolves them one at a time. The map covers that request.
-- `domain-modeling` (Matt) — records the project's vocabulary in a `CONTEXT.md`.
+- `domain-modeling` (Matt) — records the project's vocabulary in a `GLOSSARY.md`.
 
 **In the interview phase, instead of `/aicf:criar-spec`**
 

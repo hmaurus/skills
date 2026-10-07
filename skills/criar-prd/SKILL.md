@@ -83,6 +83,6 @@ Datar a última revisão no topo: o PRD é vivo, e saber quando parou de ser rev
    arquivo de [`midia/`](../midia/) seguir — `arquivo.md` ou `issues.md`; sem linha, arquivo. Se `docs/agents/issue-tracker.md` discordar da
    linha, avisar uma vez e seguir a linha.
 3. Se apareceu vocabulário já ambíguo — dois nomes para a mesma coisa, ou o mesmo nome para duas
-   —, sugerir `domain-modeling` (Matt Pocock) para gravar o glossário em `CONTEXT.md`, ao lado do
+   —, sugerir `domain-modeling` (Matt Pocock) para gravar o glossário em `GLOSSARY.md`, ao lado do
    PRD e não dentro dele.
 4. Sugerir `/clear` antes da primeira demanda: o contexto da entrevista já cumpriu seu papel.

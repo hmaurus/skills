@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.36.0 — 2026-10-06
+
+- **O glossário do domínio passa a se chamar `GLOSSARY.md`.** O Matt Pocock trocou
+  `CONTEXT.md` por `GLOSSARY.md` na `1.3.0` (PR #1120), e as skills dele só procuram o nome novo:
+  num projeto com as duas coleções, o `domain-modeling` não enxergava o `CONTEXT.md` do aicf e
+  criava um segundo glossário ao lado. Mudam o template do `CLAUDE.md`, o passo 3 do
+  `/aicf:fechar-demanda`, a `ajuda`, a `criar-prd`, a `criar-spec`, os dois READMEs e o PRD; o
+  glossário deste repositório foi renomeado com `git mv`. Medição:
+  `grep -rn 'CONTEXT.md' --include='*.md' skills/ .claude/CLAUDE.md README.md README.en.md docs/projeto/PRD.md | wc -l`
+  devolve 10 em `064ee85` e 0 nesta versão.
+- Projeto que já fez o setup não muda sozinho: a migração é `git mv CONTEXT.md GLOSSARY.md` e a
+  troca do nome na linha **Glossário do domínio** do `CLAUDE.md`, descrita nas notas da release.
+  Nenhuma skill aceita os dois nomes.
+- Monorepo (`GLOSSARY-MAP.md`, ADR por contexto) continua fora, até o primeiro monorepo com as
+  duas coleções.
+- Verificação de comportamento em aberto: o template só chega a um projeto pelo `/aicf:setup`, que
+  só o titular invoca; encerra no primeiro setup real ou quando o `grill-with-docs` gravar um termo
+  num `GLOSSARY.md` migrado sem criar outro arquivo.
+
 ## 0.35.1 — 2026-10-02
 
 - **O `/aicf:criar-prd` aceita pasta como material de partida.** `/aicf:criar-prd docs/insumos/`
