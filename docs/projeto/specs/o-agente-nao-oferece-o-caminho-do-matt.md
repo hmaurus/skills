@@ -113,6 +113,18 @@ Do `to-spec`, o `criar-spec` absorve dois critérios que não conflitam com o ai
   critério de implementação vem logo abaixo da tabela; a lista "As skills do Matt (…) exigem
   `/setup-matt-pocock-skills`" deixa de citar o `to-spec`. Os comandos entregues são os da seção
   Solução, com a spec junto, e a skill diz que terminar um ticket não conclui a demanda.
+- `skills/implementar-spec/SKILL.md`, seção "Implementar": logo depois da regra "Avaliar se a
+  mudança merece teste", que não muda, entra o parágrafo que faz o item Testes valer nos caminhos
+  aicf. Sem ele, o ponto de teste combinado na entrevista fica escrito na spec e nenhuma regra o
+  aplica: a regra atual decide *se* a mudança leva teste, não *onde*. Com o Matt instalado, o *como*
+  passa a ser o `/tdd`, que o agente pode invocar e que traz junto as próprias regras (seams
+  confirmadas, ciclo vermelho → verde, antipadrões). Nos caminhos Superpowers e Matt nada muda,
+  porque o `implementar-spec` passa a vez e o método testa do jeito dele. Texto:
+
+  > Código que merece teste entra no ponto que o item Testes da spec nomeia. **Com o Matt Pocock
+  > instalado** (linha "Coleções de skills de workflow instaladas" do `CLAUDE.md`), escreve-se pelo
+  > `/tdd`; sem ele, pelas regras acima. Testar em outro ponto, ou não testar o que a spec previu,
+  > se diz em uma linha antes de fazer.
 - `skills/criar-spec/SKILL.md`: ADRs em "Antes de perguntar"; um parágrafo para a entrevista que
   já aconteceu por `brainstorming` ou `grill-with-docs` (partir do decidido, perguntar só o que
   falta, gravar o caminho na linha `Processo`); item **Testes** em "A spec"; e o critério de
@@ -160,6 +172,8 @@ projeto privado que originou esta demanda.
    - `grep -c 'ADR' skills/criar-spec/SKILL.md`: 0 → ≥ 1
    - `grep -c 'Testes' skills/criar-spec/SKILL.md`: 0 → 1
    - `grep -c '/to-tickets' skills/implementar-spec/SKILL.md`: 0 → ≥ 1
+   - `grep -c '/tdd' skills/implementar-spec/SKILL.md`: 0 → ≥ 1
+   - `grep -c 'item Testes' skills/implementar-spec/SKILL.md`: 0 → 1
    - `grep -c 'Não gravam nada' README.md`: 1 → 0
    - `grep -c 'vira a spec da demanda pela receita da mídia' skills/setup/templates/claude-md.md`: 1 → 0
    - `grep -c 'aicf:criar-spec' skills/setup/templates/claude-md.md`: 2 → ≥ 3
