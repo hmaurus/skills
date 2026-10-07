@@ -6,6 +6,8 @@ Plugin de skills para Claude Code que cuida da governança e do planejamento mac
 
 Este repositório é a fonte editável do plugin, publicado no marketplace `aicodingflow`.
 
+**Este arquivo mora em `.claude/CLAUDE.md`, não na raiz:** a raiz do repositório é a raiz do plugin (`"source": "./"` no `marketplace.json`), e desde o Claude Code 2.1.292 o `claude plugin validate --strict` reprova `CLAUDE.md` ali. O `AGENTS.md` da raiz é uma linha com o link para cá — symlink não serve, porque os links relativos deste arquivo partem de `.claude/`. Conferir com `test -f CLAUDE.md`, que falha.
+
 ## Lema
 
 **Simplicidade e manutenibilidade acima de tudo.** Havendo trade-off entre a solução mais completa e a mais direta, escolher a direta — desde que entregue o resultado. Gatilho de revisão: dois mecanismos coexistindo, sincronização entre estados, ou abstração antecipando o futuro.

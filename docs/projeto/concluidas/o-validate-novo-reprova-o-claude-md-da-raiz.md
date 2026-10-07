@@ -1,6 +1,6 @@
 # O `validate` do Claude Code 2.1.292 reprova o `CLAUDE.md` da raiz
 
-Processo — entrevista: criar-spec · implementação: a definir · sugestão: aicf-direto (um `git mv`, um symlink, sete links e uma linha do CI, sem decisão de abordagem em aberto)
+Processo — entrevista: criar-spec · implementação: aicf-direto
 
 ## Problema
 
@@ -43,8 +43,11 @@ O pin do CI sobe para `2.1.292` no mesmo commit, como manda a seção de verific
 
 - `CLAUDE.md` → `.claude/CLAUDE.md`, por `git mv`. Os 6 links relativos dele (linhas 23, 25, 27, 29,
   31 e 39 hoje) ganham `../` na frente, porque a base mudou de pasta.
-- `AGENTS.md` — continua symlink, agora para `.claude/CLAUDE.md` (`ln -sfn .claude/CLAUDE.md AGENTS.md`).
-  O validador não reclama dele hoje; se um dia reclamar, é demanda nova.
+- `AGENTS.md` — deixa de ser symlink e vira um arquivo de uma linha, com o link para
+  `.claude/CLAUDE.md`. Decidido na implementação: como symlink para `.claude/CLAUDE.md`, quem lê o
+  `AGENTS.md` na raiz recebe links escritos a partir de `.claude/` (`../docs/...`), que dali apontam
+  para fora do repositório — o `check_links.py` acusou os 6. O validador não reclama do `AGENTS.md`
+  hoje; se um dia reclamar, é demanda nova.
 - `docs/projeto/concluidas/anonimizar-as-referencias-ao-projeto-privado.md:137` — o link
   `../../../CLAUDE.md` passa a apontar para `../../../.claude/CLAUDE.md`.
 - `.github/workflows/ci.yml:26` — `@anthropic-ai/claude-code@2.1.278` vira `@2.1.292`.
@@ -70,9 +73,49 @@ quem usa o plugin, não deste repositório, e ficam como estão.
 2. O `--strict` ainda morde: acrescentar `"bogus": 1` ao `.claude-plugin/plugin.json`, conferir que
    `git diff --stat` mostra o arquivo alterado, rodar `claude plugin validate . --strict` e ver a
    saída 1 com `Unknown field 'bogus'`; depois `git checkout .claude-plugin/plugin.json`.
-3. `readlink AGENTS.md` devolve `.claude/CLAUDE.md`, e `test -f CLAUDE.md` falha.
+3. `test -L AGENTS.md` e `test -f CLAUDE.md` falham, e `grep -c '.claude/CLAUDE.md' AGENTS.md` devolve 1.
 4. Depois do push, `gh run list --workflow=ci.yml --limit 1` → `completed success`, rodando com o
    2.1.292.
 5. O `CLAUDE.md` continua carregando: numa sessão nova neste repositório, `/memory` lista
    `.claude/CLAUDE.md` como memória do projeto. Depende do titular abrir a sessão; encerra no
    próximo uso real, e o relatório diz isso em vez de prometer o teste.
+
+## Relatório de implementação (2026-10-06)
+
+- **Status** — concluído. CI run `37556277712` → `completed success`, rodando o Claude Code 2.1.292
+  (`gh run view 37556277712 --log | grep 'Claude Code: '`).
+- **Causa raiz** — o `marketplace.json` declara o plugin com `"source": "./"`, então o `CLAUDE.md`
+  deste repositório estava na raiz do plugin, e o 2.1.292 passou a avisar que ali ele não é
+  carregado como contexto; o `--strict` transforma o aviso em erro. Nenhuma mudança do repositório
+  causou a falha.
+- **Arquivos alterados**
+  - `CLAUDE.md` → `.claude/CLAUDE.md`, com os 6 links relativos prefixados por `../`.
+  - `AGENTS.md` — de symlink para arquivo de uma linha com o link para `.claude/CLAUDE.md`.
+  - `docs/projeto/concluidas/anonimizar-as-referencias-ao-projeto-privado.md` — o link para o
+    `CLAUDE.md` passa a apontar para `.claude/CLAUDE.md`.
+  - `.github/workflows/ci.yml` — pin de `2.1.278` para `2.1.292`.
+- **Commits**
+  - `430ed1a` docs(projeto): spec do validate que reprova o CLAUDE.md da raiz
+  - `de58acf` fix(ci): o CLAUDE.md vai para .claude/ e o pin do CI sobe para 2.1.292
+- **Validação**
+  - Passo 1: `./scripts/check.sh` com o 2.1.292 → `161 links conferidos, 0 quebrados`, os dois
+    `✔ Validation passed`, `Tudo verde.`, saída 0.
+  - Passo 2: com `"bogus": 1` no `plugin.json` (`git diff --stat` mostrou o arquivo alterado),
+    `claude plugin validate . --strict` saiu com 1 e acusou `Unknown field 'bogus'`; arquivo
+    restaurado com `git checkout`.
+  - Passo 3: `test -L AGENTS.md` e `test -f CLAUDE.md` saem com 1; `grep -c '.claude/CLAUDE.md' AGENTS.md` → 1.
+  - Passo 4: o run acima, com `Tudo verde.` no log.
+  - Passo 5, **em aberto**: conferir numa sessão nova que `/memory` lista `.claude/CLAUDE.md` como
+    memória do projeto. Depende do titular abrir a sessão; encerra no próximo uso real deste
+    repositório.
+  - Sem revisão de código: a mudança move um arquivo, troca um symlink por uma linha de texto e
+    altera um número de versão no CI, sem lógica nova. O `check.sh` cobre os links.
+- **Escopo efetivo** — o `AGENTS.md` divergiu da spec. Ela previa reapontar o symlink, mas o
+  `check_links.py` acusou os 6 links do `CLAUDE.md` lidos pelo caminho do `AGENTS.md`: quem o lê na
+  raiz recebe `../docs/...`, que dali sai do repositório. Por decisão do usuário, ele virou um
+  arquivo-ponteiro. As outras duas opções eram links a partir da raiz (`/docs/...`) ou fazer o
+  check pular symlink, e a segunda escondia um defeito real.
+- **Lições** — symlink para arquivo de outra pasta carrega os links relativos da pasta de origem.
+  Isso vale para qualquer markdown que se lê por um symlink.
+- **Promoção (passo 3)** — um parágrafo no [`.claude/CLAUDE.md`](../../../.claude/CLAUDE.md),
+  seção "O que é": onde o arquivo mora, por quê, e por que o `AGENTS.md` não é symlink.
