@@ -116,7 +116,9 @@ html { scroll-behavior: smooth; }
     <li><a href="#limites">10. O que ele não cobre</a></li>
     <li><a href="#aicf">11. Matt e aicf lado a lado</a></li>
     <li><a href="#juntos">12. Os dois juntos</a></li>
-    <li><a href="#cola">13. Cola rápida</a></li>
+    <li><a href="#matt-depois">13. O Matt depois da spec</a></li>
+    <li><a href="#aicf-depois">14. O aicf depois da spec</a></li>
+    <li><a href="#cola">15. Cola rápida</a></li>
   </ol>
 </nav>
 
@@ -124,7 +126,7 @@ html { scroll-behavior: smooth; }
 <header class="hero">
   <div class="eyebrow">mattpocock-skills v1.3.1 · sozinho</div>
   <h1>Como funcionam as skills do Matt Pocock</h1>
-  <p class="lede">Um passeio pelo plugin inteiro, sem aicf e sem Superpowers: o que cada skill faz, em que ordem elas se encadeiam, que arquivos deixam no repositório e onde a decisão fica com você. No fim, duas seções o comparam com o aicf.</p>
+  <p class="lede">Um passeio pelo plugin inteiro, sem aicf e sem Superpowers: o que cada skill faz, em que ordem elas se encadeiam, que arquivos deixam no repositório e onde a decisão fica com você. No fim, quatro seções o comparam com o aicf, hoje e depois da spec que o aicf tem em aberto.</p>
 </header>
 
 <section id="ideia">
@@ -471,11 +473,152 @@ intent em docs/projeto/intents/ ──▶ /grill-with-docs (entrevista) ──�
   <dt>Quem digita</dt><dd>O agente não consegue chamar <span class="cmd">/grill-with-docs</span>, <span class="cmd">/to-spec</span>, <span class="cmd">/to-tickets</span> nem <span class="cmd">/implement</span>, porque são só do usuário. Quando o caminho escolhido é o do Matt, quem digita é você.</dd>
 </dl>
 
-<div class="note"><strong>Em andamento no aicf</strong>Esses pontos de atrito são o assunto da spec aberta <code>docs/projeto/specs/o-agente-nao-oferece-o-caminho-do-matt.md</code>. A proposta: o agente conduz a entrevista pelas skills que o <span class="cmd">/grill-with-docs</span> chama (<span class="cmd">grilling</span> e <span class="cmd">domain-modeling</span>, que ele pode invocar), toda spec sai pelo <span class="cmd">/aicf:criar-spec</span> no formato do aicf, e o agente entrega a você os comandos <span class="cmd">/to-tickets</span> e <span class="cmd">/implement</span> já com a spec no argumento. A análise detalhada, com os riscos (reentrevistar depois do grill, perder as histórias de usuário), está na nota <a href="https://github.com/hmaurus/skills/blob/main/docs/notas-de-sessao/o-matt-com-e-sem-o-aicf.md">O Matt com e sem o aicf</a>.</div>
+<div class="note"><strong>Em andamento no aicf</strong>Esses pontos de atrito são o assunto da spec aberta <code>docs/projeto/specs/o-agente-nao-oferece-o-caminho-do-matt.md</code>. A proposta: o agente conduz a entrevista pelas skills que o <span class="cmd">/grill-with-docs</span> chama (<span class="cmd">grilling</span> e <span class="cmd">domain-modeling</span>, que ele pode invocar), toda spec sai pelo <span class="cmd">/aicf:criar-spec</span> no formato do aicf, e o agente entrega a você os comandos <span class="cmd">/to-tickets</span> e <span class="cmd">/implement</span> já com a spec no argumento. A análise detalhada, com os riscos (reentrevistar depois do grill, perder as histórias de usuário), está na nota <a href="https://github.com/hmaurus/skills/blob/main/docs/notas-de-sessao/o-matt-com-e-sem-o-aicf.md">O Matt com e sem o aicf</a>. As seções 13 e 14 mostram como fica cada lado depois dela.</div>
+</section>
+
+<section id="matt-depois">
+<h2>13. O caminho do Matt depois da spec</h2>
+<div class="note"><strong>Proposta, ainda não implementada</strong>As seções 13 e 14 descrevem o que a spec <code>o-agente-nao-oferece-o-caminho-do-matt.md</code> (commit <code>8002e06</code>) promete para o aicf 0.37.0. Até ela ser implementada, vale o que as seções 11 e 12 descrevem.</div>
+<p><strong>O Matt sozinho não muda.</strong> A spec não toca nenhum arquivo do plugin dele: num projeto sem aicf, tudo das seções 1 a 10 continua igual. O que muda é o uso do Matt <strong>dentro</strong> do aicf: o agente passa a oferecê-lo, conduz a parte que consegue conduzir e entrega a você a parte que só você pode digitar.</p>
+<div class="tbl"><table>
+<thead><tr><th>Passo</th><th>Hoje</th><th>Depois da spec</th></tr></thead>
+<tbody>
+<tr><td>Escolher a entrevista</td><td>O agente não tem critério e, na prática, não sugere o Matt.</td><td>O <code>CLAUDE.md</code> traz o critério: demanda que cria termo ou decisão de domínio → <span class="cmd">grill-with-docs</span>.</td></tr>
+<tr><td>Entrevista</td><td>Você digita <span class="cmd">/grill-with-docs</span>.</td><td>O agente conduz, invocando <span class="cmd">grilling</span> e <span class="cmd">domain-modeling</span>, que é exatamente o que o comando faz.</td></tr>
+<tr><td>Spec</td><td><span class="cmd">/to-spec</span> grava em <code>.scratch/</code>, que o aicf não adota.</td><td>O agente invoca <span class="cmd">/aicf:criar-spec</span>: parte do que a conversa decidiu, pergunta só o que falta e grava em <code>docs/projeto/specs/</code>, com o item Testes.</td></tr>
+<tr><td>Tickets</td><td>Você digita <span class="cmd">/to-tickets</span>, sem referência à spec do aicf.</td><td>O agente entrega <code>/to-tickets docs/projeto/specs/&lt;nome&gt;.md</code>, e você digita.</td></tr>
+<tr><td>Implementação</td><td>Você digita <span class="cmd">/implement</span> com o ticket.</td><td>O agente entrega <code>/implement &lt;spec&gt; &lt;ticket&gt;</code>. A spec vai junto porque o ticket local não aponta para ela, e é na spec que está o ponto de teste.</td></tr>
+<tr><td>Fim</td><td><span class="cmd">/aicf:fechar-demanda</span>.</td><td>Igual. Roda depois do último ticket, ou de forma parcial quando a sessão acaba com tickets abertos.</td></tr>
+</tbody></table></div>
+
+<h3>Exemplo: multa por devolução atrasada</h3>
+<p>Um sistema de biblioteca, com o registro em arquivos. Já existe o intent <code>docs/projeto/intents/multa-por-atraso.md</code>. A demanda mexe com o domínio: o que conta como atraso, se a multa tem teto, se feriado conta.</p>
+
+<div class="step"><div class="n">1</div><div>
+<h3>Escolha do caminho de entrevista</h3>
+<pre><code>Você:   vamos entrevistar a multa por atraso
+Agente: Sugiro o grill-with-docs: a demanda cria termos de domínio
+        (atraso, multa, dia útil) que vale gravar no GLOSSARY.md.
+        Alternativas: criar-spec (decisões pontuais) ou brainstorming
+        (desenho aberto). Qual prefere?
+Você:   grill-with-docs</code></pre>
+<p>Você não digita <span class="cmd">/grill-with-docs</span>: o agente sabe que o comando é seu e chama as duas skills que ele compõe.</p>
+</div></div>
+
+<div class="step"><div class="n">2</div><div>
+<h3>Entrevista conduzida pelo agente</h3>
+<pre><code>❓ Q1 - Atraso conta em dias corridos ou úteis?
+➡️ Corridos: é o que o regulamento atual diz (li docs/regulamento.md).
+
+❓ Q2 - A multa tem teto?
+➡️ Sim, o valor do livro, para não passar do custo de repor.</code></pre>
+<p>Ao fim, o <code>GLOSSARY.md</code> ganha <strong>Atraso</strong> e <strong>Multa</strong>. Se o teto for difícil de reverter e tiver tido alternativa real, o agente oferece um ADR em <code>docs/adr/</code>.</p>
+</div></div>
+
+<div class="step"><div class="n">3</div><div>
+<h3>Spec pelo <span class="cmd">/aicf:criar-spec</span></h3>
+<p>O agente invoca o <span class="cmd">criar-spec</span> sozinho. Ele lê os ADRs da área, não repete o que a conversa já respondeu e pergunta o que falta, tipicamente o ponto de teste:</p>
+<pre><code>Agente: Onde testamos? Proponho registrarDevolucao(emprestimo, data),
+        o ponto mais alto que pega cálculo e teto. O teste parecido é
+        tests/emprestimo.test.ts.
+Você:   ok</code></pre>
+<p>O intent vira spec por <code>git mv</code> para <code>docs/projeto/specs/multa-por-atraso.md</code>, com:</p>
+<pre><code>Processo — entrevista: grill-with-docs · implementação: a definir · sugestão: Matt (três fatias verticais com dependência, mais de uma sessão)</code></pre>
+</div></div>
+
+<div class="step"><div class="n">4</div><div>
+<h3>Implementação: o agente entrega, você digita</h3>
+<p>Em sessão nova, <span class="cmd">/aicf:implementar-spec</span> lê a spec e pergunta o caminho (a sugestão não é <code>aicf-direto</code>, então ele não decide sozinho). Você escolhe o Matt. Ele decide o workspace, diz numa linha qual e por quê, e entrega:</p>
+<pre><code>Agente: Rode:
+        /to-tickets docs/projeto/specs/multa-por-atraso.md</code></pre>
+<p>O <span class="cmd">/to-tickets</span> propõe as fatias e você aprova:</p>
+<pre><code>.scratch/multa-por-atraso/issues/
+├── 01-multa-simples-por-dia.md
+├── 02-teto-pelo-valor-do-livro.md     Blocked by: 01
+└── 03-multa-no-recibo.md              Blocked by: 01</code></pre>
+<p>Cada ticket, com <code>/clear</code> entre eles:</p>
+<pre><code>/implement docs/projeto/specs/multa-por-atraso.md .scratch/multa-por-atraso/issues/01-multa-simples-por-dia.md</code></pre>
+<p>Dentro do <span class="cmd">/implement</span>, o <span class="cmd">/tdd</span> encontra o ponto de teste na spec (<code>registrarDevolucao</code>), escreve o teste que falha, implementa o mínimo, roda o <span class="cmd">/code-review</span> e commita.</p>
+</div></div>
+
+<div class="step"><div class="n">5</div><div>
+<h3>Fechamento</h3>
+<p>Terminado o ticket 03, o agente aplica <span class="cmd">/aicf:fechar-demanda</span>: checks no projeto inteiro, sem segunda revisão (o <span class="cmd">/implement</span> já revisou), relatório no fim da spec, <code>git mv</code> para <code>concluidas/</code> e a linha final:</p>
+<pre><code>Processo — entrevista: grill-with-docs · implementação: implement</code></pre>
+<p>Se a sessão acabar depois do ticket 01, o fechamento é parcial: a spec ganha <code>## Estado em andamento</code> dizendo que 02 e 03 seguem abertos.</p>
+</div></div>
+</section>
+
+<section id="aicf-depois">
+<h2>14. O aicf depois da spec</h2>
+<p>A spec muda o aicf em cinco pontos. Eles valem em qualquer caminho, não só no do Matt:</p>
+<div class="tbl"><table>
+<thead><tr><th>Mudança</th><th>Onde</th><th>Efeito</th></tr></thead>
+<tbody>
+<tr><td><strong>Critério de entrevista</strong></td><td>template do <code>CLAUDE.md</code></td><td><span class="cmd">criar-spec</span> quando faltam decisões pontuais; <code>brainstorming</code> quando o desenho está aberto; <span class="cmd">grill-with-docs</span> quando há termo ou decisão de domínio.</td></tr>
+<tr><td><strong>Toda spec passa pelo <span class="cmd">criar-spec</span></strong></td><td><code>CLAUDE.md</code>, <code>ajuda</code></td><td>Terminada a conversa do <code>brainstorming</code> ou do <span class="cmd">grill-with-docs</span>, o agente invoca o <span class="cmd">criar-spec</span>. Nada mais vai para <code>.scratch/</code> ou <code>docs/superpowers/specs/</code>.</td></tr>
+<tr><td><strong>ADRs e item Testes</strong></td><td><code>criar-spec</code></td><td>Antes de perguntar, lê os ADRs da área. Quando a demanda toca código, a spec diz em que ponto testar e qual teste parecido já existe, conferido com você.</td></tr>
+<tr><td><strong>Critério de implementação</strong></td><td><code>criar-spec</code> e <code>implementar-spec</code></td><td>aicf direto ou plan mode quando cabe numa sessão; Superpowers para muitos passos numa sessão; Matt para fatias verticais com dependência, ao longo de várias sessões.</td></tr>
+<tr><td><strong>Teste nos caminhos aicf</strong></td><td><code>implementar-spec</code></td><td>Código que merece teste entra no ponto da spec, pelo <span class="cmd">/tdd</span> se o Matt estiver instalado. Desviar se anuncia em uma linha.</td></tr>
+</tbody></table></div>
+
+<h3>Exemplo: o CSV abre numa coluna só no Excel</h3>
+<p>Um bug pequeno. O relatório mensal sai com vírgula como separador, e o Excel em português espera ponto e vírgula. Registro em arquivos, Matt instalado.</p>
+
+<div class="step"><div class="n">1</div><div>
+<h3>Entrevista pelo <span class="cmd">/aicf:criar-spec</span></h3>
+<p>Pelo critério, é decisão pontual: o agente sugere o próprio <span class="cmd">criar-spec</span>. Ele lê o código e os ADRs da área (há um <code>docs/adr/0003-csv-em-utf-8-com-bom.md</code>) e pergunta só o que é escolha:</p>
+<pre><code>Escolha: separador fixo em ";" ou configurável por usuário?
+  › Fixo em ";" (o público é todo brasileiro)
+    Configurável
+    Other</code></pre>
+<p>A spec nasce direto em <code>docs/projeto/specs/csv-abre-numa-coluna.md</code>:</p>
+<pre><code>Processo — entrevista: criar-spec · implementação: a definir · sugestão: aicf-direto (troca o separador num arquivo)
+
+## Testes
+Por exportarRelatorio(mes), que devolve o CSV inteiro. Teste parecido:
+tests/relatorio-anual.test.ts.
+
+## Verificação
+Abrir o CSV de setembro no Excel e ver as colunas separadas.</code></pre>
+</div></div>
+
+<div class="step"><div class="n">2</div><div>
+<h3>Implementação pelo aicf direto</h3>
+<p><span class="cmd">/aicf:implementar-spec</span> vê a sugestão <code>aicf-direto</code> e um diff que cabe numa frase, então decide sem perguntar:</p>
+<pre><code>Agente: Troco o separador de "," para ";" em exportarRelatorio, na branch atual.</code></pre>
+<p>Agora a regra nova de teste entra em ação, em três perguntas:</p>
+<ol>
+  <li><strong>Merece teste?</strong> Sim: é correção de bug, então começa pelo teste (regra que já existia).</li>
+  <li><strong>Onde?</strong> No ponto da spec: <code>exportarRelatorio(mes)</code>.</li>
+  <li><strong>Como?</strong> O Matt está instalado, então pelo <span class="cmd">/tdd</span>. Ele confirma a seam rapidamente (já veio combinada), escreve o teste que espera <code>;</code>, vê falhar, troca o separador e vê passar.</li>
+</ol>
+<p>Sem o Matt instalado, os passos 1 e 2 seriam iguais, e o teste seguiria as regras do próprio aicf, no mesmo ponto. Se o agente quisesse testar só a função que monta uma linha, teria de dizer isso antes, em uma linha.</p>
+</div></div>
+
+<div class="step"><div class="n">3</div><div>
+<h3>Fechamento</h3>
+<p>O agente roda o passo de Verificação da spec e só afirma que funciona depois de ver a saída. Depois, <span class="cmd">/aicf:fechar-demanda</span>: checks no projeto inteiro, revisão por um subagente que não viu a implementação (o aicf direto não revisa por conta própria), relatório, <code>git mv</code> para <code>concluidas/</code> e commit de fechamento separado do commit de código:</p>
+<pre><code>Processo — entrevista: criar-spec · implementação: aicf-direto</code></pre>
+</div></div>
+
+<h3>Os dois exemplos lado a lado</h3>
+<div class="tbl"><table>
+<thead><tr><th></th><th>Multa por atraso (Matt)</th><th>CSV numa coluna (aicf direto)</th></tr></thead>
+<tbody>
+<tr><td>Por que este caminho</td><td>Termos de domínio novos; três fatias com dependência</td><td>Decisão pontual; diff de uma frase</td></tr>
+<tr><td>Quem conduz a entrevista</td><td>O agente, por <span class="cmd">grilling</span> + <span class="cmd">domain-modeling</span></td><td>O agente, pelo <span class="cmd">criar-spec</span></td></tr>
+<tr><td>Quem escreve a spec</td><td><span class="cmd">criar-spec</span></td><td><span class="cmd">criar-spec</span></td></tr>
+<tr><td>Ponto de teste</td><td><code>registrarDevolucao</code>, na spec</td><td><code>exportarRelatorio</code>, na spec</td></tr>
+<tr><td>Quem digita comandos</td><td>Você: <span class="cmd">/to-tickets</span> e cada <span class="cmd">/implement</span></td><td>Ninguém além do pedido inicial</td></tr>
+<tr><td>TDD</td><td><span class="cmd">/tdd</span> dentro do <span class="cmd">/implement</span></td><td><span class="cmd">/tdd</span> chamado pelo <span class="cmd">implementar-spec</span></td></tr>
+<tr><td>Revisão</td><td><span class="cmd">/code-review</span> por ticket; o fechamento não repete</td><td>Proposta no fechamento</td></tr>
+<tr><td>Sessões</td><td>Várias, uma por ticket</td><td>Uma</td></tr>
+</tbody></table></div>
 </section>
 
 <section id="cola">
-<h2>13. Cola rápida</h2>
+<h2>15. Cola rápida</h2>
 <div class="tbl"><table>
 <thead><tr><th>Situação</th><th>Comece por</th></tr></thead>
 <tbody>
