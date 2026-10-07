@@ -61,6 +61,10 @@ Seis regras valem antes de abrir qualquer doc:
 - **Bug de causa desconhecida** → depurar de forma sistemática antes de propor correção; se `systematic-debugging` (Superpowers) ou `/diagnosing-bugs` (Matt Pocock) estiverem instalados, usar.
 - Operação que se repete vira **skill** em `.claude/skills/`, não improviso na hora.
 
+### Agente Codex: só revisa
+
+O Codex é revisor, não implementador. **Ele não altera nenhum arquivo do repositório**: o que tem a dizer vai num parecer em `docs/agente-codex/revisoes/`, o único lugar onde escreve e commita. O parecer é sugestão: quem decide o que adotar, e aplica, é o agente líder (Claude Code) com o usuário.
+
 ## Verificação
 
 Um comando só, antes de commitar: **`./scripts/check.sh`**. Saída saudável termina em `Tudo verde.` e sai com 0, depois de imprimir a versão do Claude Code usada, `N links conferidos, 0 quebrados` e os dois `✔ Validation passed`. Ele confere três coisas: link relativo de markdown que aponta para arquivo inexistente, o formato do plugin (`claude plugin validate --strict` nos manifestos de `.claude-plugin/` e no frontmatter das skills) e se a versão do `plugin.json` é a entrada **do topo** do `CHANGELOG.md`. O check de links não enxerga o que está dentro de bloco cercado ou de crase — link de exemplo é ilustração — e ignora `skills/setup/templates/**`, onde o link fala do projeto que vai receber a cópia: **link quebrado dentro de um template passa batido**, e isso encerra quando chegar ao projeto de um usuário.
