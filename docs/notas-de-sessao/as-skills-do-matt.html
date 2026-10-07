@@ -1,0 +1,505 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Skills do Matt Pocock</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: índice fixo à esquerda + coluna de leitura (~68ch); no celular, índice vira bloco no topo */
+:root {
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --fg: #1b1f2a;
+  --muted: #5a6273;
+  --line: #dde1e8;
+  --accent: #2346c7;
+  --accent-soft: #e6ebfb;
+  --user: #a3520f;
+  --user-soft: #fbeedd;
+  --model: #1f7a55;
+  --model-soft: #e0f3ea;
+  --code-bg: #eef0f4;
+  --font-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --font-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "Cascadia Mono", monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #12151c; --surface: #191d26; --fg: #e4e7ee; --muted: #9aa2b3; --line: #2c3240;
+    --accent: #8fa6ff; --accent-soft: #1f2849; --user: #f0a868; --user-soft: #3a2614;
+    --model: #6fd3a6; --model-soft: #12301f; --code-bg: #222734; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #12151c; --surface: #191d26; --fg: #e4e7ee; --muted: #9aa2b3; --line: #2c3240;
+  --accent: #8fa6ff; --accent-soft: #1f2849; --user: #f0a868; --user-soft: #3a2614;
+  --model: #6fd3a6; --model-soft: #12301f; --code-bg: #222734; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 16px; line-height: 1.65; }
+.wrap { max-width: 1180px; margin: 0 auto; padding-inline: 20px; padding-block: 32px 80px; display: grid; grid-template-columns: 230px minmax(0, 1fr); gap: 48px; }
+nav.toc { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 24px); align-self: start; font-size: 14px; }
+nav.toc p { font-family: var(--font-mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 0 0 8px; }
+nav.toc ol { list-style: none; padding: 0; margin: 0; display: grid; gap: 2px; counter-reset: s; }
+nav.toc a { color: var(--muted); text-decoration: none; display: block; padding: 3px 8px; border-left: 2px solid transparent; }
+nav.toc a:hover, nav.toc a:focus-visible { color: var(--accent); border-left-color: var(--accent); outline: none; }
+main { min-width: 0; max-width: 72ch; }
+header.hero { padding-block: 8px 28px; border-bottom: 1px solid var(--line); margin-bottom: 8px; }
+.eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+h1 { font-family: var(--font-display); font-weight: 800; font-size: clamp(2rem, 5vw, 3rem); line-height: 1.05; margin: 8px 0 14px; text-wrap: balance; letter-spacing: -.01em; }
+h2 { font-family: var(--font-display); font-weight: 800; font-size: 1.65rem; line-height: 1.2; margin: 56px 0 12px; text-wrap: balance; scroll-margin-top: 20px; }
+h3 { font-family: var(--font-display); font-weight: 600; font-size: 1.2rem; margin: 32px 0 6px; }
+.lede { font-size: 1.12rem; color: var(--muted); margin: 0; }
+p { margin: 0 0 14px; }
+a { color: var(--accent); }
+code { font-family: var(--font-mono); font-size: .88em; background: var(--code-bg); padding: 1px 5px; border-radius: 4px; }
+pre { font-family: var(--font-mono); font-size: 13.5px; line-height: 1.55; background: var(--code-bg); padding: 14px 16px; border-radius: 6px; overflow-x: auto; margin: 0 0 18px; }
+pre code { background: none; padding: 0; }
+ul, ol { padding-left: 1.3em; margin: 0 0 14px; }
+li { margin-bottom: 4px; }
+.cmd { font-family: var(--font-mono); font-weight: 500; font-size: .92em; white-space: nowrap; }
+.tag { display: inline-block; font-family: var(--font-mono); font-size: 11px; letter-spacing: .04em; padding: 1px 7px; border-radius: 999px; vertical-align: 2px; white-space: nowrap; }
+.tag.u { background: var(--user-soft); color: var(--user); }
+.tag.m { background: var(--model-soft); color: var(--model); }
+.note { background: var(--accent-soft); border-radius: 6px; padding: 14px 16px; margin: 0 0 18px; }
+.note strong:first-child { display: block; margin-bottom: 2px; }
+.two { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin: 0 0 18px; }
+.box { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 14px 16px; min-width: 0; }
+.box h4 { margin: 0 0 6px; font-size: 1rem; }
+.box p:last-child, .box ul:last-child { margin-bottom: 0; }
+.box.u { border-top: 3px solid var(--user); }
+.box.m { border-top: 3px solid var(--model); }
+.step { display: grid; grid-template-columns: 2.4rem minmax(0, 1fr); gap: 14px; padding-block: 18px; border-top: 1px solid var(--line); }
+.step .n { font-family: var(--font-display); font-weight: 800; font-size: 1.6rem; color: var(--accent); line-height: 1.1; }
+.step h3 { margin-top: 0; }
+.kv { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 4px 14px; font-size: 15px; margin: 8px 0 12px; }
+.kv dt { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); padding-top: 3px; }
+.kv dd { margin: 0; }
+.tbl { overflow-x: auto; margin: 0 0 18px; border: 1px solid var(--line); border-radius: 6px; }
+table { border-collapse: collapse; width: 100%; font-size: 15px; background: var(--surface); }
+th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); font-weight: 500; }
+tr:last-child td { border-bottom: none; }
+.diagram { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 12px; margin: 0 0 18px; overflow-x: auto; }
+.diagram pre.mermaid { background: none; margin: 0; text-align: center; }
+.tree li { list-style: none; }
+.src { font-size: 14px; color: var(--muted); border-top: 1px solid var(--line); margin-top: 56px; padding-top: 16px; }
+@media (max-width: 860px) {
+  .wrap { grid-template-columns: minmax(0, 1fr); gap: 8px; padding-inline: 16px; }
+  nav.toc { position: static; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 12px 14px; }
+  nav.toc ol { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+  .kv { grid-template-columns: minmax(0, 1fr); }
+  .kv dt { padding-top: 8px; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+html { scroll-behavior: smooth; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+<nav class="toc" aria-label="Índice">
+  <p>Neste tutorial</p>
+  <ol>
+    <li><a href="#ideia">1. A ideia</a></li>
+    <li><a href="#dois-tipos">2. Dois tipos de skill</a></li>
+    <li><a href="#setup">3. Instalar e configurar</a></li>
+    <li><a href="#fluxo">4. O fluxo principal</a></li>
+    <li><a href="#exemplo">5. Exemplo do começo ao fim</a></li>
+    <li><a href="#rampas">6. Entradas laterais</a></li>
+    <li><a href="#vocabulario">7. O vocabulário por baixo</a></li>
+    <li><a href="#contexto">8. Higiene de contexto</a></li>
+    <li><a href="#avulsas">9. Skills avulsas</a></li>
+    <li><a href="#limites">10. O que ele não cobre</a></li>
+    <li><a href="#aicf">11. Matt e aicf lado a lado</a></li>
+    <li><a href="#juntos">12. Os dois juntos</a></li>
+    <li><a href="#cola">13. Cola rápida</a></li>
+  </ol>
+</nav>
+
+<main>
+<header class="hero">
+  <div class="eyebrow">mattpocock-skills v1.3.1 · sozinho</div>
+  <h1>Como funcionam as skills do Matt Pocock</h1>
+  <p class="lede">Um passeio pelo plugin inteiro, sem aicf e sem Superpowers: o que cada skill faz, em que ordem elas se encadeiam, que arquivos deixam no repositório e onde a decisão fica com você. No fim, duas seções o comparam com o aicf.</p>
+</header>
+
+<section id="ideia">
+<h2>1. A ideia</h2>
+<p>O Matt abre o README com uma crítica: frameworks como GSD, BMAD e Spec-Kit "são donos do processo" e, com isso, tiram o controle de quem usa. A proposta dele é o oposto: skills <strong>pequenas, fáceis de adaptar e combináveis</strong>, cada uma com um trabalho só. Não existe um orquestrador central que conduz você de ponta a ponta; existe um mapa (a skill <span class="cmd">/ask-matt</span>) e você decide o próximo passo.</p>
+<p>Cada skill existe para consertar um modo de falha que ele observa em agentes de código:</p>
+<div class="tbl"><table>
+<thead><tr><th>Modo de falha</th><th>Causa</th><th>Conserto</th></tr></thead>
+<tbody>
+<tr><td>O agente não fez o que eu queria</td><td>Desalinhamento: ninguém sabe exatamente o que quer</td><td>Entrevista antes de codar: <span class="cmd">/grill-with-docs</span>, <span class="cmd">/grill-me</span></td></tr>
+<tr><td>O agente é prolixo demais</td><td>Falta linguagem comum do domínio</td><td><code>GLOSSARY.md</code> mantido durante a entrevista (<span class="cmd">/domain-modeling</span>)</td></tr>
+<tr><td>O código não funciona</td><td>Falta feedback sobre o código que roda</td><td>Ciclo vermelho → verde (<span class="cmd">/tdd</span>) e depuração com loop (<span class="cmd">/diagnosing-bugs</span>)</td></tr>
+<tr><td>Viramos uma bola de lama</td><td>Agentes aceleram a entropia do código</td><td>Módulos profundos (<span class="cmd">/codebase-design</span>, <span class="cmd">/improve-codebase-architecture</span>)</td></tr>
+</tbody></table></div>
+</section>
+
+<section id="dois-tipos">
+<h2>2. Dois tipos de skill</h2>
+<p>A divisão que organiza o plugin inteiro é <strong>quem pode disparar a skill</strong>. Ela é controlada por um campo no cabeçalho do <code>SKILL.md</code>: <code>disable-model-invocation: true</code> faz o Claude Code esconder a skill do agente, e só você consegue chamá-la digitando o comando.</p>
+<div class="two">
+  <div class="box u">
+    <h4><span class="tag u">você invoca</span> Orquestram</h4>
+    <p>Só rodam quando você digita. São os passos do fluxo: <span class="cmd">/grill-with-docs</span>, <span class="cmd">/to-spec</span>, <span class="cmd">/to-tickets</span>, <span class="cmd">/implement</span>, <span class="cmd">/implement-spec</span>, <span class="cmd">/triage</span>, <span class="cmd">/wayfinder</span>, <span class="cmd">/retro</span>, <span class="cmd">/handoff</span>, <span class="cmd">/ask-matt</span>, <span class="cmd">/setup-matt-pocock-skills</span>…</p>
+  </div>
+  <div class="box m">
+    <h4><span class="tag m">agente também invoca</span> Guardam a disciplina</h4>
+    <p>O agente as carrega sozinho quando a tarefa casa com a descrição, ou outra skill as chama. São o "como fazer bem": <span class="cmd">/grilling</span>, <span class="cmd">/tdd</span>, <span class="cmd">/code-review</span>, <span class="cmd">/diagnosing-bugs</span>, <span class="cmd">/domain-modeling</span>, <span class="cmd">/codebase-design</span>, <span class="cmd">/prototype</span>, <span class="cmd">/research</span>, <span class="cmd">/pr</span>, <span class="cmd">/wizard</span>.</p>
+  </div>
+</div>
+<p><strong>Regra de composição:</strong> uma skill de usuário pode chamar skills de modelo, mas nunca outra skill de usuário. Por isso o fluxo não se encadeia sozinho: <span class="cmd">/to-spec</span> não chama <span class="cmd">/to-tickets</span>, e nada chama <span class="cmd">/implement</span>. Quem passa de um passo ao outro é você.</p>
+<p>Várias skills de usuário são quase só um ponteiro. O <code>SKILL.md</code> inteiro do <span class="cmd">/grill-with-docs</span> é uma linha: "chame a skill <code>grilling</code> e a skill <code>domain-modeling</code>". O <span class="cmd">/grill-me</span> chama só <code>grilling</code>. A lógica mora nas skills de modelo; as de usuário dão nome a uma combinação.</p>
+<div class="note"><strong>Como aparece na sua sessão</strong>Na lista de skills que o agente enxerga só aparecem as de modelo (com o prefixo <code>mattpocock-skills:</code>). As de usuário continuam disponíveis como comandos com barra; você as vê ao digitar <code>/</code> no Claude Code.</div>
+</section>
+
+<section id="setup">
+<h2>3. Instalar e configurar</h2>
+<p>Há dois jeitos de instalar, e o Matt pede que você escolha um só (os dois juntos duplicam cada skill):</p>
+<ul>
+  <li><strong>Plugin do Claude Code</strong> (<code>/plugin install mattpocock-skills</code>): pacote gerenciado, somente leitura, que se atualiza quando ele publica. É o seu caso.</li>
+  <li><strong>skills.sh</strong> (<code>npx skills@latest add mattpocock/skills</code>): copia os arquivos para dentro do seu repositório, editáveis, e só atualiza quando você pede.</li>
+</ul>
+
+<h3>O <span class="cmd">/setup-matt-pocock-skills</span>, uma vez por repositório</h3>
+<p>As skills de engenharia leem configuração do repositório, e é este comando que a escreve. Ele explora o repositório (remote do git, <code>CLAUDE.md</code>/<code>AGENTS.md</code>, <code>GLOSSARY.md</code>, <code>docs/adr/</code>, <code>.scratch/</code>, sinais de monorepo), mostra o que achou e faz no máximo três perguntas, sempre com a resposta recomendada na frente:</p>
+<dl class="kv">
+  <dt>A · Tracker</dt><dd>Onde moram as issues. GitHub (via <code>gh</code>), GitLab (via <code>glab</code>), <strong>markdown local</strong> em <code>.scratch/</code>, ou outro descrito em prosa (Jira, Linear).</dd>
+  <dt>B · Labels</dt><dd>Só se o <span class="cmd">/triage</span> estiver instalado: manter os cinco labels padrão (<code>needs-triage</code>, <code>needs-info</code>, <code>ready-for-agent</code>, <code>ready-for-human</code>, <code>wontfix</code>) ou mapear para os nomes que o seu tracker já usa.</dd>
+  <dt>C · Domínio</dt><dd>Só se houver sinal de monorepo: um <code>GLOSSARY.md</code> na raiz (o padrão) ou um <code>GLOSSARY-MAP.md</code> apontando um glossário por contexto.</dd>
+</dl>
+<p>Ele mostra o rascunho, deixa você editar e então escreve:</p>
+<pre><code>CLAUDE.md                     ← ganha um bloco "## Agent skills" com ponteiros
+docs/agents/issue-tracker.md  ← como criar, ler, comentar e fechar issues
+docs/agents/triage-labels.md  ← mapeamento de labels (só com /triage)
+docs/agents/domain.md         ← onde está o glossário e as regras de leitura</code></pre>
+<p>Esses arquivos são a "porta" entre as skills e o seu projeto. O <code>issue-tracker.md</code>, por exemplo, traduz frases genéricas das skills ("publique no tracker", "busque o ticket") em comandos concretos: <code>gh issue create</code> no GitHub, ou "crie um arquivo em <code>.scratch/&lt;feature&gt;/</code>" no modo local. Depois do setup, você pode editar esses arquivos à mão; rodar o setup de novo só é preciso para trocar de tracker.</p>
+<p>O <code>GLOSSARY.md</code> e o <code>docs/adr/</code> <strong>não</strong> são criados no setup. Eles nascem sob demanda, quando o primeiro termo for resolvido ou a primeira decisão merecer registro.</p>
+</section>
+
+<section id="fluxo">
+<h2>4. O fluxo principal: da ideia ao código entregue</h2>
+<p>O <span class="cmd">/ask-matt</span> chama isto de <em>main flow</em>: o caminho que a maior parte do trabalho percorre. Há dois desvios opcionais: protótipo, quando uma pergunta só se responde rodando código, e o tamanho da obra, que decide entre implementar direto ou quebrar em tickets.</p>
+<div class="diagram">
+<pre class="mermaid">
+flowchart TD
+  A["/grill-with-docs: entrevista + glossário + ADR"] --> B{"Alguma pergunta precisa de código para responder?"}
+  B -- sim --> P["/handoff → /prototype → /handoff de volta"]
+  P --> C
+  B -- não --> C{"Cabe numa sessão?"}
+  C -- não --> S["/to-spec: spec no tracker"]
+  S --> T["/to-tickets: fatias com bloqueios"]
+  T --> I1["/implement por ticket (/clear entre eles)"]
+  T --> I2["/implement-spec: todos em paralelo"]
+  C -- sim --> I0["/implement: na mesma sessão"]
+  I0 --> R["/tdd + /code-review: dentro do implement"]
+  I1 --> R
+  I2 --> R
+  R --> PR["/pr (se for PR)"]
+  PR --> RE["/retro: melhora o ambiente"]
+</pre>
+</div>
+
+<div class="step"><div class="n">1</div><div>
+<h3><span class="cmd">/grill-with-docs</span> <span class="tag u">você invoca</span></h3>
+<p>A entrevista. O agente monta uma <strong>árvore de decisões</strong> (cada decisão abre as decisões que dependem dela) e trabalha em <strong>rodadas</strong>. Em cada rodada pergunta toda a <strong>fronteira</strong>: as decisões cujos pré-requisitos já estão resolvidos. Cada pergunta vem numerada e com a resposta que ele recomenda:</p>
+<pre><code>❓ Q1 - Onde guardar o histórico?: …
+➡️ Recomendo tabela própria, porque …
+
+❓ Q2 - Quem pode apagar um item?: …
+➡️ Só o autor.</code></pre>
+<p>Suas respostas empurram a fronteira para a frente, e ele recalcula a próxima rodada. Duas regras importam: <strong>fato é trabalho do agente</strong> (ele manda um subagente olhar o código em vez de perguntar a você) e <strong>decisão é sua</strong>. Termina quando a fronteira esvazia e você confirma que há entendimento comum.</p>
+<p>O "with-docs" vem da segunda skill que ele carrega, a <span class="cmd">/domain-modeling</span>: durante a conversa o agente desafia termos vagos ("conta: você quer dizer Cliente ou Usuário?"), confere se o código concorda com o que você diz, atualiza o <code>GLOSSARY.md</code> na hora e oferece um ADR quando uma decisão é difícil de reverter, surpreendente sem contexto e fruto de um trade-off real (os três ao mesmo tempo).</p>
+<dl class="kv"><dt>Produz</dt><dd>Entendimento na conversa, <code>GLOSSARY.md</code> e talvez <code>docs/adr/NNNN-*.md</code>. Ainda nenhuma spec.</dd></dl>
+</div></div>
+
+<div class="step"><div class="n">2</div><div>
+<h3>Desvio: <span class="cmd">/prototype</span> <span class="tag m">agente também invoca</span></h3>
+<p>Quando uma pergunta não se resolve no papel ("esse modelo de estados faz sentido?", "como essa tela deve ficar?"), o Matt manda fazer um protótipo descartável. São duas formas:</p>
+<ul>
+  <li><strong>Lógica:</strong> um único arquivo HTML com botões livres e roteiros guiados que empurram a máquina de estados pelos casos difíceis, operável por quem não programa.</li>
+  <li><strong>Interface:</strong> várias variações radicalmente diferentes na mesma rota, alternadas por um parâmetro na URL e uma barra flutuante.</li>
+</ul>
+<p>O protótipo roda com um comando, não persiste nada e mostra o estado inteiro a cada ação. No fim, a decisão validada vai para o código real e o protótipo fica guardado numa branch <code>prototype/&lt;nome&gt;</code>, fora da <code>main</code>, com um ponteiro na issue. O <span class="cmd">/handoff</span> antes e depois serve para levar o contexto a uma sessão separada (ver seção 8).</p>
+</div></div>
+
+<div class="step"><div class="n">3</div><div>
+<h3><span class="cmd">/to-spec</span> <span class="tag u">você invoca</span></h3>
+<p>Transforma a conversa em spec. <strong>Não entrevista</strong>: só sintetiza o que já foi discutido. Por isso precisa rodar na mesma janela de contexto da entrevista. Antes de escrever, propõe as <strong>seams</strong> (as interfaces públicas onde os testes vão observar o comportamento), preferindo as que já existem e a mais alta possível, e confere com você.</p>
+<p>O modelo da spec tem: Problema, Solução, <strong>uma lista longa de histórias de usuário</strong> ("Como &lt;ator&gt;, quero &lt;recurso&gt;, para &lt;benefício&gt;"), Decisões de implementação, Decisões de teste, Fora de escopo e Notas. Sem caminho de arquivo nem trecho de código, porque envelhecem rápido; a exceção é um trecho que saiu de um protótipo e diz a decisão melhor que a prosa.</p>
+<dl class="kv"><dt>Produz</dt><dd>Uma issue no tracker (ou <code>.scratch/&lt;feature&gt;/spec.md</code>) com o label <code>ready-for-agent</code>.</dd></dl>
+</div></div>
+
+<div class="step"><div class="n">4</div><div>
+<h3><span class="cmd">/to-tickets</span> <span class="tag u">você invoca</span></h3>
+<p>Quebra a spec em <strong>tracer bullets</strong>: fatias verticais, cada uma atravessando todas as camadas (schema, API, interface, testes) por um caminho estreito, de modo que cada ticket entregue algo demonstrável sozinho e caiba numa janela de contexto nova. Fatias horizontais ("primeiro todo o banco, depois toda a API") são o que ele evita.</p>
+<p>Cada ticket declara suas <strong>arestas de bloqueio</strong>: quais tickets precisam estar prontos antes. Ele mostra a lista numerada (título, bloqueado por, o que entrega) e pergunta se a granularidade e os bloqueios estão certos, até você aprovar.</p>
+<p>A exceção são refatorações largas (renomear uma coluna usada em mil lugares): aí a sequência é <em>expand → migrate → contract</em>. Adiciona a forma nova ao lado da antiga, migra os chamadores em lotes, cada lote um ticket, e por fim remove a forma antiga.</p>
+<dl class="kv"><dt>Produz</dt><dd>No tracker local, um arquivo por ticket em <code>.scratch/&lt;feature&gt;/issues/01-*.md</code>; no GitHub, uma issue por ticket com bloqueio nativo entre elas.</dd></dl>
+</div></div>
+
+<div class="step"><div class="n">5</div><div>
+<h3><span class="cmd">/implement</span> ou <span class="cmd">/implement-spec</span> <span class="tag u">você invoca</span></h3>
+<div class="two">
+  <div class="box"><h4><span class="cmd">/implement</span></h4><p>Curtíssimo: implementa o que a spec ou o ticket descreve, usa <span class="cmd">/tdd</span> nas seams combinadas, roda o typecheck e testes isolados com frequência, a suíte inteira no fim, chama <span class="cmd">/code-review</span> e <strong>commita na branch atual</strong>. Para obra multi-sessão, roda-se um ticket por vez, com <code>/clear</code> entre eles.</p></div>
+  <div class="box"><h4><span class="cmd">/implement-spec</span></h4><p>Lê os tickets como um <strong>grafo de tarefas</strong> e mantém a fronteira ocupada: um subagente implementador por ticket pronto, cada um em sua worktree, todos com <span class="cmd">/tdd</span>. Um subagente de merge junta tudo numa <strong>branch de integração</strong>. No fim, um <span class="cmd">/code-review</span> sobre a branch inteira e limpeza das worktrees.</p></div>
+</div>
+<p><strong>O <span class="cmd">/tdd</span></strong> é a disciplina do código. Antes do primeiro teste, ele combina com você as seams a testar, e nenhum teste nasce fora delas. Depois, um ciclo por vez: um teste que falha, o mínimo de código para passar, e o próximo. Ele lista três antipadrões: teste acoplado à implementação (quebra ao refatorar sem mudar comportamento), teste tautológico (recalcula o esperado do mesmo jeito que o código) e fatia horizontal (todos os testes primeiro). Refatoração fica fora do ciclo e é assunto da revisão.</p>
+<p><strong>O <span class="cmd">/code-review</span></strong> compara <code>HEAD</code> com um ponto fixo (commit, branch, tag) em dois eixos, cada um num subagente separado para um não contaminar o outro:</p>
+<ul>
+  <li><strong>Standards:</strong> o código segue os padrões documentados do repositório (<code>CODING_STANDARDS.md</code>, <code>CONTRIBUTING.md</code>)? Sempre somado a uma base de 12 <em>code smells</em> do Fowler (Feature Envy, Shotgun Surgery, Speculative Generality…), tratados como julgamento e nunca como violação dura.</li>
+  <li><strong>Spec:</strong> o diff faz o que a issue pediu? Aponta o que falta, o que sobra (escopo a mais) e o que parece feito mas está errado.</li>
+</ul>
+<p>Os dois relatórios aparecem lado a lado, sem reordenar um contra o outro.</p>
+</div></div>
+
+<div class="step"><div class="n">6</div><div>
+<h3><span class="cmd">/pr</span> <span class="tag m">agente também invoca</span></h3>
+<p>Se o trabalho sobe como pull request, esta skill dá forma ao texto: um resumo como o menor visual que deixa a mudança clara, evidência de antes e depois de que funciona, e o risco do merge (porta de mão única ou de mão dupla, e o raio de impacto).</p>
+</div></div>
+
+<div class="step"><div class="n">7</div><div>
+<h3><span class="cmd">/retro</span> <span class="tag u">você invoca</span></h3>
+<p>Olha a sessão que acabou e propõe melhorias no <strong>ambiente</strong> do agente, não no código, ordenadas por gravidade: ponteiros de navegação, checks automáticos que teriam pegado um erro, regras novas para o revisor, instruções que não mudam nada no <code>CLAUDE.md</code>, chamadas de ferramenta caras, informação que faltou. A regra central: erro mecânico vira check determinístico (lint, hook de pre-commit, job de CI); só julgamento vira texto em <code>CODING_STANDARDS.md</code>. Roda-se na própria sessão, antes do <code>/clear</code>.</p>
+</div></div>
+</section>
+
+<section id="exemplo">
+<h2>5. Exemplo do começo ao fim</h2>
+<p>Um repositório solo, sem remote, com o tracker em markdown local. A demanda: "exportar o relatório mensal em CSV".</p>
+<pre><code>/setup-matt-pocock-skills      → escolhe "Local markdown"; escreve docs/agents/*
+/grill-with-docs exportar relatório mensal em CSV
+   rodada 1: Q1 quem exporta? Q2 quais colunas? Q3 separador?
+   rodada 2: Q4 meses sem dados geram arquivo vazio ou erro? …
+   → GLOSSARY.md ganha "Relatório mensal" e "Período de competência"
+/to-spec                       → .scratch/exportar-csv/spec.md
+/to-tickets                    → 3 tickets, o 02 e o 03 bloqueados pelo 01
+/clear
+/implement .scratch/exportar-csv/issues/01-gerar-csv-de-um-mes.md
+/clear
+/implement .scratch/exportar-csv/issues/02-botao-de-download.md
+…
+/retro</code></pre>
+<p>O que fica no repositório:</p>
+<pre><code>CLAUDE.md                       (bloco "## Agent skills")
+GLOSSARY.md
+docs/agents/issue-tracker.md
+docs/agents/domain.md
+.scratch/exportar-csv/
+├── spec.md
+└── issues/
+    ├── 01-gerar-csv-de-um-mes.md     Status: ready-for-agent
+    ├── 02-botao-de-download.md       Blocked by: 01
+    └── 03-mes-sem-dados.md           Blocked by: 01</code></pre>
+<p>Repare na janela de contexto: entrevista, spec e tickets acontecem na <strong>mesma</strong> sessão, sem compactar, porque a spec é síntese da conversa. Só depois dos tickets vem o <code>/clear</code>, e cada <span class="cmd">/implement</span> parte do ticket, que foi escrito para se sustentar sozinho.</p>
+</section>
+
+<section id="rampas">
+<h2>6. Entradas laterais</h2>
+<p>Situações que geram trabalho e depois desembocam no fluxo principal.</p>
+
+<h3><span class="cmd">/triage</span>: pedidos e bugs se acumulando</h3>
+<p><strong>Triagem</strong> é a primeira passada sobre o que chega de fora: um usuário abre uma issue dizendo "deu erro ao salvar" ou "seria bom exportar em PDF". Antes de alguém trabalhar nisso, um mantenedor decide se o pedido procede, se está claro o bastante e quem vai fazer. O <span class="cmd">/triage</span> faz essa passada com você: o agente investiga e recomenda, e você decide. O resultado de cada issue é um label de estado, que diz o que acontece com ela a seguir.</p>
+<p>Cada issue recebe uma categoria (<code>bug</code> ou <code>enhancement</code>) e um estado:</p>
+<div class="tbl"><table>
+<thead><tr><th>Estado</th><th>Significa</th></tr></thead>
+<tbody>
+<tr><td><code>needs-triage</code></td><td>Ainda não avaliada.</td></tr>
+<tr><td><code>needs-info</code></td><td>Falta informação de quem abriu. O agente posta as perguntas e a issue volta a <code>needs-triage</code> quando a pessoa responde.</td></tr>
+<tr><td><code>ready-for-agent</code></td><td>Especificada a ponto de um agente implementar sem você. Ganha um <em>agent brief</em>: comentário com o comportamento esperado e os critérios de aceite.</td></tr>
+<tr><td><code>ready-for-human</code></td><td>Pronta, mas precisa de gente: julgamento, acesso externo, teste manual.</td></tr>
+<tr><td><code>wontfix</code></td><td>Não será feita. Fecha com explicação; pedido de recurso recusado vai para <code>.out-of-scope/</code>, para não ser pedido de novo.</td></tr>
+</tbody></table></div>
+<div class="diagram">
+<pre class="mermaid">
+stateDiagram-v2
+  direction LR
+  [*] --> needs_triage
+  needs_triage --> needs_info
+  needs_info --> needs_triage: autor respondeu
+  needs_triage --> ready_for_agent
+  needs_triage --> ready_for_human
+  needs_triage --> wontfix
+</pre>
+</div>
+<p>Você pede em linguagem natural ("o que precisa da minha atenção?", "vamos ver a #42"). Para cada issue ele lê tudo, procura se aquilo já existe no código, consulta a pasta <code>.out-of-scope/</code> (pedidos já recusados), reproduz o bug antes de qualquer pergunta, entrevista se faltar clareza e aplica o resultado: um <em>agent brief</em> para <code>ready-for-agent</code>, notas de triagem para <code>needs-info</code>, fechamento explicado para <code>wontfix</code>. Todo comentário começa com um aviso de que foi gerado por IA. Só vale para issues que <strong>você não criou</strong>: tickets do <span class="cmd">/to-tickets</span> já nascem prontos. Num projeto solo, em que todas as issues são suas, ele quase não tem uso.</p>
+
+<h3><span class="cmd">/diagnosing-bugs</span>: algo quebrou</h3>
+<p>Para o bug difícil: o intermitente, a regressão entre duas versões boas. Seis fases, e a primeira é a que importa:</p>
+<ol>
+  <li><strong>Construir um loop de feedback:</strong> um único comando, já executado, que fica vermelho <em>neste</em> bug, de forma determinística, em segundos e sem humano. Sem esse comando, é proibido formular hipótese.</li>
+  <li><strong>Reproduzir e minimizar:</strong> cortar entradas e passos um por vez até que tudo o que sobrou seja necessário para falhar.</li>
+  <li><strong>Hipóteses:</strong> de 3 a 5, ranqueadas, cada uma com a previsão que a refuta, mostradas a você antes de testar.</li>
+  <li><strong>Instrumentar:</strong> uma variável por vez, logs marcados com um prefixo único (<code>[DEBUG-a4f2]</code>) para limpar com um grep.</li>
+  <li><strong>Corrigir com teste de regressão</strong>, escrito antes da correção, se houver uma seam correta. Se não houver, isso é o achado.</li>
+  <li><strong>Limpeza:</strong> repro original não reproduz, logs removidos, hipótese certa registrada no commit.</li>
+</ol>
+<p>Depois, <span class="cmd">/retro</span> para perguntar o que teria evitado o bug.</p>
+
+<h3><span class="cmd">/wayfinder</span>: obra grande e nebulosa</h3>
+<p>Para o que não cabe numa sessão e cujo caminho ainda não está visível (projeto novo, feature enorme). Ele <strong>planeja, não constrói</strong>. Cria um <strong>mapa</strong> (uma issue com label <code>wayfinder:map</code>) com Destino, Notas, Decisões até aqui, "Ainda não especificado" (a névoa) e Fora de escopo. Os filhos do mapa são <strong>tickets de decisão</strong>, perguntas cuja resposta é uma decisão, de quatro tipos:</p>
+<ul>
+  <li><strong>research</strong> (sem você): um subagente lê fontes primárias;</li>
+  <li><strong>prototype</strong> (com você): artefato tosco para reagir;</li>
+  <li><strong>grilling</strong> (com você): conversa, o caso padrão;</li>
+  <li><strong>task</strong>: trabalho braçal que destrava uma decisão (criar conta num serviço para avaliar a API).</li>
+</ul>
+<p>A primeira sessão só desenha o mapa. Cada sessão seguinte resolve <strong>um</strong> ticket da fronteira, registra a resposta, fecha a issue e transforma em ticket a névoa que ficou nítida. Quando o caminho clareia, entra no fluxo principal pelo <span class="cmd">/to-spec</span>.</p>
+</section>
+
+<section id="vocabulario">
+<h2>7. O vocabulário por baixo</h2>
+<p>Duas skills de modelo são a fonte única de duas linguagens que as outras usam.</p>
+<div class="two">
+  <div class="box"><h4><span class="cmd">/domain-modeling</span>: a língua do negócio</h4>
+  <p>Cuida do <code>GLOSSARY.md</code>: um termo por entrada, definição de uma ou duas frases, e uma linha <em>Avoid</em> com os sinônimos proibidos. Sem nenhum detalhe de implementação. Cuida também dos ADRs em <code>docs/adr/</code>, que podem ter um parágrafo só.</p>
+<pre><code>**Pedido**:
+Solicitação de compra feita por um Cliente.
+_Avoid_: compra, transação</code></pre></div>
+  <div class="box"><h4><span class="cmd">/codebase-design</span>: a língua da arquitetura</h4>
+  <p>Termos fixos: <strong>module</strong>, <strong>interface</strong> (tudo que o chamador precisa saber, não só a assinatura), <strong>depth</strong>, <strong>seam</strong>, <strong>adapter</strong>, <strong>leverage</strong>, <strong>locality</strong>. Um módulo profundo esconde muito comportamento atrás de uma interface pequena. Teste da deleção: se apagar o módulo espalha complexidade pelos chamadores, ele se pagava.</p></div>
+</div>
+<p><strong><span class="cmd">/improve-codebase-architecture</span></strong> <span class="tag u">você invoca</span> usa as duas. Escolhe onde olhar pelo histórico do git (os arquivos que mais mudam), manda um subagente percorrer o código anotando atrito, e gera um relatório HTML na pasta temporária, com um cartão por candidato a "aprofundamento" (problema, solução, antes/depois em diagrama, força da recomendação). Você escolhe um, e ele entra numa entrevista sobre aquele candidato. O Matt sugere rodar a cada poucos dias.</p>
+</section>
+
+<section id="contexto">
+<h2>8. Higiene de contexto</h2>
+<p>O Matt dá muito peso a quando limpar a conversa. A referência é a <strong>smart zone</strong>: cerca de 150 mil tokens nos modelos atuais, a faixa em que o modelo ainda raciocina bem. A decisão de limpar só se toma na <strong>fronteira entre fases</strong> (fim da entrevista, fim da implementação), nunca no meio delas. Na fronteira, percorra as perguntas em ordem, e a primeira resposta "sim" decide:</p>
+<div class="tbl"><table>
+<thead><tr><th>Pergunta</th><th>Se sim</th></tr></thead>
+<tbody>
+<tr><td>A próxima fase precisa desta conversa como fonte primária, ou ainda cabe na smart zone?</td><td><strong>Continuar.</strong> Entrevista → implementação é o caso típico.</td></tr>
+<tr><td>Tudo o que está aqui é descartável para o que vem?</td><td><strong><code>/clear</code></strong>. O mais barato.</td></tr>
+<tr><td>Vai trocar de ferramenta (Claude → Codex), de diretório, passar a um colega, ou desviar para uma tarefa lateral?</td><td><strong><span class="cmd">/handoff</span></strong>: escreve um markdown na pasta temporária do sistema com o resumo e as skills sugeridas para a próxima sessão.</td></tr>
+<tr><td>A tarefa roda sem você olhando?</td><td><strong>Subagente.</strong> Revisão automática é o exemplo.</td></tr>
+<tr><td>Nenhuma das anteriores</td><td><strong><code>/compact</code></strong> com instrução do que manter. É o padrão, mas fica no fim da lista.</td></tr>
+</tbody></table></div>
+<p>O motivo da ordem: todo movimento, menos continuar, troca a conversa original (fonte primária) por um resumo dela (fonte secundária), que perde informação. Limpar um contexto que ainda importava perde o porquê do que foi construído, e ler o diff depois não o recupera.</p>
+</section>
+
+<section id="avulsas">
+<h2>9. Skills avulsas</h2>
+<div class="tbl"><table>
+<thead><tr><th>Skill</th><th>Para quê</th></tr></thead>
+<tbody>
+<tr><td><span class="cmd">/grill-me</span> <span class="tag u">você</span></td><td>A mesma entrevista sem salvar nada. Para quando não há repositório por baixo: um plano, um texto, uma decisão.</td></tr>
+<tr><td><span class="cmd">/grilling</span> <span class="tag m">modelo</span></td><td>A entrevista crua, sem invólucro. É a peça usada por <span class="cmd">/grill-me</span>, <span class="cmd">/grill-with-docs</span>, <span class="cmd">/triage</span>, <span class="cmd">/wayfinder</span> e <span class="cmd">/improve-codebase-architecture</span>.</td></tr>
+<tr><td><span class="cmd">/research</span> <span class="tag m">modelo</span></td><td>Um agente em segundo plano investiga uma pergunta em fontes primárias e deixa um markdown com citações no repositório, enquanto você segue trabalhando.</td></tr>
+<tr><td><span class="cmd">/to-questionnaire</span> <span class="tag u">você</span></td><td>Quando a resposta está na cabeça de outra pessoa: monta um questionário em markdown para ela. Entrevista você sobre o envio (para quem, o que precisa voltar), não sobre o assunto.</td></tr>
+<tr><td><span class="cmd">/wizard</span> <span class="tag m">modelo</span></td><td>Gera um script bash interativo para passos que só um humano faz: provisionar infraestrutura, criar credencial, clicar num painel de terceiro. O script abre as URLs, captura os valores e os grava no <code>.env</code> e nos secrets do GitHub.</td></tr>
+<tr><td><span class="cmd">/wait-what</span> <span class="tag u">você</span></td><td>"Não entendi." O agente reexplica a última mensagem com contexto, em inglês técnico simplificado e com o vocabulário do <code>GLOSSARY.md</code>.</td></tr>
+<tr><td><span class="cmd">/teach</span> <span class="tag u">você</span></td><td>Ensina um conceito ao longo de várias sessões, usando o diretório atual para guardar o progresso.</td></tr>
+<tr><td><span class="cmd">/handoff</span> <span class="tag u">você</span></td><td>Resume a conversa num arquivo portátil para outra sessão, outra ferramenta ou outra pessoa. Referencia specs, issues e commits em vez de copiá-los, e remove segredos.</td></tr>
+<tr><td><span class="cmd">/writing-for-agents</span> <span class="tag m">modelo</span></td><td>Guia de escrita para o que agentes leem: skills, <code>CLAUDE.md</code>, docs apontados.</td></tr>
+<tr><td><span class="cmd">/ask-matt</span> <span class="tag u">você</span></td><td>O mapa de tudo isto. Pergunte "qual skill para…?" quando não lembrar.</td></tr>
+</tbody></table></div>
+</section>
+
+<section id="limites">
+<h2>10. O que ele não cobre</h2>
+<p>Usado sozinho, o plugin cuida de uma demanda por vez, da ideia ao commit. Algumas coisas ficam de fora por desenho, e vale saber antes de depender delas:</p>
+<ul>
+  <li><strong>Visão de produto e prioridade.</strong> Não há PRD nem roadmap. O mais perto disso é o mapa do <span class="cmd">/wayfinder</span>, que é sobre uma obra só.</li>
+  <li><strong>Fechamento da demanda.</strong> O <span class="cmd">/implement</span> termina em revisão e commit. Não há relatório do que foi feito nem arquivamento da spec; o que fica é a issue (fechada no tracker, ou o arquivo em <code>.scratch/</code>), o <code>GLOSSARY.md</code>, os ADRs e o histórico do git. O <span class="cmd">/retro</span> melhora o ambiente, não registra a entrega.</li>
+  <li><strong>Encadeamento automático.</strong> Nenhum passo chama o seguinte. Se você esquecer o <span class="cmd">/to-tickets</span> ou o <span class="cmd">/retro</span>, ninguém lembra por você.</li>
+  <li><strong>Verificação antes de declarar pronto.</strong> O <span class="cmd">/implement</span> pede typecheck e suíte de testes, mas não há uma regra geral de "mostre a saída do comando antes de dizer que passou" fora do <span class="cmd">/diagnosing-bugs</span>.</li>
+</ul>
+<p>Isso combina com a proposta dele: peças pequenas que você monta, sem um processo que manda em você. O custo é que a disciplina de seguir o mapa é sua.</p>
+</section>
+
+<section id="aicf">
+<h2>11. Matt e aicf lado a lado</h2>
+<p>Os dois resolvem problemas diferentes. O Matt cuida de <strong>como uma mudança sai do papel e vira código bom</strong>: entrevista, spec, fatias, TDD e revisão. O aicf cuida da <strong>governança do projeto</strong>: o que o produto é, que demandas existem, em que estado cada uma está e o registro do que foi feito. Na implementação, o aicf oferece caminhos à escolha, e o Matt é um deles. A comparação vale para <code>mattpocock-skills</code> 1.3.1 e aicf 0.36.0.</p>
+
+<div class="two">
+  <div class="box"><h4>Matt: peças que você monta</h4><p>"Não ser dono do processo." Nenhum passo chama o seguinte; você digita cada um. A disciplina mora dentro de cada passo (TDD obrigatório nas seams, revisão em dois eixos, loop de feedback antes de hipótese).</p></div>
+  <div class="box"><h4>aicf: governança fixa, implementação livre</h4><p>"A governança é obrigatória e sempre a mesma; a implementação é roteiro, não trilho." O registro e o fechamento não variam. Dentro da implementação, o caso decide, e sair do roteiro exige só dizer o motivo em uma linha.</p></div>
+</div>
+
+<div class="tbl"><table>
+<thead><tr><th>Aspecto</th><th>Matt sozinho</th><th>aicf</th></tr></thead>
+<tbody>
+<tr><td>Visão de produto</td><td>Não tem.</td><td><span class="cmd">/aicf:criar-prd</span> grava <code>docs/projeto/PRD.md</code> e é refeito quando uma decisão o contradiz. Há também um <code>ROADMAP.md</code>.</td></tr>
+<tr><td>Onde a demanda mora</td><td>No issue tracker: GitHub, GitLab ou <code>.scratch/</code>, conforme <code>docs/agents/issue-tracker.md</code>.</td><td>Na "mídia do registro", uma linha do <code>CLAUDE.md</code>: arquivos em <code>docs/projeto/</code> ou issues do GitHub com labels <code>aicf:*</code>.</td></tr>
+<tr><td>Estados</td><td>Labels de triagem dizem <strong>o que fazer a seguir</strong> (<code>needs-info</code>, <code>ready-for-agent</code>…).</td><td>Quatro estados de <strong>maturidade</strong>: incerto, decidido (intent), pronta para implementar (spec) e concluída. Mudar de estado é mover o registro (<code>git mv</code> entre pastas, ou trocar o label).</td></tr>
+<tr><td>Ideia que surge no meio</td><td>Sem regra própria; o <span class="cmd">/handoff</span> serve para desviar para uma tarefa lateral.</td><td>Registra o esboço como intent ou backlog, escolhe o estado por certeza, não por urgência, e volta ao que estava fazendo.</td></tr>
+<tr><td>Entrevista</td><td><span class="cmd">/grill-with-docs</span>: rodadas numeradas com a resposta recomendada e glossário atualizado durante a conversa.</td><td><span class="cmd">/aicf:criar-spec</span>: menu (<code>AskUserQuestion</code>) para escolhas, pergunta aberta para o que é descritivo, e começa aberto. O <span class="cmd">/grill-with-docs</span> e o <code>brainstorming</code> (Superpowers) valem como caminhos alternativos de entrevista.</td></tr>
+<tr><td>Formato da spec</td><td>Problema, Solução, lista longa de histórias de usuário, decisões de implementação e de teste, Fora de escopo. Proíbe caminho de arquivo.</td><td>Problema, Solução, <strong>arquivos e interfaces nomeados</strong>, Fora de escopo e um passo de <strong>Verificação</strong> ponta a ponta, mais a linha <code>Processo</code> com o caminho sugerido.</td></tr>
+<tr><td>Obra grande</td><td><span class="cmd">/to-tickets</span> em fatias verticais com bloqueios; se ainda é nebulosa, <span class="cmd">/wayfinder</span>.</td><td>Uma spec só, com as entregas em checkboxes. Cada sessão fecha parcial com <code>## Estado em andamento</code>. Demandas independentes viram specs separadas, com a relação escrita em prosa.</td></tr>
+<tr><td>Implementação</td><td><span class="cmd">/implement</span> ou <span class="cmd">/implement-spec</span>, sempre com <span class="cmd">/tdd</span> nas seams combinadas.</td><td><span class="cmd">/aicf:implementar-spec</span> escolhe o caminho (aicf direto, plan mode, Superpowers ou Matt) e o workspace (branch atual, branch própria ou worktree). Teste quando a mudança merece; teste primeiro em correção de bug.</td></tr>
+<tr><td>Revisão</td><td><span class="cmd">/code-review</span> em dois eixos (Standards e Spec), dentro do <span class="cmd">/implement</span>.</td><td>O fechamento propõe revisão por quem não viu a implementação. Se o caminho escolhido já revisou, não repete.</td></tr>
+<tr><td>Fim da demanda</td><td>Commit na branch. Nada registra a entrega além da issue fechada e do git.</td><td><span class="cmd">/aicf:fechar-demanda</span>, aplicado pelo agente sem pedido: checks no projeto inteiro, relatório na demanda, arquivamento em <code>concluidas/</code>, commit próprio e aviso de se a sessão pode acabar.</td></tr>
+<tr><td>Aprender com a sessão</td><td><span class="cmd">/retro</span>, quando você lembra de chamar: sugere checks, padrões de revisão e ponteiros.</td><td>Passo 3 do fechamento, em toda demanda: promove o que vale além dela para <code>docs/referencias/</code>, <code>CLAUDE.md</code>, <code>.claude/rules/</code>, skill, hook, ADR ou glossário.</td></tr>
+<tr><td>Glossário e ADR</td><td><span class="cmd">/domain-modeling</span>: <code>GLOSSARY.md</code> e <code>docs/adr/</code>.</td><td>Os mesmos arquivos. O aicf adota o formato e a numeração do <span class="cmd">/domain-modeling</span> quando o Matt está instalado.</td></tr>
+<tr><td>Quem dispara</td><td>Os passos do fluxo são só seus (<code>disable-model-invocation: true</code>).</td><td><span class="cmd">criar-spec</span>, <span class="cmd">implementar-spec</span> e <span class="cmd">fechar-demanda</span> o agente pode chamar sozinho; <span class="cmd">setup</span>, <span class="cmd">criar-prd</span> e <span class="cmd">ajuda</span> são só seus.</td></tr>
+</tbody></table></div>
+
+<h3>Quando cada um basta</h3>
+<ul>
+  <li><strong>O Matt sozinho basta</strong> quando o que importa é a qualidade de cada entrega e o histórico do git é registro suficiente: projeto pequeno, experimento, biblioteca com issues de usuários (aí o <span class="cmd">/triage</span> brilha).</li>
+  <li><strong>O aicf faz falta</strong> quando você precisa responder, semanas depois, o que o produto é, o que está na fila, por que algo foi feito daquele jeito e o que a sessão anterior descobriu. É o registro que o Matt não guarda.</li>
+</ul>
+</section>
+
+<section id="juntos">
+<h2>12. Os dois juntos</h2>
+<p>Instalados no mesmo projeto, o aicf fica por cima: ele decide em que fase a demanda está e a fecha, e o Matt entra como um caminho dentro das fases de entrevista e de implementação.</p>
+<pre><code>          GOVERNANÇA (aicf)                 CAMINHO DO MATT                    GOVERNANÇA (aicf)
+intent em docs/projeto/intents/ ──▶ /grill-with-docs (entrevista) ──▶ spec em docs/projeto/specs/
+                                                                            │
+                                    /to-tickets  ──▶  /implement  ◀─────────┘
+                                    (fatias)          (/tdd + /code-review + commit)
+                                                            │
+                                                            ▼
+                                                  /aicf:fechar-demanda
+                                       relatório, concluidas/, promoção de conhecimento</code></pre>
+<p>A linha <code>Processo</code> da demanda registra o caminho seguido, por exemplo:</p>
+<pre><code>Processo — entrevista: grill-with-docs · implementação: implement · issues #12, #13</code></pre>
+
+<h3>Onde eles se encostam</h3>
+<dl class="kv">
+  <dt>Onde mora</dt><dd>Os dois respondem "onde fica o trabalho": o Matt em <code>docs/agents/issue-tracker.md</code>, o aicf na linha <code>Mídia do registro</code> do <code>CLAUDE.md</code>. O <span class="cmd">/aicf:setup</span> lê o arquivo do Matt para propor o padrão, mas quem manda é a linha do aicf. Se discordarem, o agente avisa uma vez e segue a linha.</dd>
+  <dt>Labels</dt><dd>Os <code>aicf:*</code> marcam maturidade; os do <span class="cmd">/triage</span>, a próxima ação. São eixos diferentes, e a mesma issue pode ter os dois.</dd>
+  <dt>Spec</dt><dd>No modo arquivo, a spec do <span class="cmd">/to-spec</span> vai para <code>.scratch/</code>, que o aicf não adota. No modo issue, <span class="cmd">/aicf:criar-spec #12</span> adota a issue que o <span class="cmd">/to-spec</span> criou, em vez de abrir uma segunda.</dd>
+  <dt>Revisão</dt><dd>O <span class="cmd">/implement</span> já roda <span class="cmd">/code-review</span>. Pela regra "exigência já satisfeita não se repete", o fechamento não deveria pedir outra revisão.</dd>
+  <dt>Quem digita</dt><dd>O agente não consegue chamar <span class="cmd">/grill-with-docs</span>, <span class="cmd">/to-spec</span>, <span class="cmd">/to-tickets</span> nem <span class="cmd">/implement</span>, porque são só do usuário. Quando o caminho escolhido é o do Matt, quem digita é você.</dd>
+</dl>
+
+<div class="note"><strong>Em andamento no aicf</strong>Esses pontos de atrito são o assunto da spec aberta <code>docs/projeto/specs/o-agente-nao-oferece-o-caminho-do-matt.md</code>. A proposta: o agente conduz a entrevista pelas skills que o <span class="cmd">/grill-with-docs</span> chama (<span class="cmd">grilling</span> e <span class="cmd">domain-modeling</span>, que ele pode invocar), toda spec sai pelo <span class="cmd">/aicf:criar-spec</span> no formato do aicf, e o agente entrega a você os comandos <span class="cmd">/to-tickets</span> e <span class="cmd">/implement</span> já com a spec no argumento. A análise detalhada, com os riscos (reentrevistar depois do grill, perder as histórias de usuário), está na nota <a href="https://github.com/hmaurus/skills/blob/main/docs/notas-de-sessao/o-matt-com-e-sem-o-aicf.md">O Matt com e sem o aicf</a>.</div>
+</section>
+
+<section id="cola">
+<h2>13. Cola rápida</h2>
+<div class="tbl"><table>
+<thead><tr><th>Situação</th><th>Comece por</th></tr></thead>
+<tbody>
+<tr><td>Repositório novo para as skills</td><td><span class="cmd">/setup-matt-pocock-skills</span></td></tr>
+<tr><td>Tenho uma ideia de feature</td><td><span class="cmd">/grill-with-docs</span></td></tr>
+<tr><td>Ideia discutida, cabe numa sessão</td><td><span class="cmd">/implement</span> na mesma conversa</td></tr>
+<tr><td>Ideia discutida, obra de várias sessões</td><td><span class="cmd">/to-spec</span> → <span class="cmd">/to-tickets</span> → <span class="cmd">/implement</span> por ticket</td></tr>
+<tr><td>Quero que os tickets rodem em paralelo</td><td><span class="cmd">/implement-spec</span></td></tr>
+<tr><td>Comportamento pequeno, sem spec</td><td><span class="cmd">/tdd</span></td></tr>
+<tr><td>Revisar uma branch ou PR</td><td><span class="cmd">/code-review</span> desde <code>main</code></td></tr>
+<tr><td>Bug que resiste</td><td><span class="cmd">/diagnosing-bugs</span></td></tr>
+<tr><td>Fila de issues de terceiros</td><td><span class="cmd">/triage</span></td></tr>
+<tr><td>Projeto grande, caminho incerto</td><td><span class="cmd">/wayfinder</span></td></tr>
+<tr><td>Dúvida de modelagem que só código responde</td><td><span class="cmd">/prototype</span></td></tr>
+<tr><td>Tempo livre para cuidar do código</td><td><span class="cmd">/improve-codebase-architecture</span></td></tr>
+<tr><td>Acabou a sessão</td><td><span class="cmd">/retro</span>, depois <code>/clear</code></td></tr>
+<tr><td>Esqueci qual usar</td><td><span class="cmd">/ask-matt</span></td></tr>
+</tbody></table></div>
+</section>
+
+<p class="src">Fontes: os arquivos <code>SKILL.md</code>, <code>README.md</code> e <code>GLOSSARY.md</code> do plugin <code>mattpocock-skills</code> 1.3.1, lidos em <code>~/.claude/plugins/cache/mattpocock/mattpocock-skills/1.3.1/</code>, e as skills do aicf 0.36.0 em <code>skills/</code> deste repositório, em 2026-10-07. Repositório: <a href="https://github.com/mattpocock/skills">github.com/mattpocock/skills</a>.</p>
+</main>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({ startOnLoad: true, theme: matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "default" });</script>
+</body>
+</html>
