@@ -71,6 +71,18 @@ são justamente o caso em que o Matt é recomendado. Por isso o agente entrega:
   `/implement #<n> #<ticket>`. O `implement` trabalha sobre "the spec or tickets" que o usuário
   descreve, então aceita os dois.
 
+**O caminho do Matt pressupõe o tracker dele alinhado com a mídia do aicf:** arquivos ↔ markdown
+local (`.scratch/`); issues ↔ GitHub, no mesmo repositório. É isso que torna os dois comandos acima
+suficientes: alinhadas, as duas configurações dão à spec e ao ticket referências da mesma forma, no
+mesmo lugar. Alinhar é o tipo, não a pasta: em arquivo, a demanda continua em `docs/projeto/` e os
+tickets em `.scratch/`, como o plano do Superpowers fica em `docs/superpowers/plans/`. Divergindo
+(`docs/agents/issue-tracker.md` aponta para outro tracker, ou não existe), o agente diz em uma linha
+que o caminho do Matt exige o alinhamento, e como obtê-lo (rodar `/setup-matt-pocock-skills`, ou
+editar aquele arquivo, escolhendo o tracker que casa com a mídia), e não oferece o Matt; os outros
+caminhos seguem, e as skills do Matt que não dependem do tracker também. Os dois setups já levam ao
+alinhamento: o do aicf propõe issues quando o Matt aponta para o GitHub, e descreve a opção de issues
+como "os dois ficam nas mesmas issues" (`grep -n 'ficam nas mesmas issues' skills/setup/SKILL.md`).
+
 Terminar um ticket não conclui a demanda. O `/aicf:fechar-demanda` roda quando o último ticket
 termina, ou de forma parcial ao fim de uma sessão que deixa tickets abertos, como ele já prevê.
 
@@ -112,7 +124,9 @@ Do `to-spec`, o `criar-spec` absorve dois critérios que não conflitam com o ai
   os comandos; o caso "outra coleção" diz que, no Matt, o agente entrega os comandos e espera; o
   critério de implementação vem logo abaixo da tabela; a lista "As skills do Matt (…) exigem
   `/setup-matt-pocock-skills`" deixa de citar o `to-spec`. Os comandos entregues são os da seção
-  Solução, com a spec junto, e a skill diz que terminar um ticket não conclui a demanda.
+  Solução, com a spec junto, e a skill diz que terminar um ticket não conclui a demanda. O Matt só
+  entra entre as opções com o tracker dele alinhado à mídia, pela regra da seção Solução; o aviso
+  de divergência que o passo 1 já dá ganha essa consequência.
 - `skills/implementar-spec/SKILL.md`, seção "Implementar": logo depois da regra "Avaliar se a
   mudança merece teste", que não muda, entra o parágrafo que faz o item Testes valer nos caminhos
   aicf. Sem ele, o ponto de teste combinado na entrevista fica escrito na spec e nenhuma regra o
@@ -162,6 +176,13 @@ projeto privado que originou esta demanda.
   de outra coleção.
 - **Apontar o tracker do Matt para `docs/projeto/`.** Já descartado em
   [o setup não avisa que o Matt pergunta o mesmo](../concluidas/o-setup-nao-avisa-que-o-matt-pergunta-o-mesmo.md).
+  Reavaliado nesta entrevista com planos e tickets em subpastas de `docs/projeto/`: o `to-tickets`
+  1.3.1 traz `.scratch/<feature-slug>/issues/` no próprio texto, a mensagem final do `writing-plans`
+  traz `docs/superpowers/plans/` mesmo com o local trocado, e `docs/projeto/` deixaria de conter só
+  estados de demanda.
+- **Mídia do aicf e tracker do Matt divergentes.** A segunda revisão do Codex propôs tirar cada
+  referência da configuração dona dela. Descartado: acrescenta ao agente a escolha da origem e da
+  forma de cada referência, num caso que nenhum dos dois setups sugere.
 
 ## Verificação
 
@@ -174,6 +195,7 @@ projeto privado que originou esta demanda.
    - `grep -c '/to-tickets' skills/implementar-spec/SKILL.md`: 0 → ≥ 1
    - `grep -c '/tdd' skills/implementar-spec/SKILL.md`: 0 → ≥ 1
    - `grep -c 'item Testes' skills/implementar-spec/SKILL.md`: 0 → 1
+   - `grep -c 'alinhad' skills/implementar-spec/SKILL.md`: 0 → ≥ 1
    - `grep -c 'Não gravam nada' README.md`: 1 → 0
    - `grep -c 'vira a spec da demanda pela receita da mídia' skills/setup/templates/claude-md.md`: 1 → 0
    - `grep -c 'aicf:criar-spec' skills/setup/templates/claude-md.md`: 2 → ≥ 3
@@ -188,3 +210,7 @@ projeto privado que originou esta demanda.
    sem nada em `.scratch/`. Na implementação, os comandos entregues levam a spec, e um ticket
    retomado numa sessão nova chega aos pontos de teste da spec sem depender da conversa anterior.
    Encerra o titular, na primeira demanda que for pelo Matt.
+4. Divergência, em aberto até o uso real: num repositório com a mídia em arquivo e o
+   `docs/agents/issue-tracker.md` apontando para o GitHub, ou ausente, o `/aicf:implementar-spec`
+   não oferece o Matt e diz em uma linha que falta alinhar o tracker dele, e como. Encerra o
+   titular, na primeira vez que o caso aparecer.
