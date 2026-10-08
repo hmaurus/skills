@@ -149,7 +149,7 @@ None of these ship with `aicf`. They belong to the [Superpowers](https://github.
 **Before writing the work item**
 
 - `grill-me` (Matt) — challenges the idea with questions, until every branch of the decision is resolved. It records nothing; the result feeds the interview.
-- `grill-with-docs` (Matt) — the same grilling, recording along the way: a resolved term goes to `GLOSSARY.md`, and a hard-to-reverse decision becomes an ADR.
+- `grill-with-docs` (Matt) — the same grilling, recording along the way: a resolved term goes to `GLOSSARY.md`, and a hard-to-reverse decision becomes an ADR ([its `SKILL.md` at v1.3.1](https://github.com/mattpocock/skills/blob/v1.3.1/skills/engineering/grill-with-docs/SKILL.md), which calls `grilling` and `domain-modeling`).
 - `wayfinder` (Matt) — maps a request too big for one session as decision tickets on your tracker, and resolves them one at a time. The map covers that request.
 - `domain-modeling` (Matt) — records the project's vocabulary in a `GLOSSARY.md`.
 

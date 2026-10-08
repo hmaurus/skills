@@ -147,7 +147,7 @@ Nenhum deles vem com o aicf. São das coleções [Superpowers](https://github.co
 **Antes de escrever a demanda**
 
 - `grill-me` (Matt) — contesta a ideia com perguntas, até cada ramo da decisão estar resolvido. Não grava nada; o resultado entra na entrevista.
-- `grill-with-docs` (Matt) — o mesmo interrogatório, gravando no caminho: o termo resolvido vai para o `GLOSSARY.md`, e a decisão difícil de reverter vira ADR.
+- `grill-with-docs` (Matt) — o mesmo interrogatório, gravando no caminho: o termo resolvido vai para o `GLOSSARY.md`, e a decisão difícil de reverter vira ADR ([`SKILL.md` dele na v1.3.1](https://github.com/mattpocock/skills/blob/v1.3.1/skills/engineering/grill-with-docs/SKILL.md), que chama `grilling` e `domain-modeling`).
 - `wayfinder` (Matt) — mapeia um pedido grande demais para uma sessão como tickets de decisão no seu tracker, e resolve um por vez. O mapa vale para aquele pedido.
 - `domain-modeling` (Matt) — grava o vocabulário do projeto num `GLOSSARY.md`.
 
