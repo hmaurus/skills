@@ -110,7 +110,9 @@ Entrevista e implementação têm caminhos à escolha — o do aicf e, se instal
 do Matt Pocock. Quem oferece cada um é quem o aplica: os de entrevista, a regra da entrevista no
 `CLAUDE.md` do projeto; os de implementação, o `/aicf:implementar-spec`.
 
-No modo arquivo, a spec do `to-spec` do Matt fica no `.scratch/` dele, que o aicf não adota.
+A spec do Matt, como a do `brainstorming`, sai pelo `/aicf:criar-spec`, nos dois modos: terminada
+a conversa do `grill-with-docs`, o agente o invoca, e a spec não passa pelo `to-spec` nem pelo
+`.scratch/`.
 
 ## Trabalho recorrente não é demanda
 

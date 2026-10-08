@@ -12,14 +12,14 @@ Rodar **fora do plan mode**: o passo final grava a demanda.
 **Alvo opcional `#<n>`, no modo issue.** `/aicf:criar-spec #12` **adota** a issue 12 em vez de
 abrir uma nova: reescreve o corpo dela e ajusta o label — **olhando antes o que ela já tem**, para
 trocar em vez de acrescentar quando já houver um `aicf:*`. É assim que uma issue de fora da
-governança entra nela, e é o que evita duas issues para a mesma demanda quando a entrevista veio
-pelo `to-spec` do Matt Pocock, que cria issue nova em vez de editar a existente. No modo arquivo
+governança entra nela, e é o que evita duas issues para a mesma demanda quando alguém rodou por
+conta própria o `/to-spec` do Matt Pocock, que cria issue nova em vez de editar a existente. No modo arquivo
 não há alvo a adotar.
 
 ## Antes de perguntar
 
-Ler o que a demanda toca no repositório — o intent, se existe, e o código, os docs e os commits
-recentes da área —, **se ainda não tiver lido nesta sessão**. O que se descobre lendo não é
+Ler o que a demanda toca no repositório — o intent, se existe, e o código, os docs, os ADRs
+(`docs/adr/`) e os commits recentes da área —, **se ainda não tiver lido nesta sessão**. O que se descobre lendo não é
 pergunta: fato do repositório é trabalho do agente; decisão é do usuário.
 
 ## Como entrevistar
@@ -34,11 +34,19 @@ com pergunta óbvia** — ir nas partes difíceis que o usuário talvez não ten
 
 Continuar até não sobrar decisão em aberto, e só então escrever.
 
+**Entrevista que já aconteceu** — pelo `brainstorming` (Superpowers) ou pelo `grill-with-docs`
+(Matt Pocock) — não se repete: partir do que a conversa decidiu, perguntar só o que falta
+(tipicamente o ponto de teste) e gravar com `entrevista: brainstorming` ou
+`entrevista: grill-with-docs` na linha `Processo`.
+
 ## A spec
 
 - **Problema** — o que está errado hoje, do ponto de vista de quem usa
 - **Solução** — o que passa a existir, na mesma linguagem
 - **Arquivos e interfaces** envolvidos, nomeados
+- **Testes** — só quando a demanda toca código: em que ponto a mudança é testada (o mais alto que
+  a pega, de preferência um que já existe, idealmente um só) e qual teste parecido já existe no
+  repositório. O ponto se confere com o usuário na entrevista
 - **Fora de escopo** — o que foi levantado e decidido não fazer, com o motivo
 - **Verificação** — um passo ponta a ponta que prova que funcionou
 
@@ -75,6 +83,9 @@ Sem mídia declarada e sem `docs/projeto/`, perguntar onde gravar em vez de inve
    mais a sugestão de caminho: um dos instalados (`aicf-direto`, `aicf-plan`, ou a skill de outra
    coleção), com o motivo numa frase:
    `Processo — entrevista: criar-spec · implementação: a definir · sugestão: aicf-direto (toca dois arquivos, sem decisão de abordagem)`.
+   O critério para sugerir: `aicf-direto` ou `aicf-plan` quando cabe numa sessão; Superpowers
+   quando são muitos passos numa sessão, executados por subagente e com TDD; Matt quando o trabalho
+   se divide em fatias verticais com dependência entre elas, que podem atravessar sessões.
    Quem decide é o `/aicf:implementar-spec`, inclusive quando a implementação emenda nesta
    sessão (passo 3).
 3. Entrevista curta e demanda pequena → seguir na mesma sessão, se o usuário quiser emendar a

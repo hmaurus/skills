@@ -114,9 +114,9 @@ gh issue edit 12 --body-file <arq> --add-label aicf:spec                        
 
 Dois casos concretos, e os dois quebram sem adoção:
 
-- **O `to-spec` do Matt cria issue nova, não edita uma existente.** Quem entrevista por ele com os
-  dois apontando para o GitHub terminaria com duas issues para a mesma demanda. Com adoção:
-  `to-spec` publica, `/aicf:criar-spec #<n>` adota — uma issue só.
+- **Quem roda o `/to-spec` do Matt por conta própria** ganha issue nova, porque ele não edita uma
+  existente. Com os dois apontando para o GitHub, terminaria com duas issues para a mesma demanda.
+  Com adoção: `/to-spec` publica, `/aicf:criar-spec #<n>` adota — uma issue só.
 - **Contribuição de fora.** Alguém abre uma issue crua propondo algo, e `/aicf:criar-spec #<n>` a
   transforma em spec no lugar onde nasceu, com o histórico da conversa junto. Sem adoção o aicf
   abriria uma issue paralela e a do contribuidor viraria duplicata.

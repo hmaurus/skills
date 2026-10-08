@@ -1,5 +1,30 @@
 # Changelog
 
+## 0.37.0 — 2026-10-07
+
+- **O caminho do Matt Pocock passa a ser oferecido com o mesmo peso dos outros.** As skills de
+  caminho dele (`grill-with-docs`, `to-spec`, `to-tickets`, `implement`) têm
+  `disable-model-invocation: true` e não aparecem na lista do agente, que por isso não as sugeria.
+  Agora a entrevista pelo `grill-with-docs` o agente conduz, invocando `grilling` e
+  `domain-modeling`. O `to-spec` sai: terminada a conversa, do `grill-with-docs` ou do
+  `brainstorming`, o agente invoca o `/aicf:criar-spec`, que parte do decidido e grava a spec com a
+  entrevista na linha `Processo`. Na implementação, o agente entrega `/to-tickets` e `/implement`
+  com a spec junto, e o usuário os digita.
+- O Matt só entra entre as opções do `/aicf:implementar-spec` com o tracker dele alinhado à mídia
+  (arquivos ↔ `.scratch/`, issues ↔ GitHub). Divergindo, ou sem `docs/agents/issue-tracker.md`, o
+  agente diz como alinhar e oferece os outros caminhos.
+- Critérios de sugestão onde são aplicados: o de entrevista na regra do template do `CLAUDE.md`, o
+  de implementação no `criar-spec` e no `implementar-spec`.
+- O `criar-spec` lê os ADRs da área e ganha o item **Testes** (em que ponto a mudança é testada). O
+  `implementar-spec` aplica esse ponto nos caminhos aicf, pelo `/tdd` quando o Matt está instalado.
+- Os READMEs separam `grill-me` (não grava nada) de `grill-with-docs` (grava glossário e ADR:
+  `grep -n 'create one when the first term' ~/.claude/plugins/cache/mattpocock/mattpocock-skills/1.3.1/skills/engineering/domain-modeling/SKILL.md`).
+- Projeto que já fez o setup recebe as skills ao atualizar o plugin; as três linhas do `CLAUDE.md`
+  (coleções instaladas, regra da entrevista, passagem entre fases) se trocam à mão, pelo trecho das
+  notas da release.
+- Verificação de comportamento em aberto: encerra o titular, na primeira demanda que for pelo Matt
+  num projeto com o trecho aplicado, e na primeira vez que o tracker divergir da mídia.
+
 ## 0.36.0 — 2026-10-06
 
 - **O glossário do domínio passa a se chamar `GLOSSARY.md`.** O Matt Pocock trocou

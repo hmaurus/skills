@@ -146,14 +146,15 @@ Nenhum deles vem com o aicf. São das coleções [Superpowers](https://github.co
 
 **Antes de escrever a demanda**
 
-- `grill-me` e `grill-with-docs` (Matt) — contestam a ideia com perguntas, até cada ramo da decisão estar resolvido. Não gravam nada; o resultado entra na entrevista.
+- `grill-me` (Matt) — contesta a ideia com perguntas, até cada ramo da decisão estar resolvido. Não grava nada; o resultado entra na entrevista.
+- `grill-with-docs` (Matt) — o mesmo interrogatório, gravando no caminho: o termo resolvido vai para o `GLOSSARY.md`, e a decisão difícil de reverter vira ADR.
 - `wayfinder` (Matt) — mapeia um pedido grande demais para uma sessão como tickets de decisão no seu tracker, e resolve um por vez. O mapa vale para aquele pedido.
 - `domain-modeling` (Matt) — grava o vocabulário do projeto num `GLOSSARY.md`.
 
 **Na fase de entrevista, no lugar de `/aicf:criar-spec`**
 
-- `brainstorming` (Superpowers) — entrevista e, no caminho _architectural_, grava um design doc que vale como spec.
-- `grill-with-docs` + `to-spec` (Matt) — a mesma coisa em dois passos, terminando com a spec publicada no tracker.
+- `brainstorming` (Superpowers) — entrevista até um design aprovado; a spec sai dele pelo `/aicf:criar-spec`.
+- `grill-with-docs` (Matt) — entrevista por interrogatório; a spec sai da conversa pelo `/aicf:criar-spec`, que o agente invoca ao terminar.
 
 **Na fase de implementação, no lugar de `/aicf:implementar-spec`**
 

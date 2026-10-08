@@ -9,8 +9,8 @@ description: Implementa uma demanda a partir da spec e conduz o fechamento até 
 
 1. **Ler a spec inteira.** A linha `**Mídia do registro:**` do `CLAUDE.md` diz qual arquivo de
    [`midia/`](../midia/) seguir — `arquivo.md` ou `issues.md`; sem linha, arquivo. Se `docs/agents/issue-tracker.md` discordar da linha,
-   avisar uma vez e seguir a linha. A spec também pode vir de fora da governança do aicf, de
-   `docs/superpowers/specs/`. Se o usuário não disse qual, **listar as specs abertas pela receita
+   avisar uma vez e seguir a linha; a divergência também tira o Matt das opções do passo 3. A
+   spec também pode vir de fora da governança do aicf, de `docs/superpowers/specs/`. Se o usuário não disse qual, **listar as specs abertas pela receita
    da mídia** e perguntar, em vez de adivinhar. Alvo que ainda é intent — arquivo em `intents/`,
    linha do `ROADMAP.md`, ou issue `aicf:intent` — que o usuário mandou implementar sem entrevista:
    virar spec pela receita da mídia, com `entrevista: nenhuma` na linha `Processo`, e seguir.
@@ -28,7 +28,8 @@ description: Implementa uma demanda a partir da spec e conduz o fechamento até 
    desconhecido —, perguntar com `AskUserQuestion`, oferecendo só os caminhos instalados (a linha
    "Coleções de skills de workflow instaladas" do `CLAUDE.md` diz quais). Conforme a resposta:
    outra coleção, esta skill para aqui e o caminho escolhido assume **até o fim, inclusive a
-   integração que ele encadeia** — o aicf não interrompe nem substitui passo interno de método; ao
+   integração que ele encadeia** — o aicf não interrompe nem substitui passo interno de método; no
+   Matt, cujas skills de caminho só o usuário invoca, o agente entrega os comandos e espera; ao
    terminar, `/aicf:fechar-demanda` registra a demanda. `aicf-plan`, entrar no plan mode, montar o
    plano, esperar aprovação antes de tocar o disco, e seguir por esta skill; `aicf-direto`,
    planejar em sessão antes de editar — o plano não vai para arquivo, e na linha `Processo` o
@@ -40,13 +41,30 @@ description: Implementa uma demanda a partir da spec e conduz o fechamento até 
    | **Aicf direto** | esta skill | depende do agente | esta skill, que pergunta |
    | **Aicf plan mode** | plan mode ligado antes, ou escolhido aqui | depende do agente | esta skill, que pergunta |
    | **Superpowers** | `writing-plans`, depois `subagent-driven-development` ou `executing-plans` | `docs/superpowers/plans/YYYY-MM-DD-<topico>.md` | `finishing-a-development-branch`, encadeada e automática |
-   | **Matt Pocock** | `to-tickets`, depois `implement` | tickets, com bloqueio declarado entre eles | o próprio `implement`: `/code-review` e commit na branch atual |
+   | **Matt Pocock** | o usuário digita `/to-tickets`, depois `/implement` | tickets, com bloqueio declarado entre eles | o próprio `implement`: `/code-review` e commit na branch atual |
+
+   O critério para sugerir: `aicf-direto` ou `aicf-plan` quando cabe numa sessão; Superpowers
+   quando são muitos passos numa sessão, executados por subagente e com TDD; Matt quando o trabalho
+   se divide em fatias verticais com dependência entre elas, que podem atravessar sessões.
 
    Descer a tabela troca velocidade por rastro: nos caminhos aicf o plano vive na sessão e morre
-   com ela. As skills do Matt (`to-spec`, `to-tickets`, `triage`, `wayfinder`, `code-review`)
+   com ela. As skills do Matt (`to-tickets`, `triage`, `wayfinder`, `code-review`)
    exigem `/setup-matt-pocock-skills` rodado no repositório. No Superpowers, os headings de tarefa
    do plano ficam em inglês (`## Task 3`) mesmo com o corpo em português: `scripts/task-brief`
    procura `^#+ Task N` e responde `task N not found` para "Tarefa N".
+
+   **O Matt só entra entre as opções com o tracker dele alinhado à mídia:** arquivos ↔ markdown
+   local (`.scratch/`); issues ↔ GitHub, no mesmo repositório. Alinhar é o tipo, não a pasta: a
+   demanda segue em `docs/projeto/`, e os tickets ficam no `.scratch/`. Com
+   `docs/agents/issue-tracker.md` apontando para outro tracker, ou ausente, dizer em uma linha que o
+   caminho do Matt exige o alinhamento — rodar `/setup-matt-pocock-skills`, ou editar aquele
+   arquivo, escolhendo o tracker que casa com a mídia — e oferecer os outros. Escolhido o Matt, os
+   comandos entregues levam a spec junto, porque o ticket local não a referencia e uma sessão nova
+   perderia os pontos de teste: `/to-tickets docs/projeto/specs/<nome>.md`, depois
+   `/implement docs/projeto/specs/<nome>.md .scratch/<feature>/issues/<NN>-<slug>.md`; no modo
+   issue, `/to-tickets #<n>` e `/implement #<n> #<ticket>`. Terminar um ticket não conclui a
+   demanda: o `/aicf:fechar-demanda` roda quando o último termina, ou parcial ao fim de uma sessão
+   que deixa tickets abertos.
 
    **Junto do caminho, decidir o workspace.** O default é o da seção `## Git` do `CLAUDE.md`; sem
    ela, a branch atual. Sair dele é pergunta ao usuário, e o agente propõe quando couber:
@@ -69,6 +87,11 @@ ela não cita), dizer em uma linha o que vai fazer e por quê, antes de fazer.
 claro dos dois: escrever primeiro o teste que falha, confirmar que falha pelo motivo certo, e
 corrigir o código sem tocar no teste. Mudança de texto ou de configuração não pede nenhum dos
 dois. No meio, a régua do vizinho: onde o projeto já testa, a mudança entra testada.
+
+Código que merece teste entra no ponto que o item Testes da spec nomeia. **Com o Matt Pocock
+instalado** (linha "Coleções de skills de workflow instaladas" do `CLAUDE.md`), escreve-se pelo
+`/tdd`; sem ele, pelas regras acima. Testar em outro ponto, ou não testar o que a spec previu,
+se diz em uma linha antes de fazer.
 
 Código novo se parece com o código vizinho. Não ampliar o escopo: o que a spec pôs fora de
 escopo fica fora. Simplificar o trecho que a demanda toca é parte dela; refatorar um trecho vizinho

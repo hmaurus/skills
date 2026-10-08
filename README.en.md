@@ -148,14 +148,15 @@ None of these ship with `aicf`. They belong to the [Superpowers](https://github.
 
 **Before writing the work item**
 
-- `grill-me` and `grill-with-docs` (Matt) — challenge the idea with questions, until every branch of the decision is resolved. They record nothing; the result feeds the interview.
+- `grill-me` (Matt) — challenges the idea with questions, until every branch of the decision is resolved. It records nothing; the result feeds the interview.
+- `grill-with-docs` (Matt) — the same grilling, recording along the way: a resolved term goes to `GLOSSARY.md`, and a hard-to-reverse decision becomes an ADR.
 - `wayfinder` (Matt) — maps a request too big for one session as decision tickets on your tracker, and resolves them one at a time. The map covers that request.
 - `domain-modeling` (Matt) — records the project's vocabulary in a `GLOSSARY.md`.
 
 **In the interview phase, instead of `/aicf:criar-spec`**
 
-- `brainstorming` (Superpowers) — interviews you and, on the _architectural_ path, writes a design doc that counts as a spec.
-- `grill-with-docs` + `to-spec` (Matt) — the same thing in two steps, ending with the spec published to the tracker.
+- `brainstorming` (Superpowers) — interviews you up to an approved design; the spec comes out of it through `/aicf:criar-spec`.
+- `grill-with-docs` (Matt) — interviews you by grilling; the spec comes out of the conversation through `/aicf:criar-spec`, which the agent invokes when it ends.
 
 **In the implementation phase, instead of `/aicf:implementar-spec`**
 
