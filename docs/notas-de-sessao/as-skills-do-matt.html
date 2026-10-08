@@ -489,10 +489,11 @@ intent em docs/projeto/intents/ ──▶ /grill-with-docs (entrevista) ──�
 <tr><td>Tickets</td><td>Você digita <span class="cmd">/to-tickets</span>, sem referência à spec do aicf.</td><td>O agente entrega <code>/to-tickets docs/projeto/specs/&lt;nome&gt;.md</code>, e você digita.</td></tr>
 <tr><td>Implementação</td><td>Você digita <span class="cmd">/implement</span> com o ticket.</td><td>O agente entrega <code>/implement &lt;spec&gt; &lt;ticket&gt;</code>. A spec vai junto porque o ticket local não aponta para ela, e é na spec que está o ponto de teste.</td></tr>
 <tr><td>Fim</td><td><span class="cmd">/aicf:fechar-demanda</span>.</td><td>Igual. Roda depois do último ticket, ou de forma parcial quando a sessão acaba com tickets abertos.</td></tr>
+<tr><td>Configuração</td><td>A mídia do aicf e o tracker do Matt podem divergir sem consequência visível.</td><td>O Matt só é oferecido com os dois alinhados: aicf em arquivos ↔ Matt em <code>.scratch/</code>; aicf em issues ↔ Matt no GitHub do mesmo repositório. Divergindo, o agente diz como alinhar e oferece os outros caminhos.</td></tr>
 </tbody></table></div>
 
 <h3>Exemplo: multa por devolução atrasada</h3>
-<p>Um sistema de biblioteca, com o registro em arquivos. Já existe o intent <code>docs/projeto/intents/multa-por-atraso.md</code>. A demanda mexe com o domínio: o que conta como atraso, se a multa tem teto, se feriado conta.</p>
+<p>Um sistema de biblioteca, com o registro do aicf em arquivos e o tracker do Matt em markdown local (<code>.scratch/</code>). Já existe o intent <code>docs/projeto/intents/multa-por-atraso.md</code>. A demanda mexe com o domínio: o que conta como atraso, se a multa tem teto, se feriado conta.</p>
 
 <div class="step"><div class="n">1</div><div>
 <h3>Escolha do caminho de entrevista</h3>
