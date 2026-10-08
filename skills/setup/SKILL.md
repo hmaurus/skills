@@ -105,17 +105,19 @@ com a explicação curta de cada uma:
 **Se `docs/agents/issue-tracker.md` existe**, o `/setup-matt-pocock-skills` já respondeu a mesma
 pergunta — onde o trabalho mora. Ler e propor o default a partir dele ("o tracker do Matt aponta
 para GitHub; usar issues aqui também?") em vez de perguntar do zero. As duas configs seguem
-independentes: divergir é legítimo, e a do aicf é a linha do `CLAUDE.md`.
+independentes: divergir é legítimo, e a do aicf é a linha do `CLAUDE.md`; divergindo, o caminho do
+Matt sai das opções do `/aicf:implementar-spec`.
 
 **Se o arquivo não existe e a detecção achou o Matt Pocock habilitado**, o setup dele ainda vai
 fazer a mesma pergunta, do zero. A descrição de cada opção ganha uma frase, que fica ao lado da
 escolha e não no enunciado:
 
 - **arquivos**: o `/setup-matt-pocock-skills` vai perguntar o mesmo, e em arquivo o Matt guarda o
-  trabalho dele em `.scratch/`, separado de `docs/projeto/`;
+  trabalho dele em `.scratch/`, separado de `docs/projeto/` — no setup do Matt, escolher markdown
+  local;
 - **issues**: no setup do Matt, escolher GitHub, e os dois ficam nas mesmas issues.
 
-Só informar no modo arquivo, sem ensinar a alinhar: o tracker local do Matt recebe também tickets e
+Só informar no modo arquivo, sem ensinar a apontar o tracker do Matt para `docs/projeto/`: o tracker local do Matt recebe também tickets e
 mapas, e apontá-lo para `docs/projeto/` misturaria tudo isso nas pastas de estado do aicf. O aicf
 não escreve a config do Matt.
 

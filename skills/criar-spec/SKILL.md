@@ -1,6 +1,6 @@
 ---
 name: criar-spec
-description: Entrevista o usuário até a demanda estar madura e escreve a spec no repositório. Invocar quando o usuário pede entrevista, spec ou amadurecimento de uma demanda ou intent; não invocar para pergunta pontual, nem no meio de uma implementação sem o usuário pedir a volta à entrevista. Caminho aicf da fase de entrevista.
+description: Entrevista o usuário até a demanda estar madura e escreve a spec no repositório. Invocar quando o usuário pede entrevista, spec ou amadurecimento de uma demanda ou intent, ou ao terminar a conversa do brainstorming ou do grill-with-docs; não invocar para pergunta pontual, nem no meio de uma implementação sem o usuário pedir a volta à entrevista. Caminho aicf da fase de entrevista.
 ---
 
 # Criar spec por entrevista
@@ -83,9 +83,10 @@ Sem mídia declarada e sem `docs/projeto/`, perguntar onde gravar em vez de inve
    mais a sugestão de caminho: um dos instalados (`aicf-direto`, `aicf-plan`, ou a skill de outra
    coleção), com o motivo numa frase:
    `Processo — entrevista: criar-spec · implementação: a definir · sugestão: aicf-direto (toca dois arquivos, sem decisão de abordagem)`.
-   O critério para sugerir: `aicf-direto` ou `aicf-plan` quando cabe numa sessão; Superpowers
-   quando são muitos passos numa sessão, executados por subagente e com TDD; Matt quando o trabalho
-   se divide em fatias verticais com dependência entre elas, que podem atravessar sessões.
+   O critério para sugerir: `aicf-direto` ou `aicf-plan` quando cabe numa sessão;
+   `subagent-driven-development` (Superpowers) quando são muitos passos numa sessão, executados por
+   subagente e com TDD; `to-tickets` (Matt) quando o trabalho se divide em fatias verticais com
+   dependência entre elas, que podem atravessar sessões.
    Quem decide é o `/aicf:implementar-spec`, inclusive quando a implementação emenda nesta
    sessão (passo 3).
 3. Entrevista curta e demanda pequena → seguir na mesma sessão, se o usuário quiser emendar a
