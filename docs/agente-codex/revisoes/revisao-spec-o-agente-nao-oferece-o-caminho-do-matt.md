@@ -238,3 +238,59 @@ parte desta revisão; envio e conferência do CI ficam com o titular ou agente l
 170 links conferidos e nenhum quebrado, os dois `Validation passed` e versão
 `0.36.0` no topo do changelog. Antes do commit, `git diff --cached --check`
 confere o whitespace do parecer.
+
+## Terceira revisão — 2026-10-07
+
+Esta seção substitui o resultado da segunda revisão para a versão atual da
+[spec](../../projeto/specs/o-agente-nao-oferece-o-caminho-do-matt.md).
+Base: `1e94218`. Identificação da cópia revisada:
+`sha256sum docs/projeto/specs/o-agente-nao-oferece-o-caminho-do-matt.md` →
+`aa3c1c286751644c56f77ccb3b0ab32107a689b45d447f286e71a3f1a1072ff0`.
+
+**Resultado: nenhum novo achado que exija correção antes da implementação.**
+O achado da segunda revisão foi tratado por uma decisão explícita de escopo:
+o caminho de implementação do Matt só é oferecido com o tracker alinhado à mídia
+do aicf — markdown local para arquivos, GitHub no mesmo repositório para issues.
+A alternativa de suportar configurações divergentes foi descartada com motivo.
+Essa decisão torna coerentes as referências dos comandos propostos, sem exigir
+que o agente combine trackers diferentes. A Verificação 4 cobre a recusa do
+caminho quando a configuração diverge ou está ausente.
+
+As soluções dos três achados iniciais continuam presentes: atualização das
+instruções ativas deste repositório, delimitação da passagem pelo `criar-spec`
+às entrevistas e entrega da spec junto do ticket na retomada. O parágrafo novo
+na seção Implementar também determina como os caminhos aicf usam o item Testes,
+inclusive a invocação de `/tdd` quando o Matt está instalado.
+
+### Evidência e limites
+
+Os quatorze `grep -c` da Verificação 1 foram executados com os padrões e arquivos
+da spec. Resultados, na ordem escrita:
+`0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 2, 1, 2`.
+Todos conferem com os valores de antes. As contagens de depois continuam como
+critérios para a implementação; não comprovam comportamento por si mesmas.
+
+Foram relidos `criar-spec`, `implementar-spec`, o template e o setup do aicf,
+além de `grill-with-docs`, `domain-modeling`, `to-tickets`, `implement`, `tdd`
+e a configuração de tracker local no cache do Matt `1.3.1` indicado pela spec.
+Os comandos da spec para conferir as quatro skills de invocação exclusiva pelo
+usuário, a criação do glossário, a confirmação dos pontos de teste e os modelos
+de ticket foram executados novamente. A busca por `user stor` não retornou
+ocorrências nos quatro diretórios indicados; a busca por `seam` retornou
+`implement` e `tdd`.
+
+Revisão estática: nenhuma skill dos fluxos propostos foi invocada. A oferta do
+caminho, a passagem de fase e a retomada em sessão nova precisam da verificação
+em uso real das condições 3 e 4, pelos responsáveis definidos na spec. Não há
+promessa de que esses comportamentos tenham sido testados nesta revisão.
+
+O fechamento de `aicf:fechar-demanda` aplica-se somente ao parecer. A spec
+permanece aberta e intacta; nenhuma alteração ou promoção de conhecimento foi
+feita fora do diretório permitido ao Codex. O commit desta revisão contém
+somente este parecer. O envio e a conferência do CI ficam com o titular ou
+agente líder; nenhum push faz parte desta revisão.
+
+`./scripts/check.sh` terminou em `Tudo verde.`, saída 0, Claude Code `2.1.293`,
+171 links conferidos e nenhum quebrado, os dois `Validation passed` e versão
+`0.36.0` no topo do changelog. O whitespace do parecer é conferido com
+`git diff --cached --check` antes do commit.
