@@ -22,6 +22,8 @@
 - Projeto que já fez o setup recebe as skills ao atualizar o plugin; as três linhas do `CLAUDE.md`
   (coleções instaladas, regra da entrevista, passagem entre fases) se trocam à mão, pelo trecho das
   notas da release.
+- O `/aicf:setup` e a `ajuda` avisam que tracker do Matt divergente da mídia o tira da
+  implementação, e o setup manda escolher markdown local no Matt quando a mídia é arquivo.
 - Verificação de comportamento em aberto: encerra o titular, na primeira demanda que for pelo Matt
   num projeto com o trecho aplicado, e na primeira vez que o tracker divergir da mídia.
 

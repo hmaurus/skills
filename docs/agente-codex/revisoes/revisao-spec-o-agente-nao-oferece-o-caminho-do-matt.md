@@ -169,7 +169,7 @@ e estende a verificação à retomada. Não é necessário reabrir esses achados
 
 ### P2 — Escolher a referência do ticket pelo tracker do Matt
 
-**Local:** [spec](../../projeto/specs/o-agente-nao-oferece-o-caminho-do-matt.md),
+**Local:** [spec](../../projeto/concluidas/o-agente-nao-oferece-o-caminho-do-matt.md),
 linhas 69–72, comandos entregues ao usuário; a regra também é levada ao passo 3
 do `implementar-spec` pelo inventário de arquivos.
 
@@ -242,7 +242,7 @@ confere o whitespace do parecer.
 ## Terceira revisão — 2026-10-07
 
 Esta seção substitui o resultado da segunda revisão para a versão atual da
-[spec](../../projeto/specs/o-agente-nao-oferece-o-caminho-do-matt.md).
+[spec](../../projeto/concluidas/o-agente-nao-oferece-o-caminho-do-matt.md).
 Base: `1e94218`. Identificação da cópia revisada:
 `sha256sum docs/projeto/specs/o-agente-nao-oferece-o-caminho-do-matt.md` →
 `aa3c1c286751644c56f77ccb3b0ab32107a689b45d447f286e71a3f1a1072ff0`.

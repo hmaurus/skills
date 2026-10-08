@@ -1,6 +1,6 @@
 # O Matt com e sem o aicf
 
-Leitura da spec [o agente não oferece o caminho do Matt](../projeto/specs/o-agente-nao-oferece-o-caminho-do-matt.md),
+Leitura da spec [o agente não oferece o caminho do Matt](../projeto/concluidas/o-agente-nao-oferece-o-caminho-do-matt.md),
 feita em 2026-10-07 sobre o commit `dfd4606`, antes da implementação. Responde três perguntas: quais
 arquivos a spec toca, se ela acopla mais ou menos o aicf às outras coleções, e se o aicf pode
 prejudicar o funcionamento do Matt. No fim estão os ajustes sugeridos para a spec. Nenhum foi

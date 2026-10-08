@@ -1,6 +1,6 @@
 # O agente não oferece o caminho do Matt
 
-Processo — entrevista: criar-spec · implementação: a definir · sugestão: aicf-direto (só markdown, com o texto de cada trecho decidido aqui)
+Processo — entrevista: criar-spec · implementação: aicf-direto
 
 ## Problema
 
@@ -214,3 +214,57 @@ projeto privado que originou esta demanda.
    `docs/agents/issue-tracker.md` apontando para o GitHub, ou ausente, o `/aicf:implementar-spec`
    não oferece o Matt e diz em uma linha que falta alinhar o tracker dele, e como. Encerra o
    titular, na primeira vez que o caso aparecer.
+
+## Relatório de implementação (2026-10-07)
+
+**Status:** concluído. CI conferido após o push (ver o commit de fechamento).
+
+**Arquivos alterados**
+
+- `skills/setup/templates/claude-md.md` e `.claude/CLAUDE.md` — nota de que as skills de caminho
+  do Matt só o usuário invoca; `grill-with-docs` sem `→ to-spec`, com o critério de entrevista; a
+  passagem entre fases manda invocar o `/aicf:criar-spec` ao fim do `brainstorming` e do
+  `grill-with-docs`.
+- `skills/implementar-spec/SKILL.md` — no Matt, o agente entrega os comandos e espera; o critério
+  de implementação fica abaixo da tabela; a regra do tracker alinhado à mídia, com os comandos que
+  levam a spec junto; o parágrafo do item Testes, com `/tdd`.
+- `skills/criar-spec/SKILL.md` — leitura de ADRs, parágrafo para a entrevista que já aconteceu,
+  item **Testes**, critério de implementação, e a description cobre a invocação ao fim das duas
+  entrevistas.
+- `skills/ajuda/SKILL.md`, `skills/midia/issues.md`, `README.md`, `README.en.md` — como a spec
+  pede.
+- `skills/setup/SKILL.md` — fora da lista da spec, veio da revisão (ver Escopo efetivo).
+- `.claude-plugin/plugin.json` e `CHANGELOG.md` — `0.37.0`.
+
+**Commits**
+
+- `debde95` feat: o agente oferece o caminho do Matt
+- `c5de9d3` fix: o setup e a ajuda avisam que divergir tira o Matt
+
+**Validação**
+
+- Verificação 1: as 14 contagens da spec, rodadas em `debde95`, batem todas com o "depois"
+  (as mesmas linhas de `grep -c` da seção Verificação; `grep -c 'Testes' skills/criar-spec/SKILL.md`
+  ainda devolve 1 em `c5de9d3`).
+- Verificação 2: `./scripts/check.sh` termina em `Tudo verde.` em `debde95` e em `c5de9d3`.
+- Revisão por subagente fresco, contra a spec: cinco achados, todos adotados em `c5de9d3`.
+- Verificações 3 e 4 seguem em aberto, com as condições de encerramento que a spec já dá: encerra o
+  titular, na primeira demanda que for pelo Matt num projeto com o trecho do template aplicado, e
+  na primeira vez que o tracker divergir da mídia. O agente não as roda porque dependem de
+  atualizar o plugin, reiniciar a sessão e o titular invocar o comando.
+
+**Escopo efetivo**
+
+- A linha do `brainstorming` nos dois READMEs também mudou: dizia que o design doc "vale como spec",
+  o que contradiria a regra de que toda spec sai pelo `/aicf:criar-spec`.
+- Da revisão, fora da lista da spec: o `setup` e o `ajuda` passam a dizer que tracker divergente
+  tira o Matt do `/aicf:implementar-spec`, e o `setup` manda escolher markdown local no setup do
+  Matt quando a mídia é arquivo. O "sem ensinar a alinhar" do `setup` virou "sem ensinar a apontar
+  o tracker do Matt para `docs/projeto/`", porque "alinhar" passou a nomear o alinhamento de tipo.
+- O valor da sugestão no `criar-spec` é a skill de entrada de cada coleção
+  (`subagent-driven-development`, `to-tickets`), não o nome da coleção.
+- O tutorial `docs/notas-de-sessao/as-skills-do-matt.html` teve as duas notas de estado
+  atualizadas para "implementado na 0.37.0"; as seções 11 e 12 continuam descrevendo a 0.36.0.
+
+**Lições** — nenhuma promoção: o passo 3 do ritual não achou regra nova além desta demanda; o
+fechamento não gerou ADR, regra, skill nem doc de referência.
