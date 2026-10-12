@@ -58,16 +58,36 @@ convenção e, faltando, propõe a edição com o diff e aplica com o aceite do 
 
 Acontece uma vez por projeto — na segunda chamada a conferência já passa — e serve para projeto
 novo e antigo sem nota de migração. O setup do aicf não a chama: costuma rodar antes do setup do
-Matt, quando o arquivo ainda não existe, e roda uma vez. A edição **troca** a linha
-`The spec is .scratch/<feature-slug>/spec.md` em vez de acrescentar uma segunda, para o tracker não
-se contradizer.
+Matt, quando o arquivo ainda não existe, e roda uma vez.
+
+**A edição troca as três frases do tracker que mandam a spec para `.scratch/`, e acrescenta a
+exceção à regra de caminho.** Acrescentar ao lado deixaria o tracker se contradizendo, e o
+`to-tickets` manda "avoid specific file paths" nos tickets
+(`grep -n 'avoid specific file paths' …/to-tickets/SKILL.md` → linha 105), o que a linha `Spec:`
+contraria se ninguém disser que ela é exceção. As operações de wayfinding, os tickets e os mapas
+seguem em `.scratch/`, intocados. No `issue-tracker-local.md` do Matt `1.3.1`:
+
+| Frase do Matt | Passa a ser |
+| --- | --- |
+| `Issues and specs for this repo live as markdown files in .scratch/.` | Os tickets deste repositório moram em `.scratch/`; a spec de cada feature é a da demanda do aicf, em `docs/projeto/specs/<nome>.md`. |
+| `The spec is .scratch/<feature-slug>/spec.md` | A spec é a da demanda, em `docs/projeto/specs/<nome>.md`. Todo ticket abre, logo abaixo do título, com `**Spec:** docs/projeto/specs/<nome>.md`, com o caminho real da demanda. A linha é obrigatória mesmo onde a skill manda evitar caminho de arquivo: ela aponta a spec, não a implementação. |
+| `Create a new file under .scratch/<feature-slug>/ (creating the directory if needed).` | a mesma frase, mais: "Spec não: vai para `docs/projeto/specs/<nome>.md`." |
+
+**A conferência olha as duas obrigações e a localização antiga, separadas**, para que um tracker
+convertido pela metade — à mão, por exemplo — não passe como alinhado. A convenção está presente só
+quando as três dão o esperado em `docs/agents/issue-tracker.md`:
+
+- localização nova: `grep -c 'docs/projeto/specs'` → ≥ 1;
+- obrigação da referência: `grep -c '\*\*Spec:\*\*'` → ≥ 1;
+- localização antiga ausente: `grep -c '\.scratch/<feature-slug>/spec\.md\|Issues and specs'` → 0.
+
+Faltando alguma, a operação propõe só o que falta, preservando o resto do arquivo.
 
 ## Arquivos e interfaces
 
-- `skills/midia/arquivo.md` — operação nova "Alinhar o tracker do Matt": a conferência
-  (`grep -c 'docs/projeto/specs' docs/agents/issue-tracker.md` → 0 é convenção ausente; arquivo
-  ausente ou apontando para outro tracker fica com a regra de alinhamento que o `implementar-spec`
-  já tem), a linha que sai e a que entra. O `skills/midia/issues.md` não muda: no modo issue o
+- `skills/midia/arquivo.md` — operação nova "Alinhar o tracker do Matt": as três conferências e
+  as três trocas da Solução (arquivo ausente ou apontando para outro tracker fica com a regra de
+  alinhamento que o `implementar-spec` já tem). O `skills/midia/issues.md` não muda: no modo issue o
   ticket remoto já nasce com `## Parent`.
 - `skills/criar-spec/SKILL.md` — item novo na lista "A spec", de umas 5 linhas:
 
@@ -105,7 +125,8 @@ se contradizer.
 - `docs/adr/0008-o-aicf-escreve-a-convencao-no-tracker-do-matt.md` — ADR novo. O
   [0004](../../adr/0004-midia-do-registro-e-config-propria.md) diz que o aicf **lê** o
   `issue-tracker.md` e não depende dele; escrever nele é relação nova. Registra: o que se escreve
-  (só a linha da spec e a linha `Spec:` dos tickets, no modo arquivo), quando (pela operação do
+  (só as três frases da Solução, no modo arquivo — abertura, localização da spec com a linha
+  `Spec:` e a exceção à regra de caminho, e a operação de publicação; wayfinding fica intocado), quando (pela operação do
   `midia/arquivo.md`, chamada do `criar-spec` e do `implementar-spec`, com aceite), e o custo assumido — rodar `/setup-matt-pocock-skills` de novo
   regrava o arquivo e apaga a convenção; o Matt só pede isso para trocar de tracker ou recomeçar
   (`grep -n 're-running this skill' …/setup-matt-pocock-skills/SKILL.md`), e a próxima chamada
@@ -157,11 +178,14 @@ se contradizer.
    arquivo, com `docs/agents/issue-tracker.md` copiado de
    `setup-matt-pocock-skills/issue-tracker-local.md`, um subagente segue o
    `skills/implementar-spec/SKILL.md` deste repositório com o caminho do Matt escolhido: propõe a
-   troca da linha da spec com diff, e depois dela `grep -c '.scratch/<feature-slug>/spec.md'` → 0 e
-   `grep -c 'docs/projeto/specs' docs/agents/issue-tracker.md` → ≥ 1; os comandos entregues têm um
-   argumento cada. Contraprova: com o tracker já convertido, não propõe edição.
+   troca das três frases com diff, e depois dela as três conferências da Solução, rodadas em
+   `docs/agents/issue-tracker.md`, dão ≥ 1, ≥ 1 e 0; os comandos entregues têm um argumento cada.
+   Contraprovas: com o tracker já convertido, não propõe edição; com o tracker convertido pela
+   metade — localização trocada, sem a obrigação do `**Spec:**` —, propõe só a frase que falta.
 4. **Uso real, encerrado pelo titular.** No primeiro projeto que implementar pelo Matt depois da
-   versão nova: os tickets do `/to-tickets` abrem com `**Spec:**`, e `/implement <ticket>` numa
+   versão nova: os tickets do `/to-tickets` abrem com `**Spec:**` seguido do caminho real da
+   demanda (`grep -L '^\*\*Spec:\*\* docs/projeto/specs/[a-z0-9-]*\.md' .scratch/<feature>/issues/*.md`
+   não lista nenhum), e `/implement <ticket>` numa
    sessão limpa lê a spec antes do primeiro teste (conferir no transcript). Depende de atualizar o
    plugin e de comandos que só o usuário digita; encerra nesse uso, e falhar traz a meia frase do
    `CLAUDE.md` de volta para o escopo.
