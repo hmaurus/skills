@@ -57,28 +57,30 @@ Chamada pelo `/aicf:criar-spec` (entrevista pelo `grill-with-docs`) e pelo
 numa sessão limpa chegue à spec só pelo ticket.
 
 Vale só com `docs/agents/issue-tracker.md` apontando para markdown local (`.scratch/`). Arquivo
-ausente, ou apontando para outro tracker, fica com a regra de alinhamento do
-`/aicf:implementar-spec`, e esta operação não roda.
+ausente, ou apontando para outro tracker: esta operação não roda.
 
-**Conferir**, em `docs/agents/issue-tracker.md` — a convenção está presente só quando as três dão o
-esperado:
+**Conferir**, em `docs/agents/issue-tracker.md` — a convenção está presente só quando as quatro dão
+o esperado:
 
 ```bash
 grep -c 'docs/projeto/specs' docs/agents/issue-tracker.md                           # ≥ 1
 grep -c '\*\*Spec:\*\*' docs/agents/issue-tracker.md                                 # ≥ 1
 grep -c '\.scratch/<feature-slug>/spec\.md\|Issues and specs' docs/agents/issue-tracker.md  # 0
+grep -c 'Spec não: vai para' docs/agents/issue-tracker.md                           # ≥ 1
 ```
 
-**Faltando alguma, propor com o diff só o que falta, e aplicar com o aceite do usuário.** Cada
-troca é de uma frase do arquivo do Matt; o resto do arquivo — wayfinding, tickets, mapas — fica
-como está:
+**Faltando alguma, propor com o diff só a troca que falta, e aplicar com o aceite do usuário.**
+Cada troca é de uma frase do arquivo do Matt, que traz crases e marcador de lista como abaixo; o
+resto do arquivo — wayfinding, tickets, mapas — fica como está:
 
 | Frase do Matt | Passa a ser |
 | --- | --- |
-| `Issues and specs for this repo live as markdown files in .scratch/.` | Os tickets deste repositório moram em `.scratch/`; a spec de cada feature é a da demanda do aicf, em `docs/projeto/specs/<nome>.md`. |
-| `The spec is .scratch/<feature-slug>/spec.md` | A spec é a da demanda, em `docs/projeto/specs/<nome>.md`. Todo ticket abre, logo abaixo do título, com `**Spec:** docs/projeto/specs/<nome>.md`, com o caminho real da demanda. A linha é obrigatória mesmo onde a skill manda evitar caminho de arquivo: ela aponta a spec, não a implementação. |
-| `Create a new file under .scratch/<feature-slug>/ (creating the directory if needed).` | a mesma frase, mais: "Spec não: vai para `docs/projeto/specs/<nome>.md`." |
+| ``Issues and specs for this repo live as markdown files in `.scratch/`.`` | Os tickets deste repositório moram em `.scratch/`; a spec de cada feature é a da demanda do aicf, em `docs/projeto/specs/<nome>.md`. |
+| ``- The spec is `.scratch/<feature-slug>/spec.md` `` | - A spec é a da demanda, em `docs/projeto/specs/<nome>.md`. Todo ticket abre, logo abaixo do título, com `**Spec:** docs/projeto/specs/<nome>.md`, com o caminho real da demanda. A linha é obrigatória mesmo onde a skill manda evitar caminho de arquivo: ela aponta a spec, não a implementação. |
+| ``Create a new file under `.scratch/<feature-slug>/` (creating the directory if needed).`` | a mesma frase, mais: "Spec não: vai para `docs/projeto/specs/<nome>.md`." |
 
-Tracker convertido pela metade — à mão, por exemplo — recebe só a frase cuja conferência falhou.
+Tracker convertido pela metade — à mão, por exemplo — recebe só a troca que falta: a primeira
+conferência cobre a abertura, a segunda a linha `**Spec:**` da frase da spec, a terceira acusa a
+frase antiga que sobrou, e a quarta a frase de publicação.
 Rodar `/setup-matt-pocock-skills` de novo regrava o arquivo e apaga a convenção; a próxima chamada
 desta operação a repõe.

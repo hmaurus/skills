@@ -99,7 +99,8 @@ inventar pasta.
 
 **O `docs/agents/issue-tracker.md` do Matt Pocock responde a mesma pergunta** — onde o trabalho
 mora. O aicf lê para propor o default no setup, e não depende: a linha do `CLAUDE.md` é a única
-fonte da verdade dele. Se as duas discordarem, avisar uma vez e seguir a linha — divergir é
+fonte da verdade dele. No modo arquivo, o aicf também escreve nele, com aceite, a convenção que
+manda a spec para `docs/projeto/specs/` (operação "Alinhar o tracker do Matt" do `midia/arquivo.md`). Se as duas discordarem, avisar uma vez e seguir a linha — divergir é
 legítimo, mas precisa ser escolha, não descoberta tardia: divergindo, o caminho do Matt sai das
 opções do `/aicf:implementar-spec`. Os labels `aicf:*` classificam maturidade
 do documento; os do `/triage` dele, o que fazer em seguida. Eixos diferentes: a mesma issue pode

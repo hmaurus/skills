@@ -94,7 +94,7 @@ Sem mídia declarada e sem `docs/projeto/`, perguntar onde gravar em vez de inve
    subagente e com TDD; `to-tickets` (Matt) quando o trabalho se divide em fatias verticais com
    dependência entre elas, que podem atravessar sessões.
    Quem decide é o `/aicf:implementar-spec`, inclusive quando a implementação emenda nesta
-   sessão (passo 3).
+   sessão (passo 4).
 3. Entrevista pelo `grill-with-docs` e mídia arquivo → rodar a operação "Alinhar o tracker do
    Matt" do [`midia/arquivo.md`](../midia/arquivo.md) antes de o usuário ir embora. Quem limpa a
    sessão e digita `/to-tickets` direto não passa pelo `/aicf:implementar-spec`, e sem a operação

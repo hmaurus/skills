@@ -13,12 +13,12 @@ abertura (`Issues and specs … live in .scratch/`), a localização da spec com
 exceção à regra "avoid specific file paths" do `to-tickets`, e a operação de publicação. As
 operações de wayfinding, os tickets e os mapas seguem em `.scratch/`, intocados. No modo issue nada
 se escreve: o ticket remoto já nasce com `## Parent` apontando a issue da spec
-(`grep -n '^## Parent' …/mattpocock-skills/1.3.1/skills/engineering/to-tickets/SKILL.md` → linha 86).
+(`grep -n '^## Parent' ~/.claude/plugins/cache/mattpocock/mattpocock-skills/1.3.1/skills/engineering/to-tickets/SKILL.md` → linha 86).
 
 **Quando:** pela operação "Alinhar o tracker do Matt" do `skills/midia/arquivo.md`, chamada de dois
 pontos — o fim do `/aicf:criar-spec` com entrevista pelo `grill-with-docs`, e o
-`/aicf:implementar-spec` quando o caminho do Matt é escolhido. Ela confere antes e propõe com o diff
-só o que falta. O `/aicf:setup` não a chama.
+`/aicf:implementar-spec` quando o caminho do Matt é escolhido. Ela confere antes, por quatro `grep`, e propõe
+com o diff só o que falta. O `/aicf:setup` não a chama.
 
 ## Por quê
 
@@ -33,7 +33,7 @@ comando só com o ticket.
 A edição troca as frases em vez de acrescentar ao lado: acrescentar deixaria o tracker se
 contradizendo sobre onde a spec mora, e a linha `Spec:` contrariaria o "avoid specific file paths"
 do `to-tickets`
-(`grep -n 'avoid specific file paths' …/mattpocock-skills/1.3.1/skills/engineering/to-tickets/SKILL.md`
+(`grep -n 'avoid specific file paths' ~/.claude/plugins/cache/mattpocock/mattpocock-skills/1.3.1/skills/engineering/to-tickets/SKILL.md`
 → linha 105) se ninguém dissesse que ela é exceção.
 
 O setup não a chama porque costuma rodar antes do setup do Matt, quando o arquivo ainda não existe,
@@ -43,7 +43,7 @@ e roda uma vez; as duas chamadas cobrem projeto novo, projeto antigo e tracker r
 
 - **Rodar `/setup-matt-pocock-skills` de novo regrava o arquivo e apaga a convenção.** O Matt só
   pede isso para trocar de tracker ou recomeçar
-  (`grep -n 're-running this skill' …/mattpocock-skills/1.3.1/skills/engineering/setup-matt-pocock-skills/SKILL.md`
+  (`grep -n 're-running this skill' ~/.claude/plugins/cache/mattpocock/mattpocock-skills/1.3.1/skills/engineering/setup-matt-pocock-skills/SKILL.md`
   → linha 116), e a próxima chamada da operação a repõe.
 - **A troca exata depende do texto de três frases do Matt `1.3.1`.** Se o Matt mudar essas frases,
   a terceira conferência deixa de achar a localização antiga, mas a segunda (`**Spec:**` ≥ 1)
