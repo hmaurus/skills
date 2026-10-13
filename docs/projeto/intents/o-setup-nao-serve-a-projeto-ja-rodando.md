@@ -19,7 +19,7 @@ não tem comando para isso. Decidido: o setup passa a servir também a projeto j
   comportamento dele vive em [verificacao-do-setup.md](../../referencias/verificacao-do-setup.md).
   O que mudar aqui entra com a verificação em aberto até uma passada do titular.
 - Surgiu na entrevista de
-  [a spec do aicf não tem histórias para o caminho do Matt](../specs/a-spec-nao-tem-historias-para-o-matt.md),
+  [a spec do aicf não tem histórias para o caminho do Matt](../concluidas/a-spec-nao-tem-historias-para-o-matt.md),
   que decidiu gravar a convenção da spec no tracker do Matt pelo `criar-spec` e pelo
   `implementar-spec`, e não pelo setup.
 

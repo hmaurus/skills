@@ -1,6 +1,6 @@
 # A spec do aicf não tem histórias para o caminho do Matt
 
-Processo — entrevista: criar-spec · implementação: a definir · sugestão: aicf-direto (texto curto em skills, template e um ADR, sem decisão de abordagem em aberto)
+Processo — entrevista: criar-spec · implementação: aicf-direto
 
 Funde o intent "O caminho do Matt pede a spec no argumento", que saiu de `intents/` com esta spec.
 
@@ -194,3 +194,76 @@ Faltando alguma, a operação propõe só o que falta, preservando o resto do ar
    → 1 e 1 antes, 0 e 0 depois; `grep -c 'Spec mora só onde a mídia' skills/setup/templates/claude-md.md .claude/CLAUDE.md`
    → 0 e 0 antes, 1 e 1 depois.
 6. `./scripts/check.sh` termina em `Tudo verde.`
+
+## Relatório de implementação (2026-10-12)
+
+**Status:** concluído, com a Verificação 4 (uso real) em aberto. Encerra o titular no primeiro
+projeto que implementar pelo Matt na `0.38.0`: os tickets do `/to-tickets` abrem com `**Spec:**`
+e o `/implement <ticket>` numa sessão limpa lê a spec antes do primeiro teste. Falhar traz de volta
+a meia frase do bloco `## Agent skills` do `CLAUDE.md`, que estava fora de escopo.
+
+**Arquivos alterados**
+
+- `skills/midia/arquivo.md` — operação "Alinhar o tracker do Matt": conferências, as três trocas,
+  e a regra de propor só o que falta.
+- `skills/criar-spec/SKILL.md` — item Histórias e Decisões de implementação, condicionado ao
+  `grill-with-docs`; passo 3 novo em "Ao terminar", chamando a operação.
+- `skills/implementar-spec/SKILL.md` — a operação roda com o Matt escolhido; comandos de um
+  argumento.
+- `skills/setup/SKILL.md` — a frase "o aicf não escreve a config do Matt" virou "o setup não edita
+  o tracker", com quando a convenção entra.
+- `skills/ajuda/SKILL.md` — fora da lista da spec, veio da revisão: o aicf também escreve no tracker.
+- `.claude/CLAUDE.md` e `skills/setup/templates/claude-md.md` — "Spec mora só onde a mídia do
+  registro manda".
+- [ADR 0008](../../adr/0008-o-aicf-escreve-a-convencao-no-tracker-do-matt.md) — novo.
+- `.claude-plugin/plugin.json` e `CHANGELOG.md` — `0.38.0`.
+
+**Commits**
+
+- `ddb49fa` feat(matt): spec com histórias e ticket que leva à spec
+- `83e3d21` fix(matt): ajustes da revisão na operação do tracker
+
+**Validação**
+
+- Verificação 1: `grep -c 'istórias' skills/criar-spec/SKILL.md` 0 → 2;
+  `grep -c 'Decisões de implementação' skills/criar-spec/SKILL.md` 0 → 1 (em `83e3d21`).
+- Verificação 2, por subagente seguindo o `criar-spec` deste repositório, em repositório de
+  rascunho com o tracker copiado do `issue-tracker-local.md` do Matt `1.3.1`: com
+  `entrevista: grill-with-docs`, a spec saiu com Histórias (9) e Decisões de implementação, e o
+  subagente propôs com diff as três trocas antes de terminar. Contraprova, entrevista pelo próprio
+  `criar-spec`: spec sem as duas seções, tracker intocado.
+- Verificação 3, por subagente seguindo o `implementar-spec` deste repositório, com o Matt
+  escolhido: tracker original → três trocas propostas com diff, conferências 0/0/2 antes e 3/1/0
+  depois, comandos `/to-tickets docs/projeto/specs/<nome>.md` e
+  `/implement .scratch/<feature>/issues/<NN>-<slug>.md`. Contraprovas: tracker já convertido →
+  nenhuma edição; convertido pela metade (sem `**Spec:**`) → só a frase da spec, 3/1/0 depois.
+  Rodadas em `ddb49fa`, antes da quarta conferência; ela dá 0 no `issue-tracker-local.md` original
+  e 1 nos quatro trackers que os subagentes deixaram convertidos.
+- Verificação 5: `grep -c 'não em .docs/superpowers/specs/. nem pelo .to-spec.'` no template e no
+  `.claude/CLAUDE.md` 1 e 1 → 0 e 0; `grep -c 'Spec mora só onde a mídia'` 0 e 0 → 1 e 1.
+- Verificação 6: `./scripts/check.sh` termina em `Tudo verde.` em `ddb49fa` e em `83e3d21`.
+- Revisão por subagente fresco, contra a spec: nenhum bloqueio, quatro ajustes e três notas; seis
+  adotados em `83e3d21`, o sétimo é o desvio de momento abaixo.
+
+**Escopo efetivo**
+
+- **A operação roda com o Matt já escolhido, não na checagem antes de oferecê-lo**, como dizia a
+  Solução. A Verificação 3 já a rodava "com o caminho do Matt escolhido", e assim quem escolhe outro
+  caminho não recebe proposta de edição no tracker.
+- **Quarta conferência**, `grep -c 'Spec não: vai para'` ≥ 1, vinda da revisão: com as três da
+  spec, um tracker sem a troca da frase de publicação passava como alinhado, e "propor só a frase
+  que falta" não tinha conferência para essa frase.
+- A tabela das trocas reproduz as crases e o marcador de lista do original do Matt, para a troca
+  literal casar.
+- `skills/ajuda/SKILL.md` ganhou uma frase, fora da lista da spec.
+
+**Lições**
+
+- Inserir o passo 3 em "Ao terminar" do `criar-spec` deixou o "(passo 3)" do passo 2, que aponta
+  para o próprio arquivo, mirando o passo errado; a revisão pegou. É a regra "Passo citado por
+  número é ponteiro" do `.claude/CLAUDE.md`, já com o `grep` que acusa — nenhuma regra nova.
+- Achado dos subagentes, registrado no Backlog do `ROADMAP.md`: o aviso de divergência do tracker
+  no `criar-spec` e no `fechar-demanda` não diz que alinhar é o tipo e não a pasta.
+- Promoção do passo 3: o [ADR 0008](../../adr/0008-o-aicf-escreve-a-convencao-no-tracker-do-matt.md),
+  escrito como parte da demanda; nenhuma regra, skill ou doc de referência novos.
+

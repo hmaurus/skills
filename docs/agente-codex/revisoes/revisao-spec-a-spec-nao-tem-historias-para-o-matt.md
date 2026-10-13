@@ -1,7 +1,7 @@
 # Revisão da spec — A spec não tem histórias para o Matt
 
 Data: 2026-10-12. Parecer consultivo sobre a
-[spec](../../projeto/specs/a-spec-nao-tem-historias-para-o-matt.md).
+[spec](../../projeto/concluidas/a-spec-nao-tem-historias-para-o-matt.md).
 Base: `63c9de0c5d5a30957e1b8712ff102de34adb7d6f`.
 Identificação: `sha256sum docs/projeto/specs/a-spec-nao-tem-historias-para-o-matt.md`
 → `ae333fbc80f63a0348015e569bfaa6253db4e3c5fa1d9f4ee67e6c9fedf5a6ff`.
