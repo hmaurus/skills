@@ -199,8 +199,15 @@ Faltando alguma, a operação propõe só o que falta, preservando o resto do ar
 
 **Status:** concluído, com a Verificação 4 (uso real) em aberto. Encerra o titular no primeiro
 projeto que implementar pelo Matt na `0.38.0`: os tickets do `/to-tickets` abrem com `**Spec:**`
-e o `/implement <ticket>` numa sessão limpa lê a spec antes do primeiro teste. Falhar traz de volta
-a meia frase do bloco `## Agent skills` do `CLAUDE.md`, que estava fora de escopo.
+e o caminho exato da demanda, e o `/implement <ticket>` numa sessão limpa lê **esse** arquivo antes
+do primeiro teste (conferir no transcript qual spec foi lida). O `grep -L` da Verificação 4 aceita
+qualquer nome sob `specs/`, inclusive inexistente ou de outra demanda; o aceite é, com
+`S=docs/projeto/specs/<nome>.md`, `test -f "$S"` verdadeiro e
+`grep -LFx "**Spec:** $S" .scratch/<feature>/issues/*.md` sem saída — ele lista o ticket que
+aponta outra spec. Ajuste vindo do
+[parecer do Codex](../../agente-codex/revisoes/revisao-implementacao-a-spec-nao-tem-historias-para-o-matt.md).
+Falhar traz de volta a meia frase do bloco `## Agent skills` do `CLAUDE.md`, que estava fora de
+escopo.
 
 **Arquivos alterados**
 
