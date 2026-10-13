@@ -118,8 +118,10 @@ escolha e não no enunciado:
 - **issues**: no setup do Matt, escolher GitHub, e os dois ficam nas mesmas issues.
 
 Só informar no modo arquivo, sem ensinar a apontar o tracker do Matt para `docs/projeto/`: o tracker local do Matt recebe também tickets e
-mapas, e apontá-lo para `docs/projeto/` misturaria tudo isso nas pastas de estado do aicf. O aicf
-não escreve a config do Matt.
+mapas, e apontá-lo para `docs/projeto/` misturaria tudo isso nas pastas de estado do aicf. O setup
+não edita o tracker do Matt: a convenção que manda a spec para `docs/projeto/specs/` entra nele na
+primeira spec entrevistada pelo `grill-with-docs`, ou na primeira vez que o caminho do Matt for
+escolhido no `/aicf:implementar-spec`.
 
 **O default vai primeiro na lista**, porque o `AskUserQuestion` apresenta a primeira opção como a
 sugerida. É arquivo, sempre — o nome do diretório não muda isso, nem um `-issues` no fim dele. A

@@ -47,6 +47,12 @@ Continuar até não sobrar decisão em aberto, e só então escrever.
 - **Testes** — só quando a demanda toca código: em que ponto a mudança é testada (o mais alto que
   a pega, de preferência um que já existe, idealmente um só) e qual teste parecido já existe no
   repositório. O ponto se confere com o usuário na entrevista
+- **Histórias** e **Decisões de implementação** — só quando a entrevista foi pelo
+  `grill-with-docs` (Matt), porque é o que o `to-tickets` usa para fatiar:
+  - Histórias: lista numerada "Como <papel>, quero <x>, para <y>", extensa, cobrindo todo o
+    comportamento, inclusive o que cada papel *não* pode e o efeito que *não* acontece
+  - Decisões: o que a entrevista decidiu e o código não mostra (arquitetura, schema, contrato de
+    API, interação entre módulos)
 - **Fora de escopo** — o que foi levantado e decidido não fazer, com o motivo
 - **Verificação** — um passo ponta a ponta que prova que funcionou
 
@@ -89,6 +95,10 @@ Sem mídia declarada e sem `docs/projeto/`, perguntar onde gravar em vez de inve
    dependência entre elas, que podem atravessar sessões.
    Quem decide é o `/aicf:implementar-spec`, inclusive quando a implementação emenda nesta
    sessão (passo 3).
-3. Entrevista curta e demanda pequena → seguir na mesma sessão, se o usuário quiser emendar a
+3. Entrevista pelo `grill-with-docs` e mídia arquivo → rodar a operação "Alinhar o tracker do
+   Matt" do [`midia/arquivo.md`](../midia/arquivo.md) antes de o usuário ir embora. Quem limpa a
+   sessão e digita `/to-tickets` direto não passa pelo `/aicf:implementar-spec`, e sem a operação
+   os tickets nascem sem a linha que leva à spec.
+4. Entrevista curta e demanda pequena → seguir na mesma sessão, se o usuário quiser emendar a
    implementação. Entrevista longa → sugerir `/clear` ou sessão nova: a spec deve bastar
    sozinha, e o resíduo da conversa ancora a implementação na memória em vez do texto.

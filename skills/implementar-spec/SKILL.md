@@ -58,13 +58,15 @@ description: Implementa uma demanda a partir da spec e conduz o fechamento até 
    demanda segue em `docs/projeto/`, e os tickets ficam no `.scratch/`. Com
    `docs/agents/issue-tracker.md` apontando para outro tracker, ou ausente, dizer em uma linha que o
    caminho do Matt exige o alinhamento — rodar `/setup-matt-pocock-skills`, ou editar aquele
-   arquivo, escolhendo o tracker que casa com a mídia — e oferecer os outros. Escolhido o Matt, os
-   comandos entregues levam a spec junto, porque o ticket local não a referencia e uma sessão nova
-   perderia os pontos de teste: `/to-tickets docs/projeto/specs/<nome>.md`, depois
-   `/implement docs/projeto/specs/<nome>.md .scratch/<feature>/issues/<NN>-<slug>.md`; no modo
-   issue, `/to-tickets #<n>` e `/implement #<n> #<ticket>`. Terminar um ticket não conclui a
-   demanda: o `/aicf:fechar-demanda` roda quando o último termina, ou parcial ao fim de uma sessão
-   que deixa tickets abertos.
+   arquivo, escolhendo o tracker que casa com a mídia — e oferecer os outros. Escolhido o Matt no
+   modo arquivo, rodar a operação "Alinhar o tracker do Matt" do
+   [`midia/arquivo.md`](../midia/arquivo.md) antes de entregar os comandos: é ela que faz cada
+   ticket abrir com a linha `**Spec:**`, e uma sessão nova chegar à spec pelo ticket. Os comandos:
+   `/to-tickets docs/projeto/specs/<nome>.md`, depois
+   `/implement .scratch/<feature>/issues/<NN>-<slug>.md`; no modo issue, `/to-tickets #<n>` e
+   `/implement #<ticket>` — o ticket remoto já nasce com `## Parent` apontando a issue da spec.
+   Terminar um ticket não conclui a demanda: o `/aicf:fechar-demanda` roda quando o último
+   termina, ou parcial ao fim de uma sessão que deixa tickets abertos.
 
    **Junto do caminho, decidir o workspace.** O default é o da seção `## Git` do `CLAUDE.md`; sem
    ela, a branch atual. Sair dele é pergunta ao usuário, e o agente propõe quando couber:

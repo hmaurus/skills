@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.38.0 — 2026-10-12
+
+- **A spec entrevistada pelo `grill-with-docs` ganha as seções Histórias e Decisões de
+  implementação**, as duas que o `to-spec` do Matt escreve e o `to-tickets` usa para fatiar. Num
+  projeto privado, das 35 histórias do `to-spec`, 4 diziam algo que a prosa do aicf deixava
+  implícito (medição à mão, sem comando que a refaça). Nas outras entrevistas a spec não muda.
+- **O ticket do Matt leva à spec, e o `/implement` volta a receber só o ticket.** A operação nova
+  "Alinhar o tracker do Matt", no `skills/midia/arquivo.md`, troca três frases do
+  `docs/agents/issue-tracker.md` do Matt: a spec passa a ser a de `docs/projeto/specs/` e todo
+  ticket abre com `**Spec:** docs/projeto/specs/<nome>.md`. Roda com aceite e diff, chamada no fim
+  do `/aicf:criar-spec` (entrevista pelo `grill-with-docs`) e no `/aicf:implementar-spec` (caminho
+  do Matt escolhido); confere antes e propõe só o que falta. Os comandos entregues voltam a ter um
+  argumento: `/implement .scratch/<feature>/issues/<NN>-<slug>.md`, ou `/implement #<ticket>`.
+  Escrever no tracker do Matt é relação nova, registrada no ADR 0008.
+- A regra da passagem entre fases, no template do `CLAUDE.md`, troca a lista de exceções pelo
+  princípio: spec mora só onde a mídia do registro manda, qualquer que seja a skill que a escreva.
+  O `/aicf:setup` deixa de dizer que o aicf não escreve a config do Matt.
+- Verificação de uso real em aberto: encerra o titular, no primeiro projeto que implementar pelo
+  Matt nesta versão — os tickets abrem com `**Spec:**` e o `/implement` numa sessão limpa lê a spec.
+
 ## 0.37.0 — 2026-10-07
 
 - **O caminho do Matt Pocock passa a ser oferecido com o mesmo peso dos outros.** As skills de
