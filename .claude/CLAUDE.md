@@ -10,7 +10,7 @@ Este repositório é a fonte editável do plugin, publicado no marketplace `aico
 
 ## Lema
 
-**Simplicidade e manutenibilidade acima de tudo.** Havendo trade-off entre a solução mais completa e a mais direta, escolher a direta — desde que entregue o resultado. Gatilho de revisão: dois mecanismos coexistindo, sincronização entre estados, ou abstração antecipando o futuro.
+**Simplicidade e manutenibilidade acima de tudo.** Havendo trade-off entre a solução mais completa e a mais direta, escolher a direta — desde que entregue o resultado. Sinais de que complicou: dois mecanismos para a mesma coisa, estado duplicado que precisa ficar sincronizado, abstração para um futuro que ninguém pediu. Na dúvida sobre como fazer, o padrão oficial do framework, não um próprio: padrão oficial não é over-engineering; camada opcional é.
 
 ## Registro
 

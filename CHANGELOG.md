@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.38.1 — 2026-10-15
+
+- **O Lema do template do `CLAUDE.md` troca os gatilhos de revisão por sinais que o agente reconhece
+  no próprio diff e ganha uma frase.** "Dois mecanismos coexistindo, sincronização entre estados"
+  virou "dois mecanismos para a mesma coisa, estado duplicado que precisa ficar sincronizado"; a
+  frase nova resolve a tensão entre simplicidade e seguir o framework: padrão oficial não é
+  over-engineering, camada opcional é. O `.claude/CLAUDE.md` deste repositório recebe o mesmo texto.
+  `grep -c 'camada opcional é' skills/setup/templates/claude-md.md .claude/CLAUDE.md` devolve 1 nos
+  dois.
+- Projeto que já fez o setup não muda sozinho: o parágrafo do Lema se troca à mão.
+
 ## 0.38.0 — 2026-10-12
 
 - **A spec entrevistada pelo `grill-with-docs` ganha as seções Histórias e Decisões de
