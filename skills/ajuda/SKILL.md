@@ -18,7 +18,7 @@ livre em qualquer ponto, e o agente propõe a que couber sem esperar autorizaç�
 **Demanda** (registro no estado "decidido" ou "incerto", ou ideia ainda não registrada) →
 **entrevista**, que produz a spec → **implementação**, que a consome → **fechamento**, que é
 `/aicf:fechar-demanda` — relatório, arquivamento e linha `Processo` vivem lá, e o agente o
-aplica em qualquer caminho. Demanda que já nasceu de entrevista volta à mesa: o agente diz se o
+aplica em qualquer caminho. Qual demanda pegar em seguida, `/aicf:proxima-demanda` sugere. Demanda que já nasceu de entrevista volta à mesa: o agente diz se o
 registrado basta ou se vale outra rodada. Pular a entrevista é legítimo quando a demanda já diz
 o suficiente — a demanda muda de estado para "pronta para implementar" como está, e a linha
 `Processo` registra `entrevista: nenhuma`.

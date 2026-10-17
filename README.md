@@ -100,6 +100,7 @@ São seis. A diferença entre elas é quem pode chamar cada uma.
 | `/aicf:criar-spec` | fase de entrevista | Interroga até não sobrar decisão em aberto, depois escreve a spec, com a sugestão de caminho de implementação. `/aicf:criar-spec #12` adota uma issue que já existe |
 | `/aicf:implementar-spec` | fase de implementação | Decide o caminho pela sugestão da spec, implementa e verifica. Ao final chama o fechamento |
 | `/aicf:fechar-demanda` | fase de fechamento | Checks, relatório, arquivamento e promoção de conhecimento, por qualquer caminho de implementação |
+| `/aicf:proxima-demanda` | entre uma demanda e outra | Lê o corpo de tudo o que está aberto, no registro e fora dele (branch não integrada, ticket, plano), e sugere a próxima, com as alternativas e o comando de entrada |
 
 As skills são pequenas de propósito. Elas dizem o que o agente não teria como inferir: onde gravar, o que registrar e quando fechar. O que a ferramenta já faz bem, e o que se decide melhor no caso concreto, fica com o agente.
 

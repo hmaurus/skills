@@ -102,6 +102,7 @@ There are six. What separates them is who can invoke each one.
 | `/aicf:criar-spec` | interview phase | Interrogates until no decision is left open, then writes the spec, with a suggested implementation path. `/aicf:criar-spec #12` adopts an issue that already exists |
 | `/aicf:implementar-spec` | implementation phase | Picks the path from the spec's suggestion, implements and verifies. At the end it calls closing |
 | `/aicf:fechar-demanda` | closing phase | Checks, report, archiving and knowledge promotion, on any implementation path |
+| `/aicf:proxima-demanda` | between work items | Reads the body of everything still open, in the record and outside it (unmerged branch, ticket, plan), and suggests the next one, with the alternatives and the command to start it |
 
 The skills are small on purpose. They say what the agent could not infer: where to write, what to record, and when to close. What the tool already does well, and what is better decided case by case, stays with the agent.
 

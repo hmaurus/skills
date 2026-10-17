@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.39.0 — 2026-10-17
+
+- **Skill nova, `/aicf:proxima-demanda`: sugere a próxima demanda a pegar.** Lê o corpo de tudo o
+  que está aberto (specs, intents, roadmap, backlog e, no modo issue, os três labels), o `PRD.md`
+  como régua, e o trabalho começado fora do registro: branch não integrada, worktree, stash,
+  ticket do Matt e plano do Superpowers. Ordena pelo custo já pago, pelo prazo escrito e pela
+  condição de backlog que disparou, e responde com uma recomendação, até duas alternativas, a
+  pergunta que decide e o comando de entrada. O agente a alcança sozinho, quando o usuário pergunta
+  o que fazer em seguida.
+- Ticket do Matt cuja linha `**Spec:**` aponta para `concluidas/` conta como resíduo: o
+  `/implement` não muda o status do ticket, e num projeto privado 27 tickets de três demandas
+  concluídas seguiam `ready-for-agent`.
+- O `/aicf:ajuda` e as duas tabelas de skills dos READMEs citam a skill nova.
+
 ## 0.38.1 — 2026-10-15
 
 - **O Lema do template do `CLAUDE.md` troca os gatilhos de revisão por sinais que o agente reconhece
