@@ -27,9 +27,10 @@ alternativas, a pergunta que decide e o comando de entrada. Só lê: a escolha �
   - `skills/ajuda/SKILL.md`, `README.md`, `README.en.md` — uma menção cada.
 - **Commits** — `3ade431` feat(proxima-demanda): skill que sugere a próxima demanda.
 - **Validação** — `./scripts/check.sh` → `Tudo verde.`. Os comandos da seção 1 da skill rodaram
-  no projeto privado antes do commit, e um deles mudou a skill: os tickets do Matt em `.scratch/`
-  estavam todos `ready-for-agent`, e todos apontavam para spec concluída — o `/implement` não muda
-  o status do ticket. Sem a regra do resíduo, a skill sugeriria trabalho já feito.
+  no projeto privado antes do commit, e um deles mudou a skill: 27 tickets do Matt em `.scratch/`
+  estavam `ready-for-agent`, todos de spec concluída — as três primeiras demandas, anteriores aos
+  43 tickets `resolved` das três seguintes. Sem a regra do resíduo, a skill sugeriria trabalho já
+  feito; com ela, ninguém precisa voltar para marcar ticket antigo.
   Comportamento da skill invocada: depende de o titular atualizar o plugin e abrir sessão nova;
   encerra no primeiro uso real que responda pela seção 3.
 - **Escopo efetivo** — o previsto, mais a regra do ticket residual.

@@ -9,9 +9,10 @@
   condição de backlog que disparou, e responde com uma recomendação, até duas alternativas, a
   pergunta que decide e o comando de entrada. O agente a alcança sozinho, quando o usuário pergunta
   o que fazer em seguida.
-- Ticket do Matt cuja linha `**Spec:**` aponta para `concluidas/` conta como resíduo: o
-  `/implement` não muda o status do ticket, e num projeto privado 27 tickets de três demandas
-  concluídas seguiam `ready-for-agent`.
+- Ticket do Matt cuja linha `**Spec:**` aponta para `concluidas/` conta como resíduo: num projeto
+  privado, os 27 tickets das três primeiras demandas concluídas seguiam `ready-for-agent`, enquanto
+  os das três seguintes estavam `resolved`. O status do ticket pode ficar para trás; a pasta da
+  spec não fica.
 - O `/aicf:ajuda` e as duas tabelas de skills dos READMEs citam a skill nova.
 
 ## 0.38.1 — 2026-10-15
