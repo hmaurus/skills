@@ -1,12 +1,12 @@
 ---
-name: criar-prd
-description: Entrevista o usuário sobre o produto — problema, público, escopo, sucesso — e escreve o PRD do projeto. Rodar no começo, e de novo quando uma decisão contrariar o que está escrito.
+name: prd
+description: Cria ou atualiza o PRD do projeto. Vazio, entrevista o usuário sobre o produto — problema, público, escopo, sucesso — e escreve; preenchido, confere o PRD contra as demandas, os ADRs e o glossário antes de perguntar, e entrevista só o que o projeto não responde. Rodar no começo, e de novo quando uma decisão contrariar o que está escrito.
 disable-model-invocation: true
 argument-hint: "[arquivo, pasta ou texto de contexto]"
 arguments: contexto
 ---
 
-# Criar o PRD por entrevista
+# Criar ou atualizar o PRD
 
 O PRD responde o que nenhuma linha de código responde: para quem o produto existe, o que ele não
 vai fazer, e o que conta como sucesso. É o documento do qual saem as primeiras demandas.
@@ -22,6 +22,34 @@ roda de novo, sem cerimônia de fechamento.
 `docs/projeto/PRD.md`. Se já existe preenchido, é **modo revisão**: ler antes de perguntar,
 mostrar o que já está respondido e entrevistar só o que mudou ou ficou aberto — não reescrever
 seção que continua válida. Sem `docs/projeto/`, perguntar onde gravar em vez de inventar pasta.
+
+## Modo revisão: conferir o PRD contra o projeto
+
+O PRD envelhece sem ninguém dizer: a demanda que contraria o escopo fecha, e o texto continua
+afirmando o contrário. Antes da primeira pergunta, confrontar cada seção com o repositório. As
+demandas moram onde a linha `**Mídia do registro:**` do `CLAUDE.md` diz — no modo arquivo,
+`docs/projeto/` (`concluidas/`, `specs/`, `intents/`, `backlog/` e o `ROADMAP.md`); no modo issue,
+`gh issue list --state all --label <aicf:spec|aicf:intent|aicf:backlog>`, fechada é concluída.
+
+- **Escopo, Dentro** — item cuja demanda já está concluída; item que ainda não tem demanda nenhuma.
+- **Escopo, Fora** — item que voltou como demanda aberta, ou que já foi concluído.
+- **Riscos** — data ou condição que já passou.
+- **Público e Modelo** — contra o `GLOSSARY.md` e os ADRs (`docs/adr/`): termo trocado, decisão de
+  modelo registrada fora do PRD.
+- **Afirmação verificável** — número, nome de comando ou lista que o repositório desmente.
+- **Ponteiro antigo** — o cabeçalho que diz "revisar por `/aicf:criar-prd`" passa a dizer
+  `/aicf:prd`, sem perguntar: é o nome anterior desta skill.
+
+Mostrar o resultado antes da entrevista, seção por seção, cada divergência com a fonte — arquivo
+da demanda, issue, ADR, commit — e separada em dois grupos:
+
+- **Fato** — o agente corrige no texto proposto: contagem, nome, risco cuja data passou sem ter
+  acontecido.
+- **Decisão** — só o usuário responde, e é o que vai para a entrevista: se a mudança de escopo foi
+  decisão ou deriva, o motivo de um item novo em Fora, as metas de Sucesso, o que fazer com um risco
+  vencido.
+
+Seção sem divergência e sem pergunta do usuário fica como está.
 
 ## Material de partida
 
@@ -74,8 +102,10 @@ Datar a última revisão no topo: o PRD é vivo, e saber quando parou de ser rev
 
 ## Ao terminar
 
-1. Mostrar o PRD e pedir revisão antes de considerá-lo fechado.
-2. **Propor tirar dele as primeiras demandas** — cada coisa que a proposta exige vira uma. No
+1. Mostrar o PRD e pedir revisão antes de considerá-lo fechado. No modo revisão, mostrar só o texto
+   novo de cada seção que muda, gravar com a aprovação e atualizar a **Última revisão**.
+2. **Propor tirar dele as primeiras demandas** — cada coisa que a proposta exige vira uma; no modo
+   revisão, cada item de Escopo que ainda não tem demanda. No
    **modo arquivo**, isso é o primeiro `ROADMAP.md`: uma linha em `Próximas` ou `Backlog` conforme
    a certeza, e o que precisar de contexto vira arquivo em `intents/`, e aí **a linha sai** — quem
    tem arquivo não tem linha. No **modo issue** não há roadmap: cada uma nasce como issue com

@@ -69,7 +69,9 @@ passo cobriu qual exigência.
    referência que o passo 3 acabou de criar — entra como link no relatório desta demanda; não
    tendo gerado nada, o relatório diz isso. E o que esta demanda escreveu criou demanda nova, ou
    tornou alguma obsoleta? Ajustar inline — no modo arquivo, no `ROADMAP.md` ou no arquivo da
-   outra demanda; no modo issue, na issue dela.
+   outra demanda; no modo issue, na issue dela. Se ela contraria o `PRD.md` — entrou no que ele
+   diz Fora, mudou Escopo, Público ou Modelo, resolveu ou criou um Risco —, sugerir ao usuário
+   `/aicf:prd`, que só ele invoca; o fechamento não edita o PRD.
 
 O fechamento vai num commit próprio, separado do commit de código; quando o processo escolhido já
 commitou por conta própria, cobre só o registro. Tarefa pequena (fix trivial, copy, renomeação)

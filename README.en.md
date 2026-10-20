@@ -4,7 +4,7 @@
 
 _[Versão em português](README.md)_
 
-`aicf` is a Claude Code skill plugin that handles project governance: the PRD, the roadmap, the record of each work item, and the report of what shipped. There are six skills, and they work on top of the implementation path you already use.
+`aicf` is a Claude Code skill plugin that handles project governance: the PRD, the roadmap, the record of each work item, and the report of what shipped. There are seven skills, and they work on top of the implementation path you already use.
 
 Superpowers, Matt Pocock and spec-kit cover one work item at a time, and cover it well. Three questions go unanswered:
 
@@ -52,7 +52,7 @@ Each work item is a versioned file in the repository, or a GitHub issue. You pic
 
 ### Where does the project stand?
 
-`/aicf:criar-prd` interviews you and writes `PRD.md`. It has a "ruled out, by decision" section, which holds what you decided against and why.
+`/aicf:prd` interviews you and writes `PRD.md`. It has a "ruled out, by decision" section, which holds what you decided against and why.
 
 ### Why did we decide against that?
 
@@ -68,7 +68,7 @@ Each work item is a versioned file in the repository, or a GitHub issue. You pic
 
 It asks for the project name, a sentence or two about it, whether a work item lives in a file or an issue, and what to do with the engineering defaults. The tools you already use (password manager, library docs, skill collections) it looks up on your machine, and only asks about what it cannot find. If the directory is not a git repository yet, it offers `git init` before asking where work items live. At the end it leaves what it created in a first commit on `main` and hands you `develop`, the working branch.
 
-**2. Fill in `PRD.md`.** It ships with the sections and a prompt under each. `/aicf:criar-prd` interviews you section by section and writes the file, starting from the problem rather than the solution.
+**2. Fill in `PRD.md`.** It ships with the sections and a prompt under each. `/aicf:prd` interviews you section by section and writes the file, starting from the problem rather than the solution.
 
 <details>
 <summary>Why the PRD does not go through the work item cycle</summary>
@@ -92,7 +92,7 @@ There are six. What separates them is who can invoke each one.
 | Skill | When | What it does |
 | --- | --- | --- |
 | `/aicf:setup` | once, on a new project | Initializes the git repository if missing, asks whether work items live in files or issues and sets up whatever the answer requires: `docs/projeto/` with the PRD, roadmap and work item folders, or the GitHub repository and the three `aicf:*` labels. In both cases it creates `CLAUDE.md` (with `AGENTS.md` pointing to it), a `README.md`, the engineering defaults if you want them, the first commit on `main` and a `develop` branch |
-| `/aicf:criar-prd` | start of the project | Interviews you about the product and writes `PRD.md`. Run it again whenever a decision contradicts it |
+| `/aicf:prd` | start of the project, and when the PRD goes stale | Interviews you about the product and writes `PRD.md`. When revising, it checks the PRD against the work items, the ADRs and the glossary before asking, and only interviews you on what the project can't answer |
 | `/aicf:ajuda` | whenever you want to reread the method | The map: the cycle, what each phase produces, and the governance conventions |
 
 **You type them, or the agent reaches for them.** They answer requests in plain language, such as "interview me about X" or "implement spec Y", and the agent loads them when it recognizes the intent.

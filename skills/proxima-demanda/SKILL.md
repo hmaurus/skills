@@ -22,7 +22,9 @@ A linha `**Mídia do registro:**` do `CLAUDE.md` diz onde a demanda mora; sem li
 
 No modo issue, o corpo se lê com `gh issue view <n>`. E, nos dois modos:
 
-- **O `PRD.md`** — escopo, ordem e riscos do MVP: é a régua da prioridade.
+- **O `PRD.md`** — escopo, ordem e riscos do MVP: é a régua da prioridade. Demanda aberta que ele
+  lista em Fora, ou Risco com data vencida, é régua defasada: a resposta avisa e sugere ao usuário
+  `/aicf:prd` antes de seguir a ordem.
 - **Trabalho começado fora do registro** — `git branch --no-merged`, `git worktree list`,
   `git stash list`, ticket aberto em `.scratch/*/issues/` (Matt Pocock), plano em
   `docs/superpowers/plans/` com tarefa sem marcar (Superpowers). Ticket cuja linha `**Spec:**`

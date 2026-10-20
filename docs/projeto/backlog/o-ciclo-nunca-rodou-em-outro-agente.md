@@ -20,7 +20,7 @@ Levantado em 2026-09-19, na entrevista do PRD.
   pasta que o agente lê é o caminho de instalação lá.
 - **O empacotamento não é.** `.claude-plugin/` e o marketplace são do Claude Code. Fora dele não
   há `/plugin install`.
-- **`disable-model-invocation: true`** (`setup`, `criar-prd`) está fora do mínimo do padrão. Outro
+- **`disable-model-invocation: true`** (`setup`, `prd`) está fora do mínimo do padrão. Outro
   agente pode invocar as duas sozinho.
 - **A prosa cita ferramentas do Claude Code** em 20 pontos
   (`grep -rnoE 'AskUserQuestion|plan mode|/clear|\.claude/rules|hooks?' skills/ --include='*.md' | wc -l`),

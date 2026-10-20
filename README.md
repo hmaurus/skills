@@ -4,7 +4,7 @@
 
 _[English version](README.en.md)_
 
-O aicf é um plugin de skills para Claude Code que cuida da governança do projeto: o PRD, o roadmap, o registro de cada demanda e o relatório do que foi entregue. São seis skills, e elas funcionam por cima do caminho de implementação que você já usa.
+O aicf é um plugin de skills para Claude Code que cuida da governança do projeto: o PRD, o roadmap, o registro de cada demanda e o relatório do que foi entregue. São sete skills, e elas funcionam por cima do caminho de implementação que você já usa.
 
 Superpowers, Matt Pocock e spec-kit cobrem bem uma demanda por vez. Três perguntas ficam sem resposta:
 
@@ -50,7 +50,7 @@ Cada demanda é um arquivo versionado no repositório, ou uma issue do GitHub. V
 
 ### Onde o projeto está?
 
-`/aicf:criar-prd` entrevista você e escreve o `PRD.md`. Ele tem uma seção "fora de escopo, por decisão", que guarda o que você resolveu não fazer e o motivo.
+`/aicf:prd` entrevista você e escreve o `PRD.md`. Ele tem uma seção "fora de escopo, por decisão", que guarda o que você resolveu não fazer e o motivo.
 
 ### Por que decidimos não fazer aquilo?
 
@@ -66,7 +66,7 @@ Cada demanda é um arquivo versionado no repositório, ou uma issue do GitHub. V
 
 Ele pergunta o nome do projeto, uma ou duas frases sobre ele, se a demanda vive em arquivo ou em issue e o que fazer com os padrões de engenharia. As ferramentas que você já usa (gerenciador de senhas, documentação de bibliotecas, coleções de skills) ele procura na máquina e só pergunta pelo que não encontrar. Se o diretório ainda não for um repositório git, ele oferece o `git init` antes da pergunta sobre onde as demandas moram. No fim, deixa o que criou no primeiro commit em `main` e te entrega em `develop`, a branch de trabalho.
 
-**2. Preencher o `PRD.md`.** Ele nasce com as seções e uma pergunta em cada uma. `/aicf:criar-prd` entrevista seção por seção e escreve o arquivo, começando pelo problema em vez da solução.
+**2. Preencher o `PRD.md`.** Ele nasce com as seções e uma pergunta em cada uma. `/aicf:prd` entrevista seção por seção e escreve o arquivo, começando pelo problema em vez da solução.
 
 <details>
 <summary>Por que o PRD não passa pelo ciclo da demanda</summary>
@@ -90,7 +90,7 @@ São seis. A diferença entre elas é quem pode chamar cada uma.
 | Skill | Quando | O que faz |
 | --- | --- | --- |
 | `/aicf:setup` | uma vez, no projeto novo | Inicializa o repositório git se faltar, pergunta se a demanda mora em arquivo ou em issue e monta o que a escolha pedir: `docs/projeto/` com PRD, roadmap e as pastas de demanda, ou o repositório no GitHub e os três labels `aicf:*`. Nos dois casos cria o `CLAUDE.md` (com `AGENTS.md` apontando para ele), um `README.md`, os padrões de engenharia se você quiser, o primeiro commit em `main` e a branch `develop` |
-| `/aicf:criar-prd` | começo do projeto | Entrevista sobre o produto e escreve o `PRD.md`. Roda de novo quando uma decisão o contraria |
+| `/aicf:prd` | começo do projeto, e quando o PRD envelhece | Entrevista sobre o produto e escreve o `PRD.md`. Na revisão, confere o PRD contra as demandas, os ADRs e o glossário antes de perguntar, e entrevista só o que o projeto não responde |
 | `/aicf:ajuda` | quando quiser reler o método | O mapa: o ciclo, o que cada fase produz e as convenções de governança |
 
 **Você digita, ou o agente alcança sozinho.** Respondem a pedidos em linguagem natural, como "me entreviste sobre X" ou "implementa a spec Y", e o agente as carrega quando reconhece a intenção.

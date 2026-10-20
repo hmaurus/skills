@@ -27,7 +27,7 @@ demanda. Achado por revisão de código, não pelo uso.
 O exemplo sem marca foi pago de verdade. O `roadmap.md` trazia dois itens prontos sob `## Próximas`,
 cuja legenda diz "Decidido, ainda sem arquivo", e o `ROADMAP.md` deste repositório nasceu com os
 mesmos dois: um deles ficou quatro versões como decisão que ninguém tomou. Saíram na `0.29.2`, e a
-seção ficou só com a legenda — a primeira linha real quem escreve é o `/aicf:criar-prd`.
+seção ficou só com a legenda — a primeira linha real quem escreve é o `/aicf:prd`.
 
 A conferência é ler o template inteiro procurando **linha de configuração com valor decidido** — se
 um passo da skill pergunta o valor, o template não pode já tê-lo — e **item em seção que o cabeçalho

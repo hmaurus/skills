@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.40.0 — 2026-10-19
+
+- **`/aicf:criar-prd` passa a se chamar `/aicf:prd`, e a revisão confere o PRD contra o projeto
+  antes de perguntar.** Com o PRD preenchido, a skill compara cada seção com as demandas, os ADRs e
+  o `GLOSSARY.md` — item de Escopo já concluído ou sem demanda, item de Fora que voltou, risco
+  vencido, número que o repositório desmente — e mostra cada divergência com a fonte, separada
+  entre fato, que o agente corrige, e decisão, que vai para a entrevista. Num projeto privado, o
+  PRD revisado 13 dias antes listava como fora do MVP itens já adiantados e trazia um risco com
+  data vencida; o deste repositório dizia "Seis skills" com sete (`ls skills/*/SKILL.md | wc -l`).
+  Continua só manual (`disable-model-invocation: true`).
+- **O fechamento e a próxima demanda sugerem rodar `/aicf:prd`.** O `/aicf:fechar-demanda`, quando
+  a demanda contraria o PRD; o `/aicf:proxima-demanda`, quando uma demanda aberta está no Fora do PRD
+  ou um risco tem data vencida. Nenhum dos dois edita o PRD.
+- O PRD dos projetos que já fizeram o setup traz no cabeçalho o nome antigo; a primeira revisão
+  pela `/aicf:prd` troca a linha. Os READMEs passam a contar sete skills.
+
 ## 0.39.0 — 2026-10-17
 
 - **Skill nova, `/aicf:proxima-demanda`: sugere a próxima demanda a pegar.** Lê o corpo de tudo o

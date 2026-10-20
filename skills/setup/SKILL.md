@@ -510,7 +510,7 @@ e o que fazer em seguida — não só o que foi criado no disco.
      do abstrato;
    - que a governança é a mesma em qualquer caminho de implementação, inclusive os de outras
      coleções.
-3. Sugerir `/aicf:criar-prd` como próximo passo — é do PRD que saem as primeiras demandas (no
+3. Sugerir `/aicf:prd` como próximo passo — é do PRD que saem as primeiras demandas (no
    modo arquivo, o roadmap inicial; no modo issue, as primeiras issues). Depois dele, a primeira
    demanda começa por `/aicf:criar-spec`.
 4. Dizer que `/aicf:ajuda` é o lugar de voltar quando quiser reler como o método
