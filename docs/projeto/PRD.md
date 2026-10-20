@@ -4,7 +4,7 @@ O porquê do produto. Responde o que nenhuma linha de código responde: para que
 
 Documento vivo — quando uma decisão o contrariar, revisar por `/aicf:prd`, em vez de deixar envelhecer.
 
-**Última revisão:** 2026-09-19
+**Última revisão:** 2026-10-19
 
 ## Problema
 
@@ -31,28 +31,30 @@ O fio comum: **quem quer empreender desenvolvendo aplicativos web com IA e Claud
 Um plugin de Claude Code que monta a estrutura de documentos do projeto e conduz cada demanda da ideia até o relatório do que foi feito. Duas camadas:
 
 - **Governança**, sempre a mesma: PRD, roadmap, demandas versionadas (arquivo no repositório ou issue do GitHub) e o registro do que saiu. Toda demanda passa por demanda → entrevista → implementação → fechamento.
-- **Implementação**, à escolha: a governança escolhe o caminho de cada fase, e dentro da fase o framework escolhido roda inteiro. O aicf traz um caminho mínimo próprio e aceita Superpowers e Matt Pocock nas fases de entrevista e de implementação.
+- **Implementação**, à escolha: a governança escolhe o caminho de cada fase, e dentro da fase a coleção escolhida roda inteira. O aicf traz um caminho mínimo próprio e aceita Superpowers e Matt Pocock nas fases de entrevista e de implementação.
 
-Seis skills, deliberadamente pequenas: dizem o que o agente não teria como inferir — onde gravar, o que registrar, quando fechar — e param aí.
+Sete skills, deliberadamente pequenas: dizem o que o agente não teria como inferir — onde gravar, o que registrar, quando fechar — e param aí.
 
 ## Escopo
 
 **Dentro:**
 
-- Setup de projeto novo: `PRD.md`, o lugar das demandas (arquivo ou issue) e o `CLAUDE.md` da raiz, com `AGENTS.md` como link.
+- Setup de projeto sem governança montada, novo ou já com código e histórico: `PRD.md`, o lugar das demandas (arquivo ou issue) e o `CLAUDE.md` da raiz, com `AGENTS.md` como link.
+- Setup de projeto que já tem governança montada, para conferir e completar o que falta. Decidido, ainda sem entrevista: [intent](intents/o-setup-nao-serve-a-projeto-ja-rodando.md).
 - PRD por entrevista, revisado quando uma decisão o contraria.
 - Roadmap e demandas versionadas, com a maturidade na pasta ou no label.
 - Entrevista que produz spec, com sugestão de caminho de implementação.
 - Caminho aicf mínimo de implementação, que encadeia o fechamento.
 - Fechamento por qualquer caminho: checks, relatório, arquivamento e promoção de conhecimento para `CLAUDE.md`, ADR, `GLOSSARY.md`, `docs/referencias/` ou skill.
 - Superpowers e Matt Pocock como caminhos alternativos de entrevista e de implementação.
+- Sugestão da próxima demanda, depois de ler o corpo de tudo o que está aberto.
 
 **Fora, por decisão:**
 
 - **O caminho de implementação** (TDD, plano, subagentes, revisão de código). Fica com a coleção escolhida ou com o agente. Motivo: é o que as coleções fazem bem, e é onde um processo rígido é burlado. [ADR 0001](../adr/0001-fronteira-de-fase.md).
 - **Migração entre arquivo e issue.** A escolha de mídia vale do ponto em diante; o que está em arquivo fica onde está. Motivo: migrar é uma demanda de conversão a manter, e ninguém pediu. [ADR 0004](../adr/0004-midia-do-registro-e-config-propria.md).
 - **Manual ou tutorial separado do README.** Motivo: dois documentos humanos divergem; o que é para quem já usa fica dobrado no README. [ADR 0005](../adr/0005-a-documentacao-humana-e-um-arquivo-so.md).
-- **Outros agentes (Codex, OpenCode, Cursor) como alvo.** O alvo é Claude Code. A porta fica aberta: o formato `SKILL.md` é o padrão aberto Agent Skills, que esses agentes leem (`curl -s https://agentskills.io/llms.txt` lista os clientes), e o setup já gera `AGENTS.md`. Mas o empacotamento é plugin de Claude Code, e a prosa cita ferramentas dele (`AskUserQuestion`, plan mode, `/clear`, `disable-model-invocation`) em cerca de vinte pontos (`grep -rnoE 'AskUserQuestion|plan mode|/clear|\.claude/rules|hooks?' skills/ --include='*.md' | wc -l`). Ninguém testou, e o plugin não promete. Motivo: o público é quem usa Claude Code, e cada agente a mais é uma superfície a manter sem quem a exercite.
+- **Outros agentes (Codex, OpenCode, Cursor) como alvo.** O alvo é Claude Code. A porta fica aberta: o formato `SKILL.md` é o padrão aberto Agent Skills, que esses agentes leem (`curl -s https://agentskills.io/llms.txt` lista os clientes), e o setup já gera `AGENTS.md`. Mas o empacotamento é plugin de Claude Code, e a prosa cita ferramentas dele (`AskUserQuestion`, plan mode, `/clear`, `disable-model-invocation`) em 23 pontos no commit `441a74b` (`grep -rnoE 'AskUserQuestion|plan mode|/clear|\.claude/rules|hooks?' skills/ --include='*.md' | wc -l`). Ninguém testou, e o plugin não promete. Motivo: o público é quem usa Claude Code, e cada agente a mais é uma superfície a manter sem quem a exercite.
 - **A organização interna de `docs/referencias/`.** A pasta existe: o `/aicf:ajuda` a nomeia para doc que descreve o mundo em vez de um trabalho a fazer, e o passo 3 do `/aicf:fechar-demanda` manda conhecimento operacional para lá (`grep -n 'docs/referencias' skills/ajuda/SKILL.md skills/fechar-demanda/SKILL.md`). O que fica fora é o resto: o setup não a cria (nasce no primeiro arquivo, como `docs/adr/` e `GLOSSARY.md`), e o plugin não impõe índice, nome de arquivo nem subpasta dentro dela. Motivo: o que tem padrão já tem lugar — decisão em ADR, vocabulário em `GLOSSARY.md`, regra em `CLAUDE.md`, procedimento em skill —, e o que sobra (referência de serviço de terceiro, estudo, pesquisa) varia demais entre projetos para ter forma imposta. Esta entrada dizia que a pasta inteira era fora de escopo, contradizendo as duas skills; corrigido em 2026-09-19.
 - **Trackers além do GitHub Issues** (Linear, Jira). Motivo: o plugin só carrega o que o autor usa e consegue testar, e até hoje foram só arquivo markdown e GitHub Issues. A mídia é uma linha de configuração, então acrescentar uma depois é possível, mas só quando houver quem a exercite.
 
@@ -69,6 +71,6 @@ Seis skills, deliberadamente pequenas: dizem o que o agente não teria como infe
 ## Riscos
 
 - **O processo pesa e é burlado.** É o que matou o primeiro framework do autor. Se acontecer: cada contorno vira demanda contra a skill que pesou, para simplificá-la, não exceção tolerada. As skills continuam pequenas por princípio.
-- **Claude Code muda o formato de plugin ou de skill.** Se acontecer: o CI pina a versão do Claude Code e valida os manifestos; quando uma versão nova reprovar, subir o pin e corrigir o repositório na mesma release.
-- **Uma coleção, ou a própria Anthropic, absorve a governança.** Se acontecer: comparar e aposentar a skill sobreposta. O aicf já delega a implementação; delegar mais uma fase é continuidade, não derrota.
+- **Claude Code muda o formato de plugin ou de skill.** Se acontecer: o CI pina a versão do Claude Code e valida os manifestos; quando uma versão nova reprovar, subir o pin e corrigir o repositório na mesma release. Aconteceu em 2026-10-06: o Claude Code 2.1.292 passou a reprovar o `CLAUDE.md` na raiz do plugin. O arquivo deste repositório foi para `.claude/`, e o pin subiu (`grep -n 'claude-code@' .github/workflows/ci.yml` → `2.1.292`). [Concluída](concluidas/o-validate-novo-reprova-o-claude-md-da-raiz.md).
+- **Uma coleção, ou a própria Anthropic, absorve a governança.** Se acontecer: comparar e aposentar a skill sobreposta. O aicf já delega a implementação; delegar mais uma fase é continuidade, não derrota. O caso mais próximo até hoje é o `wayfinder` do Matt Pocock. Ele planeja um trabalho grande demais para uma sessão como um mapa de decisões, com o que ficou fora de escopo e as decisões tomadas. A sobreposição é parcial: por padrão ele para no planejamento, "produce decisions, not deliverables" (`grep -n 'produce decisions, not deliverables' ~/.claude/plugins/cache/mattpocock/mattpocock-skills/1.3.1/skills/engineering/wayfinder/SKILL.md` → linha 13). Também não registra o que a execução entregou nem mantém documento do produto (`grep -ci prd` no mesmo arquivo → 0). Nada se aposentou; o README deixou de ignorá-lo em 2026-09-20 ([concluída](concluidas/o-wayfinder-do-matt-faz-o-planejamento-macro.md)).
 - **Depende de uma pessoa só.** Manutenção e evolução dependem do tempo do autor, dividido com o curso e os projetos. Se acontecer: o repositório é público e MIT, a governança dele está em arquivo, e as skills são arquivos sem servidor. A última release continua funcionando sem manutenção, e quem quiser continua de onde parou.
