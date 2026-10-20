@@ -94,9 +94,10 @@ para habilitar é pior ainda.
 
 ## A mídia do registro
 
-**Antes desta pergunta, ler [`ferramentas.md`](ferramentas.md) inteiro**, nesta pasta: a
-detecção do que o usuário já usa roda antes dela, e a linha do que achou abre o enunciado. Lá
-também está o que muda nesta pergunta quando o tracker do Matt Pocock existe ou a detecção o acha.
+**Antes desta pergunta — ou da dos padrões, quando esta não é feita —, ler
+[`ferramentas.md`](ferramentas.md) inteiro**, nesta pasta: a detecção do que o usuário já usa roda
+antes dela, e a linha do que achou abre o enunciado. Lá também está o que muda nesta pergunta
+quando o tracker do Matt Pocock existe ou a detecção o acha.
 
 **Antes de criar a estrutura** — é esta resposta que decide o que criar. Pergunta com opções
 (`AskUserQuestion` no Claude Code), com a explicação curta de cada uma:
@@ -232,7 +233,7 @@ envelheça sem ninguém perceber.
 ## Os padrões de engenharia
 
 **Manter o global como está, ou Não usar:** não colar nada, e conferir que o `CLAUDE.md` gerado
-não ficou com seção equivalente vinda do outro template. **Nas outras quatro respostas, ler
+não ficou com seção equivalente vinda de `templates/preferencias.md`. **Nas outras quatro respostas, ler
 [`padroes.md`](padroes.md) inteiro antes de seguir.**
 
 Em qualquer caso, avisar sobre a única regra do template que muda o comportamento do usuário,

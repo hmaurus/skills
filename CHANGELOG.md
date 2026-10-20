@@ -9,7 +9,7 @@
 - **O `setup` cabe no que o Antigravity carrega.** O `agy` lê só os primeiros 24.000 bytes de cada
   `SKILL.md`, e o do setup tinha 31.930: o corte caía antes do envio ao remoto, da `develop` e de
   "Ao terminar". As seções que só valem em alguns casos foram para `ferramentas.md`, `padroes.md` e
-  `remoto.md`, na pasta da skill, e o `SKILL.md` diz quando ler cada uma. Ficou com 21.429
+  `remoto.md`, na pasta da skill, e o `SKILL.md` diz quando ler cada uma. Ficou com 21.496
   (`wc -c skills/setup/SKILL.md`). O `scripts/check.sh` ganha um quarto bloco, que reprova
   `SKILL.md` acima de 24.000 bytes; rodou vermelho no setup antes da divisão e verde depois.
 - **O Codex deixa de mostrar ao modelo `setup`, `prd` e `ajuda`.** Ele ignora o

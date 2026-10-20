@@ -25,9 +25,9 @@ está rodando**, não as de qualquer CLI que exista na máquina: no Antigravity,
 instalado ao lado responde pelo Claude Code, e acharia o que não está no `agy`.
 
 **O global** é o arquivo de instruções do usuário que vale para todos os projetos da máquina:
-`~/.claude/CLAUDE.md` no Claude Code; no Antigravity, `~/.gemini/config/AGENTS.md`, ou
-`~/.gemini/GEMINI.md` e `~/.gemini/AGENTS.md`, que ele também lê. É o que a pergunta dos padrões
-lê, e o que `padroes.md` completa. Três fontes, uma por pergunta:
+`~/.claude/CLAUDE.md` no Claude Code; no Antigravity, `~/.gemini/config/AGENTS.md` — o que se
+cria quando não há nenhum —, ou `~/.gemini/GEMINI.md` e `~/.gemini/AGENTS.md`, que ele também lê.
+É o que a pergunta dos padrões lê, e o que `padroes.md` completa ou cria. Três fontes, uma por pergunta:
 
 - **cofre** — o global, onde ele aparece declarado em prosa. Ter o binário `bw` ou `op` na máquina
   não conta: não diz que é o cofre que o usuário usa;
@@ -53,7 +53,8 @@ lê, e o que `padroes.md` completa. Três fontes, uma por pergunta:
   ```
 
 **Em outro harness** — Codex, opencode, qualquer um que leia o `AGENTS.md` —, não há detecção:
-perguntar o global e as três respostas, **mesmo que o CLI `claude` exista na máquina**.
+perguntar onde fica o global e as três respostas, **mesmo que o CLI `claude` exista na máquina**.
+No Claude Code sem o CLI `claude` no `PATH`, o mesmo: perguntar o que o global não respondeu.
 
 **O que a detecção achou, declarar numa linha e seguir, sem perguntar** — *"Achei Bitwarden e
 Context7 no seu global, e Superpowers e Matt Pocock habilitados; vou registrar assim."* **A linha
@@ -70,7 +71,7 @@ venda de stack. **Coleção se sugere, não se instala:** plugin instalado no me
 na próxima, e a linha do `CLAUDE.md` registra o que estava habilitado agora.
 
 Registrar as respostas onde elas já têm lugar: as duas primeiras nas seções de segurança e de
-dependências dos padrões de engenharia (em `padroes.md`); a terceira, na linha "Coleções de skills de
+dependências dos padrões de engenharia (`templates/preferencias.md`); a terceira, na linha "Coleções de skills de
 workflow instaladas" de "Processos de desenvolvimento" do `CLAUDE.md` — é dela que o
 `implementar-spec` tira os caminhos que oferece. **Nome da ferramenta e nome da variável de ambiente — nunca o valor.**
 
