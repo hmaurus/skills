@@ -1,6 +1,6 @@
 # O PRD envelhece sem ninguém conferir
 
-Processo — entrevista: criar-spec · implementação: a definir · sugestão: aicf-direto (texto de três skills e uma renomeação mecânica, sem decisão de abordagem em aberto)
+Processo — entrevista: criar-spec · implementação: aicf-direto
 
 ## Problema
 
@@ -146,3 +146,51 @@ grep -rl 'criar-prd' --exclude-dir=.git . | grep -vE '^(\./)?(CHANGELOG\.md|docs
 5. **Os avisos do fechamento e da próxima demanda, em aberto até o uso real.** São frases curtas
    em skills que o titular invoca. Encerram no primeiro uso em que uma demanda aberta esteja no Fora
    do PRD, ou em que uma demanda concluída o contrarie, e o aviso apareça.
+
+## Relatório de implementação (2026-10-19)
+
+- **Status** — concluído no código; a verificação de comportamento segue em aberto (itens 4 e 5 da
+  Verificação), com quem a encerra abaixo.
+- **Arquivos alterados**
+  - `skills/criar-prd/` → `skills/prd/` — `name`, description com os dois usos, a seção nova
+    *Modo revisão: conferir o PRD contra o projeto* e o *Ao terminar* da revisão
+  - `skills/fechar-demanda/SKILL.md` — uma frase no passo 4
+  - `skills/proxima-demanda/SKILL.md` — uma frase no item do `PRD.md` (passo 1) e um item no passo 3
+  - `.claude-plugin/plugin.json` — caminho da skill e versão `0.40.0`; `CHANGELOG.md` — entrada `0.40.0`
+  - O nome novo em `README.md`, `README.en.md`, `skills/setup/SKILL.md`,
+    `skills/setup/templates/prd.md`, `.claude/CLAUDE.md`, `.claude/rules/templates.md`,
+    `docs/projeto/PRD.md` (só o cabeçalho) e no item de backlog do ciclo em outro agente
+- **Commits**
+  - `2c3819c` docs(projeto): spec para o PRD que envelhece sem ninguém conferir
+  - `b09fb95` feat(prd)!: 0.40.0 — criar-prd vira prd, e a revisão confere o PRD contra o projeto
+  - `8209bd6` fix(prd): achados da revisão — issues fechadas sem label, risco vencido é decisão,
+    aviso no passo 3
+- **Validação**
+  - `./scripts/check.sh` → `Tudo verde.` depois de cada commit.
+  - Verificação 2: o comando de *Arquivos e interfaces* lista só `skills/prd/SKILL.md`.
+  - Verificação 3: `test -d skills/criar-prd` sai com 1, e
+    `grep -c '^disable-model-invocation: true' skills/prd/SKILL.md` → 1.
+  - Revisão de código por subagente que não viu a implementação, sobre `b09fb95`. Os achados
+    aplicados em `8209bd6`: no modo issue, o filtro por `aicf:*` não acha issue fechada, porque o
+    label sai no fechamento (`skills/midia/issues.md`), e o `gh issue list` corta em 30
+    (`gh issue list --help | grep -- --limit`); risco vencido aparecia como fato e como decisão; o
+    aviso da próxima demanda estava no passo 1 e faltava no 3, que monta a resposta; "São seis" no
+    segundo parágrafo dos dois READMEs; o item de backlog contava duas skills manuais, e são três.
+  - **Em aberto — `/aicf:prd`** (`disable-model-invocation: true`, o agente não verifica). Encerra
+    quando o titular, com o plugin em `0.40.0` e a sessão reiniciada, rodar `/aicf:prd` neste
+    repositório e a lista de divergências trouxer, antes da primeira pergunta, o "Seis skills" da
+    Proposta contra `ls skills/*/SKILL.md | wc -l` → 7. O ponteiro do cabeçalho deste repositório já
+    foi trocado à mão nesta demanda, então não aparece nessa passada.
+  - **Em aberto — avisos do fechamento e da próxima demanda.** Encerram no primeiro uso real em que
+    uma demanda aberta esteja no Fora do PRD, ou uma concluída o contrarie, e o aviso apareça.
+- **Escopo efetivo**
+  - Plano × entrega: a spec punha "risco cuja data passou" no grupo Fato; a revisão mostrou que
+    manter, remover ou reescrever o risco é decisão do usuário, e ele foi para o grupo Decisão.
+  - A revisão também pediu os comandos do modo issue que a spec não detalhava.
+  - O *Ao terminar* da revisão passou a propor demanda para item de Escopo sem demanda, o que a
+    spec listava como conferência, mas não como saída.
+- **Lições** — renomear skill deixa contagem em mais de um lugar do README: a linha 7 foi trocada
+  pelo `sed` e o "São seis." do segundo parágrafo, não; quem pegou foi a revisão.
+- **Promovido** — nada para `CLAUDE.md`, ADR ou glossário. O limite de 30 do `gh issue list` nas
+  outras skills virou item de Backlog no `ROADMAP.md` ("A listagem de issues corta em 30 sem
+  avisar").
