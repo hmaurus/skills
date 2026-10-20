@@ -12,8 +12,6 @@ head -qn1 docs/projeto/intents/*.md docs/projeto/specs/*.md docs/projeto/conclui
 
 > Decidido, ainda sem arquivo.
 
-- **Atualizar o aicf nos outros harnesses desta máquina, pelo README.** Falta o Antigravity, com a cópia 0.39.0 (`agy plugin list --json | jq -r '.[] | select(.name=="aicf") | .version'`), e o opencode, que não tem o aicf (`ls ~/.config/opencode/skills` não existe). O Codex e o Claude Code já foram atualizados em 2026-10-20 pelos comandos do README (`codex plugin list | grep aicf@` e `claude plugin list --json | jq -r '.[] | select(.id=="aicf@aicodingflow") | .version'` → `0.41.1`). **Antes de atualizar, pesquisar se cada um instala por plugin ou extensão do próprio harness**, para a atualização ser um comando, e não uma cópia de arquivos à mão: no Antigravity, se o `agy plugin install <plugin>@<marketplace>` aceita marketplace de fora do oficial (hoje `agy plugin install aicf@aicodingflow` → `unknown marketplace: aicodingflow`), e o que uma nova importação faz — a cópia 0.39.0 veio do `agy plugin import` a partir do Claude Code (`jq -r '.imports[] | select(.name=="aicf") | .source' ~/.gemini/config/import_manifest.json` → `claude-code`); no opencode, se há plugin ou pacote que instale skills no lugar de copiar `skills/`, que é o que o README manda hoje. O que a pesquisa achar muda o README. Vem depois de [o aicf quebra fora do Claude Code](concluidas/o-ciclo-nunca-rodou-em-outro-agente.md), seguindo os comandos de instalar e atualizar que ela escreve no README: é rodá-los que os prova. Decidido pelo titular em 2026-10-20.
-
 ## Backlog
 
 > Ainda não é certeza. O que separa daqui de `Próximas` é **certeza, não urgência**: demanda certa e sem prioridade já é `Próximas`.
