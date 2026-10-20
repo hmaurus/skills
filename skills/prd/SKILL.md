@@ -29,7 +29,9 @@ O PRD envelhece sem ninguém dizer: a demanda que contraria o escopo fecha, e o 
 afirmando o contrário. Antes da primeira pergunta, confrontar cada seção com o repositório. As
 demandas moram onde a linha `**Mídia do registro:**` do `CLAUDE.md` diz — no modo arquivo,
 `docs/projeto/` (`concluidas/`, `specs/`, `intents/`, `backlog/` e o `ROADMAP.md`); no modo issue,
-`gh issue list --state all --label <aicf:spec|aicf:intent|aicf:backlog>`, fechada é concluída.
+as abertas em `gh issue list --state open --search "label:aicf:backlog,aicf:intent,aicf:spec" --limit 500`
+e as concluídas em `gh issue list --state closed --limit 500` — o label sai no fechamento, então
+filtrar fechada por `aicf:*` não acha nada.
 
 - **Escopo, Dentro** — item cuja demanda já está concluída; item que ainda não tem demanda nenhuma.
 - **Escopo, Fora** — item que voltou como demanda aberta, ou que já foi concluído.
@@ -43,11 +45,10 @@ demandas moram onde a linha `**Mídia do registro:**` do `CLAUDE.md` diz — no 
 Mostrar o resultado antes da entrevista, seção por seção, cada divergência com a fonte — arquivo
 da demanda, issue, ADR, commit — e separada em dois grupos:
 
-- **Fato** — o agente corrige no texto proposto: contagem, nome, risco cuja data passou sem ter
-  acontecido.
+- **Fato** — o agente corrige no texto proposto: contagem, nome, ponteiro.
 - **Decisão** — só o usuário responde, e é o que vai para a entrevista: se a mudança de escopo foi
-  decisão ou deriva, o motivo de um item novo em Fora, as metas de Sucesso, o que fazer com um risco
-  vencido.
+  decisão ou deriva, o motivo de um item novo em Fora, as metas de Sucesso, e se um risco com data
+  vencida sai, fica ou muda.
 
 Seção sem divergência e sem pergunta do usuário fica como está.
 
@@ -106,7 +107,7 @@ Datar a última revisão no topo: o PRD é vivo, e saber quando parou de ser rev
    novo de cada seção que muda, gravar com a aprovação e atualizar a **Última revisão**.
 2. **Propor tirar dele as primeiras demandas** — cada coisa que a proposta exige vira uma; no modo
    revisão, cada item de Escopo que ainda não tem demanda. No
-   **modo arquivo**, isso é o primeiro `ROADMAP.md`: uma linha em `Próximas` ou `Backlog` conforme
+   **modo arquivo**, isso vai para o `ROADMAP.md` (na criação, o primeiro): uma linha em `Próximas` ou `Backlog` conforme
    a certeza, e o que precisar de contexto vira arquivo em `intents/`, e aí **a linha sai** — quem
    tem arquivo não tem linha. No **modo issue** não há roadmap: cada uma nasce como issue com
    `aicf:intent` ou `aicf:backlog`. A linha `**Mídia do registro:**` do `CLAUDE.md` diz qual

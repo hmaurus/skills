@@ -83,7 +83,7 @@ As fases de entrevista e de implementação aceitam caminhos de fora do aicf, se
 
 ## As skills
 
-São seis. A diferença entre elas é quem pode chamar cada uma.
+São sete. A diferença entre elas é quem pode chamar cada uma.
 
 **Você digita.** Só existem quando você as chama; as duas primeiras conduzem uma sessão inteira.
 

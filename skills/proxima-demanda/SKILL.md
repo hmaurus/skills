@@ -23,8 +23,7 @@ A linha `**Mídia do registro:**` do `CLAUDE.md` diz onde a demanda mora; sem li
 No modo issue, o corpo se lê com `gh issue view <n>`. E, nos dois modos:
 
 - **O `PRD.md`** — escopo, ordem e riscos do MVP: é a régua da prioridade. Demanda aberta que ele
-  lista em Fora, ou Risco com data vencida, é régua defasada: a resposta avisa e sugere ao usuário
-  `/aicf:prd` antes de seguir a ordem.
+  lista em Fora, ou Risco com data vencida, é régua defasada, e a resposta avisa (passo 3).
 - **Trabalho começado fora do registro** — `git branch --no-merged`, `git worktree list`,
   `git stash list`, ticket aberto em `.scratch/*/issues/` (Matt Pocock), plano em
   `docs/superpowers/plans/` com tarefa sem marcar (Superpowers). Ticket cuja linha `**Spec:**`
@@ -57,6 +56,8 @@ destrava.
 - **Uma recomendação**, com o motivo citando o registro: arquivo, issue ou seção do PRD.
 - **Até duas alternativas**, cada uma com a condição em que passaria à frente.
 - **A pergunta que decide entre elas**, quando o registro não a responde.
+- **O aviso de régua defasada**, quando o passo 1 achou: sugerir `/aicf:prd`. A recomendação
+  segue mesmo assim.
 - **O comando de entrada**: `/aicf:implementar-spec <spec>` para spec pronta; para intent ou
   linha do roadmap, o caminho de entrevista que a regra do `CLAUDE.md` sugere para o caso.
 

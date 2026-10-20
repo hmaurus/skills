@@ -7,7 +7,7 @@
   o `GLOSSARY.md` — item de Escopo já concluído ou sem demanda, item de Fora que voltou, risco
   vencido, número que o repositório desmente — e mostra cada divergência com a fonte, separada
   entre fato, que o agente corrige, e decisão, que vai para a entrevista. Num projeto privado, o
-  PRD revisado 13 dias antes listava como fora do MVP itens já adiantados e trazia um risco com
+  PRD revisado pouco antes listava como fora do MVP itens já adiantados e trazia um risco com
   data vencida; o deste repositório dizia "Seis skills" com sete (`ls skills/*/SKILL.md | wc -l`).
   Continua só manual (`disable-model-invocation: true`).
 - **O fechamento e a próxima demanda sugerem rodar `/aicf:prd`.** O `/aicf:fechar-demanda`, quando

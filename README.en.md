@@ -85,7 +85,7 @@ The interview and implementation phases accept paths from outside `aicf`, if you
 
 ## The skills
 
-There are six. What separates them is who can invoke each one.
+There are seven. What separates them is who can invoke each one.
 
 **You type them.** They only exist when you call them; the first two drive a whole session.
 
