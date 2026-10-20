@@ -176,11 +176,14 @@ grep -rl 'criar-prd' --exclude-dir=.git . | grep -vE '^(\./)?(CHANGELOG\.md|docs
     (`gh issue list --help | grep -- --limit`); risco vencido aparecia como fato e como decisão; o
     aviso da próxima demanda estava no passo 1 e faltava no 3, que monta a resposta; "São seis" no
     segundo parágrafo dos dois READMEs; o item de backlog contava duas skills manuais, e são três.
-  - **Em aberto — `/aicf:prd`** (`disable-model-invocation: true`, o agente não verifica). Encerra
-    quando o titular, com o plugin em `0.40.0` e a sessão reiniciada, rodar `/aicf:prd` neste
-    repositório e a lista de divergências trouxer, antes da primeira pergunta, o "Seis skills" da
-    Proposta contra `ls skills/*/SKILL.md | wc -l` → 7. O ponteiro do cabeçalho deste repositório já
-    foi trocado à mão nesta demanda, então não aparece nessa passada.
+  - **Encerrada em 2026-10-19 — `/aicf:prd`** (`disable-model-invocation: true`, o agente não
+    verifica). O titular rodou `/aicf:prd` neste repositório na `0.40.1`, depois de
+    `/reload-plugins`, com o estado em `441a74b`. Antes da primeira pergunta, a tabela de fatos
+    trouxe o "Seis skills" da Proposta contra `ls skills/*/SKILL.md | wc -l` → 7, cada linha com a
+    fonte, e as decisões vieram separadas, uma pergunta por vez. A passada também achou o que a spec
+    não previa: "framework" contra o verbete "Coleção de skills" do `GLOSSARY.md`, o "cerca de
+    vinte pontos" do Fora (o `grep` do próprio PRD dá 23), e um risco que já aconteceu (o Claude
+    Code 2.1.292, em 2026-10-06).
   - **Em aberto — avisos do fechamento e da próxima demanda.** Encerram no primeiro uso real em que
     uma demanda aberta esteja no Fora do PRD, ou uma concluída o contrarie, e o aviso apareça.
 - **Escopo efetivo**
