@@ -47,15 +47,21 @@ Para atualizar: `codex plugin marketplace upgrade aicodingflow`.
 
 ### opencode (compatível)
 
-No opencode, copie as pastas de `skills/` para `.opencode/skills/` do projeto, ou para `~/.config/opencode/skills/`, que vale em todos. **Copie, não crie link simbólico**: com link ele não acha nenhuma skill. A pasta `midia/` vai junto; não é skill, mas as outras a leem.
+O opencode lê as skills direto do clone, pela chave `skills` da config:
 
 ```bash
 git clone https://github.com/hmaurus/skills ~/aicf
-mkdir -p ~/.config/opencode/skills
-cp -r ~/aicf/skills/* ~/.config/opencode/skills/
 ```
 
-Para atualizar: `git -C ~/aicf pull` e copiar de novo. **O opencode não esconde `setup`, `prd` e `ajuda` do agente.** Nos outros harnesses só você as invoca; no opencode o agente pode chamá-las sozinho.
+No `~/.config/opencode/opencode.json` (ou `.jsonc`), que vale em todos os projetos, ou no `opencode.json` de um projeto:
+
+```json
+"skills": { "paths": ["~/aicf/skills"] }
+```
+
+Use a forma com `paths`. A lista direta, `"skills": ["~/aicf/skills"]`, aparece no schema publicado, mas o opencode 1.17 recusa a config com ela.
+
+Para atualizar: `git -C ~/aicf pull`. **O opencode não esconde `setup`, `prd` e `ajuda` do agente.** Nos outros harnesses só você as invoca; no opencode o agente pode chamá-las sozinho.
 
 ### Depois de instalar
 

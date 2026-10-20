@@ -49,15 +49,21 @@ To update: `codex plugin marketplace upgrade aicodingflow`.
 
 ### opencode (compatible)
 
-For opencode, copy the folders in `skills/` to the project's `.opencode/skills/`, or to `~/.config/opencode/skills/` for every project. **Copy, do not symlink**: with a symlink it finds no skill at all. The `midia/` folder goes too; it is not a skill, but the others read it.
+opencode reads the skills straight from the clone, through the `skills` key in its config:
 
 ```bash
 git clone https://github.com/hmaurus/skills ~/aicf
-mkdir -p ~/.config/opencode/skills
-cp -r ~/aicf/skills/* ~/.config/opencode/skills/
 ```
 
-To update: `git -C ~/aicf pull` and copy again. **opencode does not hide `setup`, `prd` and `ajuda` from the agent.** In the other harnesses only you invoke them; in opencode the agent may call them on its own.
+In `~/.config/opencode/opencode.json` (or `.jsonc`), which applies to every project, or in a project's `opencode.json`:
+
+```json
+"skills": { "paths": ["~/aicf/skills"] }
+```
+
+Use the form with `paths`. The bare list, `"skills": ["~/aicf/skills"]`, is in the published schema, but opencode 1.17 rejects a config that uses it.
+
+To update: `git -C ~/aicf pull`. **opencode does not hide `setup`, `prd` and `ajuda` from the agent.** In the other harnesses only you invoke them; in opencode the agent may call them on its own.
 
 ### After installing
 
