@@ -16,7 +16,7 @@
 
 **Glossário do domínio** (`GLOSSARY.md`) e **decisões difíceis de reverter** (ADR em `docs/adr/`, numerado e imutável) nascem quando houver o primeiro termo ambíguo ou a primeira decisão a registrar — o passo 3 do ritual de fechamento manda escrever nos dois.
 
-**Este arquivo é lido inteiro em toda sessão.** O alvo que a documentação do Claude Code publica é abaixo de 200 linhas; regra que só vale para uma parte do código vai para `.claude/rules/<tema>.md` com `paths:` no frontmatter (no Antigravity, `.agents/rules/<tema>.md` com `trigger: glob` e `globs:`), e procedimento de vários passos vira skill. `/doctor` propõe cortes do que o agente já deduz do código.
+**Este arquivo é lido inteiro em toda sessão.** O alvo que a documentação do Claude Code publica é abaixo de 200 linhas, e o Antigravity carrega só os primeiros 24.000 bytes (`wc -lc CLAUDE.md` mede os dois); regra que só vale para uma parte do código vai para `.claude/rules/<tema>.md` com `paths:` no frontmatter (no Antigravity, `.agents/rules/<tema>.md` com `trigger: glob` e `globs:`), e procedimento de vários passos vira skill. `/doctor` propõe cortes do que o agente já deduz do código.
 
 ## Processos de desenvolvimento
 

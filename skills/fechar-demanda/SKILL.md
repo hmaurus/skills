@@ -66,9 +66,11 @@ passo cobriu qual exigência.
 
    ADR e glossário são do `/domain-modeling` (Matt Pocock) — formato e numeração são dele; sem
    ele, um parágrafo em `docs/adr/0001-slug.md`, imutável, basta. Escrever no `CLAUDE.md` obriga
-   a olhar o que de lá saiu de validade e o tamanho: ele é lido inteiro em toda sessão, o alvo que a documentação do Claude
-   Code publica é abaixo de 200 linhas por arquivo, e `/doctor` propõe cortes do que o agente já
-   deduz do próprio código.
+   a olhar o que de lá saiu de validade e o tamanho: ele é lido inteiro em toda sessão, o alvo que
+   a documentação do Claude Code publica é abaixo de 200 linhas por arquivo, e o Antigravity, que o
+   lê pelo `AGENTS.md`, carrega só os primeiros 24.000 bytes e descarta o resto sem avisar
+   (`wc -lc CLAUDE.md` mede os dois). `/doctor` propõe cortes do que o agente já deduz do próprio
+   código.
 4. **Fechar o que este ritual abriu.** A saída dos passos 1 a 3 — ADR, regra, skill ou doc de
    referência que o passo 3 acabou de criar — entra como link no relatório desta demanda; não
    tendo gerado nada, o relatório diz isso. E o que esta demanda escreveu criou demanda nova, ou

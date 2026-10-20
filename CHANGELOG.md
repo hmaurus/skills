@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.41.1 — 2026-10-20
+
+- **O fechamento confere o tamanho do `CLAUDE.md` também pelo corte do Antigravity.** O passo 3 do
+  `/aicf:fechar-demanda` e o template do `CLAUDE.md` só citavam o alvo de 200 linhas do Claude
+  Code; o Antigravity lê o mesmo arquivo pelo `AGENTS.md` e carrega só os primeiros 24.000 bytes.
+  As duas medidas não andam juntas: o `.claude/CLAUDE.md` deste repositório tem 16.697 bytes em 85
+  linhas (`wc -lc .claude/CLAUDE.md`), e nesse ritmo 200 linhas dariam uns 39.000 bytes. Os dois
+  textos passam a citar os dois limites (`grep -c '24.000 bytes' skills/fechar-demanda/SKILL.md
+  skills/setup/templates/claude-md.md` → 1 e 1).
+
 ## 0.41.0 — 2026-10-20
 
 - **O aicf passa a ter dois alvos, Claude Code e Antigravity, e dois harnesses compatíveis, Codex
