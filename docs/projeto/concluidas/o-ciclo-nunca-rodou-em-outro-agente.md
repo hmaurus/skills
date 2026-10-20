@@ -1,6 +1,6 @@
 # O aicf quebra fora do Claude Code
 
-Processo — entrevista: criar-spec · implementação: a definir · sugestão: aicf-plan (toca as sete skills, o check, o PRD e o README nos dois idiomas, e a divisão do setup pede plano antes de mover texto)
+Processo — entrevista: criar-spec · implementação: aicf-plan
 
 Era backlog desde 2026-09-19, à espera de alguém rodar o aicf em outro agente. Em 2026-10-19 o
 titular instalou o Antigravity CLI para escrever um sistema novo com o aicf, e a análise daquele dia
@@ -181,3 +181,62 @@ passadas da Verificação.
    terminar" (apresenta o método e sugere `/aicf:prd`); a `develop` existe
    (`git branch --list develop`); e a linha da detecção declara o que o `agy plugin list` mostra,
    não o `claude plugin list`. A condição fica em `verificacao-do-setup.md`.
+
+## Relatório de implementação (2026-10-20)
+
+- **Status** — concluído na `0.41.0`. Fica em aberto, pelo titular, a passada do `/aicf:setup` no
+  Antigravity (Verificação 7), registrada em
+  [`verificacao-do-setup.md`](../../referencias/verificacao-do-setup.md): encerra no primeiro uso
+  real, depois que a demanda seguinte do `ROADMAP.md` atualizar a cópia do `agy`.
+- **Arquivos alterados**
+  - `skills/setup/SKILL.md`, e os novos `ferramentas.md`, `padroes.md` e `remoto.md` na mesma pasta
+  - `skills/{setup,prd,ajuda}/agents/openai.yaml`, novos
+  - `skills/fechar-demanda/SKILL.md` (passo 3, description, revisão), `criar-spec`, `prd`,
+    `implementar-spec` e `skills/setup/templates/claude-md.md`
+  - `scripts/check.sh` (quarto bloco) e `.claude/CLAUDE.md` (Verificação e Publicação)
+  - `docs/projeto/PRD.md`, `GLOSSARY.md`, `README.md`, `README.en.md`,
+    `docs/referencias/verificacao-do-setup.md`, `.claude-plugin/plugin.json`, `CHANGELOG.md`
+- **Commits**
+  - `14876db` refactor(setup): move as seções condicionais para arquivos da pasta
+  - `4571432` feat: 0.41.0 — o aicf roda no Antigravity, e não quebra no Codex nem no opencode
+  - `1cec23c` fix(setup): achados da revisão da 0.41.0
+- **Validação**
+  - Teste antes: com o bloco novo e o setup inteiro, `./scripts/check.sh` reprovou com
+    `skills/setup/SKILL.md tem 31930 bytes`; depois do `14876db`, `Tudo verde.` com
+    `7 skills conferidas, nenhuma acima de 24000 bytes`.
+  - `wc -c skills/setup/SKILL.md` → 21496.
+  - Antigravity: o `agy plugin validate` do Problema numa cópia nova → `✔ Validation passed`, sem
+    `only the first 24000 are loaded`.
+  - Codex: o `codex exec` da Verificação 4 listou `criar-spec`, `fechar-demanda`,
+    `implementar-spec` e `proxima-demanda`.
+  - opencode: `opencode debug skill` achou as sete em `.opencode/skills/` e em
+    `~/.config/opencode/skills/` (com `HOME` isolado).
+  - Os dois greps da Verificação 6 → 0 e 0.
+  - Os comandos de instalar e atualizar do README rodaram com `HOME` e `CODEX_HOME` isolados no
+    scratchpad, sem tocar nas cópias instaladas.
+  - Revisão de código por subagente fresco, sobre `4c4ad88..4571432`: nada bloqueava; os três
+    pontos a corrigir e quatro dos menores entraram no `1cec23c`.
+- **Escopo efetivo**
+  - Saiu do setup mais que as três seções da spec: os parágrafos do Matt Pocock da pergunta da
+    mídia foram para `ferramentas.md`. Só as três deixariam o arquivo perto de 22.400 bytes,
+    acima da meta de 22.000.
+  - O ponteiro de `ferramentas.md` ficou no topo de "A mídia do registro", não no lugar antigo da
+    seção, porque a detecção roda antes dessa pergunta.
+  - "O global" passou a depender do harness também na pergunta dos padrões e em `padroes.md`, não
+    só na detecção do cofre: sem isso, o setup no Antigravity completaria o global do Claude Code.
+  - O `/code-review` da tabela do `implementar-spec` ficou sem "só no Claude Code": é a skill do
+    Matt Pocock que o `implement` chama.
+  - O `.claude/CLAUDE.md` ganhou o `agy plugin validate` como passo antes da release. A revisão
+    apontou que "testado a cada versão" não tinha mecanismo que o cumprisse.
+  - A data "Última revisão" do PRD não mudou: ela marca a revisão pelo `/aicf:prd`, e esta edição
+    veio da spec.
+- **Lições**
+  - `opencode debug skill` direto num pipe corta a saída, e o `jq` acusa `parse error`; salvo em
+    arquivo, sai inteira. O comando certo está em
+    [`harnesses.md`](../../referencias/harnesses.md).
+  - Sobram citações só do Claude Code que o grep da spec não cobre: o `!` da sessão no setup, o
+    `/doctor` no fechamento e no template, e o "Other" do menu no `criar-spec`. Nenhuma quebra o
+    fluxo fora dele.
+  - Passo 3: nasceu [`docs/referencias/harnesses.md`](../../referencias/harnesses.md), com como
+    testar em cada harness sem mexer nas cópias instaladas e os limites de cada um. Entrou um item
+    no Backlog do `ROADMAP.md`: o corte de 24.000 bytes também vale para o `AGENTS.md`.

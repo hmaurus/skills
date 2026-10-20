@@ -39,7 +39,7 @@ GSD ou o BMAD"), e uma resposta nesse tipo de discussão seria divulgação a cu
 ## Perguntas
 
 - Vale o esforço agora, ou depois de o ciclo ter rodado em mais projetos (ver o item
-  [o ciclo nunca rodou em outro agente](../specs/o-ciclo-nunca-rodou-em-outro-agente.md))?
+  [o ciclo nunca rodou em outro agente](../concluidas/o-ciclo-nunca-rodou-em-outro-agente.md))?
 - Em inglês, em português ou nos dois?
 - Responder em discussões que já existem, criar um post próprio, ou os dois, e em que ordem?
 - O que se mede para saber se funcionou — estrelas, instalações, issues de fora?

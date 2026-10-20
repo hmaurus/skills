@@ -344,7 +344,7 @@ mas sem `origin`: o transcript traz `gh repo create` sem `--push`, `git ls-remot
 sai vazio, e o resumo diz para enviar a produção primeiro. Encerra nessas duas passadas.
 
 **A passada no Antigravity, na `0.41.0`**
-([o aicf quebra fora do Claude Code](../projeto/specs/o-ciclo-nunca-rodou-em-outro-agente.md)).
+([o aicf quebra fora do Claude Code](../projeto/concluidas/o-ciclo-nunca-rodou-em-outro-agente.md)).
 Ainda não rodou. É a primeira fora do Claude Code: o setup ficou com menos de 24.000 bytes, que é o
 que o `agy` carrega, e as seções que só valem em alguns casos foram para `ferramentas.md`,
 `padroes.md` e `remoto.md`, na pasta da skill. O "Antes de qualquer passada" vale com duas trocas:
