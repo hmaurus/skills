@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-# Verificação deste repositório: links de markdown, formato do plugin e entrada
-# da versão no changelog. Roda localmente antes de commitar, e é o mesmo script
+# Verificação deste repositório: links de markdown, formato do plugin, entrada
+# da versão no changelog e tamanho do SKILL.md. Roda localmente antes de commitar, e é o mesmo script
 # que o .github/workflows/ci.yml executa depois do push.
 #
-# Os três checks rodam sempre, mesmo se um falhar: quem rodou quer ver tudo o
+# Os quatro checks rodam sempre, mesmo se um falhar: quem rodou quer ver tudo o
 # que está vermelho de uma vez.
 set -u
 
@@ -56,6 +56,26 @@ elif [ "$versao" != "$topo" ]; then
   reprova "a versão $versao não é a entrada do topo do CHANGELOG.md (lá está $topo)"
 else
   echo "$versao é a entrada do topo do changelog"
+fi
+echo
+
+# O Antigravity carrega só os primeiros 24000 bytes de cada SKILL.md e descarta
+# o resto sem erro. O limite dele é sobre o corpo; medir o arquivo inteiro é
+# mais estrito e não precisa separar o frontmatter.
+echo "→ Tamanho do SKILL.md (o Antigravity corta acima de 24000 bytes)"
+limite=24000
+conferidas=0
+acima=0
+for skill in skills/*/SKILL.md; do
+  conferidas=$((conferidas + 1))
+  bytes=$(wc -c < "$skill")
+  if [ "$bytes" -gt "$limite" ]; then
+    reprova "$skill tem $bytes bytes; o Antigravity carrega só os primeiros $limite"
+    acima=1
+  fi
+done
+if [ "$acima" -eq 0 ]; then
+  echo "$conferidas skills conferidas, nenhuma acima de $limite bytes"
 fi
 echo
 

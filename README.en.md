@@ -4,7 +4,7 @@
 
 _[Versão em português](README.md)_
 
-`aicf` is a Claude Code skill plugin that handles project governance: the PRD, the roadmap, the record of each work item, and the report of what shipped. There are seven skills, and they work on top of the implementation path you already use.
+`aicf` is a skill plugin for Claude Code and Antigravity that handles project governance: the PRD, the roadmap, the record of each work item, and the report of what shipped. There are seven skills, and they work on top of the implementation path you already use.
 
 Superpowers, Matt Pocock and spec-kit cover one work item at a time, and cover it well. Three questions go unanswered:
 
@@ -16,14 +16,61 @@ Superpowers, Matt Pocock and spec-kit cover one work item at a time, and cover i
 
 ## Install
 
+aicf runs in four harnesses, the agents that load and run the skills. **Claude Code and Antigravity are targets**: every release is tested on them. **Codex and opencode are compatible**: aicf avoids breaking on them, but does not test them on every release.
+
+### Claude Code (target)
+
 ```
 /plugin marketplace add hmaurus/skills
 /plugin install aicf@aicodingflow
 ```
 
-Restart your session afterwards. Skills load at the start of a session and do not hot-swap.
+To update: `claude plugin update aicf@aicodingflow`.
 
-On a new project, start with `/aicf:setup`. On an existing one, start with `/aicf:ajuda`, which explains the cycle.
+### Antigravity (target)
+
+`agy` installs the Claude Code plugin from a folder, converting it:
+
+```bash
+git clone https://github.com/hmaurus/skills ~/aicf
+agy plugin install ~/aicf
+```
+
+To update: `git -C ~/aicf pull && agy plugin install ~/aicf`, which installs over the old copy.
+
+### Codex (compatible)
+
+```bash
+codex plugin marketplace add hmaurus/skills
+codex plugin add aicf@aicodingflow
+```
+
+To update: `codex plugin marketplace upgrade aicodingflow`.
+
+### opencode (compatible)
+
+For opencode, copy the folders in `skills/` to the project's `.opencode/skills/`, or to `~/.config/opencode/skills/` for every project. **Copy, do not symlink**: with a symlink it finds no skill at all. The `midia/` folder goes too; it is not a skill, but the others read it.
+
+```bash
+git clone https://github.com/hmaurus/skills ~/aicf
+mkdir -p ~/.config/opencode/skills
+cp -r ~/aicf/skills/* ~/.config/opencode/skills/
+```
+
+To update: `git -C ~/aicf pull` and copy again. **opencode does not hide `setup`, `prd` and `ajuda` from the agent.** In the other harnesses only you invoke them; in opencode the agent may call them on its own.
+
+### After installing
+
+Start a new session: skills load at the start of a session and do not hot-swap. On a new project, start with `setup`. On an existing one, with `ajuda`, which explains the cycle.
+
+| Harness | How to invoke a skill |
+| --- | --- |
+| Claude Code | `/aicf:setup` |
+| Antigravity | `/aicf:setup` |
+| Codex | `$aicf:setup` |
+| opencode | ask for it by name, no prefix: "use the setup skill" |
+
+The skills write `/aicf:name` when they refer to each other. In Codex and opencode, translate with the table.
 
 ## The cycle
 

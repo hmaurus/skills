@@ -342,3 +342,20 @@ grep -c '^## Git' CLAUDE.md                                   # 0
 E o resumo nomeia a `feature` como a branch do commit. **O ramo do modo issue**, com o mesmo preparo
 mas sem `origin`: o transcript traz `gh repo create` sem `--push`, `git ls-remote --heads origin`
 sai vazio, e o resumo diz para enviar a produção primeiro. Encerra nessas duas passadas.
+
+**A passada no Antigravity, na `0.41.0`**
+([o aicf quebra fora do Claude Code](../projeto/specs/o-ciclo-nunca-rodou-em-outro-agente.md)).
+Ainda não rodou. É a primeira fora do Claude Code: o setup ficou com menos de 24.000 bytes, que é o
+que o `agy` carrega, e as seções que só valem em alguns casos foram para `ferramentas.md`,
+`padroes.md` e `remoto.md`, na pasta da skill. O "Antes de qualquer passada" vale com duas trocas:
+atualizar é `git -C ~/aicf pull && agy plugin install ~/aicf`, e a versão se confere com
+`agy plugin list --json | jq -r '.[] | select(.name=="aicf") | .version'` → `0.41.0`. Num
+diretório novo, no modo arquivo, numa máquina onde o CLI `claude` também existe:
+
+1. O setup chega a "Ao terminar": apresenta o método e sugere `/aicf:prd`.
+2. A `develop` existe: `git branch --list develop` devolve a linha.
+3. A linha da detecção declara as coleções que `agy plugin list --json | jq -r '.[] | select(.enabled) | .name'`
+   mostra, e não as do `claude plugin list`.
+
+Encerra no primeiro uso real, o setup do sistema novo do titular, depois que a demanda seguinte
+atualizar a cópia do `agy`.

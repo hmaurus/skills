@@ -24,9 +24,9 @@ pergunta: fato do repositório é trabalho do agente; decisão é do usuário.
 
 ## Como entrevistar
 
-`AskUserQuestion` para o que é **escolha** (escopo, prioridade, trade-off entre abordagens — o
-"Other" protege contra enquadramento errado); pergunta aberta para o que é **descritivo** (o
-que incomoda hoje, como imagina usando). **Começar aberto** — menu ancora quem ainda não formou
+pergunta com opções (`AskUserQuestion` no Claude Code) para o que é **escolha** (escopo,
+prioridade, trade-off entre abordagens — o "Other" protege contra enquadramento errado); pergunta
+aberta para o que é **descritivo** (o que incomoda hoje, como imagina usando). **Começar aberto** — menu ancora quem ainda não formou
 opinião sobre o próprio problema.
 
 Cobrir implementação técnica, UX, casos de borda e o que pode dar errado. **Não gastar rodada
@@ -100,5 +100,5 @@ Sem mídia declarada e sem `docs/projeto/`, perguntar onde gravar em vez de inve
    sessão e digita `/to-tickets` direto não passa pelo `/aicf:implementar-spec`, e sem a operação
    os tickets nascem sem a linha que leva à spec.
 4. Entrevista curta e demanda pequena → seguir na mesma sessão, se o usuário quiser emendar a
-   implementação. Entrevista longa → sugerir `/clear` ou sessão nova: a spec deve bastar
-   sozinha, e o resíduo da conversa ancora a implementação na memória em vez do texto.
+   implementação. Entrevista longa → sugerir limpar a sessão (`/clear` no Claude Code) ou abrir
+   outra: a spec deve bastar sozinha, e o resíduo da conversa ancora a implementação na memória em vez do texto.

@@ -98,15 +98,15 @@ para habilitar é pior ainda.
 detecção do que o usuário já usa roda antes dela, e a linha do que achou abre o enunciado. Lá
 também está o que muda nesta pergunta quando o tracker do Matt Pocock existe ou a detecção o acha.
 
-**Antes de criar a estrutura** — é esta resposta que decide o que criar. `AskUserQuestion`,
-com a explicação curta de cada uma:
+**Antes de criar a estrutura** — é esta resposta que decide o que criar. Pergunta com opções
+(`AskUserQuestion` no Claude Code), com a explicação curta de cada uma:
 
 - **Arquivos em `docs/projeto/`** (default) — a demanda é um `.md` versionado. Zero setup,
   sobrevive ao `git clone` sem rede, entra no `grep` do repositório, não depende de fornecedor.
 - **Issues (GitHub)** — a demanda é uma issue. Conversa com comentário e notificação, contribuição
   de fora em dois cliques, referência estável por `#12`, e `Fixes #12` fecha pelo merge.
 
-**O default vai primeiro na lista**, porque o `AskUserQuestion` apresenta a primeira opção como a
+**O default vai primeiro na lista**, porque a pergunta com opções apresenta a primeira como a
 sugerida. É arquivo, sempre — o nome do diretório não muda isso, nem um `-issues` no fim dele. A
 única exceção é o tracker do Matt apontar para o GitHub: aí o default proposto é issues, e issues
 vai primeiro.
@@ -130,18 +130,19 @@ não um valor a ser deixado implícito em projeto novo. As receitas estão em
 `midia/`, uma por mídia: [`arquivo.md`](../midia/arquivo.md) e [`issues.md`](../midia/issues.md).
 
 Perguntar também **o que fazer com os padrões de engenharia** (idioma, KISS/YAGNI, validação antes
-do commit, testes, acessibilidade, tratamento de credencial). Pode ir na mesma chamada de
-`AskUserQuestion` que a mídia, a critério do agente — nenhuma das duas respostas muda a outra, e o
+do commit, testes, acessibilidade, tratamento de credencial). Pode ir na mesma pergunta com
+opções que a mídia, a critério do agente — nenhuma das duas respostas muda a outra, e o
 login do `gh` funciona igual depois das duas.
 
 **As opções dependem do que o global já tem**, porque a pergunta é sobre o que acontece com o que
-existe, não só sobre onde colar. Ler `~/.claude/CLAUDE.md` antes: ele **tem padrões** quando tem
-seção equivalente a alguma de `templates/preferencias.md`.
+existe, não só sobre onde colar. Ler o global antes — qual arquivo é, por harness, está em
+`ferramentas.md`: ele **tem padrões** quando tem seção equivalente a alguma de
+`templates/preferencias.md`.
 
 Global com padrões — o default primeiro:
 
 - **Manter o global como está** — nada é copiado nem alterado.
-- **Completar o global** — acrescenta ao `~/.claude/CLAUDE.md` só as seções que faltam lá.
+- **Completar o global** — acrescenta a ele só as seções que faltam lá.
 - **Acrescentar no projeto** — o `CLAUDE.md` do projeto recebe só as seções que o global não tem,
   somando a ele. Quem trabalha em equipe e quer o padrão inteiro no repositório copia o resto à
   mão: o global não viaja no `git clone`.
@@ -208,16 +209,16 @@ Se o projeto já tem `CLAUDE.md` na raiz, não substituir: mostrar a seção "Pr
 desenvolvimento" do template e propor acrescentá-la ao arquivo existente.
 
 Projeto que já tem código também tem a parte do `CLAUDE.md` que se deduz dele — comandos, layout,
-convenções —, e essa parte não é deste setup: sugerir `/init` numa sessão aberta com
-`CLAUDE_CODE_NEW_INIT=1` no ambiente (`CLAUDE_CODE_NEW_INIT=1 claude` — é variável do processo,
-não liga de dentro da sessão), que explora o repositório com subagente e apresenta uma proposta
-antes de escrever qualquer arquivo. O setup segue dono da governança — PRD, e o que a mídia
+convenções —, e essa parte não é deste setup. Só no Claude Code: sugerir `/init` numa sessão
+aberta com `CLAUDE_CODE_NEW_INIT=1` no ambiente (`CLAUDE_CODE_NEW_INIT=1 claude` — é variável do
+processo, não liga de dentro da sessão), que explora o repositório com subagente e apresenta uma
+proposta antes de escrever qualquer arquivo. O setup segue dono da governança — PRD, e o que a mídia
 escolhida pedir. Num projeto sem código não há o que deduzir, e nada muda.
 
 ## `AGENTS.md` como link simbólico
 
 `ln -s CLAUDE.md AGENTS.md` na raiz. **Um arquivo, dois nomes** — o Claude Code lê `CLAUDE.md`;
-Codex, Cursor e outros leem `AGENTS.md`. Manter os dois como arquivos separados garante que um
+Antigravity, Codex e outros leem `AGENTS.md`. Manter os dois como arquivos separados garante que um
 envelheça sem ninguém perceber.
 
 - Se `AGENTS.md` já existe — arquivo ou link —, não tocar.
@@ -328,11 +329,11 @@ e o que fazer em seguida — não só o que foi criado no disco.
    do remoto: em que branch o commit ficou, que a seção `## Git` do `CLAUDE.md` ficou de fora para
    o usuário escrever com o fluxo dele, e, se o remoto não tem branch nenhuma — criado agora ou
    vazio —, que a produção é a primeira branch a enviar.
-2. **Apresentar o método em linguagem comum.** Ler o mapa com a ferramenta `Read`, em
-   [`../ajuda/SKILL.md`](../ajuda/SKILL.md) — a skill `/aicf:ajuda` só o usuário invoca, e o
-   harness recusaria a ferramenta Skill. **Não com `cat`**: a saída do `cat` cai inteira na tela de
-   quem está conhecendo o método, que é o muro de texto que esta apresentação evita; a do `Read`
-   fica recolhida. Contar o que ele diz, em vez de colar um texto guardado aqui: texto guardado seria a
+2. **Apresentar o método em linguagem comum.** Ler o mapa com a ferramenta de leitura de arquivo (`Read` no Claude Code),
+   em [`../ajuda/SKILL.md`](../ajuda/SKILL.md) — a skill `/aicf:ajuda` só o usuário invoca, e o
+   harness recusaria invocá-la. **Não com `cat`**: a saída do `cat` cai inteira na tela de quem está
+   conhecendo o método, que é o muro de texto que esta apresentação evita; a da ferramenta de
+   leitura fica recolhida. Contar o que ele diz, em vez de colar um texto guardado aqui: texto guardado seria a
    segunda cópia do mapa e envelheceria sozinho, enquanto a skill é a fonte da verdade do ciclo. Cobrir, nesta ordem:
    - as quatro fases, uma frase cada, sem o vocabulário de governança;
    - **um exemplo concreto de primeira demanda**, do pedido até o registro fechado, usando o nome

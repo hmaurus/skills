@@ -1,5 +1,37 @@
 # Changelog
 
+## 0.41.0 — 2026-10-20
+
+- **O aicf passa a ter dois alvos, Claude Code e Antigravity, e dois harnesses compatíveis, Codex
+  e opencode.** Alvo é testado a cada versão; compatível não quebra de propósito, mas não é
+  testado. O termo entra no `GLOSSARY.md` (**Harness**), e o PRD troca "outros agentes fora" por
+  essa divisão.
+- **O `setup` cabe no que o Antigravity carrega.** O `agy` lê só os primeiros 24.000 bytes de cada
+  `SKILL.md`, e o do setup tinha 31.930: o corte caía antes do envio ao remoto, da `develop` e de
+  "Ao terminar". As seções que só valem em alguns casos foram para `ferramentas.md`, `padroes.md` e
+  `remoto.md`, na pasta da skill, e o `SKILL.md` diz quando ler cada uma. Ficou com 21.429
+  (`wc -c skills/setup/SKILL.md`). O `scripts/check.sh` ganha um quarto bloco, que reprova
+  `SKILL.md` acima de 24.000 bytes; rodou vermelho no setup antes da divisão e verde depois.
+- **O Codex deixa de mostrar ao modelo `setup`, `prd` e `ajuda`.** Ele ignora o
+  `disable-model-invocation`; o `agents/openai.yaml` com `allow_implicit_invocation: false` nas
+  três é o campo que ele lê. Com `skills/` em `.agents/skills/`, o `codex exec` listou só
+  `criar-spec`, `fechar-demanda`, `implementar-spec` e `proxima-demanda`. No opencode as três
+  continuam visíveis: o frontmatter dele não tem campo para isso, e o README avisa.
+- **O setup detecta o ambiente pelo harness em que roda.** No Antigravity, as coleções saem de
+  `agy plugin list --json`, as docs de `agy mcp list` e o global é `~/.gemini/config/AGENTS.md`;
+  em outro harness, pergunta, mesmo com o CLI `claude` na máquina — antes ele acharia o que está
+  instalado no Claude Code.
+- **A promoção de conhecimento do `/aicf:fechar-demanda` grava no caminho do harness.** Regra por
+  caminho, skill e hook ganham o par do Antigravity (`.agents/rules/` com `trigger: glob`,
+  `.agents/skills/`, `.agents/hooks.json`), e o template do `CLAUDE.md` também
+  (``grep -rnE '\.claude/(rules|skills|settings\.json)' skills/ | grep -vc '\.agents/'`` → 0).
+- **Ferramenta do Claude Code aparece pelo nome genérico, com o nome dela entre parênteses** —
+  "pergunta com opções (`AskUserQuestion` no Claude Code)", "limpar a sessão (`/clear` no Claude
+  Code)" (``grep -rnE 'AskUserQuestion|/clear' skills/ --include='*.md' | grep -vc 'no Claude Code'``
+  → 0).
+- O README, nos dois idiomas, ensina a instalar e atualizar em cada harness e diz como invocar uma
+  skill em cada um. Os comandos rodaram com `HOME` e `CODEX_HOME` isolados.
+
 ## 0.40.1 — 2026-10-19
 
 - **A troca do ponteiro antigo no cabeçalho do PRD vale também na criação.** Na `0.40.0`, a regra

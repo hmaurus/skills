@@ -36,6 +36,12 @@ Um conjunto de skills de terceiro que cuida da implementação: Superpowers, Mat
 convive com elas e não as substitui.
 _Evitar_: framework, framework de desenvolvimento, método
 
+**Harness**:
+O agente que carrega e roda as skills: Claude Code, Antigravity, Codex, opencode. É **alvo**
+quando o aicf é testado nele a cada versão (Claude Code, Antigravity), e **compatível** quando o
+aicf evita quebrar nele mas não o testa (Codex, opencode).
+_Evitar_: ferramenta, CLI
+
 **Governança**:
 A camada do aicf: registra o que será feito e o que foi feito. É sempre a mesma, seja qual for o
 caminho de cada fase.

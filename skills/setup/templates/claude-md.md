@@ -16,7 +16,7 @@
 
 **Glossário do domínio** (`GLOSSARY.md`) e **decisões difíceis de reverter** (ADR em `docs/adr/`, numerado e imutável) nascem quando houver o primeiro termo ambíguo ou a primeira decisão a registrar — o passo 3 do ritual de fechamento manda escrever nos dois.
 
-**Este arquivo é lido inteiro em toda sessão.** O alvo que a documentação do Claude Code publica é abaixo de 200 linhas; regra que só vale para uma parte do código vai para `.claude/rules/<tema>.md` com `paths:` no frontmatter, e procedimento de vários passos vira skill. `/doctor` propõe cortes do que o agente já deduz do código.
+**Este arquivo é lido inteiro em toda sessão.** O alvo que a documentação do Claude Code publica é abaixo de 200 linhas; regra que só vale para uma parte do código vai para `.claude/rules/<tema>.md` com `paths:` no frontmatter (no Antigravity, `.agents/rules/<tema>.md` com `trigger: glob` e `globs:`), e procedimento de vários passos vira skill. `/doctor` propõe cortes do que o agente já deduz do código.
 
 ## Processos de desenvolvimento
 
@@ -35,7 +35,7 @@ Seis regras valem antes de abrir qualquer doc:
 - **O método escolhido fecha o código; a governança fecha a demanda.** Rodar o processo de implementação inteiro — inclusive o passo de integração que ele encadeia — e só então `/aicf:fechar-demanda`.
 - **A passagem entre fases é da governança.** Terminada a conversa do `brainstorming` (Superpowers) ou do `grill-with-docs` (Matt Pocock), o agente invoca o `/aicf:criar-spec`, que parte do que a conversa decidiu e grava a spec com `entrevista: brainstorming` ou `entrevista: grill-with-docs` na linha `Processo`; então o agente para e pergunta o caminho da implementação. Pelo `brainstorming`, a spec parte do design aprovado — o arquivo do caminho _architectural_ ou o design curto do _bounded_ —, e o `writing-plans` que ele chama é passagem de fase, não encadeamento. Pelo Matt, o agente conduz a entrevista invocando `grilling` e `domain-modeling`, que é o que o `grill-with-docs` faz. **Spec mora só onde a mídia do registro manda** (`docs/projeto/specs/`, ou issue `aicf:spec`), qualquer que seja a skill que a escreva — nunca em `docs/superpowers/specs/` nem em `.scratch/`.
 - **Bug de causa desconhecida** → depurar de forma sistemática antes de propor correção; se `systematic-debugging` (Superpowers) ou `/diagnosing-bugs` (Matt Pocock) estiverem instalados, usar.
-- Operação que se repete vira **skill** em `.claude/skills/`, não improviso na hora.
+- Operação que se repete vira **skill** em `.claude/skills/` (no Antigravity, `.agents/skills/`), não improviso na hora.
 
 ## Verificação
 

@@ -1,6 +1,6 @@
 ---
 name: fechar-demanda
-description: Ritual de fechamento de uma demanda — checks, revisão, relatório, arquivamento e promoção de conhecimento. Aplicar proativamente ao concluir qualquer demanda, por qualquer caminho de implementação, e também ao interromper uma demanda por falta de contexto, para registrar o estado parcial antes do /clear.
+description: Ritual de fechamento de uma demanda — checks, revisão, relatório, arquivamento e promoção de conhecimento. Aplicar proativamente ao concluir qualquer demanda, por qualquer caminho de implementação, e também ao interromper uma demanda por falta de contexto, para registrar o estado parcial antes de a sessão acabar.
 ---
 
 # Fechar uma demanda
@@ -26,8 +26,8 @@ existe, **no projeto inteiro, nunca só nos arquivos tocados**. Qual é o comand
 `## Verificação` do `CLAUDE.md` diz — é a que o `/aicf:setup` gera; quando não existe, vale o que
 os scripts do projeto expõem, e não havendo nenhum o relatório registra isso — o passo não some
 em silêncio. Propor revisão de código quando a mudança for além de ajuste de texto —
-`/code-review`, subagente fresco que não viu a implementação, ou o code review do harness; não
-reler o próprio diff na mesma sessão. **Exigência já satisfeita por um passo do caminho escolhido
+`/code-review` (só no Claude Code), subagente fresco que não viu a implementação, ou o code review
+do harness; não reler o próprio diff na mesma sessão. **Exigência já satisfeita por um passo do caminho escolhido
 não se repete** — o `subagent-driven-development` termina com revisão do branch inteiro, e pedir
 outra é pagar duas vezes pela mesma leitura; o relatório declara em uma linha, na Validação, qual
 passo cobriu qual exigência.
@@ -48,11 +48,15 @@ passo cobriu qual exigência.
    | --- | --- |
    | Conhecimento operacional — manual, ID, gotcha | doc em `docs/referencias/` |
    | Regra que muda como o agente age: erro que já apareceu duas vezes; achado da revisão que o agente deveria saber sobre este código (esse não espera a segunda vez); contexto que um colega novo precisaria | `CLAUDE.md` |
-   | Regra que só vale para uma parte do código | `.claude/rules/<tema>.md` com `paths:` no frontmatter — carrega só ao tocar arquivo daquele padrão |
-   | Procedimento que apareceu pela terceira vez | skill em `.claude/skills/` |
-   | Regra que precisa valer sem exceção — a que pode falhar sem ninguém perceber | hook em `.claude/settings.json`: roda sempre, enquanto skill é conselho que o modelo pode não seguir |
+   | Regra que só vale para uma parte do código | `.claude/rules/<tema>.md` com `paths:` no frontmatter, no Claude Code; `.agents/rules/<tema>.md` com `trigger: glob` e `globs:`, no Antigravity — carrega só ao tocar arquivo daquele padrão |
+   | Procedimento que apareceu pela terceira vez | skill em `.claude/skills/` no Claude Code, `.agents/skills/` no Antigravity |
+   | Regra que precisa valer sem exceção — a que pode falhar sem ninguém perceber | hook em `.claude/settings.json` no Claude Code, `.agents/hooks.json` no Antigravity: roda sempre, enquanto skill é conselho que o modelo pode não seguir |
    | Decisão difícil de reverter, surpreendente e com trade-off real | ADR em `docs/adr/` |
    | Termo ambíguo do domínio | glossário em `GLOSSARY.md` |
+
+   O caminho é o do harness em que o agente está rodando. Em outro harness (Codex, opencode),
+   skill vai para `.agents/skills/`, que os dois leem; regra por caminho e hook viram regra no
+   `AGENTS.md`, o mesmo arquivo do `CLAUDE.md` pelo link que o setup cria.
 
    **Afirmação verificável carrega o teste que a refuta.** Número vem com o comando que o
    remede — `<N> linhas` (`wc -l < <arquivo>`, `<AAAA-MM-DD>`); afirmação de estado — item de
@@ -79,8 +83,8 @@ cabe num commit, e a demanda pode nascer já no fechamento: o relatório registr
 e a demanda nasce concluída, pela receita da mídia.
 
 **A última mensagem diz se a sessão pode acabar.** Nada pendente — trabalho commitado, enviado e
-com o CI conferido, quando o projeto tem —: dizer que já dá para fechar a sessão ou dar `/clear`.
-Algo pendente: listar o que falta e quem faz.
+com o CI conferido, quando o projeto tem —: dizer que já dá para fechar a sessão ou limpá-la
+(`/clear` no Claude Code). Algo pendente: listar o que falta e quem faz.
 
 ## Sessão que acaba antes da demanda
 

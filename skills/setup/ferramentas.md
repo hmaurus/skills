@@ -20,14 +20,23 @@ caminhos de entrevista e implementação que o aicf oferece mudam — sem elas, 
 caminho aicf existe, e propor `brainstorming` seria propor algo que não roda.
 
 **Detectar antes de perguntar.** Quem já usa o método costuma ter as três respostas na máquina, e
-perguntar o que o ambiente responde é rodada gasta. Três fontes, uma por pergunta:
+perguntar o que o ambiente responde é rodada gasta. **As fontes são as do harness em que o setup
+está rodando**, não as de qualquer CLI que exista na máquina: no Antigravity, um CLI `claude`
+instalado ao lado responde pelo Claude Code, e acharia o que não está no `agy`.
 
-- **cofre** — o `~/.claude/CLAUDE.md`, onde ele aparece declarado em prosa. Ter o binário `bw` ou
-  `op` na máquina não conta: não diz que é o cofre que o usuário usa;
-- **fonte de docs** — o global, ou `claude mcp list`, que mostra o Context7 tanto instalado como
-  plugin (`plugin:context7:context7`) quanto configurado direto como servidor MCP;
-- **coleções** — os plugins habilitados **neste diretório**; Superpowers e Matt Pocock aparecem
-  pelo id (`superpowers@…`, `mattpocock-skills@…`):
+**O global** é o arquivo de instruções do usuário que vale para todos os projetos da máquina:
+`~/.claude/CLAUDE.md` no Claude Code; no Antigravity, `~/.gemini/config/AGENTS.md`, ou
+`~/.gemini/GEMINI.md` e `~/.gemini/AGENTS.md`, que ele também lê. É o que a pergunta dos padrões
+lê, e o que `padroes.md` completa. Três fontes, uma por pergunta:
+
+- **cofre** — o global, onde ele aparece declarado em prosa. Ter o binário `bw` ou `op` na máquina
+  não conta: não diz que é o cofre que o usuário usa;
+- **fonte de docs** — o global, ou a lista de servidores MCP: no Claude Code, `claude mcp list`,
+  que mostra o Context7 tanto instalado como plugin (`plugin:context7:context7`) quanto
+  configurado direto como servidor MCP; no Antigravity, `agy mcp list`, onde ele aparece como
+  `context7`;
+- **coleções** — no Claude Code, os plugins habilitados **neste diretório**; Superpowers e Matt
+  Pocock aparecem pelo id (`superpowers@…`, `mattpocock-skills@…`):
 
   ```bash
   claude plugin list --json | jq -r --arg d "$PWD" \
@@ -36,11 +45,20 @@ perguntar o que o ambiente responde é rodada gasta. Três fontes, uma por pergu
 
   **Não ler `~/.claude/plugins/cache/`**: o cache guarda também plugin desabilitado. E **não
   tirar o filtro de escopo**: sem ele, plugin habilitado só em outro projeto conta como instalado
-  aqui.
+  aqui. No Antigravity, os plugins habilitados aparecem pelo nome (`superpowers`,
+  `mattpocock-skills`):
+
+  ```bash
+  agy plugin list --json | jq -r '.[] | select(.enabled) | .name'
+  ```
+
+**Em outro harness** — Codex, opencode, qualquer um que leia o `AGENTS.md` —, não há detecção:
+perguntar o global e as três respostas, **mesmo que o CLI `claude` exista na máquina**.
 
 **O que a detecção achou, declarar numa linha e seguir, sem perguntar** — *"Achei Bitwarden e
 Context7 no seu global, e Superpowers e Matt Pocock habilitados; vou registrar assim."* **A linha
-abre o enunciado (`question`) da pergunta da mídia no `AskUserQuestion`**, antes da pergunta em si —
+abre o enunciado da pergunta da mídia** (o campo `question` do `AskUserQuestion` no Claude Code),
+antes da pergunta em si —
 não num texto solto antes da chamada, que o agente pula. A detecção roda antes dela, e é essa
 posição que deixa o usuário corrigir antes de qualquer arquivo existir. Aparecer só no resumo
 final, depois do commit, é o mesmo que não declarar.
@@ -50,9 +68,6 @@ Bitwarden (CLI `bw`, plano gratuito generoso) para senhas, Context7 para docs, S
 Pocock para coleções — e aceitar "nenhum" como resposta: quem está começando não tem nada disso, e insistir transforma o setup em
 venda de stack. **Coleção se sugere, não se instala:** plugin instalado no meio da sessão só carrega
 na próxima, e a linha do `CLAUDE.md` registra o que estava habilitado agora.
-
-**Sem o CLI `claude`** — outro harness, lendo pelo `AGENTS.md` —, a detecção pelo CLI não existe:
-perguntar o que o global não respondeu, do mesmo jeito.
 
 Registrar as respostas onde elas já têm lugar: as duas primeiras nas seções de segurança e de
 dependências dos padrões de engenharia (em `padroes.md`); a terceira, na linha "Coleções de skills de

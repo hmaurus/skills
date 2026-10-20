@@ -71,9 +71,9 @@ não tem isso?" — e seguir. Produto desenhado a partir da solução resolve o 
 Ordem que funciona: problema → quem sofre com ele → o que passa a existir → escopo → modelo →
 sucesso → riscos.
 
-Uma pergunta de cada vez: `AskUserQuestion` para escolha (o que fica fora, qual modelo, qual
-sinal de sucesso), aberta para o descritivo (problema, público, proposta) — menu ancora quem
-ainda não formou opinião sobre o próprio produto.
+Uma pergunta de cada vez: pergunta com opções (`AskUserQuestion` no Claude Code) para escolha (o
+que fica fora, qual modelo, qual sinal de sucesso), aberta para o descritivo (problema, público,
+proposta) — menu ancora quem ainda não formou opinião sobre o próprio produto.
 
 ## As três armadilhas
 
@@ -116,4 +116,5 @@ Datar a última revisão no topo: o PRD é vivo, e saber quando parou de ser rev
 3. Se apareceu vocabulário já ambíguo — dois nomes para a mesma coisa, ou o mesmo nome para duas
    —, sugerir `domain-modeling` (Matt Pocock) para gravar o glossário em `GLOSSARY.md`, ao lado do
    PRD e não dentro dele.
-4. Sugerir `/clear` antes da primeira demanda: o contexto da entrevista já cumpriu seu papel.
+4. Sugerir limpar a sessão (`/clear` no Claude Code) antes da primeira demanda: o contexto da
+   entrevista já cumpriu seu papel.

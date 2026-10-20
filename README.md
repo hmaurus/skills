@@ -4,7 +4,7 @@
 
 _[English version](README.en.md)_
 
-O aicf é um plugin de skills para Claude Code que cuida da governança do projeto: o PRD, o roadmap, o registro de cada demanda e o relatório do que foi entregue. São sete skills, e elas funcionam por cima do caminho de implementação que você já usa.
+O aicf é um plugin de skills para Claude Code e Antigravity que cuida da governança do projeto: o PRD, o roadmap, o registro de cada demanda e o relatório do que foi entregue. São sete skills, e elas funcionam por cima do caminho de implementação que você já usa.
 
 Superpowers, Matt Pocock e spec-kit cobrem bem uma demanda por vez. Três perguntas ficam sem resposta:
 
@@ -14,14 +14,61 @@ Superpowers, Matt Pocock e spec-kit cobrem bem uma demanda por vez. Três pergun
 
 ## Instalação
 
+O aicf roda em quatro harnesses, os agentes que carregam e rodam as skills. **Claude Code e Antigravity são alvos**: cada versão é testada neles. **Codex e opencode são compatíveis**: o aicf evita quebrar neles, mas não os testa a cada versão.
+
+### Claude Code (alvo)
+
 ```
 /plugin marketplace add hmaurus/skills
 /plugin install aicf@aicodingflow
 ```
 
-Reinicie a sessão depois de instalar. As skills carregam no início da sessão e não trocam a quente.
+Para atualizar: `claude plugin update aicf@aicodingflow`.
 
-Em projeto novo, comece por `/aicf:setup`. Em projeto que já existe, por `/aicf:ajuda`, que explica o ciclo.
+### Antigravity (alvo)
+
+O `agy` instala o plugin do Claude Code a partir de uma pasta, convertendo-o:
+
+```bash
+git clone https://github.com/hmaurus/skills ~/aicf
+agy plugin install ~/aicf
+```
+
+Para atualizar: `git -C ~/aicf pull && agy plugin install ~/aicf`, que instala por cima.
+
+### Codex (compatível)
+
+```bash
+codex plugin marketplace add hmaurus/skills
+codex plugin add aicf@aicodingflow
+```
+
+Para atualizar: `codex plugin marketplace upgrade aicodingflow`.
+
+### opencode (compatível)
+
+No opencode, copie as pastas de `skills/` para `.opencode/skills/` do projeto, ou para `~/.config/opencode/skills/`, que vale em todos. **Copie, não crie link simbólico**: com link ele não acha nenhuma skill. A pasta `midia/` vai junto; não é skill, mas as outras a leem.
+
+```bash
+git clone https://github.com/hmaurus/skills ~/aicf
+mkdir -p ~/.config/opencode/skills
+cp -r ~/aicf/skills/* ~/.config/opencode/skills/
+```
+
+Para atualizar: `git -C ~/aicf pull` e copiar de novo. **O opencode não esconde `setup`, `prd` e `ajuda` do agente.** Nos outros harnesses só você as invoca; no opencode o agente pode chamá-las sozinho.
+
+### Depois de instalar
+
+Abra uma sessão nova: as skills carregam no início da sessão e não trocam a quente. Em projeto novo, comece pelo `setup`. Em projeto que já existe, pela `ajuda`, que explica o ciclo.
+
+| Harness | Como invocar uma skill |
+| --- | --- |
+| Claude Code | `/aicf:setup` |
+| Antigravity | `/aicf:setup` |
+| Codex | `$aicf:setup` |
+| opencode | pedir pelo nome, sem prefixo: "use a skill setup" |
+
+As skills escrevem `/aicf:nome` quando citam umas às outras. No Codex e no opencode, traduza pela tabela.
 
 ## O ciclo
 

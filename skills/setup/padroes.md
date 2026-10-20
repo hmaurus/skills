@@ -5,7 +5,7 @@ para ser colado dentro de um `CLAUDE.md`, não para virar arquivo próprio.
 
 **Completar o global, ou No global:**
 
-1. Se `~/.claude/CLAUDE.md` não existe, criar com o conteúdo do template.
+1. Se o global não existe, criar com o conteúdo do template.
 2. Se existe, **não sobrescrever e não anexar direto**: mostrar quais seções do template ainda
    não têm equivalente lá e propor acrescentar só essas. Aquele arquivo vale para todos os
    projetos da máquina — inclusive os que não usam este método. Mexer nele sem confirmação

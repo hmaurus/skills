@@ -25,8 +25,9 @@ description: Implementa uma demanda a partir da spec e conduz o fechamento até 
    `sugestão: <caminho> (motivo)`. Se a sugestão é `aicf-direto` e o diff cabe numa frase, dizer
    a frase e ir — o caso é óbvio e a decisão é do agente. Em qualquer outro caso — sugestão de
    plano ou de outra coleção, spec sem sugestão, demanda que toca vários arquivos ou código
-   desconhecido —, perguntar com `AskUserQuestion`, oferecendo só os caminhos instalados (a linha
-   "Coleções de skills de workflow instaladas" do `CLAUDE.md` diz quais). Conforme a resposta:
+   desconhecido —, perguntar com opções (`AskUserQuestion` no Claude Code), oferecendo só os
+   caminhos instalados (a linha "Coleções de skills de workflow instaladas" do `CLAUDE.md` diz
+   quais). Conforme a resposta:
    outra coleção, esta skill para aqui e o caminho escolhido assume **até o fim, inclusive a
    integração que ele encadeia** — o aicf não interrompe nem substitui passo interno de método; no
    Matt, cujas skills de caminho só o usuário invoca, o agente entrega os comandos e espera; ao
@@ -107,5 +108,5 @@ depois de ver a saída do comando** — e daí invocar `/aicf:fechar-demanda`, q
 até o registro. **Não presumir o ritual pela memória desta skill.**
 
 **Em branch própria ou worktree, integrar antes do relatório:** checks e revisão do fechamento
-rodam na branch; depois, `AskUserQuestion` — merge na branch de origem, PR, ou deixar a branch. O
+rodam na branch; depois, pergunta com opções — merge na branch de origem, PR, ou deixar a branch. O
 commit de fechamento vai onde o código ficou.
