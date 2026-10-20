@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.40.1 — 2026-10-19
+
+- **A troca do ponteiro antigo no cabeçalho do PRD vale também na criação.** Na `0.40.0`, a regra
+  que troca "revisar por `/aicf:criar-prd`" por `/aicf:prd` estava só na lista do modo revisão.
+  Num projeto que fez o setup antes da `0.40.0` e nunca preencheu o PRD, o `/aicf:prd` entra em
+  modo criação e o cabeçalho copiado do template antigo podia ficar como estava. A frase passa para
+  *Onde ele fica*, que vale para os dois modos (`grep -n 'Nos dois modos' skills/prd/SKILL.md` → 1
+  linha).
+
 ## 0.40.0 — 2026-10-19
 
 - **`/aicf:criar-prd` passa a se chamar `/aicf:prd`, e a revisão confere o PRD contra o projeto

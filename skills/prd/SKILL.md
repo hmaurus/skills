@@ -22,6 +22,8 @@ roda de novo, sem cerimônia de fechamento.
 `docs/projeto/PRD.md`. Se já existe preenchido, é **modo revisão**: ler antes de perguntar,
 mostrar o que já está respondido e entrevistar só o que mudou ou ficou aberto — não reescrever
 seção que continua válida. Sem `docs/projeto/`, perguntar onde gravar em vez de inventar pasta.
+Nos dois modos, o cabeçalho que diz "revisar por `/aicf:criar-prd`" passa a dizer `/aicf:prd`,
+sem perguntar: é o nome anterior desta skill.
 
 ## Modo revisão: conferir o PRD contra o projeto
 
@@ -39,13 +41,11 @@ filtrar fechada por `aicf:*` não acha nada.
 - **Público e Modelo** — contra o `GLOSSARY.md` e os ADRs (`docs/adr/`): termo trocado, decisão de
   modelo registrada fora do PRD.
 - **Afirmação verificável** — número, nome de comando ou lista que o repositório desmente.
-- **Ponteiro antigo** — o cabeçalho que diz "revisar por `/aicf:criar-prd`" passa a dizer
-  `/aicf:prd`, sem perguntar: é o nome anterior desta skill.
 
 Mostrar o resultado antes da entrevista, seção por seção, cada divergência com a fonte — arquivo
 da demanda, issue, ADR, commit — e separada em dois grupos:
 
-- **Fato** — o agente corrige no texto proposto: contagem, nome, ponteiro.
+- **Fato** — o agente corrige no texto proposto: contagem, nome.
 - **Decisão** — só o usuário responde, e é o que vai para a entrevista: se a mudança de escopo foi
   decisão ou deriva, o motivo de um item novo em Fora, as metas de Sucesso, e se um risco com data
   vencida sai, fica ou muda.
