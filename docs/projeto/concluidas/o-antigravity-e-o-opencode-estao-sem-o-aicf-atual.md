@@ -1,6 +1,6 @@
 # O Antigravity e o opencode estão sem o aicf atual
 
-Processo — entrevista: criar-spec · implementação: a definir · sugestão: aicf-direto (README, README.en e dois docs de referência, com a abordagem já decidida; o resto é rodar comandos nesta máquina)
+Processo — entrevista: criar-spec · implementação: aicf-direto
 
 Vem depois de [o aicf quebra fora do Claude Code](../concluidas/o-ciclo-nunca-rodou-em-outro-agente.md),
 que escreveu no README os comandos de instalar e atualizar em cada harness. Rodá-los nesta máquina
@@ -122,3 +122,66 @@ obrigatória: o README não vai para o contexto do agente.
    executado nesta máquina na forma em que está escrito. O relatório lista os que rodaram e a
    saída de cada um.
 5. `./scripts/check.sh` termina em `Tudo verde.`
+
+## Relatório de implementação (2026-10-20)
+
+**Status:** concluído. As duas cópias desta máquina estão na `0.41.1`, e o README ensina o caminho
+que funcionou. Sem bump de versão, porque nenhuma skill mudou.
+
+**Arquivos alterados**
+
+- `README.md` e `README.en.md`: a seção do opencode troca a cópia de `skills/` pelo clone mais
+  `"skills": { "paths": ["~/aicf/skills"] }`, e atualizar vira `git -C ~/aicf pull`. Saem o aviso
+  "copie, não crie link simbólico" e a frase sobre `midia/`. A seção do Antigravity não muda.
+- `docs/referencias/harnesses.md`: quatro achados, cada um com o comando que o confere. São eles:
+  o install por cima limpa skill removida, não há marketplace para o aicf, o `agy plugin import
+  claude` não atualiza, e a chave `skills` do opencode tem uma forma que funciona e outra que é
+  recusada.
+- Fora do repositório: clone em `~/aicf`, a chave `skills` em `~/.config/opencode/opencode.jsonc`
+  e a cópia do `agy` em `~/.gemini/config/plugins/aicf/`. O backup da config do `agy` feito antes
+  do import ficou na pasta temporária da sessão.
+
+**Commits**
+
+- `3efc169` docs(projeto): spec de atualizar o aicf no Antigravity e no opencode
+- `6a07887` docs: o opencode lê o aicf direto do clone, pela chave skills
+
+**Validação**
+
+1. `agy plugin list --json | jq -r '.[] | select(.name=="aicf") | .version'` → `0.41.1`;
+   `ls ~/.gemini/config/plugins/aicf/skills | grep -c criar-prd` → 0; `diff -rq ~/aicf/skills
+   ~/.gemini/config/plugins/aicf/skills` sem saída. `mattpocock-skills` e `superpowers`
+   continuam `enabled`.
+2. `opencode debug skill > s.json` fora de repositório: as sete do aicf (`grep -cxE ...` → 7) e
+   53 no total (`jq -r '.[].name' s.json | wc -l`).
+3. `jq -r '.[] | select(.name=="prd") | .location' s.json` → `/home/mh/aicf/skills/prd/SKILL.md`.
+4. Rodados como estão escritos: `git clone https://github.com/hmaurus/skills ~/aicf`, a chave
+   `skills` no `opencode.jsonc`, `agy plugin install ~/aicf` e `git -C ~/aicf pull && agy plugin
+   install ~/aicf` (`Already up to date.` e `[ok] aicf`, `7 processed`). Com `HOME` isolado, a
+   chave também funcionou no `opencode.json` de um projeto, com `~` e com caminho absoluto.
+5. `./scripts/check.sh` → `Tudo verde.`
+
+A revisão de código não rodou, porque a mudança é só texto de documentação.
+
+**Escopo efetivo**
+
+- **O README do Antigravity não mudou.** O `agy plugin import claude` respondeu
+  `No claude extensions found` no HOME real, com o aicf 0.41.1 instalado no Claude Code, e também
+  em quatro HOMEs isolados. O install por cima não precisou de `uninstall` antes: ele levou a cópia
+  à `0.41.1` e apagou `criar-prd/`. Por isso o `verificacao-do-setup.md`, que cita o mesmo comando,
+  também não mudou.
+- **A forma da chave no opencode divergiu da spec.** A spec previa `"skills": ["~/aicf/skills"]`,
+  que é a forma em lista do schema publicado. O opencode 1.17.11 recusa a config com
+  `Expected object | undefined, got ["~/aicf/skills"] skills`, e a forma que entrou é
+  `{ "paths": [...] }`. Ela também é a que o plugin do Superpowers preenche.
+
+**Lições**
+
+- O schema publicado em `opencode.ai/config.json` acompanha a versão mais nova do opencode, não a
+  instalada. Antes de escrever no README o que ele diz, a forma se testa no binário local.
+
+**Saída do ritual:** o conhecimento operacional foi para o
+[`harnesses.md`](../../referencias/harnesses.md) no commit de código. Nada foi para o
+`CLAUDE.md`, ADR ou glossário. A regra sobre ferramenta de terceiro, que o `CLAUDE.md` já tem,
+cobre a lição do schema. Esta demanda não cria nem torna obsoleta outra demanda, e não contraria o
+PRD.
