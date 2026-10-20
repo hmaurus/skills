@@ -222,5 +222,5 @@ Uma demanda só, com as entregas em checkboxes; a sessão faz o que cabe e fecha
   agente carrega leva regra e comando; a medição vai para o CHANGELOG ou para a spec. Dois números
   do backlog mudaram com esta demanda e foram ajustados inline
   ([o setup não avisa que o Matt pergunta o mesmo](o-setup-nao-avisa-que-o-matt-pergunta-o-mesmo.md),
-  [o ciclo nunca rodou em outro agente](../backlog/o-ciclo-nunca-rodou-em-outro-agente.md)).
+  [o ciclo nunca rodou em outro agente](../specs/o-ciclo-nunca-rodou-em-outro-agente.md)).
   Nenhum ADR, skill ou termo de glossário.
