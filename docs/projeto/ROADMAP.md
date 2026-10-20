@@ -12,7 +12,7 @@ head -qn1 docs/projeto/intents/*.md docs/projeto/specs/*.md docs/projeto/conclui
 
 > Decidido, ainda sem arquivo.
 
-- **Atualizar o aicf nos outros harnesses desta máquina, pelo README.** O Antigravity tem a cópia 0.39.0 e o Codex a 0.38.1 (`agy plugin list --json | jq -r '.[] | select(.name=="aicf") | .version'`, `codex plugin list | grep aicf@`), e o opencode não tem o aicf. Vem depois de [o aicf quebra fora do Claude Code](concluidas/o-ciclo-nunca-rodou-em-outro-agente.md), seguindo os comandos de instalar e atualizar que ela escreve no README: é rodá-los que os prova. Decidido pelo titular em 2026-10-20.
+- **Atualizar o aicf nos outros harnesses desta máquina, pelo README.** Falta o Antigravity, com a cópia 0.39.0 (`agy plugin list --json | jq -r '.[] | select(.name=="aicf") | .version'`), e o opencode, que não tem o aicf (`ls ~/.config/opencode/skills` não existe). O Codex e o Claude Code já foram atualizados em 2026-10-20 pelos comandos do README (`codex plugin list | grep aicf@` e `claude plugin list --json | jq -r '.[] | select(.id=="aicf@aicodingflow") | .version'` → `0.41.1`). Vem depois de [o aicf quebra fora do Claude Code](concluidas/o-ciclo-nunca-rodou-em-outro-agente.md), seguindo os comandos de instalar e atualizar que ela escreve no README: é rodá-los que os prova. Decidido pelo titular em 2026-10-20.
 
 ## Backlog
 
