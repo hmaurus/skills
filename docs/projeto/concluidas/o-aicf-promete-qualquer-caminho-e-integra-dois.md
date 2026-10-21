@@ -1,6 +1,6 @@
 # O aicf promete qualquer caminho e integra dois
 
-Processo — entrevista: grill-with-docs · implementação: a definir · sugestão: aicf-plan (cerca de vinte arquivos de prosa e um SVG numa sessão, com ordem entre eles e sem TDD)
+Processo — entrevista: grill-with-docs · implementação: aicf-plan
 
 ## Problema
 
@@ -170,3 +170,46 @@ Com `V` como no Problema:
 10. `agy plugin validate .` → `✔ Validation passed`, sem `only the first 24000 are loaded`.
 11. Depois da release:
     `gh release view v0.42.0 --json body --jq .body | grep -c 'templates/claude-md.md'` → 1.
+
+## Relatório de implementação (2026-10-20)
+
+- **Status** — concluído. CI do commit `56cabfb`: run `39525457104`, `completed success`
+  (`gh run list --workflow=ci.yml --limit 1`).
+- **Arquivos alterados** — `GLOSSARY.md` (termos novos, gravados na entrevista);
+  [ADR 0009](../../adr/0009-o-aicf-integra-superpowers-e-matt.md), novo; `README.md` e
+  `README.en.md` (abertura com o lema, frases de "qualquer caminho"); `docs/projeto/PRD.md`
+  (Problema, Público, Proposta, Escopo, entrada nova em "Fora, por decisão"); `.claude-plugin/`
+  (`description`, `keywords`, versão `0.42.0`); `skills/ajuda`, `setup` (com `ferramentas.md` e o
+  template do `CLAUDE.md`), `criar-spec`, `implementar-spec`, `fechar-demanda`, `midia/issues.md`;
+  `.claude/CLAUDE.md`; `docs/assets/hero.svg` e `hero.en.svg`, redesenhados; o doc de pesquisa dos
+  vizinhos, a intent do setup, o backlog do Reddit e `verificacao-do-setup.md`; `CHANGELOG.md`.
+- **Commits** — `f147acc` docs(projeto): spec; `086cea5` feat: 0.42.0 — o aicf integra
+  Superpowers e Matt, e a governança vira gestão de produto; `56cabfb` fix: 0.42.0 — ajustes da
+  revisão no vocabulário e na conta de estrelas.
+- **Validação** — `./scripts/check.sh` → `Tudo verde.` (223 links, 0 quebrados). Com `V` como no
+  Problema: `grep -rni 'governan' $V | grep -v 'governanca-nos-frameworks-vizinhos' | wc -l` → 0
+  (era 58); `grep -rni 'qualquer caminho\|caminho que você já usa\|caminhos de fora' $V | wc -l`
+  → 0 (era 14); no `README.en.md`, `governance` → 0 e as formas de "any path" → 0;
+  `grep -c 'Superpowers, Matt Pocock e spec-kit' README.md` → 0; `"gestao-de-produto"` → 1 em cada
+  manifesto; a intent cita `0.42.0` uma vez. Os dois SVG passam no parse e nos dois comandos da
+  `0.25.0`, e um screenshot pelo Playwright, em fundo claro e escuro, mostrou as três faixas
+  legíveis. `agy plugin validate` pela receita do
+  [`harnesses.md`](../../referencias/harnesses.md) → `✔ Validation passed`, sem aviso de corte. Revisão
+  de código por subagente que não viu a implementação: 15 achados, 13 aplicados em `56cabfb`; o
+  item da release e do fechamento é este passo.
+- **Escopo efetivo** — entrou o `docs/assets/hero.en.svg`, que a spec não nomeava e dizia
+  "Governance". A conta de estrelas mudou: a spec previa "as duas maiores", e a revisão mostrou que
+  o terceiro não era o spec-kit, e sim o `affaan-m/ECC`, com 284.922
+  (`gh api repos/affaan-m/ECC --jq .stargazers_count`), perto demais dos 298.688 do Matt para a
+  frase durar. README e ADR dizem "duas das mais populares", com os números e o comando. O ADR 0009
+  foi corrigido nesse ponto antes da release, dentro desta demanda. A verificação 11 (notas da
+  release com o pedido sobre o `CLAUDE.md`) se fecha na publicação da `v0.42.0`, logo depois deste
+  commit.
+- **Lições** — a Verificação 10 da spec citava `agy plugin validate .`, que falha neste
+  repositório por falta de `plugin.json` na raiz; o comando certo é o do `harnesses.md`, que monta
+  uma cópia. Foi o único comando da Verificação não rodado durante a entrevista, e foi o que veio
+  errado — a regra de rodar o comando antes de o doc fechar já existe no `CLAUDE.md`.
+- **Promovido** — ao `.claude/CLAUDE.md`, na regra de afirmação sobre ferramenta de terceiro:
+  ranking se confere contra o campo, com busca ordenada por estrelas, e não só contra os
+  repositórios que a frase cita.
+
