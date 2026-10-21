@@ -40,6 +40,8 @@ agy plugin install ~/aicf
 
 To update: `git -C ~/aicf pull && agy plugin install ~/aicf`, which installs over the old copy.
 
+`~/aicf` is only a suggestion, here and for opencode: any folder works, as long as the update — and, for opencode, the config — points to it.
+
 ### Codex (compatible)
 
 ```bash
