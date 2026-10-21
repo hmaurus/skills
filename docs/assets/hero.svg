@@ -12,7 +12,7 @@
   tokens que o primeiro procura, ou ele acusa a si mesmo.
 -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" width="1200" height="400" role="img" aria-labelledby="titulo descricao">
-  <title id="titulo">A gestão de produto do aicf, que une o Superpowers e as skills do Matt Pocock</title>
+  <title id="titulo">O aicf: gestão de produto em cima; Superpowers, Matt Pocock e o caminho aicf embaixo</title>
   <desc id="descricao">No topo, uma faixa clara chamada Gestão de produto — o quê e por quê: PRD, roadmap, registro de demandas, relatório. Abaixo, ligada a ela por uma linha, a faixa do aicf: integração e condução do ciclo de vida da demanda. Dela descem linhas para três caixas: Superpowers, Matt Pocock e, menor e tracejada, o caminho aicf. Embaixo, a legenda: engenharia de software, como construir.</desc>
 
   <rect x="0" y="0" width="1200" height="400" rx="24" fill="#47536b"/>

@@ -6,7 +6,7 @@ _[English version](README.en.md)_
 
 **Você não precisa escolher entre Superpowers e Matt Pocock: escolha os dois, com o aicf.**
 
-O aicf é um plugin de skills para Claude Code e Antigravity que integra gestão de produto e engenharia de software, conduzindo o ciclo de vida de cada demanda, do registro ao fechamento. O [Superpowers](https://github.com/obra/superpowers) e as [skills do Matt Pocock](https://github.com/mattpocock/skills) são as duas maiores coleções de skills de engenharia no GitHub: 302 mil e 298 mil estrelas em 2026-10-20, contra 142 mil da seguinte, `github/spec-kit` (`gh api repos/<dono>/<repo> --jq .stargazers_count`). O aicf une as duas, e dá para entrevistar a demanda por uma e implementar pela outra. Por cima delas, acrescenta o PRD, o roadmap, o registro de demandas e o relatório do que foi entregue. Sem nenhuma das duas instalada, o caminho aicf, mínimo, faz a entrevista e a implementação sozinho. São sete skills.
+O aicf é um plugin de skills para Claude Code e Antigravity que integra gestão de produto e engenharia de software, conduzindo o ciclo de vida de cada demanda, do registro ao fechamento. O [Superpowers](https://github.com/obra/superpowers) e as [skills do Matt Pocock](https://github.com/mattpocock/skills) são duas das coleções de skills de engenharia mais populares do GitHub: 302 mil e 298 mil estrelas em 2026-10-20 (`gh api repos/obra/superpowers --jq .stargazers_count`, e o mesmo para `mattpocock/skills`). O aicf une as duas, e dá para entrevistar a demanda por uma e implementar pela outra. Por cima delas, acrescenta o PRD, o roadmap, o registro de demandas e o relatório do que foi entregue. Sem nenhuma das duas instalada, o caminho aicf, que vem com o plugin, faz a entrevista e a implementação sozinho. São sete skills.
 
 As duas coleções cobrem bem uma demanda por vez. Três perguntas ficam sem resposta:
 
@@ -101,7 +101,7 @@ Cada demanda é um arquivo versionado no repositório, ou uma issue do GitHub. V
 
 ## O problema que isso resolve
 
-![A gestão de produto do aicf, que une o Superpowers e as skills do Matt Pocock](docs/assets/hero.svg)
+![O aicf: gestão de produto em cima; Superpowers, Matt Pocock e o caminho aicf embaixo](docs/assets/hero.svg)
 
 ### Onde o projeto está?
 
@@ -233,9 +233,9 @@ Esses arquivos descrevem uma demanda e são escritos antes da execução. Três 
 - **Planejamento entre demandas.** O `brainstorming` do Superpowers decompõe um pedido grande em subprojetos e trabalha o primeiro; os outros ficam na conversa. O `wayfinder` do Matt monta um mapa de tickets para um pedido grande, com `Not yet specified` para o que ainda não dá para detalhar, e esse mapa termina junto com aquele trabalho. Nenhum dos dois mantém uma lista que atravesse várias demandas.
 - **Registro depois da execução.** O `implement` do Matt termina no commit; não fecha o ticket nem marca critérios de aceite. O Superpowers revisa o código contra o plano a cada tarefa, mas não atualiza o plano nem a spec com o que mudou. No aicf o `fechar-demanda` pede um relatório na própria demanda, e é ali que ficam as diferenças entre o que foi planejado e o que saiu.
 
-Se você já usa uma dessas coleções, continua usando, e pode usar as duas. O aicf acrescenta a gestão de produto e faz a passagem entre as fases; dentro de cada fase, quem manda é a coleção escolhida.
+Se você já usa uma dessas coleções, pode continuar com ela e somar a outra. O aicf acrescenta a gestão de produto e faz a passagem entre as fases; dentro de cada fase, quem manda é o caminho escolhido.
 
-**GSD e BMAD já têm essa parte.** O `PROJECT.md` do GSD Core tem "What This Is", "Core Value", "Out of Scope" com o motivo e "Key Decisions"; `complete-milestone` e `extract-learnings` fazem o que o `fechar-demanda` faz aqui. A diferença é que nos dois a gestão de produto vem junto com um motor de execução próprio: 72 comandos `/gsd-*` no GSD Core, 30 skills e `uv` obrigatório no BMAD. O aicf deixa esse motor de fora por decisão ([ADR 0001](docs/adr/0001-fronteira-de-fase.md)): dentro da fase de implementação quem manda é o método que você escolheu. O GSD entrega mais coisas que o aicf. A escolha é entre adotar o motor de execução dele ou manter o seu.
+**GSD e BMAD já têm essa parte.** O `PROJECT.md` do GSD Core tem "What This Is", "Core Value", "Out of Scope" com o motivo e "Key Decisions"; `complete-milestone` e `extract-learnings` fazem o que o `fechar-demanda` faz aqui. A diferença é que nos dois a gestão de produto vem junto com um motor de execução próprio: 72 comandos `/gsd-*` no GSD Core, 30 skills e `uv` obrigatório no BMAD. O aicf deixa esse motor de fora por decisão ([ADR 0001](docs/adr/0001-fronteira-de-fase.md)): dentro da fase de implementação quem manda é o método que você escolheu. O GSD entrega mais coisas que o aicf. A escolha é entre adotar o motor de execução dele ou usar o Superpowers e o Matt Pocock com o aicf.
 
 </details>
 

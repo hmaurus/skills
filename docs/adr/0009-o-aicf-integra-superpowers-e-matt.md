@@ -18,8 +18,8 @@ camada e o conjunto das demandas registradas.
 
 ## Decisão
 
-**O aicf integra Superpowers e Matt Pocock, as duas maiores coleções de skills de engenharia no
-GitHub, e acrescenta por cima a gestão de produto.** Outra coleção entra como caminho só quando
+**O aicf integra Superpowers e Matt Pocock, duas das coleções de skills de engenharia mais
+populares do GitHub, e acrescenta por cima a gestão de produto.** Outra coleção entra como caminho só quando
 houver quem a exercite, com o acoplamento que ela pedir.
 
 **A camada do aicf passa a se chamar gestão de produto**: PRD, roadmap, registro de demandas e

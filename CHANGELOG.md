@@ -7,9 +7,11 @@
   qualquer caminho", mas cada coleção integrada exigiu acoplamento próprio (ADR 0008, as regras do
   `brainstorming` e do `grill-with-docs` no `CLAUDE.md`). O README abre com o lema "Você não precisa
   escolher entre Superpowers e Matt Pocock: escolha os dois, com o aicf", e o PRD põe outras
-  coleções em "Fora, por decisão". As estrelas que sustentam "as duas maiores" foram medidas em
-  2026-10-20 com `gh api repos/<dono>/<repo> --jq .stargazers_count`: 302.590 (`obra/superpowers`),
-  298.641 (`mattpocock/skills`), 142.143 (`github/spec-kit`). [ADR 0009](docs/adr/0009-o-aicf-integra-superpowers-e-matt.md).
+  coleções em "Fora, por decisão". As estrelas citadas no README foram medidas em 2026-10-20 com
+  `gh api repos/<dono>/<repo> --jq .stargazers_count`: 302.609 (`obra/superpowers`) e 298.688
+  (`mattpocock/skills`). O README diz "duas das mais populares", não "as duas maiores": a terceira,
+  `affaan-m/ECC`, tem 284.922, perto demais para a frase sobreviver a algumas semanas
+  (`gh api repos/affaan-m/ECC --jq .stargazers_count`). [ADR 0009](docs/adr/0009-o-aicf-integra-superpowers-e-matt.md).
 - **"Governança" sai do vocabulário.** O termo colidia com governança de TI, com o `GOVERNANCE.md`
   de projeto open source e com governança de agentes, e nomeava duas coisas. A camada passa a ser
   **gestão de produto**; a outra, **engenharia de software**; o conjunto das demandas, **registro
@@ -20,8 +22,8 @@
   com `V` como na spec da demanda. Histórico (entradas anteriores deste arquivo, `concluidas/`,
   ADRs 0001 a 0008) fica como foi escrito.
 - **`hero.svg` e `hero.en.svg` redesenhados:** gestão de produto no topo, o aicf no meio, e
-  Superpowers, Matt Pocock e o caminho aicf embaixo. Os dois comandos da `0.25.0` seguem dando 0 e
-  só o xmlns.
+  Superpowers, Matt Pocock e o caminho aicf embaixo. `grep -c '<script\|<foreignObject\|@import' docs/assets/hero.svg` → 0, e
+  `grep -o 'https\?://[^"]*' docs/assets/hero.svg | sort -u` → só o xmlns; o mesmo no `hero.en.svg`.
 - Projetos que já usam o aicf não quebram: nenhuma skill procura a palavra no `CLAUDE.md` deles. A
   troca da prosa vai nas notas da release, e o caso entra na intent do setup para projeto já
   rodando.

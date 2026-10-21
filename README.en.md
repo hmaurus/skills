@@ -6,7 +6,7 @@ _[Versão em português](README.md)_
 
 **You don't have to choose between Superpowers and Matt Pocock: pick both, with `aicf`.**
 
-`aicf` is a skill plugin for Claude Code and Antigravity that brings together product management and software engineering, running the lifecycle of each work item from registry to closing. [Superpowers](https://github.com/obra/superpowers) and [Matt Pocock's skills](https://github.com/mattpocock/skills) are the two largest software engineering skill collections on GitHub: 302k and 298k stars on 2026-10-20, against 142k for the next one, `github/spec-kit` (`gh api repos/<owner>/<repo> --jq .stargazers_count`). `aicf` joins the two, and you can interview a work item with one and implement it with the other. On top of them it adds the PRD, the roadmap, the work item registry, and the report of what shipped. With neither installed, the `aicf` path, a minimal one, handles interview and implementation on its own. There are seven skills.
+`aicf` is a skill plugin for Claude Code and Antigravity that brings together product management and software engineering, running the lifecycle of each work item from the moment it is recorded to closing. [Superpowers](https://github.com/obra/superpowers) and [Matt Pocock's skills](https://github.com/mattpocock/skills) are two of the most popular software engineering skill collections on GitHub: 302k and 298k stars on 2026-10-20 (`gh api repos/obra/superpowers --jq .stargazers_count`, and the same for `mattpocock/skills`). `aicf` joins the two, and you can interview a work item with one and implement it with the other. On top of them it adds the PRD, the roadmap, the work item registry, and the report of what shipped. With neither installed, the `aicf` path, which ships with the plugin, handles interview and implementation on its own. There are seven skills.
 
 Both collections cover one work item at a time, and cover it well. Three questions go unanswered:
 
@@ -103,7 +103,7 @@ Each work item is a versioned file in the repository, or a GitHub issue. You pic
 
 ## The problem this solves
 
-![aicf's product management, joining Superpowers and Matt Pocock's skills](docs/assets/hero.en.svg)
+![aicf: product management on top; Superpowers, Matt Pocock and the aicf path below](docs/assets/hero.en.svg)
 
 ### Where does the project stand?
 
@@ -235,9 +235,9 @@ Those files describe one work item and are written before execution. Three thing
 - **Planning across work items.** Superpowers' `brainstorming` breaks a large request into sub-projects and works the first one; the others stay in the conversation. Matt's `wayfinder` builds a ticket map for a large request, with `Not yet specified` for what cannot be detailed yet, and that map ends along with that piece of work. Neither keeps a list that spans several work items.
 - **A record after execution.** Matt's `implement` ends at the commit; it neither closes the ticket nor ticks the acceptance criteria. Superpowers reviews the code against the plan after each task, but does not update the plan or the spec with what changed. In `aicf`, `fechar-demanda` asks for a report in the work item itself, and that is where the differences between what was planned and what shipped are written down.
 
-If you already use one of these collections, keep using it, and you can use both. `aicf` adds product management and handles the handoff between phases; inside each phase, the collection you picked is in charge.
+If you already use one of these collections, you can keep it and add the other. `aicf` adds product management and handles the handoff between phases; inside each phase, the path you picked is in charge.
 
-**GSD and BMAD already have this part.** GSD Core's `PROJECT.md` has "What This Is", "Core Value", "Out of Scope" with the reasoning, and "Key Decisions"; `complete-milestone` and `extract-learnings` do what `fechar-demanda` does here. The difference is that in both, product management comes together with an execution engine of their own: 72 `/gsd-*` commands in GSD Core, 30 skills and a hard `uv` requirement in BMAD. `aicf` leaves that engine out by decision ([ADR 0001](docs/adr/0001-fronteira-de-fase.md)): inside the implementation phase, whatever runs is the method you picked. GSD delivers more than `aicf`. The choice is between adopting its execution engine or keeping yours.
+**GSD and BMAD already have this part.** GSD Core's `PROJECT.md` has "What This Is", "Core Value", "Out of Scope" with the reasoning, and "Key Decisions"; `complete-milestone` and `extract-learnings` do what `fechar-demanda` does here. The difference is that in both, product management comes together with an execution engine of their own: 72 `/gsd-*` commands in GSD Core, 30 skills and a hard `uv` requirement in BMAD. `aicf` leaves that engine out by decision ([ADR 0001](docs/adr/0001-fronteira-de-fase.md)): inside the implementation phase, whatever runs is the method you picked. GSD delivers more than `aicf`. The choice is between adopting its execution engine or using Superpowers and Matt Pocock with `aicf`.
 
 </details>
 

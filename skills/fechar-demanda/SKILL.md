@@ -13,7 +13,7 @@ arquivo de [`midia/`](../midia/) seguir — `arquivo.md` ou `issues.md`; sem lin
 discordar da linha, avisar uma vez e seguir a linha. No modo issue, `/aicf:fechar-demanda #12` fecha
 aquela issue; sem alvo, a demanda é a que a sessão trabalhou.
 
-**Antes de qualquer coisa: a implementação terminou inteira?** Caminho de outra coleção termina no
+**Antes de qualquer coisa: a implementação terminou inteira?** Caminho de uma das coleções termina no
 passo que ele encadeia — no Superpowers, `finishing-a-development-branch`, que decide o destino do
 código. Sem essa decisão, o registro diz "concluído" e o código fica parado numa branch. Se o
 método tem passo de integração e ele não rodou, rodar antes — nos caminhos aicf, depois dos checks

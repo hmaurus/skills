@@ -33,8 +33,8 @@ _Evitar_: ciclo de desenvolvimento (é o SDLC), ciclo de vida do produto (é mai
 demandas
 
 **Caminho**:
-Quem conduz uma fase: uma coleção de skills, ou o **caminho aicf**, mínimo, para quem não instalou
-as coleções. Escolhe-se um por fase, e as escolhas são independentes entre si: diz-se "caminho de
+Quem conduz uma fase: uma coleção de skills, ou o **caminho aicf**, que vem com o plugin e serve a
+quem não instalou as coleções. Escolhe-se um por fase, e as escolhas são independentes entre si: diz-se "caminho de
 entrevista" ou "caminho de implementação" conforme a fase.
 _Evitar_: método, modo, fluxo, caminho mínimo (como nome)
 

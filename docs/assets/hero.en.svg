@@ -12,7 +12,7 @@
   tokens que o primeiro procura, ou ele acusa a si mesmo.
 -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" width="1200" height="400" role="img" aria-labelledby="titulo descricao">
-  <title id="titulo">aicf's product management, joining Superpowers and Matt Pocock's skills</title>
+  <title id="titulo">aicf: product management on top; Superpowers, Matt Pocock and the aicf path below</title>
   <desc id="descricao">At the top, a light band labelled Product management — what and why: PRD, roadmap, work item registry, report. Below it, connected by a line, the aicf band: integration and handling of the work item lifecycle. From it, lines go down to three boxes: Superpowers, Matt Pocock and, smaller and dashed, the aicf path. At the bottom, the caption: software engineering, how to build.</desc>
 
   <rect x="0" y="0" width="1200" height="400" rx="24" fill="#47536b"/>

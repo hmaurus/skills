@@ -6,8 +6,9 @@ disable-model-invocation: true
 
 # Workflow de uma demanda
 
-O trabalho tem duas camadas. A **gestão de produto** — registro de demandas, ritual de fechamento e
-checks — é obrigatória e sempre a mesma. A **engenharia de software** é roteiro, não trilho: se o caso pedir outra
+O trabalho tem duas camadas. A **gestão de produto** — PRD, roadmap, registro de demandas e
+relatório — e o fechamento, com seus checks, são obrigatórios e sempre os mesmos. Na **engenharia
+de software**, o caminho aicf é roteiro, não trilho: se o caso pedir outra
 coisa, o caso ganha. Ao sair do roteiro (pular etapa, trocar de caminho no meio, usar ferramenta
 que a skill não cita), **dizer em uma linha o que vai fazer e por quê**, antes de fazer.
 Ferramenta do agente — subagente, plan mode, code review, busca paralela — é escolha
