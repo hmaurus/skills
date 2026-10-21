@@ -26,14 +26,21 @@ _Evitar_: design doc, PRD, plano
 **Fase**:
 Uma das quatro etapas por que toda demanda passa: demanda, entrevista, implementação, fechamento.
 
+**Ciclo de vida da demanda**:
+O percurso de uma demanda pelas quatro fases, do registro ao fechamento. É o aicf que o conduz:
+escolhe o caminho de cada fase e faz a passagem entre elas. Em inglês, _work item lifecycle_.
+_Evitar_: ciclo de desenvolvimento (é o SDLC), ciclo de vida do produto (é mais amplo), fluxo de
+demandas
+
 **Caminho**:
-Quem conduz uma fase: o aicf, ou uma coleção de skills. Escolhe-se um por fase, e as escolhas
-são independentes entre si.
-_Evitar_: método, modo, fluxo
+Quem conduz uma fase: uma coleção de skills, ou o **caminho aicf**, mínimo, para quem não instalou
+as coleções. Escolhe-se um por fase, e as escolhas são independentes entre si: diz-se "caminho de
+entrevista" ou "caminho de implementação" conforme a fase.
+_Evitar_: método, modo, fluxo, caminho mínimo (como nome)
 
 **Coleção de skills**:
-Um conjunto de skills de terceiro que cuida da implementação: Superpowers, Matt Pocock. O aicf
-convive com elas e não as substitui.
+Um conjunto de skills de terceiro que conduz a engenharia de software: Superpowers ou Matt Pocock,
+as duas que o aicf integra.
 _Evitar_: framework, framework de desenvolvimento, método
 
 **Harness**:
@@ -42,10 +49,21 @@ quando o aicf é testado nele a cada versão (Claude Code, Antigravity), e **com
 aicf evita quebrar nele mas não o testa (Codex, opencode).
 _Evitar_: ferramenta, CLI
 
-**Governança**:
-A camada do aicf: registra o que será feito e o que foi feito. É sempre a mesma, seja qual for o
-caminho de cada fase.
-_Evitar_: processo, metodologia, workflow
+**Gestão de produto**:
+A camada que o aicf acrescenta por cima da engenharia de software: o quê e o porquê do produto, e o
+que saiu de fato. São o PRD, o roadmap, o registro de demandas e o relatório. Sem artigo quando é a
+disciplina; "gestão do produto" quando se fala de um produto específico.
+_Evitar_: governança, gestão de projeto, processo, metodologia
+
+**Engenharia de software**:
+A camada do como construir: as fases de entrevista e de implementação, cada uma conduzida por um
+caminho.
+_Evitar_: implementação (como nome da camada; é o nome de uma fase)
+
+**Registro de demandas**:
+O conjunto das demandas que o aicf acompanha num projeto, todas numa mesma mídia. Em inglês,
+_work item registry_ — nome adotado pelo aicf, não termo consolidado da indústria.
+_Evitar_: governança
 
 **Mídia do registro**:
 Onde a demanda mora no projeto: arquivos em `docs/projeto/` ou issues do GitHub. Escolha do
