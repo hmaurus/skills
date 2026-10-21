@@ -15,9 +15,9 @@ A linha `**Mídia do registro:**` do `CLAUDE.md` diz onde a demanda mora; sem li
 
 | O quê | Modo arquivo | Modo issue |
 | --- | --- | --- |
-| Pronta para implementar | `docs/projeto/specs/` | `gh issue list --state open --label aicf:spec` |
-| Decidida | `docs/projeto/intents/` e `ROADMAP.md` → Próximas | `--label aicf:intent` |
-| Incerta | `docs/projeto/backlog/` e `ROADMAP.md` → Backlog | `--label aicf:backlog` |
+| Spec | `docs/projeto/specs/` | `gh issue list --state open --label aicf:spec` |
+| Intent | `docs/projeto/intents/` e `ROADMAP.md` → Próximas | `--label aicf:intent` |
+| Backlog | `docs/projeto/backlog/` e `ROADMAP.md` → Backlog | `--label aicf:backlog` |
 | Aberta por alguém de fora, sem triagem | `gh issue list --state open` | issue aberta sem label `aicf:*` |
 
 No modo issue, o corpo se lê com `gh issue view <n>`. E, nos dois modos:

@@ -66,7 +66,7 @@ A linha `**Mídia do registro:**` do `CLAUDE.md` diz qual arquivo de
 [`midia/`](../midia/) seguir — `arquivo.md` ou `issues.md`; sem linha, arquivo. Se `docs/agents/issue-tracker.md` discordar da linha, avisar
 uma vez e seguir a linha.
 
-A demanda **muda de estado** para "pronta para implementar". Três casos, e só o terceiro cria
+A demanda **muda de estado** para **spec**. Três casos, e só o terceiro cria
 registro novo:
 
 - **Já tem registro próprio** (arquivo em `intents/`, ou issue com label `aicf:*`) — é esse mesmo
@@ -77,7 +77,7 @@ registro novo:
   sai junto.
 - **Era uma linha do `ROADMAP.md`** (só existe no modo arquivo) — vira arquivo em `specs/`, e **a
   linha sai**: quem tem arquivo não tem linha.
-- **Nunca foi registrada** — a demanda nasce já no estado "pronta para implementar", numa escrita
+- **Nunca foi registrada** — a demanda nasce já no estado spec, numa escrita
   só: arquivo direto em `specs/`, ou `gh issue create --label aicf:spec`.
 
 Sem mídia declarada e sem `docs/projeto/`, perguntar onde gravar em vez de inventar pasta.

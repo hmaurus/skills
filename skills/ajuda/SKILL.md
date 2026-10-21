@@ -16,12 +16,13 @@ livre em qualquer ponto, e o agente propõe a que couber sem esperar autorizaç�
 
 ## O ciclo
 
-**Demanda** (registro no estado "decidido" ou "incerto", ou ideia ainda não registrada) →
+**Registro** (a demanda entra no estado backlog ou intent, pela certeza — ou a fase é pulada, e
+a ideia vai direto à entrevista) →
 **entrevista**, que produz a spec → **implementação**, que a consome → **fechamento**, que é
 `/aicf:fechar-demanda` — relatório, arquivamento e linha `Processo` vivem lá, e o agente o
 aplica seja qual for o caminho. Qual demanda pegar em seguida, `/aicf:proxima-demanda` sugere. Demanda que já nasceu de entrevista volta à mesa: o agente diz se o
 registrado basta ou se vale outra rodada. Pular a entrevista é legítimo quando a demanda já diz
-o suficiente — a demanda muda de estado para "pronta para implementar" como está, e a linha
+o suficiente — a demanda muda de estado para spec como está, e a linha
 `Processo` registra `entrevista: nenhuma`.
 
 **Três palavras, uma unidade de trabalho.** _Demanda_ é a coisa a fazer. _Intent_ e _spec_ são
@@ -69,9 +70,9 @@ uma terceira mídia seria um terceiro arquivo.
 
 O registro de demandas é o mesmo nas duas. Quatro estados:
 
-- **Incerto** — nem se sabe se será feito.
-- **Decidido**, ainda não entrevistado.
-- **Pronta para implementar.**
+- **Backlog** — incerto: nem se sabe se será feito.
+- **Intent** — decidido, ainda não entrevistado.
+- **Spec** — pronta para implementar.
 - **Concluída**, com o relatório.
 
 **Um item, um lugar.** A demanda mora num registro só, do nascimento ao fechamento, e mudar de

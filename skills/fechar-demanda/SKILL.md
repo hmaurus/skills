@@ -91,7 +91,7 @@ com o CI conferido, quando o projeto tem —: dizer que já dá para fechar a se
 ## Sessão que acaba antes da demanda
 
 Contexto no fim com a demanda aberta também é fechamento, parcial: a demanda continua no estado
-"pronta para implementar" e o que a sessão descobriu vai para o corpo dela sob
+spec e o que a sessão descobriu vai para o corpo dela sob
 `## Estado em andamento` — decisão tomada, caminho descartado com o motivo, onde parou e o
 próximo passo. **Se a frase serve para qualquer demanda, ela é do `CLAUDE.md`, não da demanda.**
 O teste é a retomada caber em `continue a demanda <alvo>`. Commit próprio no modo arquivo; no modo

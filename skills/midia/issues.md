@@ -6,9 +6,9 @@ A receita do modo issue, operação por operação.
 
 | Estado | Onde |
 | --- | --- |
-| Incerto — nem se sabe se será feito | issue aberta, `aicf:backlog` |
-| Decidido, ainda não entrevistado | issue aberta, `aicf:intent` |
-| Pronta para implementar | issue aberta, `aicf:spec` |
+| Backlog — incerto, nem se sabe se será feito | issue aberta, `aicf:backlog` |
+| Intent — decidido, ainda não entrevistado | issue aberta, `aicf:intent` |
+| Spec — pronta para implementar | issue aberta, `aicf:spec` |
 | Concluída | issue fechada, com o relatório em comentário |
 
 O estado se decide por **certeza, não urgência**: decidido é o que já se resolveu fazer, mesmo que

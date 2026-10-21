@@ -44,7 +44,7 @@ Este repositório é a fonte editável do plugin, publicado no marketplace `aico
 
 ## Processos de desenvolvimento
 
-Duas camadas: a **gestão de produto** registra o que será feito e o que foi feito, e é sempre a mesma; a **engenharia de software** é como o código sai, por um caminho em cada fase: o caminho aicf, o Superpowers ou o Matt Pocock, as duas coleções que o aicf integra. Uma demanda passa por quatro fases: demanda → entrevista → implementação → fechamento.
+Duas camadas: a **gestão de produto** registra o que será feito e o que foi feito, e é sempre a mesma; a **engenharia de software** é como o código sai, por um caminho em cada fase: o caminho aicf, o Superpowers ou o Matt Pocock, as duas coleções que o aicf integra. Uma demanda passa por quatro fases: registro → entrevista → implementação → fechamento.
 
 **O mapa do método está em `/aicf:ajuda`, que só o usuário invoca** — ciclo, o que cada fase produz e as convenções do registro de demandas. **O fechamento — relatório e ritual — está em `/aicf:fechar-demanda`**, que o agente aplica ao concluir qualquer demanda, seja qual for o caminho.
 

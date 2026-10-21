@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.43.0 — 2026-10-21
+
+- **A primeira fase se chama registro, e os estados têm um nome só.** O `GLOSSARY.md` definia
+  **Demanda** como a unidade de trabalho e usava a mesma palavra para a primeira das quatro fases;
+  agora são registro → entrevista → implementação → fechamento, em inglês _Intake_. Fase é o que
+  se faz; estado é onde a demanda fica — backlog, intent, spec, concluída —, e "incerto" e
+  "decidido" passam a ser o critério que separa backlog de intent, não nome de estado. O README
+  mostra cada fase com o estado em que deixa a demanda. As tabelas de estado de `midia/`, `ajuda`
+  e `proxima-demanda` e o estado citado no `criar-spec` e no `fechar-demanda` seguem o glossário.
+  Medido sobre os arquivos vivos
+  (`V="README.md README.en.md GLOSSARY.md .claude/CLAUDE.md skills docs/projeto/PRD.md"`), com os
+  dois `grep` da [spec](docs/projeto/specs/a-primeira-fase-tem-o-nome-da-demanda.md): fase com o
+  nome da demanda, 9 → 0; estado com o nome do critério, 17 → 0. Sem ADR: renomear é fácil de
+  reverter.
+
 ## 0.42.0 — 2026-10-20
 
 - **O aicf deixa de se dizer agnóstico: integra o Superpowers e as skills do Matt Pocock.** README,

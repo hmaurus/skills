@@ -6,9 +6,9 @@ A receita do modo arquivo, operação por operação.
 
 | Estado | Onde |
 | --- | --- |
-| Incerto — nem se sabe se será feito | `backlog/<nome>.md`, ou linha em `ROADMAP.md` → Backlog |
-| Decidido, ainda não entrevistado | `intents/<nome>.md`, ou linha em `ROADMAP.md` → Próximas |
-| Pronta para implementar | `specs/<nome>.md` |
+| Backlog — incerto, nem se sabe se será feito | `backlog/<nome>.md`, ou linha em `ROADMAP.md` → Backlog |
+| Intent — decidido, ainda não entrevistado | `intents/<nome>.md`, ou linha em `ROADMAP.md` → Próximas |
+| Spec — pronta para implementar | `specs/<nome>.md` |
 | Concluída | `concluidas/<nome>.md`, com o relatório no fim |
 
 O estado se decide por **certeza, não urgência**: decidido é o que já se resolveu fazer, mesmo que

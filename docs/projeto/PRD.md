@@ -30,7 +30,7 @@ O fio comum: **quem quer empreender desenvolvendo aplicativos web com IA e Claud
 
 Um plugin de Claude Code que monta a estrutura de documentos do projeto e conduz cada demanda da ideia até o relatório do que foi feito. Duas camadas:
 
-- **Gestão de produto**, sempre a mesma: PRD, roadmap, registro de demandas (arquivo no repositório ou issue do GitHub) e o relatório do que saiu. Toda demanda passa por demanda → entrevista → implementação → fechamento.
+- **Gestão de produto**, sempre a mesma: PRD, roadmap, registro de demandas (arquivo no repositório ou issue do GitHub) e o relatório do que saiu. Toda demanda passa por registro → entrevista → implementação → fechamento.
 - **Engenharia de software**, à escolha: o aicf escolhe o caminho de cada fase, e dentro da fase a coleção escolhida roda inteira. O aicf integra Superpowers e Matt Pocock nas fases de entrevista e de implementação, e dá para entrevistar por um e implementar pelo outro; sem nenhum dos dois, o caminho aicf, que vem com o plugin, faz as duas fases.
 
 Sete skills, deliberadamente pequenas: dizem o que o agente não teria como inferir — onde gravar, o que registrar, quando fechar — e param aí.
@@ -66,7 +66,7 @@ Sete skills, deliberadamente pequenas: dizem o que o agente não teria como infe
 
 ## Sucesso
 
-**O sinal que serve de prova hoje:** os projetos do autor rodam o ciclo inteiro, demanda → entrevista → implementação → fechamento, sem o processo ser burlado. Quando o autor contorna uma fase, o plugin falhou no que motivou sua criação. Verificação: em cada projeto que consome o plugin, toda demanda em `concluidas/` (ou issue fechada) tem relatório de fechamento.
+**O sinal que serve de prova hoje:** os projetos do autor rodam o ciclo inteiro, registro → entrevista → implementação → fechamento, sem o processo ser burlado. Quando o autor contorna uma fase, o plugin falhou no que motivou sua criação. Verificação: em cada projeto que consome o plugin, toda demanda em `concluidas/` (ou issue fechada) tem relatório de fechamento.
 
 **A definir.** Uso por aluno sem ajuda, contribuição de fora e sobrevivência à troca de coleção são sinais plausíveis, mas ainda é cedo: o plugin foi exercitado com duas coleções e poucos projetos. Revisar esta seção quando houver alunos usando.
 

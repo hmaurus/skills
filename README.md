@@ -82,22 +82,22 @@ As skills escrevem `/aicf:nome` quando citam umas às outras. No Codex e no open
 
 ## O ciclo
 
-Toda demanda passa pelas mesmas quatro fases.
+Toda demanda passa pelas mesmas quatro fases. Cada uma a deixa num estado, que é a pasta onde o arquivo mora ou o label da issue.
 
 ```mermaid
 flowchart LR
-  D[Demanda<br/>o que se quer, ainda cru]
-  E[Entrevista<br/>produz a spec]
-  I[Implementação<br/>consome a spec]
-  F[Fechamento<br/>relatório do que saiu]
-  D --> E --> I --> F
-  F -.-> D
+  R[Registro<br/>backlog ou intent]
+  E[Entrevista<br/>spec]
+  I[Implementação<br/>o código, e continua spec]
+  F[Fechamento<br/>concluída]
+  R --> E --> I --> F
+  F -.-> R
 ```
 
-- **Demanda** — a ideia registrada, mesmo antes de estar madura.
-- **Entrevista** — perguntas até não sobrar decisão em aberto. Sai uma spec.
-- **Implementação** — alguém executa a spec, pelo caminho aicf, pelo Superpowers ou pelo Matt.
-- **Fechamento** — o relatório do que foi feito, com o que saiu diferente do planejado.
+- **Registro** — a ideia gravada, mesmo antes de madura. Fica em backlog se ainda é incerta, em intent se já está decidida.
+- **Entrevista** — perguntas até não sobrar decisão em aberto. A demanda vira spec.
+- **Implementação** — alguém executa a spec, pelo caminho aicf, pelo Superpowers ou pelo Matt. O estado não muda.
+- **Fechamento** — o relatório do que foi feito, com o que saiu diferente do planejado. A demanda vai para concluída.
 
 Cada demanda é um arquivo versionado no repositório, ou uma issue do GitHub. Você escolhe qual no setup.
 

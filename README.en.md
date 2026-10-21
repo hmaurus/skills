@@ -84,22 +84,22 @@ The skills write `/aicf:name` when they refer to each other. In Codex and openco
 
 ## The cycle
 
-Every work item goes through the same four phases.
+Every work item goes through the same four phases. Each one leaves it in a state, which is the folder the file lives in or the issue's label.
 
 ```mermaid
 flowchart LR
-  D[Work item<br/>what you want, still raw]
-  E[Interview<br/>produces the spec]
-  I[Implementation<br/>consumes the spec]
-  F[Closing<br/>report of what shipped]
-  D --> E --> I --> F
-  F -.-> D
+  R[Intake<br/>backlog or intent]
+  E[Interview<br/>spec]
+  I[Implementation<br/>the code, still spec]
+  F[Closing<br/>done, in concluidas/]
+  R --> E --> I --> F
+  F -.-> R
 ```
 
-- **Work item** — the idea recorded, even before it is mature.
-- **Interview** — questions until no decision is left open. A spec comes out.
-- **Implementation** — someone executes the spec, through the `aicf` path, Superpowers or Matt.
-- **Closing** — the report of what was done, including what came out different from the plan.
+- **Intake** — the idea recorded, even before it is mature. It goes to backlog while uncertain, to intent once decided.
+- **Interview** — questions until no decision is left open. The work item becomes a spec.
+- **Implementation** — someone executes the spec, through the `aicf` path, Superpowers or Matt. The state does not change.
+- **Closing** — the report of what was done, including what came out different from the plan. The work item moves to `concluidas/`.
 
 Each work item is a versioned file in the repository, or a GitHub issue. You pick which one at setup.
 
