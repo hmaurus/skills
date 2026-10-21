@@ -10,7 +10,7 @@ description: Implementa uma demanda a partir da spec e conduz o fechamento até 
 1. **Ler a spec inteira.** A linha `**Mídia do registro:**` do `CLAUDE.md` diz qual arquivo de
    [`midia/`](../midia/) seguir — `arquivo.md` ou `issues.md`; sem linha, arquivo. Se `docs/agents/issue-tracker.md` discordar da linha,
    avisar uma vez e seguir a linha; a divergência também tira o Matt das opções do passo 3. A
-   spec também pode vir de fora da governança do aicf, de `docs/superpowers/specs/`. Se o usuário não disse qual, **listar as specs abertas pela receita
+   spec também pode vir de fora do registro de demandas do aicf, de `docs/superpowers/specs/`. Se o usuário não disse qual, **listar as specs abertas pela receita
    da mídia** e perguntar, em vez de adivinhar. Alvo que ainda é intent — arquivo em `intents/`,
    linha do `ROADMAP.md`, ou issue `aicf:intent` — que o usuário mandou implementar sem entrevista:
    virar spec pela receita da mídia, com `entrevista: nenhuma` na linha `Processo`, e seguir.
@@ -76,7 +76,7 @@ description: Implementa uma demanda a partir da spec e conduz o fechamento até 
    **worktree** — outra pasta, com a própria branch — só quando o checkout atual precisa continuar
    em uso (outra sessão, servidor rodando), e nunca quando a verificação depende de estado não
    versionado (`.env`, banco, pasta gitignored): a worktree nasce sem ele. Dizer numa linha o que
-   decidiu e por quê — em qualquer caminho, inclusive o de outra coleção, antes de passar a vez.
+   decidiu e por quê — seja qual for o caminho, inclusive o de uma coleção, antes de passar a vez.
 
 Se a spec não diz o suficiente para implementar, dizer isso e propor uma rodada de
 `/aicf:criar-spec` — não preencher a lacuna por conta própria.

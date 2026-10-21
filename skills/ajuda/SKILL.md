@@ -1,13 +1,13 @@
 ---
 name: ajuda
-description: O mapa do método — o ciclo de uma demanda, o que cada fase produz e as convenções de governança comuns às duas mídias do registro. Para reler como o método funciona; só o usuário invoca.
+description: O mapa do método — o ciclo de uma demanda, o que cada fase produz e as convenções do registro de demandas, comuns às duas mídias. Para reler como o método funciona; só o usuário invoca.
 disable-model-invocation: true
 ---
 
 # Workflow de uma demanda
 
-O trabalho tem duas camadas. A **governança** — registro, ritual de fechamento e checks — é
-obrigatória e sempre a mesma. A **implementação** é roteiro, não trilho: se o caso pedir outra
+O trabalho tem duas camadas. A **gestão de produto** — registro de demandas, ritual de fechamento e
+checks — é obrigatória e sempre a mesma. A **engenharia de software** é roteiro, não trilho: se o caso pedir outra
 coisa, o caso ganha. Ao sair do roteiro (pular etapa, trocar de caminho no meio, usar ferramenta
 que a skill não cita), **dizer em uma linha o que vai fazer e por quê**, antes de fazer.
 Ferramenta do agente — subagente, plan mode, code review, busca paralela — é escolha
@@ -18,7 +18,7 @@ livre em qualquer ponto, e o agente propõe a que couber sem esperar autorizaç�
 **Demanda** (registro no estado "decidido" ou "incerto", ou ideia ainda não registrada) →
 **entrevista**, que produz a spec → **implementação**, que a consome → **fechamento**, que é
 `/aicf:fechar-demanda` — relatório, arquivamento e linha `Processo` vivem lá, e o agente o
-aplica em qualquer caminho. Qual demanda pegar em seguida, `/aicf:proxima-demanda` sugere. Demanda que já nasceu de entrevista volta à mesa: o agente diz se o
+aplica seja qual for o caminho. Qual demanda pegar em seguida, `/aicf:proxima-demanda` sugere. Demanda que já nasceu de entrevista volta à mesa: o agente diz se o
 registrado basta ou se vale outra rodada. Pular a entrevista é legítimo quando a demanda já diz
 o suficiente — a demanda muda de estado para "pronta para implementar" como está, e a linha
 `Processo` registra `entrevista: nenhuma`.
@@ -31,8 +31,8 @@ label.
 **Integração e fechamento são coisas diferentes.** _Integração_ é decidir o destino do código —
 merge na base, PR, ou a branch fica. É o último passo da **implementação**, e pertence ao método
 escolhido. _Fechamento_ é o registro da demanda — relatório, conclusão, promoção de
-conhecimento. É `/aicf:fechar-demanda`, e nada além. **O método fecha o código, a
-governança fecha a demanda — e a segunda só começa depois da primeira.**
+conhecimento. É `/aicf:fechar-demanda`, e nada além. **O método fecha o código, o
+aicf fecha a demanda — e a segunda só começa depois da primeira.**
 
 **Entrevista e implementação são escolhas independentes. Na entrevista, o caminho é pergunta ao
 usuário; na implementação, o agente segue a sugestão gravada na spec quando o caso é óbvio —
@@ -40,17 +40,17 @@ caminho aicf direto e diff que cabe numa frase — e pergunta com opções nos d
 sugere pelo ponto forte que couber ao caso; a decisão é do usuário quando há escolha real, e o
 caminho seguido vira a linha `Processo` na demanda.
 
-**A governança escolhe o caminho de cada fase; dentro da fase, o encadeamento do framework roda
+**O aicf escolhe o caminho de cada fase; dentro da fase, o encadeamento do framework roda
 inteiro.** Skill que o método declara como passo seguinte dentro da mesma fase não se pula nem se
 substitui — no Superpowers, `executing-plans` e `subagent-driven-development` declaram
 `finishing-a-development-branch` como `REQUIRED SUB-SKILL`: ela roda automaticamente, sem
 perguntar, e o agente conta em uma linha o que ficou decidido. Interferir ali degrada a qualidade
-de um processo que não é nosso. Na **passagem entre fases** quem decide é a governança, mesmo
+de um processo que não é nosso. Na **passagem entre fases** quem decide é o aicf, mesmo
 quando o framework recomenda continuar nele: o `brainstorming` declara `writing-plans` como estado
 terminal, e ainda assim o agente para na fronteira, grava o design como spec e pergunta o caminho
 da implementação.
 
-## Governança — onde mora o quê
+## Gestão de produto — onde mora o quê
 
 **A mídia do registro é escolha do projeto**, declarada numa linha do `CLAUDE.md`, na seção
 "Processos de desenvolvimento":
@@ -66,7 +66,7 @@ Os comandos concretos, e como cada mídia representa os estados, estão no arqui
 linha nomeia — [`midia/arquivo.md`](../midia/arquivo.md) ou [`midia/issues.md`](../midia/issues.md);
 uma terceira mídia seria um terceiro arquivo.
 
-A governança é a mesma nas duas. Quatro estados:
+O registro de demandas é o mesmo nas duas. Quatro estados:
 
 - **Incerto** — nem se sabe se será feito.
 - **Decidido**, ainda não entrevistado.
@@ -85,7 +85,7 @@ sendo feito.
 Um caminho só: toda demanda que vai ser feita vira spec — com entrevista ou sem —, e tudo termina
 concluído, inclusive o que a entrevista concluiu não fazer.
 
-Só governança de demanda entra aí, e isso não muda com a mídia. Doc que descreve o mundo em vez de
+Só o registro de demandas entra aí, e isso não muda com a mídia. Doc que descreve o mundo em vez de
 um trabalho a fazer — configuração, ID externo, decisão de marca, número de negócio, aprendizado —
 vai para `docs/referencias/`, criada quando houver o primeiro arquivo. **PRD, ADR e `GLOSSARY.md`
 ficam em arquivo nos dois modos**; no modo issue, `docs/projeto/` existe com o `PRD.md` dentro, e só

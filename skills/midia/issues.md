@@ -100,10 +100,10 @@ label tem **limite de 100 caracteres**; o que não couber fica de fora — o cri
 
 `/aicf:criar-spec #12` e `/aicf:fechar-demanda #12` aceitam um número como alvo. Em vez de criar
 issue nova, a skill **reescreve o corpo daquela** e ajusta o label. Issue que nunca teve label
-`aicf:*` ganha um agora — é assim que uma issue de fora da governança entra nela.
+`aicf:*` ganha um agora — é assim que uma issue de fora do registro de demandas entra nele.
 
 **Olhar o label atual antes de escrever.** O alvo `#<n>` não é só para issue crua: é também como o
-usuário aponta a skill para uma demanda que já está na governança, e aí só acrescentar label deixa
+usuário aponta a skill para uma demanda que já está no registro, e aí só acrescentar label deixa
 a issue com dois, contando a mesma demanda em dois estados.
 
 ```bash
@@ -125,4 +125,4 @@ Dois casos concretos, e os dois quebram sem adoção:
 
 Sem rede, token expirado, sem permissão: a skill **mostra o erro e para**. Não grava em arquivo, não
 grava em rascunho; o usuário resolve o acesso e retoma. Gravar em `docs/projeto/` "só desta vez" é
-exatamente como um repositório acaba com governança em duas mídias sem ninguém ter escolhido isso.
+exatamente como um repositório acaba com o registro de demandas em duas mídias sem ninguém ter escolhido isso.

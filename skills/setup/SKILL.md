@@ -1,10 +1,10 @@
 ---
 name: setup
-description: Cria a base de governança de um projeto novo — inicializa o repositório git se faltar, pergunta se a demanda mora em arquivos ou em issues do GitHub, e monta o que a escolha pedir: docs/projeto/ com PRD e roadmap e as pastas de demanda, ou o repositório no GitHub e os labels aicf:*, mais o CLAUDE.md raiz — e, se o usuário quiser, os padrões de engenharia. Em repositório novo, deixa tudo no primeiro commit, em main, e entrega develop como branch de trabalho; em repositório com histórico, um commit na branch ativa, sem mexer em branch nem no remoto. Rodar uma vez, no começo do projeto.
+description: Cria a estrutura de um projeto novo — inicializa o repositório git se faltar, pergunta se a demanda mora em arquivos ou em issues do GitHub, e monta o que a escolha pedir: docs/projeto/ com PRD e roadmap e as pastas de demanda, ou o repositório no GitHub e os labels aicf:*, mais o CLAUDE.md raiz — e, se o usuário quiser, os padrões de engenharia. Em repositório novo, deixa tudo no primeiro commit, em main, e entrega develop como branch de trabalho; em repositório com histórico, um commit na branch ativa, sem mexer em branch nem no remoto. Rodar uma vez, no começo do projeto.
 disable-model-invocation: true
 ---
 
-# Setup da governança do projeto
+# Setup da estrutura do projeto
 
 Monta a estrutura que o restante do método assume. Roda uma vez, num projeto novo ou num que
 ainda não tem `docs/projeto/`.
@@ -16,7 +16,7 @@ perguntar antes: pular, ou mostrar o diff e deixar o usuário decidir arquivo po
 
 **Antes da primeira pergunta**, dizer em três a cinco linhas o que vem pela frente. Não mais que
 isso: quem roda este comando pela primeira vez está prestes a agir, e três parágrafos sobre
-governança seriam o muro que a apresentação existe para derrubar. Cobrir só:
+o método seriam o muro que a apresentação existe para derrubar. Cobrir só:
 
 - **o que vai ser montado** — onde a visão do produto mora, onde cada demanda é registrada, e como
   o agente sabe disso em toda sessão;
@@ -46,7 +46,7 @@ relatório vive no histórico, e `.gitkeep` num diretório sem git não segura p
 perguntar. Sim, `git init -b main`: é local, barato e desfeito com `rm -rf .git`. O `-b` é o que
 garante o nome — sem `init.defaultBranch` configurado, o `git init` puro cria `master`.
 
-Montar a governança num diretório sem repositório entrega um método que não funciona, e o usuário
+Montar a estrutura do projeto num diretório sem repositório entrega um método que não funciona, e o usuário
 só descobre no primeiro fechamento de demanda.
 
 **Dito não, o setup segue em modo arquivo**, sem primeiro commit e sem oferecer o modo issue — e
@@ -61,7 +61,7 @@ por conta própria. Não insistir: a estrutura criada continua válida, só não
 | já existia, sem commit em branch nenhuma (`git rev-list -n 1 --all` sai vazio) | `git branch -m main`, se a branch ativa não for `main` — não há histórico para perder | `main` |
 | já existia, com commit em qualquer branch | nada — as branches e o remoto são do projeto, e ele já tem um fluxo para levar mudança à produção | a branch ativa |
 
-**Com histórico, o setup não mexe em branch.** A governança é uma mudança como outra qualquer: vai
+**Com histórico, o setup não mexe em branch.** A estrutura do projeto é uma mudança como outra qualquer: vai
 para a branch ativa e chega à produção pelo fluxo que o projeto já tem (PR, merge). Daí em diante,
 neste caso: o `CLAUDE.md` nasce sem a seção `## Git`, o `gh repo create` roda sem `--push`, e "A
 `main` no remoto" e "A branch de trabalho" não rodam — trocar de branch, criar `develop` ou enviar
@@ -77,7 +77,7 @@ o repositório.
 1. **`command -v gh`** — sem o GitHub CLI o modo issue não existe nesta máquina, e a opção **não é
    oferecida**. Uma linha: o modo issue precisa do GitHub CLI (<https://cli.github.com>); quem o
    quiser para aqui, instala e roda o `/aicf:setup` de novo — este comando roda uma vez, e trocar
-   de mídia num projeto que já tem governança montada não é dele.
+   de mídia num projeto que já tem a estrutura montada não é dele.
 2. **`gh auth status`** — falhando, falta login, que o setup **conduz**.
 3. **`git remote -v`** — vazio, falta o repositório no GitHub, que o setup **cria**. Apontando para
    outro provedor, a opção **não é oferecida**: a receita inteira do modo issue é `gh`. Este
@@ -213,7 +213,7 @@ Projeto que já tem código também tem a parte do `CLAUDE.md` que se deduz dele
 convenções —, e essa parte não é deste setup. Só no Claude Code: sugerir `/init` numa sessão
 aberta com `CLAUDE_CODE_NEW_INIT=1` no ambiente (`CLAUDE_CODE_NEW_INIT=1 claude` — é variável do
 processo, não liga de dentro da sessão), que explora o repositório com subagente e apresenta uma
-proposta antes de escrever qualquer arquivo. O setup segue dono da governança — PRD, e o que a mídia
+proposta antes de escrever qualquer arquivo. O setup segue dono da gestão de produto — PRD, e o que a mídia
 escolhida pedir. Num projeto sem código não há o que deduzir, e nada muda.
 
 ## `AGENTS.md` como link simbólico
@@ -256,7 +256,7 @@ arquivo que ele não criou.
 **E o commit também nomeia os caminhos**, depois do `git add` deles:
 
 ```bash
-git commit -m 'chore: estrutura de governança do projeto' -- <caminhos>
+git commit -m 'chore: estrutura do projeto' -- <caminhos>
 ```
 
 `git commit` sem caminhos commita o índice inteiro — inclusive o que o usuário deixou em stage antes
@@ -336,12 +336,12 @@ e o que fazer em seguida — não só o que foi criado no disco.
    conhecendo o método, que é o muro de texto que esta apresentação evita; a da ferramenta de
    leitura fica recolhida. Contar o que ele diz, em vez de colar um texto guardado aqui: texto guardado seria a
    segunda cópia do mapa e envelheceria sozinho, enquanto a skill é a fonte da verdade do ciclo. Cobrir, nesta ordem:
-   - as quatro fases, uma frase cada, sem o vocabulário de governança;
+   - as quatro fases, uma frase cada, sem o jargão do método;
    - **um exemplo concreto de primeira demanda**, do pedido até o registro fechado, usando o nome
      real do projeto e a mídia que o usuário acabou de escolher — é o exemplo que faz o ciclo sair
      do abstrato;
-   - que a governança é a mesma em qualquer caminho de implementação, inclusive os de outras
-     coleções.
+   - que o aicf une o Superpowers e as skills do Matt Pocock — dá para entrevistar por um e
+     implementar pelo outro — e que, sem nenhum dos dois, o caminho aicf mínimo faz as duas fases.
 3. Sugerir `/aicf:prd` como próximo passo — é do PRD que saem as primeiras demandas (no
    modo arquivo, o roadmap inicial; no modo issue, as primeiras issues). Depois dele, a primeira
    demanda começa por `/aicf:criar-spec`.

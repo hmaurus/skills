@@ -4,9 +4,11 @@
 
 _[English version](README.en.md)_
 
-O aicf é um plugin de skills para Claude Code e Antigravity que cuida da governança do projeto: o PRD, o roadmap, o registro de cada demanda e o relatório do que foi entregue. São sete skills, e elas funcionam por cima do caminho de implementação que você já usa.
+**Você não precisa escolher entre Superpowers e Matt Pocock: escolha os dois, com o aicf.**
 
-Superpowers, Matt Pocock e spec-kit cobrem bem uma demanda por vez. Três perguntas ficam sem resposta:
+O aicf é um plugin de skills para Claude Code e Antigravity que integra gestão de produto e engenharia de software, conduzindo o ciclo de vida de cada demanda, do registro ao fechamento. O [Superpowers](https://github.com/obra/superpowers) e as [skills do Matt Pocock](https://github.com/mattpocock/skills) são as duas maiores coleções de skills de engenharia no GitHub: 302 mil e 298 mil estrelas em 2026-10-20, contra 142 mil da seguinte, `github/spec-kit` (`gh api repos/<dono>/<repo> --jq .stargazers_count`). O aicf une as duas, e dá para entrevistar a demanda por uma e implementar pela outra. Por cima delas, acrescenta o PRD, o roadmap, o registro de demandas e o relatório do que foi entregue. Sem nenhuma das duas instalada, o caminho aicf, mínimo, faz a entrevista e a implementação sozinho. São sete skills.
+
+As duas coleções cobrem bem uma demanda por vez. Três perguntas ficam sem resposta:
 
 - **Onde o projeto está?** As specs descrevem cada mudança, uma por uma. Nenhuma delas diz o que o produto é, para quem serve e o que ficou de fora por decisão.
 - **Por que decidimos não fazer aquilo?** O motivo de descartar um caminho ficou na conversa com o agente, e a conversa não é salva. Semanas depois a mesma discussão volta.
@@ -92,14 +94,14 @@ flowchart LR
 
 - **Demanda** — a ideia registrada, mesmo antes de estar madura.
 - **Entrevista** — perguntas até não sobrar decisão em aberto. Sai uma spec.
-- **Implementação** — alguém executa a spec, por qualquer caminho.
+- **Implementação** — alguém executa a spec, pelo caminho aicf, pelo Superpowers ou pelo Matt.
 - **Fechamento** — o relatório do que foi feito, com o que saiu diferente do planejado.
 
 Cada demanda é um arquivo versionado no repositório, ou uma issue do GitHub. Você escolhe qual no setup.
 
 ## O problema que isso resolve
 
-![A camada de governança do aicf sobre os caminhos de implementação](docs/assets/hero.svg)
+![A gestão de produto do aicf, que une o Superpowers e as skills do Matt Pocock](docs/assets/hero.svg)
 
 ### Onde o projeto está?
 
@@ -111,7 +113,7 @@ Cada demanda é um arquivo versionado no repositório, ou uma issue do GitHub. V
 
 ### O que saiu de fato?
 
-`/aicf:fechar-demanda` pede um relatório do que foi entregue e o guarda junto da demanda. Ele roda em qualquer caminho de implementação, inclusive nos que não são do aicf.
+`/aicf:fechar-demanda` pede um relatório do que foi entregue e o guarda junto da demanda. Ele roda seja qual for o caminho de implementação: o do aicf, o do Superpowers ou o do Matt.
 
 ## Começando um projeto novo
 
@@ -132,7 +134,7 @@ Uma spec descreve uma mudança, com escopo e um estado "pronto". O PRD descreve 
 
 **4. Primeira demanda.** `/aicf:criar-spec` para amadurecer, `/aicf:implementar-spec` para executar e fechar. Daí em diante o ciclo se repete.
 
-As fases de entrevista e de implementação aceitam caminhos de fora do aicf, se você já usa outras coleções de skills. A governança não muda, e a demanda anota qual caminho foi usado.
+As fases de entrevista e de implementação aceitam o Superpowers e as skills do Matt Pocock, se estiverem instalados, e dá para entrevistar por um e implementar pelo outro. O registro de demandas não muda, e a demanda anota qual caminho foi usado.
 
 ## As skills
 
@@ -144,7 +146,7 @@ São sete. A diferença entre elas é quem pode chamar cada uma.
 | --- | --- | --- |
 | `/aicf:setup` | uma vez, no projeto novo | Inicializa o repositório git se faltar, pergunta se a demanda mora em arquivo ou em issue e monta o que a escolha pedir: `docs/projeto/` com PRD, roadmap e as pastas de demanda, ou o repositório no GitHub e os três labels `aicf:*`. Nos dois casos cria o `CLAUDE.md` (com `AGENTS.md` apontando para ele), um `README.md`, os padrões de engenharia se você quiser, o primeiro commit em `main` e a branch `develop` |
 | `/aicf:prd` | começo do projeto, e quando o PRD envelhece | Entrevista sobre o produto e escreve o `PRD.md`. Na revisão, confere o PRD contra as demandas, os ADRs e o glossário antes de perguntar, e entrevista só o que o projeto não responde |
-| `/aicf:ajuda` | quando quiser reler o método | O mapa: o ciclo, o que cada fase produz e as convenções de governança |
+| `/aicf:ajuda` | quando quiser reler o método | O mapa: o ciclo, o que cada fase produz e as convenções do registro de demandas |
 
 **Você digita, ou o agente alcança sozinho.** Respondem a pedidos em linguagem natural, como "me entreviste sobre X" ou "implementa a spec Y", e o agente as carrega quando reconhece a intenção.
 
@@ -152,7 +154,7 @@ São sete. A diferença entre elas é quem pode chamar cada uma.
 | --- | --- | --- |
 | `/aicf:criar-spec` | fase de entrevista | Interroga até não sobrar decisão em aberto, depois escreve a spec, com a sugestão de caminho de implementação. `/aicf:criar-spec #12` adota uma issue que já existe |
 | `/aicf:implementar-spec` | fase de implementação | Decide o caminho pela sugestão da spec, implementa e verifica. Ao final chama o fechamento |
-| `/aicf:fechar-demanda` | fase de fechamento | Checks, relatório, arquivamento e promoção de conhecimento, por qualquer caminho de implementação |
+| `/aicf:fechar-demanda` | fase de fechamento | Checks, relatório, arquivamento e promoção de conhecimento, seja qual for o caminho de implementação |
 | `/aicf:proxima-demanda` | entre uma demanda e outra | Lê o corpo de tudo o que está aberto, no registro e fora dele (branch não integrada, ticket, plano), e sugere a próxima, com as alternativas e o comando de entrada |
 
 As skills são pequenas de propósito. Elas dizem o que o agente não teria como inferir: onde gravar, o que registrar e quando fechar. O que a ferramenta já faz bem, e o que se decide melhor no caso concreto, fica com o agente.
@@ -196,7 +198,7 @@ Se o seu projeto precisar de outra estrutura, escreva a diferença no `CLAUDE.md
 <details>
 <summary><strong>Comandos vizinhos que valem conhecer</strong> — e para que serve cada um</summary>
 
-Nenhum deles vem com o aicf. São das coleções [Superpowers](https://github.com/obra/superpowers) e [Matt Pocock](https://github.com/mattpocock/skills), e valem se você já as tem instaladas.
+Nenhum deles vem com o aicf. São das coleções [Superpowers](https://github.com/obra/superpowers) e [Matt Pocock](https://github.com/mattpocock/skills), as duas que o aicf integra, e valem se você as tem instaladas.
 
 **Antes de escrever a demanda**
 
@@ -231,9 +233,9 @@ Esses arquivos descrevem uma demanda e são escritos antes da execução. Três 
 - **Planejamento entre demandas.** O `brainstorming` do Superpowers decompõe um pedido grande em subprojetos e trabalha o primeiro; os outros ficam na conversa. O `wayfinder` do Matt monta um mapa de tickets para um pedido grande, com `Not yet specified` para o que ainda não dá para detalhar, e esse mapa termina junto com aquele trabalho. Nenhum dos dois mantém uma lista que atravesse várias demandas.
 - **Registro depois da execução.** O `implement` do Matt termina no commit; não fecha o ticket nem marca critérios de aceite. O Superpowers revisa o código contra o plano a cada tarefa, mas não atualiza o plano nem a spec com o que mudou. No aicf o `fechar-demanda` pede um relatório na própria demanda, e é ali que ficam as diferenças entre o que foi planejado e o que saiu.
 
-Se você já usa uma dessas coleções, pode continuar usando. O aicf cuida só da governança, e ela funciona igual em qualquer caminho de implementação.
+Se você já usa uma dessas coleções, continua usando, e pode usar as duas. O aicf acrescenta a gestão de produto e faz a passagem entre as fases; dentro de cada fase, quem manda é a coleção escolhida.
 
-**GSD e BMAD já têm essa parte.** O `PROJECT.md` do GSD Core tem "What This Is", "Core Value", "Out of Scope" com o motivo e "Key Decisions"; `complete-milestone` e `extract-learnings` fazem o que o `fechar-demanda` faz aqui. A diferença é que nos dois a governança vem junto com um motor de execução próprio: 72 comandos `/gsd-*` no GSD Core, 30 skills e `uv` obrigatório no BMAD. O aicf deixa esse motor de fora por decisão ([ADR 0001](docs/adr/0001-fronteira-de-fase.md)): dentro da fase de implementação quem manda é o método que você escolheu. O GSD entrega mais coisas que o aicf. A escolha é entre adotar o motor de execução dele ou manter o seu.
+**GSD e BMAD já têm essa parte.** O `PROJECT.md` do GSD Core tem "What This Is", "Core Value", "Out of Scope" com o motivo e "Key Decisions"; `complete-milestone` e `extract-learnings` fazem o que o `fechar-demanda` faz aqui. A diferença é que nos dois a gestão de produto vem junto com um motor de execução próprio: 72 comandos `/gsd-*` no GSD Core, 30 skills e `uv` obrigatório no BMAD. O aicf deixa esse motor de fora por decisão ([ADR 0001](docs/adr/0001-fronteira-de-fase.md)): dentro da fase de implementação quem manda é o método que você escolheu. O GSD entrega mais coisas que o aicf. A escolha é entre adotar o motor de execução dele ou manter o seu.
 
 </details>
 

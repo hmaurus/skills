@@ -6,7 +6,7 @@ Processo — entrevista: a definir · implementação: a definir
 motivo — registrada aqui ou num intent.
 
 Surgiu de um post no Reddit que compara Superpowers e Matt Pocock. O aicf se apresenta como a
-governança que roda por cima dos dois (README, "Por que este, e não o Superpowers, o Matt Pocock, o
+gestão de produto que une os dois (README, "Por que este, e não o Superpowers, o Matt Pocock, o
 GSD ou o BMAD"), e uma resposta nesse tipo de discussão seria divulgação a custo zero.
 
 ## O que pesa
@@ -32,7 +32,7 @@ GSD ou o BMAD"), e uma resposta nesse tipo de discussão seria divulgação a cu
   - **verificar antes** — procurar no GitHub, no Reddit e nos marketplaces de plugins do Claude
     Code se outra ferramenta já une os dois, e registrar aqui a busca feita e o resultado;
   - **trocar a frase por uma que descreve o aicf sem falar dos outros**, como "uma camada de
-    governança que roda por cima dos dois: você escolhe o Superpowers ou o Matt para cada demanda, e
+    gestão de produto que une os dois: você escolhe o Superpowers ou o Matt para cada demanda, e
     o registro do que foi decidido e feito fica sempre no mesmo lugar". Essa não depende de busca
     nenhuma para ser verdade.
 

@@ -11,8 +11,8 @@ Rodar **fora do plan mode**: o passo final grava a demanda.
 
 **Alvo opcional `#<n>`, no modo issue.** `/aicf:criar-spec #12` **adota** a issue 12 em vez de
 abrir uma nova: reescreve o corpo dela e ajusta o label — **olhando antes o que ela já tem**, para
-trocar em vez de acrescentar quando já houver um `aicf:*`. É assim que uma issue de fora da
-governança entra nela, e é o que evita duas issues para a mesma demanda quando alguém rodou por
+trocar em vez de acrescentar quando já houver um `aicf:*`. É assim que uma issue de fora do
+registro de demandas entra nele, e é o que evita duas issues para a mesma demanda quando alguém rodou por
 conta própria o `/to-spec` do Matt Pocock, que cria issue nova em vez de editar a existente. No modo arquivo
 não há alvo a adotar.
 

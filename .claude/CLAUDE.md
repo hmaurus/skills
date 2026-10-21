@@ -2,7 +2,7 @@
 
 ## O que é
 
-Plugin de skills para Claude Code que cuida da governança e do planejamento macro de um projeto de software: PRD, roadmap e demandas versionadas, e o ciclo que leva cada demanda da ideia ao registro do que foi feito.
+Plugin de skills para Claude Code que integra o Superpowers e as skills do Matt Pocock e acrescenta por cima a gestão de produto: PRD, roadmap, registro de demandas e o ciclo de vida que leva cada demanda da ideia ao relatório do que foi feito.
 
 Este repositório é a fonte editável do plugin, publicado no marketplace `aicodingflow`.
 
@@ -44,9 +44,9 @@ Este repositório é a fonte editável do plugin, publicado no marketplace `aico
 
 ## Processos de desenvolvimento
 
-Duas camadas: a **governança** registra o que será feito e o que foi feito, e é sempre a mesma; a **implementação** é como o código sai, e tem caminhos à escolha. Uma demanda passa por quatro fases: demanda → entrevista → implementação → fechamento.
+Duas camadas: a **gestão de produto** registra o que será feito e o que foi feito, e é sempre a mesma; a **engenharia de software** é como o código sai, pelo caminho aicf ou por uma das duas coleções que o aicf integra (Superpowers, Matt Pocock). Uma demanda passa por quatro fases: demanda → entrevista → implementação → fechamento.
 
-**O mapa do método está em `/aicf:ajuda`, que só o usuário invoca** — ciclo, o que cada fase produz e as convenções de governança. **O fechamento — relatório e ritual — está em `/aicf:fechar-demanda`**, que o agente aplica ao concluir qualquer demanda, por qualquer caminho.
+**O mapa do método está em `/aicf:ajuda`, que só o usuário invoca** — ciclo, o que cada fase produz e as convenções do registro de demandas. **O fechamento — relatório e ritual — está em `/aicf:fechar-demanda`**, que o agente aplica ao concluir qualquer demanda, seja qual for o caminho.
 
 **Coleções de skills de workflow instaladas:** Superpowers, Matt Pocock. _(São os caminhos de entrevista e implementação que o aicf pode oferecer além do dele. As skills de caminho do Matt Pocock — `grill-with-docs`, `to-spec`, `to-tickets` e `implement` — só o usuário invoca, e não aparecem na lista de skills do agente: instalado é o que esta linha diz.)_
 
@@ -56,8 +56,8 @@ Seis regras valem antes de abrir qualquer doc:
 
 - **Na entrevista, o caminho é pergunta ao usuário; na implementação, o agente segue a sugestão gravada na spec quando o caso é óbvio — caminho aicf direto e diff que cabe numa frase — e pergunta com opções nos demais.** O agente sugere pelo ponto forte que couber ao caso; a decisão é do usuário quando há escolha real. A entrevista entra por `/aicf:criar-spec`, ou, se instalados, por `brainstorming` (Superpowers) ou `grill-with-docs` (Matt Pocock). O critério para sugerir: `/aicf:criar-spec` quando faltam decisões pontuais; `brainstorming` quando o desenho está aberto, com alternativas a comparar; `grill-with-docs` quando a demanda cria termo ou decisão de domínio, que ele grava no `GLOSSARY.md` e em ADR.
 - **Ideia que surge no meio de outra demanda** → registrar pela receita da mídia (`skills/midia/` do plugin aicf, a mesma que o `/aicf:criar-spec` segue), com o estado decidido por **certeza, não urgência** (decidido é o que já se resolveu fazer, mesmo que não agora; incerto é o que ainda não se sustenta), e voltar ao que estava sendo feito.
-- **O método escolhido fecha o código; a governança fecha a demanda.** Rodar o processo de implementação inteiro — inclusive o passo de integração que ele encadeia — e só então `/aicf:fechar-demanda`.
-- **A passagem entre fases é da governança.** Terminada a conversa do `brainstorming` (Superpowers) ou do `grill-with-docs` (Matt Pocock), o agente invoca o `/aicf:criar-spec`, que parte do que a conversa decidiu e grava a spec com `entrevista: brainstorming` ou `entrevista: grill-with-docs` na linha `Processo`; então o agente para e pergunta o caminho da implementação. Pelo `brainstorming`, a spec parte do design aprovado — o arquivo do caminho _architectural_ ou o design curto do _bounded_ —, e o `writing-plans` que ele chama é passagem de fase, não encadeamento. Pelo Matt, o agente conduz a entrevista invocando `grilling` e `domain-modeling`, que é o que o `grill-with-docs` faz. **Spec mora só onde a mídia do registro manda** (`docs/projeto/specs/`, ou issue `aicf:spec`), qualquer que seja a skill que a escreva — nunca em `docs/superpowers/specs/` nem em `.scratch/`.
+- **O método escolhido fecha o código; o aicf fecha a demanda.** Rodar o processo de implementação inteiro — inclusive o passo de integração que ele encadeia — e só então `/aicf:fechar-demanda`.
+- **A passagem entre fases é do aicf.** Terminada a conversa do `brainstorming` (Superpowers) ou do `grill-with-docs` (Matt Pocock), o agente invoca o `/aicf:criar-spec`, que parte do que a conversa decidiu e grava a spec com `entrevista: brainstorming` ou `entrevista: grill-with-docs` na linha `Processo`; então o agente para e pergunta o caminho da implementação. Pelo `brainstorming`, a spec parte do design aprovado — o arquivo do caminho _architectural_ ou o design curto do _bounded_ —, e o `writing-plans` que ele chama é passagem de fase, não encadeamento. Pelo Matt, o agente conduz a entrevista invocando `grilling` e `domain-modeling`, que é o que o `grill-with-docs` faz. **Spec mora só onde a mídia do registro manda** (`docs/projeto/specs/`, ou issue `aicf:spec`), qualquer que seja a skill que a escreva — nunca em `docs/superpowers/specs/` nem em `.scratch/`.
 - **Bug de causa desconhecida** → depurar de forma sistemática antes de propor correção; se `systematic-debugging` (Superpowers) ou `/diagnosing-bugs` (Matt Pocock) estiverem instalados, usar.
 - Operação que se repete vira **skill** em `.claude/skills/`, não improviso na hora.
 

@@ -1,7 +1,9 @@
-# Governança macro nos frameworks vizinhos — pesquisa de 2026-09-19
+# Gestão de produto nos frameworks vizinhos — pesquisa de 2026-09-19
+
+> O texto abaixo foi escrito com o nome antigo da camada e trocou de vocabulário na `0.42.0` ([ADR 0009](../adr/0009-o-aicf-integra-superpowers-e-matt.md)). Os achados são os da data da pesquisa.
 
 Sete frameworks de desenvolvimento com agente, lidos em fonte primária (código, templates, issues e
-blog dos autores), contra os quatro critérios que definem a governança do aicf. Serve a quem for
+blog dos autores), contra os quatro critérios que definem a gestão de produto do aicf. Serve a quem for
 ajustar a comparação do `README.md`, decidir o que o aicf copia ou deixa de fora, ou responder "por
 que não o X?".
 
@@ -238,7 +240,7 @@ Todas contra os shas desta pesquisa. Trechos do aicf: `sed -n 159,175p README.md
 
 ### (2) É subentendido e todo mundo faz igual?
 
-**Não.** Ninguém faz "igual sem framework": quem não tem a camada ou a improvisa à mão (issue #1192) ou não tem (o autor do Superpowers diz que "just telling superpowers to just continue with the plan in $filename" basta para ele). Quem tem, tem porque o framework impõe — e impõe junto com o motor de implementação. Não existe hoje um framework que ofereça a governança **sem** ser dono da implementação; é essa combinação que é sua.
+**Não.** Ninguém faz "igual sem framework": quem não tem a camada ou a improvisa à mão (issue #1192) ou não tem (o autor do Superpowers diz que "just telling superpowers to just continue with the plan in $filename" basta para ele). Quem tem, tem porque o framework impõe — e impõe junto com o motor de implementação. Não existe hoje um framework que ofereça a gestão de produto **sem** ser dono da implementação; é essa combinação que é sua.
 
 ### (3) Você está complicando?
 
@@ -259,8 +261,8 @@ Em relação a quem não tem, **sim, um pouco** — e os pontos onde os leves re
 - **Retrospectiva entre milestones** (GSD `RETROSPECTIVE.md` com "Cross-Milestone Trends").
 
 **O aicf faz, eles não:**
-- **Governança agnóstica do caminho de implementação.** GSD e BMAD são donos da execução; spec-kit, openspec e task-master são donos do planejamento da demanda. Nenhum aceita "rode o Superpowers ou o Matt dentro da fase". É o seu diferencial e é o que o próprio Matt aponta como problema dos outros ("they take away your control").
+- **Gestão de produto sem ser dona do caminho de implementação.** GSD e BMAD são donos da execução; spec-kit, openspec e task-master são donos do planejamento da demanda. Nenhum aceita "rode o Superpowers ou o Matt dentro da fase". É o seu diferencial e é o que o próprio Matt aponta como problema dos outros ("they take away your control").
 - **Promoção do aprendizado para CLAUDE.md/ADR/glossário como passo do ritual.** GSD extrai para `LEARNINGS.md` e gsd-pi injeta `KNOWLEDGE.md` em toda task (função equivalente, mecanismo próprio); BMAD só *propõe* action items; os outros não têm nada. Nenhum escreve no `CLAUDE.md` como regra de fechamento.
 - **Relatório plano × entrega na própria demanda.** O mais perto é `SUMMARY.md`+`VERIFICATION.md` do GSD (dois arquivos, por plano/fase) e o `result.md` experimental do openspec.
 
-**Onde o aicf duplica:** a camada de governança do GSD Core (`.planning/PROJECT.md`, `ROADMAP.md`, `phases/`, `complete-milestone`, `extract-learnings`). Dito sem rodeio: o aicf é a pasta `.planning/` do GSD sem o loop de execução do GSD, e plugável a Superpowers/Matt. Isso é uma posição legítima — o seu PRD argumenta que o loop é o que se burla no meio do projeto — mas o README hoje compara só com Superpowers e Matt, e o leitor que conhece GSD vai perguntar "por que não o GSD?". A resposta existe (o GSD é dono da implementação; 72 comandos; não aceita outro caminho), e vale estar escrita.
+**Onde o aicf duplica:** a camada de gestão de produto do GSD Core (`.planning/PROJECT.md`, `ROADMAP.md`, `phases/`, `complete-milestone`, `extract-learnings`). Dito sem rodeio: o aicf é a pasta `.planning/` do GSD sem o loop de execução do GSD, e plugável a Superpowers/Matt. Isso é uma posição legítima — o seu PRD argumenta que o loop é o que se burla no meio do projeto — mas o README hoje compara só com Superpowers e Matt, e o leitor que conhece GSD vai perguntar "por que não o GSD?". A resposta existe (o GSD é dono da implementação; 72 comandos; não aceita outro caminho), e vale estar escrita.

@@ -17,7 +17,7 @@ concluídas. Aqui ela fica junta.
    disco.
 2. Conferir o cabeçalho do comando: `cache/aicodingflow/aicf/<versão>/skills/setup`. Sem isso, a
    passada pode estar exercitando a versão anterior.
-3. **Diretório novo.** O setup roda uma vez por projeto, e não migra projeto que já tem governança.
+3. **Diretório novo.** O setup roda uma vez por projeto, e não migra projeto que já tem a estrutura montada.
 4. **A configuração global do git entra na passada.** Com `init.defaultBranch = main` no global
    (`git config --global init.defaultBranch`), qualquer `git init` cria `main`, e a passada não
    exercita a máquina nova, onde ele cria `master`. Para exercitá-la, desligar antes e religar

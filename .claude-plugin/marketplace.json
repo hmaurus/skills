@@ -4,16 +4,18 @@
     "name": "AI Coding Flow",
     "url": "https://aicodingflow.com"
   },
-  "description": "Governança de projeto e workflow de demandas do AI Coding Flow para Claude Code.",
+  "description": "Gestão de produto e ciclo de vida da demanda do AI Coding Flow para Claude Code, integrando Superpowers e Matt Pocock.",
   "plugins": [
     {
       "name": "aicf",
       "source": "./",
-      "description": "Governança de projeto para desenvolver com agentes: a estrutura que sustenta o projeto (PRD, roadmap, demandas versionadas) e o ciclo que leva cada demanda da ideia ao registro do que foi feito.",
+      "description": "Gestão de produto e ciclo de vida da demanda para Claude Code, integrando Superpowers e Matt Pocock: PRD, roadmap, registro de demandas e o relatório do que foi feito.",
       "category": "engineering",
       "keywords": [
         "workflow",
-        "governanca",
+        "gestao-de-produto",
+        "superpowers",
+        "mattpocock",
         "prd",
         "spec",
         "starter-kit",

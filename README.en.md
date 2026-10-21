@@ -4,9 +4,11 @@
 
 _[Versão em português](README.md)_
 
-`aicf` is a skill plugin for Claude Code and Antigravity that handles project governance: the PRD, the roadmap, the record of each work item, and the report of what shipped. There are seven skills, and they work on top of the implementation path you already use.
+**You don't have to choose between Superpowers and Matt Pocock: pick both, with `aicf`.**
 
-Superpowers, Matt Pocock and spec-kit cover one work item at a time, and cover it well. Three questions go unanswered:
+`aicf` is a skill plugin for Claude Code and Antigravity that brings together product management and software engineering, running the lifecycle of each work item from registry to closing. [Superpowers](https://github.com/obra/superpowers) and [Matt Pocock's skills](https://github.com/mattpocock/skills) are the two largest software engineering skill collections on GitHub: 302k and 298k stars on 2026-10-20, against 142k for the next one, `github/spec-kit` (`gh api repos/<owner>/<repo> --jq .stargazers_count`). `aicf` joins the two, and you can interview a work item with one and implement it with the other. On top of them it adds the PRD, the roadmap, the work item registry, and the report of what shipped. With neither installed, the `aicf` path, a minimal one, handles interview and implementation on its own. There are seven skills.
+
+Both collections cover one work item at a time, and cover it well. Three questions go unanswered:
 
 - **Where does the project stand?** Specs describe each change, one by one. None of them says what the product is, who it serves, and what was ruled out by decision.
 - **Why did we decide against that?** The reason for dropping an approach stayed in the conversation with the agent, and the conversation is not saved. Weeks later the same argument comes back.
@@ -94,14 +96,14 @@ flowchart LR
 
 - **Work item** — the idea recorded, even before it is mature.
 - **Interview** — questions until no decision is left open. A spec comes out.
-- **Implementation** — someone executes the spec, by any path.
+- **Implementation** — someone executes the spec, through the `aicf` path, Superpowers or Matt.
 - **Closing** — the report of what was done, including what came out different from the plan.
 
 Each work item is a versioned file in the repository, or a GitHub issue. You pick which one at setup.
 
 ## The problem this solves
 
-![The aicf governance layer sitting above the implementation paths](docs/assets/hero.en.svg)
+![aicf's product management, joining Superpowers and Matt Pocock's skills](docs/assets/hero.en.svg)
 
 ### Where does the project stand?
 
@@ -113,7 +115,7 @@ Each work item is a versioned file in the repository, or a GitHub issue. You pic
 
 ### What actually shipped?
 
-`/aicf:fechar-demanda` asks for a report of what shipped and keeps it with the work item. It runs on any implementation path, including the ones that are not `aicf`'s.
+`/aicf:fechar-demanda` asks for a report of what shipped and keeps it with the work item. It runs whatever the implementation path: `aicf`'s, Superpowers' or Matt's.
 
 ## Starting a new project
 
@@ -134,7 +136,7 @@ A spec describes a change, with a scope and a "done" state. The PRD describes th
 
 **4. First work item.** `/aicf:criar-spec` to mature it, `/aicf:implementar-spec` to execute and close. From there the cycle repeats.
 
-The interview and implementation phases accept paths from outside `aicf`, if you already use other skill collections. Governance does not change, and the work item notes which path was used.
+The interview and implementation phases accept Superpowers and Matt Pocock's skills, if installed, and you can interview with one and implement with the other. The work item registry does not change, and the work item notes which path was used.
 
 ## The skills
 
@@ -146,7 +148,7 @@ There are seven. What separates them is who can invoke each one.
 | --- | --- | --- |
 | `/aicf:setup` | once, on a new project | Initializes the git repository if missing, asks whether work items live in files or issues and sets up whatever the answer requires: `docs/projeto/` with the PRD, roadmap and work item folders, or the GitHub repository and the three `aicf:*` labels. In both cases it creates `CLAUDE.md` (with `AGENTS.md` pointing to it), a `README.md`, the engineering defaults if you want them, the first commit on `main` and a `develop` branch |
 | `/aicf:prd` | start of the project, and when the PRD goes stale | Interviews you about the product and writes `PRD.md`. When revising, it checks the PRD against the work items, the ADRs and the glossary before asking, and only interviews you on what the project can't answer |
-| `/aicf:ajuda` | whenever you want to reread the method | The map: the cycle, what each phase produces, and the governance conventions |
+| `/aicf:ajuda` | whenever you want to reread the method | The map: the cycle, what each phase produces, and the work item registry conventions |
 
 **You type them, or the agent reaches for them.** They answer requests in plain language, such as "interview me about X" or "implement spec Y", and the agent loads them when it recognizes the intent.
 
@@ -154,7 +156,7 @@ There are seven. What separates them is who can invoke each one.
 | --- | --- | --- |
 | `/aicf:criar-spec` | interview phase | Interrogates until no decision is left open, then writes the spec, with a suggested implementation path. `/aicf:criar-spec #12` adopts an issue that already exists |
 | `/aicf:implementar-spec` | implementation phase | Picks the path from the spec's suggestion, implements and verifies. At the end it calls closing |
-| `/aicf:fechar-demanda` | closing phase | Checks, report, archiving and knowledge promotion, on any implementation path |
+| `/aicf:fechar-demanda` | closing phase | Checks, report, archiving and knowledge promotion, whatever the implementation path |
 | `/aicf:proxima-demanda` | between work items | Reads the body of everything still open, in the record and outside it (unmerged branch, ticket, plan), and suggests the next one, with the alternatives and the command to start it |
 
 The skills are small on purpose. They say what the agent could not infer: where to write, what to record, and when to close. What the tool already does well, and what is better decided case by case, stays with the agent.
@@ -198,7 +200,7 @@ If your project needs a different structure, write the difference in the root `C
 <details>
 <summary><strong>Neighbouring commands worth knowing</strong> — and what each one is for</summary>
 
-None of these ship with `aicf`. They belong to the [Superpowers](https://github.com/obra/superpowers) and [Matt Pocock](https://github.com/mattpocock/skills) collections, and they apply if you already have them installed.
+None of these ship with `aicf`. They belong to the [Superpowers](https://github.com/obra/superpowers) and [Matt Pocock](https://github.com/mattpocock/skills) collections, the two `aicf` integrates, and they apply if you have them installed.
 
 **Before writing the work item**
 
@@ -233,9 +235,9 @@ Those files describe one work item and are written before execution. Three thing
 - **Planning across work items.** Superpowers' `brainstorming` breaks a large request into sub-projects and works the first one; the others stay in the conversation. Matt's `wayfinder` builds a ticket map for a large request, with `Not yet specified` for what cannot be detailed yet, and that map ends along with that piece of work. Neither keeps a list that spans several work items.
 - **A record after execution.** Matt's `implement` ends at the commit; it neither closes the ticket nor ticks the acceptance criteria. Superpowers reviews the code against the plan after each task, but does not update the plan or the spec with what changed. In `aicf`, `fechar-demanda` asks for a report in the work item itself, and that is where the differences between what was planned and what shipped are written down.
 
-If you already use one of these collections, you can keep using it. `aicf` only handles governance, and that works the same on any implementation path.
+If you already use one of these collections, keep using it, and you can use both. `aicf` adds product management and handles the handoff between phases; inside each phase, the collection you picked is in charge.
 
-**GSD and BMAD already have this part.** GSD Core's `PROJECT.md` has "What This Is", "Core Value", "Out of Scope" with the reasoning, and "Key Decisions"; `complete-milestone` and `extract-learnings` do what `fechar-demanda` does here. The difference is that in both, governance comes together with an execution engine of their own: 72 `/gsd-*` commands in GSD Core, 30 skills and a hard `uv` requirement in BMAD. `aicf` leaves that engine out by decision ([ADR 0001](docs/adr/0001-fronteira-de-fase.md)): inside the implementation phase, whatever runs is the method you picked. GSD delivers more than `aicf`. The choice is between adopting its execution engine or keeping yours.
+**GSD and BMAD already have this part.** GSD Core's `PROJECT.md` has "What This Is", "Core Value", "Out of Scope" with the reasoning, and "Key Decisions"; `complete-milestone` and `extract-learnings` do what `fechar-demanda` does here. The difference is that in both, product management comes together with an execution engine of their own: 72 `/gsd-*` commands in GSD Core, 30 skills and a hard `uv` requirement in BMAD. `aicf` leaves that engine out by decision ([ADR 0001](docs/adr/0001-fronteira-de-fase.md)): inside the implementation phase, whatever runs is the method you picked. GSD delivers more than `aicf`. The choice is between adopting its execution engine or keeping yours.
 
 </details>
 

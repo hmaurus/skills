@@ -15,9 +15,9 @@ com ela e não dá para compartilhar.
 agente "lembra" pode ser de duas versões atrás. Um MCP de documentação faz o agente consultar a doc
 atual antes de escrever a chamada. Sem nenhum, registrar que a doc oficial é consultada na mão.
 
-**3. Coleções de skills de workflow.** Com Superpowers ou as skills do Matt Pocock instaladas, os
-caminhos de entrevista e implementação que o aicf oferece mudam — sem elas, só o
-caminho aicf existe, e propor `brainstorming` seria propor algo que não roda.
+**3. Coleções de skills de workflow.** O aicf foi feito para unir o Superpowers e as skills do Matt
+Pocock: com elas instaladas, os caminhos de entrevista e implementação que ele oferece mudam — sem
+elas, só o caminho aicf mínimo existe, e propor `brainstorming` seria propor algo que não roda.
 
 **Detectar antes de perguntar.** Quem já usa o método costuma ter as três respostas na máquina, e
 perguntar o que o ambiente responde é rodada gasta. **As fontes são as do harness em que o setup
@@ -66,7 +66,7 @@ final, depois do commit, é o mesmo que não declarar.
 
 **O que não achou, explicar em uma frase e sugerir, numa pergunta só com os itens que faltaram** —
 Bitwarden (CLI `bw`, plano gratuito generoso) para senhas, Context7 para docs, Superpowers e Matt
-Pocock para coleções — e aceitar "nenhum" como resposta: quem está começando não tem nada disso, e insistir transforma o setup em
+Pocock para coleções, as duas que o aicf integra — e aceitar "nenhum" como resposta: quem está começando não tem nada disso, e insistir transforma o setup em
 venda de stack. **Coleção se sugere, não se instala:** plugin instalado no meio da sessão só carrega
 na próxima, e a linha do `CLAUDE.md` registra o que estava habilitado agora.
 

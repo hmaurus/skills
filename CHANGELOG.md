@@ -1,5 +1,31 @@
 # Changelog
 
+## 0.42.0 — 2026-10-20
+
+- **O aicf deixa de se dizer agnóstico: integra o Superpowers e as skills do Matt Pocock.** README,
+  PRD, manifestos e skills prometiam funcionar "por cima do caminho que você já usa" e "igual em
+  qualquer caminho", mas cada coleção integrada exigiu acoplamento próprio (ADR 0008, as regras do
+  `brainstorming` e do `grill-with-docs` no `CLAUDE.md`). O README abre com o lema "Você não precisa
+  escolher entre Superpowers e Matt Pocock: escolha os dois, com o aicf", e o PRD põe outras
+  coleções em "Fora, por decisão". As estrelas que sustentam "as duas maiores" foram medidas em
+  2026-10-20 com `gh api repos/<dono>/<repo> --jq .stargazers_count`: 302.590 (`obra/superpowers`),
+  298.641 (`mattpocock/skills`), 142.143 (`github/spec-kit`). [ADR 0009](docs/adr/0009-o-aicf-integra-superpowers-e-matt.md).
+- **"Governança" sai do vocabulário.** O termo colidia com governança de TI, com o `GOVERNANCE.md`
+  de projeto open source e com governança de agentes, e nomeava duas coisas. A camada passa a ser
+  **gestão de produto**; a outra, **engenharia de software**; o conjunto das demandas, **registro
+  de demandas**; e quem conduz o **ciclo de vida da demanda** e fecha a demanda é **o aicf**. O
+  commit do setup passa a ser `chore: estrutura do projeto`. Nos arquivos vivos,
+  `grep -rni 'governan' $V | grep -v 'governanca-nos-frameworks-vizinhos' | wc -l` foi de 58 a 0 e
+  `grep -rni 'qualquer caminho\|caminho que você já usa\|caminhos de fora' $V | wc -l` de 14 a 0,
+  com `V` como na spec da demanda. Histórico (entradas anteriores deste arquivo, `concluidas/`,
+  ADRs 0001 a 0008) fica como foi escrito.
+- **`hero.svg` e `hero.en.svg` redesenhados:** gestão de produto no topo, o aicf no meio, e
+  Superpowers, Matt Pocock e o caminho aicf embaixo. Os dois comandos da `0.25.0` seguem dando 0 e
+  só o xmlns.
+- Projetos que já usam o aicf não quebram: nenhuma skill procura a palavra no `CLAUDE.md` deles. A
+  troca da prosa vai nas notas da release, e o caso entra na intent do setup para projeto já
+  rodando.
+
 ## 0.41.1 — 2026-10-20
 
 - **O fechamento confere o tamanho do `CLAUDE.md` também pelo corte do Antigravity.** O passo 3 do

@@ -1,6 +1,6 @@
 ---
 name: fechar-demanda
-description: Ritual de fechamento de uma demanda — checks, revisão, relatório, arquivamento e promoção de conhecimento. Aplicar proativamente ao concluir qualquer demanda, por qualquer caminho de implementação, e também ao interromper uma demanda por falta de contexto, para registrar o estado parcial antes de a sessão acabar.
+description: Ritual de fechamento de uma demanda — checks, revisão, relatório, arquivamento e promoção de conhecimento. Aplicar proativamente ao concluir qualquer demanda, seja qual for o caminho de implementação, e também ao interromper uma demanda por falta de contexto, para registrar o estado parcial antes de a sessão acabar.
 ---
 
 # Fechar uma demanda
