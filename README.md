@@ -6,7 +6,7 @@ _[English version](README.en.md)_
 
 **Você não precisa escolher entre Superpowers e Matt Pocock: escolha os dois, com o aicf.**
 
-O aicf é um plugin de skills para Claude Code e Antigravity que integra gestão de produto e engenharia de software, conduzindo o ciclo de vida de cada demanda, do registro ao fechamento. O [Superpowers](https://github.com/obra/superpowers) e as [skills do Matt Pocock](https://github.com/mattpocock/skills) são duas das coleções de skills de engenharia mais populares do GitHub: 302 mil e 298 mil estrelas em 2026-10-20 (`gh api repos/obra/superpowers --jq .stargazers_count`, e o mesmo para `mattpocock/skills`). O aicf une as duas, e dá para entrevistar a demanda por uma e implementar pela outra. Por cima delas, acrescenta o PRD, o roadmap, o registro de demandas e o relatório do que foi entregue. Sem nenhuma das duas instalada, o caminho aicf, que vem com o plugin, faz a entrevista e a implementação sozinho. São sete skills.
+O aicf é um plugin de skills para Claude Code e Antigravity que integra gestão de produto e engenharia de software, conduzindo o ciclo de vida de cada demanda, do registro ao fechamento. O [Superpowers](https://github.com/obra/superpowers) e as [skills do Matt Pocock](https://github.com/mattpocock/skills) são duas das coleções de skills de engenharia mais populares do GitHub: 302 mil e 298 mil estrelas em 2026-10-20[^estrelas]. O aicf une as duas, e dá para entrevistar a demanda por uma e implementar pela outra. Por cima delas, acrescenta o PRD, o roadmap, o registro de demandas e o relatório do que foi entregue. Sem nenhuma das duas instalada, o caminho aicf, que vem com o plugin, faz a entrevista e a implementação sozinho. São sete skills.
 
 As duas coleções cobrem bem uma demanda por vez. Três perguntas ficam sem resposta:
 
@@ -248,3 +248,5 @@ Feito para o curso [Claude Code: Criador de Apps](https://aicodingflow.com/curso
 Sugestões e problemas entram por [issue](https://github.com/hmaurus/skills/issues/new/choose). Cada uma é triada para `docs/projeto/`, e a issue fecha com o link do arquivo que ela gerou, ou com o motivo da recusa.
 
 MIT.
+
+[^estrelas]: `gh api repos/obra/superpowers --jq .stargazers_count` e `gh api repos/mattpocock/skills --jq .stargazers_count`.
