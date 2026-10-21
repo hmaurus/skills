@@ -10,21 +10,33 @@ A unidade de trabalho: algo que se quer no projeto, da ideia crua ao registro do
 Existe num lugar só, como arquivo ou como issue.
 _Evitar_: tarefa, feature, ticket, item
 
+**Estado**:
+Onde a demanda está no registro: backlog, intent, spec ou concluída. Na mídia de arquivos é a
+pasta; na de issues, o label.
+_Evitar_: incerto, decidido, pronta para implementar (como nomes de estado), status, etapa
+
 **Intent**:
-Uma demanda decidida, ainda não entrevistada. Sabe-se que será feita; não se sabe como.
+O estado da demanda decidida, ainda não entrevistada. Sabe-se que será feita; não se sabe como.
 _Evitar_: ideia, rascunho, proposta
 
 **Backlog**:
-Onde espera a demanda que ainda não é certeza. O que a separa de intent é certeza, não urgência.
+O estado da demanda que ainda não é certeza. O que a separa de intent é certeza, não urgência:
+incerta vai para backlog, decidida vai para intent.
 _Evitar_: wishlist, ideias futuras
 
 **Spec**:
-Uma demanda madura: a entrevista acabou e não sobrou decisão em aberto. É o que a implementação
-consome.
+O estado da demanda madura: a entrevista acabou e não sobrou decisão em aberto. É o que a
+implementação consome.
 _Evitar_: design doc, PRD, plano
 
+**Concluída**:
+O estado da demanda que passou pelo fechamento, com o relatório gravado nela.
+_Evitar_: entregue, finalizada, done
+
 **Fase**:
-Uma das quatro etapas por que toda demanda passa: demanda, entrevista, implementação, fechamento.
+Uma das quatro etapas de trabalho por que toda demanda passa: registro, entrevista,
+implementação, fechamento. A fase é o que se faz; o estado é onde a demanda fica depois.
+_Evitar_: demanda (como nome da primeira fase), estado
 
 **Ciclo de vida da demanda**:
 O percurso de uma demanda pelas quatro fases, do registro ao fechamento. É o aicf que o conduz:
@@ -59,6 +71,12 @@ _Evitar_: governança, gestão de projeto, processo, metodologia
 A camada do como construir: as fases de entrevista e de implementação, cada uma conduzida por um
 caminho.
 _Evitar_: implementação (como nome da camada; é o nome de uma fase)
+
+**Registro**:
+A primeira fase: gravar a demanda na mídia e decidir o estado dela pela certeza, backlog ou intent.
+É o que põe a demanda no registro de demandas. Pode ser pulada: a ideia que vai direto à
+entrevista nasce como spec. Em inglês, _intake_.
+_Evitar_: demanda (como nome da fase), captura, triagem
 
 **Registro de demandas**:
 O conjunto das demandas que o aicf acompanha num projeto, todas numa mesma mídia. Em inglês,
