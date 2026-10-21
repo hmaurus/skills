@@ -24,6 +24,12 @@ harness impõe. Alvo e compatível estão no [`GLOSSARY.md`](../../GLOSSARY.md).
   veio de um import, `agy plugin install ~/aicf` levou a `0.41.1` e apagou a skill `criar-prd`,
   renomeada para `prd` na `0.40.0` (`ls ~/.gemini/config/plugins/aicf/skills | grep -c criar-prd`
   → 0), sem pedir para desinstalar antes.
+- **A sessão roda as skills da hora em que abriu.** O `agy` carrega skills e comandos uma vez, ao
+  iniciar; atualizar o plugin no meio não chega à sessão aberta. Numa sessão de 2026-10-20 23:06 a
+  2026-10-21 00:16, com o aicf atualizado para a 0.42.0 às 23:15, o `/aicf:setup` rodado depois
+  disso gerou o template da versão anterior. O log da sessão confirma:
+  `grep -c 'Reloading system slash commands and skills' ~/.gemini/antigravity-cli/log/cli-<AAAAMMDD_HHMMSS>.log`
+  → 1, com o horário de abertura. Depois de atualizar, abrir sessão nova.
 - **Não há marketplace para o aicf.** `agy plugin install <plugin>@<marketplace>` só aceita um
   marketplace registrado, e o `agy plugin --help` não tem comando para registrar.
   `aicodingflow`, `claude`, `claude-code`, `gemini`, `antigravity`, `github`, `git`, `official` e
