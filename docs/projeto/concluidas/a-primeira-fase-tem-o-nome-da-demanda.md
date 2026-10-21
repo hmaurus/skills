@@ -1,6 +1,6 @@
 # A primeira fase tem o nome da demanda
 
-Processo — entrevista: grill-with-docs · implementação: a definir · sugestão: aicf-plan (troca de vocabulário em doze arquivos, sem decisão de abordagem, mas com redação a acertar em cada um)
+Processo — entrevista: grill-with-docs · implementação: aicf-plan
 
 ## Problema
 
@@ -130,3 +130,38 @@ changelog, tamanho das skills), mais os dois `grep` da Verificação.
 4. `./scripts/check.sh` termina em `Tudo verde.`.
 5. A seção "O ciclo" renderizada no GitHub mostra o diagrama com as quatro fases e o estado de cada
    uma — conferência visual depois do push.
+
+## Relatório de implementação (2026-10-21)
+
+- **Status** — concluído. CI verde no commit de código (run `39537072080`,
+  `gh run view 39537072080 --json conclusion --jq .conclusion` → `success`).
+- **Arquivos alterados**
+  - `GLOSSARY.md` — Fase, Registro, Estado e Concluída; Backlog, Intent e Spec como estados (no
+    commit da spec, durante a entrevista).
+  - `README.md` e `README.en.md` — "O ciclo": diagrama e lista com o estado em que cada fase deixa
+    a demanda; _Intake_ em inglês.
+  - `.claude/CLAUDE.md`, `skills/setup/templates/claude-md.md`, `docs/projeto/PRD.md` — a
+    sequência registro → entrevista → implementação → fechamento.
+  - `skills/midia/arquivo.md`, `skills/midia/issues.md`, `skills/ajuda/SKILL.md`,
+    `skills/proxima-demanda/SKILL.md` — tabelas e lista de estados pelo nome, com o critério ao
+    lado.
+  - `skills/criar-spec/SKILL.md`, `skills/fechar-demanda/SKILL.md` — o estado citado passa a ser
+    spec.
+  - `.claude-plugin/plugin.json` e `CHANGELOG.md` — `0.43.0`.
+- **Commits** — `47381f8` docs(projeto): spec de a primeira fase tem o nome da demanda;
+  `7c79ad8` feat: 0.43.0 — a primeira fase se chama registro, e os estados têm um nome só.
+- **Validação**
+  - Os dois `grep` do Problema, com o mesmo `V`: 9 → 0 e 17 → 0.
+  - `grep -c 'registro → entrevista → implementação → fechamento' .claude/CLAUDE.md skills/setup/templates/claude-md.md docs/projeto/PRD.md`
+    → 1, 1, 2.
+  - `grep -c 'Intake' README.en.md` → 2; `grep -c 'Registro' README.md` → 3.
+  - `./scripts/check.sh` → `Tudo verde.`; `agy plugin validate` na cópia de
+    [`harnesses.md`](../../referencias/harnesses.md) → `✔ Validation passed`.
+  - Revisão de código não pedida: a mudança é troca de texto, sem lógica.
+  - **Em aberto:** a conferência visual do mermaid renderizado no GitHub (passo 5 da Verificação)
+    não foi feita pelo agente; encerra quando o titular abrir a seção "O ciclo" do README no
+    GitHub e vir as quatro caixas. O comportamento da `ajuda`, que o agente não invoca, encerra no
+    próximo uso real dela.
+- **Escopo efetivo** — o previsto. O `GLOSSARY.md` mudou na entrevista, não na implementação.
+- **Promoção** — nada a promover: as lições desta demanda (medir antes de escrever, o comando que
+  a Verificação cita se roda) já estão no `CLAUDE.md`.

@@ -11,7 +11,7 @@
   e `proxima-demanda` e o estado citado no `criar-spec` e no `fechar-demanda` seguem o glossário.
   Medido sobre os arquivos vivos
   (`V="README.md README.en.md GLOSSARY.md .claude/CLAUDE.md skills docs/projeto/PRD.md"`), com os
-  dois `grep` da [spec](docs/projeto/specs/a-primeira-fase-tem-o-nome-da-demanda.md): fase com o
+  dois `grep` da [spec](docs/projeto/concluidas/a-primeira-fase-tem-o-nome-da-demanda.md): fase com o
   nome da demanda, 9 → 0; estado com o nome do critério, 17 → 0. Sem ADR: renomear é fácil de
   reverter.
 
