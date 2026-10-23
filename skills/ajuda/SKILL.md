@@ -44,9 +44,8 @@ caminho seguido vira a linha `Processo` na demanda.
 
 **O aicf escolhe o caminho de cada fase; dentro da fase, o encadeamento do framework roda
 inteiro.** Skill que o método declara como passo seguinte dentro da mesma fase não se pula nem se
-substitui — no Superpowers, `executing-plans` e `subagent-driven-development` declaram
-`finishing-a-development-branch` como `REQUIRED SUB-SKILL`: ela roda automaticamente, sem
-perguntar, e o agente conta em uma linha o que ficou decidido. Interferir ali degrada a qualidade
+substitui — no Superpowers, `executing-plans` e `subagent-driven-development` terminam mandando
+usar `finishing-a-development-branch`: ela roda automaticamente, sem perguntar, e o agente conta em uma linha o que ficou decidido. Interferir ali degrada a qualidade
 de um processo que não é nosso. Na **passagem entre fases** quem decide é o aicf, mesmo
 quando o framework recomenda continuar nele: o `brainstorming` declara `writing-plans` como estado
 terminal, e ainda assim o agente para na fronteira, grava o design como spec e pergunta o caminho

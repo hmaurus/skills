@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.43.1 — 2026-10-23
+
+- **O `ajuda` deixa de citar um rótulo que o Superpowers não usa mais.** A frase dizia que
+  `executing-plans` e `subagent-driven-development` declaram `finishing-a-development-branch` como
+  `REQUIRED SUB-SKILL`. Desde a v6.4.1 do Superpowers (`5bf4e78`), as duas terminam só com
+  "Use superpowers:finishing-a-development-branch.". O encadeamento continua o mesmo, e a regra do
+  aicf de não pulá-lo também. Conferido no clone de `obra/superpowers` em `2ce8aa1` (v7.0.1):
+  `grep -rc 'REQUIRED SUB-SKILL.*finishing' $R/superpowers/skills/{executing-plans,subagent-driven-development}`
+  → 0 em todos os arquivos;
+  `grep -rn '^Use superpowers:finishing-a-development-branch' $R/superpowers/skills/{executing-plans,subagent-driven-development}`
+  → uma linha em cada (`executing-plans/SKILL.md` e `subagent-driven-development/references/final-review.md`).
+
 ## 0.43.0 — 2026-10-21
 
 - **A primeira fase se chama registro, e os estados têm um nome só.** O `GLOSSARY.md` definia
