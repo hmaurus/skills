@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.43.2 — 2026-10-23
+
+- **O `prd` diz como escrever as primeiras linhas do `ROADMAP.md` e o que vem depois delas.** O
+  passo 2 de "Ao terminar" era a única instrução sobre o roadmap e dizia só onde a linha vai. Agora
+  diz que `Próximas` é intent, decidida e ainda não entrevistada; dá a forma da linha
+  (`- **<título>.** <contexto>`, e `Encerra quando <condição>.` no Backlog, regra que só existia na
+  legenda do template); mede uma demanda por um ciclo de entrevista e implementação; manda mostrar
+  a lista antes de gravar; apaga o exemplo `> - ...` do template na primeira linha real — o
+  `docs/projeto/ROADMAP.md` deste repositório ainda o tem acima das duas linhas do Backlog —; e, no
+  modo revisão, propõe tirar a demanda cujo item saiu do Escopo. O passo 4 diz que nenhuma demanda
+  sai como spec e aponta a entrevista e o `/aicf:proxima-demanda`. Ficam no `prd`, não só no
+  `midia/arquivo.md`, porque são critério do passo que ele executa, e o ponteiro para a receita não
+  garante que o agente a abra. Sai também o parêntese "(na criação, o primeiro)", resto da frase de
+  antes do modo revisão (`8209bd6`), cujo "o primeiro" não tinha substantivo.
+  `grep -c 'Próximas` é intent' skills/prd/SKILL.md` → 1;
+  `grep -c 'Nenhuma demanda sai daqui como spec' skills/prd/SKILL.md` → 1;
+  `grep -rn 'na criação, o primeiro' --exclude-dir=.git --exclude=CHANGELOG.md .` → nenhuma
+  ocorrência. Comportamento não verificado: o `prd` tem `disable-model-invocation: true`, e encerra
+  no próximo `/aicf:prd` num projeto em modo arquivo, quando o `ROADMAP.md` sair com linhas nessa
+  forma e sem o `> - ...`.
+
 ## 0.43.1 — 2026-10-23
 
 - **O `ajuda` deixa de citar um rótulo que o Superpowers não usa mais.** A frase dizia que

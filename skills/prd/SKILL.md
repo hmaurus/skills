@@ -106,10 +106,16 @@ Datar a última revisão no topo: o PRD é vivo, e saber quando parou de ser rev
 1. Mostrar o PRD e pedir revisão antes de considerá-lo fechado. No modo revisão, mostrar só o texto
    novo de cada seção que muda, gravar com a aprovação e atualizar a **Última revisão**.
 2. **Propor tirar dele as primeiras demandas** — cada coisa que a proposta exige vira uma; no modo
-   revisão, cada item de Escopo que ainda não tem demanda. No
-   **modo arquivo**, isso vai para o `ROADMAP.md` (na criação, o primeiro): uma linha em `Próximas` ou `Backlog` conforme
-   a certeza, e o que precisar de contexto vira arquivo em `intents/`, e aí **a linha sai** — quem
-   tem arquivo não tem linha. No **modo issue** não há roadmap: cada uma nasce como issue com
+   revisão, cada item de Escopo que ainda não tem demanda, e propor tirar a demanda cujo item saiu
+   do Escopo. Uma demanda é o que cabe num ciclo de entrevista e implementação: nem a tarefa de uma
+   linha de código, nem o produto inteiro. Mostrar a lista e gravar com a aprovação. No **modo
+   arquivo**, isso vai para o `ROADMAP.md`: uma linha em `Próximas` ou `Backlog` conforme a
+   certeza — `Próximas` é intent, decidida e ainda não entrevistada; `Backlog` é o que ainda não se
+   sustenta —, na forma `- **<título>.** <contexto em uma ou duas frases>`, e a de `Backlog`
+   termina com `Encerra quando <condição>.`. A primeira linha real de uma seção apaga o exemplo
+   `> - ...` do template. O que precisar de contexto — decisão, restrição ou motivo que a entrevista
+   do PRD trouxe e não cabe na linha — vira arquivo em `intents/`, e aí **a linha sai** — quem tem
+   arquivo não tem linha. No **modo issue** não há roadmap: cada uma nasce como issue com
    `aicf:intent` ou `aicf:backlog`. A linha `**Mídia do registro:**` do `CLAUDE.md` diz qual
    arquivo de [`midia/`](../midia/) seguir — `arquivo.md` ou `issues.md`; sem linha, arquivo. Se `docs/agents/issue-tracker.md` discordar da
    linha, avisar uma vez e seguir a linha.
@@ -117,4 +123,6 @@ Datar a última revisão no topo: o PRD é vivo, e saber quando parou de ser rev
    —, sugerir `domain-modeling` (Matt Pocock) para gravar o glossário em `GLOSSARY.md`, ao lado do
    PRD e não dentro dele.
 4. Sugerir limpar a sessão (`/clear` no Claude Code) antes da primeira demanda: o contexto da
-   entrevista já cumpriu seu papel.
+   entrevista já cumpriu seu papel. Nenhuma demanda sai daqui como spec: a próxima fase é a
+   entrevista dela, por `/aicf:criar-spec` — ou `brainstorming`/`grill-with-docs`, se instalados —,
+   e `/aicf:proxima-demanda` sugere por qual começar.

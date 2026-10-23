@@ -1,6 +1,6 @@
 {
   "name": "aicf",
-  "version": "0.43.1",
+  "version": "0.43.2",
   "description": "Gestão de produto e ciclo de vida da demanda para Claude Code, integrando Superpowers e Matt Pocock: PRD, roadmap, registro de demandas e o relatório do que foi feito.",
   "author": {
     "name": "AI Coding Flow",
