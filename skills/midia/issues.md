@@ -153,9 +153,10 @@ esta seção ao fim do arquivo do Matt, sem tocar no resto:
 ```
 
 A segunda confere o ponteiro que o `/setup-matt-pocock-skills` grava na raiz, a seção
-`## Agent skills` com a linha `See docs/agents/issue-tracker.md.`: é por ela que o
-`/implement-spec` digitado sem o sufixo chega ao tracker. Faltando, propor repor a seção no
-`CLAUDE.md`, ou no `AGENTS.md` quando não há `CLAUDE.md` — o arquivo que o setup do Matt editaria.
+`## Agent skills`, cuja subseção `### Issue tracker` termina em
+``See `docs/agents/issue-tracker.md`.``: é por ela que o
+`/implement-spec` digitado sem o sufixo chega ao tracker. Faltando, propor repor essa subseção
+no `CLAUDE.md`, ou no `AGENTS.md` quando não há `CLAUDE.md` — o arquivo que o setup do Matt editaria.
 Rodar `/setup-matt-pocock-skills` de novo regrava o tracker e apaga a seção; a próxima chamada
 desta operação a repõe.
 

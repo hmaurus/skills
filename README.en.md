@@ -219,7 +219,7 @@ None of these ship with `aicf`. They belong to the [Superpowers](https://github.
 **In the implementation phase, instead of `/aicf:implementar-spec`**
 
 - `writing-plans` + `subagent-driven-development` (Superpowers) — the plan goes to a file, and subagents execute task by task.
-- `to-tickets` + `implement` or `implement-spec` (Matt) — the spec becomes tickets with declared dependencies between them, run one by one by `implement`, or in parallel by `implement-spec`, each in its own worktree and merged on an integration branch.
+- `to-tickets` + `implement` or `implement-spec` (Matt) — the spec becomes tickets with declared dependencies between them, run one by one by `implement`, or in parallel by `implement-spec`, which puts each ticket in its own worktree and merges them all on an integration branch.
 - `code-review` (Matt) — reviews the diff on two axes, repository standards and faithfulness to the spec, in parallel subagents.
 
 You can interview by one path and implement by another. These flows write different amounts of documentation: on `aicf`'s own paths the implementation plan is not persisted to the repository.

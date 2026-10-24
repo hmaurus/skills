@@ -6,15 +6,15 @@ Data: 2026-10-24 · Status: aceita · Versão: `0.44.0` · **Amplia o [0008](000
 
 Nos dois modos, arquivo e issue, a operação "Alinhar o tracker do Matt" acrescenta ao fim do
 `docs/agents/issue-tracker.md` a seção `## Quando o /implement-spec roda`, com aceite e diff, e
-confere o ponteiro que o setup do Matt grava na raiz (`See docs/agents/issue-tracker.md.`, na seção
-`## Agent skills` do `CLAUDE.md` ou do `AGENTS.md`). O 0008 continua valendo para as três frases
+confere o ponteiro que o setup do Matt grava na raiz (``See `docs/agents/issue-tracker.md`.``, na subseção
+`### Issue tracker` da seção `## Agent skills` do `CLAUDE.md` ou do `AGENTS.md`). O 0008 continua valendo para as três frases
 do modo arquivo; o que muda é que o modo issue deixa de não escrever nada, e a escrita deixa de
 ser só troca de frase.
 
 **O que a seção diz:** calcular a fronteira pelo que já entrou na branch de integração; rodar no
 checkout principal, depois do merge, a verificação do ticket marcado com
 `**Verificação no checkout principal:**`; e, só no markdown local, passar os tickets aos
-subagentes por caminho absoluto.
+subagentes por caminho absoluto e achar os tickets da spec pela linha `**Spec:**`.
 
 **O comando que o aicf entrega** leva um sufixo que só aponta a seção:
 `/implement-spec <spec> — antes de começar, ler docs/agents/issue-tracker.md, seção "Quando o /implement-spec roda"`.

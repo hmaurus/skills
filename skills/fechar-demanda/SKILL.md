@@ -20,8 +20,8 @@ método tem passo de integração e ele não rodou, rodar antes — nos caminhos
 e da revisão abaixo, como manda o `implementar-spec`.
 
 No Matt, o `/implement-spec` termina numa branch de integração, e o fechamento roda uma vez,
-sobre ela. A integração termina quando o destino do código está decidido, não só com o merge: o
-destino é pergunta com opções — merge na branch de origem, PR, ou deixar a branch. Se o
+sobre ela. A integração termina quando o destino do código está decidido, não só com o merge: depois
+dos checks abaixo, rodados na branch de integração, o destino é pergunta com opções — merge na branch de origem, PR, ou deixar a branch. Se o
 `implement-spec` já abriu o PR, as opções são fazer o merge dele agora ou deixá-lo aberto para
 revisão. Qualquer escolha fecha a demanda; o commit de fechamento vai onde o código ficou, e no PR
 aberto ele entra no PR.

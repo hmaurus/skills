@@ -10,9 +10,8 @@ worktree, juntos numa branch de integração. A forma se escolhe aqui, com o gra
 ## Os dois pontos de entrada
 
 - **De volta do `/to-tickets`, na mesma sessão.**
-- **Retomada:** `/aicf:implementar-spec <spec>` numa sessão nova, quando a spec já tem tickets — no
-  modo arquivo, arquivos em `.scratch/<feature>/issues/` com a linha `**Spec:**` apontando para
-  ela; no modo issue, issues com `## Parent` apontando a issue da spec. Não entregar o
+- **Retomada:** `/aicf:implementar-spec <spec>` numa sessão nova, quando a spec já tem tickets —
+  o passo 3 do `SKILL.md` os acha pela linha `**Spec:**` ou por `## Parent`. Não entregar o
   `/to-tickets` de novo nem criar ticket: ir direto à medição. É a exceção à regra de que a skill
   para ao entregar o caminho de uma coleção.
 
@@ -39,14 +38,16 @@ da mesma fronteira; migration em mais de um ticket; verificação que depende de
 versionado. O custo dele: o titular revisa a branch de integração inteira no fim, e precisa de
 cota de uso para vários subagentes ao mesmo tempo.
 
-Escolhido o `/implement`, entregar o comando do primeiro ticket da fronteira —
-`/implement .scratch/<feature>/issues/<NN>-<slug>.md`, ou `/implement #<ticket>` — e esperar.
+Escolhido o `/implement`, o workspace é o da regra do `SKILL.md`. Entregar `/clear` e o comando
+do primeiro ticket da fronteira — `/implement .scratch/<feature>/issues/<NN>-<slug>.md`, ou
+`/implement #<ticket>` —, a repetir a cada ticket, com `/clear` entre eles, e esperar. O
+`/aicf:fechar-demanda` roda depois do último.
 
 ## Escolhido o `/implement-spec`
 
 ### 1. Editar os tickets
 
-O implementador só lê o próprio ticket. Propor a edição, mostrar o diff e aplicar com o aceite do
+O implementador vê o próprio ticket, a spec e as notas compartilhadas, nunca o trabalho dos outros em andamento. Propor a edição, mostrar o diff e aplicar com o aceite do
 usuário:
 
 - **Dois tickets da mesma fronteira que tocam o mesmo arquivo:** bloqueio entre eles, ou os nomes
@@ -55,11 +56,12 @@ usuário:
   paralelo contra o mesmo banco.
 - **Ticket cuja verificação depende de estado não versionado:** a linha
   `**Verificação no checkout principal:** <comando> — na worktree ela não roda; reportar isso em vez de verde.`
-  Na worktree, o teste que lê arquivo no gitignore é pulado em silêncio.
+  Na worktree, o teste que lê arquivo no gitignore pode se pular sozinho, sem aviso.
 
 **Bloqueio, por mídia:**
 
-- **Arquivo:** a linha `Blocked by: NN, NN` do ticket.
+- **Arquivo:** editar a linha `**Blocked by:**` que o ticket já tem, trocando o "None (can start
+  immediately)" pelos tickets que o bloqueiam — nunca acrescentar uma segunda linha.
 - **Issue:** a dependência nativa do GitHub, como o tracker do Matt a descreve:
 
   ```bash
@@ -67,10 +69,11 @@ usuário:
   gh api --method POST repos/<owner>/<repo>/issues/<bloqueado>/dependencies/blocked_by -F issue_id=<id>
   ```
 
-  O corpo do ticket acompanha. A linha `Blocked by: #<n>` no corpo só substitui a dependência onde
-  a plataforma não a oferece.
+  A seção `## Blocked by` do corpo acompanha, editada no lugar. Onde a plataforma não oferece a
+  dependência, a seção do corpo é o bloqueio.
 
-Depois de acrescentar bloqueios, medir a largura da fronteira de novo antes da decisão final.
+Depois de acrescentar bloqueios, medir a largura da fronteira de novo. Se ela cair abaixo de 2
+tickets prontos ao mesmo tempo, voltar à pergunta da forma com a medida nova.
 
 ### 2. Conferir o tracker
 
@@ -81,6 +84,8 @@ de antes da `0.44.0`.
 
 ### 3. Dizer na conversa
 
+- O workspace é do método: o `implement-spec` cria a branch de integração e as worktrees, e o
+  aicf não cria branch nem worktree antes.
 - Se começar uma segunda revisão ampla depois da correção, interromper e pedir só checagens
   focadas nos achados corrigidos: o ciclo de revisão e correção do `implement-spec` não diz quando
   parar.

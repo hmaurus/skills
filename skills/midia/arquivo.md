@@ -91,14 +91,17 @@ A quinta conferência não troca frase: acrescenta esta seção ao fim do arquiv
 - Ticket com a linha `**Verificação no checkout principal:**`: depois do merge dele na branch de
   integração, rodar o comando dessa linha no checkout principal, com a branch de integração em
   checkout, um ticket por vez, e só então liberar os tickets que ele bloqueia.
+- Os tickets da spec são os arquivos de `.scratch/*/issues/` cuja linha `**Spec:**` aponta para
+  ela.
 - Passar cada ticket aos subagentes implementadores pelo caminho absoluto no checkout principal:
   o `/to-tickets` não faz commit dos tickets, e a worktree só tem o que tem commit.
 ```
 
 A sexta confere o ponteiro que o `/setup-matt-pocock-skills` grava na raiz, a seção
-`## Agent skills` com a linha `See docs/agents/issue-tracker.md.`: é por ela que o
-`/implement-spec` digitado sem o sufixo chega ao tracker. Faltando, propor repor a seção no
-`CLAUDE.md`, ou no `AGENTS.md` quando não há `CLAUDE.md` — o arquivo que o setup do Matt editaria.
+`## Agent skills`, cuja subseção `### Issue tracker` termina em
+``See `docs/agents/issue-tracker.md`.``: é por ela que o
+`/implement-spec` digitado sem o sufixo chega ao tracker. Faltando, propor repor essa subseção
+no `CLAUDE.md`, ou no `AGENTS.md` quando não há `CLAUDE.md` — o arquivo que o setup do Matt editaria.
 
 Tracker convertido pela metade — à mão, por exemplo — recebe só a troca que falta: a primeira
 conferência cobre a abertura, a segunda a linha `**Spec:**` da frase da spec, a terceira acusa a

@@ -32,7 +32,8 @@ label.
 
 **Integração e fechamento são coisas diferentes.** _Integração_ é decidir o destino do código —
 merge na base, PR, ou a branch fica. É o último passo da **implementação**, e pertence ao método
-escolhido. _Fechamento_ é o registro da demanda — relatório, conclusão, promoção de
+escolhido; quando o método para na branch sem decidir o destino, como o `implement-spec` do Matt,
+a pergunta fica com o `/aicf:fechar-demanda`. _Fechamento_ é o registro da demanda — relatório, conclusão, promoção de
 conhecimento. É `/aicf:fechar-demanda`, e nada além. **O método fecha o código, o
 aicf fecha a demanda — e a segunda só começa depois da primeira.**
 

@@ -92,13 +92,14 @@ Sem mídia declarada e sem `docs/projeto/`, perguntar onde gravar em vez de inve
    O critério para sugerir está em
    [`../implementar-spec/caminhos.md`](../implementar-spec/caminhos.md): ler antes de gravar a
    sugestão. Quem decide é o `/aicf:implementar-spec`, inclusive quando a implementação emenda
-   nesta sessão (passo 4). Com a sugestão `to-tickets`, dizer ao usuário que, depois do
-   `/to-tickets`, a implementação se retoma por `/aicf:implementar-spec <spec>`, que lê os tickets
-   e ajuda a escolher entre `/implement` por ticket e `/implement-spec`.
+   nesta sessão (passo 4). Com a sugestão `to-tickets`, dizer ao usuário que a implementação
+   começa por `/aicf:implementar-spec <spec>`, que alinha o tracker, entrega o `/to-tickets` e, de
+   volta dele ou numa sessão nova, ajuda a escolher entre `/implement` por ticket e
+   `/implement-spec`.
 3. Entrevista pelo `grill-with-docs` → rodar a operação "Alinhar o tracker do Matt" da receita da
    mídia ([`arquivo.md`](../midia/arquivo.md) ou [`issues.md`](../midia/issues.md)) antes de o
    usuário ir embora. Quem limpa a sessão e digita `/to-tickets` direto não passa pelo
-   `/aicf:implementar-spec`, e sem a operação os tickets nascem sem a linha que leva à spec, e o
+   `/aicf:implementar-spec`, e sem a operação, no modo arquivo, os tickets nascem sem a linha que leva à spec, e o
    `/implement-spec` sem as regras que ele lê no tracker.
 4. Entrevista curta e demanda pequena → seguir na mesma sessão, se o usuário quiser emendar a
    implementação. Entrevista longa → sugerir limpar a sessão (`/clear` no Claude Code) ou abrir
