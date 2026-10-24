@@ -1,6 +1,6 @@
 # O caminho do Matt não oferece o implement-spec
 
-Processo — entrevista: criar-spec · implementação: a definir · sugestão: aicf-plan (só texto, mas em vários arquivos; o desenho já está decidido e cabe numa sessão)
+Processo — entrevista: criar-spec · implementação: aicf-plan
 
 ## Problema
 
@@ -440,3 +440,68 @@ teve dois tickets colidindo no merge, ~3,24 M tokens de subagentes, um 429 no oi
 e 23 problemas num `/code-review` posterior. Nenhum benchmark independente compara o
 `subagent-driven-development` com o `/implement-spec` (busca em 2026-10-23 no GitHub, no HN e na
 web).
+
+## Relatório de implementação (2026-10-24)
+
+- **Status:** concluído; a verificação de comportamento (item 6) segue em aberto até o uso real.
+  CI: run `40069748924`, `completed success`
+  (`gh run view 40069748924 --json conclusion -q .conclusion` → `success`).
+- **Arquivos alterados:**
+  - `skills/implementar-spec/caminhos.md` (novo): o critério dos quatro caminhos;
+  - `skills/implementar-spec/matt.md` (novo): entrada, medição, forma, edição dos tickets,
+    conferência do tracker, o que dizer, comando com o sufixo;
+  - `skills/implementar-spec/SKILL.md`: tabela, ordem de ler `caminhos.md`, retomada antes da
+    pergunta do caminho, ponteiro para o `matt.md`, exceção de workspace;
+  - `skills/criar-spec/SKILL.md`: ordem de ler `caminhos.md`, anúncio da entrada pelo
+    `/aicf:implementar-spec`, alinhamento nos dois modos;
+  - `skills/fechar-demanda/SKILL.md`: branch de integração e `/code-review` final do método;
+  - `skills/midia/arquivo.md` e `skills/midia/issues.md`: a seção `## Quando o /implement-spec roda`
+    e a conferência do ponteiro na operação de alinhar, que o modo issue ganha; "Concluir" com a
+    issue já fechada pelo merge;
+  - `docs/adr/0010-o-aicf-escreve-as-regras-do-implement-spec-no-tracker-do-matt.md` (novo);
+  - `skills/ajuda/SKILL.md`, os dois READMEs, a linha de coleções (template e `.claude/CLAUDE.md`),
+    o relatório de governança, a intent do setup, `plugin.json` e `CHANGELOG.md` (`0.44.0`).
+- **Commits:**
+  - `4df9641` docs: revisar spec do implement-spec — regras no tracker do Matt, sufixo só aponta;
+  - `8a98ce4` feat(implementar-spec): 0.44.0 — o caminho do Matt oferece o implement-spec;
+  - `6f875af` fix(implementar-spec): achados da revisão do implement-spec.
+- **Validação:**
+  - `./scripts/check.sh` → `Tudo verde.` antes de cada commit;
+  - os itens 2 a 5 da Verificação dão o esperado no `6f875af`: `subagente e com TDD` → nada;
+    `caminhos.md` → 2; `matt.md` → só no `implementar-spec`; `implement-spec` ≥ 1 nos oito
+    arquivos; a seção ≥ 1 nas duas mídias; o sufixo → 1 no `matt.md`; `calcular a fronteira` → 0
+    no `matt.md` e 1 em cada mídia; as frases antigas dos READMEs → 0; `2026-10-23` ≥ 1 no
+    relatório de governança;
+  - os comandos novos de achar tickets testados: o `grep -rlF '**Spec:** …'` num `.scratch/` de
+    teste, e a regex de `## Parent` num JSON de teste, onde acha o `#12` e não o `#123`;
+  - revisão por um subagente que não viu a implementação. Dos 15 achados, 14 foram aplicados no
+    `6f875af`, entre eles o de severidade alta: a retomada perguntava o caminho e entregava o
+    `/to-tickets` de novo antes de chegar ao `matt.md`. O que ficou de fora está em Escopo efetivo;
+  - o item 6 (comportamento) segue em aberto. Quem o encerra é o titular, numa sessão nova na
+    `0.44.0`, no primeiro projeto com tickets do Matt, pelos cenários do item 6.
+- **Escopo efetivo:**
+  - **Uma mudança de desenho antes de implementar:** na conversa desta sessão, as instruções ao
+    orquestrador saíram do argumento do comando e foram para uma seção do tracker do Matt, nos dois
+    modos. O sufixo ficou, mas só aponta a seção. A spec foi revisada em `4df9641`, e a decisão
+    está no ADR 0010.
+  - **Divergência mantida:** a conferência do tracker roda depois de escolhido o
+    `/implement-spec`, e não antes da pergunta da forma, como o item 4 previa. O `/implement` não
+    precisa da seção.
+  - **Fora da lista da spec:** o `ajuda` teve duas frases corrigidas. Uma dizia que o aicf só
+    escreve no tracker no modo arquivo; a outra, que a integração é sempre do método.
+  - **Título da seção sem crase**, para casar com o texto do sufixo; os `grep` da spec acompanham.
+  - **A seção do tracker local ganhou um quarto item:** como achar os tickets da spec, pela linha
+    `**Spec:**`.
+- **Lições:**
+  - **Nada no Matt manda o agente abrir o `docs/agents/issue-tracker.md`.** As skills dele só
+    supõem que o tracker "foi fornecido", e o `CLAUDE.md` traz o ponteiro, não o conteúdo. Regra
+    que só mora no tracker depende de o agente decidir abri-lo; para isso servem o sufixo e a
+    conferência do ponteiro.
+  - **O formato de bloqueio dos tickets não é o do wayfinding:** o `to-tickets` escreve
+    `**Blocked by:**` e `## Blocked by`, e o tracker do Matt descreve `Blocked by: NN` só para os
+    mapas
+    (`sed -n '75p;99,101p' ~/.claude/plugins/cache/mattpocock/mattpocock-skills/1.3.1/skills/engineering/to-tickets/SKILL.md`).
+    Quem lê só o tracker escreve a linha errada.
+- **Saída do ritual:** o [ADR 0010](../../adr/0010-o-aicf-escreve-as-regras-do-implement-spec-no-tracker-do-matt.md).
+  Nenhuma regra nova no `CLAUDE.md`: as duas lições cabem na regra que já existe, de conferir
+  afirmação sobre ferramenta de terceiro no código dela. O PRD não muda.

@@ -2,7 +2,7 @@
 
 Data: 2026-10-24. Parecer consultivo sobre a proposta de síntese apresentada na
 conversa, ainda não aplicada à
-[spec](../../projeto/specs/o-caminho-do-matt-nao-oferece-o-implement-spec.md).
+[spec](../../projeto/concluidas/o-caminho-do-matt-nao-oferece-o-implement-spec.md).
 Base: `19ec7c66b4209b8a84d2b2ca4700418385d0bf2d`.
 Identificação: `sha256sum docs/projeto/specs/o-caminho-do-matt-nao-oferece-o-implement-spec.md`
 → `6cce2106a9098903eb8a2013b79be309cd31b23cad3e8b55bf298af8be41d4b7`.

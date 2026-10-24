@@ -19,7 +19,7 @@ não tem comando para isso. Decidido: o setup passa a servir também a projeto j
 - **A linha de coleções da `0.44.0` é o segundo caso.** A lista de skills de caminho do Matt, na
   linha "Coleções de skills de workflow instaladas" do template, ganhou o `implement-spec`. Projeto
   montado antes segue com a lista antiga, e a troca foi de novo pelas notas da release, à mão
-  ([o caminho do Matt não oferece o implement-spec](../specs/o-caminho-do-matt-nao-oferece-o-implement-spec.md)).
+  ([o caminho do Matt não oferece o implement-spec](../concluidas/o-caminho-do-matt-nao-oferece-o-implement-spec.md)).
 - **A ordem entre os setups importa.** O `/setup-matt-pocock-skills` grava
   `docs/agents/issue-tracker.md`; o setup do aicf lê esse arquivo para propor a mídia, e só pode
   ler se o do Matt rodou antes. Hoje, quando o Matt rodou depois, nada no aicf volta a ler o

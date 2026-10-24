@@ -1,7 +1,7 @@
 # Revisão da spec — O caminho do Matt não oferece o implement-spec
 
 Data: 2026-10-23. Parecer consultivo sobre a
-[spec](../../projeto/specs/o-caminho-do-matt-nao-oferece-o-implement-spec.md), ainda sem commit.
+[spec](../../projeto/concluidas/o-caminho-do-matt-nao-oferece-o-implement-spec.md), ainda sem commit.
 Base: `3befd6eeda55667f2da356c893daebc6fbd40454`.
 Identificação: `sha256sum docs/projeto/specs/o-caminho-do-matt-nao-oferece-o-implement-spec.md`
 → `eb3c07de2face65377c9f6ee229d60b8e72eaf7cf36566cb86aa72263952dde0`.
