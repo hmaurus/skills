@@ -217,7 +217,7 @@ Nenhum deles vem com o aicf. São das coleções [Superpowers](https://github.co
 **Na fase de implementação, no lugar de `/aicf:implementar-spec`**
 
 - `writing-plans` + `subagent-driven-development` (Superpowers) — o plano vai para arquivo, e subagentes executam tarefa por tarefa.
-- `to-tickets` + `implement` (Matt) — a spec vira tickets com dependência declarada entre eles, executados um a um.
+- `to-tickets` + `implement` ou `implement-spec` (Matt) — a spec vira tickets com dependência declarada entre eles, executados um por vez pelo `implement`, ou em paralelo pelo `implement-spec`, cada um numa worktree e juntos numa branch de integração.
 - `code-review` (Matt) — revisa o diff em dois eixos, padrões do repositório e fidelidade à spec, em subagentes paralelos.
 
 Dá para entrevistar por um caminho e implementar por outro. Esses fluxos gravam quantidades diferentes de documentação: nos caminhos do próprio aicf o plano de implementação não é persistido no repositório.
@@ -233,7 +233,7 @@ Esses arquivos descrevem uma demanda e são escritos antes da execução. Três 
 
 - **Documento de produto.** Nenhum deles cria um arquivo dizendo o que o produto é, para quem serve e o que ficou fora por decisão. O Matt guarda pedidos recusados em `.out-of-scope/<conceito>.md`, com o motivo. Isso cobre um pedido de cada vez.
 - **Planejamento entre demandas.** O `brainstorming` do Superpowers decompõe um pedido grande em subprojetos e trabalha o primeiro; os outros ficam na conversa. O `wayfinder` do Matt monta um mapa de tickets para um pedido grande, com `Not yet specified` para o que ainda não dá para detalhar, e esse mapa termina junto com aquele trabalho. Nenhum dos dois mantém uma lista que atravesse várias demandas.
-- **Registro depois da execução.** O `implement` do Matt termina no commit; não fecha o ticket nem marca critérios de aceite. O Superpowers revisa o código contra o plano a cada tarefa, mas não atualiza o plano nem a spec com o que mudou. No aicf o `fechar-demanda` pede um relatório na própria demanda, e é ali que ficam as diferenças entre o que foi planejado e o que saiu.
+- **Registro depois da execução.** O `implement` do Matt termina no commit sem fechar o ticket; o `implement-spec` resolve os tickets ao terminar, ou pelo merge do PR que abre; nenhum dos dois marca critérios de aceite. O Superpowers revisa o código contra o plano a cada tarefa, mas não atualiza o plano nem a spec com o que mudou. No aicf o `fechar-demanda` pede um relatório na própria demanda, e é ali que ficam as diferenças entre o que foi planejado e o que saiu.
 
 Se você já usa uma dessas coleções, pode continuar com ela e somar a outra. O aicf acrescenta a gestão de produto e faz a passagem entre as fases; dentro de cada fase, quem manda é o caminho escolhido.
 

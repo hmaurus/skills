@@ -48,7 +48,7 @@ Duas camadas: a **gestão de produto** registra o que será feito e o que foi fe
 
 **O mapa do método está em `/aicf:ajuda`, que só o usuário invoca** — ciclo, o que cada fase produz e as convenções do registro de demandas. **O fechamento — relatório e ritual — está em `/aicf:fechar-demanda`**, que o agente aplica ao concluir qualquer demanda, seja qual for o caminho.
 
-**Coleções de skills de workflow instaladas:** Superpowers, Matt Pocock. _(São os caminhos de entrevista e implementação que o aicf pode oferecer além do dele. As skills de caminho do Matt Pocock — `grill-with-docs`, `to-spec`, `to-tickets` e `implement` — só o usuário invoca, e não aparecem na lista de skills do agente: instalado é o que esta linha diz.)_
+**Coleções de skills de workflow instaladas:** Superpowers, Matt Pocock. _(São os caminhos de entrevista e implementação que o aicf pode oferecer além do dele. As skills de caminho do Matt Pocock — `grill-with-docs`, `to-spec`, `to-tickets`, `implement` e `implement-spec` — só o usuário invoca, e não aparecem na lista de skills do agente: instalado é o que esta linha diz.)_
 
 **Mídia do registro:** arquivos em `docs/projeto/`
 

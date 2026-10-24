@@ -219,7 +219,7 @@ None of these ship with `aicf`. They belong to the [Superpowers](https://github.
 **In the implementation phase, instead of `/aicf:implementar-spec`**
 
 - `writing-plans` + `subagent-driven-development` (Superpowers) — the plan goes to a file, and subagents execute task by task.
-- `to-tickets` + `implement` (Matt) — the spec becomes tickets with declared dependencies between them, executed one at a time.
+- `to-tickets` + `implement` or `implement-spec` (Matt) — the spec becomes tickets with declared dependencies between them, run one by one by `implement`, or in parallel by `implement-spec`, each in its own worktree and merged on an integration branch.
 - `code-review` (Matt) — reviews the diff on two axes, repository standards and faithfulness to the spec, in parallel subagents.
 
 You can interview by one path and implement by another. These flows write different amounts of documentation: on `aicf`'s own paths the implementation plan is not persisted to the repository.
@@ -235,7 +235,7 @@ Those files describe one work item and are written before execution. Three thing
 
 - **Product document.** Neither creates a file stating what the product is, who it serves and what was ruled out by decision. Matt's keep rejected requests in `.out-of-scope/<concept>.md`, with the reasoning. That covers one request at a time.
 - **Planning across work items.** Superpowers' `brainstorming` breaks a large request into sub-projects and works the first one; the others stay in the conversation. Matt's `wayfinder` builds a ticket map for a large request, with `Not yet specified` for what cannot be detailed yet, and that map ends along with that piece of work. Neither keeps a list that spans several work items.
-- **A record after execution.** Matt's `implement` ends at the commit; it neither closes the ticket nor ticks the acceptance criteria. Superpowers reviews the code against the plan after each task, but does not update the plan or the spec with what changed. In `aicf`, `fechar-demanda` asks for a report in the work item itself, and that is where the differences between what was planned and what shipped are written down.
+- **A record after execution.** Matt's `implement` ends at the commit without closing the ticket; `implement-spec` resolves the tickets when it finishes, or through the merge of the PR it opens; neither ticks the acceptance criteria. Superpowers reviews the code against the plan after each task, but does not update the plan or the spec with what changed. In `aicf`, `fechar-demanda` asks for a report in the work item itself, and that is where the differences between what was planned and what shipped are written down.
 
 If you already use one of these collections, you can keep it and add the other. `aicf` adds product management and handles the handoff between phases; inside each phase, the path you picked is in charge.
 

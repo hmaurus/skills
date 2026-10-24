@@ -89,16 +89,17 @@ Sem mídia declarada e sem `docs/projeto/`, perguntar onde gravar em vez de inve
    mais a sugestão de caminho: um dos instalados (`aicf-direto`, `aicf-plan`, ou a skill de outra
    coleção), com o motivo numa frase:
    `Processo — entrevista: criar-spec · implementação: a definir · sugestão: aicf-direto (toca dois arquivos, sem decisão de abordagem)`.
-   O critério para sugerir: `aicf-direto` ou `aicf-plan` quando cabe numa sessão;
-   `subagent-driven-development` (Superpowers) quando são muitos passos numa sessão, executados por
-   subagente e com TDD; `to-tickets` (Matt) quando o trabalho se divide em fatias verticais com
-   dependência entre elas, que podem atravessar sessões.
-   Quem decide é o `/aicf:implementar-spec`, inclusive quando a implementação emenda nesta
-   sessão (passo 4).
-3. Entrevista pelo `grill-with-docs` e mídia arquivo → rodar a operação "Alinhar o tracker do
-   Matt" do [`midia/arquivo.md`](../midia/arquivo.md) antes de o usuário ir embora. Quem limpa a
-   sessão e digita `/to-tickets` direto não passa pelo `/aicf:implementar-spec`, e sem a operação
-   os tickets nascem sem a linha que leva à spec.
+   O critério para sugerir está em
+   [`../implementar-spec/caminhos.md`](../implementar-spec/caminhos.md): ler antes de gravar a
+   sugestão. Quem decide é o `/aicf:implementar-spec`, inclusive quando a implementação emenda
+   nesta sessão (passo 4). Com a sugestão `to-tickets`, dizer ao usuário que, depois do
+   `/to-tickets`, a implementação se retoma por `/aicf:implementar-spec <spec>`, que lê os tickets
+   e ajuda a escolher entre `/implement` por ticket e `/implement-spec`.
+3. Entrevista pelo `grill-with-docs` → rodar a operação "Alinhar o tracker do Matt" da receita da
+   mídia ([`arquivo.md`](../midia/arquivo.md) ou [`issues.md`](../midia/issues.md)) antes de o
+   usuário ir embora. Quem limpa a sessão e digita `/to-tickets` direto não passa pelo
+   `/aicf:implementar-spec`, e sem a operação os tickets nascem sem a linha que leva à spec, e o
+   `/implement-spec` sem as regras que ele lê no tracker.
 4. Entrevista curta e demanda pequena → seguir na mesma sessão, se o usuário quiser emendar a
    implementação. Entrevista longa → sugerir limpar a sessão (`/clear` no Claude Code) ou abrir
    outra: a spec deve bastar sozinha, e o resíduo da conversa ancora a implementação na memória em vez do texto.

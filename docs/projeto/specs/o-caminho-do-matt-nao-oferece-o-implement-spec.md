@@ -215,7 +215,7 @@ decidido**, não só com o merge. Entram três coisas:
   `/implement` numa sessão limpa", passa a dizer `/implement` ou `/implement-spec`. A operação
   ganha a seção do item 4 (os três itens), acrescentada ao fim do arquivo do Matt e não troca de
   frase, e mais duas conferências:
-  ``grep -c 'Quando o `/implement-spec` roda' docs/agents/issue-tracker.md`` → ≥ 1, e o ponteiro
+  `grep -c 'Quando o /implement-spec roda' docs/agents/issue-tracker.md` → ≥ 1, e o ponteiro
   que o setup do Matt grava na raiz,
   `cat CLAUDE.md AGENTS.md 2>/dev/null | grep -c 'docs/agents/issue-tracker.md'` → ≥ 1. Faltando
   o ponteiro, propor repor a seção `## Agent skills` com a linha do tracker, no arquivo que já
@@ -335,7 +335,7 @@ Verificação.
    → ≥ 1 em cada um (hoje, 0 nos que já existem, e erro para o `matt.md`, que ainda não existe).
    O `caminhos.md` fica fora da lista: ele só conhece o `to-tickets`.
 4. A regra mora no tracker, nas duas mídias, e o sufixo só aponta para ela:
-   ``grep -c 'Quando o `/implement-spec` roda' skills/midia/arquivo.md skills/midia/issues.md`` → ≥ 1
+   `grep -c 'Quando o /implement-spec roda' skills/midia/arquivo.md skills/midia/issues.md` → ≥ 1
    em cada (hoje, 0);
    `grep -c 'seção "Quando o /implement-spec roda"' skills/implementar-spec/matt.md` → 1 (hoje,
    erro: o arquivo não existe);

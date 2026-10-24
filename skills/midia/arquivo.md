@@ -54,24 +54,26 @@ A linha `Processo` fica logo abaixo do título; o formato é o do `/aicf:fechar-
 Chamada pelo `/aicf:criar-spec` (entrevista pelo `grill-with-docs`) e pelo
 `/aicf:implementar-spec` (caminho do Matt escolhido). Faz o `to-tickets` deixar a spec em
 `docs/projeto/specs/` e abrir cada ticket com a linha que leva até ela, para que o `/implement`
-numa sessão limpa chegue à spec só pelo ticket.
+ou o `/implement-spec` numa sessão limpa chegue à spec só pelo ticket, e escreve no tracker as
+regras que o `/implement-spec` precisa.
 
 Vale só com `docs/agents/issue-tracker.md` apontando para markdown local (`.scratch/`). Arquivo
 ausente, ou apontando para outro tracker: esta operação não roda.
 
-**Conferir**, em `docs/agents/issue-tracker.md` — a convenção está presente só quando as quatro dão
-o esperado:
+**Conferir** — a convenção está presente só quando as seis dão o esperado:
 
 ```bash
 grep -c 'docs/projeto/specs' docs/agents/issue-tracker.md                           # ≥ 1
 grep -c '\*\*Spec:\*\*' docs/agents/issue-tracker.md                                 # ≥ 1
 grep -c '\.scratch/<feature-slug>/spec\.md\|Issues and specs' docs/agents/issue-tracker.md  # 0
 grep -c 'Spec não: vai para' docs/agents/issue-tracker.md                           # ≥ 1
+grep -c 'Quando o /implement-spec roda' docs/agents/issue-tracker.md                # ≥ 1
+cat CLAUDE.md AGENTS.md 2>/dev/null | grep -c 'docs/agents/issue-tracker.md'        # ≥ 1
 ```
 
 **Faltando alguma, propor com o diff só a troca que falta, e aplicar com o aceite do usuário.**
-Cada troca é de uma frase do arquivo do Matt, que traz crases e marcador de lista como abaixo; o
-resto do arquivo — wayfinding, tickets, mapas — fica como está:
+As três primeiras trocas são de uma frase do arquivo do Matt, que traz crases e marcador de lista
+como abaixo; o resto do arquivo — wayfinding, tickets, mapas — fica como está:
 
 | Frase do Matt | Passa a ser |
 | --- | --- |
@@ -79,8 +81,28 @@ resto do arquivo — wayfinding, tickets, mapas — fica como está:
 | ``- The spec is `.scratch/<feature-slug>/spec.md` `` | - A spec é a da demanda, em `docs/projeto/specs/<nome>.md`. Todo ticket abre, logo abaixo do título, com `**Spec:** docs/projeto/specs/<nome>.md`, com o caminho real da demanda. A linha é obrigatória mesmo onde a skill manda evitar caminho de arquivo: ela aponta a spec, não a implementação. |
 | ``Create a new file under `.scratch/<feature-slug>/` (creating the directory if needed).`` | a mesma frase, mais: "Spec não: vai para `docs/projeto/specs/<nome>.md`." |
 
+A quinta conferência não troca frase: acrescenta esta seção ao fim do arquivo do Matt.
+
+```markdown
+## Quando o /implement-spec roda
+
+- Na execução, calcular a fronteira pelo que já entrou na branch de integração, não pelo estado
+  do ticket no tracker: os tickets só se resolvem no fim.
+- Ticket com a linha `**Verificação no checkout principal:**`: depois do merge dele na branch de
+  integração, rodar o comando dessa linha no checkout principal, com a branch de integração em
+  checkout, um ticket por vez, e só então liberar os tickets que ele bloqueia.
+- Passar cada ticket aos subagentes implementadores pelo caminho absoluto no checkout principal:
+  o `/to-tickets` não faz commit dos tickets, e a worktree só tem o que tem commit.
+```
+
+A sexta confere o ponteiro que o `/setup-matt-pocock-skills` grava na raiz, a seção
+`## Agent skills` com a linha `See docs/agents/issue-tracker.md.`: é por ela que o
+`/implement-spec` digitado sem o sufixo chega ao tracker. Faltando, propor repor a seção no
+`CLAUDE.md`, ou no `AGENTS.md` quando não há `CLAUDE.md` — o arquivo que o setup do Matt editaria.
+
 Tracker convertido pela metade — à mão, por exemplo — recebe só a troca que falta: a primeira
 conferência cobre a abertura, a segunda a linha `**Spec:**` da frase da spec, a terceira acusa a
-frase antiga que sobrou, e a quarta a frase de publicação.
+frase antiga que sobrou, a quarta a frase de publicação, a quinta a seção do `/implement-spec` e a
+sexta o ponteiro.
 Rodar `/setup-matt-pocock-skills` de novo regrava o arquivo e apaga a convenção; a próxima chamada
 desta operação a repõe.

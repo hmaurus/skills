@@ -42,11 +42,9 @@ description: Implementa uma demanda a partir da spec e conduz o fechamento até 
    | **Aicf direto** | esta skill | depende do agente | esta skill, que pergunta |
    | **Aicf plan mode** | plan mode ligado antes, ou escolhido aqui | depende do agente | esta skill, que pergunta |
    | **Superpowers** | `writing-plans`, depois `subagent-driven-development` ou `executing-plans` | `docs/superpowers/plans/YYYY-MM-DD-<topico>.md` | `finishing-a-development-branch`, encadeada e automática |
-   | **Matt Pocock** | o usuário digita `/to-tickets`, depois `/implement` | tickets, com bloqueio declarado entre eles | o próprio `implement`: `/code-review` e commit na branch atual |
+   | **Matt Pocock** | o usuário digita `/to-tickets`, depois `/implement` por ticket ou `/implement-spec` para o grafo inteiro | tickets, com bloqueio declarado entre eles | no `implement`, `/code-review` e commit na branch atual; no `implement-spec`, branch de integração, `/code-review` final e tickets resolvidos no tracker — ou, quando o tracker fecha trabalho por PR, um PR em rascunho marcado como pronto no fim |
 
-   O critério para sugerir: `aicf-direto` ou `aicf-plan` quando cabe numa sessão; Superpowers
-   quando são muitos passos numa sessão, executados por subagente e com TDD; Matt quando o trabalho
-   se divide em fatias verticais com dependência entre elas, que podem atravessar sessões.
+   O critério para sugerir está em [`caminhos.md`](caminhos.md): ler antes de sugerir.
 
    Descer a tabela troca velocidade por rastro: nos caminhos aicf o plano vive na sessão e morre
    com ela. As skills do Matt (`to-tickets`, `triage`, `wayfinder`, `code-review`)
@@ -59,15 +57,18 @@ description: Implementa uma demanda a partir da spec e conduz o fechamento até 
    demanda segue em `docs/projeto/`, e os tickets ficam no `.scratch/`. Com
    `docs/agents/issue-tracker.md` apontando para outro tracker, ou ausente, dizer em uma linha que o
    caminho do Matt exige o alinhamento — rodar `/setup-matt-pocock-skills`, ou editar aquele
-   arquivo, escolhendo o tracker que casa com a mídia — e oferecer os outros. Escolhido o Matt no
-   modo arquivo, rodar a operação "Alinhar o tracker do Matt" do
-   [`midia/arquivo.md`](../midia/arquivo.md) antes de entregar os comandos: é ela que faz cada
-   ticket abrir com a linha `**Spec:**`, e uma sessão nova chegar à spec pelo ticket. Os comandos:
-   `/to-tickets docs/projeto/specs/<nome>.md`, depois
-   `/implement .scratch/<feature>/issues/<NN>-<slug>.md`; no modo issue, `/to-tickets #<n>` e
-   `/implement #<ticket>` — o ticket remoto já nasce com `## Parent` apontando a issue da spec.
+   arquivo, escolhendo o tracker que casa com a mídia — e oferecer os outros. Escolhido o Matt,
+   rodar a operação "Alinhar o tracker do Matt" da receita da mídia antes de entregar o comando:
+   no modo arquivo, é ela que faz cada ticket abrir com a linha `**Spec:**`, e uma sessão nova
+   chegar à spec pelo ticket; nos dois modos, ela escreve as regras que o `/implement-spec` lê. O
+   comando: `/to-tickets docs/projeto/specs/<nome>.md`, ou `/to-tickets #<n>` no modo issue — o
+   ticket remoto já nasce com `## Parent` apontando a issue da spec.
    Terminar um ticket não conclui a demanda: o `/aicf:fechar-demanda` roda quando o último
    termina, ou parcial ao fim de uma sessão que deixa tickets abertos.
+
+   **De volta do `/to-tickets`, ou numa sessão nova em que a spec já tem tickets** (sem entregar o
+   `/to-tickets` de novo): ler [`matt.md`](matt.md) e seguir. É lá que se escolhe entre
+   `/implement` e `/implement-spec`.
 
    **Junto do caminho, decidir o workspace.** O default é o da seção `## Git` do `CLAUDE.md`; sem
    ela, a branch atual. Sair dele é pergunta ao usuário, e o agente propõe quando couber:
@@ -75,7 +76,9 @@ description: Implementa uma demanda a partir da spec e conduz o fechamento até 
    commit de código, ou área onde erro custa dinheiro ou dado (migration, auth, pagamento);
    **worktree** — outra pasta, com a própria branch — só quando o checkout atual precisa continuar
    em uso (outra sessão, servidor rodando), e nunca quando a verificação depende de estado não
-   versionado (`.env`, banco, pasta gitignored): a worktree nasce sem ele. Dizer numa linha o que
+   versionado (`.env`, banco, pasta gitignored): a worktree nasce sem ele. Com
+   `/implement-spec`, não escolher workspace: branch e worktrees são do método; a restrição acima
+   vale para a escolha do aicf, e o estado não versionado segue o tratamento de `matt.md`. Dizer numa linha o que
    decidiu e por quê — seja qual for o caminho, inclusive o de uma coleção, antes de passar a vez.
 
 Se a spec não diz o suficiente para implementar, dizer isso e propor uma rodada de

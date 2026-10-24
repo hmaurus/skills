@@ -1,5 +1,45 @@
 # Changelog
 
+## 0.44.0 — 2026-10-24
+
+- **O caminho do Matt oferece o `/implement-spec`.** O Matt continua um caminho só, com duas formas
+  de executar os tickets: `/implement` por ticket, o padrão, ou `/implement-spec`, que roda o grafo
+  inteiro com subagentes em paralelo, cada um numa worktree, juntos numa branch de integração. A
+  forma se escolhe depois do `/to-tickets`, com o grafo à vista, pelo `skills/implementar-spec/matt.md`
+  novo: mede a fronteira, arquivo compartilhado, migration e verificação que depende de estado não
+  versionado, e recomenda. O critério numérico é o do
+  [resumo da v1.3](https://developer.tenten.co/mattpocock-skills-v1-3-pr-implement-spec-retro),
+  *"four or more tickets with independent parallel frontiers"*
+  (`curl -s <url> | grep -o 'four or more tickets[^<\\]*' | head -1`). Numa sessão nova em que a spec
+  já tem tickets, `/aicf:implementar-spec <spec>` vai direto à medição.
+- **O critério dos quatro caminhos sai das duas skills** para o `skills/implementar-spec/caminhos.md`,
+  lido pelo `criar-spec` e pelo `implementar-spec`. O `subagent-driven-development` passa a ser
+  descrito como serial, que não se sugere para ganhar velocidade.
+- **As regras do orquestrador moram no tracker do Matt**
+  ([ADR 0010](docs/adr/0010-o-aicf-escreve-as-regras-do-implement-spec-no-tracker-do-matt.md)): a
+  operação "Alinhar o tracker do Matt" acrescenta a seção `## Quando o /implement-spec roda` ao
+  `docs/agents/issue-tracker.md` nos dois modos — o modo issue ganha a operação — e confere o
+  ponteiro do `CLAUDE.md` para o tracker. O comando entregue leva um sufixo que só aponta a seção.
+  Antes de editar os tickets, os nomes compartilhados se fixam ou se bloqueia: na doc do Matt, dois
+  implementadores em paralelo criaram a mesma string como `blockedSince` e `blockedOn`
+  (`grep -n 'blockedSince' ~/.claude/plugins/cache/mattpocock/mattpocock-skills/1.3.1/docs/engineering/implement-spec.md`
+  → linha 56). No Antigravity, os subagentes rodam em background
+  (*"independent, concurrent agent sessions"*:
+  `curl -sL https://antigravity.google/docs/cli/features | grep -o 'independent, concurrent agent sessions'`),
+  mas a worktree por subagente não foi testada; o `matt.md` avisa até uma passada no `agy`.
+- O `fechar-demanda` trata a branch de integração do `implement-spec` (destino é pergunta; com o PR
+  já aberto, merge ou deixá-lo aberto) e aceita o `/code-review` final dele como a revisão. A
+  operação "Concluir" do `skills/midia/issues.md` adota a issue já fechada pelo merge, sem reabrir.
+- O `implement-spec` entra na lista de skills de caminho do Matt (template do `CLAUDE.md` e
+  `.claude/CLAUDE.md`), nos READMEs e no `ajuda`; o relatório de governança ganha a frase datada de
+  que ele está publicado desde a v1.3.0.
+- Conferir: `grep -lF 'subagente e com TDD' skills/*/SKILL.md` → nada;
+  `grep -lF 'matt.md' skills/*/SKILL.md` → só `skills/implementar-spec/SKILL.md`;
+  `grep -c 'Quando o /implement-spec roda' skills/midia/arquivo.md skills/midia/issues.md` → ≥ 1 em
+  cada. Comportamento em aberto até o uso real, numa sessão nova na `0.44.0`: encerra o titular, no
+  primeiro projeto com tickets do Matt, nos cenários do item 6 da Verificação da spec.
+- Projeto que já fez o setup acrescenta o `implement-spec` à linha de coleções do `CLAUDE.md` à mão.
+
 ## 0.43.2 — 2026-10-23
 
 - **O `prd` diz como escrever as primeiras linhas do `ROADMAP.md` e o que vem depois delas.** O

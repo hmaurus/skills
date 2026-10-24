@@ -29,7 +29,7 @@ número não, e não existe `ROADMAP.md`.
 | Listar um estado | `gh issue list --state open --label aicf:spec` |
 | Listar os três estados abertos | `gh issue list --state open --search "label:aicf:backlog,aicf:intent,aicf:spec"` |
 | Gravar o relatório | `gh issue comment <n> --body-file <arq>` |
-| Concluir | `gh issue edit <n> --remove-label <label-atual>` e `gh issue close <n>` |
+| Concluir | `gh issue edit <n> --remove-label <label-atual>` e `gh issue close <n>`; se o merge de um PR já a fechou, só tirar o label, sem reabrir — o relatório já foi como comentário |
 | Referenciar outra demanda | `#<n>` |
 | Corrigir referências após mover | não se aplica — `#12` não muda de lugar |
 
@@ -120,6 +120,44 @@ Dois casos concretos, e os dois quebram sem adoção:
 - **Contribuição de fora.** Alguém abre uma issue crua propondo algo, e `/aicf:criar-spec #<n>` a
   transforma em spec no lugar onde nasceu, com o histórico da conversa junto. Sem adoção o aicf
   abriria uma issue paralela e a do contribuidor viraria duplicata.
+
+## Alinhar o tracker do Matt
+
+Chamada pelo `/aicf:criar-spec` (entrevista pelo `grill-with-docs`) e pelo
+`/aicf:implementar-spec` (caminho do Matt escolhido). No modo issue, o ticket do `to-tickets` já
+nasce com `## Parent` apontando a issue da spec, e a convenção da spec não precisa de troca; o que
+se escreve no tracker são as regras que o `/implement-spec` precisa.
+
+Vale só com `docs/agents/issue-tracker.md` apontando para o GitHub, no mesmo repositório. Arquivo
+ausente, ou apontando para outro tracker: esta operação não roda.
+
+**Conferir** — a convenção está presente só quando as duas dão o esperado:
+
+```bash
+grep -c 'Quando o /implement-spec roda' docs/agents/issue-tracker.md                # ≥ 1
+cat CLAUDE.md AGENTS.md 2>/dev/null | grep -c 'docs/agents/issue-tracker.md'        # ≥ 1
+```
+
+**Faltando alguma, propor com o diff e aplicar com o aceite do usuário.** A primeira acrescenta
+esta seção ao fim do arquivo do Matt, sem tocar no resto:
+
+```markdown
+## Quando o /implement-spec roda
+
+- Na execução, calcular a fronteira pelo que já entrou na branch de integração, não pelo estado
+  do ticket no tracker: o bloqueador só fecha no fim, com o merge do PR ou no passo de resolver
+  os tickets.
+- Ticket com a linha `**Verificação no checkout principal:**`: depois do merge dele na branch de
+  integração, rodar o comando dessa linha no checkout principal, com a branch de integração em
+  checkout, um ticket por vez, e só então liberar os tickets que ele bloqueia.
+```
+
+A segunda confere o ponteiro que o `/setup-matt-pocock-skills` grava na raiz, a seção
+`## Agent skills` com a linha `See docs/agents/issue-tracker.md.`: é por ela que o
+`/implement-spec` digitado sem o sufixo chega ao tracker. Faltando, propor repor a seção no
+`CLAUDE.md`, ou no `AGENTS.md` quando não há `CLAUDE.md` — o arquivo que o setup do Matt editaria.
+Rodar `/setup-matt-pocock-skills` de novo regrava o tracker e apaga a seção; a próxima chamada
+desta operação a repõe.
 
 ## Quando o `gh` falha
 

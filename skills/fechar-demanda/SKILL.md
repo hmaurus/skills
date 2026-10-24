@@ -19,6 +19,13 @@ código. Sem essa decisão, o registro diz "concluído" e o código fica parado 
 método tem passo de integração e ele não rodou, rodar antes — nos caminhos aicf, depois dos checks
 e da revisão abaixo, como manda o `implementar-spec`.
 
+No Matt, o `/implement-spec` termina numa branch de integração, e o fechamento roda uma vez,
+sobre ela. A integração termina quando o destino do código está decidido, não só com o merge: o
+destino é pergunta com opções — merge na branch de origem, PR, ou deixar a branch. Se o
+`implement-spec` já abriu o PR, as opções são fazer o merge dele agora ou deixá-lo aberto para
+revisão. Qualquer escolha fecha a demanda; o commit de fechamento vai onde o código ficou, e no PR
+aberto ele entra no PR.
+
 ## Antes do relatório
 
 Rodar o script de check do projeto (lint + format + typecheck) e a suíte de testes, quando
@@ -28,7 +35,8 @@ os scripts do projeto expõem, e não havendo nenhum o relatório registra isso 
 em silêncio. Propor revisão de código quando a mudança for além de ajuste de texto —
 `/code-review` (só no Claude Code), subagente fresco que não viu a implementação, ou o code review
 do harness; não reler o próprio diff na mesma sessão. **Exigência já satisfeita por um passo do caminho escolhido
-não se repete** — o `subagent-driven-development` termina com revisão do branch inteiro, e pedir
+não se repete** — o `subagent-driven-development` termina com revisão do branch inteiro, e o
+`implement-spec` do Matt com um `/code-review` final da branch de integração; pedir
 outra é pagar duas vezes pela mesma leitura; o relatório declara em uma linha, na Validação, qual
 passo cobriu qual exigência.
 
@@ -39,7 +47,8 @@ passo cobriu qual exigência.
    receita da mídia.
 2. **Concluir** a demanda. No modo arquivo, `git mv` para `concluidas/` e corrigir os links
    relativos que apontavam para o arquivo, pela receita da mídia. **Essa correção é só do modo
-   arquivo**: `#12` não muda de lugar e não quebra. No modo issue, fechar a issue.
+   arquivo**: `#12` não muda de lugar e não quebra. No modo issue, fechar a issue; se o merge de
+   um PR já a fechou, a receita da mídia diz como adotá-la sem reabrir.
 3. **Reler o próprio relatório e os achados da revisão de código procurando o que vale além
    desta demanda** — decisão que outra sessão vai reencontrar, armadilha que vai morder de novo,
    ID externo — e promover, porque ninguém abre demanda concluída procurando informação:
