@@ -91,7 +91,7 @@ também passe por ele.
    `/code-review` e commit na branch atual; no `implement-spec`, branch de integração,
    `/code-review` final e tickets resolvidos no tracker, ou, quando o tracker fecha trabalho por
    PR, um PR aberto em rascunho e marcado como pronto no fim (passos 3 e 8 do `implement-spec`).
-2. **Os comandos** continuam: alinhar o tracker (modo arquivo) e entregar o `/to-tickets`.
+2. **Os comandos** continuam: alinhar o tracker (nos dois modos, pela receita da mídia) e entregar o `/to-tickets`.
    Acrescenta-se o que vem depois, em dois pontos de entrada:
    - **de volta do `/to-tickets`, na mesma sessão**;
    - **retomada**: `/aicf:implementar-spec <spec>` numa sessão nova, quando a spec já tem tickets
@@ -116,9 +116,10 @@ também passe por ele.
      fixados nos dois (o caso `blockedSince` × `blockedOn` da doc);
    - migration em mais de um ticket da mesma fronteira: bloqueio, para que elas não rodem em
      paralelo contra o mesmo banco;
-   - ticket cuja verificação depende de estado não versionado: uma linha dizendo que, na worktree,
-     essa verificação não roda, e que o implementador reporta isso em vez de verde. Na worktree, o
-     teste que lê arquivo no gitignore é pulado em silêncio.
+   - ticket cuja verificação depende de estado não versionado: a linha
+     `**Verificação no checkout principal:** <comando> — na worktree ela não roda; reportar isso em vez de verde.`
+     Na worktree, o teste que lê arquivo no gitignore é pulado em silêncio. A linha diz ao
+     implementador o que reportar; o que o orquestrador faz com ela está no tracker (item 4).
 
    **Bloqueio, por mídia:** no modo arquivo, a linha `Blocked by:` do ticket; no modo issue, a
    dependência nativa do GitHub, pelo procedimento do tracker do Matt
@@ -126,19 +127,51 @@ também passe por ele.
    id de banco do bloqueador), e o corpo acompanha. A linha `Blocked by: #<n>` no corpo só
    substitui a dependência onde a plataforma não a oferece. Depois de acrescentar bloqueios, a
    largura da fronteira se mede de novo antes da decisão final.
-4. **O que é para o orquestrador vai no argumento do comando**, que sobrevive ao `/clear` (a doc do
-   Matt manda *"clear the context and type `/implement-spec`"*) e é lido por ele:
-   - no modo arquivo, passar os tickets aos subagentes pelo **caminho absoluto no checkout
-     principal**. O `/to-tickets` não faz commit dos tickets, e a worktree só tem o que tem commit;
-     com a `.scratch/` no gitignore, nem um commit os levaria;
-   - para cada ticket marcado no item 3: rodar a verificação dele no checkout principal, na branch
-     de integração, **depois do merge daquele ticket**, um por vez, e só então liberar os que ele
-     bloqueia;
-   - no modo issue, calcular a fronteira pelo que já entrou na branch de integração, porque o
-     bloqueador só fecha no tracker no fim.
+4. **O que é para o orquestrador, e vale para toda execução, mora no tracker do Matt**, o
+   `docs/agents/issue-tracker.md`. A doc do Matt manda *"tell the orchestrator"* em dois desses
+   casos (linhas 60 e 68 de `docs/engineering/implement-spec.md`), e o tracker é o lugar onde
+   dizer isso sobrevive ao `/clear` e chega também a quem digita o `/implement-spec` sem passar
+   pelo aicf — a mesma razão do
+   [ADR 0008](../../adr/0008-o-aicf-escreve-a-convencao-no-tracker-do-matt.md).
 
-   O comando fica `/implement-spec <spec> — <instruções>`, com o mesmo `<spec>` do `/to-tickets`:
-   o caminho no modo arquivo, `#<n>` no modo issue.
+   **Nada no Matt manda o orquestrador abrir o tracker.** O `implement-spec` só supõe que ele foi
+   fornecido (*"should have been provided to you"*, linha 9 do `SKILL.md` dele), e o setup do Matt
+   grava no `CLAUDE.md` uma linha `See docs/agents/issue-tracker.md.` (linha 91 do
+   `setup-matt-pocock-skills/SKILL.md`): o ponteiro entra no contexto, o arquivo não. O que leva o
+   agente a abri-lo é precisar saber como o tracker fecha trabalho (passos 3 e 8). A mesma cadeia
+   já funcionou para o `to-tickets`, que diz a mesma frase (linha 11): num projeto privado, os
+   tickets saíram com a linha `**Spec:**`, que só existe no tracker. Por isso a leitura vem por dois
+   caminhos:
+   - **o comando entregue pelo aicf manda ler** (abaixo) — leitura garantida;
+   - **sem o sufixo**, esquecido ou com o Matt chamado direto, sobra a cadeia indireta, e a
+     operação de alinhar confere o elo dela que o aicf alcança: a linha do `CLAUDE.md`.
+
+   A operação "Alinhar o tracker do Matt" acrescenta ao fim do arquivo a seção
+   `## Quando o /implement-spec roda`, com:
+   - **nos dois modos:** calcular a fronteira pelo que já entrou na branch de integração, não pelo
+     estado do ticket no tracker, porque os tickets só se resolvem no fim (passo 8 do
+     `implement-spec`). A doc registra o problema no GitHub; no markdown local o `Status: resolved`
+     também só vem no passo 8;
+   - **nos dois modos:** ticket com a linha `**Verificação no checkout principal:**` tem o comando
+     rodado no checkout principal, com a branch de integração em checkout, **depois do merge
+     daquele ticket**, um por vez, e só então se liberam os que ele bloqueia;
+   - **só no markdown local:** passar cada ticket aos subagentes pelo **caminho absoluto no checkout
+     principal**. O `/to-tickets` não faz commit dos tickets, e a worktree só tem o que tem commit;
+     com a `.scratch/` no gitignore, nem um commit os levaria.
+
+   No `matt.md`, este item é conferir o alinhamento antes da pergunta da forma — na retomada, o
+   tracker pode ser de antes da `0.44.0` — e propor o que falta, pela receita da mídia.
+
+   O comando é o nativo com um sufixo que **aponta a seção, sem copiar as regras**:
+
+   ```
+   /implement-spec <spec> — antes de começar, ler docs/agents/issue-tracker.md, seção "Quando o /implement-spec roda"
+   ```
+
+   O `<spec>` é o mesmo do `/to-tickets` — o caminho no modo arquivo, `#<n>` no modo issue —, como
+   a doc do Matt manda: *"with a pointer to the spec"* (linha 40). As regras ficam num lugar só, a
+   seção do tracker; copiá-las no argumento daria ao `matt.md` um segundo texto delas, que teria de
+   ficar igual ao do tracker.
 5. **O que é do titular, o agente diz na conversa:** se começar uma segunda revisão ampla depois
    da correção, interromper e pedir só checagens focadas nos achados corrigidos; revisar a branch
    de integração inteira no fim; a verificação ponta a ponta da spec roda no checkout principal,
@@ -147,12 +180,12 @@ também passe por ele.
    [doc da CLI](https://antigravity.google/docs/cli/features) os descreve como *"independent,
    concurrent agent sessions"*), mas a worktree por subagente não está documentada nem foi
    testada. O aviso sai quando uma passada no `agy` confirmar ou derrubar isso.
-7. Então o agente entrega `/clear` e o comando do item 4, e espera.
+7. Então o agente entrega `/clear` e o comando do item 4, com o sufixo, e espera.
 
 **Workspace:** com o `/implement-spec`, quem cria a branch de integração e as worktrees é o
 método, e o aicf não decide workspace além de dizer isso numa linha. A regra de hoje ("worktree
 nunca quando a verificação depende de estado não versionado") continua valendo para a escolha do
-próprio aicf. No `implement-spec`, ela vira a marcação do item 3 e a instrução do item 4. A nota
+próprio aicf. No `implement-spec`, ela vira a marcação do item 3 e a regra do tracker do item 4. A nota
 vai no `SKILL.md`, logo depois da regra de workspace, como exceção explícita a ela: *"Com
 `/implement-spec`, não escolher workspace: branch e worktrees são do método; a restrição acima
 vale para a escolha do aicf, e o estado não versionado segue o tratamento de `matt.md`."* Só dizer
@@ -179,7 +212,25 @@ decidido**, não só com o merge. Entram três coisas:
 ### Fora das skills
 
 - **`skills/midia/arquivo.md`**, operação "Alinhar o tracker do Matt": onde diz "para que o
-  `/implement` numa sessão limpa", passa a dizer `/implement` ou `/implement-spec`.
+  `/implement` numa sessão limpa", passa a dizer `/implement` ou `/implement-spec`. A operação
+  ganha a seção do item 4 (os três itens), acrescentada ao fim do arquivo do Matt e não troca de
+  frase, e mais duas conferências:
+  ``grep -c 'Quando o `/implement-spec` roda' docs/agents/issue-tracker.md`` → ≥ 1, e o ponteiro
+  que o setup do Matt grava na raiz,
+  `cat CLAUDE.md AGENTS.md 2>/dev/null | grep -c 'docs/agents/issue-tracker.md'` → ≥ 1. Faltando
+  o ponteiro, propor repor a seção `## Agent skills` com a linha do tracker, no arquivo que já
+  existe (o setup do Matt edita o `CLAUDE.md`, ou o `AGENTS.md` sem `CLAUDE.md`: linhas 76–80 do
+  `setup-matt-pocock-skills/SKILL.md`).
+- **`skills/midia/issues.md`**: a operação "Alinhar o tracker do Matt", nova, só com a seção do
+  item 4 (os dois itens dos dois modos), as mesmas duas conferências e aceite com diff. Até aqui o
+  modo issue não escrevia nada no tracker do Matt.
+- **`skills/implementar-spec/SKILL.md`** e **`skills/criar-spec/SKILL.md`**: as chamadas da
+  operação deixam de ser só do modo arquivo e passam a seguir a receita da mídia.
+- **`docs/adr/0010-o-aicf-escreve-as-regras-do-implement-spec-no-tracker-do-matt.md`**: novo, e
+  amplia o [0008](../../adr/0008-o-aicf-escreve-a-convencao-no-tracker-do-matt.md), que dizia "no
+  modo issue nada se escreve" e "só três frases". O 0008 continua valendo para as três frases. A
+  decisão: o aicf acrescenta, nos dois modos, a seção do `implement-spec`; o motivo é o do item 4.
+  A alternativa recusada, o sufixo no argumento do comando, vai em Fora de escopo.
 - **`skills/setup/templates/claude-md.md`** e **`.claude/CLAUDE.md`**: a lista de skills de caminho
   do Matt ganha o `implement-spec`.
 - **`README.md`** e **`README.en.md`**, na lista "Na fase de implementação": os tickets são
@@ -218,8 +269,11 @@ decidido**, não só com o merge. Entram três coisas:
   anúncio da retomada por `/aicf:implementar-spec <spec>` quando a sugestão é `to-tickets`.
 - `skills/fechar-demanda/SKILL.md`: a integração do `implement-spec` e o `/code-review` que já
   cobre a revisão.
-- `skills/midia/issues.md`: a issue da spec já fechada pelo merge.
-- `skills/midia/arquivo.md`, `skills/setup/templates/claude-md.md`, `.claude/CLAUDE.md`,
+- `skills/midia/issues.md`: a issue da spec já fechada pelo merge, e a operação "Alinhar o tracker
+  do Matt", nova.
+- `skills/midia/arquivo.md`: a seção do `implement-spec` na operação de alinhar.
+- `docs/adr/0010-o-aicf-escreve-as-regras-do-implement-spec-no-tracker-do-matt.md`: novo.
+- `skills/setup/templates/claude-md.md`, `.claude/CLAUDE.md`,
   `README.md`, `README.en.md`, `docs/referencias/governanca-nos-frameworks-vizinhos.md`,
   `docs/projeto/intents/o-setup-nao-serve-a-projeto-ja-rodando.md`, `.claude-plugin/plugin.json`,
   `CHANGELOG.md`.
@@ -230,12 +284,18 @@ Nenhum código muda, só texto de skills e documentação. O ponto de teste é o
 `./scripts/check.sh`, que já existe e confere os três links novos (dos dois consumidores para o
 `caminhos.md` e do `implementar-spec` para o `matt.md`), o tamanho dos `SKILL.md`, o par versão ×
 `CHANGELOG.md` e os manifestos. Ele confere que os destinos existem, não que a ordem de leitura é
-obedecida nem que o procedimento chegou inteiro ao `matt.md`: isso fica para o item 5 da
+obedecida nem que o procedimento chegou inteiro ao `matt.md`: isso fica para o item 6 da
 Verificação.
 
 ## Fora de escopo
 
 - **Duas linhas do Matt na tabela, escolhidas antes dos tickets.** Seria escolher sem ver o grafo.
+- **As regras copiadas no sufixo do argumento.** Seriam dois textos da mesma regra, no `matt.md` e
+  no tracker, que teriam de ficar iguais. E, sozinho, o sufixo só chega a quem copia o comando que
+  o aicf entregou — o erro que o
+  [ADR 0008](../../adr/0008-o-aicf-escreve-a-convencao-no-tracker-do-matt.md) desfez: até a
+  `0.37.0` o `/implement` levava a spec junto no argumento, e quem conduzia o Matt direto o
+  digitava sem ela. O sufixo fica, mas só aponta a seção.
 - **O `criar-spec` sugerir a forma.** A spec não diz a largura da fronteira; a sugestão continua
   `to-tickets`.
 - **Testar a worktree por subagente no `agy` agora.** Fica como aviso, que sai depois de uma
@@ -269,15 +329,26 @@ Verificação.
      (hoje, 0);
    - `grep -lF 'matt.md' skills/*/SKILL.md` → só `skills/implementar-spec/SKILL.md` (hoje, nada).
 
-   Presença de texto não prova o fluxo; quem o prova é o item 5.
+   Presença de texto não prova o fluxo; quem o prova é o item 6.
 3. O `implement-spec` aparece onde o aicf lista o Matt:
    `grep -c 'implement-spec' skills/implementar-spec/SKILL.md skills/implementar-spec/matt.md skills/fechar-demanda/SKILL.md skills/midia/arquivo.md skills/setup/templates/claude-md.md .claude/CLAUDE.md README.md README.en.md`
    → ≥ 1 em cada um (hoje, 0 nos que já existem, e erro para o `matt.md`, que ainda não existe).
    O `caminhos.md` fica fora da lista: ele só conhece o `to-tickets`.
-4. As frases antigas do README saem:
+4. A regra mora no tracker, nas duas mídias, e o sufixo só aponta para ela:
+   ``grep -c 'Quando o `/implement-spec` roda' skills/midia/arquivo.md skills/midia/issues.md`` → ≥ 1
+   em cada (hoje, 0);
+   `grep -c 'seção "Quando o /implement-spec roda"' skills/implementar-spec/matt.md` → 1 (hoje,
+   erro: o arquivo não existe);
+   e a regra não é copiada nele: `grep -c 'calcular a fronteira' skills/implementar-spec/matt.md`
+   → 0, enquanto `grep -c 'calcular a fronteira' skills/midia/arquivo.md skills/midia/issues.md` →
+   ≥ 1 em cada (hoje, 0);
+   `grep -c "AGENTS.md 2>/dev/null | grep -c 'docs/agents/issue-tracker.md'" skills/midia/arquivo.md skills/midia/issues.md`
+   → 1 em cada (hoje, 0);
+   `test -f docs/adr/0010-o-aicf-escreve-as-regras-do-implement-spec-no-tracker-do-matt.md`.
+5. As frases antigas do README saem:
    `grep -c 'executados um a um' README.md` e `grep -c 'executed one at a time' README.en.md` → 0
    (hoje, 1 cada); a frase datada entra: `grep -c '2026-10-23' docs/referencias/governanca-nos-frameworks-vizinhos.md` → ≥ 1 (hoje, 0).
-5. **Comportamento, em aberto até o uso real**, numa sessão aberta depois de atualizar o plugin
+6. **Comportamento, em aberto até o uso real**, numa sessão aberta depois de atualizar o plugin
    para a `0.44.0`. Quem encerra é o titular, no uso; o relatório diz isso em vez de prometer um
    teste agora. As duas entradas (de volta do `/to-tickets` e retomada) se observam nos dois modos,
    arquivo e issue. Cada cenário passa quando:
@@ -285,8 +356,17 @@ Verificação.
      grep mede;
    - **grafo estreito**, ou largo com o titular escolhendo a forma serial: o agente oferece e
      entrega `/implement <ticket>`;
-   - **grafo largo, forma paralela escolhida:** o agente propõe a edição dos tickets quando algum
-     sinal aparece e entrega `/clear` + `/implement-spec <spec> — <instruções>`;
+   - **grafo largo, forma paralela escolhida:** o agente confere o tracker alinhado, propõe a
+     edição dos tickets quando algum sinal aparece e entrega `/clear` + o comando com o sufixo
+     que aponta a seção do tracker;
+   - **execução do `/implement-spec`, com o sufixo:** o orquestrador abre o `issue-tracker.md` e
+     segue a seção — libera o ticket bloqueado assim que o bloqueador entra na branch de
+     integração, roda no checkout principal a verificação marcada e, no modo arquivo, passa os
+     tickets por caminho absoluto;
+   - **execução sem o sufixo** (`/implement-spec <spec>` digitado direto): observar se o
+     orquestrador abre o `issue-tracker.md` por conta própria. Abrindo, segue a seção como acima;
+     não abrindo, a cadeia indireta não basta, e isso se registra como achado, sem reprovar a
+     demanda: o comando que o aicf entrega leva o sufixo;
    - **retomada:** `/aicf:implementar-spec <spec>` numa sessão nova, com os tickets já criados,
      vai à medição sem pedir `/to-tickets` de novo e sem duplicar tickets;
    - **fechamento:** com o PR deixado aberto, o commit de fechamento entra no PR; com a issue da
@@ -316,7 +396,8 @@ clone do [relatório de governança](../../referencias/governanca-nos-frameworks
   - a worktree não evita a colisão, só a adia para o merge (`blockedSince` × `blockedOn`);
   - o ciclo de revisão e correção pode não parar (~4 h numa feature de 5 tickets);
   - no GitHub, um ticket bloqueado só começa quando o bloqueador fecha, e o bloqueador só fecha no
-    fim;
+    fim, e a doc manda dizer ao orquestrador que calcule a fronteira pela branch de integração:
+    `grep -n 'Tell the orchestrator to track' $M/docs/engineering/implement-spec.md` → linha 60;
   - teste que lê arquivo no gitignore é pulado na worktree:
     `grep -n 'run it in the main checkout' $M/docs/engineering/implement-spec.md` → linha 68;
   - o pareamento de seams do `/implement` não existe; *"name the seams in the spec or the tickets"*
