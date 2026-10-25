@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.45.0 — 2026-10-25
+
+- **O `criar-spec` invocado direto confere o caminho da entrevista.** Quem digitava
+  `/aicf:criar-spec` como porta de entrada entrava na entrevista aicf sem ver o critério da regra
+  da entrevista do `CLAUDE.md`, que manda o caminho ser pergunta ao usuário. Agora, depois de ler o
+  que a demanda toca, a skill diz numa frase quando `brainstorming` ou `grill-with-docs` cabe com
+  clareza e a coleção está instalada, e pergunta se troca; no caso que não é claro, segue calada.
+  Visto em 2026-10-25, numa demanda do `ROADMAP.md` que foi direto à entrevista aicf sem que o
+  titular soubesse se o agente tinha escolhido ou só seguido a skill.
+- Conferir: `grep -c 'conferir o caminho da entrevista' skills/criar-spec/SKILL.md` → 1.
+  Comportamento em aberto até o uso real, numa sessão nova na `0.45.0`: encerra o primeiro
+  `/aicf:criar-spec` invocado direto numa demanda de desenho aberto que ofereça o `brainstorming`
+  antes da primeira pergunta.
+
 ## 0.44.0 — 2026-10-24
 
 - **O caminho do Matt oferece o `/implement-spec`.** O Matt continua um caminho só, com duas formas

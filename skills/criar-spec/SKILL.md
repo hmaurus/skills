@@ -22,6 +22,12 @@ Ler o que a demanda toca no repositório — o intent, se existe, e o código, o
 (`docs/adr/`) e os commits recentes da área —, **se ainda não tiver lido nesta sessão**. O que se descobre lendo não é
 pergunta: fato do repositório é trabalho do agente; decisão é do usuário.
 
+**Invocado sem conversa anterior, conferir o caminho da entrevista.** Lido o que a demanda toca, se
+o critério da regra da entrevista no `CLAUDE.md` apontar com clareza para `brainstorming` ou
+`grill-with-docs`, e a coleção dele estiver na linha "Coleções de skills de workflow instaladas",
+dizer qual e por quê numa frase e perguntar se troca. Caso que não é claro, ou sem a coleção:
+seguir sem comentar — quem digitou o comando já escolheu o caminho aicf.
+
 ## Como entrevistar
 
 pergunta com opções (`AskUserQuestion` no Claude Code) para o que é **escolha** (escopo,
