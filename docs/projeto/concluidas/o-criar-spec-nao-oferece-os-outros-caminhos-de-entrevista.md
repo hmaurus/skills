@@ -20,8 +20,8 @@ coleção, segue sem comentar.
 
 ## Relatório de implementação (2026-10-25)
 
-- **Status** — concluído no commit; push e release da `0.45.0` em aberto até o titular autorizar
-  (encerra quando `gh release list --limit 1` mostrar `v0.45.0`).
+- **Status** — concluído; CI run `40166648513` → `completed success`; release `v0.45.0`
+  (`gh release list --limit 1`). `agy plugin validate` → `✔ Validation passed`.
 - **Arquivos alterados**
   - `skills/criar-spec/SKILL.md` — parágrafo "Invocado sem conversa anterior, conferir o caminho
     da entrevista".
