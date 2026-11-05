@@ -42,6 +42,26 @@ cada vez.
 - **Informar no fim.** O relatório final traz o que foi ao ar, as decisões tomadas sem o usuário e
   o que ficou para ele.
 
+## Uma área para o que é de cada usuário e projeto
+
+Pedido do usuário (2026-11-05): a solução deve **reservar um lugar para as especificidades do
+usuário e do projeto**, preenchido de preferência numa entrevista. O contrato genérico do aicf é o
+padrão, e cada projeto o afrouxa ou o aperta ali.
+
+O exemplo do projeto de origem: o usuário assume que, numa execução autônoma, o agente **pode
+editar os termos de uso, os contratos e a documentação**, desde que **mostre as mudanças na tela
+ao fim**, para ele ler quando voltar. É um afrouxamento da segunda lista candidata abaixo (termos
+e licença voltam ao usuário), e mostra por que a lista não pode ser fixa: o que é perigo num
+projeto em produção com clientes é rotina num projeto ainda não divulgado.
+
+Na entrevista:
+- **Onde a área mora:** o `CLAUDE.md` do projeto, que o agente lê em toda sessão, ou um arquivo
+  próprio que o contrato cita.
+- **Quem a preenche e quando:** o `/aicf:setup`, a primeira execução autônoma ou uma skill própria.
+- **O formato:** o que o agente pode fazer sozinho, o que volta ao usuário e como as mudanças
+  aparecem no fim. No exemplo: "registrar em tela", o trecho de cada texto publicado no relatório
+  final, não só o nome do arquivo.
+
 ## O que já se sabe
 
 - **No caso de origem, o que sobrou como parada de verdade:**
@@ -163,7 +183,8 @@ O formato que se firmou:
   perda de dado, credencial, ação irreversível fora do que foi autorizado. E onde o projeto
   acrescenta os casos dele. O histórico acima sugere uma segunda lista, do que volta ao usuário
   mesmo sem perigo técnico: termos e licença, novo aceite, aviso a quem usa, dinheiro e regra de
-  domínio além da spec.
+  domínio além da spec. As duas listas são o padrão, que a área do projeto (acima) afrouxa ou
+  aperta.
 - **Texto publicado sem a revisão prevista:** se a autonomia cobre, como risco aceito "a
   confirmar", ou se publicar texto jurídico entra na segunda lista.
 - **A higiene das esperas:** se vai no contrato ou fica na intent da presença, que já registra o
