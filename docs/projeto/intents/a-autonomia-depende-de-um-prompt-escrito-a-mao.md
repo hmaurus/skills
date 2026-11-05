@@ -70,6 +70,86 @@ cada vez.
   subagentes abertos). Esta trata do *contrato* da execução depois de escolhido o caminho.
   Entrevistar as duas juntas pode ser o mais simples.
 
+## O histórico do projeto de origem
+
+O projeto de origem teve cerca de dez demandas com autonomia dada pelo usuário em um mês
+(2026-10-11 a 2026-11-05). Elas estão registradas nos relatórios de fechamento, no registro
+jurídico e nas memórias do agente. O que serve ao contrato, por tema:
+
+### Decisões que o agente tomou sozinho
+
+- **Deu errado: ampliar uma regra de domínio além da história da spec.** Uma decisão autônoma
+  tratou como não removível um caso que a história não restringia. A revisão não pegou, e o
+  usuário achou o problema dias depois. **Regra candidata:** a decisão pela recomendação vale
+  para o *como*, nunca para estender o *o quê* do domínio. Diante de uma lacuna de regra de
+  negócio, ficar com a leitura mais estreita da spec e registrar a dúvida.
+- **Deu certo: desviar da spec com o motivo escrito.** Três exemplos:
+  - um nome mudado para cumprir um ADR;
+  - um teto criado a partir de um alerta de segurança, registrado como risco aceito;
+  - fatias delegadas a subagentes, uma por vez.
+
+  O que os fez dar certo foi a seção "o que mudou em relação à spec" no relatório.
+- **Troca de caminho pela ausência do usuário:** o plan mode pede aprovação, e com o usuário
+  dormindo o agente foi pelo caminho direto e registrou o motivo. Num outro caso, o plano foi
+  commitado sem aprovação.
+- **Texto publicado sem a revisão que o projeto pede:** em três demandas, um texto jurídico foi ao
+  ar sem a revisão prevista, com a justificativa de que só havia contas de teste. Os três ficaram
+  registrados como risco aceito "a confirmar pelo usuário".
+- **Onde a autonomia parou, com acerto:**
+  - uma revisão mostrou que a mudança exigia alterar a licença dos termos de uso, e o deploy
+    esperou a escolha do usuário;
+  - uma resposta inesperada do serviço de pagamento também voltou para ele.
+
+  **Regra candidata:** além do perigo técnico, volta ao usuário o que o compromete juridicamente
+  ou com quem usa o produto: mudança de licença ou de termos, novo aceite, aviso por e-mail aos
+  usuários, dinheiro.
+
+### Travas que não eram perigo
+
+- **Contexto cheio:** uma execução parou de madrugada porque a sessão vinha de uma entrevista
+  longa. Começar a execução autônoma numa sessão nova.
+- **Permissão:** o pedido de permissão de um subagente em segundo plano para tudo até alguém
+  responder. A sessão abre sem pedidos.
+- **Limite de uso:** o subagente parado volta com uma mensagem; não se relança do zero.
+- **Pergunta no meio:** um implementador parou para perguntar e, ao voltar, achou a worktree
+  apagada. Quem para para perguntar commita antes.
+- **Credencial inacessível ao agente** (o `.env` bloqueado): conferir a produção virou pendência
+  do usuário no relatório, sem parar o resto.
+
+### Higiene das esperas
+
+Em duas de três madrugadas, ficaram shells e subagentes abertos ao fim. As armadilhas estão
+registradas nas memórias do agente:
+- `until ! pgrep -f "<cmd>"` casa com o próprio laço e nunca termina;
+- `gh run list -c <sha>` com o SHA curto devolve lista vazia, sem erro, e a espera do CI nunca
+  acaba;
+- `pkill -f` com o padrão do comando derruba o próprio shell.
+
+A regra que ficou: esperar pelo `run_in_background` ou pelo exit code num arquivo, usar o SHA
+completo, matar pelo PID e, no fim, encerrar os servidores, os laços e as worktrees que
+sobrarem.
+
+### Publicação
+
+- **O run do CI fica verde com o job de deploy pulado:** confirmar a publicação pelo job, não
+  pelo run.
+- **Dois runs vermelhos antes do verde** (memória estourada no lint e um teste instável), ambos
+  corrigidos sem o usuário. Isso sustenta a regra "falha intermitente se repete; falha real se
+  corrige".
+- **Script de dados em produção roda primeiro em modo de ensaio** (`--dry-run`). Num caso, o
+  ensaio mostrou um formato de arquivo que o script não esperava.
+- **Depois do deploy, conferir a produção** com uma requisição real, não só o CI.
+
+### O relatório no fim
+
+O formato que se firmou:
+- um status com os runs, o SHA e a conferência em produção;
+- "o que mudou em relação à spec";
+- "pendências do usuário";
+- os riscos aceitos "a confirmar", cada um com o gatilho de revisão;
+- quando a demanda não fecha, um "estado em andamento" com o próximo passo do usuário;
+- o que o agente revisou sozinho (capturas de tela, o caminho que não perguntou).
+
 ## Em aberto para a entrevista
 
 - **Onde a regra mora:**
@@ -81,7 +161,13 @@ cada vez.
   pergunta explícita ao entregar o comando, ou pelos dois.
 - **O que é "perigoso"** numa lista genérica, que valha para qualquer projeto: dano em produção,
   perda de dado, credencial, ação irreversível fora do que foi autorizado. E onde o projeto
-  acrescenta os casos dele.
+  acrescenta os casos dele. O histórico acima sugere uma segunda lista, do que volta ao usuário
+  mesmo sem perigo técnico: termos e licença, novo aceite, aviso a quem usa, dinheiro e regra de
+  domínio além da spec.
+- **Texto publicado sem a revisão prevista:** se a autonomia cobre, como risco aceito "a
+  confirmar", ou se publicar texto jurídico entra na segunda lista.
+- **A higiene das esperas:** se vai no contrato ou fica na intent da presença, que já registra o
+  resto.
 - **A autorização de publicar:** se o aicf traz a ordem dos passos (merge, CI no mesmo SHA,
   deploy) como modelo, ou se ela é só do projeto.
 - **As perguntas das skills:** se cada skill que pergunta ganha uma frase ("com o usuário
